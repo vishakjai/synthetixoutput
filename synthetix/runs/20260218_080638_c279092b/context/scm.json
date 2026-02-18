@@ -1,0 +1,150 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy ASP application for customer and order management, which is to be modernized to Node.js. The application handles user sessions, customer data, and order processing.",
+  "nodes": [
+    {
+      "id": "service:legacy_customer_orders",
+      "type": "Service",
+      "name": "Legacy Customer Orders",
+      "metadata": {
+        "language": "ASP",
+        "framework": "Classic ASP"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 1,
+          "evidence": "Application_OnStart sets 'AppName' to 'Legacy Customer Orders'"
+        }
+      ]
+    },
+    {
+      "id": "component:session_management",
+      "type": "Component",
+      "name": "Session Management",
+      "metadata": {
+        "language": "VBScript"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 5,
+          "evidence": "Session_OnStart initializes session variables"
+        }
+      ]
+    },
+    {
+      "id": "component:customer_management",
+      "type": "Component",
+      "name": "Customer Management",
+      "metadata": {
+        "language": "VBScript"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 1,
+          "evidence": "Handles customer login and displays customer list"
+        }
+      ]
+    },
+    {
+      "id": "component:order_management",
+      "type": "Component",
+      "name": "Order Management",
+      "metadata": {
+        "language": "VBScript"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 1,
+          "evidence": "Handles order creation and updates"
+        }
+      ]
+    },
+    {
+      "id": "component:layout_renderer",
+      "type": "Component",
+      "name": "Layout Renderer",
+      "metadata": {
+        "language": "VBScript"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/layout.asp",
+          "line": 1,
+          "evidence": "Defines HTML layout rendering functions"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "CALLS_HTTP",
+      "from": "component:customer_management",
+      "to": "component:session_management",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 15,
+          "evidence": "Session variables updated on login"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "component:order_management",
+      "to": "component:session_management",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 5,
+          "evidence": "RequireLogin function call"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "component:customer_management",
+      "to": "component:layout_renderer",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 3,
+          "evidence": "Includes layout.asp for rendering"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "component:order_management",
+      "to": "component:layout_renderer",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 3,
+          "evidence": "Includes layout.asp for rendering"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
