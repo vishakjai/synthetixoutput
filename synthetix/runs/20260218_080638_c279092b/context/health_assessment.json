@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "The health assessment identifies key areas for improvement in maintainability, security, reliability, and testability of the legacy ASP application.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 3,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "component:session_management",
+      "reason": "Session management lacks robust security measures.",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 10,
+          "evidence": "Session variables are not securely managed"
+        }
+      ]
+    },
+    {
+      "scope": "component:customer_management",
+      "reason": "Inline HTML and VBScript mix reduces maintainability.",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 30,
+          "evidence": "HTML and script mixed in customer management"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Session Hijacking Risk",
+      "description": "Lack of secure session management could lead to session hijacking.",
+      "severity": "critical",
+      "confidence": 0.9
+    },
+    {
+      "title": "Code Maintainability Issues",
+      "description": "Mixing HTML and VBScript makes the codebase difficult to maintain and extend.",
+      "severity": "high",
+      "confidence": 0.8
+    }
+  ]
+}
