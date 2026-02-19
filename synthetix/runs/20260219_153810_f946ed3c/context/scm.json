@@ -1,0 +1,95 @@
+{
+  "version": "1.0",
+  "summary": "Legacy ASP application for customer and order management, targeted for modernization to Node.js.",
+  "nodes": [
+    {
+      "id": "node:legacy_asp_application",
+      "type": "Service",
+      "name": "Legacy Customer Orders",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 3,
+          "evidence": "Application(\"AppName\") = \"Legacy Customer Orders\""
+        }
+      ]
+    },
+    {
+      "id": "node:session_management",
+      "type": "Component",
+      "name": "Session Management",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 9,
+          "evidence": "Session_OnStart and Session_OnEnd handlers"
+        }
+      ]
+    },
+    {
+      "id": "node:customer_management",
+      "type": "Component",
+      "name": "Customer Management",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 1,
+          "evidence": "Customer login and listing logic"
+        }
+      ]
+    },
+    {
+      "id": "node:order_management",
+      "type": "Component",
+      "name": "Order Management",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 1,
+          "evidence": "Order creation and update logic"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:customer_management",
+      "to": "node:session_management",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 20,
+          "evidence": "Session(\"IsAuthenticated\") check"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:order_management",
+      "to": "node:session_management",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 4,
+          "evidence": "Call RequireLogin()"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
