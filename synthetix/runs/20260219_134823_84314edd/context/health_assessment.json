@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "summary": "The health assessment of the legacy codebase indicates areas that require modernization and improvement.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 3,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "session_management",
+      "reason": "Session management is handled using insecure methods.",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 12,
+          "evidence": "Session(\"IsAuthenticated\") = True"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Insecure Session Management",
+      "description": "The current session management approach is vulnerable to session hijacking.",
+      "severity": "critical",
+      "confidence": 0.9
+    }
+  ]
+}
