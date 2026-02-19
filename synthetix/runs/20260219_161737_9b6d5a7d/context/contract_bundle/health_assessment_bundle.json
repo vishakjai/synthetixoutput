@@ -1,0 +1,204 @@
+{
+  "header": {
+    "artifact_id": "f3d345ed560b4c8bbd7de30982514b6a",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-19T21:18:03.790531+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260219_161737_9b6d5a7d",
+      "stage_id": "context_layer",
+      "task_id": "6851f5f494674f2c880c7f0dfecabee8"
+    },
+    "parents": [],
+    "digest": "sha256:7da02678ba67307f536dc7c3ca76751f01ef7e9523df890ab3323ac2cffc079b",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260219_161737_9b6d5a7d",
+      "bundle_version": "20260219T211803Z_20260219_161737_9b6d5a7d"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "The health assessment identifies key areas for improvement in maintainability, security, and reliability of the legacy ASP codebase."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 60,
+      "security": 50,
+      "reliability": 55,
+      "testability": 40
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: global.asa",
+      "description": "Session management without proper error handling.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "global.asa"
+        ],
+        "paths": [
+          "global.asa"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "global.asa"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "Session Hijacking",
+      "description": "Lack of secure session management can lead to session hijacking.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:001",
+      "title": "Migrate Session Management to Node.js",
+      "priority": "P0",
+      "business_value": "Potential session hijacking and unauthorized access.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node:global_asa",
+          "node:customer_asp"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Node.js session library"
+      ],
+      "plan": [
+        "Use Express",
+        "js with a secure session management library like express-session"
+      ],
+      "acceptance_criteria": [
+        "Sessions are securely managed with proper locking and encryption.",
+        "Session-related vulnerabilities are mitigated."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:001"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "remediation:001"
+    ]
+  }
+}
