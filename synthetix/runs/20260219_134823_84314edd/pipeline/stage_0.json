@@ -1,0 +1,359 @@
+{
+  "run_id": "20260219_134823_84314edd",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 6 nodes, 5 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260219T184848Z_20260219_134823_84314edd",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725"
+      },
+      "context_bundle": {
+        "bundle_id": "b91903c262b64c4fb7cd4afaf4b9d6b2",
+        "created_at": "2026-02-19T18:48:48.852525+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "5b38e1ab987c4ba5a2727ee94c62a251",
+            "digest": "sha256:b9008a51a97ea88a183676273cd450dce36544492e565863cae4cdf33ec97c74",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "86f0269f1fef4d488f8a70608e3dd2af",
+            "digest": "sha256:3c00a594845a41efa7ef743bf4f1f3cf9fb4e753289aef8640b4e2c90e01ab7d",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "238fb5bde0a6427184c871369b7824c0",
+            "digest": "sha256:6f46fd59959bd5c8e0351d797ca4eeda5d1ef27179ac8475c829f9aeb3955edd",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-19T18:48:48.889924+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy ASP application components and their relationships, intended for modernization into a Python-based system.",
+        "nodes": [
+          {
+            "id": "node:global_asa",
+            "type": "Component",
+            "name": "Global ASA",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "global.asa",
+                "line": 1,
+                "evidence": "<SCRIPT LANGUAGE=\"VBScript\" RUNAT=\"Server\">"
+              }
+            ]
+          },
+          {
+            "id": "node:customer_asp",
+            "type": "Component",
+            "name": "Customer ASP",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 1,
+                "evidence": "<%@ Language=\"VBScript\" %>"
+              }
+            ]
+          },
+          {
+            "id": "node:layout_asp",
+            "type": "Component",
+            "name": "Layout ASP",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/layout.asp",
+                "line": 1,
+                "evidence": "<% Sub RenderHeader(title) %>"
+              }
+            ]
+          },
+          {
+            "id": "node:logout_asp",
+            "type": "Component",
+            "name": "Logout ASP",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/logout.asp",
+                "line": 1,
+                "evidence": "<%@ Language=\"VBScript\" %>"
+              }
+            ]
+          },
+          {
+            "id": "node:orders_asp",
+            "type": "Component",
+            "name": "Orders ASP",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/orders.asp",
+                "line": 1,
+                "evidence": "<%@ Language=\"VBScript\" %>"
+              }
+            ]
+          },
+          {
+            "id": "node:util_asp",
+            "type": "Component",
+            "name": "Util ASP",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/util.asp",
+                "line": 1,
+                "evidence": "<% Option Explicit %>"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "IMPORTS",
+            "from": "node:customer_asp",
+            "to": "node:util_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "includes/customer.asp",
+                "line": 2,
+                "evidence": "<!--#include file=\"includes/util.asp\" -->"
+              }
+            ]
+          },
+          {
+            "type": "IMPORTS",
+            "from": "node:customer_asp",
+            "to": "node:layout_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "includes/customer.asp",
+                "line": 3,
+                "evidence": "<!--#include file=\"includes/layout.asp\" -->"
+              }
+            ]
+          },
+          {
+            "type": "IMPORTS",
+            "from": "node:orders_asp",
+            "to": "node:util_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "includes/orders.asp",
+                "line": 2,
+                "evidence": "<!--#include file=\"includes/util.asp\" -->"
+              }
+            ]
+          },
+          {
+            "type": "IMPORTS",
+            "from": "node:orders_asp",
+            "to": "node:layout_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "includes/orders.asp",
+                "line": 3,
+                "evidence": "<!--#include file=\"includes/layout.asp\" -->"
+              }
+            ]
+          },
+          {
+            "type": "CALLS_HTTP",
+            "from": "node:customer_asp",
+            "to": "node:orders_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "includes/customer.asp",
+                "line": 22,
+                "evidence": "Response.Redirect \"customers.asp\""
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and standards observed in the legacy ASP codebase.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use PascalCase for subroutine names.",
+            "confidence": 0.9,
+            "examples": [
+              "Sub RenderHeader(title)"
+            ],
+            "counterexamples": [
+              "sub renderheader(title)"
+            ],
+            "provenance": [
+              {
+                "file": "includes/layout.asp",
+                "line": 1,
+                "evidence": "Sub RenderHeader(title)"
+              }
+            ]
+          },
+          {
+            "id": "rule:session_management",
+            "category": "auth",
+            "rule": "Session variables are used for authentication state management.",
+            "confidence": 0.9,
+            "examples": [
+              "Session(\"IsAuthenticated\") = True"
+            ],
+            "counterexamples": [
+              "Session(\"IsAuthenticated\") = 1"
+            ],
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 12,
+                "evidence": "Session(\"IsAuthenticated\") = True"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure consistent naming conventions across all subroutines.",
+          "Refactor session management to use a more secure method."
+        ],
+        "scaffold_templates": [
+          "Python Flask application structure with session management."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy codebase indicates areas that require modernization and improvement.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "session_management",
+            "reason": "Session management is handled using insecure methods.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 12,
+                "evidence": "Session(\"IsAuthenticated\") = True"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Insecure Session Management",
+            "description": "The current session management approach is vulnerable to session hijacking.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:session_management",
+          "title": "Refactor Session Management",
+          "problem_statement": "The current session management approach is insecure and vulnerable to hijacking.",
+          "scope": [
+            "includes/customer.asp",
+            "includes/logout.asp"
+          ],
+          "risk_if_unaddressed": "Potential for unauthorized access and data breaches.",
+          "effort": "M",
+          "severity": "critical",
+          "dependencies": [
+            "node:util_asp"
+          ],
+          "suggested_approach": "Implement secure session management using Python Flask sessions.",
+          "success_criteria": [
+            "Session management is secure and resistant to hijacking.",
+            "User sessions are properly authenticated and terminated."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "includes/customer.asp",
+              "line": 12,
+              "evidence": "Session(\"IsAuthenticated\") = True"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 20391,
+    "latency_ms": 24989.908933639526,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-19T18:48:48.892005+00:00"
+}
