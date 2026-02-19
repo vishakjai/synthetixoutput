@@ -1,0 +1,202 @@
+{
+  "header": {
+    "artifact_id": "7fcf434294a14a1b8e5a1e979fc06c71",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-19T18:03:14.828980+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260219_130247_64d56dcf",
+      "stage_id": "context_layer",
+      "task_id": "34b5898a7bbf43568a5ba19fc2c1d26d"
+    },
+    "parents": [],
+    "digest": "sha256:17421e5cb94c67f194621c60514bb173c98c3644f377fe2c7e8553d15f07b04f",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260219_130247_64d56dcf",
+      "bundle_version": "20260219T180314Z_20260219_130247_64d56dcf"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The legacy system has maintainability and security concerns due to outdated technology."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 4,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Session Management",
+      "description": "Server-side session management is outdated and insecure.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Session Management"
+        ],
+        "paths": [
+          "Session Management"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "includes/customer.asp"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "Security Vulnerability",
+      "description": "The use of server-side sessions can lead to session hijacking.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:modernize_auth",
+      "title": "Modernize Authentication",
+      "priority": "P0",
+      "business_value": "Potential for session hijacking and unauthorized access.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node:customers_table"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "node:login_endpoint"
+      ],
+      "plan": [
+        "Implement JWT-based authentication"
+      ],
+      "acceptance_criteria": [
+        "All authentication uses JWT tokens.",
+        "Sessions are no longer stored server-side."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:modernize_auth"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "remediation:modernize_auth"
+    ]
+  }
+}
