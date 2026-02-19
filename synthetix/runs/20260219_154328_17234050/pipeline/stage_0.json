@@ -1,0 +1,298 @@
+{
+  "run_id": "20260219_154328_17234050",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260219T204344Z_20260219_154328_17234050",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725"
+      },
+      "context_bundle": {
+        "bundle_id": "9288704e5ca94cbf9e6f161f4ae1a45c",
+        "created_at": "2026-02-19T20:43:44.061025+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "3369933989d8437cb9db30571e815cff",
+            "digest": "sha256:ff3dd753790178eee8becbe275c0f4b180634aa6481b2139cf4a13fc979822a8",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "f4990c29d9de475d9377fea3d96223e2",
+            "digest": "sha256:c9a41f6932f7ab78bd72cd6265c265764e0df86338b76c2250b9c6add8d94bbf",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "7c1cd59531114e5787ea1823d87fb1fc",
+            "digest": "sha256:71bab849978627935f52e713d33d596d2871a4121f5340c04216418eec36acef",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-19T20:43:44.103232+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy ASP application for managing customer orders, sessions, and authentication, to be modernized into a Node.js application.",
+        "nodes": [
+          {
+            "id": "service:legacy_customer_orders",
+            "type": "Service",
+            "name": "Legacy Customer Orders",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "global.asa",
+                "line": 5,
+                "evidence": "Application(\"AppName\") = \"Legacy Customer Orders\""
+              }
+            ]
+          },
+          {
+            "id": "component:session_management",
+            "type": "Component",
+            "name": "Session Management",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "global.asa",
+                "line": 9,
+                "evidence": "Sub Session_OnStart()"
+              }
+            ]
+          },
+          {
+            "id": "component:authentication",
+            "type": "Component",
+            "name": "Authentication",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 13,
+                "evidence": "If action = \"login\" Then"
+              }
+            ]
+          },
+          {
+            "id": "component:customer_management",
+            "type": "Component",
+            "name": "Customer Management",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 1,
+                "evidence": "Call RenderHeader(\"Customers\")"
+              }
+            ]
+          },
+          {
+            "id": "component:order_management",
+            "type": "Component",
+            "name": "Order Management",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/orders.asp",
+                "line": 1,
+                "evidence": "Call RenderHeader(\"Orders\")"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "CALLS_HTTP",
+            "from": "component:authentication",
+            "to": "component:customer_management",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "includes/customer.asp",
+                "line": 24,
+                "evidence": "Response.Redirect \"customers.asp\""
+              }
+            ]
+          },
+          {
+            "type": "CALLS_HTTP",
+            "from": "component:order_management",
+            "to": "component:customer_management",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "includes/orders.asp",
+                "line": 1,
+                "evidence": "Call RequireLogin()"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "The legacy codebase uses VBScript for server-side logic and lacks modern development conventions such as structured error handling and testing.",
+        "rules": [
+          {
+            "id": "naming:consistent_variable_naming",
+            "category": "naming",
+            "rule": "Use consistent and descriptive names for variables.",
+            "confidence": 0.8,
+            "examples": [
+              "Dim userName"
+            ],
+            "counterexamples": [
+              "Dim x"
+            ],
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 14,
+                "evidence": "Dim userName"
+              }
+            ]
+          },
+          {
+            "id": "error_handling:use_structured_error_handling",
+            "category": "error_handling",
+            "rule": "Implement structured error handling instead of 'On Error Resume Next'.",
+            "confidence": 0.9,
+            "examples": [
+              "Try...Catch in Node.js"
+            ],
+            "counterexamples": [
+              "On Error Resume Next"
+            ],
+            "provenance": [
+              {
+                "file": "includes/orders.asp",
+                "line": 34,
+                "evidence": "On Error Resume Next"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor to use modern error handling techniques such as try-catch blocks in Node.js."
+        ],
+        "scaffold_templates": [
+          "Node.js Express application template with session management and authentication."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy application has low maintainability and lacks modern security and reliability practices.",
+        "scores": {
+          "maintainability": 2,
+          "security": 3,
+          "reliability": 2,
+          "testability": 1
+        },
+        "hotspots": [
+          {
+            "scope": "component:authentication",
+            "reason": "Lack of secure password handling and session management.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 14,
+                "evidence": "Session(\"UserName\") = userName"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Insecure Session Management",
+            "description": "Sessions are managed without secure practices, leading to potential session hijacking.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:modernize_authentication",
+          "title": "Modernize Authentication Component",
+          "problem_statement": "The authentication component uses insecure session management.",
+          "scope": [
+            "component:authentication"
+          ],
+          "risk_if_unaddressed": "Potential for session hijacking and unauthorized access.",
+          "effort": "M",
+          "severity": "critical",
+          "dependencies": [
+            "component:session_management"
+          ],
+          "suggested_approach": "Implement secure session management using JWT in Node.js.",
+          "success_criteria": [
+            "Sessions are securely managed using JWT.",
+            "Authentication is robust against common vulnerabilities."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "includes/customer.asp",
+              "line": 14,
+              "evidence": "Session(\"UserName\") = userName"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 21073,
+    "latency_ms": 14746.337175369263,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-19T20:43:44.104691+00:00"
+}
