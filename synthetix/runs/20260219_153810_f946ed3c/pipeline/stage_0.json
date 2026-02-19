@@ -1,0 +1,285 @@
+{
+  "run_id": "20260219_153810_f946ed3c",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260219T203825Z_20260219_153810_f946ed3c",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725"
+      },
+      "context_bundle": {
+        "bundle_id": "2faeb7ddbe204fcfb227318fa1f6348f",
+        "created_at": "2026-02-19T20:38:25.389645+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "84d00a1c5aea4b429a0d8fa852330b15",
+            "digest": "sha256:dee83bed6ff1ea4d0192115bfc754e25bcf640cb3a9166f20de03d226a437dde",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "69ff2056d7d64851b6aaa5ee097420a9",
+            "digest": "sha256:e010ccffda271742e5825a040f41f1613bdcbc713912e0f86f666da40fab8813",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "f4d8d7d3364a4b12b33cb5dbaabb1dc4",
+            "digest": "sha256:04e4f2263fbdcbb32f3e18364b73b30d422f56d9d724654555975cc16ff512fb",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-19T20:38:25.445392+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy ASP application for customer and order management, targeted for modernization to Node.js.",
+        "nodes": [
+          {
+            "id": "node:legacy_asp_application",
+            "type": "Service",
+            "name": "Legacy Customer Orders",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "global.asa",
+                "line": 3,
+                "evidence": "Application(\"AppName\") = \"Legacy Customer Orders\""
+              }
+            ]
+          },
+          {
+            "id": "node:session_management",
+            "type": "Component",
+            "name": "Session Management",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "global.asa",
+                "line": 9,
+                "evidence": "Session_OnStart and Session_OnEnd handlers"
+              }
+            ]
+          },
+          {
+            "id": "node:customer_management",
+            "type": "Component",
+            "name": "Customer Management",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 1,
+                "evidence": "Customer login and listing logic"
+              }
+            ]
+          },
+          {
+            "id": "node:order_management",
+            "type": "Component",
+            "name": "Order Management",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/orders.asp",
+                "line": 1,
+                "evidence": "Order creation and update logic"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:customer_management",
+            "to": "node:session_management",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "includes/customer.asp",
+                "line": 20,
+                "evidence": "Session(\"IsAuthenticated\") check"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:order_management",
+            "to": "node:session_management",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "includes/orders.asp",
+                "line": 4,
+                "evidence": "Call RequireLogin()"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Analysis of coding conventions and practices in the legacy ASP codebase.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use camelCase for variable names.",
+            "confidence": 0.8,
+            "examples": [
+              "Dim userName"
+            ],
+            "counterexamples": [
+              "Dim UserName"
+            ],
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 12,
+                "evidence": "Dim userName"
+              }
+            ]
+          },
+          {
+            "id": "rule:session_management",
+            "category": "auth",
+            "rule": "Ensure session management for user authentication.",
+            "confidence": 0.9,
+            "examples": [
+              "Session(\"IsAuthenticated\")"
+            ],
+            "counterexamples": [
+              "Session(\"Authenticated\")"
+            ],
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 20,
+                "evidence": "Session(\"IsAuthenticated\") = True"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Adopt consistent naming conventions across the codebase.",
+          "Implement more robust error handling mechanisms."
+        ],
+        "scaffold_templates": [
+          "Node.js Express application structure with session management."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "Health assessment of the legacy ASP codebase, highlighting maintainability, security, and reliability concerns.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Session Management",
+            "reason": "Potential session fixation vulnerability.",
+            "severity": "high",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "global.asa",
+                "line": 9,
+                "evidence": "Session_OnStart without session regeneration"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Session Fixation",
+            "description": "The current session management approach may allow session fixation attacks.",
+            "severity": "critical",
+            "confidence": 0.8
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task:modernize_session_management",
+          "title": "Modernize Session Management",
+          "problem_statement": "The legacy session management approach is vulnerable to session fixation attacks.",
+          "scope": [
+            "Session Management"
+          ],
+          "risk_if_unaddressed": "Potential unauthorized access due to session fixation.",
+          "effort": "M",
+          "severity": "critical",
+          "dependencies": [
+            "node:session_management"
+          ],
+          "suggested_approach": "Implement session regeneration on login in the Node.js application.",
+          "success_criteria": [
+            "Session is regenerated on each login.",
+            "No session fixation vulnerabilities detected in security tests."
+          ],
+          "confidence": 0.8,
+          "provenance": [
+            {
+              "file": "global.asa",
+              "line": 9,
+              "evidence": "Session_OnStart without session regeneration"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 20953,
+    "latency_ms": 14469.624996185303,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-19T20:38:25.446487+00:00"
+}
