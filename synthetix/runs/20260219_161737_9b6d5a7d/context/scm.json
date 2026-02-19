@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy ASP application structure and its components, focusing on session management, customer handling, and order processing.",
+  "nodes": [
+    {
+      "id": "node:global_asa",
+      "type": "Component",
+      "name": "Global ASA",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 1,
+          "evidence": "Sub Application_OnStart()"
+        }
+      ]
+    },
+    {
+      "id": "node:customer_asp",
+      "type": "Component",
+      "name": "Customer ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 1,
+          "evidence": "If action = \"login\" Then"
+        }
+      ]
+    },
+    {
+      "id": "node:orders_asp",
+      "type": "Component",
+      "name": "Orders ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 1,
+          "evidence": "Select Case action"
+        }
+      ]
+    },
+    {
+      "id": "node:layout_asp",
+      "type": "Component",
+      "name": "Layout ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/layout.asp",
+          "line": 1,
+          "evidence": "Sub RenderHeader(title)"
+        }
+      ]
+    },
+    {
+      "id": "node:util_asp",
+      "type": "Component",
+      "name": "Util ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/util.asp",
+          "line": 1,
+          "evidence": "Sub RedirectWithFlash(url, message)"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "CALLS_HTTP",
+      "from": "node:customer_asp",
+      "to": "node:orders_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 18,
+          "evidence": "Response.Redirect \"customers.asp\""
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "node:orders_asp",
+      "to": "node:customer_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 40,
+          "evidence": "RedirectWithFlash \"orders.asp\", \"Order not found.\""
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
