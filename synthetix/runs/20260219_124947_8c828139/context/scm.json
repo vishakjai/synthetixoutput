@@ -1,0 +1,170 @@
+{
+  "version": "1.0",
+  "summary": "Legacy ASP application for managing customer orders, sessions, and authentication, targeted for modernization to TypeScript.",
+  "nodes": [
+    {
+      "id": "node:global_asa",
+      "type": "Component",
+      "name": "Global ASA",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 1,
+          "evidence": "<SCRIPT LANGUAGE=\"VBScript\" RUNAT=\"Server\">"
+        }
+      ]
+    },
+    {
+      "id": "node:customer_asp",
+      "type": "Component",
+      "name": "Customer ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 1,
+          "evidence": "<%@ Language=\"VBScript\" %>"
+        }
+      ]
+    },
+    {
+      "id": "node:layout_asp",
+      "type": "Component",
+      "name": "Layout ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/layout.asp",
+          "line": 1,
+          "evidence": "Sub RenderHeader(title)"
+        }
+      ]
+    },
+    {
+      "id": "node:logout_asp",
+      "type": "Component",
+      "name": "Logout ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/logout.asp",
+          "line": 1,
+          "evidence": "<%@ Language=\"VBScript\" %>"
+        }
+      ]
+    },
+    {
+      "id": "node:orders_asp",
+      "type": "Component",
+      "name": "Orders ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 1,
+          "evidence": "<%@ Language=\"VBScript\" %>"
+        }
+      ]
+    },
+    {
+      "id": "node:util_asp",
+      "type": "Component",
+      "name": "Util ASP",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/util.asp",
+          "line": 1,
+          "evidence": "Sub RedirectWithFlash(url, message)"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "node:customer_asp",
+      "to": "node:util_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 2,
+          "evidence": "<!--#include file=\"includes/util.asp\" -->"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:customer_asp",
+      "to": "node:layout_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 3,
+          "evidence": "<!--#include file=\"includes/layout.asp\" -->"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:orders_asp",
+      "to": "node:util_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 2,
+          "evidence": "<!--#include file=\"includes/util.asp\" -->"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:orders_asp",
+      "to": "node:layout_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 3,
+          "evidence": "<!--#include file=\"includes/layout.asp\" -->"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "node:customer_asp",
+      "to": "node:orders_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 20,
+          "evidence": "Response.Redirect \"customers.asp\""
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database conversion context not specified."
+  ]
+}
