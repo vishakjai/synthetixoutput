@@ -1,0 +1,295 @@
+{
+  "header": {
+    "artifact_id": "7b20dbc039994f5ba25e14bac63d1b5a",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-19T18:03:14.824274+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260219_130247_64d56dcf",
+      "stage_id": "context_layer",
+      "task_id": "34b5898a7bbf43568a5ba19fc2c1d26d"
+    },
+    "parents": [],
+    "digest": "sha256:a705d5b0ce39867a46751491a218e72573f74cc4b64740872408ecdc98932d8a",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260219_130247_64d56dcf",
+      "bundle_version": "20260219T180314Z_20260219_130247_64d56dcf"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "node:application",
+        "type": "service",
+        "name": "Legacy Customer Orders",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "VBScript",
+        "repo_paths": [
+          "global.asa"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "language": "VBScript",
+          "framework": "Classic ASP"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "global.asa"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node:login_endpoint",
+        "type": "endpoint",
+        "name": "Login",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "/customers.asp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "method": "POST",
+          "path": "/customers.asp"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "includes/customer.asp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node:orders_endpoint",
+        "type": "endpoint",
+        "name": "Orders",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "/orders.asp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "method": "POST",
+          "path": "/orders.asp"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "includes/orders.asp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node:customers_table",
+        "type": "table",
+        "name": "Customers",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "includes/customer.asp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "includes/customer.asp"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node:orders_table",
+        "type": "table",
+        "name": "Orders",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "includes/orders.asp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "includes/orders.asp"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "calls_http",
+        "from": "node:login_endpoint",
+        "to": "node:application",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {
+          "method": "POST"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "includes/customer.asp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "calls_http",
+        "from": "node:orders_endpoint",
+        "to": "node:application",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {
+          "method": "POST"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "includes/orders.asp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:3",
+        "type": "reads",
+        "from": "node:login_endpoint",
+        "to": "node:customers_table",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "includes/customer.asp"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:4",
+        "type": "reads",
+        "from": "node:orders_endpoint",
+        "to": "node:orders_table",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "includes/orders.asp"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 5,
+      "edge_count": 4,
+      "languages": [
+        "VBScript"
+      ]
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": []
+}
