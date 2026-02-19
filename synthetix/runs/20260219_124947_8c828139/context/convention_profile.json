@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of legacy ASP codebase for modernization to TypeScript, focusing on naming conventions, error handling, and security.",
+  "rules": [
+    {
+      "id": "rule:naming_convention",
+      "category": "naming",
+      "rule": "Use camelCase for variable names.",
+      "confidence": 0.8,
+      "examples": [
+        "Dim userName"
+      ],
+      "counterexamples": [
+        "Dim UserName"
+      ],
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 12,
+          "evidence": "Dim userName"
+        }
+      ]
+    },
+    {
+      "id": "rule:error_handling",
+      "category": "error_handling",
+      "rule": "Implement structured error handling.",
+      "confidence": 0.7,
+      "examples": [
+        "On Error Resume Next"
+      ],
+      "counterexamples": [
+        "No error handling"
+      ],
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 28,
+          "evidence": "On Error Resume Next"
+        }
+      ]
+    },
+    {
+      "id": "rule:security_input_validation",
+      "category": "security",
+      "rule": "Validate all user inputs to prevent injection attacks.",
+      "confidence": 0.9,
+      "examples": [
+        "Trim(Request.Form(\"userName\"))"
+      ],
+      "counterexamples": [
+        "Request.Form(\"userName\")"
+      ],
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 13,
+          "evidence": "userName = Trim(Request.Form(\"userName\"))"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Ensure consistent naming conventions across the codebase.",
+    "Implement structured error handling using try-catch blocks in TypeScript.",
+    "Validate and sanitize all user inputs to prevent security vulnerabilities."
+  ],
+  "scaffold_templates": [
+    "TypeScript service template for handling user sessions and authentication.",
+    "TypeScript component template for rendering HTML with security in mind."
+  ]
+}
