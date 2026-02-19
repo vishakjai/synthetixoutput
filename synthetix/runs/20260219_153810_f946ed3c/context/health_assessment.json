@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "summary": "Health assessment of the legacy ASP codebase, highlighting maintainability, security, and reliability concerns.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 3,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "Session Management",
+      "reason": "Potential session fixation vulnerability.",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 9,
+          "evidence": "Session_OnStart without session regeneration"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Session Fixation",
+      "description": "The current session management approach may allow session fixation attacks.",
+      "severity": "critical",
+      "confidence": 0.8
+    }
+  ]
+}
