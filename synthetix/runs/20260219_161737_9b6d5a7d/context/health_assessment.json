@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "summary": "The health assessment identifies key areas for improvement in maintainability, security, and reliability of the legacy ASP codebase.",
+  "scores": {
+    "maintainability": 60,
+    "security": 50,
+    "reliability": 55,
+    "testability": 40
+  },
+  "hotspots": [
+    {
+      "scope": "global.asa",
+      "reason": "Session management without proper error handling.",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 6,
+          "evidence": "Application(\"TotalSessions\") = Application(\"TotalSessions\") + 1"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Session Hijacking",
+      "description": "Lack of secure session management can lead to session hijacking.",
+      "severity": "critical",
+      "confidence": 0.9
+    }
+  ]
+}
