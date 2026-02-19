@@ -1,0 +1,152 @@
+{
+  "version": "1.0",
+  "summary": "Legacy ASP application for customer and order management to be modernized to Node.js.",
+  "nodes": [
+    {
+      "id": "node:application",
+      "type": "Service",
+      "name": "Legacy Customer Orders",
+      "metadata": {
+        "language": "VBScript",
+        "framework": "Classic ASP"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 1,
+          "evidence": "Application_OnStart sets AppName to 'Legacy Customer Orders'"
+        }
+      ]
+    },
+    {
+      "id": "node:login_endpoint",
+      "type": "Endpoint",
+      "name": "Login",
+      "metadata": {
+        "method": "POST",
+        "path": "/customers.asp"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 13,
+          "evidence": "Handles login action"
+        }
+      ]
+    },
+    {
+      "id": "node:orders_endpoint",
+      "type": "Endpoint",
+      "name": "Orders",
+      "metadata": {
+        "method": "POST",
+        "path": "/orders.asp"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 13,
+          "evidence": "Handles create and update actions"
+        }
+      ]
+    },
+    {
+      "id": "node:customers_table",
+      "type": "Table",
+      "name": "Customers",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 40,
+          "evidence": "Iterates over Application('Customers')"
+        }
+      ]
+    },
+    {
+      "id": "node:orders_table",
+      "type": "Table",
+      "name": "Orders",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 66,
+          "evidence": "Iterates over Application('Orders')"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "CALLS_HTTP",
+      "from": "node:login_endpoint",
+      "to": "node:application",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "method": "POST"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 13,
+          "evidence": "Login action redirects to customers.asp"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "node:orders_endpoint",
+      "to": "node:application",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "method": "POST"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 13,
+          "evidence": "Handles create and update actions"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node:login_endpoint",
+      "to": "node:customers_table",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 40,
+          "evidence": "Iterates over Application('Customers')"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node:orders_endpoint",
+      "to": "node:orders_table",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 66,
+          "evidence": "Iterates over Application('Orders')"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
