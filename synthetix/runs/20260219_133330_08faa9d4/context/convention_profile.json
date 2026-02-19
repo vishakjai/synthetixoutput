@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "summary": "This profile outlines the coding conventions and best practices for the legacy ASP codebase, highlighting areas for improvement during modernization.",
+  "rules": [
+    {
+      "id": "rule:naming_convention",
+      "category": "naming",
+      "rule": "Use consistent naming conventions for variables and functions.",
+      "confidence": 0.7,
+      "examples": [
+        "Dim userName",
+        "Sub HandleCreate()"
+      ],
+      "counterexamples": [
+        "Dim usrNm",
+        "Sub hndleCrte()"
+      ],
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 10,
+          "evidence": "Variable naming"
+        }
+      ]
+    },
+    {
+      "id": "rule:error_handling",
+      "category": "error_handling",
+      "rule": "Implement structured error handling using On Error Resume Next and error checking.",
+      "confidence": 0.8,
+      "examples": [
+        "On Error Resume Next",
+        "If Err.Number <> 0 Then"
+      ],
+      "counterexamples": [
+        "No error handling"
+      ],
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 30,
+          "evidence": "Error handling in order creation"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Ensure all variables are explicitly declared using Option Explicit.",
+    "Avoid using On Error Resume Next without proper error checks."
+  ],
+  "scaffold_templates": [
+    "Node.js Express application structure with routes for customers and orders.",
+    "Dockerfile for local testing and deployment."
+  ]
+}
