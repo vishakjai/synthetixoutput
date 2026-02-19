@@ -1,0 +1,153 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy ASP application structure and its modernization plan to Node.js, capturing key components and their interactions.",
+  "nodes": [
+    {
+      "id": "node:global_asa",
+      "type": "Component",
+      "name": "global.asa",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 1,
+          "evidence": "VBScript for session and application management"
+        }
+      ]
+    },
+    {
+      "id": "node:customer_asp",
+      "type": "Component",
+      "name": "customer.asp",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 1,
+          "evidence": "Handles customer login and display"
+        }
+      ]
+    },
+    {
+      "id": "node:layout_asp",
+      "type": "Component",
+      "name": "layout.asp",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/layout.asp",
+          "line": 1,
+          "evidence": "Renders HTML layout"
+        }
+      ]
+    },
+    {
+      "id": "node:logout_asp",
+      "type": "Component",
+      "name": "logout.asp",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/logout.asp",
+          "line": 1,
+          "evidence": "Handles user logout"
+        }
+      ]
+    },
+    {
+      "id": "node:orders_asp",
+      "type": "Component",
+      "name": "orders.asp",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 1,
+          "evidence": "Handles order creation and updates"
+        }
+      ]
+    },
+    {
+      "id": "node:util_asp",
+      "type": "Component",
+      "name": "util.asp",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/util.asp",
+          "line": 1,
+          "evidence": "Utility functions for the application"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "CALLS_HTTP",
+      "from": "node:customer_asp",
+      "to": "node:orders_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 34,
+          "evidence": "Redirects to orders.asp after login"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:customer_asp",
+      "to": "node:util_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 2,
+          "evidence": "Includes util.asp for utility functions"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:orders_asp",
+      "to": "node:util_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 2,
+          "evidence": "Includes util.asp for utility functions"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:orders_asp",
+      "to": "node:layout_asp",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 3,
+          "evidence": "Includes layout.asp for rendering HTML layout"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
