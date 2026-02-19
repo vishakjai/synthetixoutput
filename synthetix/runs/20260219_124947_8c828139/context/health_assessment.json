@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "Health assessment of the legacy ASP codebase, identifying key areas for improvement in maintainability, security, and reliability.",
+  "scores": {
+    "maintainability": 60,
+    "security": 50,
+    "reliability": 55,
+    "testability": 40
+  },
+  "hotspots": [
+    {
+      "scope": "includes/orders.asp",
+      "reason": "Lack of structured error handling.",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 28,
+          "evidence": "On Error Resume Next"
+        }
+      ]
+    },
+    {
+      "scope": "includes/customer.asp",
+      "reason": "Potential for injection attacks due to insufficient input validation.",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 13,
+          "evidence": "userName = Trim(Request.Form(\"userName\"))"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Security Vulnerability",
+      "description": "Potential for injection attacks due to insufficient input validation.",
+      "severity": "critical",
+      "confidence": 0.9
+    },
+    {
+      "title": "Error Handling Deficiency",
+      "description": "Lack of structured error handling could lead to unhandled exceptions.",
+      "severity": "high",
+      "confidence": 0.8
+    }
+  ]
+}
