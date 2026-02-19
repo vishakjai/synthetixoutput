@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "summary": "This profile outlines the coding conventions and practices observed in the legacy ASP codebase.",
+  "rules": [
+    {
+      "id": "rule:naming_convention",
+      "category": "naming",
+      "rule": "Variables and functions should use camelCase.",
+      "confidence": 0.7,
+      "examples": [
+        "Dim userName",
+        "Sub RenderHeader"
+      ],
+      "counterexamples": [
+        "Dim User_Name",
+        "Sub render_header"
+      ],
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 8,
+          "evidence": "Dim userName"
+        }
+      ]
+    },
+    {
+      "id": "rule:session_management",
+      "category": "security",
+      "rule": "Session variables should be locked during updates.",
+      "confidence": 0.9,
+      "examples": [
+        "Application.Lock",
+        "Application.UnLock"
+      ],
+      "counterexamples": [
+        "Session variable updates without locking"
+      ],
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 6,
+          "evidence": "Application.Lock"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Ensure consistent naming conventions across all scripts.",
+    "Implement proper error handling for all user inputs."
+  ],
+  "scaffold_templates": [
+    "Node.js Express template for session management",
+    "Node.js Express template for customer login"
+  ]
+}
