@@ -1,0 +1,30 @@
+[
+  {
+    "id": "remediation:modernize_auth",
+    "title": "Modernize Authentication",
+    "problem_statement": "Current authentication uses server-side sessions, which are insecure.",
+    "scope": [
+      "includes/customer.asp",
+      "includes/logout.asp"
+    ],
+    "risk_if_unaddressed": "Potential for session hijacking and unauthorized access.",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "node:login_endpoint"
+    ],
+    "suggested_approach": "Implement JWT-based authentication.",
+    "success_criteria": [
+      "All authentication uses JWT tokens.",
+      "Sessions are no longer stored server-side."
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "includes/customer.asp",
+        "line": 19,
+        "evidence": "Session('UserName')"
+      }
+    ]
+  }
+]
