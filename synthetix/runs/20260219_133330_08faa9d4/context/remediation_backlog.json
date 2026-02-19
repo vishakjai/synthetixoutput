@@ -1,0 +1,55 @@
+[
+  {
+    "id": "task:modernize_auth",
+    "title": "Modernize Authentication Mechanism",
+    "problem_statement": "The current authentication mechanism is based on session variables and lacks security best practices.",
+    "scope": [
+      "includes/customer.asp",
+      "includes/logout.asp"
+    ],
+    "risk_if_unaddressed": "Continued use of insecure authentication practices could lead to unauthorized access.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "node:util_asp"
+    ],
+    "suggested_approach": "Implement JWT-based authentication in Node.js.",
+    "success_criteria": [
+      "Authentication is handled using JWT tokens.",
+      "Session management is secure and stateless."
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "includes/customer.asp",
+        "line": 15,
+        "evidence": "Session-based authentication"
+      }
+    ]
+  },
+  {
+    "id": "task:input_validation",
+    "title": "Implement Input Validation",
+    "problem_statement": "Lack of input validation exposes the application to security risks.",
+    "scope": [
+      "includes/orders.asp"
+    ],
+    "risk_if_unaddressed": "Potential for SQL injection and data corruption.",
+    "effort": "S",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Use a validation library in Node.js to ensure all inputs are sanitized.",
+    "success_criteria": [
+      "All user inputs are validated and sanitized.",
+      "Security vulnerabilities related to input handling are mitigated."
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "includes/orders.asp",
+        "line": 45,
+        "evidence": "No input validation for order fields"
+      }
+    ]
+  }
+]
