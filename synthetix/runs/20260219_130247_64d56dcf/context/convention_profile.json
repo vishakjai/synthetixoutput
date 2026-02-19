@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "summary": "Legacy code follows Classic ASP conventions, requiring modernization to Node.js standards.",
+  "rules": [
+    {
+      "id": "rule:naming_convention",
+      "category": "naming",
+      "rule": "Use camelCase for variable and function names in Node.js.",
+      "confidence": 0.8,
+      "examples": [
+        "let userName = 'John';"
+      ],
+      "counterexamples": [
+        "Dim user_name"
+      ],
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 14,
+          "evidence": "Dim userName"
+        }
+      ]
+    },
+    {
+      "id": "rule:session_management",
+      "category": "auth",
+      "rule": "Use JWT tokens for session management instead of server-side sessions.",
+      "confidence": 0.9,
+      "examples": [
+        "const token = jwt.sign({ userId }, secret);"
+      ],
+      "counterexamples": [
+        "Session('UserName') = userName"
+      ],
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 19,
+          "evidence": "Session('UserName')"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Ensure all endpoints are RESTful and follow HTTP status code conventions."
+  ],
+  "scaffold_templates": [
+    "Node.js Express application structure with JWT authentication."
+  ]
+}
