@@ -1,0 +1,373 @@
+{
+  "run_id": "20260219_133330_08faa9d4",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 6 nodes, 4 edges, 2 conventions, 2 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260219T183357Z_20260219_133330_08faa9d4",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725"
+      },
+      "context_bundle": {
+        "bundle_id": "2e0ec02f4f194b79a2c01c6b2914babd",
+        "created_at": "2026-02-19T18:33:57.522541+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "a2875bd020c64c6ca90349785db4efa2",
+            "digest": "sha256:b652bdf266c8d5c5edcc42a0858b8c76711c6d8e8203f473c0b90b5ba5d02fd1",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "eaaa6ceb503d4ed6b38a5baa50d98fe4",
+            "digest": "sha256:c962c5ed5cab70459d0917eaabd63e66dfc63d45d2de4cc4011c4478cf270cf5",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "772be0f9451f467eb7f6facb48a6fcea",
+            "digest": "sha256:b43d21e8d62f993cd0da3fb0ef77065b924c87b927204153366f086581927299",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-19T18:33:57.585009+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy ASP application structure and its modernization plan to Node.js, capturing key components and their interactions.",
+        "nodes": [
+          {
+            "id": "node:global_asa",
+            "type": "Component",
+            "name": "global.asa",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "global.asa",
+                "line": 1,
+                "evidence": "VBScript for session and application management"
+              }
+            ]
+          },
+          {
+            "id": "node:customer_asp",
+            "type": "Component",
+            "name": "customer.asp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 1,
+                "evidence": "Handles customer login and display"
+              }
+            ]
+          },
+          {
+            "id": "node:layout_asp",
+            "type": "Component",
+            "name": "layout.asp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/layout.asp",
+                "line": 1,
+                "evidence": "Renders HTML layout"
+              }
+            ]
+          },
+          {
+            "id": "node:logout_asp",
+            "type": "Component",
+            "name": "logout.asp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/logout.asp",
+                "line": 1,
+                "evidence": "Handles user logout"
+              }
+            ]
+          },
+          {
+            "id": "node:orders_asp",
+            "type": "Component",
+            "name": "orders.asp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/orders.asp",
+                "line": 1,
+                "evidence": "Handles order creation and updates"
+              }
+            ]
+          },
+          {
+            "id": "node:util_asp",
+            "type": "Component",
+            "name": "util.asp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "includes/util.asp",
+                "line": 1,
+                "evidence": "Utility functions for the application"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "CALLS_HTTP",
+            "from": "node:customer_asp",
+            "to": "node:orders_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "includes/customer.asp",
+                "line": 34,
+                "evidence": "Redirects to orders.asp after login"
+              }
+            ]
+          },
+          {
+            "type": "IMPORTS",
+            "from": "node:customer_asp",
+            "to": "node:util_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "includes/customer.asp",
+                "line": 2,
+                "evidence": "Includes util.asp for utility functions"
+              }
+            ]
+          },
+          {
+            "type": "IMPORTS",
+            "from": "node:orders_asp",
+            "to": "node:util_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "includes/orders.asp",
+                "line": 2,
+                "evidence": "Includes util.asp for utility functions"
+              }
+            ]
+          },
+          {
+            "type": "IMPORTS",
+            "from": "node:orders_asp",
+            "to": "node:layout_asp",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "includes/orders.asp",
+                "line": 3,
+                "evidence": "Includes layout.asp for rendering HTML layout"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and best practices for the legacy ASP codebase, highlighting areas for improvement during modernization.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use consistent naming conventions for variables and functions.",
+            "confidence": 0.7,
+            "examples": [
+              "Dim userName",
+              "Sub HandleCreate()"
+            ],
+            "counterexamples": [
+              "Dim usrNm",
+              "Sub hndleCrte()"
+            ],
+            "provenance": [
+              {
+                "file": "includes/customer.asp",
+                "line": 10,
+                "evidence": "Variable naming"
+              }
+            ]
+          },
+          {
+            "id": "rule:error_handling",
+            "category": "error_handling",
+            "rule": "Implement structured error handling using On Error Resume Next and error checking.",
+            "confidence": 0.8,
+            "examples": [
+              "On Error Resume Next",
+              "If Err.Number <> 0 Then"
+            ],
+            "counterexamples": [
+              "No error handling"
+            ],
+            "provenance": [
+              {
+                "file": "includes/orders.asp",
+                "line": 30,
+                "evidence": "Error handling in order creation"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all variables are explicitly declared using Option Explicit.",
+          "Avoid using On Error Resume Next without proper error checks."
+        ],
+        "scaffold_templates": [
+          "Node.js Express application structure with routes for customers and orders.",
+          "Dockerfile for local testing and deployment."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment identifies key areas requiring attention in the legacy codebase, focusing on maintainability, security, and reliability.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 55,
+          "testability": 40
+        },
+        "hotspots": [
+          {
+            "scope": "includes/orders.asp",
+            "reason": "Lack of input validation and error handling.",
+            "severity": "high",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "includes/orders.asp",
+                "line": 40,
+                "evidence": "No input validation for order creation fields"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Vulnerabilities",
+            "description": "Potential for SQL injection and cross-site scripting due to lack of input sanitization.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task:modernize_auth",
+          "title": "Modernize Authentication Mechanism",
+          "problem_statement": "The current authentication mechanism is based on session variables and lacks security best practices.",
+          "scope": [
+            "includes/customer.asp",
+            "includes/logout.asp"
+          ],
+          "risk_if_unaddressed": "Continued use of insecure authentication practices could lead to unauthorized access.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [
+            "node:util_asp"
+          ],
+          "suggested_approach": "Implement JWT-based authentication in Node.js.",
+          "success_criteria": [
+            "Authentication is handled using JWT tokens.",
+            "Session management is secure and stateless."
+          ],
+          "confidence": 0.8,
+          "provenance": [
+            {
+              "file": "includes/customer.asp",
+              "line": 15,
+              "evidence": "Session-based authentication"
+            }
+          ]
+        },
+        {
+          "id": "task:input_validation",
+          "title": "Implement Input Validation",
+          "problem_statement": "Lack of input validation exposes the application to security risks.",
+          "scope": [
+            "includes/orders.asp"
+          ],
+          "risk_if_unaddressed": "Potential for SQL injection and data corruption.",
+          "effort": "S",
+          "severity": "critical",
+          "dependencies": [],
+          "suggested_approach": "Use a validation library in Node.js to ensure all inputs are sanitized.",
+          "success_criteria": [
+            "All user inputs are validated and sanitized.",
+            "Security vulnerabilities related to input handling are mitigated."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "includes/orders.asp",
+              "line": 45,
+              "evidence": "No input validation for order fields"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 20510,
+    "latency_ms": 26219.876050949097,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-19T18:33:57.586489+00:00"
+}
