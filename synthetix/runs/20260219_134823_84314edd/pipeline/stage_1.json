@@ -1,0 +1,1225 @@
+{
+  "run_id": "20260219_134823_84314edd",
+  "stage": 1,
+  "result": {
+    "agent_name": "Analyst Agent",
+    "stage": 1,
+    "status": "success",
+    "summary": "Extracted 8 functional requirements, 5 non-functional requirements, 5 risks, 2 clarifications, 0 failed quality gates [software-general-v1]",
+    "output": {
+      "analysis_walkthrough": {
+        "business_objective_summary": "Modernize a legacy ASP codebase to Python, ensuring backward compatibility and documenting functionality.",
+        "requirements_understanding": [
+          "The legacy codebase involves session management, customer login, and order processing.",
+          "The modernization must preserve the existing functionality and session handling logic.",
+          "The system must be containerized for local testing using Docker."
+        ],
+        "conversion_to_technical_requirements": [
+          "Translate ASP session and application state management to Python using Flask or Django.",
+          "Use Python's built-in data structures to replace VBScript dictionaries.",
+          "Implement a RESTful API for customer and order management."
+        ],
+        "clarifications_requested": [
+          "Is there a preferred Python framework (Flask or Django) for the implementation?",
+          "Are there any specific security standards to adhere to beyond general best practices?"
+        ]
+      },
+      "project_name": "Legacy Codebase Modernization",
+      "executive_summary": "This project involves modernizing a legacy ASP codebase to Python, ensuring feature parity and backward compatibility, with deployment in a Docker environment.",
+      "functional_requirements": [
+        {
+          "id": "FR-001",
+          "title": "Session Management",
+          "description": "Implement session management to track active sessions and user authentication status.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "Sessions are initiated upon user login and terminated upon logout.",
+            "Total active sessions are tracked and displayed.",
+            "User authentication status is maintained across requests."
+          ]
+        },
+        {
+          "id": "FR-002",
+          "title": "User Authentication",
+          "description": "Implement user login functionality with session-based authentication.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "User is prompted for a username upon accessing the customer page.",
+            "Successful login sets the session as authenticated and stores the username.",
+            "Failed login attempts are redirected with an error message."
+          ]
+        },
+        {
+          "id": "FR-003",
+          "title": "Customer Management",
+          "description": "Display a list of customers stored in the application state.",
+          "priority": "P1",
+          "acceptance_criteria": [
+            "Customers are displayed in a tabular format with ID and Name columns.",
+            "Customer data is retrieved from an in-memory data structure.",
+            "The page is accessible only to authenticated users."
+          ]
+        },
+        {
+          "id": "FR-004",
+          "title": "Order Creation",
+          "description": "Implement functionality to create new orders for customers.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "Order creation requires customer selection, status, and total amount.",
+            "Orders are stored in an in-memory data structure with a unique ID.",
+            "Invalid order submissions are redirected with an error message."
+          ]
+        },
+        {
+          "id": "FR-005",
+          "title": "Order Update",
+          "description": "Implement functionality to update the status of existing orders.",
+          "priority": "P1",
+          "acceptance_criteria": [
+            "Order status can be updated to NEW, PROCESSING, or CLOSED.",
+            "Updates are reflected in the in-memory data structure.",
+            "Invalid updates are redirected with an error message."
+          ]
+        },
+        {
+          "id": "FR-006",
+          "title": "Flash Messaging",
+          "description": "Implement flash messaging to provide feedback to users.",
+          "priority": "P2",
+          "acceptance_criteria": [
+            "Flash messages are displayed after redirects.",
+            "Messages are cleared after being displayed once.",
+            "Flash messages support success and error types."
+          ]
+        },
+        {
+          "id": "FR-007",
+          "title": "HTML Encoding",
+          "description": "Ensure all user inputs and outputs are HTML encoded to prevent XSS.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "All dynamic content is HTML encoded before rendering.",
+            "User inputs are sanitized to prevent script injection.",
+            "Encoding is applied consistently across all pages."
+          ]
+        },
+        {
+          "id": "FR-008",
+          "title": "Docker Deployment",
+          "description": "Deploy the modernized application in a Docker container for local testing.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "The application runs successfully in a Docker container.",
+            "All dependencies are included in the Docker image.",
+            "The Docker setup supports local testing and development."
+          ]
+        }
+      ],
+      "non_functional_requirements": [
+        {
+          "id": "NFR-001",
+          "title": "Performance",
+          "description": "The application should handle at least 100 concurrent sessions without performance degradation.",
+          "category": "performance",
+          "metric": "Handle 100 concurrent sessions",
+          "acceptance_criteria": [
+            "Application response time remains under 200ms with 100 concurrent sessions.",
+            "Memory usage remains stable under load.",
+            "No session data loss occurs under load."
+          ]
+        },
+        {
+          "id": "NFR-002",
+          "title": "Security",
+          "description": "Ensure secure handling of user data and session information.",
+          "category": "security",
+          "metric": "No security vulnerabilities in OWASP Top 10",
+          "acceptance_criteria": [
+            "No SQL injection vulnerabilities are present.",
+            "Session data is protected against hijacking.",
+            "User data is encrypted in transit."
+          ]
+        },
+        {
+          "id": "NFR-003",
+          "title": "Scalability",
+          "description": "The application should be scalable to support future growth.",
+          "category": "scalability",
+          "metric": "Scalable to 1000 users",
+          "acceptance_criteria": [
+            "Application architecture supports horizontal scaling.",
+            "Database queries are optimized for large datasets.",
+            "Load balancing is implemented for high availability."
+          ]
+        },
+        {
+          "id": "NFR-004",
+          "title": "Reliability",
+          "description": "Ensure the application is reliable and available 99.9% of the time.",
+          "category": "reliability",
+          "metric": "99.9% uptime",
+          "acceptance_criteria": [
+            "Automated tests cover 90% of the codebase.",
+            "Downtime is minimized during deployments.",
+            "Error handling is implemented for all critical operations."
+          ]
+        },
+        {
+          "id": "NFR-005",
+          "title": "Usability",
+          "description": "The application should be user-friendly and intuitive.",
+          "category": "usability",
+          "metric": "User satisfaction score of 4.5/5",
+          "acceptance_criteria": [
+            "User interface is consistent and intuitive.",
+            "Feedback is collected and addressed in iterative improvements.",
+            "Documentation is provided for all user-facing features."
+          ]
+        }
+      ],
+      "legacy_functional_contract": [
+        {
+          "function_name": "Application_OnStart",
+          "inputs": [],
+          "outputs": [
+            "Application state initialized"
+          ],
+          "side_effects": [
+            "Sets application name and initializes session count"
+          ]
+        },
+        {
+          "function_name": "Session_OnStart",
+          "inputs": [],
+          "outputs": [
+            "Session variables initialized"
+          ],
+          "side_effects": [
+            "Increments session count"
+          ]
+        },
+        {
+          "function_name": "Session_OnEnd",
+          "inputs": [],
+          "outputs": [
+            "Session variables cleared"
+          ],
+          "side_effects": [
+            "Decrements session count"
+          ]
+        },
+        {
+          "function_name": "HandleCreate",
+          "inputs": [
+            "customerId",
+            "status",
+            "total"
+          ],
+          "outputs": [
+            "New order created"
+          ],
+          "side_effects": [
+            "Adds order to application state"
+          ]
+        },
+        {
+          "function_name": "HandleUpdate",
+          "inputs": [
+            "orderId",
+            "newStatus"
+          ],
+          "outputs": [
+            "Order status updated"
+          ],
+          "side_effects": [
+            "Modifies order in application state"
+          ]
+        }
+      ],
+      "assumptions": [
+        "The modernization will use Flask as the Python framework unless specified otherwise.",
+        "Existing business logic will be preserved in the new implementation.",
+        "The application will be containerized using Docker for local testing."
+      ],
+      "risks": [
+        {
+          "description": "Potential data loss during the transition from ASP to Python.",
+          "impact": "high",
+          "mitigation": "Implement comprehensive data migration tests and backups."
+        },
+        {
+          "description": "Security vulnerabilities introduced during modernization.",
+          "impact": "medium",
+          "mitigation": "Conduct thorough security audits and code reviews."
+        },
+        {
+          "description": "Performance degradation due to inefficient Python code.",
+          "impact": "medium",
+          "mitigation": "Optimize code and conduct performance testing."
+        },
+        {
+          "description": "Compatibility issues with existing client systems.",
+          "impact": "low",
+          "mitigation": "Ensure backward compatibility and provide thorough testing."
+        },
+        {
+          "description": "Docker configuration issues leading to deployment failures.",
+          "impact": "low",
+          "mitigation": "Use standard Docker practices and conduct deployment tests."
+        }
+      ],
+      "out_of_scope": [
+        "Integration with external systems not mentioned in the legacy code.",
+        "Enhancements beyond the current functionality."
+      ],
+      "requirements_pack": {
+        "artifact_type": "requirements_pack",
+        "artifact_version": "2.0",
+        "artifact_id": "REQPACK-20260219_134823_84314EDD",
+        "generated_at": "2026-02-19T18:49:28.015858+00:00",
+        "generated_by": {
+          "agent_name": "Analyst Agent",
+          "persona": "Legacy Modernization Analyst",
+          "persona_version": "1.0",
+          "requirements_pack_profile": "requirements-pack-v2-general",
+          "domain_pack": {
+            "id": "software-general-v1",
+            "version": "1.0.0",
+            "ontologies": [
+              "Capability Taxonomy"
+            ],
+            "standards": [],
+            "internal_playbooks": []
+          }
+        },
+        "project": {
+          "name": "Legacy Codebase Modernization",
+          "work_item_id": "20260219_134823_84314edd",
+          "jurisdiction": [
+            "GLOBAL"
+          ],
+          "regulatory_profile": [],
+          "domain_pack": {
+            "id": "software-general-v1",
+            "version": "1.0.0",
+            "ontologies": [
+              "Capability Taxonomy"
+            ],
+            "standards": [],
+            "internal_playbooks": []
+          }
+        },
+        "intake": {
+          "business_request_raw": "Modernize the provided legacy codebase into Python. Document current functionality and acceptance criteria, design architecture, implement rewritten services, run QA/security checks, validate requirements, and deploy for local Docker testing.",
+          "actors": [
+            "Business User"
+          ],
+          "channels": [
+            "API"
+          ],
+          "data_elements": [
+            {
+              "name": "serviceId",
+              "classification": "INTERNAL"
+            }
+          ],
+          "constraints_from_user": [],
+          "assumptions": [
+            "The modernization will use Flask as the Python framework unless specified otherwise.",
+            "Existing business logic will be preserved in the new implementation.",
+            "The application will be containerized using Docker for local testing."
+          ]
+        },
+        "domain_mapping": {
+          "capabilities": [
+            {
+              "framework": "Capability Taxonomy",
+              "service_domain": "API Platform",
+              "capability_id": "api_platform",
+              "confidence": 0.55,
+              "rationale": "Mapped from objective overlap for API Platform."
+            }
+          ],
+          "domain_invariants": [
+            {
+              "id": "INV-001",
+              "statement": "Define explicit error handling and observability requirements."
+            },
+            {
+              "id": "INV-002",
+              "statement": "Include measurable non-functional requirements."
+            },
+            {
+              "id": "INV-003",
+              "statement": "Map acceptance criteria to executable test types."
+            }
+          ],
+          "glossary": [
+            {
+              "term": "AuditEvent",
+              "definition": "AuditEvent entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "DomainEvent",
+              "definition": "DomainEvent entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "ServiceRequest",
+              "definition": "ServiceRequest entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "User",
+              "definition": "User entity in current domain scope.",
+              "synonyms": []
+            }
+          ]
+        },
+        "compliance": {
+          "controls_triggered": [],
+          "privacy": {
+            "pii_masking_rules": [],
+            "retention_days": 365,
+            "access_model": "least_privilege"
+          }
+        },
+        "requirements": {
+          "functional": [
+            {
+              "id": "FR-001",
+              "title": "Session Management",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-004",
+                "scenarios": [
+                  "BDD-004-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-002",
+              "title": "User Authentication",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-001",
+                "scenarios": [
+                  "BDD-001-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-003",
+              "title": "Customer Management",
+              "priority": "P1",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-004",
+              "title": "Order Creation",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-002",
+                "scenarios": [
+                  "BDD-002-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-005",
+              "title": "Order Update",
+              "priority": "P1",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-003",
+                "scenarios": [
+                  "BDD-003-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-006",
+              "title": "Flash Messaging",
+              "priority": "P2",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-007",
+              "title": "HTML Encoding",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-008",
+              "title": "Docker Deployment",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            }
+          ],
+          "non_functional": [
+            {
+              "id": "NFR-001",
+              "category": "performance",
+              "metric": "Handle 100 concurrent sessions",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            },
+            {
+              "id": "NFR-002",
+              "category": "security",
+              "metric": "No security vulnerabilities in OWASP Top 10",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            },
+            {
+              "id": "NFR-003",
+              "category": "scalability",
+              "metric": "Scalable to 1000 users",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            },
+            {
+              "id": "NFR-004",
+              "category": "reliability",
+              "metric": "99.9% uptime",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            },
+            {
+              "id": "NFR-005",
+              "category": "usability",
+              "metric": "User satisfaction score of 4.5/5",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            }
+          ]
+        },
+        "bdd": {
+          "features": [
+            {
+              "id": "BDD-001",
+              "title": "User Login",
+              "scenarios": [
+                {
+                  "id": "BDD-001-SC-001",
+                  "name": "Successful login",
+                  "gherkin": [
+                    "Given a user is on the login page",
+                    "When they enter valid credentials",
+                    "Then they are redirected to the customers page"
+                  ],
+                  "maps_to": [
+                    "FR-002"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-002",
+              "title": "Order Creation",
+              "scenarios": [
+                {
+                  "id": "BDD-002-SC-001",
+                  "name": "Create a new order",
+                  "gherkin": [
+                    "Given a user is authenticated",
+                    "When they submit a valid order form",
+                    "Then the order is created and stored"
+                  ],
+                  "maps_to": [
+                    "FR-004"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-003",
+              "title": "Order Update",
+              "scenarios": [
+                {
+                  "id": "BDD-003-SC-001",
+                  "name": "Update order status",
+                  "gherkin": [
+                    "Given an existing order",
+                    "When the status is changed",
+                    "Then the order status is updated in the system"
+                  ],
+                  "maps_to": [
+                    "FR-005"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-004",
+              "title": "Session Management",
+              "scenarios": [
+                {
+                  "id": "BDD-004-SC-001",
+                  "name": "Track active sessions",
+                  "gherkin": [
+                    "Given multiple users are logged in",
+                    "When a new session starts",
+                    "Then the total session count is incremented"
+                  ],
+                  "maps_to": [
+                    "FR-001"
+                  ]
+                }
+              ]
+            }
+          ],
+          "lint": {
+            "gherkin_valid": true,
+            "missing_steps": []
+          }
+        },
+        "open_questions": [
+          {
+            "id": "Q-001",
+            "question": "Are there existing operational constraints or integration dependencies not listed?",
+            "owner": "Client",
+            "severity": "high"
+          }
+        ],
+        "risks": [
+          {
+            "description": "Potential data loss during the transition from ASP to Python.",
+            "impact": "high",
+            "mitigation": "Implement comprehensive data migration tests and backups."
+          },
+          {
+            "description": "Security vulnerabilities introduced during modernization.",
+            "impact": "medium",
+            "mitigation": "Conduct thorough security audits and code reviews."
+          },
+          {
+            "description": "Performance degradation due to inefficient Python code.",
+            "impact": "medium",
+            "mitigation": "Optimize code and conduct performance testing."
+          },
+          {
+            "description": "Compatibility issues with existing client systems.",
+            "impact": "low",
+            "mitigation": "Ensure backward compatibility and provide thorough testing."
+          },
+          {
+            "description": "Docker configuration issues leading to deployment failures.",
+            "impact": "low",
+            "mitigation": "Use standard Docker practices and conduct deployment tests."
+          }
+        ],
+        "out_of_scope": [
+          "Integration with external systems not mentioned in the legacy code.",
+          "Enhancements beyond the current functionality."
+        ],
+        "traceability": {
+          "links": [
+            {
+              "from": "FR-001",
+              "to": "BDD-004",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-002",
+              "to": "BDD-001",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-004",
+              "to": "BDD-002",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-005",
+              "to": "BDD-003",
+              "type": "verified_by"
+            }
+          ]
+        },
+        "conversation_audit": {
+          "thread_id": "THREAD-20260219_134823_84314edd",
+          "changes": []
+        },
+        "context_reference": {
+          "version_id": "20260219T184848Z_20260219_134823_84314edd",
+          "repo": "Synthetix",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "scm_version": "1.0",
+          "cp_version": "1.0",
+          "ha_version": "1.0"
+        },
+        "schema_version": "2.0.0",
+        "domain_pack_ref": {
+          "id": "software-general-v1",
+          "name": "General Software Domain Pack",
+          "version": "1.0.0"
+        },
+        "analyst_dag_trace": [
+          {
+            "step": "normalize_requirement",
+            "status": "completed",
+            "details": "actors=0, actions=3, objects=1"
+          },
+          {
+            "step": "map_to_capabilities",
+            "status": "completed",
+            "details": "primary=1, alternatives=0"
+          },
+          {
+            "step": "retrieve_internal_patterns",
+            "status": "completed",
+            "details": "patterns=0, standards=0"
+          },
+          {
+            "step": "retrieve_compliance_constraints",
+            "status": "completed",
+            "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+          },
+          {
+            "step": "synthesize_requirements_pack",
+            "status": "completed",
+            "details": "requirements_pack_ready=true, bdd_features=4"
+          },
+          {
+            "step": "run_quality_gates",
+            "status": "completed",
+            "details": "quality_gates=3, failed=0"
+          }
+        ],
+        "input_contract": {
+          "business_objective": "Modernize the provided legacy codebase into Python. Document current functionality and acceptance criteria, design architecture, implement rewritten services, run QA/security checks, validate requirements, and deploy for local Docker testing.",
+          "use_case": "code_modernization",
+          "jurisdiction": "GLOBAL",
+          "data_classification": [
+            "INTERNAL"
+          ]
+        },
+        "capability_mapping": {
+          "framework": "Capability Taxonomy",
+          "primary_capabilities": [
+            {
+              "id": "api_platform",
+              "service_domain": "API Platform",
+              "business_capability": "Service Delivery",
+              "confidence": 0.55,
+              "dependencies": [
+                "identity_access",
+                "observability"
+              ]
+            }
+          ],
+          "alternative_capabilities": [],
+          "confidence": 0.55
+        },
+        "domain_model_excerpt": {
+          "entities": [
+            "AuditEvent",
+            "DomainEvent",
+            "ServiceRequest",
+            "User"
+          ],
+          "lifecycle_states": [
+            "completed",
+            "failed",
+            "processed",
+            "requested",
+            "validated"
+          ],
+          "relationships": [
+            "LegacyInput contract must map deterministically to ModernizedOutput contract",
+            "ServiceRequest emits DomainEvent and AuditEvent"
+          ]
+        },
+        "regulatory_constraints_applied": [],
+        "standards_guidance": [],
+        "gold_patterns": [],
+        "non_negotiables": [
+          "Define explicit error handling and observability requirements.",
+          "Include measurable non-functional requirements.",
+          "Map acceptance criteria to executable test types."
+        ],
+        "bdd_contract": {
+          "features": [
+            {
+              "id": "BDD-001",
+              "title": "User Login",
+              "source_requirement_ids": [
+                "FR-002"
+              ],
+              "gherkin": "Feature: User Login\nScenario: Successful login\nGiven a user is on the login page\nWhen they enter valid credentials\nThen they are redirected to the customers page"
+            },
+            {
+              "id": "BDD-002",
+              "title": "Order Creation",
+              "source_requirement_ids": [
+                "FR-004"
+              ],
+              "gherkin": "Feature: Order Creation\nScenario: Create a new order\nGiven a user is authenticated\nWhen they submit a valid order form\nThen the order is created and stored"
+            },
+            {
+              "id": "BDD-003",
+              "title": "Order Update",
+              "source_requirement_ids": [
+                "FR-005"
+              ],
+              "gherkin": "Feature: Order Update\nScenario: Update order status\nGiven an existing order\nWhen the status is changed\nThen the order status is updated in the system"
+            },
+            {
+              "id": "BDD-004",
+              "title": "Session Management",
+              "source_requirement_ids": [
+                "FR-001"
+              ],
+              "gherkin": "Feature: Session Management\nScenario: Track active sessions\nGiven multiple users are logged in\nWhen a new session starts\nThen the total session count is incremented"
+            }
+          ],
+          "lint": {
+            "pass": true,
+            "issues": [],
+            "scenario_count": 4
+          }
+        },
+        "non_functional_contract": {
+          "must": [
+            {
+              "id": "NFR-002",
+              "title": "Security",
+              "description": "Ensure secure handling of user data and session information.",
+              "category": "security",
+              "metric": "No security vulnerabilities in OWASP Top 10",
+              "acceptance_criteria": [
+                "No SQL injection vulnerabilities are present.",
+                "Session data is protected against hijacking.",
+                "User data is encrypted in transit."
+              ]
+            },
+            {
+              "id": "NFR-004",
+              "title": "Reliability",
+              "description": "Ensure the application is reliable and available 99.9% of the time.",
+              "category": "reliability",
+              "metric": "99.9% uptime",
+              "acceptance_criteria": [
+                "Automated tests cover 90% of the codebase.",
+                "Downtime is minimized during deployments.",
+                "Error handling is implemented for all critical operations."
+              ]
+            }
+          ],
+          "should": [
+            {
+              "id": "NFR-001",
+              "title": "Performance",
+              "description": "The application should handle at least 100 concurrent sessions without performance degradation.",
+              "category": "performance",
+              "metric": "Handle 100 concurrent sessions",
+              "acceptance_criteria": [
+                "Application response time remains under 200ms with 100 concurrent sessions.",
+                "Memory usage remains stable under load.",
+                "No session data loss occurs under load."
+              ]
+            },
+            {
+              "id": "NFR-003",
+              "title": "Scalability",
+              "description": "The application should be scalable to support future growth.",
+              "category": "scalability",
+              "metric": "Scalable to 1000 users",
+              "acceptance_criteria": [
+                "Application architecture supports horizontal scaling.",
+                "Database queries are optimized for large datasets.",
+                "Load balancing is implemented for high availability."
+              ]
+            },
+            {
+              "id": "NFR-005",
+              "title": "Usability",
+              "description": "The application should be user-friendly and intuitive.",
+              "category": "usability",
+              "metric": "User satisfaction score of 4.5/5",
+              "acceptance_criteria": [
+                "User interface is consistent and intuitive.",
+                "Feedback is collected and addressed in iterative improvements.",
+                "Documentation is provided for all user-facing features."
+              ]
+            }
+          ]
+        },
+        "acceptance_test_mapping": [
+          {
+            "requirement_id": "FR-001",
+            "test_types": [
+              "integration",
+              "security",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-004"
+            ]
+          },
+          {
+            "requirement_id": "FR-002",
+            "test_types": [
+              "integration",
+              "security",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-001"
+            ]
+          },
+          {
+            "requirement_id": "FR-003",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-004",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-002"
+            ]
+          },
+          {
+            "requirement_id": "FR-005",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-003"
+            ]
+          },
+          {
+            "requirement_id": "FR-006",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-007",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-008",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          }
+        ],
+        "quality_gates": [
+          {
+            "name": "gherkin_syntax",
+            "status": "PASS",
+            "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+            "details": {
+              "scenario_count": 4,
+              "issues": []
+            }
+          },
+          {
+            "name": "requirements_completeness",
+            "status": "PASS",
+            "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+            "details": {
+              "functional_count": 8,
+              "non_functional_count": 5,
+              "min_functional": 6,
+              "min_non_functional": 4,
+              "scenario_count": 4,
+              "min_scenarios": 4,
+              "capability_count": 1
+            }
+          },
+          {
+            "name": "compliance_constraints_applied",
+            "status": "WARN",
+            "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+            "details": {
+              "jurisdiction": "GLOBAL",
+              "data_classification": [
+                "INTERNAL"
+              ],
+              "constraints_count": 0
+            }
+          }
+        ],
+        "executive_summary": "This project involves modernizing a legacy ASP codebase to Python, ensuring feature parity and backward compatibility, with deployment in a Docker environment."
+      },
+      "domain_pack": {
+        "id": "software-general-v1",
+        "name": "General Software Domain Pack",
+        "version": "1.0.0"
+      },
+      "capability_mapping": {
+        "framework": "Capability Taxonomy",
+        "primary_capabilities": [
+          {
+            "id": "api_platform",
+            "service_domain": "API Platform",
+            "business_capability": "Service Delivery",
+            "confidence": 0.55,
+            "dependencies": [
+              "identity_access",
+              "observability"
+            ]
+          }
+        ],
+        "alternative_capabilities": [],
+        "confidence": 0.55
+      },
+      "domain_model_excerpt": {
+        "entities": [
+          "AuditEvent",
+          "DomainEvent",
+          "ServiceRequest",
+          "User"
+        ],
+        "lifecycle_states": [
+          "completed",
+          "failed",
+          "processed",
+          "requested",
+          "validated"
+        ],
+        "relationships": [
+          "LegacyInput contract must map deterministically to ModernizedOutput contract",
+          "ServiceRequest emits DomainEvent and AuditEvent"
+        ]
+      },
+      "regulatory_constraints": [],
+      "bdd_contract": {
+        "features": [
+          {
+            "id": "BDD-001",
+            "title": "User Login",
+            "source_requirement_ids": [
+              "FR-002"
+            ],
+            "gherkin": "Feature: User Login\nScenario: Successful login\nGiven a user is on the login page\nWhen they enter valid credentials\nThen they are redirected to the customers page"
+          },
+          {
+            "id": "BDD-002",
+            "title": "Order Creation",
+            "source_requirement_ids": [
+              "FR-004"
+            ],
+            "gherkin": "Feature: Order Creation\nScenario: Create a new order\nGiven a user is authenticated\nWhen they submit a valid order form\nThen the order is created and stored"
+          },
+          {
+            "id": "BDD-003",
+            "title": "Order Update",
+            "source_requirement_ids": [
+              "FR-005"
+            ],
+            "gherkin": "Feature: Order Update\nScenario: Update order status\nGiven an existing order\nWhen the status is changed\nThen the order status is updated in the system"
+          },
+          {
+            "id": "BDD-004",
+            "title": "Session Management",
+            "source_requirement_ids": [
+              "FR-001"
+            ],
+            "gherkin": "Feature: Session Management\nScenario: Track active sessions\nGiven multiple users are logged in\nWhen a new session starts\nThen the total session count is incremented"
+          }
+        ],
+        "lint": {
+          "pass": true,
+          "issues": [],
+          "scenario_count": 4
+        }
+      },
+      "quality_gates": [
+        {
+          "name": "gherkin_syntax",
+          "status": "PASS",
+          "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+          "details": {
+            "scenario_count": 4,
+            "issues": []
+          }
+        },
+        {
+          "name": "requirements_completeness",
+          "status": "PASS",
+          "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+          "details": {
+            "functional_count": 8,
+            "non_functional_count": 5,
+            "min_functional": 6,
+            "min_non_functional": 4,
+            "scenario_count": 4,
+            "min_scenarios": 4,
+            "capability_count": 1
+          }
+        },
+        {
+          "name": "compliance_constraints_applied",
+          "status": "WARN",
+          "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+          "details": {
+            "jurisdiction": "GLOBAL",
+            "data_classification": [
+              "INTERNAL"
+            ],
+            "constraints_count": 0
+          }
+        }
+      ],
+      "acceptance_test_mapping": [
+        {
+          "requirement_id": "FR-001",
+          "test_types": [
+            "integration",
+            "security",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-004"
+          ]
+        },
+        {
+          "requirement_id": "FR-002",
+          "test_types": [
+            "integration",
+            "security",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-001"
+          ]
+        },
+        {
+          "requirement_id": "FR-003",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-004",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-002"
+          ]
+        },
+        {
+          "requirement_id": "FR-005",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-003"
+          ]
+        },
+        {
+          "requirement_id": "FR-006",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-007",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-008",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        }
+      ],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "question": "Are there existing operational constraints or integration dependencies not listed?",
+          "owner": "Client",
+          "severity": "high"
+        }
+      ],
+      "standards_guidance": [],
+      "gold_patterns": [],
+      "conversation_audit": {
+        "thread_id": "THREAD-20260219_134823_84314edd",
+        "changes": []
+      },
+      "context_reference": {
+        "version_id": "20260219T184848Z_20260219_134823_84314edd",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+        "scm_version": "1.0",
+        "cp_version": "1.0",
+        "ha_version": "1.0"
+      }
+    },
+    "tokens_used": 8039,
+    "latency_ms": 39113.48509788513,
+    "logs": [
+      "[Analyst Agent] Starting execution...",
+      "[Analyst Agent] Domain Pack selected: software-general-v1",
+      "[Analyst Agent] Deterministic mapping: capabilities=1, constraints=0",
+      "[Analyst Agent] Sending request to LLM (gpt-4o)...",
+      "[Analyst Agent] Received response (2444 tokens, 39113ms)",
+      "[Analyst Agent] LLM output parsed; compiling deterministic Requirements Pack...",
+      "[Analyst Agent] Requirements Pack compiled with quality gates"
+    ]
+  },
+  "saved_at": "2026-02-19T18:49:28.016520+00:00"
+}
