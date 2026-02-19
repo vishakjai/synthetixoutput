@@ -1,0 +1,57 @@
+[
+  {
+    "id": "remediation:input_validation",
+    "title": "Implement Input Validation",
+    "problem_statement": "User inputs are not properly validated, leading to potential security vulnerabilities.",
+    "scope": [
+      "includes/customer.asp",
+      "includes/orders.asp"
+    ],
+    "risk_if_unaddressed": "Increased risk of injection attacks.",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "node:util_asp"
+    ],
+    "suggested_approach": "Implement input validation and sanitization using TypeScript libraries.",
+    "success_criteria": [
+      "All user inputs are validated and sanitized.",
+      "No security vulnerabilities related to input handling."
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "includes/customer.asp",
+        "line": 13,
+        "evidence": "userName = Trim(Request.Form(\"userName\"))"
+      }
+    ]
+  },
+  {
+    "id": "remediation:error_handling",
+    "title": "Implement Structured Error Handling",
+    "problem_statement": "Current error handling is insufficient and unstructured.",
+    "scope": [
+      "includes/orders.asp"
+    ],
+    "risk_if_unaddressed": "Potential for unhandled exceptions leading to application crashes.",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [
+      "node:util_asp"
+    ],
+    "suggested_approach": "Use try-catch blocks in TypeScript to handle errors gracefully.",
+    "success_criteria": [
+      "All potential error points are covered with try-catch blocks.",
+      "Application does not crash due to unhandled exceptions."
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "includes/orders.asp",
+        "line": 28,
+        "evidence": "On Error Resume Next"
+      }
+    ]
+  }
+]
