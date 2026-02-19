@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "summary": "Legacy ASP application for managing customer orders, sessions, and authentication, to be modernized into a Node.js application.",
+  "nodes": [
+    {
+      "id": "service:legacy_customer_orders",
+      "type": "Service",
+      "name": "Legacy Customer Orders",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 5,
+          "evidence": "Application(\"AppName\") = \"Legacy Customer Orders\""
+        }
+      ]
+    },
+    {
+      "id": "component:session_management",
+      "type": "Component",
+      "name": "Session Management",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 9,
+          "evidence": "Sub Session_OnStart()"
+        }
+      ]
+    },
+    {
+      "id": "component:authentication",
+      "type": "Component",
+      "name": "Authentication",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 13,
+          "evidence": "If action = \"login\" Then"
+        }
+      ]
+    },
+    {
+      "id": "component:customer_management",
+      "type": "Component",
+      "name": "Customer Management",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 1,
+          "evidence": "Call RenderHeader(\"Customers\")"
+        }
+      ]
+    },
+    {
+      "id": "component:order_management",
+      "type": "Component",
+      "name": "Order Management",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 1,
+          "evidence": "Call RenderHeader(\"Orders\")"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "CALLS_HTTP",
+      "from": "component:authentication",
+      "to": "component:customer_management",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 24,
+          "evidence": "Response.Redirect \"customers.asp\""
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "component:order_management",
+      "to": "component:customer_management",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 1,
+          "evidence": "Call RequireLogin()"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
