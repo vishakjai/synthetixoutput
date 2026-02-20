@@ -2689,12 +2689,110 @@
           "[Developer Agent]   \u2713 SessionManagementService complete (113 LOC, 6 files)",
           "[Developer Agent] All sub-agents complete. Total: 251 LOC"
         ]
+      },
+      {
+        "agent_name": "Database Engineer Agent",
+        "stage": 4,
+        "status": "success",
+        "summary": "Prepared DB migration plan (6 steps, 4 scripts) legacy_db -> target_db",
+        "output": {
+          "migration_summary": "The migration involves transitioning from a legacy database system to a modern target database system, focusing on ensuring backward compatibility and improved maintainability.",
+          "source_engine": "legacy_db",
+          "target_engine": "target_db",
+          "schema_assessment": {
+            "tables": 0,
+            "indexes": 0,
+            "constraints": 0,
+            "risk_notes": [
+              "No specific schema details provided; assuming in-memory storage transition.",
+              "Potential data loss if in-memory data is not persisted correctly.",
+              "Ensure data consistency during migration to avoid application state issues."
+            ]
+          },
+          "migration_plan": [
+            {
+              "step": "Analyze current in-memory data structures",
+              "description": "Review the existing in-memory data structures used in the legacy system to understand the data flow and storage requirements.",
+              "risk": "medium"
+            },
+            {
+              "step": "Design target database schema",
+              "description": "Design a new schema for the target database that accommodates the current data structures and future scalability.",
+              "risk": "medium"
+            },
+            {
+              "step": "Implement data persistence layer",
+              "description": "Develop a persistence layer in the TypeScript application to interface with the target database.",
+              "risk": "medium"
+            },
+            {
+              "step": "Migrate data from in-memory to target database",
+              "description": "Transfer existing in-memory data to the new database, ensuring data integrity and consistency.",
+              "risk": "high"
+            },
+            {
+              "step": "Validate data integrity",
+              "description": "Perform data validation checks to ensure that the data in the target database matches the expected outcomes.",
+              "risk": "high"
+            },
+            {
+              "step": "Optimize database performance",
+              "description": "Apply indexing and caching strategies to improve database performance and response times.",
+              "risk": "low"
+            }
+          ],
+          "generated_scripts": [
+            {
+              "name": "CreateSchema.sql",
+              "type": "ddl",
+              "sql": "CREATE TABLE ApplicationState (AppName VARCHAR(255), TotalSessions INT); CREATE TABLE UserSessions (SessionID INT PRIMARY KEY, UserName VARCHAR(255), IsAuthenticated BOOLEAN, FlashMessage TEXT); CREATE TABLE Orders (OrderID INT PRIMARY KEY, CustomerID INT, Status VARCHAR(50), Total DECIMAL(10, 2));"
+            },
+            {
+              "name": "MigrateData.sql",
+              "type": "dml",
+              "sql": "INSERT INTO ApplicationState (AppName, TotalSessions) VALUES ('Legacy Customer Orders', 0); -- Additional data migration logic here"
+            },
+            {
+              "name": "ValidateData.sql",
+              "type": "validation",
+              "sql": "SELECT COUNT(*) FROM UserSessions WHERE IsAuthenticated = TRUE; SELECT COUNT(*) FROM Orders WHERE Status IS NOT NULL;"
+            },
+            {
+              "name": "RollbackMigration.sql",
+              "type": "rollback",
+              "sql": "DROP TABLE IF EXISTS ApplicationState; DROP TABLE IF EXISTS UserSessions; DROP TABLE IF EXISTS Orders;"
+            }
+          ],
+          "data_validation_checks": [
+            "Verify that the total session count matches the expected number after migration.",
+            "Ensure all user sessions are correctly migrated with authentication status.",
+            "Check that all orders have valid statuses and totals."
+          ],
+          "rollback_strategy": "In case of migration failure, execute RollbackMigration.sql to revert the database to its initial state, ensuring no partial data remains.",
+          "context_reference": {
+            "version_id": "20260220T125004Z_20260220_074945_dff6e4f2",
+            "repo": "Synthetix",
+            "branch": "main",
+            "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+            "scm_version": "1.0",
+            "cp_version": "1.0",
+            "ha_version": "1.0"
+          }
+        },
+        "tokens_used": 10876,
+        "latency_ms": 19576.617002487183,
+        "logs": [
+          "[Database Engineer Agent] Starting execution...",
+          "[Database Engineer Agent] Sending request to LLM (gpt-4o)...",
+          "[Database Engineer Agent] Received response (803 tokens, 19577ms)",
+          "[Database Engineer Agent] Output parsed successfully"
+        ]
       }
     ],
-    "current_stage": 3,
+    "current_stage": 4,
     "pipeline_status": "running",
-    "total_tokens": 60939,
-    "total_latency_ms": 115323.35233688354,
+    "total_tokens": 71815,
+    "total_latency_ms": 134899.96933937073,
     "logs": [
       "[Analyst Agent] Starting execution...",
       "[Analyst Agent] Domain Pack selected: software-general-v1",
@@ -2715,7 +2813,11 @@
       "[Developer Agent]   \u21b3 Spawned sub-agent: SessionManagementService",
       "[Developer Agent]   \u2713 ApplicationStateService complete (138 LOC, 7 files)",
       "[Developer Agent]   \u2713 SessionManagementService complete (113 LOC, 6 files)",
-      "[Developer Agent] All sub-agents complete. Total: 251 LOC"
+      "[Developer Agent] All sub-agents complete. Total: 251 LOC",
+      "[Database Engineer Agent] Starting execution...",
+      "[Database Engineer Agent] Sending request to LLM (gpt-4o)...",
+      "[Database Engineer Agent] Received response (803 tokens, 19577ms)",
+      "[Database Engineer Agent] Output parsed successfully"
     ],
     "run_id": "20260220_074945_dff6e4f2",
     "integration_context": {
@@ -7884,7 +7986,7 @@
       "severity": "ok"
     },
     "pending_approval": null,
-    "next_stage_idx": 2,
+    "next_stage_idx": 3,
     "analyst_output": {
       "analysis_walkthrough": {
         "business_objective_summary": "Modernize a legacy ASP codebase to TypeScript, ensuring backward compatibility and documenting functionality.",
@@ -9105,8 +9207,8 @@
         "pipeline",
         "qa"
       ],
-      "attempted_files": 20,
-      "exported_files": 20,
+      "attempted_files": 48,
+      "exported_files": 48,
       "failed_files": 0,
       "skipped_files": 0,
       "failed_samples": [],
@@ -9116,16 +9218,16 @@
       "default_branch": "main",
       "repo_empty_at_start": false,
       "attempted": true,
-      "attempted_at": "2026-02-20T12:53:27.298707+00:00",
+      "attempted_at": "2026-02-20T12:56:04.073005+00:00",
       "final_attempted": false,
-      "stage_at_export": 2
+      "stage_at_export": 3
     },
     "github_export_progress": {
-      "last_stage_exported": 2,
-      "last_export_at": "2026-02-20T12:53:27.312389+00:00",
+      "last_stage_exported": 3,
+      "last_export_at": "2026-02-20T12:56:04.073055+00:00",
       "last_status": "exported",
       "last_reason": "",
-      "attempt_count": 2
+      "attempt_count": 3
     },
     "agent_collaboration": {
       "1": {
@@ -9709,12 +9811,97 @@
         "ha_version": "1.0"
       },
       "artifact_root": "run_artifacts/20260220_074945_dff6e4f2/generated_code"
+    },
+    "database_engineer_output": {
+      "migration_summary": "The migration involves transitioning from a legacy database system to a modern target database system, focusing on ensuring backward compatibility and improved maintainability.",
+      "source_engine": "legacy_db",
+      "target_engine": "target_db",
+      "schema_assessment": {
+        "tables": 0,
+        "indexes": 0,
+        "constraints": 0,
+        "risk_notes": [
+          "No specific schema details provided; assuming in-memory storage transition.",
+          "Potential data loss if in-memory data is not persisted correctly.",
+          "Ensure data consistency during migration to avoid application state issues."
+        ]
+      },
+      "migration_plan": [
+        {
+          "step": "Analyze current in-memory data structures",
+          "description": "Review the existing in-memory data structures used in the legacy system to understand the data flow and storage requirements.",
+          "risk": "medium"
+        },
+        {
+          "step": "Design target database schema",
+          "description": "Design a new schema for the target database that accommodates the current data structures and future scalability.",
+          "risk": "medium"
+        },
+        {
+          "step": "Implement data persistence layer",
+          "description": "Develop a persistence layer in the TypeScript application to interface with the target database.",
+          "risk": "medium"
+        },
+        {
+          "step": "Migrate data from in-memory to target database",
+          "description": "Transfer existing in-memory data to the new database, ensuring data integrity and consistency.",
+          "risk": "high"
+        },
+        {
+          "step": "Validate data integrity",
+          "description": "Perform data validation checks to ensure that the data in the target database matches the expected outcomes.",
+          "risk": "high"
+        },
+        {
+          "step": "Optimize database performance",
+          "description": "Apply indexing and caching strategies to improve database performance and response times.",
+          "risk": "low"
+        }
+      ],
+      "generated_scripts": [
+        {
+          "name": "CreateSchema.sql",
+          "type": "ddl",
+          "sql": "CREATE TABLE ApplicationState (AppName VARCHAR(255), TotalSessions INT); CREATE TABLE UserSessions (SessionID INT PRIMARY KEY, UserName VARCHAR(255), IsAuthenticated BOOLEAN, FlashMessage TEXT); CREATE TABLE Orders (OrderID INT PRIMARY KEY, CustomerID INT, Status VARCHAR(50), Total DECIMAL(10, 2));"
+        },
+        {
+          "name": "MigrateData.sql",
+          "type": "dml",
+          "sql": "INSERT INTO ApplicationState (AppName, TotalSessions) VALUES ('Legacy Customer Orders', 0); -- Additional data migration logic here"
+        },
+        {
+          "name": "ValidateData.sql",
+          "type": "validation",
+          "sql": "SELECT COUNT(*) FROM UserSessions WHERE IsAuthenticated = TRUE; SELECT COUNT(*) FROM Orders WHERE Status IS NOT NULL;"
+        },
+        {
+          "name": "RollbackMigration.sql",
+          "type": "rollback",
+          "sql": "DROP TABLE IF EXISTS ApplicationState; DROP TABLE IF EXISTS UserSessions; DROP TABLE IF EXISTS Orders;"
+        }
+      ],
+      "data_validation_checks": [
+        "Verify that the total session count matches the expected number after migration.",
+        "Ensure all user sessions are correctly migrated with authentication status.",
+        "Check that all orders have valid statuses and totals."
+      ],
+      "rollback_strategy": "In case of migration failure, execute RollbackMigration.sql to revert the database to its initial state, ensuring no partial data remains.",
+      "context_reference": {
+        "version_id": "20260220T125004Z_20260220_074945_dff6e4f2",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+        "scm_version": "1.0",
+        "cp_version": "1.0",
+        "ha_version": "1.0"
+      }
     }
   },
   "stage_status": {
     "1": "success",
     "2": "success",
-    "3": "success"
+    "3": "success",
+    "4": "success"
   },
   "progress_logs": [
     "[07:49:46] \u25b6 Pipeline started (run_id=20260220_074945_dff6e4f2)",
@@ -9761,8 +9948,17 @@
     "[Developer Agent]   \u2713 ApplicationStateService complete (138 LOC, 7 files)",
     "[Developer Agent]   \u2713 SessionManagementService complete (113 LOC, 6 files)",
     "[Developer Agent] All sub-agents complete. Total: 251 LOC",
-    "[07:55:27] \u2705 Stage 3 finished: Generated 251 LOC across 13 files in 2 components (via 2 parallel sub-agents)"
+    "[07:55:27] \u2705 Stage 3 finished: Generated 251 LOC across 13 files in 2 components (via 2 parallel sub-agents)",
+    "[07:56:04] \ud83d\udce6 GitHub export (stage 3) succeeded: vishakjai/synthetixoutput@synthetix-runs (48 files)",
+    "[07:56:04] \ud83d\uded1 Human approval required before Stage 4",
+    "[07:56:38] \u2705 Human approved transition to Stage 4",
+    "[07:56:38] \u23f3 Stage 4 started: Database Engineer Agent",
+    "[Database Engineer Agent] Starting execution...",
+    "[Database Engineer Agent] Sending request to LLM (gpt-4o)...",
+    "[Database Engineer Agent] Received response (803 tokens, 19577ms)",
+    "[Database Engineer Agent] Output parsed successfully",
+    "[07:56:57] \u2705 Stage 4 finished: Prepared DB migration plan (6 steps, 4 scripts) legacy_db -> target_db"
   ],
   "error_message": null,
-  "saved_at": "2026-02-20T12:55:27.594973+00:00"
+  "saved_at": "2026-02-20T12:56:57.904568+00:00"
 }
