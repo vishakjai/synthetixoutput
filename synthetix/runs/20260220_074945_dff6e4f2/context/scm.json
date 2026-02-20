@@ -1,0 +1,150 @@
+{
+  "version": "1.0",
+  "summary": "Legacy ASP application for managing customer orders, to be modernized to TypeScript.",
+  "nodes": [
+    {
+      "id": "node:application",
+      "type": "Service",
+      "name": "Legacy Customer Orders",
+      "metadata": {
+        "language": "VBScript",
+        "framework": "ASP Classic"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "global.asa",
+          "line": 1,
+          "evidence": "Application_OnStart"
+        }
+      ]
+    },
+    {
+      "id": "node:customer_module",
+      "type": "Module",
+      "name": "Customer Module",
+      "metadata": {
+        "language": "VBScript"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/customer.asp",
+          "line": 1,
+          "evidence": "Handles customer login and display"
+        }
+      ]
+    },
+    {
+      "id": "node:orders_module",
+      "type": "Module",
+      "name": "Orders Module",
+      "metadata": {
+        "language": "VBScript"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "includes/orders.asp",
+          "line": 1,
+          "evidence": "Handles order creation and updates"
+        }
+      ]
+    },
+    {
+      "id": "node:layout_module",
+      "type": "Module",
+      "name": "Layout Module",
+      "metadata": {
+        "language": "VBScript"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "includes/layout.asp",
+          "line": 1,
+          "evidence": "Renders HTML layout"
+        }
+      ]
+    },
+    {
+      "id": "node:util_module",
+      "type": "Module",
+      "name": "Utility Module",
+      "metadata": {
+        "language": "VBScript"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "includes/util.asp",
+          "line": 1,
+          "evidence": "Provides utility functions"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "node:customer_module",
+      "to": "node:util_module",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 2,
+          "evidence": "Include util.asp"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:orders_module",
+      "to": "node:util_module",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 2,
+          "evidence": "Include util.asp"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:customer_module",
+      "to": "node:layout_module",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "includes/customer.asp",
+          "line": 3,
+          "evidence": "Include layout.asp"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node:orders_module",
+      "to": "node:layout_module",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "includes/orders.asp",
+          "line": 3,
+          "evidence": "Include layout.asp"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
