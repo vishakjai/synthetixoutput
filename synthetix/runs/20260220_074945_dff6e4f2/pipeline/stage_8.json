@@ -1,0 +1,108 @@
+{
+  "run_id": "20260220_074945_dff6e4f2",
+  "stage": 8,
+  "result": {
+    "agent_name": "Deployment Agent",
+    "stage": 8,
+    "status": "warning",
+    "summary": "Docker deploy: PENDING | Endpoint: ",
+    "output": {
+      "deployment_strategy": "rolling",
+      "deployment_overview": "Deploy the modernized TypeScript-based application locally using Docker Compose. This ensures consistent environments across development and testing, leveraging Docker's ability to manage dependencies and configurations efficiently.",
+      "container_images": [
+        {
+          "name": "application-state-service",
+          "base_image": "node:14",
+          "tag": "latest",
+          "port": 8080
+        },
+        {
+          "name": "session-management-service",
+          "base_image": "node:14",
+          "tag": "latest",
+          "port": 8081
+        },
+        {
+          "name": "customer-data-service",
+          "base_image": "node:14",
+          "tag": "latest",
+          "port": 8082
+        },
+        {
+          "name": "order-management-service",
+          "base_image": "node:14",
+          "tag": "latest",
+          "port": 8083
+        }
+      ],
+      "health_checks": [
+        {
+          "service": "application-state-service",
+          "path": "/health",
+          "port": 8080
+        },
+        {
+          "service": "session-management-service",
+          "path": "/health",
+          "port": 8081
+        },
+        {
+          "service": "customer-data-service",
+          "path": "/health",
+          "port": 8082
+        },
+        {
+          "service": "order-management-service",
+          "path": "/health",
+          "port": 8083
+        }
+      ],
+      "post_deployment_checks": [
+        {
+          "check": "JWT authentication implementation",
+          "status": "pending",
+          "details": "Verify that JWT authentication is fully implemented and functioning as expected."
+        },
+        {
+          "check": "OWASP Top 10 security compliance",
+          "status": "pending",
+          "details": "Ensure all OWASP Top 10 security checks are completed and any critical issues are addressed."
+        },
+        {
+          "check": "Data integrity post-migration",
+          "status": "pending",
+          "details": "Validate that data integrity is maintained after migrating from in-memory to persistent storage."
+        }
+      ],
+      "context_reference": {
+        "version_id": "20260220T125004Z_20260220_074945_dff6e4f2",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+        "scm_version": "1.0",
+        "cp_version": "1.0",
+        "ha_version": "1.0"
+      },
+      "deployment_target": "local",
+      "deployment_result": {
+        "status": "pending",
+        "url": "",
+        "total_pods": 0,
+        "healthy_pods": 0,
+        "deployment_time_seconds": 0
+      },
+      "docker_live_deployment": {
+        "enabled": false,
+        "message": "Enable live_deploy to run real Docker deployment"
+      }
+    },
+    "tokens_used": 4106,
+    "latency_ms": 6426.880836486816,
+    "logs": [
+      "[Deployment Agent] Starting deployment phase...",
+      "[Deployment Agent] Deployment plan generated",
+      "[Deployment Agent] live_deploy disabled; returning deployment plan only"
+    ]
+  },
+  "saved_at": "2026-02-20T13:03:34.258644+00:00"
+}
