@@ -3501,12 +3501,115 @@
           "[Analyst (Validation)] Received response (2273 tokens, 72052ms)",
           "[Analyst (Validation)] Output parsed successfully"
         ]
+      },
+      {
+        "agent_name": "Deployment Agent",
+        "stage": 8,
+        "status": "warning",
+        "summary": "Docker deploy: PENDING | Endpoint: ",
+        "output": {
+          "deployment_strategy": "rolling",
+          "deployment_overview": "Deploy the modernized TypeScript-based application locally using Docker Compose. This ensures consistent environments across development and testing, leveraging Docker's ability to manage dependencies and configurations efficiently.",
+          "container_images": [
+            {
+              "name": "application-state-service",
+              "base_image": "node:14",
+              "tag": "latest",
+              "port": 8080
+            },
+            {
+              "name": "session-management-service",
+              "base_image": "node:14",
+              "tag": "latest",
+              "port": 8081
+            },
+            {
+              "name": "customer-data-service",
+              "base_image": "node:14",
+              "tag": "latest",
+              "port": 8082
+            },
+            {
+              "name": "order-management-service",
+              "base_image": "node:14",
+              "tag": "latest",
+              "port": 8083
+            }
+          ],
+          "health_checks": [
+            {
+              "service": "application-state-service",
+              "path": "/health",
+              "port": 8080
+            },
+            {
+              "service": "session-management-service",
+              "path": "/health",
+              "port": 8081
+            },
+            {
+              "service": "customer-data-service",
+              "path": "/health",
+              "port": 8082
+            },
+            {
+              "service": "order-management-service",
+              "path": "/health",
+              "port": 8083
+            }
+          ],
+          "post_deployment_checks": [
+            {
+              "check": "JWT authentication implementation",
+              "status": "pending",
+              "details": "Verify that JWT authentication is fully implemented and functioning as expected."
+            },
+            {
+              "check": "OWASP Top 10 security compliance",
+              "status": "pending",
+              "details": "Ensure all OWASP Top 10 security checks are completed and any critical issues are addressed."
+            },
+            {
+              "check": "Data integrity post-migration",
+              "status": "pending",
+              "details": "Validate that data integrity is maintained after migrating from in-memory to persistent storage."
+            }
+          ],
+          "context_reference": {
+            "version_id": "20260220T125004Z_20260220_074945_dff6e4f2",
+            "repo": "Synthetix",
+            "branch": "main",
+            "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+            "scm_version": "1.0",
+            "cp_version": "1.0",
+            "ha_version": "1.0"
+          },
+          "deployment_target": "local",
+          "deployment_result": {
+            "status": "pending",
+            "url": "",
+            "total_pods": 0,
+            "healthy_pods": 0,
+            "deployment_time_seconds": 0
+          },
+          "docker_live_deployment": {
+            "enabled": false,
+            "message": "Enable live_deploy to run real Docker deployment"
+          }
+        },
+        "tokens_used": 4106,
+        "latency_ms": 6426.880836486816,
+        "logs": [
+          "[Deployment Agent] Starting deployment phase...",
+          "[Deployment Agent] Deployment plan generated",
+          "[Deployment Agent] live_deploy disabled; returning deployment plan only"
+        ]
       }
     ],
-    "current_stage": 7,
+    "current_stage": 8,
     "pipeline_status": "running",
-    "total_tokens": 96652,
-    "total_latency_ms": 253623.2852935791,
+    "total_tokens": 100758,
+    "total_latency_ms": 260050.16613006592,
     "logs": [
       "[Analyst Agent] Starting execution...",
       "[Analyst Agent] Domain Pack selected: software-general-v1",
@@ -3544,7 +3647,10 @@
       "[Analyst (Validation)] Starting execution...",
       "[Analyst (Validation)] Sending request to LLM (gpt-4o)...",
       "[Analyst (Validation)] Received response (2273 tokens, 72052ms)",
-      "[Analyst (Validation)] Output parsed successfully"
+      "[Analyst (Validation)] Output parsed successfully",
+      "[Deployment Agent] Starting deployment phase...",
+      "[Deployment Agent] Deployment plan generated",
+      "[Deployment Agent] live_deploy disabled; returning deployment plan only"
     ],
     "run_id": "20260220_074945_dff6e4f2",
     "integration_context": {
@@ -8713,7 +8819,7 @@
       "severity": "ok"
     },
     "pending_approval": null,
-    "next_stage_idx": 6,
+    "next_stage_idx": 7,
     "analyst_output": {
       "analysis_walkthrough": {
         "business_objective_summary": "Modernize a legacy ASP codebase to TypeScript, ensuring backward compatibility and documenting functionality.",
@@ -9934,8 +10040,8 @@
         "pipeline",
         "qa"
       ],
-      "attempted_files": 64,
-      "exported_files": 64,
+      "attempted_files": 65,
+      "exported_files": 65,
       "failed_files": 0,
       "skipped_files": 0,
       "failed_samples": [],
@@ -9945,16 +10051,16 @@
       "default_branch": "main",
       "repo_empty_at_start": false,
       "attempted": true,
-      "attempted_at": "2026-02-20T13:00:15.052830+00:00",
+      "attempted_at": "2026-02-20T13:03:22.298766+00:00",
       "final_attempted": false,
-      "stage_at_export": 6
+      "stage_at_export": 7
     },
     "github_export_progress": {
-      "last_stage_exported": 6,
-      "last_export_at": "2026-02-20T13:00:15.053954+00:00",
+      "last_stage_exported": 7,
+      "last_export_at": "2026-02-20T13:03:22.298904+00:00",
       "last_status": "exported",
       "last_reason": "",
-      "attempt_count": 6
+      "attempt_count": 7
     },
     "agent_collaboration": {
       "1": {
@@ -11293,6 +11399,96 @@
         "cp_version": "1.0",
         "ha_version": "1.0"
       }
+    },
+    "deployer_output": {
+      "deployment_strategy": "rolling",
+      "deployment_overview": "Deploy the modernized TypeScript-based application locally using Docker Compose. This ensures consistent environments across development and testing, leveraging Docker's ability to manage dependencies and configurations efficiently.",
+      "container_images": [
+        {
+          "name": "application-state-service",
+          "base_image": "node:14",
+          "tag": "latest",
+          "port": 8080
+        },
+        {
+          "name": "session-management-service",
+          "base_image": "node:14",
+          "tag": "latest",
+          "port": 8081
+        },
+        {
+          "name": "customer-data-service",
+          "base_image": "node:14",
+          "tag": "latest",
+          "port": 8082
+        },
+        {
+          "name": "order-management-service",
+          "base_image": "node:14",
+          "tag": "latest",
+          "port": 8083
+        }
+      ],
+      "health_checks": [
+        {
+          "service": "application-state-service",
+          "path": "/health",
+          "port": 8080
+        },
+        {
+          "service": "session-management-service",
+          "path": "/health",
+          "port": 8081
+        },
+        {
+          "service": "customer-data-service",
+          "path": "/health",
+          "port": 8082
+        },
+        {
+          "service": "order-management-service",
+          "path": "/health",
+          "port": 8083
+        }
+      ],
+      "post_deployment_checks": [
+        {
+          "check": "JWT authentication implementation",
+          "status": "pending",
+          "details": "Verify that JWT authentication is fully implemented and functioning as expected."
+        },
+        {
+          "check": "OWASP Top 10 security compliance",
+          "status": "pending",
+          "details": "Ensure all OWASP Top 10 security checks are completed and any critical issues are addressed."
+        },
+        {
+          "check": "Data integrity post-migration",
+          "status": "pending",
+          "details": "Validate that data integrity is maintained after migrating from in-memory to persistent storage."
+        }
+      ],
+      "context_reference": {
+        "version_id": "20260220T125004Z_20260220_074945_dff6e4f2",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+        "scm_version": "1.0",
+        "cp_version": "1.0",
+        "ha_version": "1.0"
+      },
+      "deployment_target": "local",
+      "deployment_result": {
+        "status": "pending",
+        "url": "",
+        "total_pods": 0,
+        "healthy_pods": 0,
+        "deployment_time_seconds": 0
+      },
+      "docker_live_deployment": {
+        "enabled": false,
+        "message": "Enable live_deploy to run real Docker deployment"
+      }
     }
   },
   "stage_status": {
@@ -11302,7 +11498,8 @@
     "4": "success",
     "5": "success",
     "6": "success",
-    "7": "success"
+    "7": "success",
+    "8": "warning"
   },
   "progress_logs": [
     "[07:49:46] \u25b6 Pipeline started (run_id=20260220_074945_dff6e4f2)",
@@ -11386,8 +11583,16 @@
     "[Analyst (Validation)] Sending request to LLM (gpt-4o)...",
     "[Analyst (Validation)] Received response (2273 tokens, 72052ms)",
     "[Analyst (Validation)] Output parsed successfully",
-    "[08:02:37] \u2705 Stage 7 finished: Verdict: CONDITIONALLY_APPROVED | Functional: 87.5% | NFR: 60% | 4 gaps identified"
+    "[08:02:37] \u2705 Stage 7 finished: Verdict: CONDITIONALLY_APPROVED | Functional: 87.5% | NFR: 60% | 4 gaps identified",
+    "[08:03:22] \ud83d\udce6 GitHub export (stage 7) succeeded: vishakjai/synthetixoutput@synthetix-runs (65 files)",
+    "[08:03:22] \ud83d\uded1 Human approval required before Stage 8",
+    "[08:03:27] \u2705 Human approved transition to Stage 8",
+    "[08:03:27] \u23f3 Stage 8 started: Deployment Agent",
+    "[Deployment Agent] Starting deployment phase...",
+    "[Deployment Agent] Deployment plan generated",
+    "[Deployment Agent] live_deploy disabled; returning deployment plan only",
+    "[08:03:34] \u26a0\ufe0f Stage 8 finished: Docker deploy: PENDING | Endpoint: "
   ],
   "error_message": null,
-  "saved_at": "2026-02-20T13:02:37.223810+00:00"
+  "saved_at": "2026-02-20T13:03:34.259401+00:00"
 }
