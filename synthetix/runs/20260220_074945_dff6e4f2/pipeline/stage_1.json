@@ -1,0 +1,1229 @@
+{
+  "run_id": "20260220_074945_dff6e4f2",
+  "stage": 1,
+  "result": {
+    "agent_name": "Analyst Agent",
+    "stage": 1,
+    "status": "success",
+    "summary": "Extracted 8 functional requirements, 5 non-functional requirements, 5 risks, 3 clarifications, 0 failed quality gates [software-general-v1]",
+    "output": {
+      "analysis_walkthrough": {
+        "business_objective_summary": "Modernize a legacy ASP codebase to TypeScript, ensuring backward compatibility and documenting functionality.",
+        "requirements_understanding": [
+          "The legacy codebase must be translated into TypeScript while maintaining existing functionality.",
+          "Backward compatibility is crucial, meaning the new TypeScript code should behave identically to the legacy ASP code.",
+          "The modernization process includes documenting current functionality, designing architecture, implementing rewritten services, and running QA/security checks.",
+          "Deployment for local Docker testing is required to validate the modernization."
+        ],
+        "conversion_to_technical_requirements": [
+          "Use TypeScript for the new implementation to ensure type safety and modern language features.",
+          "Implement services using a modular architecture to facilitate maintainability and scalability.",
+          "Utilize Docker for consistent local testing environments.",
+          "Ensure that all session and application state management in ASP is accurately replicated in TypeScript."
+        ],
+        "clarifications_requested": [
+          "Are there any specific performance improvements expected beyond maintaining current functionality?",
+          "Should the modernization include any new features or strictly adhere to legacy functionality?",
+          "What are the specific security requirements or standards that need to be adhered to during modernization?"
+        ]
+      },
+      "project_name": "Legacy ASP to TypeScript Modernization",
+      "executive_summary": "The project aims to modernize a legacy ASP codebase to TypeScript, ensuring backward compatibility and documenting functionality for deployment in a Docker environment.",
+      "functional_requirements": [
+        {
+          "id": "FR-001",
+          "title": "Initialize Application State",
+          "description": "The application should initialize with a name and track total sessions, similar to the legacy ASP Application_OnStart.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "Application name is set to 'Legacy Customer Orders'.",
+            "Total sessions start at 0 and increment correctly.",
+            "State is maintained across sessions."
+          ]
+        },
+        {
+          "id": "FR-002",
+          "title": "User Session Management",
+          "description": "Manage user sessions to track authentication status and user-specific messages, replicating Session_OnStart and Session_OnEnd behavior.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "User sessions initialize with 'IsAuthenticated' set to false.",
+            "Sessions increment and decrement total session count correctly.",
+            "Flash messages are set and cleared appropriately."
+          ]
+        },
+        {
+          "id": "FR-003",
+          "title": "User Authentication",
+          "description": "Authenticate users based on provided username, replicating the login process in 'customer.asp'.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "Users must provide a username to authenticate.",
+            "Successful login sets 'IsAuthenticated' to true and stores the username.",
+            "Failed login attempts provide appropriate feedback messages."
+          ]
+        },
+        {
+          "id": "FR-004",
+          "title": "Customer Data Display",
+          "description": "Display customer data in a tabular format, ensuring data is sourced from in-memory storage.",
+          "priority": "P1",
+          "acceptance_criteria": [
+            "Customer data is retrieved from in-memory storage.",
+            "Data is displayed in a table with correct formatting.",
+            "Only authenticated users can view customer data."
+          ]
+        },
+        {
+          "id": "FR-005",
+          "title": "Order Management",
+          "description": "Implement order creation and update functionalities, ensuring data consistency and validation.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "Orders can be created with valid customer ID, status, and total.",
+            "Orders can be updated with a new status.",
+            "Invalid inputs are handled with appropriate error messages."
+          ]
+        },
+        {
+          "id": "FR-006",
+          "title": "Session-Based Flash Messaging",
+          "description": "Implement flash messaging to provide feedback to users, similar to the legacy RedirectWithFlash function.",
+          "priority": "P1",
+          "acceptance_criteria": [
+            "Flash messages are set during redirects.",
+            "Messages are displayed once and cleared after being shown.",
+            "Flash messages appear in a consistent format across the application."
+          ]
+        },
+        {
+          "id": "FR-007",
+          "title": "HTML Rendering",
+          "description": "Render HTML headers and footers consistently, replicating the RenderHeader and RenderFooter functions.",
+          "priority": "P2",
+          "acceptance_criteria": [
+            "HTML headers include application name and navigation links.",
+            "Footers display application information and current time.",
+            "HTML is rendered with consistent styling."
+          ]
+        },
+        {
+          "id": "FR-008",
+          "title": "Data Encoding and Security",
+          "description": "Ensure data is securely encoded for HTML output, replicating HtmlEncode functionality.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "All user input is encoded before being rendered in HTML.",
+            "No HTML injection vulnerabilities are present.",
+            "Encoding is consistent with legacy behavior."
+          ]
+        }
+      ],
+      "non_functional_requirements": [
+        {
+          "id": "NFR-001",
+          "title": "Performance",
+          "description": "The application should perform at least as efficiently as the legacy system.",
+          "category": "performance",
+          "metric": "Response time under 200ms for typical operations",
+          "acceptance_criteria": [
+            "Response times are measured and documented.",
+            "Performance is consistent under typical load conditions.",
+            "No significant performance degradation from legacy system."
+          ]
+        },
+        {
+          "id": "NFR-002",
+          "title": "Security",
+          "description": "Ensure the application is secure against common web vulnerabilities.",
+          "category": "security",
+          "metric": "Pass OWASP Top 10 security checks",
+          "acceptance_criteria": [
+            "Application passes security audits.",
+            "No critical vulnerabilities are present.",
+            "Security measures are documented and tested."
+          ]
+        },
+        {
+          "id": "NFR-003",
+          "title": "Scalability",
+          "description": "The application should be scalable to handle increased load.",
+          "category": "scalability",
+          "metric": "Support 100 concurrent users without degradation",
+          "acceptance_criteria": [
+            "Scalability tests are conducted and documented.",
+            "Application supports increased load without performance loss.",
+            "Architecture supports horizontal scaling."
+          ]
+        },
+        {
+          "id": "NFR-004",
+          "title": "Reliability",
+          "description": "Ensure the application is reliable and available.",
+          "category": "reliability",
+          "metric": "99.9% uptime",
+          "acceptance_criteria": [
+            "Downtime is minimized and documented.",
+            "Application recovers gracefully from failures.",
+            "Monitoring and alerting are in place."
+          ]
+        },
+        {
+          "id": "NFR-005",
+          "title": "Usability",
+          "description": "The application should be user-friendly and easy to navigate.",
+          "category": "usability",
+          "metric": "User satisfaction score of 4.5/5",
+          "acceptance_criteria": [
+            "User feedback is collected and analyzed.",
+            "Navigation is intuitive and consistent.",
+            "Documentation and help resources are available."
+          ]
+        }
+      ],
+      "legacy_functional_contract": [
+        {
+          "function_name": "Application_OnStart",
+          "inputs": [],
+          "outputs": [
+            "AppName",
+            "TotalSessions"
+          ],
+          "side_effects": [
+            "Initialize application state"
+          ]
+        },
+        {
+          "function_name": "Session_OnStart",
+          "inputs": [],
+          "outputs": [
+            "UserName",
+            "IsAuthenticated",
+            "FlashMessage"
+          ],
+          "side_effects": [
+            "Increment TotalSessions"
+          ]
+        },
+        {
+          "function_name": "Session_OnEnd",
+          "inputs": [],
+          "outputs": [],
+          "side_effects": [
+            "Decrement TotalSessions"
+          ]
+        },
+        {
+          "function_name": "HandleCreate",
+          "inputs": [
+            "customerId",
+            "status",
+            "total"
+          ],
+          "outputs": [
+            "OrderId"
+          ],
+          "side_effects": [
+            "Add order to Application Orders"
+          ]
+        },
+        {
+          "function_name": "HandleUpdate",
+          "inputs": [
+            "orderId",
+            "newStatus"
+          ],
+          "outputs": [],
+          "side_effects": [
+            "Update order status in Application Orders"
+          ]
+        }
+      ],
+      "assumptions": [
+        "The legacy functionality is fully understood and documented.",
+        "No new features are to be added unless specified.",
+        "The application environment supports TypeScript and Docker."
+      ],
+      "risks": [
+        {
+          "description": "Potential for functionality deviation during modernization.",
+          "impact": "high",
+          "mitigation": "Thorough testing and validation against legacy behavior."
+        },
+        {
+          "description": "Security vulnerabilities introduced during code rewrite.",
+          "impact": "medium",
+          "mitigation": "Conduct security audits and adhere to best practices."
+        },
+        {
+          "description": "Performance degradation in the new implementation.",
+          "impact": "medium",
+          "mitigation": "Performance testing and optimization."
+        },
+        {
+          "description": "Incompatibility with existing deployment environments.",
+          "impact": "low",
+          "mitigation": "Use Docker for consistent deployment environments."
+        },
+        {
+          "description": "Incomplete documentation of legacy functionality.",
+          "impact": "medium",
+          "mitigation": "Engage with legacy system experts and conduct thorough code reviews."
+        }
+      ],
+      "out_of_scope": [
+        "Development of new features beyond legacy functionality.",
+        "Integration with external systems not present in the legacy code."
+      ],
+      "requirements_pack": {
+        "artifact_type": "requirements_pack",
+        "artifact_version": "2.0",
+        "artifact_id": "REQPACK-20260220_074945_DFF6E4F2",
+        "generated_at": "2026-02-20T12:50:41.029936+00:00",
+        "generated_by": {
+          "agent_name": "Analyst Agent",
+          "persona": "Legacy Modernization Analyst",
+          "persona_version": "1.0",
+          "requirements_pack_profile": "requirements-pack-v2-general",
+          "domain_pack": {
+            "id": "software-general-v1",
+            "version": "1.0.0",
+            "ontologies": [
+              "Capability Taxonomy"
+            ],
+            "standards": [],
+            "internal_playbooks": []
+          }
+        },
+        "project": {
+          "name": "Legacy ASP to TypeScript Modernization",
+          "work_item_id": "20260220_074945_dff6e4f2",
+          "jurisdiction": [
+            "GLOBAL"
+          ],
+          "regulatory_profile": [],
+          "domain_pack": {
+            "id": "software-general-v1",
+            "version": "1.0.0",
+            "ontologies": [
+              "Capability Taxonomy"
+            ],
+            "standards": [],
+            "internal_playbooks": []
+          }
+        },
+        "intake": {
+          "business_request_raw": "Modernize the provided legacy codebase into TypeScript. Document current functionality and acceptance criteria, design architecture, implement rewritten services, run QA/security checks, validate requirements, and deploy for local Docker testing.",
+          "actors": [
+            "Business User"
+          ],
+          "channels": [
+            "API"
+          ],
+          "data_elements": [
+            {
+              "name": "serviceId",
+              "classification": "INTERNAL"
+            }
+          ],
+          "constraints_from_user": [],
+          "assumptions": [
+            "The legacy functionality is fully understood and documented.",
+            "No new features are to be added unless specified.",
+            "The application environment supports TypeScript and Docker."
+          ]
+        },
+        "domain_mapping": {
+          "capabilities": [
+            {
+              "framework": "Capability Taxonomy",
+              "service_domain": "API Platform",
+              "capability_id": "api_platform",
+              "confidence": 0.55,
+              "rationale": "Mapped from objective overlap for API Platform."
+            }
+          ],
+          "domain_invariants": [
+            {
+              "id": "INV-001",
+              "statement": "Define explicit error handling and observability requirements."
+            },
+            {
+              "id": "INV-002",
+              "statement": "Include measurable non-functional requirements."
+            },
+            {
+              "id": "INV-003",
+              "statement": "Map acceptance criteria to executable test types."
+            }
+          ],
+          "glossary": [
+            {
+              "term": "AuditEvent",
+              "definition": "AuditEvent entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "DomainEvent",
+              "definition": "DomainEvent entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "ServiceRequest",
+              "definition": "ServiceRequest entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "User",
+              "definition": "User entity in current domain scope.",
+              "synonyms": []
+            }
+          ]
+        },
+        "compliance": {
+          "controls_triggered": [],
+          "privacy": {
+            "pii_masking_rules": [],
+            "retention_days": 365,
+            "access_model": "least_privilege"
+          }
+        },
+        "requirements": {
+          "functional": [
+            {
+              "id": "FR-001",
+              "title": "Initialize Application State",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-002",
+              "title": "User Session Management",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-004",
+                "scenarios": [
+                  "BDD-004-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-003",
+              "title": "User Authentication",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-001",
+                "scenarios": [
+                  "BDD-001-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-004",
+              "title": "Customer Data Display",
+              "priority": "P1",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-005",
+              "title": "Order Management",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-002",
+                "scenarios": [
+                  "BDD-002-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-006",
+              "title": "Session-Based Flash Messaging",
+              "priority": "P1",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-003",
+                "scenarios": [
+                  "BDD-003-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-007",
+              "title": "HTML Rendering",
+              "priority": "P2",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-008",
+              "title": "Data Encoding and Security",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            }
+          ],
+          "non_functional": [
+            {
+              "id": "NFR-001",
+              "category": "performance",
+              "metric": "Response time under 200ms for typical operations",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            },
+            {
+              "id": "NFR-002",
+              "category": "security",
+              "metric": "Pass OWASP Top 10 security checks",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            },
+            {
+              "id": "NFR-003",
+              "category": "scalability",
+              "metric": "Support 100 concurrent users without degradation",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            },
+            {
+              "id": "NFR-004",
+              "category": "reliability",
+              "metric": "99.9% uptime",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            },
+            {
+              "id": "NFR-005",
+              "category": "usability",
+              "metric": "User satisfaction score of 4.5/5",
+              "verification_method": [
+                "unit",
+                "integration"
+              ]
+            }
+          ]
+        },
+        "bdd": {
+          "features": [
+            {
+              "id": "BDD-001",
+              "title": "User Authentication",
+              "scenarios": [
+                {
+                  "id": "BDD-001-SC-001",
+                  "name": "Successful Login",
+                  "gherkin": [
+                    "Given a user provides a valid username",
+                    "When they submit the login form",
+                    "Then they should be authenticated and redirected to the customers page"
+                  ],
+                  "maps_to": [
+                    "FR-003"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-002",
+              "title": "Order Creation",
+              "scenarios": [
+                {
+                  "id": "BDD-002-SC-001",
+                  "name": "Create a new order",
+                  "gherkin": [
+                    "Given a user is authenticated",
+                    "When they provide valid order details",
+                    "Then a new order is created and stored in the application"
+                  ],
+                  "maps_to": [
+                    "FR-005"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-003",
+              "title": "Flash Messaging",
+              "scenarios": [
+                {
+                  "id": "BDD-003-SC-001",
+                  "name": "Display flash message",
+                  "gherkin": [
+                    "Given a flash message is set",
+                    "When the user is redirected",
+                    "Then the flash message is displayed once and cleared"
+                  ],
+                  "maps_to": [
+                    "FR-006"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-004",
+              "title": "Session Management",
+              "scenarios": [
+                {
+                  "id": "BDD-004-SC-001",
+                  "name": "Start a new session",
+                  "gherkin": [
+                    "Given the application is running",
+                    "When a new user session starts",
+                    "Then the total session count is incremented"
+                  ],
+                  "maps_to": [
+                    "FR-002"
+                  ]
+                }
+              ]
+            }
+          ],
+          "lint": {
+            "gherkin_valid": true,
+            "missing_steps": []
+          }
+        },
+        "open_questions": [
+          {
+            "id": "Q-001",
+            "question": "Are there existing operational constraints or integration dependencies not listed?",
+            "owner": "Client",
+            "severity": "high"
+          }
+        ],
+        "risks": [
+          {
+            "description": "Potential for functionality deviation during modernization.",
+            "impact": "high",
+            "mitigation": "Thorough testing and validation against legacy behavior."
+          },
+          {
+            "description": "Security vulnerabilities introduced during code rewrite.",
+            "impact": "medium",
+            "mitigation": "Conduct security audits and adhere to best practices."
+          },
+          {
+            "description": "Performance degradation in the new implementation.",
+            "impact": "medium",
+            "mitigation": "Performance testing and optimization."
+          },
+          {
+            "description": "Incompatibility with existing deployment environments.",
+            "impact": "low",
+            "mitigation": "Use Docker for consistent deployment environments."
+          },
+          {
+            "description": "Incomplete documentation of legacy functionality.",
+            "impact": "medium",
+            "mitigation": "Engage with legacy system experts and conduct thorough code reviews."
+          }
+        ],
+        "out_of_scope": [
+          "Development of new features beyond legacy functionality.",
+          "Integration with external systems not present in the legacy code."
+        ],
+        "traceability": {
+          "links": [
+            {
+              "from": "FR-002",
+              "to": "BDD-004",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-003",
+              "to": "BDD-001",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-005",
+              "to": "BDD-002",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-006",
+              "to": "BDD-003",
+              "type": "verified_by"
+            }
+          ]
+        },
+        "conversation_audit": {
+          "thread_id": "THREAD-20260220_074945_dff6e4f2",
+          "changes": []
+        },
+        "context_reference": {
+          "version_id": "20260220T125004Z_20260220_074945_dff6e4f2",
+          "repo": "Synthetix",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "scm_version": "1.0",
+          "cp_version": "1.0",
+          "ha_version": "1.0"
+        },
+        "schema_version": "2.0.0",
+        "domain_pack_ref": {
+          "id": "software-general-v1",
+          "name": "General Software Domain Pack",
+          "version": "1.0.0"
+        },
+        "analyst_dag_trace": [
+          {
+            "step": "normalize_requirement",
+            "status": "completed",
+            "details": "actors=0, actions=3, objects=1"
+          },
+          {
+            "step": "map_to_capabilities",
+            "status": "completed",
+            "details": "primary=1, alternatives=0"
+          },
+          {
+            "step": "retrieve_internal_patterns",
+            "status": "completed",
+            "details": "patterns=0, standards=0"
+          },
+          {
+            "step": "retrieve_compliance_constraints",
+            "status": "completed",
+            "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+          },
+          {
+            "step": "synthesize_requirements_pack",
+            "status": "completed",
+            "details": "requirements_pack_ready=true, bdd_features=4"
+          },
+          {
+            "step": "run_quality_gates",
+            "status": "completed",
+            "details": "quality_gates=3, failed=0"
+          }
+        ],
+        "input_contract": {
+          "business_objective": "Modernize the provided legacy codebase into TypeScript. Document current functionality and acceptance criteria, design architecture, implement rewritten services, run QA/security checks, validate requirements, and deploy for local Docker testing.",
+          "use_case": "code_modernization",
+          "jurisdiction": "GLOBAL",
+          "data_classification": [
+            "INTERNAL"
+          ]
+        },
+        "capability_mapping": {
+          "framework": "Capability Taxonomy",
+          "primary_capabilities": [
+            {
+              "id": "api_platform",
+              "service_domain": "API Platform",
+              "business_capability": "Service Delivery",
+              "confidence": 0.55,
+              "dependencies": [
+                "identity_access",
+                "observability"
+              ]
+            }
+          ],
+          "alternative_capabilities": [],
+          "confidence": 0.55
+        },
+        "domain_model_excerpt": {
+          "entities": [
+            "AuditEvent",
+            "DomainEvent",
+            "ServiceRequest",
+            "User"
+          ],
+          "lifecycle_states": [
+            "completed",
+            "failed",
+            "processed",
+            "requested",
+            "validated"
+          ],
+          "relationships": [
+            "LegacyInput contract must map deterministically to ModernizedOutput contract",
+            "ServiceRequest emits DomainEvent and AuditEvent"
+          ]
+        },
+        "regulatory_constraints_applied": [],
+        "standards_guidance": [],
+        "gold_patterns": [],
+        "non_negotiables": [
+          "Define explicit error handling and observability requirements.",
+          "Include measurable non-functional requirements.",
+          "Map acceptance criteria to executable test types."
+        ],
+        "bdd_contract": {
+          "features": [
+            {
+              "id": "BDD-001",
+              "title": "User Authentication",
+              "source_requirement_ids": [
+                "FR-003"
+              ],
+              "gherkin": "Feature: User Authentication\nScenario: Successful Login\nGiven a user provides a valid username\nWhen they submit the login form\nThen they should be authenticated and redirected to the customers page"
+            },
+            {
+              "id": "BDD-002",
+              "title": "Order Creation",
+              "source_requirement_ids": [
+                "FR-005"
+              ],
+              "gherkin": "Feature: Order Creation\nScenario: Create a new order\nGiven a user is authenticated\nWhen they provide valid order details\nThen a new order is created and stored in the application"
+            },
+            {
+              "id": "BDD-003",
+              "title": "Flash Messaging",
+              "source_requirement_ids": [
+                "FR-006"
+              ],
+              "gherkin": "Feature: Flash Messaging\nScenario: Display flash message\nGiven a flash message is set\nWhen the user is redirected\nThen the flash message is displayed once and cleared"
+            },
+            {
+              "id": "BDD-004",
+              "title": "Session Management",
+              "source_requirement_ids": [
+                "FR-002"
+              ],
+              "gherkin": "Feature: Session Management\nScenario: Start a new session\nGiven the application is running\nWhen a new user session starts\nThen the total session count is incremented"
+            }
+          ],
+          "lint": {
+            "pass": true,
+            "issues": [],
+            "scenario_count": 4
+          }
+        },
+        "non_functional_contract": {
+          "must": [
+            {
+              "id": "NFR-002",
+              "title": "Security",
+              "description": "Ensure the application is secure against common web vulnerabilities.",
+              "category": "security",
+              "metric": "Pass OWASP Top 10 security checks",
+              "acceptance_criteria": [
+                "Application passes security audits.",
+                "No critical vulnerabilities are present.",
+                "Security measures are documented and tested."
+              ]
+            },
+            {
+              "id": "NFR-004",
+              "title": "Reliability",
+              "description": "Ensure the application is reliable and available.",
+              "category": "reliability",
+              "metric": "99.9% uptime",
+              "acceptance_criteria": [
+                "Downtime is minimized and documented.",
+                "Application recovers gracefully from failures.",
+                "Monitoring and alerting are in place."
+              ]
+            }
+          ],
+          "should": [
+            {
+              "id": "NFR-001",
+              "title": "Performance",
+              "description": "The application should perform at least as efficiently as the legacy system.",
+              "category": "performance",
+              "metric": "Response time under 200ms for typical operations",
+              "acceptance_criteria": [
+                "Response times are measured and documented.",
+                "Performance is consistent under typical load conditions.",
+                "No significant performance degradation from legacy system."
+              ]
+            },
+            {
+              "id": "NFR-003",
+              "title": "Scalability",
+              "description": "The application should be scalable to handle increased load.",
+              "category": "scalability",
+              "metric": "Support 100 concurrent users without degradation",
+              "acceptance_criteria": [
+                "Scalability tests are conducted and documented.",
+                "Application supports increased load without performance loss.",
+                "Architecture supports horizontal scaling."
+              ]
+            },
+            {
+              "id": "NFR-005",
+              "title": "Usability",
+              "description": "The application should be user-friendly and easy to navigate.",
+              "category": "usability",
+              "metric": "User satisfaction score of 4.5/5",
+              "acceptance_criteria": [
+                "User feedback is collected and analyzed.",
+                "Navigation is intuitive and consistent.",
+                "Documentation and help resources are available."
+              ]
+            }
+          ]
+        },
+        "acceptance_test_mapping": [
+          {
+            "requirement_id": "FR-001",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-002",
+            "test_types": [
+              "integration",
+              "security",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-004"
+            ]
+          },
+          {
+            "requirement_id": "FR-003",
+            "test_types": [
+              "e2e",
+              "integration",
+              "security",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-001"
+            ]
+          },
+          {
+            "requirement_id": "FR-004",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-005",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-002"
+            ]
+          },
+          {
+            "requirement_id": "FR-006",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-003"
+            ]
+          },
+          {
+            "requirement_id": "FR-007",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-008",
+            "test_types": [
+              "integration",
+              "security",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          }
+        ],
+        "quality_gates": [
+          {
+            "name": "gherkin_syntax",
+            "status": "PASS",
+            "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+            "details": {
+              "scenario_count": 4,
+              "issues": []
+            }
+          },
+          {
+            "name": "requirements_completeness",
+            "status": "PASS",
+            "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+            "details": {
+              "functional_count": 8,
+              "non_functional_count": 5,
+              "min_functional": 6,
+              "min_non_functional": 4,
+              "scenario_count": 4,
+              "min_scenarios": 4,
+              "capability_count": 1
+            }
+          },
+          {
+            "name": "compliance_constraints_applied",
+            "status": "WARN",
+            "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+            "details": {
+              "jurisdiction": "GLOBAL",
+              "data_classification": [
+                "INTERNAL"
+              ],
+              "constraints_count": 0
+            }
+          }
+        ],
+        "executive_summary": "The project aims to modernize a legacy ASP codebase to TypeScript, ensuring backward compatibility and documenting functionality for deployment in a Docker environment."
+      },
+      "domain_pack": {
+        "id": "software-general-v1",
+        "name": "General Software Domain Pack",
+        "version": "1.0.0"
+      },
+      "capability_mapping": {
+        "framework": "Capability Taxonomy",
+        "primary_capabilities": [
+          {
+            "id": "api_platform",
+            "service_domain": "API Platform",
+            "business_capability": "Service Delivery",
+            "confidence": 0.55,
+            "dependencies": [
+              "identity_access",
+              "observability"
+            ]
+          }
+        ],
+        "alternative_capabilities": [],
+        "confidence": 0.55
+      },
+      "domain_model_excerpt": {
+        "entities": [
+          "AuditEvent",
+          "DomainEvent",
+          "ServiceRequest",
+          "User"
+        ],
+        "lifecycle_states": [
+          "completed",
+          "failed",
+          "processed",
+          "requested",
+          "validated"
+        ],
+        "relationships": [
+          "LegacyInput contract must map deterministically to ModernizedOutput contract",
+          "ServiceRequest emits DomainEvent and AuditEvent"
+        ]
+      },
+      "regulatory_constraints": [],
+      "bdd_contract": {
+        "features": [
+          {
+            "id": "BDD-001",
+            "title": "User Authentication",
+            "source_requirement_ids": [
+              "FR-003"
+            ],
+            "gherkin": "Feature: User Authentication\nScenario: Successful Login\nGiven a user provides a valid username\nWhen they submit the login form\nThen they should be authenticated and redirected to the customers page"
+          },
+          {
+            "id": "BDD-002",
+            "title": "Order Creation",
+            "source_requirement_ids": [
+              "FR-005"
+            ],
+            "gherkin": "Feature: Order Creation\nScenario: Create a new order\nGiven a user is authenticated\nWhen they provide valid order details\nThen a new order is created and stored in the application"
+          },
+          {
+            "id": "BDD-003",
+            "title": "Flash Messaging",
+            "source_requirement_ids": [
+              "FR-006"
+            ],
+            "gherkin": "Feature: Flash Messaging\nScenario: Display flash message\nGiven a flash message is set\nWhen the user is redirected\nThen the flash message is displayed once and cleared"
+          },
+          {
+            "id": "BDD-004",
+            "title": "Session Management",
+            "source_requirement_ids": [
+              "FR-002"
+            ],
+            "gherkin": "Feature: Session Management\nScenario: Start a new session\nGiven the application is running\nWhen a new user session starts\nThen the total session count is incremented"
+          }
+        ],
+        "lint": {
+          "pass": true,
+          "issues": [],
+          "scenario_count": 4
+        }
+      },
+      "quality_gates": [
+        {
+          "name": "gherkin_syntax",
+          "status": "PASS",
+          "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+          "details": {
+            "scenario_count": 4,
+            "issues": []
+          }
+        },
+        {
+          "name": "requirements_completeness",
+          "status": "PASS",
+          "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+          "details": {
+            "functional_count": 8,
+            "non_functional_count": 5,
+            "min_functional": 6,
+            "min_non_functional": 4,
+            "scenario_count": 4,
+            "min_scenarios": 4,
+            "capability_count": 1
+          }
+        },
+        {
+          "name": "compliance_constraints_applied",
+          "status": "WARN",
+          "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+          "details": {
+            "jurisdiction": "GLOBAL",
+            "data_classification": [
+              "INTERNAL"
+            ],
+            "constraints_count": 0
+          }
+        }
+      ],
+      "acceptance_test_mapping": [
+        {
+          "requirement_id": "FR-001",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-002",
+          "test_types": [
+            "integration",
+            "security",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-004"
+          ]
+        },
+        {
+          "requirement_id": "FR-003",
+          "test_types": [
+            "e2e",
+            "integration",
+            "security",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-001"
+          ]
+        },
+        {
+          "requirement_id": "FR-004",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-005",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-002"
+          ]
+        },
+        {
+          "requirement_id": "FR-006",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-003"
+          ]
+        },
+        {
+          "requirement_id": "FR-007",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-008",
+          "test_types": [
+            "integration",
+            "security",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        }
+      ],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "question": "Are there existing operational constraints or integration dependencies not listed?",
+          "owner": "Client",
+          "severity": "high"
+        }
+      ],
+      "standards_guidance": [],
+      "gold_patterns": [],
+      "conversation_audit": {
+        "thread_id": "THREAD-20260220_074945_dff6e4f2",
+        "changes": []
+      },
+      "context_reference": {
+        "version_id": "20260220T125004Z_20260220_074945_dff6e4f2",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+        "scm_version": "1.0",
+        "cp_version": "1.0",
+        "ha_version": "1.0"
+      }
+    },
+    "tokens_used": 8143,
+    "latency_ms": 36557.73711204529,
+    "logs": [
+      "[Analyst Agent] Starting execution...",
+      "[Analyst Agent] Domain Pack selected: software-general-v1",
+      "[Analyst Agent] Deterministic mapping: capabilities=1, constraints=0",
+      "[Analyst Agent] Sending request to LLM (gpt-4o)...",
+      "[Analyst Agent] Received response (2545 tokens, 36558ms)",
+      "[Analyst Agent] LLM output parsed; compiling deterministic Requirements Pack...",
+      "[Analyst Agent] Requirements Pack compiled with quality gates"
+    ]
+  },
+  "saved_at": "2026-02-20T12:50:41.030734+00:00"
+}
