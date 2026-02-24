@@ -1,0 +1,314 @@
+{
+  "run_id": "20260224_100448_1f3dff2f",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 6 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260224T150510Z_20260224_100448_1f3dff2f",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725"
+      },
+      "context_bundle": {
+        "bundle_id": "c89e4ad677184b7ab82950440b039d8e",
+        "created_at": "2026-02-24T15:05:10.148101+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "7c53c4bc0dba4746836ab6c70d987234",
+            "digest": "sha256:9f6cceb234068b8b4c42a1049c19cc36addbd245e0fe39b2d8bcde310c625d16",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "3d62a78b28e24176a096149f8ccf2315",
+            "digest": "sha256:0d04ec4a845378ea1816128c5ecf734307825cfc45d00805ffcc4e87260417fd",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "fc445ca4ec7a405f8083944ffb4ef7da",
+            "digest": "sha256:c971aa0f8689d1cec15fb2979c6c3686f79cbc7f630211a379cda5170c857319",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-24T15:05:10.192548+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "The legacy banking application is being modernized from Visual Basic to C# with a transition from Microsoft Access to SQLite for database management. The application consists of multiple forms and modules handling various banking operations.",
+        "nodes": [
+          {
+            "id": "node:VB_Project",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:Form4",
+            "type": "Component",
+            "name": "Form4",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "Form4.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form4"
+              }
+            ]
+          },
+          {
+            "id": "node:Form5",
+            "type": "Component",
+            "name": "Form5",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "Form5.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form5"
+              }
+            ]
+          },
+          {
+            "id": "node:TransactionForm",
+            "type": "Component",
+            "name": "transaction.frm",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "transaction.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form5"
+              }
+            ]
+          },
+          {
+            "id": "node:Database",
+            "type": "Database",
+            "name": "Microsoft Access",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          },
+          {
+            "id": "node:SQLite",
+            "type": "Database",
+            "name": "SQLite",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "context",
+                "line": 1,
+                "evidence": "target: SQLite"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:VB_Project",
+            "to": "node:Database",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:VB_Project",
+            "to": "node:SQLite",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "context",
+                "line": 1,
+                "evidence": "target: SQLite"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "The modernization process involves transitioning to C# with adherence to modern coding standards, including naming conventions, error handling, and security practices.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use PascalCase for class names and camelCase for method names.",
+            "confidence": 0.95,
+            "examples": [
+              "class BankAccount { }",
+              "void ProcessTransaction() { }"
+            ],
+            "counterexamples": [
+              "class bankaccount { }",
+              "void processTransaction() { }"
+            ],
+            "provenance": [
+              {
+                "file": "best_practices.md",
+                "line": 10,
+                "evidence": "Naming conventions for C#"
+              }
+            ]
+          },
+          {
+            "id": "rule:error_handling",
+            "category": "error_handling",
+            "rule": "Implement try-catch blocks for exception handling.",
+            "confidence": 0.9,
+            "examples": [
+              "try { ... } catch (Exception ex) { ... }"
+            ],
+            "counterexamples": [
+              "..."
+            ],
+            "provenance": [
+              {
+                "file": "best_practices.md",
+                "line": 20,
+                "evidence": "Error handling in C#"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all C# files follow the defined naming conventions."
+        ],
+        "scaffold_templates": [
+          "C# project template with predefined folder structure and example classes."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy system has several maintainability and security concerns that need addressing during modernization.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 55,
+          "testability": 40
+        },
+        "hotspots": [
+          {
+            "scope": "Form5",
+            "reason": "Complex UI logic without separation of concerns.",
+            "severity": "high",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "Form5.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form5"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Legacy Codebase Complexity",
+            "description": "The existing codebase has complex dependencies and outdated practices that could hinder modernization.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:refactor_ui_logic",
+          "title": "Refactor UI Logic",
+          "problem_statement": "The UI logic in Form5 is tightly coupled with business logic, making it difficult to maintain.",
+          "scope": [
+            "Form5"
+          ],
+          "risk_if_unaddressed": "Increased maintenance cost and difficulty in implementing new features.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [
+            "node:Form5"
+          ],
+          "suggested_approach": "Separate UI logic from business logic using a Model-View-Controller (MVC) pattern.",
+          "success_criteria": [
+            "UI logic is isolated from business logic.",
+            "Code is easier to maintain and extend."
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "Form5.frm",
+              "line": 1,
+              "evidence": "Begin VB.Form Form5"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 6971,
+    "latency_ms": 21131.83283805847,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-24T15:05:10.194164+00:00"
+}
