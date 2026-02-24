@@ -1,0 +1,347 @@
+{
+  "run_id": "20260224_081948_e5cdb66e",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 4 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260224T132013Z_20260224_081948_e5cdb66e",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725"
+      },
+      "context_bundle": {
+        "bundle_id": "5deeb65f77654abf8fc514ee45ee6ca7",
+        "created_at": "2026-02-24T13:20:13.301964+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "68b344058d594fa8a7fad48642db1a88",
+            "digest": "sha256:45769f61a39440b0440faea7e2be4085b6af9cf5f33ff2d2299b636f4fb9be75",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "2ff9e3dbfe064e90aa58bd34103b07df",
+            "digest": "sha256:b78d31e6f23bfd3a89a7b7df5f70cd48944c10d63fb17c0ab6e81e6595901aef",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "9b3578874fbb4799aa232daf689fd18b",
+            "digest": "sha256:bf252a1b8c973707f10551991c05015ec9142f16654595aab1d7926790178074",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-24T13:20:13.342428+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy banking application, detailing its components, dependencies, and interactions. The application is being modernized from VB6 to C# with a database migration from Microsoft Access to SQLite.",
+        "nodes": [
+          {
+            "id": "node:banking_exe",
+            "type": "Component",
+            "name": "Banking Application Executable",
+            "metadata": {
+              "language": "VB6",
+              "type": "Executable"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:msado20_lib",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {
+              "type": "Library",
+              "version": "2.0"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "id": "node:dao350_lib",
+            "type": "ExternalDependency",
+            "name": "Microsoft DAO 3.51 Object Library",
+            "metadata": {
+              "type": "Library",
+              "version": "3.51"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 4,
+                "evidence": "Reference=Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          },
+          {
+            "id": "node:msaccess_db",
+            "type": "Database",
+            "name": "Microsoft Access Database",
+            "metadata": {
+              "type": "Database",
+              "source": "Microsoft Access"
+            },
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:sqlite_db",
+            "type": "Database",
+            "name": "SQLite Database",
+            "metadata": {
+              "type": "Database",
+              "target": "SQLite"
+            },
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:banking_exe",
+            "to": "node:msado20_lib",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:banking_exe",
+            "to": "node:dao350_lib",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 4,
+                "evidence": "Reference=Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node:banking_exe",
+            "to": "node:msaccess_db",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "type": "WRITES_TABLE",
+            "from": "node:banking_exe",
+            "to": "node:msaccess_db",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "The specific tables and columns used in the Microsoft Access database are not detailed in the provided files."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and best practices for the modernization of the legacy banking application to C#.",
+        "rules": [
+          {
+            "id": "rule:naming_conventions",
+            "category": "naming",
+            "rule": "Use PascalCase for class names and camelCase for method names.",
+            "confidence": 0.95,
+            "examples": [
+              "public class AccountManager {}",
+              "public void ProcessTransaction() {}"
+            ],
+            "counterexamples": [
+              "public class account_manager {}",
+              "public void process_transaction() {}"
+            ],
+            "provenance": [
+              {
+                "file": "config.py",
+                "line": 1,
+                "evidence": "Python code style guide reference"
+              }
+            ]
+          },
+          {
+            "id": "rule:exception_handling",
+            "category": "error_handling",
+            "rule": "Use try-catch blocks to handle exceptions and log errors.",
+            "confidence": 0.9,
+            "examples": [
+              "try { /* code */ } catch (Exception ex) { /* log error */ }"
+            ],
+            "counterexamples": [
+              "/* code without error handling */"
+            ],
+            "provenance": [
+              {
+                "file": "agents/security_engineer.py",
+                "line": 8,
+                "evidence": "Exception handling practices"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all C# files pass the StyleCop analysis."
+        ],
+        "scaffold_templates": [
+          "C# class template with logging and error handling"
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment identifies key areas for improvement in maintainability, security, reliability, and testability of the modernized application.",
+        "scores": {
+          "maintainability": 70,
+          "security": 60,
+          "reliability": 65,
+          "testability": 50
+        },
+        "hotspots": [
+          {
+            "scope": "Legacy Codebase",
+            "reason": "Use of outdated libraries and lack of modular design.",
+            "severity": "high",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference to outdated libraries"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Vulnerabilities in Legacy Code",
+            "description": "The use of outdated libraries may expose the application to known vulnerabilities.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:modernize_codebase",
+          "title": "Modernize Legacy Codebase",
+          "problem_statement": "The current codebase is written in VB6 and relies on outdated libraries.",
+          "scope": [
+            "Entire Codebase"
+          ],
+          "risk_if_unaddressed": "Continued use of outdated technology may lead to increased maintenance costs and security risks.",
+          "effort": "L",
+          "severity": "high",
+          "dependencies": [
+            "Completion of system context model"
+          ],
+          "suggested_approach": "Rewrite the application in C# and replace outdated libraries with modern equivalents.",
+          "success_criteria": [
+            "All legacy components are successfully rewritten in C#.",
+            "The application passes all security and QA checks."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BANKING.vbp",
+              "line": 1,
+              "evidence": "Legacy codebase details"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 21485,
+    "latency_ms": 23826.234102249146,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-24T13:20:13.343633+00:00"
+}
