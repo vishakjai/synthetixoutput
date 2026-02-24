@@ -1,0 +1,108 @@
+{
+  "run_id": "20260224_121414_6cdcf7b8",
+  "stage": 8,
+  "result": {
+    "agent_name": "Deployment Agent",
+    "stage": 8,
+    "status": "warning",
+    "summary": "Docker deploy: PENDING | Endpoint: ",
+    "output": {
+      "deployment_strategy": "rolling",
+      "deployment_overview": "Deploy the modernized banking application using Docker Compose for local development and testing. The strategy involves gradually updating services to minimize downtime and ensure continuous availability.",
+      "container_images": [
+        {
+          "name": "ui-service",
+          "base_image": "mcr.microsoft.com/dotnet/framework/wcf",
+          "tag": "latest",
+          "port": 8080
+        },
+        {
+          "name": "business-logic-service",
+          "base_image": "mcr.microsoft.com/dotnet/core/aspnet",
+          "tag": "latest",
+          "port": 8081
+        },
+        {
+          "name": "data-access-service",
+          "base_image": "mcr.microsoft.com/dotnet/core/aspnet",
+          "tag": "latest",
+          "port": 8082
+        },
+        {
+          "name": "security-service",
+          "base_image": "mcr.microsoft.com/dotnet/core/aspnet",
+          "tag": "latest",
+          "port": 8083
+        }
+      ],
+      "health_checks": [
+        {
+          "service": "ui-service",
+          "path": "/health",
+          "port": 8080
+        },
+        {
+          "service": "business-logic-service",
+          "path": "/health",
+          "port": 8081
+        },
+        {
+          "service": "data-access-service",
+          "path": "/health",
+          "port": 8082
+        },
+        {
+          "service": "security-service",
+          "path": "/health",
+          "port": 8083
+        }
+      ],
+      "post_deployment_checks": [
+        {
+          "check": "Verify service connectivity",
+          "status": "pending",
+          "details": "Ensure all services can communicate as expected via defined HTTP protocols."
+        },
+        {
+          "check": "Validate data integrity",
+          "status": "pending",
+          "details": "Run data integrity checks to ensure no data loss during migration."
+        },
+        {
+          "check": "Security audit",
+          "status": "pending",
+          "details": "Conduct a security audit to verify that all security controls are in place and effective."
+        }
+      ],
+      "context_reference": {
+        "version_id": "20260224T171432Z_20260224_121414_6cdcf7b8",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+        "scm_version": "scm-v1",
+        "cp_version": "cp-v1",
+        "ha_version": "ha-v1"
+      },
+      "deployment_target": "local",
+      "deployment_result": {
+        "status": "pending",
+        "url": "",
+        "total_pods": 0,
+        "healthy_pods": 0,
+        "deployment_time_seconds": 0
+      },
+      "docker_live_deployment": {
+        "enabled": false,
+        "message": "Enable live_deploy to run real Docker deployment"
+      }
+    },
+    "tokens_used": 2477,
+    "latency_ms": 5597.7020263671875,
+    "logs": [
+      "[Deployment Agent] Starting deployment phase...",
+      "[Deployment Agent] Deployment plan generated",
+      "[Deployment Agent] live_deploy disabled; returning deployment plan only"
+    ]
+  },
+  "saved_at": "2026-02-24T17:26:43.392174+00:00"
+}
