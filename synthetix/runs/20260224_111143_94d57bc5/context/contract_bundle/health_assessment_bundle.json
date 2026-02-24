@@ -1,0 +1,204 @@
+{
+  "header": {
+    "artifact_id": "5ee3253c581d4d4d9788a15e3f528c12",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-24T16:12:03.990035+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260224_111143_94d57bc5",
+      "stage_id": "context_layer",
+      "task_id": "21e105cd99354d3c94b85c4dc96e75af"
+    },
+    "parents": [],
+    "digest": "sha256:65e764b55c3c78e24572d8ca1be5be8471a0e1325125c99ec5cdf790bc542773",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260224_111143_94d57bc5",
+      "bundle_version": "20260224T161203Z_20260224_111143_94d57bc5"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The health assessment identifies key areas of concern in the legacy codebase and provides a baseline for modernization efforts."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 2,
+      "security": 3,
+      "reliability": 2,
+      "testability": 1
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Form5",
+      "description": "Complex UI logic without separation of concerns.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Form5"
+        ],
+        "paths": [
+          "Form5"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "Form5.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "Legacy Dependency Risk",
+      "description": "The project relies on outdated ActiveX controls that may not be supported in modern environments.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:replace_activex",
+      "title": "Replace ActiveX Controls",
+      "priority": "P0",
+      "business_value": "Increased security vulnerabilities and potential incompatibility with modern systems.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node:Form4",
+          "node:Form5"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "node:VB6_Project"
+      ],
+      "plan": [
+        "Identify equivalent",
+        "NET controls and refactor the UI code"
+      ],
+      "acceptance_criteria": [
+        "All ActiveX controls are replaced with .NET equivalents.",
+        "UI functionality remains consistent with the original application."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:replace_activex"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "remediation:replace_activex"
+    ]
+  }
+}
