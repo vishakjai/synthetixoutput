@@ -1,0 +1,257 @@
+{
+  "run_id": "20260224_102711_a1e3b5df",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 3 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260224T152729Z_20260224_102711_a1e3b5df",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725"
+      },
+      "context_bundle": {
+        "bundle_id": "709d0647b68d4c9fa8c6f9170280c4db",
+        "created_at": "2026-02-24T15:27:29.323465+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "c999df34810e68df30cf9e53a685362906d4c725",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "9878b075750d4e698a5576aa010f272c",
+            "digest": "sha256:d6cbed58f4fb343b4907063ad168e52d7498f9b69f36aa851a2bd03f84ee70b4",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "84bdbdba80164a8d88983fe181d31e78",
+            "digest": "sha256:58cb80c38a61abc3ee18f7d1b5fd136265091f7a84da0c2f1d88769548ed14fe",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "d1380c885fb84557a6c99e8c5e3e4ce0",
+            "digest": "sha256:8f6f7f3cf42400726e87546654cdb474bdaa9685689314baca27328765ba0534",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-24T15:27:29.381664+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy VB6 banking application to be modernized into C# with Docker deployment.",
+        "nodes": [
+          {
+            "id": "node:banking_vbp",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:login_form",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 20,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:main_form",
+            "type": "Form",
+            "name": "main.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 21,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:banking_vbp",
+            "to": "node:login_form",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 20,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:banking_vbp",
+            "to": "node:main_form",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 21,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "Database source and target not specified."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy VB6 codebase with modernization to C#; adherence to modern C# conventions required.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use PascalCase for class names and camelCase for method names in C#.",
+            "confidence": 0.8,
+            "examples": [
+              "public class CustomerAccount {}",
+              "public void ProcessTransaction() {}"
+            ],
+            "counterexamples": [
+              "public class customer_account {}",
+              "public void process_transaction() {}"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all C# code follows the .NET naming conventions."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "Initial assessment of legacy VB6 codebase for modernization.",
+        "scores": {
+          "maintainability": 2,
+          "security": 1,
+          "reliability": 2,
+          "testability": 1
+        },
+        "hotspots": [
+          {
+            "scope": "Form4",
+            "reason": "Legacy VB6 form with outdated controls.",
+            "severity": "high",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "Form4.frm",
+                "line": 1,
+                "evidence": "VERSION 5.00"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security vulnerabilities due to outdated libraries",
+            "description": "The use of outdated VB6 libraries may pose security risks.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task:modernize_forms",
+          "title": "Modernize VB6 Forms to C#",
+          "problem_statement": "Legacy VB6 forms need to be rewritten in C# to support modern development practices.",
+          "scope": [
+            "LOGIN.frm",
+            "main.frm",
+            "transaction.frm"
+          ],
+          "risk_if_unaddressed": "Continued use of outdated and unsupported technology.",
+          "effort": "L",
+          "severity": "high",
+          "dependencies": [
+            "node:banking_vbp"
+          ],
+          "suggested_approach": "Rewrite each form using C# WinForms or WPF, ensuring compatibility with the existing business logic.",
+          "success_criteria": [
+            "All forms function as expected in the C# environment.",
+            "No loss of functionality from the original VB6 application."
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "BANKING.vbp",
+              "line": 20,
+              "evidence": "Form=LOGIN.frm"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 6737,
+    "latency_ms": 17544.649839401245,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-24T15:27:29.384747+00:00"
+}
