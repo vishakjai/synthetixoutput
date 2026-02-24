@@ -1,0 +1,156 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy banking application, detailing its components, dependencies, and interactions. The application is being modernized from VB6 to C# with a database migration from Microsoft Access to SQLite.",
+  "nodes": [
+    {
+      "id": "node:banking_exe",
+      "type": "Component",
+      "name": "Banking Application Executable",
+      "metadata": {
+        "language": "VB6",
+        "type": "Executable"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:msado20_lib",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0 Library",
+      "metadata": {
+        "type": "Library",
+        "version": "2.0"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "node:dao350_lib",
+      "type": "ExternalDependency",
+      "name": "Microsoft DAO 3.51 Object Library",
+      "metadata": {
+        "type": "Library",
+        "version": "3.51"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference=Microsoft DAO 3.51 Object Library"
+        }
+      ]
+    },
+    {
+      "id": "node:msaccess_db",
+      "type": "Database",
+      "name": "Microsoft Access Database",
+      "metadata": {
+        "type": "Database",
+        "source": "Microsoft Access"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:sqlite_db",
+      "type": "Database",
+      "name": "SQLite Database",
+      "metadata": {
+        "type": "Database",
+        "target": "SQLite"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:banking_exe",
+      "to": "node:msado20_lib",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:banking_exe",
+      "to": "node:dao350_lib",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference=Microsoft DAO 3.51 Object Library"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node:banking_exe",
+      "to": "node:msaccess_db",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "type": "WRITES_TABLE",
+      "from": "node:banking_exe",
+      "to": "node:msaccess_db",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "The specific tables and columns used in the Microsoft Access database are not detailed in the provided files."
+  ]
+}
