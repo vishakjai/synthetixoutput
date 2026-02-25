@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "summary": "The legacy system has maintainability and security concerns due to outdated technology.",
+  "scores": {
+    "maintainability": 2,
+    "security": 3,
+    "reliability": 4,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "Data Access",
+      "reason": "Direct database access without parameterized queries.",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "Module1.bas",
+          "line": 15,
+          "evidence": "RS.Open \"select max(accountid) from accounttype\", CON"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Risk",
+      "description": "The application uses direct SQL queries which are vulnerable to SQL injection attacks.",
+      "severity": "critical",
+      "confidence": 0.95
+    }
+  ]
+}
