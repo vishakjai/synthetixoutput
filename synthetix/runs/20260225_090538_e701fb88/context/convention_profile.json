@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "summary": "The repository follows a modular structure with Python modules and JSON configurations. Naming conventions and import structures are consistent, but there is limited information on testing and logging practices.",
+  "rules": [
+    {
+      "id": "rule:naming_convention",
+      "category": "naming",
+      "rule": "Modules and files should follow snake_case naming convention.",
+      "confidence": 0.9,
+      "examples": [
+        "agents/analyst.py",
+        "config.py"
+      ],
+      "counterexamples": [
+        ".DS_Store"
+      ],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Module name follows snake_case"
+        }
+      ]
+    },
+    {
+      "id": "rule:import_structure",
+      "category": "api",
+      "rule": "Imports should be organized and grouped by standard library, third-party, and local modules.",
+      "confidence": 0.85,
+      "examples": [
+        "import os\nimport sys\nfrom . import analyst"
+      ],
+      "counterexamples": [
+        "import analyst\nimport os"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Organized import structure"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Consider adding logging and error handling mechanisms across modules."
+  ],
+  "scaffold_templates": [
+    "Standard Python module template with logging and error handling."
+  ]
+}
