@@ -1,0 +1,240 @@
+{
+  "run_id": "20260225_134704_0614c8ac",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 3 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T124721Z_20260225_134704_0614c8ac",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b"
+      },
+      "context_bundle": {
+        "bundle_id": "48b7ea5f03374c60870899161266d86a",
+        "created_at": "2026-02-25T12:47:21.763813+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "8aa00bd0044141a89d4c8f40b85bb508",
+            "digest": "sha256:06229f98792e26eeb502ee05f8e89cdf71d545d84e2db652c61c80076574e47d",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "45219b1789b54c73bd8d12322e2eacb9",
+            "digest": "sha256:5c22cbbe3ced6db9add1d2eda48d9525f2706105fd9965d726da349139a2cb4d",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "9e58c9434b48445b820906b2bfde4847",
+            "digest": "sha256:4d1a060fd64b8447890a00dc8ca7a60fce6a9482c533fac5cd4ed6a501b8895f",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T12:47:21.950886+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy banking application written in Visual Basic 6.0, which is to be modernized into C#. It includes forms, modules, and various ActiveX controls.",
+        "nodes": [
+          {
+            "id": "node:Form4",
+            "type": "Form",
+            "name": "Form4",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "Form4.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form4"
+              }
+            ]
+          },
+          {
+            "id": "node:Form5",
+            "type": "Form",
+            "name": "Form5",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "Form5.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form5"
+              }
+            ]
+          },
+          {
+            "id": "node:Module1",
+            "type": "Module",
+            "name": "Module1",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 30,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:Form4",
+            "to": "node:Module1",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.7,
+            "evidence": [
+              {
+                "file": "Form4.frm",
+                "line": 1,
+                "evidence": "Attribute VB_Name = \"Form4\""
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "The exact database schema and its conversion context are not specified."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the conventions used in the legacy VB6 codebase, highlighting areas for improvement in the modernization process.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use PascalCase for form and module names.",
+            "confidence": 0.8,
+            "examples": [
+              "Form4",
+              "Module1"
+            ],
+            "counterexamples": [
+              "form4",
+              "module1"
+            ],
+            "provenance": [
+              {
+                "file": "Form4.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form4"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all form and module names follow PascalCase convention."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy system has several maintainability and security concerns due to outdated technologies and lack of modern practices.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Form5",
+            "reason": "Uses outdated ActiveX controls.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "Form5.frm",
+                "line": 1,
+                "evidence": "Object = \"{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0\"; \"MSCOMCT2.OCX\""
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Control Vulnerabilities",
+            "description": "The use of ActiveX controls poses security risks and compatibility issues in modern environments.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:replace_activex",
+          "title": "Replace ActiveX Controls",
+          "problem_statement": "ActiveX controls are outdated and pose security risks.",
+          "scope": [
+            "Form5"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities and compatibility issues.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node:Form5"
+          ],
+          "suggested_approach": "Identify equivalent C# components or libraries to replace ActiveX controls.",
+          "success_criteria": [
+            "All ActiveX controls are replaced with modern equivalents.",
+            "No security vulnerabilities related to ActiveX remain."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "Form5.frm",
+              "line": 1,
+              "evidence": "Object = \"{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0\"; \"MSCOMCT2.OCX\""
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 6580,
+    "latency_ms": 16095.239877700806,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T12:47:21.958951+00:00"
+}
