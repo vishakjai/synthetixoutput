@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "Legacy VB6 codebase lacks modern coding conventions such as structured error handling, consistent naming conventions, and comprehensive testing.",
+  "rules": [
+    {
+      "id": "rule:naming_convention",
+      "category": "naming",
+      "rule": "Use PascalCase for all public members and camelCase for private members.",
+      "confidence": 0.7,
+      "examples": [
+        "Public Sub CalculateInterest()",
+        "private int accountBalance;"
+      ],
+      "counterexamples": [
+        "Sub calculateinterest()",
+        "Dim AccountBalance As Integer"
+      ],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "rule:error_handling",
+      "category": "error_handling",
+      "rule": "Implement try-catch blocks for error handling instead of On Error GoTo.",
+      "confidence": 0.8,
+      "examples": [
+        "try { ... } catch (Exception ex) { ... }"
+      ],
+      "counterexamples": [
+        "On Error GoTo ErrorHandler"
+      ],
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "On Error GoTo f"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor code to use modern C# conventions."
+  ],
+  "scaffold_templates": [
+    "C# class templates for forms and modules."
+  ]
+}
