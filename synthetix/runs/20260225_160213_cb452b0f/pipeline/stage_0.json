@@ -1,0 +1,255 @@
+{
+  "run_id": "20260225_160213_cb452b0f",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T150241Z_20260225_160213_cb452b0f",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b"
+      },
+      "context_bundle": {
+        "bundle_id": "65eae9176d0e4307b4a91efd6ee7533f",
+        "created_at": "2026-02-25T15:02:41.748494+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "08b06c3c545f434ba2bfd85568bcb636",
+            "digest": "sha256:9ca1db388f8531b58e4df64e86a42ad7a62ed39e040923212ba0a8d2557dcb8b",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "2c4773c8b8a648879729fa5bef3799f5",
+            "digest": "sha256:0295ef279cb98f47561f295ab83d837aca81be09464935a9195b5b7a48194804",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "6cec419d563b459ea746be44ebaaaae6",
+            "digest": "sha256:80f6d453407c97dde880a4657e0bf06f9bf81fd12af636f9095f28c17478431a",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T15:02:41.796440+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy VB6 banking application with various forms and modules, targeted for modernization to C#.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 26,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Component",
+            "name": "main.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 27,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Component",
+            "name": "frmcustomer.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 28,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-4",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Connection to BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "The full functionality of each form and module is not completely documented."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy code uses VB6 conventions, requiring updates to C# standards.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Use PascalCase for method names in C#.",
+            "confidence": 0.9,
+            "examples": [
+              "GetCustomerDetails"
+            ],
+            "counterexamples": [
+              "getcustomerdetails"
+            ],
+            "provenance": [
+              {
+                "file": "Module1.bas",
+                "line": 10,
+                "evidence": "Sub getcustomerdetails()"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all method names are converted to PascalCase."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy system has maintainability and security concerns due to outdated technology.",
+        "scores": {
+          "maintainability": 2,
+          "security": 3,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Data Access",
+            "reason": "Direct database access without parameterized queries.",
+            "severity": "high",
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "Module1.bas",
+                "line": 15,
+                "evidence": "RS.Open \"select max(accountid) from accounttype\", CON"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "SQL Injection Risk",
+            "description": "The application uses direct SQL queries which are vulnerable to SQL injection attacks.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Refactor Database Access",
+          "problem_statement": "Direct SQL queries are used without parameterization, posing a security risk.",
+          "scope": [
+            "Module1.bas",
+            "DataEnvironment1.DCA"
+          ],
+          "risk_if_unaddressed": "Potential SQL injection vulnerabilities.",
+          "effort": "M",
+          "severity": "critical",
+          "dependencies": [
+            "node-4"
+          ],
+          "suggested_approach": "Refactor to use parameterized queries or ORM in C#.",
+          "success_criteria": [
+            "All database access uses parameterized queries.",
+            "No direct SQL strings in the codebase."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "Module1.bas",
+              "line": 15,
+              "evidence": "RS.Open \"select max(accountid) from accounttype\", CON"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7587,
+    "latency_ms": 27266.294956207275,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T15:02:41.798004+00:00"
+}
