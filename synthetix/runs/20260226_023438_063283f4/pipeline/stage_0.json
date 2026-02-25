@@ -1,0 +1,263 @@
+{
+  "run_id": "20260226_023438_063283f4",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 3 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T210456Z_20260226_023438_063283f4",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "761a5fc19764428e990eda27729b00f1",
+        "created_at": "2026-02-25T21:04:56.228888+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "70835dc817ff46e68e1c26802dcb842f",
+            "digest": "sha256:eb2a1a01c78903c6bec42f273b1812593e5e67d2c9a9ad7f34a46a7f82ab1cbf",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "3d776ba2c35c497d88f92ff0877c8364",
+            "digest": "sha256:81d2b3cf3e1122e4a4e8f593c342cdaa175f513f0d9823fd765d3efddb0b0fd3",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "2f2a752c0a60462190900b5f5e29ac9e",
+            "digest": "sha256:28f827ad150850c800777726d3f93c222b97ad5ecb7602c5bd73b8f677d26e1e",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T21:04:56.236159+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy VB6 banking application with multiple forms and modules, targeted for modernization to C#.",
+        "nodes": [
+          {
+            "id": "node:VB6_Project",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {
+              "type": "Exe",
+              "references": [
+                "OLE Automation",
+                "Microsoft ActiveX Data Objects 2.0 Library",
+                "Microsoft DAO 3.51 Object Library"
+              ]
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:DataEnvironment1",
+            "type": "Component",
+            "name": "DataEnvironment1.DCA",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0",
+              "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+            },
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+              }
+            ]
+          },
+          {
+            "id": "node:Form_Login",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 21,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:VB6_Project",
+            "to": "node:DataEnvironment1",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:VB6_Project",
+            "to": "node:Form_Login",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 21,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy codebase lacks modern coding conventions and best practices.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use PascalCase for class names and camelCase for method names.",
+            "confidence": 0.7,
+            "examples": [
+              "Class MyClass",
+              "void myMethod()"
+            ],
+            "counterexamples": [
+              "class my_class",
+              "void My_Method()"
+            ],
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Attribute VB_Name = \"main\""
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor code to follow C# naming conventions."
+        ],
+        "scaffold_templates": [
+          "C# class and method templates with proper naming conventions."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy codebase has maintainability and security concerns due to outdated technology and practices.",
+        "scores": {
+          "maintainability": 2,
+          "security": 3,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "DataEnvironment1.DCA",
+            "reason": "Uses outdated Microsoft Jet OLEDB provider.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Outdated Database Technology",
+            "description": "The application uses Microsoft Jet OLEDB, which is deprecated and may not be supported in future environments.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:database_migration",
+          "title": "Migrate Database to Modern SQL Server",
+          "problem_statement": "The application currently uses Microsoft Jet OLEDB, which is outdated and deprecated.",
+          "scope": [
+            "DataEnvironment1.DCA"
+          ],
+          "risk_if_unaddressed": "Potential data access issues and lack of support in future environments.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node:DataEnvironment1"
+          ],
+          "suggested_approach": "Migrate the database to a modern SQL Server and update the connection strings accordingly.",
+          "success_criteria": [
+            "Database is accessible via modern SQL Server.",
+            "All data operations are verified to work correctly post-migration."
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "DataEnvironment1.DCA",
+              "line": 1,
+              "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7830,
+    "latency_ms": 17431.809186935425,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T21:04:56.237293+00:00"
+}
