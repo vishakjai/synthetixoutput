@@ -1,0 +1,331 @@
+{
+  "run_id": "20260225_160651_c7a62cc9",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 2 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T150721Z_20260225_160651_c7a62cc9",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b"
+      },
+      "context_bundle": {
+        "bundle_id": "47fdc0470f594d66af7d9d2a09500128",
+        "created_at": "2026-02-25T15:07:21.380300+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "4ad50012173d4c1c98d5e5c5103d5a3c",
+            "digest": "sha256:cdb29b6cad1d124e140cc231311a0f2cb28e80e64ea7a14f9bf79d48d6e9d6d1",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "47b760f2083a4bc99da2dfbf4c352c2d",
+            "digest": "sha256:144680004851cd4c4c57adfce63490a4d568dc63aebd95898cf0775b0bc0702d",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "d1c72adf3d634140aae24c01c37042a1",
+            "digest": "sha256:55c61cf1dca820e5be1677d65ba8a8a1549291b5478827f6f33c4a82798fcd66",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T15:07:21.393379+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy banking application and its components, which need to be modernized into a C# application.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 20,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "Form",
+            "name": "main.frm",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 21,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-5",
+            "type": "Module",
+            "name": "Module1.bas",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 19,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-2",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          },
+          {
+            "type": "IMPORTS",
+            "from": "node-1",
+            "to": "node-5",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 19,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and practices observed in the legacy codebase.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Use of Hungarian notation for variable names.",
+            "confidence": 0.7,
+            "examples": [
+              "txtAccountID",
+              "cmdAdd"
+            ],
+            "counterexamples": [
+              "accountId",
+              "addCommand"
+            ],
+            "provenance": [
+              {
+                "file": "Form5.frm",
+                "line": 10,
+                "evidence": "txtAccountID.Text"
+              }
+            ]
+          },
+          {
+            "id": "rule-2",
+            "category": "error_handling",
+            "rule": "Use of On Error GoTo for error handling.",
+            "confidence": 0.8,
+            "examples": [
+              "On Error GoTo f"
+            ],
+            "counterexamples": [
+              "try-catch block"
+            ],
+            "provenance": [
+              {
+                "file": "Form5.frm",
+                "line": 30,
+                "evidence": "On Error GoTo f"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor variable names to use camelCase.",
+          "Replace On Error GoTo with try-catch blocks."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy codebase indicates several areas for improvement, particularly in maintainability and security.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Module1.bas",
+            "reason": "Complex logic with minimal documentation.",
+            "severity": "high",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "Module1.bas",
+                "line": 1,
+                "evidence": "Complex logic with minimal documentation."
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security vulnerabilities due to outdated libraries",
+            "description": "The use of outdated libraries such as Microsoft ActiveX Data Objects 2.0 may introduce security vulnerabilities.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Refactor variable naming conventions",
+          "problem_statement": "The current codebase uses Hungarian notation, which is outdated and not recommended in modern C# development.",
+          "scope": [
+            "Component: BANKING.vbp",
+            "Form: LOGIN.frm",
+            "Form: main.frm"
+          ],
+          "risk_if_unaddressed": "Continued use of outdated conventions may lead to confusion and hinder maintainability.",
+          "effort": "M",
+          "severity": "medium",
+          "dependencies": [
+            "None"
+          ],
+          "suggested_approach": "Refactor all variable names to use camelCase.",
+          "success_criteria": [
+            "All variable names follow camelCase convention.",
+            "Code readability is improved."
+          ],
+          "confidence": 0.8,
+          "provenance": [
+            {
+              "file": "Form5.frm",
+              "line": 10,
+              "evidence": "txtAccountID.Text"
+            }
+          ]
+        },
+        {
+          "id": "task-2",
+          "title": "Replace On Error GoTo with try-catch blocks",
+          "problem_statement": "The legacy codebase uses On Error GoTo for error handling, which is not suitable for modern C# applications.",
+          "scope": [
+            "Form: main.frm",
+            "Module: Module1.bas"
+          ],
+          "risk_if_unaddressed": "Using outdated error handling methods may lead to unhandled exceptions and application crashes.",
+          "effort": "L",
+          "severity": "high",
+          "dependencies": [
+            "None"
+          ],
+          "suggested_approach": "Refactor error handling to use try-catch blocks.",
+          "success_criteria": [
+            "All error handling uses try-catch blocks.",
+            "Application stability is improved."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "Form5.frm",
+              "line": 30,
+              "evidence": "On Error GoTo f"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8075,
+    "latency_ms": 29193.920850753784,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T15:07:21.395081+00:00"
+}
