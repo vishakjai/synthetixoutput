@@ -1,0 +1,297 @@
+{
+  "run_id": "20260225_144726_f7b579ca",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T134746Z_20260225_144726_f7b579ca",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b"
+      },
+      "context_bundle": {
+        "bundle_id": "9604cc50729742ccab31357431d45a16",
+        "created_at": "2026-02-25T13:47:46.744714+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "7ce6cb1c7bc2468588641d9a802e13bb",
+            "digest": "sha256:a72a7c656154ee6883af2b79df0bc822952e32ce82d4436535559a8d992f3f7f",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "0ce1a6bf864a48a88fe9f08e6fd6be2b",
+            "digest": "sha256:01e3fbd22b2642b013c0eedbb43f4446bdf4f135b1cb1d55f30d8204fc8644c0",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "d5923f6e14d744c6b924acdf2049fea5",
+            "digest": "sha256:6f9f7850404d597dcd1d6801829dcf0256f7335dc82e77140b758fc3293af635",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T13:47:46.792299+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "The legacy banking application is a Visual Basic 6.0 project with multiple forms and modules, utilizing Microsoft ActiveX Data Objects and DAO for database interactions. The modernization involves converting the application to C# and ensuring compatibility with Docker for local testing.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 20,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "Form",
+            "name": "main.frm",
+            "metadata": {},
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 21,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-5",
+            "type": "Module",
+            "name": "Module1.bas",
+            "metadata": {},
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 19,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-2",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          },
+          {
+            "type": "USES_LIBRARY",
+            "from": "node-1",
+            "to": "node-5",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 19,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "The legacy codebase lacks modern coding conventions such as consistent naming, error handling, and logging practices. The modernization effort should address these areas to align with contemporary C# standards.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Use PascalCase for all public members and camelCase for private members.",
+            "confidence": 0.9,
+            "examples": [
+              "public class AccountType { public string AccountName { get; set; } }"
+            ],
+            "counterexamples": [
+              "public class accounttype { public string accountname { get; set; } }"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "rule-2",
+            "category": "error_handling",
+            "rule": "Implement try-catch blocks for database operations.",
+            "confidence": 0.9,
+            "examples": [
+              "try { dbConnection.Open(); } catch (Exception ex) { LogError(ex); }"
+            ],
+            "counterexamples": [
+              "dbConnection.Open();"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all methods have XML documentation comments."
+        ],
+        "scaffold_templates": [
+          "Use ASP.NET Core templates for web services."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy system has low maintainability and security scores due to outdated technology and lack of modern practices. Reliability and testability are also concerns due to the absence of automated tests.",
+        "scores": {
+          "maintainability": 2,
+          "security": 3,
+          "reliability": 2,
+          "testability": 1
+        },
+        "hotspots": [
+          {
+            "scope": "Database Connection",
+            "reason": "Hardcoded database paths and lack of encryption.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Vulnerabilities",
+            "description": "The use of outdated ActiveX components poses security risks.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Refactor Database Connections",
+          "problem_statement": "Database connections are hardcoded and lack security measures.",
+          "scope": [
+            "DataEnvironment1.DCA"
+          ],
+          "risk_if_unaddressed": "Potential data breaches and unauthorized access.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [
+            "node-2"
+          ],
+          "suggested_approach": "Use configuration files for database connection strings and implement encryption.",
+          "success_criteria": [
+            "Database connections are managed securely and configurable."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "DataEnvironment1.DCA",
+              "line": 1,
+              "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7919,
+    "latency_ms": 19538.02227973938,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T13:47:46.793504+00:00"
+}
