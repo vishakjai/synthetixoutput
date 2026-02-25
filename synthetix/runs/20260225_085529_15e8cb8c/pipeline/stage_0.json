@@ -1,0 +1,301 @@
+{
+  "run_id": "20260225_085529_15e8cb8c",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T075555Z_20260225_085529_15e8cb8c",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b"
+      },
+      "context_bundle": {
+        "bundle_id": "a56af691cc704bd0831a22afe822572b",
+        "created_at": "2026-02-25T07:55:55.446321+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "cca5288731be4215aa4af2a5b1a069d4",
+            "digest": "sha256:f6ad8f310371368b8da57621b23c1ff971ad5f4b869914350772d3f90379c76a",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "02cab120ae754eba997a0a5472d1f4b1",
+            "digest": "sha256:1d7b6a39f07953fa68272c14886d085cfd3513750c9f7aa61b5e4b65f4d67a97",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "7beb46f06bb84311bd8aaf94c9130024",
+            "digest": "sha256:1363ddc61a22b04a2ae38e58a6673989e1c3432c869301b0541f6b7fcce610fe",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T07:55:55.461509+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy VB6 banking application to be modernized into C#. The application includes various forms for login, transactions, and reports, utilizing ActiveX controls and ADO for database interactions.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "LOGIN Form",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 27,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Component",
+            "name": "Main Form",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 28,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Component",
+            "name": "Customer Form",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 29,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 4,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "id": "node-5",
+            "type": "ExternalDependency",
+            "name": "Microsoft DAO 3.51 Object Library",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 5,
+                "evidence": "Reference=Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-4",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 4,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-2",
+            "to": "node-5",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 5,
+                "evidence": "Reference=Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "Database source and target details are not specified."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy VB6 application with minimal modern coding conventions. Transition to C# requires adherence to modern naming, error handling, and security practices.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Use PascalCase for class and method names in C#.",
+            "confidence": 0.9,
+            "examples": [
+              "public class CustomerForm {}",
+              "public void ShowReport() {}"
+            ],
+            "counterexamples": [
+              "public class customer_form {}",
+              "public void show_report() {}"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 27,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "rule-2",
+            "category": "error_handling",
+            "rule": "Implement try-catch blocks for error handling.",
+            "confidence": 0.8,
+            "examples": [
+              "try { /* code */ } catch (Exception ex) { /* handle error */ }"
+            ],
+            "counterexamples": [
+              "On Error Resume Next"
+            ],
+            "provenance": [
+              {
+                "file": "Form5.frm",
+                "line": 1,
+                "evidence": "VERSION 5.00"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all C# code follows the .NET naming conventions."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and data access layers."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy application has maintainability and security concerns due to outdated technologies and practices.",
+        "scores": {
+          "maintainability": 40,
+          "security": 30,
+          "reliability": 50,
+          "testability": 20
+        },
+        "hotspots": [
+          {
+            "scope": "Data Access",
+            "reason": "Use of outdated ADO and DAO libraries.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 4,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Vulnerabilities",
+            "description": "The use of outdated libraries may expose the application to security vulnerabilities.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Migrate LOGIN Form to C#",
+          "problem_statement": "The LOGIN form is currently implemented in VB6 and needs to be rewritten in C#.",
+          "scope": [
+            "LOGIN Form"
+          ],
+          "risk_if_unaddressed": "Continued use of unsupported technology.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [
+            "Microsoft ActiveX Data Objects 2.0 Library"
+          ],
+          "suggested_approach": "Create a new C# form with equivalent functionality and integrate with modern authentication libraries.",
+          "success_criteria": [
+            "The LOGIN form functions identically in C# as it did in VB6."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BANKING.vbp",
+              "line": 27,
+              "evidence": "Form=LOGIN.frm"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 6893,
+    "latency_ms": 24418.001890182495,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T07:55:55.463177+00:00"
+}
