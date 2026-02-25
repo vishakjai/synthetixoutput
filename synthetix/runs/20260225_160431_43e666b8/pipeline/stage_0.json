@@ -1,0 +1,224 @@
+{
+  "run_id": "20260225_160431_43e666b8",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 2 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T150456Z_20260225_160431_43e666b8",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b"
+      },
+      "context_bundle": {
+        "bundle_id": "3606e068dc824be29bd20934b338a0fc",
+        "created_at": "2026-02-25T15:04:56.140214+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "4ddaf879fb0d420daf15d777dabe1f08",
+            "digest": "sha256:7d6eb3f4b6219cb3128467640474f2a6bd53900f564b0599d77b419a11169d5c",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "e1ade3fccd12449ea45fb723cdf2f1a8",
+            "digest": "sha256:39a55894f7ae54973344e39269fe7b2f45e23336661c3d9297f210a6f17730c2",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "67dde773b8aa4c99b4afb97e55695b16",
+            "digest": "sha256:f58376e6721ebd966873f04aca4f61e41e4c2214530ab25a7db3fec33eba4f42",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T15:04:56.149356+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy banking application using VB6 with multiple forms and modules, targeted for modernization to C#.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 31,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb;"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-2",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Connection to BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy VB6 code lacks modern coding conventions such as error handling and logging.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "error_handling",
+            "rule": "Use structured exception handling instead of On Error GoTo.",
+            "confidence": 0.8,
+            "examples": [
+              "try { ... } catch (Exception ex) { ... }"
+            ],
+            "counterexamples": [
+              "On Error GoTo ..."
+            ],
+            "provenance": [
+              {
+                "file": "Form5",
+                "line": 1,
+                "evidence": "On Error GoTo f"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor error handling to use try-catch blocks in C#."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and data access layers."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy codebase has maintainability and security risks due to outdated technology and practices.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Data Access",
+            "reason": "Use of outdated database technology (Microsoft Jet)",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Outdated Database Technology",
+            "description": "The application uses Microsoft Jet, which is no longer supported and poses security risks.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Migrate Database to SQL Server",
+          "problem_statement": "The current database is using Microsoft Jet, which is outdated and unsupported.",
+          "scope": [
+            "Database Migration"
+          ],
+          "risk_if_unaddressed": "Potential data loss and security vulnerabilities.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node-2"
+          ],
+          "suggested_approach": "Migrate the database schema and data to SQL Server.",
+          "success_criteria": [
+            "All data is successfully migrated to SQL Server.",
+            "Application functions correctly with the new database."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "DataEnvironment1.DCA",
+              "line": 1,
+              "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7514,
+    "latency_ms": 21417.534828186035,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T15:04:56.150725+00:00"
+}
