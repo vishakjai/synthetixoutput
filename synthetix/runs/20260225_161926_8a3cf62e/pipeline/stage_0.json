@@ -1,0 +1,283 @@
+{
+  "run_id": "20260225_161926_8a3cf62e",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 1 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T151949Z_20260225_161926_8a3cf62e",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "bddef77f240741268f77125ce017f09b",
+        "created_at": "2026-02-25T15:19:49.763090+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "06d54f363ec84a3fa52ab9c9ef1a5c30",
+            "digest": "sha256:e8aed9395f3d65c73e61820cb1a9f6621660c5103c53de2f488df906c60c4fc0",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "8912a3a019c54cee8709db56aca4a405",
+            "digest": "sha256:17863e125621b9db5f826c0ea8ee1928dac767fdfeb43d3906eb38e86e8218d7",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "db159fbf48f643dd89ec05f6d80a8b1e",
+            "digest": "sha256:bfdef3c5bad42d7716d19960bb8899a3895995eca65112a7eaeb12ef67a73dd4",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T15:19:49.780647+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy VB6 banking application to be modernized into C#. The application involves multiple forms and modules interacting with a Microsoft Access database.",
+        "nodes": [
+          {
+            "id": "node:banking_vbp",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:login_form",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 25,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:main_form",
+            "type": "Form",
+            "name": "main.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 27,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:customer_form",
+            "type": "Form",
+            "name": "frmcustomer.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 28,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:database",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "USES_LIBRARY",
+            "from": "node:banking_vbp",
+            "to": "node:database",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy VB6 codebase lacks modern coding conventions such as structured error handling, consistent naming conventions, and comprehensive testing.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use PascalCase for all public members and camelCase for private members.",
+            "confidence": 0.7,
+            "examples": [
+              "Public Sub CalculateInterest()",
+              "private int accountBalance;"
+            ],
+            "counterexamples": [
+              "Sub calculateinterest()",
+              "Dim AccountBalance As Integer"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "rule:error_handling",
+            "category": "error_handling",
+            "rule": "Implement try-catch blocks for error handling instead of On Error GoTo.",
+            "confidence": 0.8,
+            "examples": [
+              "try { ... } catch (Exception ex) { ... }"
+            ],
+            "counterexamples": [
+              "On Error GoTo ErrorHandler"
+            ],
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "On Error GoTo f"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor code to use modern C# conventions."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy codebase has low maintainability and security due to outdated practices and lack of modern error handling and testing.",
+        "scores": {
+          "maintainability": 2,
+          "security": 3,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Form: main.frm",
+            "reason": "Uses outdated error handling mechanisms.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "On Error GoTo f"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Outdated Database Access",
+            "description": "The application uses Microsoft Jet OLEDB, which is deprecated and poses security risks.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:database_access",
+          "title": "Update Database Access Layer",
+          "problem_statement": "The application uses Microsoft Jet OLEDB, which is deprecated.",
+          "scope": [
+            "DataEnvironment1.DCA"
+          ],
+          "risk_if_unaddressed": "Continued use of deprecated technology poses security and compatibility risks.",
+          "effort": "M",
+          "severity": "critical",
+          "dependencies": [],
+          "suggested_approach": "Migrate to a modern database access technology such as Entity Framework.",
+          "success_criteria": [
+            "Database access is performed using Entity Framework.",
+            "No use of deprecated OLEDB technology."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "DataEnvironment1.DCA",
+              "line": 1,
+              "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7805,
+    "latency_ms": 22448.288917541504,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T15:19:49.781904+00:00"
+}
