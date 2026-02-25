@@ -1,6 +1,6 @@
 {
   "run_id": "20260226_022322_c8550b0f",
-  "pipeline_status": "running",
+  "pipeline_status": "waiting_approval",
   "pipeline_state": {
     "business_objectives": "Quick gate smoke test for Discover Review. Analyze and proceed.",
     "legacy_code": "",
@@ -8595,15 +8595,106 @@
         "parse_errors": []
       }
     },
-    "workflow_state": "DISCOVERED",
+    "workflow_state": "IN_REVIEW",
     "discover_review": {
-      "overall_status": "PENDING",
-      "checks": [],
-      "blocking": [],
-      "unresolved_blocking": [],
+      "overall_status": "FAIL",
+      "checks": [
+        {
+          "id": "handler_inventory_completeness",
+          "status": "pass",
+          "severity": "medium",
+          "title": "Handler Inventory Completeness",
+          "detail": "All analyzed forms meet handler coverage threshold.",
+          "source": "artifact"
+        },
+        {
+          "id": "report_model_reconciled",
+          "status": "pass",
+          "severity": "medium",
+          "title": "Report Model Reconciled",
+          "detail": "Reporting model and entrypoints reconciled.",
+          "source": "artifact"
+        },
+        {
+          "id": "variant_resolution",
+          "status": "pass",
+          "severity": "medium",
+          "title": "Variant Resolution",
+          "detail": "Single project variant detected; no variant scope decision required.",
+          "source": "artifact"
+        },
+        {
+          "id": "key_safety_issues_identified",
+          "status": "warn",
+          "severity": "medium",
+          "title": "Key Safety Issues Identified",
+          "detail": "No explicit SQL/credential safety signals detected in extracted artifacts.",
+          "source": "artifact"
+        },
+        {
+          "id": "schema_key_verification",
+          "status": "pass",
+          "severity": "medium",
+          "title": "Schema Key Verification",
+          "detail": "No delete-by-customer transaction key hazard detected.",
+          "source": "artifact"
+        },
+        {
+          "id": "identity_access_model",
+          "status": "warn",
+          "severity": "medium",
+          "title": "Identity & Access Model",
+          "detail": "Role model or credential handling requires confirmation.",
+          "source": "artifact"
+        },
+        {
+          "id": "data_access_map_complete",
+          "status": "fail",
+          "severity": "high",
+          "title": "Canonical data access map completeness",
+          "detail": "complete=False, rows=0, coverage=0.00",
+          "source": "derived"
+        },
+        {
+          "id": "reporting_reconciliation",
+          "status": "pass",
+          "severity": "high",
+          "title": "Reporting model reconciliation",
+          "detail": "All detected report bindings reconciled.",
+          "source": "derived"
+        },
+        {
+          "id": "handler_inventory_coverage",
+          "status": "pass",
+          "severity": "high",
+          "title": "Handler inventory completeness",
+          "detail": "All forms meet coverage threshold (>=0.85).",
+          "source": "derived"
+        }
+      ],
+      "blocking": [
+        {
+          "id": "data_access_map_complete",
+          "status": "fail",
+          "severity": "high",
+          "title": "Canonical data access map completeness",
+          "detail": "complete=False, rows=0, coverage=0.00",
+          "source": "derived"
+        }
+      ],
+      "unresolved_blocking": [
+        {
+          "id": "data_access_map_complete",
+          "status": "fail",
+          "severity": "high",
+          "title": "Canonical data access map completeness",
+          "detail": "complete=False, rows=0, coverage=0.00",
+          "source": "derived"
+        }
+      ],
       "resolved_ids": [],
       "waived_ids": [],
-      "updated_at": "2026-02-25T20:53:23.370471+00:00"
+      "updated_at": "2026-02-25T20:54:39.457934+00:00"
     },
     "context_contracts": {
       "system_context_model": {
@@ -9202,8 +9293,98 @@
       "is_valid": true,
       "severity": "ok"
     },
-    "pending_approval": null,
-    "next_stage_idx": 0,
+    "pending_approval": {
+      "type": "discover_review",
+      "stage": 1,
+      "next_stage": 2,
+      "message": "Discover review has unresolved blocking items. Resolve or waive blockers before moving beyond Discover.",
+      "overall_status": "FAIL",
+      "unresolved_blocking": [
+        {
+          "id": "data_access_map_complete",
+          "status": "fail",
+          "severity": "high",
+          "title": "Canonical data access map completeness",
+          "detail": "complete=False, rows=0, coverage=0.00",
+          "source": "derived"
+        }
+      ],
+      "checklist": [
+        {
+          "id": "handler_inventory_completeness",
+          "status": "pass",
+          "severity": "medium",
+          "title": "Handler Inventory Completeness",
+          "detail": "All analyzed forms meet handler coverage threshold.",
+          "source": "artifact"
+        },
+        {
+          "id": "report_model_reconciled",
+          "status": "pass",
+          "severity": "medium",
+          "title": "Report Model Reconciled",
+          "detail": "Reporting model and entrypoints reconciled.",
+          "source": "artifact"
+        },
+        {
+          "id": "variant_resolution",
+          "status": "pass",
+          "severity": "medium",
+          "title": "Variant Resolution",
+          "detail": "Single project variant detected; no variant scope decision required.",
+          "source": "artifact"
+        },
+        {
+          "id": "key_safety_issues_identified",
+          "status": "warn",
+          "severity": "medium",
+          "title": "Key Safety Issues Identified",
+          "detail": "No explicit SQL/credential safety signals detected in extracted artifacts.",
+          "source": "artifact"
+        },
+        {
+          "id": "schema_key_verification",
+          "status": "pass",
+          "severity": "medium",
+          "title": "Schema Key Verification",
+          "detail": "No delete-by-customer transaction key hazard detected.",
+          "source": "artifact"
+        },
+        {
+          "id": "identity_access_model",
+          "status": "warn",
+          "severity": "medium",
+          "title": "Identity & Access Model",
+          "detail": "Role model or credential handling requires confirmation.",
+          "source": "artifact"
+        },
+        {
+          "id": "data_access_map_complete",
+          "status": "fail",
+          "severity": "high",
+          "title": "Canonical data access map completeness",
+          "detail": "complete=False, rows=0, coverage=0.00",
+          "source": "derived"
+        },
+        {
+          "id": "reporting_reconciliation",
+          "status": "pass",
+          "severity": "high",
+          "title": "Reporting model reconciliation",
+          "detail": "All detected report bindings reconciled.",
+          "source": "derived"
+        },
+        {
+          "id": "handler_inventory_coverage",
+          "status": "pass",
+          "severity": "high",
+          "title": "Handler inventory completeness",
+          "detail": "All forms meet coverage threshold (>=0.85).",
+          "source": "derived"
+        }
+      ]
+    },
+    "next_stage_idx": 1,
     "analyst_output": {
       "analysis_walkthrough": {
         "business_objective_summary": "The objective is to perform a quick gate smoke test for the Discover Review process and proceed based on the analysis.",
@@ -12178,6 +12359,41 @@
         "cp_version": "1.0",
         "ha_version": "1.0"
       }
+    },
+    "github_export": {
+      "status": "exported",
+      "reason": "",
+      "owner": "vishakjai",
+      "repository": "synthetixoutput",
+      "branch": "synthetix-runs",
+      "base_path": "synthetix/runs/20260226_022322_c8550b0f",
+      "artifact_roots": [
+        "context",
+        "deploy",
+        "pipeline",
+        "qa"
+      ],
+      "attempted_files": 19,
+      "exported_files": 19,
+      "failed_files": 0,
+      "skipped_files": 0,
+      "failed_samples": [],
+      "skipped_samples": [],
+      "manifest_path": "synthetix/runs/20260226_022322_c8550b0f/export_manifest.json",
+      "configured_branch": "",
+      "default_branch": "main",
+      "repo_empty_at_start": false,
+      "attempted": true,
+      "attempted_at": "2026-02-25T20:54:39.449816+00:00",
+      "final_attempted": false,
+      "stage_at_export": 1
+    },
+    "github_export_progress": {
+      "last_stage_exported": 1,
+      "last_export_at": "2026-02-25T20:54:39.449847+00:00",
+      "last_status": "exported",
+      "last_reason": "",
+      "attempt_count": 1
     }
   },
   "stage_status": {
@@ -12200,8 +12416,10 @@
     "[Analyst Agent] Received response (2560 tokens, 32633ms)",
     "[Analyst Agent] LLM output parsed; compiling deterministic Requirements Pack...",
     "[Analyst Agent] Requirements Pack compiled with quality gates",
-    "[02:24:11] \u2705 Stage 1 finished: Extracted 8 functional requirements, 5 non-functional requirements, 2 risks, 2 clarifications, 1 failed quality gates [software-general-v1]"
+    "[02:24:11] \u2705 Stage 1 finished: Extracted 8 functional requirements, 5 non-functional requirements, 2 risks, 2 clarifications, 1 failed quality gates [software-general-v1]",
+    "[02:24:39] \ud83d\udce6 GitHub export (stage 1) succeeded: vishakjai/synthetixoutput@synthetix-runs (19 files)",
+    "[02:24:39] \ud83e\udded Discover review blocked progression: 1 unresolved blocking item(s)."
   ],
   "error_message": null,
-  "saved_at": "2026-02-25T20:54:11.367413+00:00"
+  "saved_at": "2026-02-25T20:54:39.458017+00:00"
 }
