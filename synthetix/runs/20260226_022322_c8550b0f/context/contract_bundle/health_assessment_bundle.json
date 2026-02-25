@@ -1,0 +1,202 @@
+{
+  "header": {
+    "artifact_id": "33d8ad984fb346e58be00e4d84f05757",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-25T20:53:38.668370+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_022322_c8550b0f",
+      "stage_id": "context_layer",
+      "task_id": "0e6905d398ab414f8f726eb44c26b7ca"
+    },
+    "parents": [],
+    "digest": "sha256:7ea3110d6125deeb9316d85d2cd0c29e2c91547cf16a986f4d063855a4976ca1",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_022322_c8550b0f",
+      "bundle_version": "20260225T205338Z_20260226_022322_c8550b0f"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 3,
+      "impact": 3,
+      "score": 9,
+      "tier": "medium",
+      "rationale": "moderate risk posture"
+    },
+    "key_themes": [
+      "The project is maintainable with moderate security and reliability concerns."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 75,
+      "security": 60,
+      "reliability": 65,
+      "testability": 70
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: web/server.py",
+      "description": "Lack of error handling in web server routes.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "web/server.py"
+        ],
+        "paths": [
+          "web/server.py"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "web/server.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Dependency Management",
+      "description": "Outdated dependencies in requirements.txt could lead to security vulnerabilities.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:001",
+      "title": "Update Dependencies",
+      "priority": "P1",
+      "business_value": "Potential security vulnerabilities due to outdated libraries.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "config:requirements_txt"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Review and update all dependencies to their latest stable versions"
+      ],
+      "acceptance_criteria": [
+        "All dependencies are up-to-date.",
+        "No security vulnerabilities reported by dependency check tools."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:001"
+    ],
+    "stabilization": [
+      "remediation:001"
+    ],
+    "modernization": [
+      "remediation:001"
+    ]
+  }
+}
