@@ -1,0 +1,235 @@
+{
+  "run_id": "20260225_084653_e3291966",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 3 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260225T074708Z_20260225_084653_e3291966",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b"
+      },
+      "context_bundle": {
+        "bundle_id": "c1bf5bb313614387a84c56cbceeeb48f",
+        "created_at": "2026-02-25T07:47:08.966994+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "0653d1ce5421a9feeb4a538cc5caec5bf8852d4b",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "912b2d22707541be83edc9681eb048a4",
+            "digest": "sha256:3b08155576069a36f82b0399589ba95b93513cee3633bffad38ff3df2e87f254",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "eeb7f41755074070ab3e8cb03f1b4e4e",
+            "digest": "sha256:3b545c25dcb4050da902bfff7d7ab4e22d473d7042b0357504befac9535f5864",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "d387c71d5622405bbea790061579d1e9",
+            "digest": "sha256:1b2bd6f9ad604e30feccd40efcefb80b95e54a1679db00948e086a57cda90362",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-25T07:47:08.983667+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "The system context model represents the structure and dependencies of the Synthetix project, focusing on Python modules and JSON schema files.",
+        "nodes": [
+          {
+            "id": "module:agents___init___py",
+            "type": "Module",
+            "name": "agents/__init__.py",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "agents/__init__.py",
+                "line": 1,
+                "evidence": "import statements"
+              }
+            ]
+          },
+          {
+            "id": "module:agents_analyst_py",
+            "type": "Module",
+            "name": "agents/analyst.py",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "agents/analyst.py",
+                "line": 1,
+                "evidence": "import statements"
+              }
+            ]
+          },
+          {
+            "id": "file:.deliveryos/schemas/analyst_report_v2.schema.json",
+            "type": "ExternalDependency",
+            "name": "analyst_report_v2.schema.json",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": ".deliveryos/schemas/analyst_report_v2.schema.json",
+                "line": 1,
+                "evidence": "JSON schema structure"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "IMPORTS",
+            "from": "module:agents___init___py",
+            "to": "module:agents_analyst_py",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "agents/__init__.py",
+                "line": 1,
+                "evidence": "import .analyst"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "The convention profile outlines coding standards and practices observed in the Synthetix project.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Modules and files should use snake_case naming convention.",
+            "confidence": 0.9,
+            "examples": [
+              "agents/analyst.py"
+            ],
+            "counterexamples": [
+              "agents/Analyst.py"
+            ],
+            "provenance": [
+              {
+                "file": "agents/analyst.py",
+                "line": 1,
+                "evidence": "file naming"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all module names follow snake_case convention."
+        ],
+        "scaffold_templates": [
+          "Use a standard Python module template for new files."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment evaluates the maintainability, security, reliability, and testability of the Synthetix project.",
+        "scores": {
+          "maintainability": 75,
+          "security": 80,
+          "reliability": 70,
+          "testability": 65
+        },
+        "hotspots": [
+          {
+            "scope": "agents/analyst.py",
+            "reason": "High complexity in function definitions.",
+            "severity": "medium",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "agents/analyst.py",
+                "line": 20,
+                "evidence": "complex function logic"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Lack of Unit Tests",
+            "description": "The project has insufficient unit tests, which may affect reliability.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:unit_tests",
+          "title": "Increase Unit Test Coverage",
+          "problem_statement": "The project lacks sufficient unit tests, impacting reliability and testability.",
+          "scope": [
+            "agents/analyst.py",
+            "agents/__init__.py"
+          ],
+          "risk_if_unaddressed": "Potential for undetected bugs and reduced reliability.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [],
+          "suggested_approach": "Implement unit tests for all critical functions and modules.",
+          "success_criteria": [
+            "Achieve at least 80% test coverage.",
+            "All critical paths are tested."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "agents/analyst.py",
+              "line": 20,
+              "evidence": "lack of test cases"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 4001,
+    "latency_ms": 13799.756050109863,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-25T07:47:08.985375+00:00"
+}
