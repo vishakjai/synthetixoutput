@@ -1,0 +1,91 @@
+{
+  "version": "1.0",
+  "summary": "Legacy VB6 banking application with multiple forms and modules, targeted for modernization to C#.",
+  "nodes": [
+    {
+      "id": "node:VB6_Project",
+      "type": "Component",
+      "name": "BANKING.vbp",
+      "metadata": {
+        "type": "Exe",
+        "references": [
+          "OLE Automation",
+          "Microsoft ActiveX Data Objects 2.0 Library",
+          "Microsoft DAO 3.51 Object Library"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:DataEnvironment1",
+      "type": "Component",
+      "name": "DataEnvironment1.DCA",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+        }
+      ]
+    },
+    {
+      "id": "node:Form_Login",
+      "type": "Form",
+      "name": "LOGIN.frm",
+      "metadata": {},
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 21,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:VB6_Project",
+      "to": "node:DataEnvironment1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:VB6_Project",
+      "to": "node:Form_Login",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 21,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
