@@ -1,0 +1,362 @@
+{
+  "run_id": "20260226_115256_a06d0fc1",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 6 nodes, 3 edges, 2 conventions, 2 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260226T062316Z_20260226_115256_a06d0fc1",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "1e18997ba81a465dafe000b11a7f144b",
+        "created_at": "2026-02-26T06:23:16.965212+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "443baedc24294f8fa21547aced0a3c58",
+            "digest": "sha256:6d9024fc97ccfbfc782a4e10eaff08aa52601620fc060907bbb49753d88c6c39",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "dac3fb6f392f455eaad12e11693a4ea1",
+            "digest": "sha256:cfe05841418ebf4880e2a8c609cc268e9c416ece966b171252837b60bf12f387",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "b2f07c741944442a925b72816e4ccc19",
+            "digest": "sha256:eb9f9546fb5444217d9760e92f93c224af9a954da57dcc5e856121893c8aadda",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-26T06:23:17.070993+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Analysis of a legacy VB6 banking application with multiple forms, modules, and ActiveX dependencies.",
+        "nodes": [
+          {
+            "id": "node:project1",
+            "type": "Project",
+            "name": "Project1",
+            "metadata": {
+              "version": "1.0",
+              "company": "isoft"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:form_login",
+            "type": "Form",
+            "name": "LOGIN",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 18,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:module1",
+            "type": "Module",
+            "name": "Module1",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 19,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "id": "node:form_main",
+            "type": "Form",
+            "name": "main",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 20,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:activex_msado",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {
+              "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "id": "node:database_bank1",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0",
+              "path": "E:\\project\\myBANKING\\BANK1.mdb"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:project1",
+            "to": "node:activex_msado",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "type": "USES_LIBRARY",
+            "from": "node:form_main",
+            "to": "node:activex_msado",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 20,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node:form_main",
+            "to": "node:database_bank1",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "DataEnvironment1.DCA binary content"
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Convention analysis of the VB6 project indicating potential areas for improvement in naming and error handling.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use consistent naming conventions for forms and modules.",
+            "confidence": 0.8,
+            "examples": [
+              "Form=LOGIN.frm",
+              "Module=Module1; Module1.bas"
+            ],
+            "counterexamples": [
+              "Form=Form7"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 18,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "rule:error_handling",
+            "category": "error_handling",
+            "rule": "Implement structured error handling in all forms and modules.",
+            "confidence": 0.7,
+            "examples": [
+              "On Error GoTo ErrorHandler"
+            ],
+            "counterexamples": [
+              "End Sub without error handling"
+            ],
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Private Sub Command1_Click()"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all forms and modules have consistent naming conventions.",
+          "Implement structured error handling in all event handlers."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules",
+          "C# error handling patterns"
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "Health assessment of the VB6 project indicating maintainability and security concerns.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Form:main",
+            "reason": "Lack of structured error handling",
+            "severity": "medium",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Private Sub Command1_Click()"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Dependency Risk",
+            "description": "Reliance on outdated ActiveX controls may pose security and compatibility risks.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:001",
+          "title": "Refactor Naming Conventions",
+          "problem_statement": "Inconsistent naming conventions across forms and modules.",
+          "scope": [
+            "Form:LOGIN",
+            "Module:Module1"
+          ],
+          "risk_if_unaddressed": "Increased difficulty in maintenance and understanding of the codebase.",
+          "effort": "S",
+          "severity": "medium",
+          "dependencies": [],
+          "suggested_approach": "Adopt a consistent naming convention for all forms and modules.",
+          "success_criteria": [
+            "All forms and modules follow the new naming convention."
+          ],
+          "confidence": 0.8,
+          "provenance": [
+            {
+              "file": "BANKING.vbp",
+              "line": 18,
+              "evidence": "Form=LOGIN.frm"
+            }
+          ]
+        },
+        {
+          "id": "remediation:002",
+          "title": "Implement Error Handling",
+          "problem_statement": "Lack of structured error handling in event handlers.",
+          "scope": [
+            "Form:main"
+          ],
+          "risk_if_unaddressed": "Potential for unhandled exceptions leading to application crashes.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [],
+          "suggested_approach": "Introduce structured error handling using try-catch blocks in C#.",
+          "success_criteria": [
+            "All event handlers have structured error handling."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "main.frm",
+              "line": 1,
+              "evidence": "Private Sub Command1_Click()"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8351,
+    "latency_ms": 19435.80913543701,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-26T06:23:17.072500+00:00"
+}
