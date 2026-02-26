@@ -1,0 +1,279 @@
+{
+  "run_id": "20260226_155323_cc73fb5a",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 3 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260226T102341Z_20260226_155323_cc73fb5a",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "0c37e82f0817492c88b8f96e19f4fe30",
+        "created_at": "2026-02-26T10:23:41.276342+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "bbc6c624bc5243e79ed91f3f8e595a29",
+            "digest": "sha256:05603d270ebcebdc54687fbec1d969576eca7800b1ce82a20cf1b667128b630b",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "5277f63588fb40c1991bf385e90666d5",
+            "digest": "sha256:1203378ff1c01d0872c2f911b2fa899068c50696837bf0eb1ff19b7f918ded13",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "b51e757368ea406393ae99c50552018e",
+            "digest": "sha256:1421634c6ceb71f752e43d871872f1c18af846de0e4a56160f1578c3289ad50c",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-26T10:23:41.317180+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy banking application and its components, including forms, modules, and data environments, which are to be modernized into a C# application.",
+        "nodes": [
+          {
+            "id": "node:banking_vbp",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:login_form",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 25,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:main_form",
+            "type": "Form",
+            "name": "main.frm",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 26,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:customer_table",
+            "type": "Table",
+            "name": "customer",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 100,
+                "evidence": "Command1 customer"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:banking_vbp",
+            "to": "node:login_form",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 25,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:banking_vbp",
+            "to": "node:main_form",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 26,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node:main_form",
+            "to": "node:customer_table",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 100,
+                "evidence": "Command1 customer"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and practices identified in the legacy codebase, which are to be aligned with modern C# standards.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use PascalCase for all class and method names.",
+            "confidence": 0.9,
+            "examples": [
+              "ClassName",
+              "MethodName"
+            ],
+            "counterexamples": [
+              "classname",
+              "methodname"
+            ],
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Attribute VB_Name = \"main\""
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all variable names follow camelCase convention."
+        ],
+        "scaffold_templates": [
+          "C# class template for form conversion."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment identifies key areas of concern in the legacy codebase, including maintainability and security risks.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "main.frm",
+            "reason": "Complex event handling logic without clear separation of concerns.",
+            "severity": "high",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 10,
+                "evidence": "Private Sub Command1_Click()"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Risk: Hardcoded Database Connections",
+            "description": "The application uses hardcoded database connection strings, which can lead to security vulnerabilities.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:refactor_event_handling",
+          "title": "Refactor Event Handling Logic",
+          "problem_statement": "The event handling logic in main.frm is complex and lacks separation of concerns, making it difficult to maintain.",
+          "scope": [
+            "main.frm"
+          ],
+          "risk_if_unaddressed": "Continued difficulty in maintaining and extending the application.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [],
+          "suggested_approach": "Refactor the event handling logic into separate methods or classes to improve maintainability.",
+          "success_criteria": [
+            "Event handling logic is modular and follows single responsibility principle."
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "main.frm",
+              "line": 10,
+              "evidence": "Private Sub Command1_Click()"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7889,
+    "latency_ms": 17233.16764831543,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-26T10:23:41.318480+00:00"
+}
