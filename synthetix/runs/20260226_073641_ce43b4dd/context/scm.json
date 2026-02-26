@@ -1,0 +1,162 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy VB6 banking application, identifying key components, dependencies, and data interactions for modernization.",
+  "nodes": [
+    {
+      "id": "node:banking_project",
+      "type": "Project",
+      "name": "BANKING",
+      "metadata": {
+        "type": "Exe",
+        "startup": "main"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:login_form",
+      "type": "Form",
+      "name": "LOGIN",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 15,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:main_form",
+      "type": "Form",
+      "name": "main",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 17,
+          "evidence": "Form=main.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:module1",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 16,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node:msado20",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0 Library",
+      "metadata": {
+        "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "node:dao350",
+      "type": "ExternalDependency",
+      "name": "Microsoft DAO 3.51 Object Library",
+      "metadata": {
+        "path": "C:\\Program Files\\Common Files\\Microsoft Shared\\DAO\\DAO350.DLL"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+        }
+      ]
+    },
+    {
+      "id": "node:bank1_db",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "path": "E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:banking_project",
+      "to": "node:msado20",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:banking_project",
+      "to": "node:dao350",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node:login_form",
+      "to": "node:bank1_db",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
