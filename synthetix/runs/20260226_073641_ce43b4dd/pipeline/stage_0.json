@@ -1,0 +1,352 @@
+{
+  "run_id": "20260226_073641_ce43b4dd",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 7 nodes, 3 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260226T020701Z_20260226_073641_ce43b4dd",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "f17ed66cd0844a3295c11d3d864a2134",
+        "created_at": "2026-02-26T02:07:01.893818+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "60e7c609128940acba8c61425b18ec32",
+            "digest": "sha256:cb333c2f33e830c018c33ee858ab03a8595ee216b743fdec81a634b673819a46",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "07185e344857400dbbbe5859cb203eb1",
+            "digest": "sha256:179dec6fd99af9535fe0b2ffc48a13e63bfbdc1860f2a8b178b37f2d4bdddbc9",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "d20e52a66abd4455b60a079b2bd39c79",
+            "digest": "sha256:f07c6d97e31269a38c61e80254f47adf3c026a4074c1f1a8dc768517b7093ad8",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-26T02:07:01.907832+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy VB6 banking application, identifying key components, dependencies, and data interactions for modernization.",
+        "nodes": [
+          {
+            "id": "node:banking_project",
+            "type": "Project",
+            "name": "BANKING",
+            "metadata": {
+              "type": "Exe",
+              "startup": "main"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:login_form",
+            "type": "Form",
+            "name": "LOGIN",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 15,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:main_form",
+            "type": "Form",
+            "name": "main",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 17,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:module1",
+            "type": "Module",
+            "name": "Module1",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "id": "node:msado20",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {
+              "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "id": "node:dao350",
+            "type": "ExternalDependency",
+            "name": "Microsoft DAO 3.51 Object Library",
+            "metadata": {
+              "path": "C:\\Program Files\\Common Files\\Microsoft Shared\\DAO\\DAO350.DLL"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 4,
+                "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          },
+          {
+            "id": "node:bank1_db",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0",
+              "path": "E:\\project\\myBANKING\\BANK1.mdb"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:banking_project",
+            "to": "node:msado20",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:banking_project",
+            "to": "node:dao350",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 4,
+                "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node:login_form",
+            "to": "node:bank1_db",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile identifies naming conventions and dependency management practices in the legacy VB6 application.",
+        "rules": [
+          {
+            "id": "rule:naming_convention_forms",
+            "category": "naming",
+            "rule": "Form names should be descriptive and follow PascalCase.",
+            "confidence": 0.8,
+            "examples": [
+              "LOGIN",
+              "main"
+            ],
+            "counterexamples": [
+              "Form1",
+              "Form2"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 15,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "rule:dependency_management",
+            "category": "dependency_management",
+            "rule": "External dependencies should be explicitly declared in the project file.",
+            "confidence": 0.9,
+            "examples": [
+              "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+            ],
+            "counterexamples": [],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all forms and modules follow consistent naming conventions."
+        ],
+        "scaffold_templates": [
+          "C# project structure template for form-based applications."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy VB6 application identifies maintainability and security as key areas for improvement.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "dependency_management",
+            "reason": "Use of outdated ActiveX components and libraries.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Outdated Technology Stack",
+            "description": "The application relies on outdated VB6 and ActiveX components, which pose security and compatibility risks.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:modernize_activex",
+          "title": "Modernize ActiveX Dependencies",
+          "problem_statement": "The application uses outdated ActiveX components that are no longer supported.",
+          "scope": [
+            "BANKING.vbp"
+          ],
+          "risk_if_unaddressed": "Continued use of unsupported components increases security vulnerabilities.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node:msado20",
+            "node:dao350"
+          ],
+          "suggested_approach": "Replace ActiveX components with modern .NET libraries.",
+          "success_criteria": [
+            "All ActiveX dependencies are replaced with .NET equivalents.",
+            "Application runs without ActiveX components."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BANKING.vbp",
+              "line": 3,
+              "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8338,
+    "latency_ms": 19579.834938049316,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-26T02:07:01.909593+00:00"
+}
