@@ -1,0 +1,268 @@
+{
+  "header": {
+    "artifact_id": "4a70ad0f6e9d4d7ebaecc52b33e759dc",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-26T02:09:50.710547+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_073933_080bdddd",
+      "stage_id": "context_layer",
+      "task_id": "b44ceeb150fb487e889e4ee2e64271fa"
+    },
+    "parents": [],
+    "digest": "sha256:298b94efca0fcf7f9c6180c2b3bda6e21e14aa42d2c72f9f2cd67279555e593b",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_073933_080bdddd",
+      "bundle_version": "20260226T020950Z_20260226_073933_080bdddd"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "project:banking",
+        "type": "component",
+        "name": "BANKING",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "type": "Exe",
+          "version": "1.0.0",
+          "company": "isoft"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "form:login",
+        "type": "component",
+        "name": "LOGIN",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "module:module1",
+        "type": "module",
+        "name": "Module1",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "dependency:msado20",
+        "type": "external_dependency",
+        "name": "Microsoft ActiveX Data Objects 2.0 Library",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "database:bank1",
+        "type": "database",
+        "name": "BANK1",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "DataEnvironment1.DCA"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "provider": "Microsoft.Jet.OLEDB.4.0",
+          "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "DataEnvironment1.DCA"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "depends_on",
+        "from": "project:banking",
+        "to": "dependency:msado20",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "depends_on",
+        "from": "form:login",
+        "to": "dependency:msado20",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "LOGIN.frm"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:3",
+        "type": "reads",
+        "from": "form:login",
+        "to": "database:bank1",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "DataEnvironment1.DCA"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 5,
+      "edge_count": 3,
+      "languages": []
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": []
+}
