@@ -1,0 +1,205 @@
+{
+  "header": {
+    "artifact_id": "9f0591cca7f0474bada92a1ac665a1bc",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-26T04:37:12.392783+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_100638_2ba5ce6a",
+      "stage_id": "context_layer",
+      "task_id": "0efb2b43b539486a90507ddc29b1be6e"
+    },
+    "parents": [],
+    "digest": "sha256:fafb95c1ba488fac5bdd7ddbe5e719e9f96829628a5360765cccbeafff29eb48",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_100638_2ba5ce6a",
+      "bundle_version": "20260226T043712Z_20260226_100638_2ba5ce6a"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Health assessment of the legacy VB6 codebase."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 3,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Form:main",
+      "description": "Multiple form dependencies and lack of modularity.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Form:main"
+        ],
+        "paths": [
+          "Form:main"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "main.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "ActiveX Dependency Risk",
+      "description": "Reliance on deprecated ActiveX components may lead to compatibility issues.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:remove_activex",
+      "title": "Remove ActiveX Dependencies",
+      "priority": "P1",
+      "business_value": "Potential security vulnerabilities and compatibility issues with modern systems.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "project:banking_vb6"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "dependency:msado20"
+      ],
+      "plan": [
+        "Refactor code to use",
+        "NET libraries instead of ActiveX components"
+      ],
+      "acceptance_criteria": [
+        "All ActiveX references are removed.",
+        "Project compiles without ActiveX dependencies."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:remove_activex"
+    ],
+    "stabilization": [
+      "remediation:remove_activex"
+    ],
+    "modernization": [
+      "remediation:remove_activex"
+    ]
+  }
+}
