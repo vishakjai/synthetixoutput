@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the structure and dependencies of a legacy VB6 banking application, including forms, modules, ActiveX controls, and database connections.",
+  "nodes": [
+    {
+      "id": "node:project1",
+      "type": "Project",
+      "name": "Project1",
+      "metadata": {
+        "version": "1.0",
+        "company": "isoft"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:form_login",
+      "type": "Form",
+      "name": "LOGIN.frm",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 20,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:module1",
+      "type": "Module",
+      "name": "Module1.bas",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 21,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node:activex_msado",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0 Library",
+      "metadata": {
+        "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "node:database_connection1",
+      "type": "Database",
+      "name": "Connection1",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb;"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:project1",
+      "to": "node:activex_msado",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "node:form_login",
+      "to": "node:database_connection1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Connection1"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
