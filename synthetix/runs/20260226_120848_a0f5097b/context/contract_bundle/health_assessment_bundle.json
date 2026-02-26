@@ -1,0 +1,204 @@
+{
+  "header": {
+    "artifact_id": "1a5958f155b241388616e3b97fa45d53",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-26T06:39:04.092156+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_120848_a0f5097b",
+      "stage_id": "context_layer",
+      "task_id": "3e9ec24c560b4cda8d0fc6d1d1b0e47c"
+    },
+    "parents": [],
+    "digest": "sha256:4ee6ef4b982bd988f01398fb0a364861c5a8818be577cc4f19f5e58dff6a58c2",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_120848_a0f5097b",
+      "bundle_version": "20260226T063904Z_20260226_120848_a0f5097b"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "The health assessment of the legacy VB6 banking application indicates areas for improvement in maintainability and security."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 60,
+      "security": 50,
+      "reliability": 70,
+      "testability": 40
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Module1.bas",
+      "description": "Lack of error handling",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Module1.bas"
+        ],
+        "paths": [
+          "Module1.bas"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "Module1.bas"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Data Source Hardcoding",
+      "description": "The database connection string is hardcoded, posing a security risk.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation-1",
+      "title": "Refactor Database Connection",
+      "priority": "P1",
+      "business_value": "Potential unauthorized access to the database.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-4"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "node-4"
+      ],
+      "plan": [
+        "Use configuration files or environment variables to manage database connection strings"
+      ],
+      "acceptance_criteria": [
+        "Database connection strings are no longer hardcoded.",
+        "Configuration is managed externally."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation-1"
+    ],
+    "stabilization": [
+      "remediation-1"
+    ],
+    "modernization": [
+      "remediation-1"
+    ]
+  }
+}
