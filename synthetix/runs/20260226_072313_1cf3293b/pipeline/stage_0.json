@@ -1,0 +1,279 @@
+{
+  "run_id": "20260226_072313_1cf3293b",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 3 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260226T015331Z_20260226_072313_1cf3293b",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "710bd6e055544d1faaed1417761e4b9b",
+        "created_at": "2026-02-26T01:53:31.041846+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "59a77fdf86eb420dad5336b3f9b4ca22",
+            "digest": "sha256:56839ea4566a9f8e0a681297f333badfc51b3248fe55cba94eaf4d9ba89d0cc4",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "f513d1413dc848eeb46efc5731f7a44c",
+            "digest": "sha256:fa8cad1163678e837722feb3611d7d20cdb8f6eff57a1592eaf3d41599a34041",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "0703dbbaf6764973b0ea9bd5510408e7",
+            "digest": "sha256:f5af478b4595ecf2deb9f959af03edc8d152f183fcbf00ecc1ccb0e4801c0ace",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-26T01:53:31.089389+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy VB6 banking application to be modernized to C#.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {
+              "language": "VB6",
+              "type": "Executable Project"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0"
+            },
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {
+              "description": "Login form for user authentication"
+            },
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 24,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-2",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          },
+          {
+            "type": "USES_LIBRARY",
+            "from": "node-1",
+            "to": "node-3",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 24,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "DataEnvironment2.Dsr",
+          "DataEnvironment3.Dsr"
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy VB6 codebase with outdated conventions.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Use PascalCase for class names.",
+            "confidence": 0.7,
+            "examples": [
+              "ClassName"
+            ],
+            "counterexamples": [
+              "classname"
+            ],
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Attribute VB_Name = \"main\""
+              }
+            ]
+          },
+          {
+            "id": "rule-2",
+            "category": "error_handling",
+            "rule": "Implement structured exception handling.",
+            "confidence": 0.75,
+            "examples": [
+              "try { ... } catch (Exception ex) { ... }"
+            ],
+            "counterexamples": [
+              "On Error Resume Next"
+            ],
+            "provenance": [
+              {
+                "file": "Module1.bas",
+                "line": 1,
+                "evidence": "On Error Resume Next"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor to use structured exception handling."
+        ],
+        "scaffold_templates": [
+          "C# class template with PascalCase naming."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy system shows maintainability and security risks.",
+        "scores": {
+          "maintainability": 40,
+          "security": 30,
+          "reliability": 50,
+          "testability": 20
+        },
+        "hotspots": [
+          {
+            "scope": "Module1.bas",
+            "reason": "Use of 'On Error Resume Next' for error handling.",
+            "severity": "high",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "Module1.bas",
+                "line": 1,
+                "evidence": "On Error Resume Next"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Risk: Lack of Structured Exception Handling",
+            "description": "The use of 'On Error Resume Next' can mask critical errors.",
+            "severity": "high",
+            "confidence": 0.85
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Refactor Error Handling",
+          "problem_statement": "The codebase uses 'On Error Resume Next', which can hide errors.",
+          "scope": [
+            "Module1.bas"
+          ],
+          "risk_if_unaddressed": "Potential for masked errors leading to system instability.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [
+            "None"
+          ],
+          "suggested_approach": "Refactor to use try-catch blocks in C#.",
+          "success_criteria": [
+            "All error handling uses structured exception handling."
+          ],
+          "confidence": 0.8,
+          "provenance": [
+            {
+              "file": "Module1.bas",
+              "line": 1,
+              "evidence": "On Error Resume Next"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7846,
+    "latency_ms": 16803.773164749146,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-26T01:53:31.091056+00:00"
+}
