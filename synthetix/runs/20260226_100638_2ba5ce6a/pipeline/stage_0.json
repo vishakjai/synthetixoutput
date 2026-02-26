@@ -1,0 +1,303 @@
+{
+  "run_id": "20260226_100638_2ba5ce6a",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 6 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260226T043712Z_20260226_100638_2ba5ce6a",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "0020d503043e4ec79201b527667d783d",
+        "created_at": "2026-02-26T04:37:12.392927+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "eb95928fc7de4ab3a675f2162c1cd555",
+            "digest": "sha256:9f4fc11493a443ef7bbf45786bd6289afc3f0dff1246929f81382ec90d9a4357",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "787582297117453b85bfc9fb64a4ef51",
+            "digest": "sha256:cf2b0a0769a0ba90e8acd536ed310c95ff7cbf5059befde87b3e6f21f6e4f5a2",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "9f0591cca7f0474bada92a1ac665a1bc",
+            "digest": "sha256:fafb95c1ba488fac5bdd7ddbe5e719e9f96829628a5360765cccbeafff29eb48",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-26T04:37:12.426856+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "v1.0",
+        "summary": "Analysis of legacy VB6 repository for modernization to C#.",
+        "nodes": [
+          {
+            "id": "project:banking_vb6",
+            "type": "Project",
+            "name": "BANKING",
+            "metadata": {
+              "language": "VB6",
+              "type": "Executable"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "form:login",
+            "type": "Form",
+            "name": "LOGIN",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 18,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "module:module1",
+            "type": "Module",
+            "name": "Module1",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 19,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "id": "form:main",
+            "type": "Form",
+            "name": "main",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 20,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "dependency:msado20",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {
+              "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "id": "database:bank1",
+            "type": "Database",
+            "name": "BANK1",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0",
+              "source": "E:\\project\\myBANKING\\BANK1.mdb"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb;"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "project:banking_vb6",
+            "to": "dependency:msado20",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "form:main",
+            "to": "database:bank1",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb;"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "v1.0",
+        "summary": "VB6 to C# modernization convention analysis.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Use PascalCase for class and method names in C#.",
+            "confidence": 0.9,
+            "examples": [
+              "public class CustomerAccount {}",
+              "public void ProcessTransaction() {}"
+            ],
+            "counterexamples": [
+              "public class customerAccount {}",
+              "public void processTransaction() {}"
+            ],
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form7"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all VB6 forms are converted to C# WinForms or WPF."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "v1.0",
+        "summary": "Health assessment of the legacy VB6 codebase.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Form:main",
+            "reason": "Multiple form dependencies and lack of modularity.",
+            "severity": "high",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Private Sub Command1_Click()"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Dependency Risk",
+            "description": "Reliance on deprecated ActiveX components may lead to compatibility issues.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:remove_activex",
+          "title": "Remove ActiveX Dependencies",
+          "problem_statement": "ActiveX components are deprecated and pose compatibility risks.",
+          "scope": [
+            "project:banking_vb6"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities and compatibility issues with modern systems.",
+          "effort": "L",
+          "severity": "high",
+          "dependencies": [
+            "dependency:msado20"
+          ],
+          "suggested_approach": "Refactor code to use .NET libraries instead of ActiveX components.",
+          "success_criteria": [
+            "All ActiveX references are removed.",
+            "Project compiles without ActiveX dependencies."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BANKING.vbp",
+              "line": 3,
+              "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7971,
+    "latency_ms": 33138.092041015625,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-26T04:37:12.428233+00:00"
+}
