@@ -1,0 +1,207 @@
+{
+  "header": {
+    "artifact_id": "d20e52a66abd4455b60a079b2bd39c79",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-26T02:07:01.893676+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_073641_ce43b4dd",
+      "stage_id": "context_layer",
+      "task_id": "151813f88aa4485ab5dcd96b5e66cad6"
+    },
+    "parents": [],
+    "digest": "sha256:f07c6d97e31269a38c61e80254f47adf3c026a4074c1f1a8dc768517b7093ad8",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_073641_ce43b4dd",
+      "bundle_version": "20260226T020701Z_20260226_073641_ce43b4dd"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The health assessment of the legacy VB6 application identifies maintainability and security as key areas for improvement."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 4,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: dependency_management",
+      "description": "Use of outdated ActiveX components and libraries.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "dependency_management"
+        ],
+        "paths": [
+          "dependency_management"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BANKING.vbp"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "Outdated Technology Stack",
+      "description": "The application relies on outdated VB6 and ActiveX components, which pose security and compatibility risks.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:modernize_activex",
+      "title": "Modernize ActiveX Dependencies",
+      "priority": "P0",
+      "business_value": "Continued use of unsupported components increases security vulnerabilities.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node:banking_project",
+          "node:login_form",
+          "node:main_form",
+          "node:module1"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "node:msado20",
+        "node:dao350"
+      ],
+      "plan": [
+        "Replace ActiveX components with modern",
+        "NET libraries"
+      ],
+      "acceptance_criteria": [
+        "All ActiveX dependencies are replaced with .NET equivalents.",
+        "Application runs without ActiveX components."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:modernize_activex"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "remediation:modernize_activex"
+    ]
+  }
+}
