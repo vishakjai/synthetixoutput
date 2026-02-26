@@ -1,0 +1,256 @@
+{
+  "header": {
+    "artifact_id": "0736b63233484667a1bb1599c63899ba",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-26T03:34:01.037706+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_090339_1a8e90b4",
+      "stage_id": "context_layer",
+      "task_id": "25d9956915764d5b8691f2fa3fd25d43"
+    },
+    "parents": [],
+    "digest": "sha256:a149c1fc874bf0381658182d1e0b6cf9dce1ecfe6279026ddc911e1f0dea16c4",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_090339_1a8e90b4",
+      "bundle_version": "20260226T033401Z_20260226_090339_1a8e90b4"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "node:project_Banking",
+        "type": "component",
+        "name": "BANKING.vbp",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "type": "Exe",
+          "startup": "main"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node:form_LOGIN",
+        "type": "component",
+        "name": "LOGIN.frm",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node:module_Module1",
+        "type": "module",
+        "name": "Module1.bas",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node:ActiveX_DAO",
+        "type": "external_dependency",
+        "name": "Microsoft DAO 3.51 Object Library",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "C:\\Program Files\\Common Files\\Microsoft Shared\\DAO\\DAO350.DLL"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "path": "C:\\Program Files\\Common Files\\Microsoft Shared\\DAO\\DAO350.DLL"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node:database_BANK1",
+        "type": "database",
+        "name": "BANK1.mdb",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "DataEnvironment1.DCA"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "provider": "Microsoft.Jet.OLEDB.4.0"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "DataEnvironment1.DCA"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "depends_on",
+        "from": "node:project_Banking",
+        "to": "node:ActiveX_DAO",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "depends_on",
+        "from": "node:project_Banking",
+        "to": "node:database_BANK1",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "DataEnvironment1.DCA"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 5,
+      "edge_count": 2,
+      "languages": []
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": [
+    {
+      "question": "The specific business rules implemented in the forms and modules are not fully detailed.",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    }
+  ]
+}
