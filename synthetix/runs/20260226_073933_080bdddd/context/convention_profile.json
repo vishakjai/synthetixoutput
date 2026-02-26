@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "This profile outlines the coding conventions and standards observed in the legacy VB6 application, identifying areas for improvement in modernization.",
+  "rules": [
+    {
+      "id": "rule:naming_convention",
+      "category": "naming",
+      "rule": "Use PascalCase for form and module names.",
+      "confidence": 0.8,
+      "examples": [
+        "FormName",
+        "ModuleName"
+      ],
+      "counterexamples": [
+        "formname",
+        "modulename"
+      ],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 21,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "rule:activeX_usage",
+      "category": "api",
+      "rule": "Minimize use of ActiveX controls for better portability.",
+      "confidence": 0.85,
+      "examples": [
+        "Use native .NET controls"
+      ],
+      "counterexamples": [
+        "Use COMCT232.OCX"
+      ],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 5,
+          "evidence": "Object=COMCT232.OCX"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor ActiveX dependencies to .NET equivalents."
+  ],
+  "scaffold_templates": [
+    "C# WinForms template for login form."
+  ]
+}
