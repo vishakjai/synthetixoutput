@@ -1,0 +1,290 @@
+{
+  "run_id": "20260226_090339_1a8e90b4",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260226T033401Z_20260226_090339_1a8e90b4",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "128d634ae402477db8cfe66ca5347835",
+        "created_at": "2026-02-26T03:34:01.038398+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "0736b63233484667a1bb1599c63899ba",
+            "digest": "sha256:a149c1fc874bf0381658182d1e0b6cf9dce1ecfe6279026ddc911e1f0dea16c4",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "b534d1fedba747f5a79320dc09bb9c0e",
+            "digest": "sha256:b703a8ebc6add009fd977cce5d6fcc19dba540ada01e135e22e90e68e07e5c87",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "a2ddbd3fe74549f58dd95e32c243a138",
+            "digest": "sha256:24ba1f5089a9d8144d0da78c63891ab6831ae3aef73bf2c744321a9718b8d263",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-26T03:34:01.082058+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "The legacy VB6 repository consists of various forms, modules, and ActiveX dependencies, with significant reliance on Microsoft technologies for data access and user interface components.",
+        "nodes": [
+          {
+            "id": "node:project_Banking",
+            "type": "Project",
+            "name": "BANKING.vbp",
+            "metadata": {
+              "type": "Exe",
+              "startup": "main"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:form_LOGIN",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 18,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:module_Module1",
+            "type": "Module",
+            "name": "Module1.bas",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 19,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "id": "node:ActiveX_DAO",
+            "type": "ExternalDependency",
+            "name": "Microsoft DAO 3.51 Object Library",
+            "metadata": {
+              "path": "C:\\Program Files\\Common Files\\Microsoft Shared\\DAO\\DAO350.DLL"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 5,
+                "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          },
+          {
+            "id": "node:database_BANK1",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:project_Banking",
+            "to": "node:ActiveX_DAO",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 5,
+                "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+              }
+            ]
+          },
+          {
+            "type": "USES_LIBRARY",
+            "from": "node:project_Banking",
+            "to": "node:database_BANK1",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "The specific business rules implemented in the forms and modules are not fully detailed."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "The VB6 project follows typical naming conventions for forms and modules but lacks explicit error handling and modern security practices.",
+        "rules": [
+          {
+            "id": "rule:naming_convention_forms",
+            "category": "naming",
+            "rule": "Forms should be named with a prefix 'frm' followed by a descriptive name.",
+            "confidence": 0.9,
+            "examples": [
+              "frmcustomer",
+              "frmtransaction"
+            ],
+            "counterexamples": [
+              "Form1",
+              "Form2"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 21,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all forms and modules have descriptive names following a consistent naming convention."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules with appropriate namespaces and using directives."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy VB6 codebase has moderate maintainability but lacks modern security and reliability features.",
+        "scores": {
+          "maintainability": 60,
+          "security": 40,
+          "reliability": 50,
+          "testability": 30
+        },
+        "hotspots": [
+          {
+            "scope": "Module1.bas",
+            "reason": "Lack of error handling and logging mechanisms.",
+            "severity": "high",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "Module1.bas",
+                "line": 1,
+                "evidence": "Module lacks Try-Catch blocks."
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Data Access Security Risk",
+            "description": "The use of Microsoft Jet OLEDB for database access may expose the application to SQL injection attacks.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:001",
+          "title": "Migrate Database Access to ADO.NET",
+          "problem_statement": "The application uses outdated Microsoft Jet OLEDB for database access.",
+          "scope": [
+            "DataEnvironment1.DCA"
+          ],
+          "risk_if_unaddressed": "Potential for SQL injection and data breaches.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node:database_BANK1"
+          ],
+          "suggested_approach": "Refactor database access code to use ADO.NET with parameterized queries.",
+          "success_criteria": [
+            "All database interactions use ADO.NET.",
+            "No direct SQL strings in the codebase."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "DataEnvironment1.DCA",
+              "line": 1,
+              "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8060,
+    "latency_ms": 20784.465074539185,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-26T03:34:01.083266+00:00"
+}
