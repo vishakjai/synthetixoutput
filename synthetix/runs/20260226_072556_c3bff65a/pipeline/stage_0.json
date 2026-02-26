@@ -1,0 +1,253 @@
+{
+  "run_id": "20260226_072556_c3bff65a",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 3 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260226T015613Z_20260226_072556_c3bff65a",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece"
+      },
+      "context_bundle": {
+        "bundle_id": "5734bc5243984706923956d9c87b47a8",
+        "created_at": "2026-02-26T01:56:13.429771+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "ca1428ed897a40bc85d53cd74cf4a928",
+            "digest": "sha256:aaad80d481c5ac1bd9b2c670a08aae6c31168bee6c47e8e908ddd38e9fc3c7dc",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "2029f309644147f3ae22aac0e0a2864e",
+            "digest": "sha256:f90477315c9ae46ae26e19bd41e531027f006dad6bf6649e5927ce3a53cbd16a",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "eaae94e2bec740fb89e3d8a9e7caf83b",
+            "digest": "sha256:64d3bc287357f1fc218f317c62564519bbbd1d8178a4971e12cf737b42f095bf",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-26T01:56:13.437984+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Legacy VB6 banking application with forms and data environments to be modernized into C#.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Component",
+            "name": "DataEnvironment1.DCA",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Connection1"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {},
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-2",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Designer=DataEnvironment1.Dsr"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node-2",
+            "to": "node-3",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Connection1"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "The exact schema of BANK1.mdb is not specified."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy VB6 codebase with outdated conventions, requiring modernization to C# standards.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Use PascalCase for class names in C#.",
+            "confidence": 0.95,
+            "examples": [
+              "CustomerAccount"
+            ],
+            "counterexamples": [
+              "customeraccount"
+            ],
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Attribute VB_Name = \"main\""
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor variable names to follow C# naming conventions."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and data access layers."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy system has maintainability and security concerns due to outdated technology.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Data Access",
+            "reason": "Use of outdated Microsoft Jet OLEDB provider.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Vulnerabilities",
+            "description": "The use of legacy components like MSWINSCK.OCX may expose the application to security risks.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation-1",
+          "title": "Upgrade Data Access Layer",
+          "problem_statement": "The application uses an outdated data access technology (Jet OLEDB).",
+          "scope": [
+            "DataEnvironment1.DCA"
+          ],
+          "risk_if_unaddressed": "Potential data access issues and security vulnerabilities.",
+          "effort": "L",
+          "severity": "high",
+          "dependencies": [
+            "node-2"
+          ],
+          "suggested_approach": "Refactor to use Entity Framework or ADO.NET in C#.",
+          "success_criteria": [
+            "Data access layer is implemented using modern C# technologies.",
+            "All data operations are verified to work correctly."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "DataEnvironment1.DCA",
+              "line": 1,
+              "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7719,
+    "latency_ms": 16481.693029403687,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-26T01:56:13.439752+00:00"
+}
