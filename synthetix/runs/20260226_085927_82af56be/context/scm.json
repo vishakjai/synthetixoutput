@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy VB6 banking application, detailing its components, dependencies, and interactions for modernization to C#.",
+  "nodes": [
+    {
+      "id": "node:Project1",
+      "type": "Project",
+      "name": "Project1",
+      "metadata": {
+        "version": "1.0",
+        "company": "isoft"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Name=\"Project1\""
+        }
+      ]
+    },
+    {
+      "id": "node:Form_LOGIN",
+      "type": "Form",
+      "name": "LOGIN",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 19,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:Module_Module1",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 20,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node:ActiveX_MSADO",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0 Library",
+      "metadata": {
+        "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "node:Database_BANK1",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "path": "E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:Project1",
+      "to": "node:ActiveX_MSADO",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "node:Form_LOGIN",
+      "to": "node:Database_BANK1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
