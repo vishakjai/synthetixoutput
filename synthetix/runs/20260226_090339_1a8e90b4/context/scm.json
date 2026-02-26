@@ -1,0 +1,118 @@
+{
+  "version": "1.0",
+  "summary": "The legacy VB6 repository consists of various forms, modules, and ActiveX dependencies, with significant reliance on Microsoft technologies for data access and user interface components.",
+  "nodes": [
+    {
+      "id": "node:project_Banking",
+      "type": "Project",
+      "name": "BANKING.vbp",
+      "metadata": {
+        "type": "Exe",
+        "startup": "main"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:form_LOGIN",
+      "type": "Form",
+      "name": "LOGIN.frm",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 18,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:module_Module1",
+      "type": "Module",
+      "name": "Module1.bas",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 19,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node:ActiveX_DAO",
+      "type": "ExternalDependency",
+      "name": "Microsoft DAO 3.51 Object Library",
+      "metadata": {
+        "path": "C:\\Program Files\\Common Files\\Microsoft Shared\\DAO\\DAO350.DLL"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 5,
+          "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+        }
+      ]
+    },
+    {
+      "id": "node:database_BANK1",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:project_Banking",
+      "to": "node:ActiveX_DAO",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 5,
+          "evidence": "Reference=...#Microsoft DAO 3.51 Object Library"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "node:project_Banking",
+      "to": "node:database_BANK1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "The specific business rules implemented in the forms and modules are not fully detailed."
+  ]
+}
