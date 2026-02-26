@@ -1,0 +1,91 @@
+{
+  "version": "1.0",
+  "summary": "Legacy VB6 banking application to be modernized to C#.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Component",
+      "name": "BANKING.vbp",
+      "metadata": {
+        "language": "VB6",
+        "type": "Executable Project"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "id": "node-3",
+      "type": "Form",
+      "name": "LOGIN.frm",
+      "metadata": {
+        "description": "Login form for user authentication"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 24,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-1",
+      "to": "node-2",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "node-1",
+      "to": "node-3",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 24,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "DataEnvironment2.Dsr",
+    "DataEnvironment3.Dsr"
+  ]
+}
