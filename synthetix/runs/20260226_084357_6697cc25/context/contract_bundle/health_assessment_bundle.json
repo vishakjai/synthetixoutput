@@ -1,0 +1,206 @@
+{
+  "header": {
+    "artifact_id": "721a5566667e44b4bb186c4d94ae035c",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-26T03:14:20.605597+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_084357_6697cc25",
+      "stage_id": "context_layer",
+      "task_id": "f2e6f84b11cd4597918920e37175c386"
+    },
+    "parents": [],
+    "digest": "sha256:1d210560aa0f0906c265de1f9f9d60c89c787e2cecda094e37452338b2daa6e9",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_084357_6697cc25",
+      "bundle_version": "20260226T031420Z_20260226_084357_6697cc25"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The health assessment identifies key areas of risk and improvement in the legacy VB6 application, focusing on maintainability, security, reliability, and testability."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 3,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Module1.bas",
+      "description": "Lack of error handling",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Module1.bas"
+        ],
+        "paths": [
+          "Module1.bas"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "Module1.bas"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "ActiveX Dependency Risk",
+      "description": "The project relies heavily on outdated ActiveX controls which may not be supported in modern environments.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediate_activex",
+      "title": "Replace ActiveX Controls",
+      "priority": "P0",
+      "business_value": "Potential security vulnerabilities and compatibility issues with modern systems.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "project:banking_vb6",
+          "module:login_form",
+          "module:main_form",
+          "module:module1"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "dependency:msado20"
+      ],
+      "plan": [
+        "Identify equivalent",
+        "NET components and replace ActiveX controls"
+      ],
+      "acceptance_criteria": [
+        "All ActiveX controls are replaced with .NET components.",
+        "Application runs without ActiveX-related errors."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediate_activex"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "remediate_activex"
+    ]
+  }
+}
