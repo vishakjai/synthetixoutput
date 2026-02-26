@@ -1,0 +1,248 @@
+{
+  "header": {
+    "artifact_id": "e89eb53529d74bf787b64a66187919d7",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-26T04:42:30.882750+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_101211_3bcbe07f",
+      "stage_id": "context_layer",
+      "task_id": "98565131a77d4f8596ea4dd2f14d9134"
+    },
+    "parents": [],
+    "digest": "sha256:56c09b01b7447c6750ccaef1802a93e2b3209bb4f1cf20d9aeb234ea84cf7131",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_101211_3bcbe07f",
+      "bundle_version": "20260226T044230Z_20260226_101211_3bcbe07f"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "This assessment evaluates the health of the legacy VB6 application, focusing on maintainability, security, reliability, and testability."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 3,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 2
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: module:Module1",
+      "description": "Lack of comments and unclear variable names.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "module:Module1"
+        ],
+        "paths": [
+          "module:Module1"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "Module1.bas"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Use of Deprecated ActiveX Controls",
+      "description": "The application relies on outdated ActiveX controls that may not be supported in modern environments.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "task:refactor_naming",
+      "title": "Refactor Naming Conventions",
+      "priority": "P2",
+      "business_value": "Continued difficulty in maintaining and understanding the codebase.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "component:login_form",
+          "component:main_form",
+          "component:module1"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Refactor all form and module names to use PascalCase"
+      ],
+      "acceptance_criteria": [
+        "All form and module names follow PascalCase."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "task:replace_activex",
+      "title": "Replace Deprecated ActiveX Controls",
+      "priority": "P1",
+      "business_value": "Potential incompatibility with future operating systems and security vulnerabilities.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "project:banking_vb6"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Identify modern equivalents or alternatives for each ActiveX control and replace them"
+      ],
+      "acceptance_criteria": [
+        "All ActiveX controls are replaced with modern equivalents."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "task:replace_activex"
+    ],
+    "stabilization": [
+      "task:refactor_naming",
+      "task:replace_activex"
+    ],
+    "modernization": [
+      "task:refactor_naming",
+      "task:replace_activex"
+    ]
+  }
+}
