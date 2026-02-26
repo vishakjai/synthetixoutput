@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "summary": "Legacy VB6 banking application with forms and data environments to be modernized into C#.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Component",
+      "name": "BANKING.vbp",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Component",
+      "name": "DataEnvironment1.DCA",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Connection1"
+        }
+      ]
+    },
+    {
+      "id": "node-3",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {},
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-1",
+      "to": "node-2",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Designer=DataEnvironment1.Dsr"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node-2",
+      "to": "node-3",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Connection1"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "The exact schema of BANK1.mdb is not specified."
+  ]
+}
