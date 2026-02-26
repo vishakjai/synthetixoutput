@@ -1,0 +1,203 @@
+{
+  "header": {
+    "artifact_id": "a2ddbd3fe74549f58dd95e32c243a138",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-26T03:34:01.038266+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "21b4653d1dc833d172299f9e3dc42f8ab2518ece",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260226_090339_1a8e90b4",
+      "stage_id": "context_layer",
+      "task_id": "25d9956915764d5b8691f2fa3fd25d43"
+    },
+    "parents": [],
+    "digest": "sha256:24ba1f5089a9d8144d0da78c63891ab6831ae3aef73bf2c744321a9718b8d263",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260226_090339_1a8e90b4",
+      "bundle_version": "20260226T033401Z_20260226_090339_1a8e90b4"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "The legacy VB6 codebase has moderate maintainability but lacks modern security and reliability features."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 60,
+      "security": 40,
+      "reliability": 50,
+      "testability": 30
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Module1.bas",
+      "description": "Lack of error handling and logging mechanisms.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Module1.bas"
+        ],
+        "paths": [
+          "Module1.bas"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "Module1.bas"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "Data Access Security Risk",
+      "description": "The use of Microsoft Jet OLEDB for database access may expose the application to SQL injection attacks.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:001",
+      "title": "Migrate Database Access to ADO.NET",
+      "priority": "P0",
+      "business_value": "Potential for SQL injection and data breaches.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node:database_BANK1"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "node:database_BANK1"
+      ],
+      "plan": [
+        "Refactor database access code to use ADO",
+        "NET with parameterized queries"
+      ],
+      "acceptance_criteria": [
+        "All database interactions use ADO.NET.",
+        "No direct SQL strings in the codebase."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:001"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "remediation:001"
+    ]
+  }
+}
