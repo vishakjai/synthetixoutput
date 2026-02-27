@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "summary": "The system context model represents the legacy banking application, detailing its components, dependencies, and interactions within the codebase.",
+  "nodes": [
+    {
+      "id": "node:VBProject",
+      "type": "Component",
+      "name": "BANKING.vbp",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:DataEnvironment1",
+      "type": "Component",
+      "name": "DataEnvironment1",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "DataEnvironment1"
+        }
+      ]
+    },
+    {
+      "id": "node:Database",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:VBProject",
+      "to": "node:DataEnvironment1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Designer=DataEnvironment1.Dsr"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "node:VBProject",
+      "to": "node:Database",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
