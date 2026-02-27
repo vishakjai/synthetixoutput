@@ -1,0 +1,152 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy VB6 banking application structure, including its forms, modules, ActiveX dependencies, and database interactions.",
+  "nodes": [
+    {
+      "id": "node:project_Banking",
+      "type": "Service",
+      "name": "Banking Application",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:form_LOGIN",
+      "type": "Component",
+      "name": "LOGIN Form",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 14,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:module_Module1",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 15,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node:form_main",
+      "type": "Component",
+      "name": "Main Form",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 16,
+          "evidence": "Form=main.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:ActiveX_MSCOMCT2",
+      "type": "ExternalDependency",
+      "name": "MSCOMCT2.OCX",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 5,
+          "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+        }
+      ]
+    },
+    {
+      "id": "node:database_BANK1",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {},
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "id": "node:table_customer",
+      "type": "Table",
+      "name": "customer",
+      "metadata": {},
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Command1 customer"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:project_Banking",
+      "to": "node:ActiveX_MSCOMCT2",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 5,
+          "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "node:form_main",
+      "to": "node:module_Module1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Attribute VB_Name = \"main\""
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node:form_main",
+      "to": "node:table_customer",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Command1 customer"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
