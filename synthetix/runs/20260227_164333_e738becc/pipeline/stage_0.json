@@ -1,0 +1,283 @@
+{
+  "run_id": "20260227_164333_e738becc",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260227T164353Z_20260227_164333_e738becc",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "0c20a7ed4cdc4232a0e410348daf245d",
+        "created_at": "2026-02-27T16:43:53.933803+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "be1c5bbda1364cfba4b94c1c1c3659be",
+            "digest": "sha256:170374c2bb809b872b67097e7a140d3c5376340234c20e3d3e5c108aca2dfdb0",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "2489f2d2c3304c4695b13537c08f7aeb",
+            "digest": "sha256:0db2e69eb7663eff9ca484fa327da4bb392b36aeed99a39e28860b0415911c4e",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "d5745fd49ab745139e93f6c6f5ceca09",
+            "digest": "sha256:ecf0532774620fe5d3cec5dd6416bd270cf5a00311c1a201ba52ac4c88a84f00",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-27T16:43:53.976808+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy VB6 BankApp1 project, detailing its components, dependencies, and interactions.",
+        "nodes": [
+          {
+            "id": "node:BankApp1",
+            "type": "Project",
+            "name": "BankApp1",
+            "metadata": {
+              "type": "Exe",
+              "title": "BANK_SYSTEM",
+              "company": "KENEX Ltd",
+              "version": "1.0.0"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:frmcustomer",
+            "type": "Form",
+            "name": "frmcustomer",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 21,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:MSDBRPTR",
+            "type": "ExternalDependency",
+            "name": "Microsoft Data Report Designer v6.0",
+            "metadata": {
+              "file": "C:\\WINDOWS\\system32\\MSDBRPTR.DLL"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 3,
+                "evidence": "Reference=...MSDBRPTR.DLL"
+              }
+            ]
+          },
+          {
+            "id": "node:MSCOMCTL",
+            "type": "ExternalDependency",
+            "name": "MSCOMCTL.OCX",
+            "metadata": {
+              "version": "2.0"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 11,
+                "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:BankApp1",
+            "to": "node:MSDBRPTR",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 3,
+                "evidence": "Reference=...MSDBRPTR.DLL"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:BankApp1",
+            "to": "node:MSCOMCTL",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 11,
+                "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "DataReport1.DCA binary content"
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and rules identified in the VB6 legacy code.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Form names should start with 'frm'.",
+            "confidence": 0.9,
+            "examples": [
+              "frmcustomer",
+              "frmdeposit"
+            ],
+            "counterexamples": [
+              "customerForm"
+            ],
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 21,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all forms follow the naming convention 'frm<Name>'."
+        ],
+        "scaffold_templates": [
+          "C# WinForms template for form conversion."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy VB6 project indicates areas of concern, particularly in maintainability and modernization readiness.",
+        "scores": {
+          "maintainability": 2,
+          "security": 3,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "frmcustomer",
+            "reason": "Complex form logic with minimal documentation.",
+            "severity": "high",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 21,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Dependency",
+            "description": "The project relies on outdated ActiveX components that may not be supported in modern environments.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:remove_activex",
+          "title": "Remove ActiveX Dependencies",
+          "problem_statement": "ActiveX components are outdated and pose security risks.",
+          "scope": [
+            "BankApp1"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities and compatibility issues with modern systems.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "MSCOMCTL.OCX",
+            "MSDBRPTR.DLL"
+          ],
+          "suggested_approach": "Refactor the application to remove ActiveX dependencies and replace them with modern equivalents.",
+          "success_criteria": [
+            "No ActiveX components present in the project.",
+            "Application runs successfully without ActiveX dependencies."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BankApp1/BANK.vbp",
+              "line": 3,
+              "evidence": "Reference=...MSDBRPTR.DLL"
+            },
+            {
+              "file": "BankApp1/BANK.vbp",
+              "line": 11,
+              "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8611,
+    "latency_ms": 15865.498065948486,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-27T16:43:54.033233+00:00"
+}
