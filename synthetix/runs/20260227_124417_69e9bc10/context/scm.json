@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "summary": "Legacy VB6 banking application to be modernized into Python with Docker deployment.",
+  "nodes": [
+    {
+      "id": "node:banking_vb6_project",
+      "type": "Component",
+      "name": "BANKING.vbp",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:main_form",
+      "type": "Form",
+      "name": "main.frm",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Form=main.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:customer_table",
+      "type": "Table",
+      "name": "customer",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "customer"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:banking_vb6_project",
+      "to": "node:main_form",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Form=main.frm"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node:main_form",
+      "to": "node:customer_table",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "customer"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Exact database schema details for conversion."
+  ]
+}
