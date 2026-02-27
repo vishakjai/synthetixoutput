@@ -1,0 +1,4723 @@
+{
+  "run_id": "20260227_124618_3448c664",
+  "stage": 1,
+  "result": {
+    "agent_name": "Analyst Agent",
+    "stage": 1,
+    "status": "success",
+    "summary": "Extracted 8 functional requirements, 5 non-functional requirements, 2 risks, 2 clarifications, 1 failed quality gates [software-general-v1]",
+    "output": {
+      "analysis_walkthrough": {
+        "business_objective_summary": "Ensure the UI functions correctly after a frontend patch by conducting a start-run smoke test.",
+        "requirements_understanding": [
+          "The objective is to verify UI stability and functionality post-patch.",
+          "A smoke test should cover critical UI components to ensure no major issues are introduced.",
+          "The test should be automated to ensure consistency and repeatability."
+        ],
+        "conversion_to_technical_requirements": [
+          "Implement automated UI smoke tests using a testing framework like Selenium or Cypress.",
+          "Ensure tests cover key UI workflows and components.",
+          "Integrate tests into the CI/CD pipeline to run after each frontend patch deployment."
+        ],
+        "clarifications_requested": [
+          "What specific UI components or workflows are considered critical for the smoke test?",
+          "Are there any existing test scripts or frameworks in use that should be leveraged?"
+        ]
+      },
+      "project_name": "UI Smoke Test Automation",
+      "executive_summary": "Automate UI smoke tests to ensure frontend stability after patches, integrating them into the CI/CD pipeline for consistent validation.",
+      "functional_requirements": [
+        {
+          "id": "FR-001",
+          "title": "Automated UI Smoke Test Execution",
+          "description": "Develop and execute automated smoke tests for the UI after each frontend patch.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "Smoke tests are automatically triggered after each frontend patch deployment.",
+            "Tests cover all critical UI components and workflows.",
+            "Test results are logged and reported in the CI/CD pipeline."
+          ]
+        },
+        {
+          "id": "FR-002",
+          "title": "Critical UI Component Coverage",
+          "description": "Identify and include all critical UI components in the smoke test suite.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "A list of critical UI components is documented and approved by stakeholders.",
+            "All identified components are included in the smoke test suite.",
+            "Tests for each component validate both functionality and visual integrity."
+          ]
+        },
+        {
+          "id": "FR-003",
+          "title": "Test Result Reporting",
+          "description": "Provide detailed reporting of smoke test results within the CI/CD pipeline.",
+          "priority": "P1",
+          "acceptance_criteria": [
+            "Test results include pass/fail status for each test case.",
+            "Reports are accessible to all relevant stakeholders.",
+            "Reports include timestamps and environment details for each test run."
+          ]
+        },
+        {
+          "id": "FR-004",
+          "title": "Error Handling in Tests",
+          "description": "Implement robust error handling in smoke tests to ensure accurate results.",
+          "priority": "P1",
+          "acceptance_criteria": [
+            "Tests gracefully handle unexpected UI changes or errors.",
+            "Error logs provide clear information for troubleshooting.",
+            "Tests retry failed steps where applicable to confirm issues."
+          ]
+        },
+        {
+          "id": "FR-005",
+          "title": "Test Environment Setup",
+          "description": "Ensure a consistent and isolated environment for running UI smoke tests.",
+          "priority": "P1",
+          "acceptance_criteria": [
+            "Test environment mirrors production settings as closely as possible.",
+            "Environment setup is automated and repeatable.",
+            "Environment is isolated to prevent interference from other tests or processes."
+          ]
+        },
+        {
+          "id": "FR-006",
+          "title": "Integration with CI/CD Pipeline",
+          "description": "Integrate UI smoke tests into the existing CI/CD pipeline for automated execution.",
+          "priority": "P0",
+          "acceptance_criteria": [
+            "Smoke tests are triggered automatically by the CI/CD pipeline after a frontend patch.",
+            "Pipeline configuration allows for easy updates to the test suite.",
+            "Pipeline provides feedback on test execution status and results."
+          ]
+        },
+        {
+          "id": "FR-007",
+          "title": "Visual Regression Testing",
+          "description": "Include visual regression testing in the smoke test suite to catch unintended UI changes.",
+          "priority": "P2",
+          "acceptance_criteria": [
+            "Visual snapshots are taken before and after patches for comparison.",
+            "Differences are highlighted and reported in test results.",
+            "Stakeholders are notified of significant visual changes."
+          ]
+        },
+        {
+          "id": "FR-008",
+          "title": "Test Maintenance and Updates",
+          "description": "Regularly update and maintain the smoke test suite to reflect UI changes.",
+          "priority": "P2",
+          "acceptance_criteria": [
+            "Test suite is reviewed and updated after each major UI change.",
+            "Obsolete tests are removed and new tests are added as needed.",
+            "Documentation is maintained for all test cases and their purposes."
+          ]
+        }
+      ],
+      "non_functional_requirements": [
+        {
+          "id": "NFR-001",
+          "title": "Test Execution Performance",
+          "description": "Ensure smoke tests execute within an acceptable time frame.",
+          "category": "performance",
+          "metric": "Tests complete within 10 minutes.",
+          "acceptance_criteria": [
+            "Average test execution time is under 10 minutes.",
+            "Test execution time is monitored and reported.",
+            "Performance issues are identified and addressed promptly."
+          ]
+        },
+        {
+          "id": "NFR-002",
+          "title": "Test Reliability",
+          "description": "Ensure smoke tests produce consistent and reliable results.",
+          "category": "reliability",
+          "metric": "Test reliability rate of 99%.",
+          "acceptance_criteria": [
+            "Tests pass consistently under the same conditions.",
+            "Flaky tests are identified and resolved.",
+            "Test reliability is tracked and reported."
+          ]
+        },
+        {
+          "id": "NFR-003",
+          "title": "Security of Test Data",
+          "description": "Ensure that test data used in smoke tests is secure and does not expose sensitive information.",
+          "category": "security",
+          "metric": "No sensitive data is exposed during tests.",
+          "acceptance_criteria": [
+            "Test data is anonymized and does not contain sensitive information.",
+            "Access to test data is restricted to authorized personnel.",
+            "Security audits are conducted regularly on test data handling."
+          ]
+        },
+        {
+          "id": "NFR-004",
+          "title": "Usability of Test Reports",
+          "description": "Ensure test reports are easy to understand and actionable.",
+          "category": "usability",
+          "metric": "Stakeholder satisfaction score of 90% on report usability.",
+          "acceptance_criteria": [
+            "Reports are clear and concise with actionable insights.",
+            "Stakeholders can easily access and interpret reports.",
+            "Feedback on report usability is collected and acted upon."
+          ]
+        },
+        {
+          "id": "NFR-005",
+          "title": "Scalability of Test Suite",
+          "description": "Ensure the smoke test suite can scale to accommodate future UI components and workflows.",
+          "category": "scalability",
+          "metric": "Test suite can handle 2x the current number of test cases.",
+          "acceptance_criteria": [
+            "Test suite architecture supports easy addition of new tests.",
+            "Performance remains stable as the number of tests increases.",
+            "Scalability is tested and validated regularly."
+          ]
+        }
+      ],
+      "legacy_functional_contract": [],
+      "legacy_code_inventory": {},
+      "legacy_skill_profile": {},
+      "assumptions": [
+        "All critical UI components have been identified and agreed upon by stakeholders.",
+        "The CI/CD pipeline is capable of integrating automated tests."
+      ],
+      "risks": [
+        {
+          "description": "Inaccurate identification of critical UI components could lead to insufficient test coverage.",
+          "impact": "high",
+          "mitigation": "Conduct thorough reviews and stakeholder consultations to ensure all critical components are covered."
+        },
+        {
+          "description": "Test execution time may exceed acceptable limits, delaying deployments.",
+          "impact": "medium",
+          "mitigation": "Optimize test scripts and parallelize execution where possible."
+        }
+      ],
+      "out_of_scope": [
+        "Testing of backend services or APIs.",
+        "Manual testing processes."
+      ],
+      "requirements_pack": {
+        "artifact_type": "requirements_pack",
+        "artifact_version": "2.0",
+        "artifact_id": "REQPACK-20260227_124618_3448C664",
+        "generated_at": "2026-02-27T12:47:18.105492+00:00",
+        "generated_by": {
+          "agent_name": "Analyst Agent",
+          "persona": "Strategic Analyst",
+          "persona_version": "1.0",
+          "requirements_pack_profile": "requirements-pack-v2-general",
+          "domain_pack": {
+            "id": "software-general-v1",
+            "version": "1.0.0",
+            "ontologies": [
+              "Capability Taxonomy"
+            ],
+            "standards": [],
+            "internal_playbooks": []
+          }
+        },
+        "project": {
+          "name": "UI Smoke Test Automation",
+          "work_item_id": "20260227_124618_3448c664",
+          "jurisdiction": [
+            "GLOBAL"
+          ],
+          "regulatory_profile": [],
+          "domain_pack": {
+            "id": "software-general-v1",
+            "version": "1.0.0",
+            "ontologies": [
+              "Capability Taxonomy"
+            ],
+            "standards": [],
+            "internal_playbooks": []
+          }
+        },
+        "intake": {
+          "business_request_raw": "UI start-run smoke after frontend patch",
+          "actors": [
+            "Business User"
+          ],
+          "channels": [
+            "Web"
+          ],
+          "data_elements": [
+            {
+              "name": "domainEntityId",
+              "classification": "INTERNAL"
+            }
+          ],
+          "constraints_from_user": [],
+          "assumptions": [
+            "All critical UI components have been identified and agreed upon by stakeholders.",
+            "The CI/CD pipeline is capable of integrating automated tests."
+          ]
+        },
+        "domain_mapping": {
+          "capabilities": [],
+          "domain_invariants": [
+            {
+              "id": "INV-001",
+              "statement": "Define explicit error handling and observability requirements."
+            },
+            {
+              "id": "INV-002",
+              "statement": "Include measurable non-functional requirements."
+            },
+            {
+              "id": "INV-003",
+              "statement": "Map acceptance criteria to executable test types."
+            }
+          ],
+          "glossary": [
+            {
+              "term": "AuditEvent",
+              "definition": "AuditEvent entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "DomainEvent",
+              "definition": "DomainEvent entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "ServiceRequest",
+              "definition": "ServiceRequest entity in current domain scope.",
+              "synonyms": []
+            },
+            {
+              "term": "User",
+              "definition": "User entity in current domain scope.",
+              "synonyms": []
+            }
+          ]
+        },
+        "compliance": {
+          "controls_triggered": [],
+          "privacy": {
+            "pii_masking_rules": [],
+            "retention_days": 365,
+            "access_model": "least_privilege"
+          }
+        },
+        "requirements": {
+          "functional": [
+            {
+              "id": "FR-001",
+              "title": "Automated UI Smoke Test Execution",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-001",
+                "scenarios": [
+                  "BDD-001-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-002",
+              "title": "Critical UI Component Coverage",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-002",
+                "scenarios": [
+                  "BDD-002-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-003",
+              "title": "Test Result Reporting",
+              "priority": "P1",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-003",
+                "scenarios": [
+                  "BDD-003-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-004",
+              "title": "Error Handling in Tests",
+              "priority": "P1",
+              "acceptance": {
+                "gherkin_feature_id": "BDD-004",
+                "scenarios": [
+                  "BDD-004-SC-001"
+                ]
+              }
+            },
+            {
+              "id": "FR-005",
+              "title": "Test Environment Setup",
+              "priority": "P1",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-006",
+              "title": "Integration with CI/CD Pipeline",
+              "priority": "P0",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-007",
+              "title": "Visual Regression Testing",
+              "priority": "P2",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            },
+            {
+              "id": "FR-008",
+              "title": "Test Maintenance and Updates",
+              "priority": "P2",
+              "acceptance": {
+                "gherkin_feature_id": "",
+                "scenarios": []
+              }
+            }
+          ],
+          "non_functional": [
+            {
+              "id": "NFR-001",
+              "category": "performance",
+              "metric": "Tests complete within 10 minutes.",
+              "verification_method": [
+                "unit",
+                "integration",
+                "e2e"
+              ]
+            },
+            {
+              "id": "NFR-002",
+              "category": "reliability",
+              "metric": "Test reliability rate of 99%.",
+              "verification_method": [
+                "unit",
+                "integration",
+                "e2e"
+              ]
+            },
+            {
+              "id": "NFR-003",
+              "category": "security",
+              "metric": "No sensitive data is exposed during tests.",
+              "verification_method": [
+                "unit",
+                "integration",
+                "e2e"
+              ]
+            },
+            {
+              "id": "NFR-004",
+              "category": "usability",
+              "metric": "Stakeholder satisfaction score of 90% on report usability.",
+              "verification_method": [
+                "unit",
+                "integration",
+                "e2e"
+              ]
+            },
+            {
+              "id": "NFR-005",
+              "category": "scalability",
+              "metric": "Test suite can handle 2x the current number of test cases.",
+              "verification_method": [
+                "unit",
+                "integration",
+                "e2e"
+              ]
+            }
+          ]
+        },
+        "bdd": {
+          "features": [
+            {
+              "id": "BDD-001",
+              "title": "Automated UI Smoke Test Execution",
+              "scenarios": [
+                {
+                  "id": "BDD-001-SC-001",
+                  "name": "Run smoke tests after frontend patch",
+                  "gherkin": [
+                    "Given a frontend patch is deployed",
+                    "When the CI/CD pipeline is triggered",
+                    "Then automated smoke tests should run and report results"
+                  ],
+                  "maps_to": [
+                    "FR-001"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-002",
+              "title": "Critical UI Component Coverage",
+              "scenarios": [
+                {
+                  "id": "BDD-002-SC-001",
+                  "name": "Validate critical UI components",
+                  "gherkin": [
+                    "Given a list of critical UI components",
+                    "When smoke tests are executed",
+                    "Then all critical components should be tested"
+                  ],
+                  "maps_to": [
+                    "FR-002"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-003",
+              "title": "Test Result Reporting",
+              "scenarios": [
+                {
+                  "id": "BDD-003-SC-001",
+                  "name": "Report smoke test results",
+                  "gherkin": [
+                    "Given smoke tests are executed",
+                    "When the tests complete",
+                    "Then results should be logged and accessible"
+                  ],
+                  "maps_to": [
+                    "FR-003"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BDD-004",
+              "title": "Error Handling in Tests",
+              "scenarios": [
+                {
+                  "id": "BDD-004-SC-001",
+                  "name": "Handle errors during test execution",
+                  "gherkin": [
+                    "Given a smoke test encounters an error",
+                    "When the error is detected",
+                    "Then it should be logged and reported"
+                  ],
+                  "maps_to": [
+                    "FR-004"
+                  ]
+                }
+              ]
+            }
+          ],
+          "lint": {
+            "gherkin_valid": true,
+            "missing_steps": []
+          }
+        },
+        "open_questions": [
+          {
+            "id": "Q-001",
+            "question": "What are target latency, throughput, and availability SLOs?",
+            "owner": "Client",
+            "severity": "high"
+          }
+        ],
+        "risks": [
+          {
+            "description": "Inaccurate identification of critical UI components could lead to insufficient test coverage.",
+            "impact": "high",
+            "mitigation": "Conduct thorough reviews and stakeholder consultations to ensure all critical components are covered."
+          },
+          {
+            "description": "Test execution time may exceed acceptable limits, delaying deployments.",
+            "impact": "medium",
+            "mitigation": "Optimize test scripts and parallelize execution where possible."
+          }
+        ],
+        "out_of_scope": [
+          "Testing of backend services or APIs.",
+          "Manual testing processes."
+        ],
+        "traceability": {
+          "links": [
+            {
+              "from": "FR-001",
+              "to": "BDD-001",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-002",
+              "to": "BDD-002",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-003",
+              "to": "BDD-003",
+              "type": "verified_by"
+            },
+            {
+              "from": "FR-004",
+              "to": "BDD-004",
+              "type": "verified_by"
+            }
+          ]
+        },
+        "conversation_audit": {
+          "thread_id": "THREAD-20260227_124618_3448c664",
+          "changes": []
+        },
+        "context_reference": {
+          "version_id": "20260227T124638Z_20260227_124618_3448c664",
+          "repo": "app",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "scm_version": "1.0",
+          "cp_version": "1.0",
+          "ha_version": "1.0"
+        },
+        "schema_version": "2.0.0",
+        "domain_pack_ref": {
+          "id": "software-general-v1",
+          "name": "General Software Domain Pack",
+          "version": "1.0.0"
+        },
+        "analyst_dag_trace": [
+          {
+            "step": "normalize_requirement",
+            "status": "completed",
+            "details": "actors=0, actions=0, objects=0"
+          },
+          {
+            "step": "map_to_capabilities",
+            "status": "completed",
+            "details": "primary=0, alternatives=0"
+          },
+          {
+            "step": "retrieve_internal_patterns",
+            "status": "completed",
+            "details": "patterns=0, standards=0"
+          },
+          {
+            "step": "retrieve_compliance_constraints",
+            "status": "completed",
+            "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+          },
+          {
+            "step": "synthesize_requirements_pack",
+            "status": "completed",
+            "details": "requirements_pack_ready=true, bdd_features=4"
+          },
+          {
+            "step": "run_quality_gates",
+            "status": "completed",
+            "details": "quality_gates=3, failed=1"
+          }
+        ],
+        "input_contract": {
+          "business_objective": "UI start-run smoke after frontend patch",
+          "use_case": "business_objectives",
+          "jurisdiction": "GLOBAL",
+          "data_classification": [
+            "INTERNAL"
+          ]
+        },
+        "capability_mapping": {
+          "framework": "Capability Taxonomy",
+          "primary_capabilities": [],
+          "alternative_capabilities": [],
+          "confidence": 0.0
+        },
+        "domain_model_excerpt": {
+          "entities": [
+            "AuditEvent",
+            "DomainEvent",
+            "ServiceRequest",
+            "User"
+          ],
+          "lifecycle_states": [
+            "completed",
+            "failed",
+            "processed",
+            "requested",
+            "validated"
+          ],
+          "relationships": [
+            "ServiceRequest emits DomainEvent and AuditEvent"
+          ]
+        },
+        "regulatory_constraints_applied": [],
+        "standards_guidance": [],
+        "gold_patterns": [],
+        "non_negotiables": [
+          "Define explicit error handling and observability requirements.",
+          "Include measurable non-functional requirements.",
+          "Map acceptance criteria to executable test types."
+        ],
+        "bdd_contract": {
+          "features": [
+            {
+              "id": "BDD-001",
+              "title": "Automated UI Smoke Test Execution",
+              "source_requirement_ids": [
+                "FR-001"
+              ],
+              "gherkin": "Feature: Automated UI Smoke Test Execution\nScenario: Run smoke tests after frontend patch\nGiven a frontend patch is deployed\nWhen the CI/CD pipeline is triggered\nThen automated smoke tests should run and report results"
+            },
+            {
+              "id": "BDD-002",
+              "title": "Critical UI Component Coverage",
+              "source_requirement_ids": [
+                "FR-002"
+              ],
+              "gherkin": "Feature: Critical UI Component Coverage\nScenario: Validate critical UI components\nGiven a list of critical UI components\nWhen smoke tests are executed\nThen all critical components should be tested"
+            },
+            {
+              "id": "BDD-003",
+              "title": "Test Result Reporting",
+              "source_requirement_ids": [
+                "FR-003"
+              ],
+              "gherkin": "Feature: Test Result Reporting\nScenario: Report smoke test results\nGiven smoke tests are executed\nWhen the tests complete\nThen results should be logged and accessible"
+            },
+            {
+              "id": "BDD-004",
+              "title": "Error Handling in Tests",
+              "source_requirement_ids": [
+                "FR-004"
+              ],
+              "gherkin": "Feature: Error Handling in Tests\nScenario: Handle errors during test execution\nGiven a smoke test encounters an error\nWhen the error is detected\nThen it should be logged and reported"
+            }
+          ],
+          "lint": {
+            "pass": true,
+            "issues": [],
+            "scenario_count": 4
+          }
+        },
+        "non_functional_contract": {
+          "must": [
+            {
+              "id": "NFR-002",
+              "title": "Test Reliability",
+              "description": "Ensure smoke tests produce consistent and reliable results.",
+              "category": "reliability",
+              "metric": "Test reliability rate of 99%.",
+              "acceptance_criteria": [
+                "Tests pass consistently under the same conditions.",
+                "Flaky tests are identified and resolved.",
+                "Test reliability is tracked and reported."
+              ]
+            },
+            {
+              "id": "NFR-003",
+              "title": "Security of Test Data",
+              "description": "Ensure that test data used in smoke tests is secure and does not expose sensitive information.",
+              "category": "security",
+              "metric": "No sensitive data is exposed during tests.",
+              "acceptance_criteria": [
+                "Test data is anonymized and does not contain sensitive information.",
+                "Access to test data is restricted to authorized personnel.",
+                "Security audits are conducted regularly on test data handling."
+              ]
+            }
+          ],
+          "should": [
+            {
+              "id": "NFR-001",
+              "title": "Test Execution Performance",
+              "description": "Ensure smoke tests execute within an acceptable time frame.",
+              "category": "performance",
+              "metric": "Tests complete within 10 minutes.",
+              "acceptance_criteria": [
+                "Average test execution time is under 10 minutes.",
+                "Test execution time is monitored and reported.",
+                "Performance issues are identified and addressed promptly."
+              ]
+            },
+            {
+              "id": "NFR-004",
+              "title": "Usability of Test Reports",
+              "description": "Ensure test reports are easy to understand and actionable.",
+              "category": "usability",
+              "metric": "Stakeholder satisfaction score of 90% on report usability.",
+              "acceptance_criteria": [
+                "Reports are clear and concise with actionable insights.",
+                "Stakeholders can easily access and interpret reports.",
+                "Feedback on report usability is collected and acted upon."
+              ]
+            },
+            {
+              "id": "NFR-005",
+              "title": "Scalability of Test Suite",
+              "description": "Ensure the smoke test suite can scale to accommodate future UI components and workflows.",
+              "category": "scalability",
+              "metric": "Test suite can handle 2x the current number of test cases.",
+              "acceptance_criteria": [
+                "Test suite architecture supports easy addition of new tests.",
+                "Performance remains stable as the number of tests increases.",
+                "Scalability is tested and validated regularly."
+              ]
+            }
+          ]
+        },
+        "acceptance_test_mapping": [
+          {
+            "requirement_id": "FR-001",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-001"
+            ]
+          },
+          {
+            "requirement_id": "FR-002",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-002"
+            ]
+          },
+          {
+            "requirement_id": "FR-003",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-003"
+            ]
+          },
+          {
+            "requirement_id": "FR-004",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": [
+              "BDD-004"
+            ]
+          },
+          {
+            "requirement_id": "FR-005",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-006",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-007",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          },
+          {
+            "requirement_id": "FR-008",
+            "test_types": [
+              "e2e",
+              "integration",
+              "unit"
+            ],
+            "bdd_scenarios": []
+          }
+        ],
+        "quality_gates": [
+          {
+            "name": "gherkin_syntax",
+            "status": "PASS",
+            "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+            "details": {
+              "scenario_count": 4,
+              "issues": []
+            }
+          },
+          {
+            "name": "requirements_completeness",
+            "status": "FAIL",
+            "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+            "details": {
+              "functional_count": 8,
+              "non_functional_count": 5,
+              "min_functional": 6,
+              "min_non_functional": 4,
+              "scenario_count": 4,
+              "min_scenarios": 4,
+              "capability_count": 0
+            }
+          },
+          {
+            "name": "compliance_constraints_applied",
+            "status": "WARN",
+            "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+            "details": {
+              "jurisdiction": "GLOBAL",
+              "data_classification": [
+                "INTERNAL"
+              ],
+              "constraints_count": 0
+            }
+          }
+        ],
+        "executive_summary": "Automate UI smoke tests to ensure frontend stability after patches, integrating them into the CI/CD pipeline for consistent validation."
+      },
+      "vb6_analysis": {},
+      "proposed_additions": {
+        "functional": [
+          {
+            "id": "FR-001",
+            "title": "Automated UI Smoke Test Execution",
+            "description": "Develop and execute automated smoke tests for the UI after each frontend patch.",
+            "priority": "P0",
+            "acceptance_criteria": [
+              "Smoke tests are automatically triggered after each frontend patch deployment.",
+              "Tests cover all critical UI components and workflows.",
+              "Test results are logged and reported in the CI/CD pipeline."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "FR-002",
+            "title": "Critical UI Component Coverage",
+            "description": "Identify and include all critical UI components in the smoke test suite.",
+            "priority": "P0",
+            "acceptance_criteria": [
+              "A list of critical UI components is documented and approved by stakeholders.",
+              "All identified components are included in the smoke test suite.",
+              "Tests for each component validate both functionality and visual integrity."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "FR-003",
+            "title": "Test Result Reporting",
+            "description": "Provide detailed reporting of smoke test results within the CI/CD pipeline.",
+            "priority": "P1",
+            "acceptance_criteria": [
+              "Test results include pass/fail status for each test case.",
+              "Reports are accessible to all relevant stakeholders.",
+              "Reports include timestamps and environment details for each test run."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "FR-004",
+            "title": "Error Handling in Tests",
+            "description": "Implement robust error handling in smoke tests to ensure accurate results.",
+            "priority": "P1",
+            "acceptance_criteria": [
+              "Tests gracefully handle unexpected UI changes or errors.",
+              "Error logs provide clear information for troubleshooting.",
+              "Tests retry failed steps where applicable to confirm issues."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "FR-005",
+            "title": "Test Environment Setup",
+            "description": "Ensure a consistent and isolated environment for running UI smoke tests.",
+            "priority": "P1",
+            "acceptance_criteria": [
+              "Test environment mirrors production settings as closely as possible.",
+              "Environment setup is automated and repeatable.",
+              "Environment is isolated to prevent interference from other tests or processes."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "FR-006",
+            "title": "Integration with CI/CD Pipeline",
+            "description": "Integrate UI smoke tests into the existing CI/CD pipeline for automated execution.",
+            "priority": "P0",
+            "acceptance_criteria": [
+              "Smoke tests are triggered automatically by the CI/CD pipeline after a frontend patch.",
+              "Pipeline configuration allows for easy updates to the test suite.",
+              "Pipeline provides feedback on test execution status and results."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "FR-007",
+            "title": "Visual Regression Testing",
+            "description": "Include visual regression testing in the smoke test suite to catch unintended UI changes.",
+            "priority": "P2",
+            "acceptance_criteria": [
+              "Visual snapshots are taken before and after patches for comparison.",
+              "Differences are highlighted and reported in test results.",
+              "Stakeholders are notified of significant visual changes."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "FR-008",
+            "title": "Test Maintenance and Updates",
+            "description": "Regularly update and maintain the smoke test suite to reflect UI changes.",
+            "priority": "P2",
+            "acceptance_criteria": [
+              "Test suite is reviewed and updated after each major UI change.",
+              "Obsolete tests are removed and new tests are added as needed.",
+              "Documentation is maintained for all test cases and their purposes."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          }
+        ],
+        "non_functional": [
+          {
+            "id": "NFR-001",
+            "title": "Test Execution Performance",
+            "description": "Ensure smoke tests execute within an acceptable time frame.",
+            "category": "performance",
+            "metric": "Tests complete within 10 minutes.",
+            "acceptance_criteria": [
+              "Average test execution time is under 10 minutes.",
+              "Test execution time is monitored and reported.",
+              "Performance issues are identified and addressed promptly."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "NFR-002",
+            "title": "Test Reliability",
+            "description": "Ensure smoke tests produce consistent and reliable results.",
+            "category": "reliability",
+            "metric": "Test reliability rate of 99%.",
+            "acceptance_criteria": [
+              "Tests pass consistently under the same conditions.",
+              "Flaky tests are identified and resolved.",
+              "Test reliability is tracked and reported."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "NFR-003",
+            "title": "Security of Test Data",
+            "description": "Ensure that test data used in smoke tests is secure and does not expose sensitive information.",
+            "category": "security",
+            "metric": "No sensitive data is exposed during tests.",
+            "acceptance_criteria": [
+              "Test data is anonymized and does not contain sensitive information.",
+              "Access to test data is restricted to authorized personnel.",
+              "Security audits are conducted regularly on test data handling."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "NFR-004",
+            "title": "Usability of Test Reports",
+            "description": "Ensure test reports are easy to understand and actionable.",
+            "category": "usability",
+            "metric": "Stakeholder satisfaction score of 90% on report usability.",
+            "acceptance_criteria": [
+              "Reports are clear and concise with actionable insights.",
+              "Stakeholders can easily access and interpret reports.",
+              "Feedback on report usability is collected and acted upon."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          },
+          {
+            "id": "NFR-005",
+            "title": "Scalability of Test Suite",
+            "description": "Ensure the smoke test suite can scale to accommodate future UI components and workflows.",
+            "category": "scalability",
+            "metric": "Test suite can handle 2x the current number of test cases.",
+            "acceptance_criteria": [
+              "Test suite architecture supports easy addition of new tests.",
+              "Performance remains stable as the number of tests increases.",
+              "Scalability is tested and validated regularly."
+            ],
+            "grounding": {
+              "classification": "proposed_extension",
+              "reason": "no direct grounding evidence in extracted legacy artifacts"
+            }
+          }
+        ]
+      },
+      "domain_pack": {
+        "id": "software-general-v1",
+        "name": "General Software Domain Pack",
+        "version": "1.0.0"
+      },
+      "capability_mapping": {
+        "framework": "Capability Taxonomy",
+        "primary_capabilities": [],
+        "alternative_capabilities": [],
+        "confidence": 0.0
+      },
+      "domain_model_excerpt": {
+        "entities": [
+          "AuditEvent",
+          "DomainEvent",
+          "ServiceRequest",
+          "User"
+        ],
+        "lifecycle_states": [
+          "completed",
+          "failed",
+          "processed",
+          "requested",
+          "validated"
+        ],
+        "relationships": [
+          "ServiceRequest emits DomainEvent and AuditEvent"
+        ]
+      },
+      "regulatory_constraints": [],
+      "bdd_contract": {
+        "features": [
+          {
+            "id": "BDD-001",
+            "title": "Automated UI Smoke Test Execution",
+            "source_requirement_ids": [
+              "FR-001"
+            ],
+            "gherkin": "Feature: Automated UI Smoke Test Execution\nScenario: Run smoke tests after frontend patch\nGiven a frontend patch is deployed\nWhen the CI/CD pipeline is triggered\nThen automated smoke tests should run and report results"
+          },
+          {
+            "id": "BDD-002",
+            "title": "Critical UI Component Coverage",
+            "source_requirement_ids": [
+              "FR-002"
+            ],
+            "gherkin": "Feature: Critical UI Component Coverage\nScenario: Validate critical UI components\nGiven a list of critical UI components\nWhen smoke tests are executed\nThen all critical components should be tested"
+          },
+          {
+            "id": "BDD-003",
+            "title": "Test Result Reporting",
+            "source_requirement_ids": [
+              "FR-003"
+            ],
+            "gherkin": "Feature: Test Result Reporting\nScenario: Report smoke test results\nGiven smoke tests are executed\nWhen the tests complete\nThen results should be logged and accessible"
+          },
+          {
+            "id": "BDD-004",
+            "title": "Error Handling in Tests",
+            "source_requirement_ids": [
+              "FR-004"
+            ],
+            "gherkin": "Feature: Error Handling in Tests\nScenario: Handle errors during test execution\nGiven a smoke test encounters an error\nWhen the error is detected\nThen it should be logged and reported"
+          }
+        ],
+        "lint": {
+          "pass": true,
+          "issues": [],
+          "scenario_count": 4
+        }
+      },
+      "quality_gates": [
+        {
+          "name": "gherkin_syntax",
+          "status": "PASS",
+          "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+          "details": {
+            "scenario_count": 4,
+            "issues": []
+          }
+        },
+        {
+          "name": "requirements_completeness",
+          "status": "FAIL",
+          "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+          "details": {
+            "functional_count": 8,
+            "non_functional_count": 5,
+            "min_functional": 6,
+            "min_non_functional": 4,
+            "scenario_count": 4,
+            "min_scenarios": 4,
+            "capability_count": 0
+          }
+        },
+        {
+          "name": "compliance_constraints_applied",
+          "status": "WARN",
+          "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+          "details": {
+            "jurisdiction": "GLOBAL",
+            "data_classification": [
+              "INTERNAL"
+            ],
+            "constraints_count": 0
+          }
+        }
+      ],
+      "acceptance_test_mapping": [
+        {
+          "requirement_id": "FR-001",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-001"
+          ]
+        },
+        {
+          "requirement_id": "FR-002",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-002"
+          ]
+        },
+        {
+          "requirement_id": "FR-003",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-003"
+          ]
+        },
+        {
+          "requirement_id": "FR-004",
+          "test_types": [
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": [
+            "BDD-004"
+          ]
+        },
+        {
+          "requirement_id": "FR-005",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-006",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-007",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        },
+        {
+          "requirement_id": "FR-008",
+          "test_types": [
+            "e2e",
+            "integration",
+            "unit"
+          ],
+          "bdd_scenarios": []
+        }
+      ],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "question": "What are target latency, throughput, and availability SLOs?",
+          "owner": "Client",
+          "severity": "high"
+        }
+      ],
+      "standards_guidance": [],
+      "gold_patterns": [],
+      "conversation_audit": {
+        "thread_id": "THREAD-20260227_124618_3448c664",
+        "changes": []
+      },
+      "modernization_readiness": {},
+      "migration_strategy_recommendation": {},
+      "source_target_modernization_profile": {},
+      "project_business_summaries": [],
+      "business_rules_catalog": [],
+      "raw_artifacts": {
+        "legacy_inventory": {
+          "artifact_type": "legacy_inventory",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            },
+            "source_language": "unknown",
+            "ecosystem": "legacy"
+          },
+          "summary": {
+            "counts": {
+              "projects": 0,
+              "programs": 0,
+              "modules": 0,
+              "forms_or_screens": 0,
+              "forms_referenced": 0,
+              "forms_unmapped": 0,
+              "controls": 0,
+              "dependencies": 0,
+              "event_handlers": 0
+            },
+            "data_touchpoints": [],
+            "modernization_readiness": {
+              "score": 0,
+              "tier": "medium",
+              "recommended_strategy": "",
+              "required_actions": []
+            }
+          },
+          "projects": [],
+          "form_coverage": [],
+          "artifact_id": "art_legacy_inventory_ece6b80e4bba4e9f",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "repo_landscape": {
+          "artifact_type": "repo_landscape",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "projects": [],
+          "shared_artifacts": {
+            "shared_db_files": [],
+            "shared_modules": [],
+            "shared_dependencies": []
+          },
+          "artifact_id": "art_repo_landscape_6badc10a901b4754",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "scope_lock": {
+          "artifact_type": "scope_lock",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "decision": "root_only",
+          "rationale": "Single canonical project detected.",
+          "approver": "",
+          "approved_at": "",
+          "status": "LOCKED",
+          "artifact_id": "art_scope_lock_ef982bbc391c4dbd",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "variant_inventory": {
+          "artifact_type": "variant_inventory",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "variants": [],
+          "artifact_id": "art_variant_inventory_db27560ec5c04bf1",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "dependency_inventory": {
+          "artifact_type": "dependency_inventory",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "dependencies": [],
+          "artifact_id": "art_dependency_inventory_444b80c5cf844e88",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "event_map": {
+          "artifact_type": "event_map",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "entries": [],
+          "artifact_id": "art_event_map_0596085678d84db9",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "sql_catalog": {
+          "artifact_type": "sql_catalog",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "statements": [],
+          "artifact_id": "art_sql_catalog_7101be1396be4053",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "sql_map": {
+          "artifact_type": "sql_map",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "entries": [],
+          "artifact_id": "art_sql_map_ef01172603264bb9",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "data_access_map": {
+          "artifact_type": "data_access_map",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "rows": [],
+          "complete": false,
+          "coverage_score": 0.0,
+          "artifact_id": "art_data_access_map_176d6e621f2347bd",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "recordset_ops": {
+          "artifact_type": "recordset_ops",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "ops": [],
+          "artifact_id": "art_recordset_ops_003f14bdd0bc443d",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "procedure_summary": {
+          "artifact_type": "procedure_summary",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "procedures": [],
+          "artifact_id": "art_procedure_summary_5f859c0707b84268",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "form_dossier": {
+          "artifact_type": "form_dossier",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "dossiers": [],
+          "artifact_id": "art_form_dossier_edc7201c082249f3",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "business_rule_catalog": {
+          "artifact_type": "business_rule_catalog",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "rules": [],
+          "artifact_id": "art_business_rule_catalog_45854d1748c649e1",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "detector_findings": {
+          "artifact_type": "detector_findings",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "findings": [],
+          "profiles": {
+            "error_handling": {
+              "on_error_resume_next": 0,
+              "on_error_goto": 0,
+              "late_bound_com_calls": 0,
+              "default_instance_refs": 0,
+              "control_array_markers": 0,
+              "win32_declares": 0
+            }
+          },
+          "artifact_id": "art_detector_findings_cd94a131bd0c4da3",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "risk_register": {
+          "artifact_type": "risk_register",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "risks": [],
+          "artifact_id": "art_risk_register_1e8baa74547d46f9",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "orphan_analysis": {
+          "artifact_type": "orphan_analysis",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "orphans": [],
+          "analysis": {
+            "startup_roots": [],
+            "reachable_forms": [],
+            "mapped_form_count": 0
+          },
+          "artifact_id": "art_orphan_analysis_4a0cfa0493c0499c",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "delivery_constitution": {
+          "artifact_type": "delivery_constitution",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "principles": [
+            "Preserve critical legacy behavior first; modernization must prove functional equivalence.",
+            "Every modernization decision must map to explicit evidence (code, query, event, or rule).",
+            "No breaking change to data contracts without approved migration path and rollback evidence."
+          ],
+          "policy_context": {
+            "domain_pack_id": "software-general-v1",
+            "domain_pack_version": "1.0.0",
+            "governance_tier": ""
+          },
+          "sources": [
+            "legacy_inventory",
+            "convention_profile",
+            "domain_pack",
+            "memory_constraints"
+          ],
+          "artifact_id": "art_delivery_constitution_031b531ad85c4075",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "variant_diff_report": {
+          "artifact_type": "variant_diff_report",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "project_count": 0,
+          "comparisons": [],
+          "decision_required": false,
+          "status": "PASS",
+          "decision_prompt": "Single project variant detected; no variant scope decision required.",
+          "schema_divergence": {
+            "detected": false,
+            "pairs": [],
+            "blocking_pairs": []
+          },
+          "artifact_id": "art_variant_diff_report_18074f3b36b245fc",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "reporting_model": {
+          "artifact_type": "reporting_model",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "data_environments": [],
+          "data_reports": [],
+          "report_entrypoints": [],
+          "mapping": {
+            "mapped_count": 0,
+            "unknown_data_environments": []
+          },
+          "connection_path_mismatches": [],
+          "status": "PASS",
+          "artifact_id": "art_reporting_model_928b940a64bf4b66",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "identity_access_model": {
+          "artifact_type": "identity_access_model",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "what_we_found": {
+            "auth_tables": [],
+            "role_model_present": false,
+            "plaintext_credential_signal": false
+          },
+          "what_we_did_not_find": [
+            "Explicit role/permission model in schema or queries."
+          ],
+          "questions_to_confirm": [
+            "Is this system single-user or multi-user under concurrent teller/ops usage?",
+            "What authorization model should be preserved or introduced during modernization?"
+          ],
+          "sensitive_query_samples": [],
+          "status": "WARN",
+          "artifact_id": "art_identity_access_model_0cf1f0594a624be3",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "discover_review_checklist": {
+          "artifact_type": "discover_review_checklist",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "skill_pack": {
+              "id": "generic_legacy",
+              "version": "1.0.0",
+              "confidence": 0.0
+            },
+            "context_reference": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "version_id": "20260227T124638Z_20260227_124618_3448c664"
+            }
+          },
+          "overall_status": "FAIL",
+          "checks": [
+            {
+              "id": "handler_inventory_completeness",
+              "title": "Handler Inventory Completeness",
+              "status": "PASS",
+              "detail": "All analyzed forms meet handler coverage threshold."
+            },
+            {
+              "id": "report_model_reconciled",
+              "title": "Report Model Reconciled",
+              "status": "PASS",
+              "detail": "Reporting model and entrypoints reconciled."
+            },
+            {
+              "id": "variant_resolution",
+              "title": "Variant Resolution",
+              "status": "PASS",
+              "detail": "Single project variant detected; no variant scope decision required."
+            },
+            {
+              "id": "variant_schema_divergence",
+              "title": "Variant Schema Divergence",
+              "status": "PASS",
+              "detail": "No cross-variant schema naming divergence detected."
+            },
+            {
+              "id": "key_safety_issues_identified",
+              "title": "Key Safety Issues Identified",
+              "status": "FAIL",
+              "detail": "No explicit SQL/credential safety signals detected in extracted artifacts. Detection is incomplete and blocks progression."
+            },
+            {
+              "id": "schema_key_verification",
+              "title": "Schema Key Verification",
+              "status": "PASS",
+              "detail": "No delete-by-customer transaction key hazard detected."
+            },
+            {
+              "id": "identity_access_model",
+              "title": "Identity & Access Model",
+              "status": "WARN",
+              "detail": "Role model or credential handling requires confirmation."
+            }
+          ],
+          "low_coverage_forms": [],
+          "artifact_id": "art_discover_review_checklist_92b5ed6f5f8a42bb",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "artifact_index": {
+          "artifact_type": "artifact_index",
+          "artifact_version": "1.0",
+          "metadata": {
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "context_reference": {
+              "repo": "app",
+              "commit_sha": "unknown"
+            }
+          },
+          "artifacts": [
+            {
+              "type": "legacy_inventory",
+              "ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_ece6b80e4bba4e9f"
+            },
+            {
+              "type": "repo_landscape",
+              "ref": "artifact://repo_landscape/1.0/art_repo_landscape_6badc10a901b4754"
+            },
+            {
+              "type": "scope_lock",
+              "ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd"
+            },
+            {
+              "type": "variant_inventory",
+              "ref": "artifact://variant_inventory/1.0/art_variant_inventory_db27560ec5c04bf1"
+            },
+            {
+              "type": "dependency_inventory",
+              "ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_444b80c5cf844e88"
+            },
+            {
+              "type": "event_map",
+              "ref": "artifact://event_map/1.0/art_event_map_0596085678d84db9"
+            },
+            {
+              "type": "sql_catalog",
+              "ref": "artifact://sql_catalog/1.0/art_sql_catalog_7101be1396be4053"
+            },
+            {
+              "type": "sql_map",
+              "ref": "artifact://sql_map/1.0/art_sql_map_ef01172603264bb9"
+            },
+            {
+              "type": "data_access_map",
+              "ref": "artifact://data_access_map/1.0/art_data_access_map_176d6e621f2347bd"
+            },
+            {
+              "type": "recordset_ops",
+              "ref": "artifact://recordset_ops/1.0/art_recordset_ops_003f14bdd0bc443d"
+            },
+            {
+              "type": "procedure_summary",
+              "ref": "artifact://procedure_summary/1.0/art_procedure_summary_5f859c0707b84268"
+            },
+            {
+              "type": "form_dossier",
+              "ref": "artifact://form_dossier/1.0/art_form_dossier_edc7201c082249f3"
+            },
+            {
+              "type": "business_rule_catalog",
+              "ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_45854d1748c649e1"
+            },
+            {
+              "type": "detector_findings",
+              "ref": "artifact://detector_findings/1.0/art_detector_findings_cd94a131bd0c4da3"
+            },
+            {
+              "type": "risk_register",
+              "ref": "artifact://risk_register/1.0/art_risk_register_1e8baa74547d46f9"
+            },
+            {
+              "type": "orphan_analysis",
+              "ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_4a0cfa0493c0499c"
+            },
+            {
+              "type": "delivery_constitution",
+              "ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_031b531ad85c4075"
+            },
+            {
+              "type": "variant_diff_report",
+              "ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_18074f3b36b245fc"
+            },
+            {
+              "type": "reporting_model",
+              "ref": "artifact://reporting_model/1.0/art_reporting_model_928b940a64bf4b66"
+            },
+            {
+              "type": "identity_access_model",
+              "ref": "artifact://identity_access_model/1.0/art_identity_access_model_0cf1f0594a624be3"
+            },
+            {
+              "type": "discover_review_checklist",
+              "ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_92b5ed6f5f8a42bb"
+            }
+          ],
+          "artifact_id": "art_artifact_index_31e6af97e4f64103",
+          "run_id": "run_ccf23dd7cfa4",
+          "generated_at": "2026-02-27T12:47:18.105978+00:00",
+          "producer": {
+            "agent": "Analyst Agent",
+            "skill_pack": "generic_legacy",
+            "skill_version": "1.0.0"
+          },
+          "context": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "canonical_project": "Project 1",
+            "target_stack": {
+              "language": "Unknown",
+              "ui": "Unknown",
+              "db": "Unknown"
+            }
+          }
+        },
+        "artifact_refs": {
+          "legacy_inventory": "artifact://legacy_inventory/1.0/art_legacy_inventory_ece6b80e4bba4e9f",
+          "repo_landscape": "artifact://repo_landscape/1.0/art_repo_landscape_6badc10a901b4754",
+          "scope_lock": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+          "variant_inventory": "artifact://variant_inventory/1.0/art_variant_inventory_db27560ec5c04bf1",
+          "dependency_inventory": "artifact://dependency_inventory/1.0/art_dependency_inventory_444b80c5cf844e88",
+          "event_map": "artifact://event_map/1.0/art_event_map_0596085678d84db9",
+          "sql_catalog": "artifact://sql_catalog/1.0/art_sql_catalog_7101be1396be4053",
+          "sql_map": "artifact://sql_map/1.0/art_sql_map_ef01172603264bb9",
+          "data_access_map": "artifact://data_access_map/1.0/art_data_access_map_176d6e621f2347bd",
+          "recordset_ops": "artifact://recordset_ops/1.0/art_recordset_ops_003f14bdd0bc443d",
+          "procedure_summary": "artifact://procedure_summary/1.0/art_procedure_summary_5f859c0707b84268",
+          "form_dossier": "artifact://form_dossier/1.0/art_form_dossier_edc7201c082249f3",
+          "business_rule_catalog": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_45854d1748c649e1",
+          "detector_findings": "artifact://detector_findings/1.0/art_detector_findings_cd94a131bd0c4da3",
+          "risk_register": "artifact://risk_register/1.0/art_risk_register_1e8baa74547d46f9",
+          "orphan_analysis": "artifact://orphan_analysis/1.0/art_orphan_analysis_4a0cfa0493c0499c",
+          "delivery_constitution": "artifact://delivery_constitution/1.0/art_delivery_constitution_031b531ad85c4075",
+          "variant_diff_report": "artifact://variant_diff_report/1.0/art_variant_diff_report_18074f3b36b245fc",
+          "reporting_model": "artifact://reporting_model/1.0/art_reporting_model_928b940a64bf4b66",
+          "identity_access_model": "artifact://identity_access_model/1.0/art_identity_access_model_0cf1f0594a624be3",
+          "discover_review_checklist": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_92b5ed6f5f8a42bb",
+          "artifact_index": "artifact://artifact_index/1.0/art_artifact_index_31e6af97e4f64103"
+        },
+        "raw_compiler_version": "2.2.0"
+      },
+      "analyst_report_v2": {
+        "artifact_type": "analyst_report",
+        "artifact_version": "2.0",
+        "artifact_id": "art_analyst_report_28b1142300c34c25",
+        "run_id": "run_52e2d9ccda3e",
+        "generated_at": "2026-02-27T12:47:18.108864+00:00",
+        "producer": {
+          "agent": "Analyst Agent",
+          "skill_pack": "generic_legacy",
+          "skill_version": "1.0.0"
+        },
+        "context": {
+          "repo": "app",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+          "canonical_project": "Project 1",
+          "target_stack": {
+            "language": "Unknown",
+            "ui": "Unknown",
+            "db": "Unknown"
+          }
+        },
+        "metadata": {
+          "compiler_version": "2.2.0",
+          "project": {
+            "name": "UI Smoke Test Automation",
+            "objective": "Ensure the UI functions correctly after a frontend patch by conducting a start-run smoke test.",
+            "domain": "software",
+            "audience_modes": [
+              "client",
+              "engineering"
+            ]
+          },
+          "generated_at": "2026-02-27T12:47:18.108864+00:00",
+          "skill_pack": {
+            "id": "generic_legacy",
+            "name": "Generic Legacy Skill",
+            "version": "1.0.0",
+            "confidence": 0.0,
+            "rationale": ""
+          },
+          "context_reference": {
+            "repo": "app",
+            "branch": "detached",
+            "commit_sha": "unknown",
+            "version_id": "20260227T124638Z_20260227_124618_3448c664",
+            "scm_version": "1.0",
+            "cp_version": "1.0",
+            "ha_version": "1.0"
+          }
+        },
+        "decision_brief": {
+          "at_a_glance": {
+            "readiness_score": 60,
+            "risk_tier": "medium",
+            "readiness_confidence": 0.73,
+            "readiness_delta_note": "Score is weighted by discovered risk/blocker density (risks=0, high_severity=0, failed_review_checks=1) and extraction coverage. Lower scores across runs usually indicate improved detection coverage, not model instability.",
+            "readiness_drivers": {
+              "risk_register_rows": 0,
+              "high_severity_risks": 0,
+              "failed_review_checks": 1,
+              "forms_unmapped": 0
+            },
+            "inventory_summary": {
+              "projects": 0,
+              "forms": 0,
+              "forms_referenced": 0,
+              "forms_unmapped": 0,
+              "controls": 0,
+              "dependencies": 0,
+              "event_handlers": 0,
+              "tables_touched": []
+            },
+            "headline": "Phased modernization recommended."
+          },
+          "recommended_strategy": {
+            "name": "Phased modernization",
+            "rationale": "Preserve behavior first, then modernize in controlled phases.",
+            "phases": [
+              {
+                "id": "PH0",
+                "title": "Baseline and equivalence harness",
+                "outcome": "Capture golden flows and baseline outputs.",
+                "exit_criteria": [
+                  "Golden flows agreed",
+                  "Baseline outputs captured",
+                  "Parity checks defined"
+                ]
+              },
+              {
+                "id": "PH1",
+                "title": "Incremental migration and dependency replacement",
+                "outcome": "Migrate forms/modules with dependency risk controls.",
+                "exit_criteria": [
+                  "P0 flows migrated",
+                  "Critical dependencies addressed",
+                  "Regression suite passing"
+                ]
+              },
+              {
+                "id": "PH2",
+                "title": "Hardening and release evidence",
+                "outcome": "Finalize quality gates and publish evidence pack.",
+                "exit_criteria": [
+                  "Quality gates pass",
+                  "Traceability complete",
+                  "Release readiness approved"
+                ]
+              }
+            ]
+          },
+          "decisions_required": {
+            "blocking": [
+              {
+                "id": "DEC-UI-001",
+                "question": "Target UI framework selection for migrated forms",
+                "options": [
+                  "WinForms",
+                  "WPF",
+                  "Web UI"
+                ],
+                "default_recommendation": "WinForms for lowest event-model delta from VB6 unless UX redesign is in scope.",
+                "impact_if_wrong": "High rework risk in form/event parity and control migration."
+              },
+              {
+                "id": "DEC-OCX-001",
+                "question": "ActiveX/OCX replacement strategy by dependency",
+                "options": [
+                  "Replace",
+                  "Wrap temporarily",
+                  "Isolate and defer"
+                ],
+                "default_recommendation": "Replace common controls and isolate only high-risk dependencies behind adapters.",
+                "impact_if_wrong": "Runtime regressions and release delays from unresolved control behavior."
+              },
+              {
+                "id": "DEC-DB-001",
+                "question": "Database contract strategy during migration",
+                "options": [
+                  "Preserve schema/queries",
+                  "Introduce migration layer",
+                  "Redesign schema"
+                ],
+                "default_recommendation": "Preserve contracts initially and modernize behind a compatibility layer.",
+                "impact_if_wrong": "Business rule drift and data-side regressions."
+              },
+              {
+                "id": "DEC-IAM-001",
+                "question": "Confirm identity/access model (role model, multi-user assumptions, and credential handling).",
+                "options": [
+                  "Single-user parity",
+                  "Multi-role RBAC model",
+                  "Hybrid transitional model"
+                ],
+                "default_recommendation": "Define target role model and credential policy before implementation.",
+                "impact_if_wrong": "Authorization defects and security/compliance regressions."
+              },
+              {
+                "id": "Q-001",
+                "question": "What are target latency, throughput, and availability SLOs?",
+                "options": [],
+                "default_recommendation": "Resolve with product/business owner before implementation commitment.",
+                "impact_if_wrong": "Execution ambiguity and acceptance-test churn."
+              }
+            ],
+            "non_blocking": [
+              {
+                "id": "DEC-OBS-001",
+                "question": "Logging and observability stack for migrated runtime",
+                "options": [
+                  "OpenTelemetry + structured logs",
+                  "Basic logs only"
+                ],
+                "default_recommendation": "OpenTelemetry + structured logs for parity troubleshooting.",
+                "impact_if_wrong": "Lower diagnosability during phased cutover."
+              }
+            ]
+          },
+          "top_risks": [
+            {
+              "id": "RISK-1",
+              "severity": "high",
+              "description": "Inaccurate identification of critical UI components could lead to insufficient test coverage.",
+              "mitigation": "Conduct thorough reviews and stakeholder consultations to ensure all critical components are covered.",
+              "evidence_refs": []
+            },
+            {
+              "id": "RISK-2",
+              "severity": "medium",
+              "description": "Test execution time may exceed acceptable limits, delaying deployments.",
+              "mitigation": "Optimize test scripts and parallelize execution where possible.",
+              "evidence_refs": []
+            }
+          ],
+          "next_steps": [
+            {
+              "id": "NS-001",
+              "title": "Confirm blocking decisions and freeze modernization scope",
+              "owner_role": "Tech Lead",
+              "done_when": [
+                "Blocking decisions approved",
+                "Backlog dependencies resolved"
+              ]
+            },
+            {
+              "id": "NS-002",
+              "title": "Implement golden-flow harness for parity validation",
+              "owner_role": "QA Lead",
+              "done_when": [
+                "Golden flow tests created",
+                "Baseline artifacts stored"
+              ]
+            }
+          ]
+        },
+        "delivery_spec": {
+          "scope": {
+            "in_scope": [
+              "Preserve legacy business behavior and workflows",
+              "Migrate UI and code to target stack",
+              "Control dependency and data-side risks during migration"
+            ],
+            "out_of_scope": [
+              "Testing of backend services or APIs.",
+              "Manual testing processes."
+            ]
+          },
+          "constraints": {
+            "musts": [
+              "No critical workflow regression for P0 flows",
+              "Traceability from requirements to tests and evidence artifacts"
+            ],
+            "shoulds": [
+              "Phased rollout with rollback points",
+              "Preserve DB contracts unless explicitly approved to change"
+            ]
+          },
+          "backlog": {
+            "items": [
+              {
+                "id": "RM-001",
+                "type": "risk_remediation",
+                "priority": "P0",
+                "title": "Define identity and access model for modernization scope",
+                "outcome": "Confirm role model, credential policy, and multi-user assumptions before implementation.",
+                "acceptance_criteria": [
+                  "Remediation implemented and validated against affected legacy flow.",
+                  "Evidence artifacts updated with before/after traceability."
+                ],
+                "depends_on": [],
+                "evidence_expected": [
+                  "identity_access_decision_record",
+                  "authorization_test_plan",
+                  "traceability_matrix"
+                ],
+                "grounding": {
+                  "classification": "derived_from_legacy",
+                  "reason": "derived from discovered risk and review artifacts"
+                }
+              }
+            ]
+          },
+          "proposed_extensions": [
+            {
+              "id": "FR-001",
+              "type": "functional",
+              "priority": "P0",
+              "title": "Automated UI Smoke Test Execution",
+              "outcome": "Develop and execute automated smoke tests for the UI after each frontend patch.",
+              "acceptance_criteria": [
+                "Smoke tests are automatically triggered after each frontend patch deployment.",
+                "Tests cover all critical UI components and workflows.",
+                "Test results are logged and reported in the CI/CD pipeline."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "traceability_matrix",
+                "functional_test_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "FR-002",
+              "type": "functional",
+              "priority": "P0",
+              "title": "Critical UI Component Coverage",
+              "outcome": "Identify and include all critical UI components in the smoke test suite.",
+              "acceptance_criteria": [
+                "A list of critical UI components is documented and approved by stakeholders.",
+                "All identified components are included in the smoke test suite.",
+                "Tests for each component validate both functionality and visual integrity."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "traceability_matrix",
+                "functional_test_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "FR-003",
+              "type": "functional",
+              "priority": "P1",
+              "title": "Test Result Reporting",
+              "outcome": "Provide detailed reporting of smoke test results within the CI/CD pipeline.",
+              "acceptance_criteria": [
+                "Test results include pass/fail status for each test case.",
+                "Reports are accessible to all relevant stakeholders.",
+                "Reports include timestamps and environment details for each test run."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "traceability_matrix",
+                "functional_test_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "FR-004",
+              "type": "functional",
+              "priority": "P1",
+              "title": "Error Handling in Tests",
+              "outcome": "Implement robust error handling in smoke tests to ensure accurate results.",
+              "acceptance_criteria": [
+                "Tests gracefully handle unexpected UI changes or errors.",
+                "Error logs provide clear information for troubleshooting.",
+                "Tests retry failed steps where applicable to confirm issues."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "traceability_matrix",
+                "functional_test_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "FR-005",
+              "type": "functional",
+              "priority": "P1",
+              "title": "Test Environment Setup",
+              "outcome": "Ensure a consistent and isolated environment for running UI smoke tests.",
+              "acceptance_criteria": [
+                "Test environment mirrors production settings as closely as possible.",
+                "Environment setup is automated and repeatable.",
+                "Environment is isolated to prevent interference from other tests or processes."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "traceability_matrix",
+                "functional_test_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "FR-006",
+              "type": "functional",
+              "priority": "P0",
+              "title": "Integration with CI/CD Pipeline",
+              "outcome": "Integrate UI smoke tests into the existing CI/CD pipeline for automated execution.",
+              "acceptance_criteria": [
+                "Smoke tests are triggered automatically by the CI/CD pipeline after a frontend patch.",
+                "Pipeline configuration allows for easy updates to the test suite.",
+                "Pipeline provides feedback on test execution status and results."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "traceability_matrix",
+                "functional_test_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "FR-007",
+              "type": "functional",
+              "priority": "P2",
+              "title": "Visual Regression Testing",
+              "outcome": "Include visual regression testing in the smoke test suite to catch unintended UI changes.",
+              "acceptance_criteria": [
+                "Visual snapshots are taken before and after patches for comparison.",
+                "Differences are highlighted and reported in test results.",
+                "Stakeholders are notified of significant visual changes."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "traceability_matrix",
+                "functional_test_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "FR-008",
+              "type": "functional",
+              "priority": "P2",
+              "title": "Test Maintenance and Updates",
+              "outcome": "Regularly update and maintain the smoke test suite to reflect UI changes.",
+              "acceptance_criteria": [
+                "Test suite is reviewed and updated after each major UI change.",
+                "Obsolete tests are removed and new tests are added as needed.",
+                "Documentation is maintained for all test cases and their purposes."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "traceability_matrix",
+                "functional_test_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "NFR-001",
+              "type": "non_functional",
+              "priority": "P1",
+              "title": "Test Execution Performance",
+              "outcome": "Ensure smoke tests execute within an acceptable time frame.",
+              "acceptance_criteria": [
+                "Average test execution time is under 10 minutes.",
+                "Test execution time is monitored and reported.",
+                "Performance issues are identified and addressed promptly."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "nfr_validation_report",
+                "quality_gate_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "NFR-002",
+              "type": "non_functional",
+              "priority": "P1",
+              "title": "Test Reliability",
+              "outcome": "Ensure smoke tests produce consistent and reliable results.",
+              "acceptance_criteria": [
+                "Tests pass consistently under the same conditions.",
+                "Flaky tests are identified and resolved.",
+                "Test reliability is tracked and reported."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "nfr_validation_report",
+                "quality_gate_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "NFR-003",
+              "type": "non_functional",
+              "priority": "P1",
+              "title": "Security of Test Data",
+              "outcome": "Ensure that test data used in smoke tests is secure and does not expose sensitive information.",
+              "acceptance_criteria": [
+                "Test data is anonymized and does not contain sensitive information.",
+                "Access to test data is restricted to authorized personnel.",
+                "Security audits are conducted regularly on test data handling."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "nfr_validation_report",
+                "quality_gate_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "NFR-004",
+              "type": "non_functional",
+              "priority": "P1",
+              "title": "Usability of Test Reports",
+              "outcome": "Ensure test reports are easy to understand and actionable.",
+              "acceptance_criteria": [
+                "Reports are clear and concise with actionable insights.",
+                "Stakeholders can easily access and interpret reports.",
+                "Feedback on report usability is collected and acted upon."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "nfr_validation_report",
+                "quality_gate_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            },
+            {
+              "id": "NFR-005",
+              "type": "non_functional",
+              "priority": "P1",
+              "title": "Scalability of Test Suite",
+              "outcome": "Ensure the smoke test suite can scale to accommodate future UI components and workflows.",
+              "acceptance_criteria": [
+                "Test suite architecture supports easy addition of new tests.",
+                "Performance remains stable as the number of tests increases.",
+                "Scalability is tested and validated regularly."
+              ],
+              "depends_on": [],
+              "evidence_expected": [
+                "nfr_validation_report",
+                "quality_gate_report"
+              ],
+              "grounding": {
+                "classification": "proposed_extension",
+                "reason": "no direct evidence linkage found in extracted legacy artifacts"
+              }
+            }
+          ],
+          "testing_and_evidence": {
+            "golden_flows": [],
+            "test_matrix": [
+              {
+                "requirement_id": "FR-001",
+                "test_types": [
+                  "e2e",
+                  "integration",
+                  "unit"
+                ],
+                "scenario_ids": [
+                  "BDD-001"
+                ]
+              },
+              {
+                "requirement_id": "FR-002",
+                "test_types": [
+                  "e2e",
+                  "integration",
+                  "unit"
+                ],
+                "scenario_ids": [
+                  "BDD-002"
+                ]
+              },
+              {
+                "requirement_id": "FR-003",
+                "test_types": [
+                  "integration",
+                  "unit"
+                ],
+                "scenario_ids": [
+                  "BDD-003"
+                ]
+              },
+              {
+                "requirement_id": "FR-004",
+                "test_types": [
+                  "integration",
+                  "unit"
+                ],
+                "scenario_ids": [
+                  "BDD-004"
+                ]
+              },
+              {
+                "requirement_id": "FR-005",
+                "test_types": [
+                  "e2e",
+                  "integration",
+                  "unit"
+                ],
+                "scenario_ids": []
+              },
+              {
+                "requirement_id": "FR-006",
+                "test_types": [
+                  "e2e",
+                  "integration",
+                  "unit"
+                ],
+                "scenario_ids": []
+              },
+              {
+                "requirement_id": "FR-007",
+                "test_types": [
+                  "e2e",
+                  "integration",
+                  "unit"
+                ],
+                "scenario_ids": []
+              },
+              {
+                "requirement_id": "FR-008",
+                "test_types": [
+                  "e2e",
+                  "integration",
+                  "unit"
+                ],
+                "scenario_ids": []
+              }
+            ],
+            "evidence_outputs": [
+              {
+                "type": "traceability_matrix",
+                "path_hint": "artifacts/evidence/traceability-matrix.json",
+                "description": "Requirement-to-test traceability"
+              },
+              {
+                "type": "quality_gate_report",
+                "path_hint": "artifacts/evidence/quality-gates.json",
+                "description": "Gate outcomes and remediation"
+              },
+              {
+                "type": "golden_flow_diff",
+                "path_hint": "artifacts/evidence/golden-flow-diff.json",
+                "description": "Legacy vs modernized output parity"
+              }
+            ],
+            "quality_gates": [
+              {
+                "id": "gherkin_syntax",
+                "result": "pass",
+                "description": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+                "remediation": ""
+              },
+              {
+                "id": "requirements_completeness",
+                "result": "fail",
+                "description": "Derived backlog coverage below dynamic threshold (1/3) for discovered scope (0 forms).",
+                "remediation": "Add missing parity requirements from form dossiers, SQL map, and risk register."
+              },
+              {
+                "id": "compliance_constraints_applied",
+                "result": "warn",
+                "description": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+                "remediation": ""
+              },
+              {
+                "id": "bdd_flow_grounding",
+                "result": "fail",
+                "description": "BDD scenarios are not linked to any extracted golden flow.",
+                "remediation": "Link scenarios to real entrypoints (form::handler) and SQL touchpoints."
+              },
+              {
+                "id": "handler_inventory_completeness",
+                "result": "pass",
+                "description": "All analyzed forms meet handler coverage threshold.",
+                "remediation": ""
+              },
+              {
+                "id": "report_model_reconciled",
+                "result": "pass",
+                "description": "Reporting model and entrypoints reconciled.",
+                "remediation": ""
+              },
+              {
+                "id": "variant_resolution",
+                "result": "pass",
+                "description": "Single project variant detected; no variant scope decision required.",
+                "remediation": ""
+              },
+              {
+                "id": "variant_schema_divergence",
+                "result": "pass",
+                "description": "No cross-variant schema naming divergence detected.",
+                "remediation": ""
+              },
+              {
+                "id": "key_safety_issues_identified",
+                "result": "fail",
+                "description": "No explicit SQL/credential safety signals detected in extracted artifacts. Detection is incomplete and blocks progression.",
+                "remediation": "Resolve review checklist item before downstream planning."
+              },
+              {
+                "id": "schema_key_verification",
+                "result": "pass",
+                "description": "No delete-by-customer transaction key hazard detected.",
+                "remediation": ""
+              },
+              {
+                "id": "identity_access_model",
+                "result": "warn",
+                "description": "Role model or credential handling requires confirmation.",
+                "remediation": "Resolve review checklist item before downstream planning."
+              },
+              {
+                "id": "qa_structural_integrity",
+                "result": "warn",
+                "description": "QA structural checks: pass=7, warn=2, fail=0, blockers=0.",
+                "remediation": "Review QA warnings for consistency hardening."
+              },
+              {
+                "id": "qa_semantic_plausibility",
+                "result": "pass",
+                "description": "Semantic plausibility checks passed with no issues.",
+                "remediation": ""
+              }
+            ]
+          },
+          "traceability": {
+            "links": [
+              {
+                "from": "FR-001",
+                "to": "BDD-001",
+                "type": "verified_by"
+              },
+              {
+                "from": "FR-002",
+                "to": "BDD-002",
+                "type": "verified_by"
+              },
+              {
+                "from": "FR-003",
+                "to": "BDD-003",
+                "type": "verified_by"
+              },
+              {
+                "from": "FR-004",
+                "to": "BDD-004",
+                "type": "verified_by"
+              }
+            ]
+          },
+          "open_questions": [
+            {
+              "id": "Q-001",
+              "question": "What are target latency, throughput, and availability SLOs?",
+              "owner": "Client",
+              "severity": "high",
+              "context": ""
+            }
+          ]
+        },
+        "discover_review": {
+          "overall_status": "FAIL",
+          "checks": [
+            {
+              "id": "handler_inventory_completeness",
+              "title": "Handler Inventory Completeness",
+              "status": "PASS",
+              "detail": "All analyzed forms meet handler coverage threshold."
+            },
+            {
+              "id": "report_model_reconciled",
+              "title": "Report Model Reconciled",
+              "status": "PASS",
+              "detail": "Reporting model and entrypoints reconciled."
+            },
+            {
+              "id": "variant_resolution",
+              "title": "Variant Resolution",
+              "status": "PASS",
+              "detail": "Single project variant detected; no variant scope decision required."
+            },
+            {
+              "id": "variant_schema_divergence",
+              "title": "Variant Schema Divergence",
+              "status": "PASS",
+              "detail": "No cross-variant schema naming divergence detected."
+            },
+            {
+              "id": "key_safety_issues_identified",
+              "title": "Key Safety Issues Identified",
+              "status": "FAIL",
+              "detail": "No explicit SQL/credential safety signals detected in extracted artifacts. Detection is incomplete and blocks progression."
+            },
+            {
+              "id": "schema_key_verification",
+              "title": "Schema Key Verification",
+              "status": "PASS",
+              "detail": "No delete-by-customer transaction key hazard detected."
+            },
+            {
+              "id": "identity_access_model",
+              "title": "Identity & Access Model",
+              "status": "WARN",
+              "detail": "Role model or credential handling requires confirmation."
+            }
+          ],
+          "variant_diff_summary": {
+            "project_count": 0,
+            "status": "PASS",
+            "schema_divergence_pairs": 0,
+            "schema_divergence_blocking_pairs": 0
+          },
+          "form_coverage": []
+        },
+        "appendix": {
+          "artifact_refs": {
+            "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_ece6b80e4bba4e9f",
+            "repo_landscape_ref": "artifact://repo_landscape/1.0/art_repo_landscape_6badc10a901b4754",
+            "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "variant_inventory_ref": "artifact://variant_inventory/1.0/art_variant_inventory_db27560ec5c04bf1",
+            "event_map_ref": "artifact://event_map/1.0/art_event_map_0596085678d84db9",
+            "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_7101be1396be4053",
+            "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_ef01172603264bb9",
+            "data_access_map_ref": "artifact://data_access_map/1.0/art_data_access_map_176d6e621f2347bd",
+            "recordset_ops_ref": "artifact://recordset_ops/1.0/art_recordset_ops_003f14bdd0bc443d",
+            "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_5f859c0707b84268",
+            "form_dossier_ref": "artifact://form_dossier/1.0/art_form_dossier_edc7201c082249f3",
+            "dependency_list_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_444b80c5cf844e88",
+            "dependency_inventory_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_444b80c5cf844e88",
+            "business_rules_ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_45854d1748c649e1",
+            "detector_findings_ref": "artifact://detector_findings/1.0/art_detector_findings_cd94a131bd0c4da3",
+            "risk_register_ref": "artifact://risk_register/1.0/art_risk_register_1e8baa74547d46f9",
+            "orphan_analysis_ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_4a0cfa0493c0499c",
+            "delivery_constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_031b531ad85c4075",
+            "variant_diff_report_ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_18074f3b36b245fc",
+            "reporting_model_ref": "artifact://reporting_model/1.0/art_reporting_model_928b940a64bf4b66",
+            "identity_access_model_ref": "artifact://identity_access_model/1.0/art_identity_access_model_0cf1f0594a624be3",
+            "discover_review_checklist_ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_92b5ed6f5f8a42bb",
+            "artifact_index_ref": "artifact://artifact_index/1.0/art_artifact_index_31e6af97e4f64103",
+            "qa_report_ref": "embedded://analyst_report_v2/qa_report_v1"
+          },
+          "high_volume_sections": {}
+        },
+        "spec_kit_decomposition": {
+          "artifact_type": "spec_kit_projection",
+          "artifact_version": "1.0",
+          "discovery_spec": {
+            "title": "Legacy discovery spec",
+            "objective": "Ensure the UI functions correctly after a frontend patch by conducting a start-run smoke test.",
+            "inventory_counts": {
+              "projects": 0,
+              "forms": 0,
+              "dependencies": 0,
+              "procedures": 0,
+              "sql_map_entries": 0
+            },
+            "key_user_stories": [
+              "As a modernization engineer, I need a deterministic map of 0 UI flows to avoid behavioral drift.",
+              "As a delivery lead, I need explicit clarification markers to avoid speculative implementation.",
+              "As QA, I need event-to-query evidence to build equivalence tests."
+            ],
+            "needs_clarification": [
+              {
+                "id": "Q-001",
+                "question": "What are target latency, throughput, and availability SLOs?",
+                "severity": "high",
+                "owner": "Client"
+              }
+            ],
+            "evidence_refs": {
+              "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_ece6b80e4bba4e9f",
+              "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_5f859c0707b84268",
+              "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_ef01172603264bb9"
+            }
+          },
+          "modernization_plan": {
+            "title": "Modernization implementation plan",
+            "strategy": "Phased modernization",
+            "rationale": "Preserve behavior first, then modernize in controlled phases.",
+            "phases": [
+              {
+                "id": "PH0",
+                "title": "Baseline and equivalence harness"
+              },
+              {
+                "id": "PH1",
+                "title": "Incremental migration and dependency replacement"
+              },
+              {
+                "id": "PH2",
+                "title": "Hardening and release evidence"
+              }
+            ],
+            "phase_outline": [
+              "Phase 0: baseline and equivalence harness",
+              "Phase 1: form/module migration with dependency replacement",
+              "Phase 2: hardening, governance gates, and evidence publication"
+            ],
+            "backlog_items": 1,
+            "blocking_decisions": 5,
+            "constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_031b531ad85c4075"
+          },
+          "executable_contracts": {
+            "title": "Executable contracts",
+            "golden_flow_count": 0,
+            "test_matrix_rows": 8,
+            "quality_gate_count": 11,
+            "grounding_status": "grounded",
+            "traceability_links": 4,
+            "contract_refs": {
+              "event_map_ref": "artifact://event_map/1.0/art_event_map_0596085678d84db9",
+              "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_7101be1396be4053",
+              "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_ef01172603264bb9"
+            }
+          },
+          "constitution": {
+            "principles": [
+              "Preserve critical legacy behavior first; modernization must prove functional equivalence.",
+              "Every modernization decision must map to explicit evidence (code, query, event, or rule).",
+              "No breaking change to data contracts without approved migration path and rollback evidence."
+            ],
+            "source_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_031b531ad85c4075"
+          }
+        },
+        "qa_report_v1": {
+          "artifact_type": "qa_report",
+          "artifact_version": "1.0",
+          "generated_at": "2026-02-27T12:47:18.108864+00:00",
+          "summary": {
+            "status": "WARN",
+            "pass_count": 7,
+            "warn_count": 2,
+            "fail_count": 0,
+            "blocker_count": 0,
+            "semantic_warn_count": 0,
+            "auto_fixes_applied": []
+          },
+          "structural": {
+            "status": "WARN",
+            "checks": [
+              {
+                "id": "struct_rule_ids_unique",
+                "title": "Business rule IDs are unique",
+                "result": "pass",
+                "detail": "0 rule IDs validated.",
+                "blocking": false,
+                "refs": [
+                  "raw_artifacts.business_rule_catalog.rules"
+                ]
+              },
+              {
+                "id": "struct_risk_ids_unique",
+                "title": "Risk IDs are unique",
+                "result": "pass",
+                "detail": "0 risk IDs validated.",
+                "blocking": false,
+                "refs": [
+                  "raw_artifacts.risk_register.risks"
+                ]
+              },
+              {
+                "id": "struct_risk_ref_integrity",
+                "title": "Rule-to-risk references resolve",
+                "result": "pass",
+                "detail": "All referenced risk IDs are present.",
+                "blocking": false,
+                "refs": [
+                  "raw_artifacts.business_rule_catalog.rules",
+                  "raw_artifacts.risk_register.risks"
+                ]
+              },
+              {
+                "id": "struct_form_ref_integrity",
+                "title": "Rule form references resolve",
+                "result": "pass",
+                "detail": "Rule scope form references resolve against discovered form inventory.",
+                "blocking": false,
+                "refs": [
+                  "raw_artifacts.business_rule_catalog.rules",
+                  "raw_artifacts.form_dossier.dossiers"
+                ]
+              },
+              {
+                "id": "cross_form_sql_consistency",
+                "title": "Form SQL coverage flags reconcile with SQL map",
+                "result": "pass",
+                "detail": "Form SQL coverage flags match SQL map evidence.",
+                "blocking": false,
+                "refs": [
+                  "raw_artifacts.legacy_inventory.form_coverage",
+                  "raw_artifacts.sql_map.entries"
+                ]
+              },
+              {
+                "id": "cross_event_handler_reconciliation",
+                "title": "Event handler counts reconcile with Event Map",
+                "result": "warn",
+                "detail": "Insufficient handler count evidence to reconcile (one side missing).",
+                "blocking": false,
+                "refs": [
+                  "raw_artifacts.legacy_inventory.summary.counts",
+                  "raw_artifacts.event_map.entries"
+                ]
+              },
+              {
+                "id": "render_open_questions_serialization",
+                "title": "Open questions serialization is valid",
+                "result": "pass",
+                "detail": "Open questions are serialized as structured objects.",
+                "blocking": false,
+                "refs": [
+                  "analyst_report_v2.delivery_spec.open_questions"
+                ]
+              },
+              {
+                "id": "render_form_count_fidelity",
+                "title": "Rendered form counts match discovered inventory",
+                "result": "warn",
+                "detail": "Insufficient evidence to compare rendered and discovered form counts.",
+                "blocking": false,
+                "refs": [
+                  "analyst_report_v2.decision_brief.at_a_glance.inventory_summary",
+                  "raw_artifacts.form_dossier.dossiers"
+                ]
+              },
+              {
+                "id": "render_artifact_refs_present",
+                "title": "Appendix artifact references are populated",
+                "result": "pass",
+                "detail": "23 artifact references present.",
+                "blocking": false,
+                "refs": [
+                  "analyst_report_v2.appendix.artifact_refs"
+                ]
+              }
+            ]
+          },
+          "semantic": {
+            "status": "PASS",
+            "checks": []
+          },
+          "meaning_validation": {
+            "status": "NOT_RUN",
+            "changes": []
+          },
+          "amendment_diff_v1": [],
+          "quality_gates": [
+            {
+              "id": "qa_structural_integrity",
+              "result": "warn",
+              "description": "QA structural checks: pass=7, warn=2, fail=0, blockers=0.",
+              "remediation": "Review QA warnings for consistency hardening."
+            },
+            {
+              "id": "qa_semantic_plausibility",
+              "result": "pass",
+              "description": "Semantic plausibility checks passed with no issues.",
+              "remediation": ""
+            }
+          ],
+          "qa_runtime_version": "1.2.0"
+        },
+        "raw_artifacts": {
+          "legacy_inventory": {
+            "artifact_type": "legacy_inventory",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              },
+              "source_language": "unknown",
+              "ecosystem": "legacy"
+            },
+            "summary": {
+              "counts": {
+                "projects": 0,
+                "programs": 0,
+                "modules": 0,
+                "forms_or_screens": 0,
+                "forms_referenced": 0,
+                "forms_unmapped": 0,
+                "controls": 0,
+                "dependencies": 0,
+                "event_handlers": 0
+              },
+              "data_touchpoints": [],
+              "modernization_readiness": {
+                "score": 0,
+                "tier": "medium",
+                "recommended_strategy": "",
+                "required_actions": []
+              }
+            },
+            "projects": [],
+            "form_coverage": [],
+            "artifact_id": "art_legacy_inventory_ece6b80e4bba4e9f",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "repo_landscape": {
+            "artifact_type": "repo_landscape",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "projects": [],
+            "shared_artifacts": {
+              "shared_db_files": [],
+              "shared_modules": [],
+              "shared_dependencies": []
+            },
+            "artifact_id": "art_repo_landscape_6badc10a901b4754",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "scope_lock": {
+            "artifact_type": "scope_lock",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "decision": "root_only",
+            "rationale": "Single canonical project detected.",
+            "approver": "",
+            "approved_at": "",
+            "status": "LOCKED",
+            "artifact_id": "art_scope_lock_ef982bbc391c4dbd",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "variant_inventory": {
+            "artifact_type": "variant_inventory",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "variants": [],
+            "artifact_id": "art_variant_inventory_db27560ec5c04bf1",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "dependency_inventory": {
+            "artifact_type": "dependency_inventory",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "dependencies": [],
+            "artifact_id": "art_dependency_inventory_444b80c5cf844e88",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "event_map": {
+            "artifact_type": "event_map",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "entries": [],
+            "artifact_id": "art_event_map_0596085678d84db9",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "sql_catalog": {
+            "artifact_type": "sql_catalog",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "statements": [],
+            "artifact_id": "art_sql_catalog_7101be1396be4053",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "sql_map": {
+            "artifact_type": "sql_map",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "entries": [],
+            "artifact_id": "art_sql_map_ef01172603264bb9",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "data_access_map": {
+            "artifact_type": "data_access_map",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "rows": [],
+            "complete": false,
+            "coverage_score": 0.0,
+            "artifact_id": "art_data_access_map_176d6e621f2347bd",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "recordset_ops": {
+            "artifact_type": "recordset_ops",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "ops": [],
+            "artifact_id": "art_recordset_ops_003f14bdd0bc443d",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "procedure_summary": {
+            "artifact_type": "procedure_summary",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "procedures": [],
+            "artifact_id": "art_procedure_summary_5f859c0707b84268",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "form_dossier": {
+            "artifact_type": "form_dossier",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "dossiers": [],
+            "artifact_id": "art_form_dossier_edc7201c082249f3",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "business_rule_catalog": {
+            "artifact_type": "business_rule_catalog",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "rules": [],
+            "artifact_id": "art_business_rule_catalog_45854d1748c649e1",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "detector_findings": {
+            "artifact_type": "detector_findings",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "findings": [],
+            "profiles": {
+              "error_handling": {
+                "on_error_resume_next": 0,
+                "on_error_goto": 0,
+                "late_bound_com_calls": 0,
+                "default_instance_refs": 0,
+                "control_array_markers": 0,
+                "win32_declares": 0
+              }
+            },
+            "artifact_id": "art_detector_findings_cd94a131bd0c4da3",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "risk_register": {
+            "artifact_type": "risk_register",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "risks": [],
+            "artifact_id": "art_risk_register_1e8baa74547d46f9",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "orphan_analysis": {
+            "artifact_type": "orphan_analysis",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "orphans": [],
+            "analysis": {
+              "startup_roots": [],
+              "reachable_forms": [],
+              "mapped_form_count": 0
+            },
+            "artifact_id": "art_orphan_analysis_4a0cfa0493c0499c",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "delivery_constitution": {
+            "artifact_type": "delivery_constitution",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "principles": [
+              "Preserve critical legacy behavior first; modernization must prove functional equivalence.",
+              "Every modernization decision must map to explicit evidence (code, query, event, or rule).",
+              "No breaking change to data contracts without approved migration path and rollback evidence."
+            ],
+            "policy_context": {
+              "domain_pack_id": "software-general-v1",
+              "domain_pack_version": "1.0.0",
+              "governance_tier": ""
+            },
+            "sources": [
+              "legacy_inventory",
+              "convention_profile",
+              "domain_pack",
+              "memory_constraints"
+            ],
+            "artifact_id": "art_delivery_constitution_031b531ad85c4075",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "variant_diff_report": {
+            "artifact_type": "variant_diff_report",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "project_count": 0,
+            "comparisons": [],
+            "decision_required": false,
+            "status": "PASS",
+            "decision_prompt": "Single project variant detected; no variant scope decision required.",
+            "schema_divergence": {
+              "detected": false,
+              "pairs": [],
+              "blocking_pairs": []
+            },
+            "artifact_id": "art_variant_diff_report_18074f3b36b245fc",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "reporting_model": {
+            "artifact_type": "reporting_model",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "data_environments": [],
+            "data_reports": [],
+            "report_entrypoints": [],
+            "mapping": {
+              "mapped_count": 0,
+              "unknown_data_environments": []
+            },
+            "connection_path_mismatches": [],
+            "status": "PASS",
+            "artifact_id": "art_reporting_model_928b940a64bf4b66",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "identity_access_model": {
+            "artifact_type": "identity_access_model",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "what_we_found": {
+              "auth_tables": [],
+              "role_model_present": false,
+              "plaintext_credential_signal": false
+            },
+            "what_we_did_not_find": [
+              "Explicit role/permission model in schema or queries."
+            ],
+            "questions_to_confirm": [
+              "Is this system single-user or multi-user under concurrent teller/ops usage?",
+              "What authorization model should be preserved or introduced during modernization?"
+            ],
+            "sensitive_query_samples": [],
+            "status": "WARN",
+            "artifact_id": "art_identity_access_model_0cf1f0594a624be3",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "discover_review_checklist": {
+            "artifact_type": "discover_review_checklist",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "skill_pack": {
+                "id": "generic_legacy",
+                "version": "1.0.0",
+                "confidence": 0.0
+              },
+              "context_reference": {
+                "repo": "app",
+                "branch": "detached",
+                "commit_sha": "unknown",
+                "version_id": "20260227T124638Z_20260227_124618_3448c664"
+              }
+            },
+            "overall_status": "FAIL",
+            "checks": [
+              {
+                "id": "handler_inventory_completeness",
+                "title": "Handler Inventory Completeness",
+                "status": "PASS",
+                "detail": "All analyzed forms meet handler coverage threshold."
+              },
+              {
+                "id": "report_model_reconciled",
+                "title": "Report Model Reconciled",
+                "status": "PASS",
+                "detail": "Reporting model and entrypoints reconciled."
+              },
+              {
+                "id": "variant_resolution",
+                "title": "Variant Resolution",
+                "status": "PASS",
+                "detail": "Single project variant detected; no variant scope decision required."
+              },
+              {
+                "id": "variant_schema_divergence",
+                "title": "Variant Schema Divergence",
+                "status": "PASS",
+                "detail": "No cross-variant schema naming divergence detected."
+              },
+              {
+                "id": "key_safety_issues_identified",
+                "title": "Key Safety Issues Identified",
+                "status": "FAIL",
+                "detail": "No explicit SQL/credential safety signals detected in extracted artifacts. Detection is incomplete and blocks progression."
+              },
+              {
+                "id": "schema_key_verification",
+                "title": "Schema Key Verification",
+                "status": "PASS",
+                "detail": "No delete-by-customer transaction key hazard detected."
+              },
+              {
+                "id": "identity_access_model",
+                "title": "Identity & Access Model",
+                "status": "WARN",
+                "detail": "Role model or credential handling requires confirmation."
+              }
+            ],
+            "low_coverage_forms": [],
+            "artifact_id": "art_discover_review_checklist_92b5ed6f5f8a42bb",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "artifact_index": {
+            "artifact_type": "artifact_index",
+            "artifact_version": "1.0",
+            "metadata": {
+              "generated_at": "2026-02-27T12:47:18.105978+00:00",
+              "context_reference": {
+                "repo": "app",
+                "commit_sha": "unknown"
+              }
+            },
+            "artifacts": [
+              {
+                "type": "legacy_inventory",
+                "ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_ece6b80e4bba4e9f"
+              },
+              {
+                "type": "repo_landscape",
+                "ref": "artifact://repo_landscape/1.0/art_repo_landscape_6badc10a901b4754"
+              },
+              {
+                "type": "scope_lock",
+                "ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd"
+              },
+              {
+                "type": "variant_inventory",
+                "ref": "artifact://variant_inventory/1.0/art_variant_inventory_db27560ec5c04bf1"
+              },
+              {
+                "type": "dependency_inventory",
+                "ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_444b80c5cf844e88"
+              },
+              {
+                "type": "event_map",
+                "ref": "artifact://event_map/1.0/art_event_map_0596085678d84db9"
+              },
+              {
+                "type": "sql_catalog",
+                "ref": "artifact://sql_catalog/1.0/art_sql_catalog_7101be1396be4053"
+              },
+              {
+                "type": "sql_map",
+                "ref": "artifact://sql_map/1.0/art_sql_map_ef01172603264bb9"
+              },
+              {
+                "type": "data_access_map",
+                "ref": "artifact://data_access_map/1.0/art_data_access_map_176d6e621f2347bd"
+              },
+              {
+                "type": "recordset_ops",
+                "ref": "artifact://recordset_ops/1.0/art_recordset_ops_003f14bdd0bc443d"
+              },
+              {
+                "type": "procedure_summary",
+                "ref": "artifact://procedure_summary/1.0/art_procedure_summary_5f859c0707b84268"
+              },
+              {
+                "type": "form_dossier",
+                "ref": "artifact://form_dossier/1.0/art_form_dossier_edc7201c082249f3"
+              },
+              {
+                "type": "business_rule_catalog",
+                "ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_45854d1748c649e1"
+              },
+              {
+                "type": "detector_findings",
+                "ref": "artifact://detector_findings/1.0/art_detector_findings_cd94a131bd0c4da3"
+              },
+              {
+                "type": "risk_register",
+                "ref": "artifact://risk_register/1.0/art_risk_register_1e8baa74547d46f9"
+              },
+              {
+                "type": "orphan_analysis",
+                "ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_4a0cfa0493c0499c"
+              },
+              {
+                "type": "delivery_constitution",
+                "ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_031b531ad85c4075"
+              },
+              {
+                "type": "variant_diff_report",
+                "ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_18074f3b36b245fc"
+              },
+              {
+                "type": "reporting_model",
+                "ref": "artifact://reporting_model/1.0/art_reporting_model_928b940a64bf4b66"
+              },
+              {
+                "type": "identity_access_model",
+                "ref": "artifact://identity_access_model/1.0/art_identity_access_model_0cf1f0594a624be3"
+              },
+              {
+                "type": "discover_review_checklist",
+                "ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_92b5ed6f5f8a42bb"
+              }
+            ],
+            "artifact_id": "art_artifact_index_31e6af97e4f64103",
+            "run_id": "run_ccf23dd7cfa4",
+            "generated_at": "2026-02-27T12:47:18.105978+00:00",
+            "producer": {
+              "agent": "Analyst Agent",
+              "skill_pack": "generic_legacy",
+              "skill_version": "1.0.0"
+            },
+            "context": {
+              "repo": "app",
+              "branch": "detached",
+              "commit_sha": "unknown",
+              "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+              "canonical_project": "Project 1",
+              "target_stack": {
+                "language": "Unknown",
+                "ui": "Unknown",
+                "db": "Unknown"
+              }
+            }
+          },
+          "artifact_refs": {
+            "legacy_inventory": "artifact://legacy_inventory/1.0/art_legacy_inventory_ece6b80e4bba4e9f",
+            "repo_landscape": "artifact://repo_landscape/1.0/art_repo_landscape_6badc10a901b4754",
+            "scope_lock": "artifact://scope_lock/1.0/art_scope_lock_ef982bbc391c4dbd",
+            "variant_inventory": "artifact://variant_inventory/1.0/art_variant_inventory_db27560ec5c04bf1",
+            "dependency_inventory": "artifact://dependency_inventory/1.0/art_dependency_inventory_444b80c5cf844e88",
+            "event_map": "artifact://event_map/1.0/art_event_map_0596085678d84db9",
+            "sql_catalog": "artifact://sql_catalog/1.0/art_sql_catalog_7101be1396be4053",
+            "sql_map": "artifact://sql_map/1.0/art_sql_map_ef01172603264bb9",
+            "data_access_map": "artifact://data_access_map/1.0/art_data_access_map_176d6e621f2347bd",
+            "recordset_ops": "artifact://recordset_ops/1.0/art_recordset_ops_003f14bdd0bc443d",
+            "procedure_summary": "artifact://procedure_summary/1.0/art_procedure_summary_5f859c0707b84268",
+            "form_dossier": "artifact://form_dossier/1.0/art_form_dossier_edc7201c082249f3",
+            "business_rule_catalog": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_45854d1748c649e1",
+            "detector_findings": "artifact://detector_findings/1.0/art_detector_findings_cd94a131bd0c4da3",
+            "risk_register": "artifact://risk_register/1.0/art_risk_register_1e8baa74547d46f9",
+            "orphan_analysis": "artifact://orphan_analysis/1.0/art_orphan_analysis_4a0cfa0493c0499c",
+            "delivery_constitution": "artifact://delivery_constitution/1.0/art_delivery_constitution_031b531ad85c4075",
+            "variant_diff_report": "artifact://variant_diff_report/1.0/art_variant_diff_report_18074f3b36b245fc",
+            "reporting_model": "artifact://reporting_model/1.0/art_reporting_model_928b940a64bf4b66",
+            "identity_access_model": "artifact://identity_access_model/1.0/art_identity_access_model_0cf1f0594a624be3",
+            "discover_review_checklist": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_92b5ed6f5f8a42bb",
+            "artifact_index": "artifact://artifact_index/1.0/art_artifact_index_31e6af97e4f64103"
+          },
+          "raw_compiler_version": "2.2.0"
+        }
+      },
+      "qa_report_v1": {
+        "artifact_type": "qa_report",
+        "artifact_version": "1.0",
+        "generated_at": "2026-02-27T12:47:18.108864+00:00",
+        "summary": {
+          "status": "WARN",
+          "pass_count": 7,
+          "warn_count": 2,
+          "fail_count": 0,
+          "blocker_count": 0,
+          "semantic_warn_count": 0,
+          "auto_fixes_applied": []
+        },
+        "structural": {
+          "status": "WARN",
+          "checks": [
+            {
+              "id": "struct_rule_ids_unique",
+              "title": "Business rule IDs are unique",
+              "result": "pass",
+              "detail": "0 rule IDs validated.",
+              "blocking": false,
+              "refs": [
+                "raw_artifacts.business_rule_catalog.rules"
+              ]
+            },
+            {
+              "id": "struct_risk_ids_unique",
+              "title": "Risk IDs are unique",
+              "result": "pass",
+              "detail": "0 risk IDs validated.",
+              "blocking": false,
+              "refs": [
+                "raw_artifacts.risk_register.risks"
+              ]
+            },
+            {
+              "id": "struct_risk_ref_integrity",
+              "title": "Rule-to-risk references resolve",
+              "result": "pass",
+              "detail": "All referenced risk IDs are present.",
+              "blocking": false,
+              "refs": [
+                "raw_artifacts.business_rule_catalog.rules",
+                "raw_artifacts.risk_register.risks"
+              ]
+            },
+            {
+              "id": "struct_form_ref_integrity",
+              "title": "Rule form references resolve",
+              "result": "pass",
+              "detail": "Rule scope form references resolve against discovered form inventory.",
+              "blocking": false,
+              "refs": [
+                "raw_artifacts.business_rule_catalog.rules",
+                "raw_artifacts.form_dossier.dossiers"
+              ]
+            },
+            {
+              "id": "cross_form_sql_consistency",
+              "title": "Form SQL coverage flags reconcile with SQL map",
+              "result": "pass",
+              "detail": "Form SQL coverage flags match SQL map evidence.",
+              "blocking": false,
+              "refs": [
+                "raw_artifacts.legacy_inventory.form_coverage",
+                "raw_artifacts.sql_map.entries"
+              ]
+            },
+            {
+              "id": "cross_event_handler_reconciliation",
+              "title": "Event handler counts reconcile with Event Map",
+              "result": "warn",
+              "detail": "Insufficient handler count evidence to reconcile (one side missing).",
+              "blocking": false,
+              "refs": [
+                "raw_artifacts.legacy_inventory.summary.counts",
+                "raw_artifacts.event_map.entries"
+              ]
+            },
+            {
+              "id": "render_open_questions_serialization",
+              "title": "Open questions serialization is valid",
+              "result": "pass",
+              "detail": "Open questions are serialized as structured objects.",
+              "blocking": false,
+              "refs": [
+                "analyst_report_v2.delivery_spec.open_questions"
+              ]
+            },
+            {
+              "id": "render_form_count_fidelity",
+              "title": "Rendered form counts match discovered inventory",
+              "result": "warn",
+              "detail": "Insufficient evidence to compare rendered and discovered form counts.",
+              "blocking": false,
+              "refs": [
+                "analyst_report_v2.decision_brief.at_a_glance.inventory_summary",
+                "raw_artifacts.form_dossier.dossiers"
+              ]
+            },
+            {
+              "id": "render_artifact_refs_present",
+              "title": "Appendix artifact references are populated",
+              "result": "pass",
+              "detail": "23 artifact references present.",
+              "blocking": false,
+              "refs": [
+                "analyst_report_v2.appendix.artifact_refs"
+              ]
+            }
+          ]
+        },
+        "semantic": {
+          "status": "PASS",
+          "checks": []
+        },
+        "meaning_validation": {
+          "status": "NOT_RUN",
+          "changes": []
+        },
+        "amendment_diff_v1": [],
+        "quality_gates": [
+          {
+            "id": "qa_structural_integrity",
+            "result": "warn",
+            "description": "QA structural checks: pass=7, warn=2, fail=0, blockers=0.",
+            "remediation": "Review QA warnings for consistency hardening."
+          },
+          {
+            "id": "qa_semantic_plausibility",
+            "result": "pass",
+            "description": "Semantic plausibility checks passed with no issues.",
+            "remediation": ""
+          }
+        ],
+        "qa_runtime_version": "1.2.0"
+      },
+      "context_reference": {
+        "version_id": "20260227T124638Z_20260227_124618_3448c664",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown",
+        "scm_version": "1.0",
+        "cp_version": "1.0",
+        "ha_version": "1.0"
+      }
+    },
+    "tokens_used": 4717,
+    "latency_ms": 39471.79698944092,
+    "logs": [
+      "[Analyst Agent] Starting execution...",
+      "[Analyst Agent] Domain Pack selected: software-general-v1",
+      "[Analyst Agent] Deterministic mapping: capabilities=0, constraints=0",
+      "[Analyst Agent] Sending request to LLM (gpt-4o)...",
+      "[Analyst Agent] Received response (2559 tokens, 39472ms)",
+      "[Analyst Agent] LLM output parsed; compiling deterministic Requirements Pack...",
+      "[Analyst Agent] Requirements Pack compiled with quality gates"
+    ]
+  },
+  "saved_at": "2026-02-27T12:47:18.119983+00:00"
+}
