@@ -1,0 +1,205 @@
+{
+  "header": {
+    "artifact_id": "b2d3fc647a5643dbbe9f385a1ea1b920",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-27T08:12:50.573529+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260227_081224_ae358d9c",
+      "stage_id": "context_layer",
+      "task_id": "cd5dcf6d230f46e293bc0ef82697ab06"
+    },
+    "parents": [],
+    "digest": "sha256:6af7f354aede789fb69c8c7dfe1c89b25a8cf58ac5b384712095c1c9338729f2",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260227_081224_ae358d9c",
+      "bundle_version": "20260227T081250Z_20260227_081224_ae358d9c"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "The health assessment identifies maintainability and security issues in the legacy VB6 application."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 60,
+      "security": 50,
+      "reliability": 55,
+      "testability": 40
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: Module1.bas",
+      "description": "Complex logic with minimal comments",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Module1.bas"
+        ],
+        "paths": [
+          "Module1.bas"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "Module1.bas"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "ActiveX Dependency",
+      "description": "Reliance on outdated ActiveX controls may pose security risks.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:activex_removal",
+      "title": "Remove ActiveX Dependencies",
+      "priority": "P1",
+      "business_value": "Potential security vulnerabilities and compatibility issues with modern systems.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node:project:banking_vbp"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "node:project:banking_vbp"
+      ],
+      "plan": [
+        "Replace ActiveX controls with equivalent",
+        "NET components"
+      ],
+      "acceptance_criteria": [
+        "All ActiveX controls are replaced with .NET components.",
+        "The application runs without ActiveX-related errors."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:activex_removal"
+    ],
+    "stabilization": [
+      "remediation:activex_removal"
+    ],
+    "modernization": [
+      "remediation:activex_removal"
+    ]
+  }
+}
