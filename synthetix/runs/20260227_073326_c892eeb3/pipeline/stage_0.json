@@ -1,0 +1,285 @@
+{
+  "run_id": "20260227_073326_c892eeb3",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260227T073350Z_20260227_073326_c892eeb3",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "23256944a7914809a9b6d8a81457b196",
+        "created_at": "2026-02-27T07:33:50.937558+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "6bff51a33c4940a6b876b6b071730a7d",
+            "digest": "sha256:52d5fd5f71def197fa4b68ce35c3d8cd7d2c79135d2255fd79c845755177cab1",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "fd90122d5cee4e57b36ed8c82fdc5cc0",
+            "digest": "sha256:748a15ffb8c2df0ec53a4c865eb5a8671c2cf9c0a0e3ec740cab4a6744e7e39c",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "887c3346337c420c95274215d4fbde67",
+            "digest": "sha256:2e207073421ae7e5c394f5e8e5fea87d2a1f0f1e2c7869b8a870ce69d9aa4ea5",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-27T07:33:50.956000+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Analysis of a legacy VB6 banking application, identifying key components, dependencies, and database interactions for modernization.",
+        "nodes": [
+          {
+            "id": "node1",
+            "type": "Project",
+            "name": "BANKING",
+            "metadata": {
+              "type": "Exe",
+              "startup": "main"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node2",
+            "type": "Form",
+            "name": "LOGIN",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node3",
+            "type": "Module",
+            "name": "Module1",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 17,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "id": "node4",
+            "type": "ActiveXDependency",
+            "name": "MSCOMCT2.OCX",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 6,
+                "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+              }
+            ]
+          },
+          {
+            "id": "node5",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node1",
+            "to": "node4",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 6,
+                "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node2",
+            "to": "node5",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy VB6 codebase with outdated conventions, requiring modernization to C# standards.",
+        "rules": [
+          {
+            "id": "rule1",
+            "category": "naming",
+            "rule": "Use PascalCase for class names.",
+            "confidence": 0.8,
+            "examples": [
+              "Class CustomerAccount"
+            ],
+            "counterexamples": [
+              "Class customeraccount"
+            ],
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form7"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor naming conventions to align with C# standards."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The VB6 codebase has several maintainability and security concerns due to outdated practices.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Form",
+            "reason": "Direct database access without parameterization.",
+            "severity": "high",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "SQL Injection Risk",
+            "description": "Direct database queries in VB6 forms pose a risk for SQL injection.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation1",
+          "title": "Refactor Database Access",
+          "problem_statement": "Direct database access in VB6 forms is not secure.",
+          "scope": [
+            "LOGIN.frm",
+            "main.frm"
+          ],
+          "risk_if_unaddressed": "Potential SQL injection vulnerabilities.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node5"
+          ],
+          "suggested_approach": "Implement parameterized queries and migrate to a secure ORM in C#.",
+          "success_criteria": [
+            "All database access is through parameterized queries.",
+            "No direct SQL queries in the codebase."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "DataEnvironment1.DCA",
+              "line": 1,
+              "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7950,
+    "latency_ms": 19486.00745201111,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-27T07:33:50.988959+00:00"
+}
