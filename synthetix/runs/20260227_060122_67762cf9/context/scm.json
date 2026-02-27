@@ -1,0 +1,166 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy VB6 banking application, detailing its components, dependencies, and database interactions.",
+  "nodes": [
+    {
+      "id": "node:banking_vbp",
+      "type": "Project",
+      "name": "BANKING.vbp",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:login_form",
+      "type": "Form",
+      "name": "LOGIN.frm",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 21,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:main_form",
+      "type": "Form",
+      "name": "main.frm",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 22,
+          "evidence": "Form=main.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:customer_form",
+      "type": "Form",
+      "name": "frmcustomer.frm",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 23,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:module1",
+      "type": "Module",
+      "name": "Module1.bas",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 20,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node:msado20",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0 Library",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=msado20.tlb"
+        }
+      ]
+    },
+    {
+      "id": "node:dao350",
+      "type": "ExternalDependency",
+      "name": "Microsoft DAO 3.51 Object Library",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference=DAO350.DLL"
+        }
+      ]
+    },
+    {
+      "id": "node:bank1_mdb",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:banking_vbp",
+      "to": "node:msado20",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=msado20.tlb"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:banking_vbp",
+      "to": "node:dao350",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference=DAO350.DLL"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node:login_form",
+      "to": "node:bank1_mdb",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
