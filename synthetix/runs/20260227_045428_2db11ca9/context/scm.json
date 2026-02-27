@@ -1,0 +1,129 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of a legacy VB6 banking application with various forms, modules, and ActiveX dependencies.",
+  "nodes": [
+    {
+      "id": "project:banking_vb6",
+      "type": "Project",
+      "name": "BANKING",
+      "metadata": {
+        "type": "Exe",
+        "startup": "main"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "form:login",
+      "type": "Form",
+      "name": "LOGIN",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 20,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "module:module1",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 21,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "form:main",
+      "type": "Form",
+      "name": "main",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 22,
+          "evidence": "Form=main.frm"
+        }
+      ]
+    },
+    {
+      "id": "form:frmcustomer",
+      "type": "Form",
+      "name": "frmcustomer",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 23,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "database:bank1",
+      "type": "Database",
+      "name": "BANK1",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "project:banking_vb6",
+      "to": "database:bank1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "project:banking_vb6",
+      "to": "form:login",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 20,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
