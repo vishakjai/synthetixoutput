@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of a legacy VB6 banking application, identifying key components, dependencies, and database interactions for modernization.",
+  "nodes": [
+    {
+      "id": "node:project_BANKING",
+      "type": "Project",
+      "name": "BANKING",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node:form_LOGIN",
+      "type": "Form",
+      "name": "LOGIN",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 24,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:module_Module1",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 25,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node:form_main",
+      "type": "Form",
+      "name": "main",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 26,
+          "evidence": "Form=main.frm"
+        }
+      ]
+    },
+    {
+      "id": "node:database_BANK1",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "USES_LIBRARY",
+      "from": "node:project_BANKING",
+      "to": "node:module_Module1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 25,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node:project_BANKING",
+      "to": "node:database_BANK1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
