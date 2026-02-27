@@ -1,0 +1,267 @@
+{
+  "run_id": "20260227_124618_3448c664",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260227T124638Z_20260227_124618_3448c664",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "7c6f77d986fa4410b2d6ea521706cf9d",
+        "created_at": "2026-02-27T12:46:38.337278+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "a0239c22889c40d79c2f00a33d9658d0",
+            "digest": "sha256:3b8095839534ccdb885a00fe2f7458676801498a78665c32e36f29925ca77900",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "1f5ab57895374cd5a86862a1dbb0131a",
+            "digest": "sha256:5909fccd579cb3db12123ea650ea0c99f0b02e4478d16bc4cda631153e1475c4",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "8a029ef2c4e84476b01c70eef62def38",
+            "digest": "sha256:c31e00f6b9d757d97fe4559af80b044b950fbdac8bc1bdc1b89680cc0741e39b",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-27T12:46:38.422678+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "The repository is primarily a Python-based application with additional configuration and JSON files. It lacks explicit database and endpoint definitions but includes various modules and import relationships.",
+        "nodes": [
+          {
+            "id": "module:agents___init___py",
+            "type": "Module",
+            "name": "agents.__init__.py",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "agents/__init__.py",
+                "line": 1,
+                "evidence": "Python module initialization"
+              }
+            ]
+          },
+          {
+            "id": "module:agents_analyst_py",
+            "type": "Module",
+            "name": "agents.analyst.py",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "agents/analyst.py",
+                "line": 10,
+                "evidence": "Python module with imports"
+              }
+            ]
+          },
+          {
+            "id": "module:config_py",
+            "type": "Module",
+            "name": "config.py",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "config.py",
+                "line": 1,
+                "evidence": "Configuration module"
+              }
+            ]
+          },
+          {
+            "id": "pkg:json",
+            "type": "Component",
+            "name": "json",
+            "metadata": {
+              "inferred": true,
+              "inferred_from_edge": true
+            },
+            "confidence": 0.45,
+            "provenance": [
+              {
+                "file": "agents/analyst.py",
+                "line": 12,
+                "evidence": "inferred node from edge endpoint `pkg:json`"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "IMPORTS",
+            "from": "module:agents___init___py",
+            "to": "module:agents_analyst_py",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "agents/__init__.py",
+                "line": 1,
+                "evidence": "Import statement"
+              }
+            ]
+          },
+          {
+            "type": "IMPORTS",
+            "from": "module:agents_analyst_py",
+            "to": "pkg:json",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "agents/analyst.py",
+                "line": 12,
+                "evidence": "Import statement"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "The repository follows standard Python conventions but lacks explicit testing and logging practices.",
+        "rules": [
+          {
+            "id": "rule:naming_conventions",
+            "category": "naming",
+            "rule": "Modules and packages should follow snake_case naming convention.",
+            "confidence": 0.9,
+            "examples": [
+              "agents/__init__.py"
+            ],
+            "counterexamples": [
+              "agents/Analyst.py"
+            ],
+            "provenance": [
+              {
+                "file": "agents/__init__.py",
+                "line": 1,
+                "evidence": "Module naming"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all modules follow snake_case naming convention."
+        ],
+        "scaffold_templates": [
+          "Basic Python module structure with __init__.py"
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The codebase is maintainable but lacks explicit security and testability measures.",
+        "scores": {
+          "maintainability": 70,
+          "security": 50,
+          "reliability": 60,
+          "testability": 40
+        },
+        "hotspots": [
+          {
+            "scope": "agents/analyst.py",
+            "reason": "Lack of unit tests",
+            "severity": "medium",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "agents/analyst.py",
+                "line": 1,
+                "evidence": "No test functions found"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security vulnerabilities due to lack of input validation",
+            "description": "The absence of input validation in modules may lead to security vulnerabilities.",
+            "severity": "high",
+            "confidence": 0.7
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:001",
+          "title": "Implement Unit Tests",
+          "problem_statement": "The codebase lacks sufficient unit tests, impacting testability and reliability.",
+          "scope": [
+            "agents/analyst.py",
+            "agents/__init__.py"
+          ],
+          "risk_if_unaddressed": "Potential undetected bugs and lower code reliability.",
+          "effort": "M",
+          "severity": "medium",
+          "dependencies": [],
+          "suggested_approach": "Develop unit tests for all functions and modules using a framework like pytest.",
+          "success_criteria": [
+            "All functions have corresponding unit tests",
+            "Achieve at least 80% code coverage"
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "agents/analyst.py",
+              "line": 1,
+              "evidence": "No test functions found"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 4037,
+    "latency_ms": 12791.954040527344,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-27T12:46:38.503543+00:00"
+}
