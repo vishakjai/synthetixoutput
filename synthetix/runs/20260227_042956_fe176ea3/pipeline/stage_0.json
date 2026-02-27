@@ -1,0 +1,287 @@
+{
+  "run_id": "20260227_042956_fe176ea3",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260227T043023Z_20260227_042956_fe176ea3",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "4f57bdea7f6945a1b85434fadfd7391e",
+        "created_at": "2026-02-27T04:30:24.324057+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "e386e98a3c2440c6971ff2fda4bf4bc7",
+            "digest": "sha256:430c32cff8a89107192e6557e1281351607fd27c8ffcddc1cb4f916374a53e3b",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "ec715d00959b42649b03c6c0d862e4d3",
+            "digest": "sha256:0e3622aca958b31e960895d6ab6b7c880156a5ed933bdcdaed73382f105a294b",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "ff422383e2324224aa0193ecd1277e6a",
+            "digest": "sha256:ac70dc3acb6e8ddcd14183d9392f63a8bd0bb170442b1e38e4289a0521abccb4",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-27T04:30:24.545310+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This system context model represents the legacy VB6 banking application, identifying its components, dependencies, and interactions.",
+        "nodes": [
+          {
+            "id": "node:project1",
+            "type": "Project",
+            "name": "BANKING",
+            "metadata": {
+              "type": "Exe",
+              "version": "1.0.0"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:form_login",
+            "type": "Form",
+            "name": "LOGIN",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node:module1",
+            "type": "Module",
+            "name": "Module1",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 17,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "id": "node:database_bank1",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0",
+              "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          },
+          {
+            "id": "node:activex_msado",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:project1",
+            "to": "node:activex_msado",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node:form_login",
+            "to": "node:database_bank1",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This convention profile outlines the coding standards and practices identified in the legacy VB6 application.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Forms and modules should follow PascalCase naming convention.",
+            "confidence": 0.8,
+            "examples": [
+              "LOGIN.frm",
+              "Module1.bas"
+            ],
+            "counterexamples": [
+              "login.frm",
+              "module1.bas"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all forms and modules adhere to PascalCase naming convention."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment evaluates the maintainability, security, reliability, and testability of the legacy VB6 application.",
+        "scores": {
+          "maintainability": 40,
+          "security": 30,
+          "reliability": 50,
+          "testability": 20
+        },
+        "hotspots": [
+          {
+            "scope": "Form:LOGIN",
+            "reason": "Lack of input validation",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "newlogin.frm",
+                "line": 1,
+                "evidence": "TextBox without validation"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Vulnerabilities",
+            "description": "Potential security risks due to outdated ActiveX controls and lack of input validation.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:input_validation",
+          "title": "Implement Input Validation",
+          "problem_statement": "Forms lack proper input validation, leading to potential security vulnerabilities.",
+          "scope": [
+            "Form:LOGIN",
+            "Form:main"
+          ],
+          "risk_if_unaddressed": "Increased risk of security breaches due to unvalidated user input.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [
+            "node:activex_msado"
+          ],
+          "suggested_approach": "Implement input validation using C# data annotations or custom validation logic.",
+          "success_criteria": [
+            "All user inputs are validated before processing."
+          ],
+          "confidence": 0.8,
+          "provenance": [
+            {
+              "file": "newlogin.frm",
+              "line": 1,
+              "evidence": "TextBox without validation"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7834,
+    "latency_ms": 19339.99991416931,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-27T04:30:24.634652+00:00"
+}
