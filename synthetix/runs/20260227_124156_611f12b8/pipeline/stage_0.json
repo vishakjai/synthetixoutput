@@ -1,0 +1,278 @@
+{
+  "run_id": "20260227_124156_611f12b8",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 3 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260227T124221Z_20260227_124156_611f12b8",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "78caaa3376cb48bb84d07eee02c7fc05",
+        "created_at": "2026-02-27T12:42:21.643616+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "3c7c610e835e4e18a87ae9b1d061e269",
+            "digest": "sha256:7c2d31c8744647dadcb0b05d938f33daf3336fd492ad9ba470703b6c430c5a4a",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "1469024309c14dc7a18b81da6997c821",
+            "digest": "sha256:412a92000010e6ccfb8956b79537400ccaa5f891ba739862bbb3b1ddfd861000",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "eb87013b30a349f5872ec5bd9336b08e",
+            "digest": "sha256:284ceb0776716e5c95d59c90aefc74f07d0a7a94325303706e00694032fdb7ca",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-27T12:42:21.795863+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy banking application structure and its modernization into a Python-based system.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "LoginForm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Component",
+            "name": "MainForm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Form=main.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Database",
+            "name": "BankDatabase",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0",
+              "source": "E:\\project\\myBANKING\\BANK1.mdb"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-3",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Connection1 uses BANK1.mdb"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-2",
+            "to": "node-3",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Connection1 uses BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "The specific functionality of some OCX components like MSCOMCTL.OCX"
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and practices for the modernized Python codebase.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Use snake_case for variable and function names.",
+            "confidence": 0.9,
+            "examples": [
+              "def calculate_interest_rate():",
+              "account_balance = 1000"
+            ],
+            "counterexamples": [
+              "def CalculateInterestRate():",
+              "AccountBalance = 1000"
+            ],
+            "provenance": [
+              {
+                "file": "config.py",
+                "line": 10,
+                "evidence": "def calculate_interest_rate():"
+              }
+            ]
+          },
+          {
+            "id": "rule-2",
+            "category": "logging",
+            "rule": "Use the logging module for all logging purposes.",
+            "confidence": 0.9,
+            "examples": [
+              "import logging",
+              "logging.info('This is an info message')"
+            ],
+            "counterexamples": [
+              "print('This is an info message')"
+            ],
+            "provenance": [
+              {
+                "file": "agents/analyst.py",
+                "line": 20,
+                "evidence": "import logging"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all Python files pass PEP 8 linting."
+        ],
+        "scaffold_templates": [
+          "Use FastAPI for creating new endpoints."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy codebase and its modernization status.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 55,
+          "testability": 40
+        },
+        "hotspots": [
+          {
+            "scope": "Database Connection",
+            "reason": "Use of outdated Microsoft Access database.",
+            "severity": "high",
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Security Risk",
+            "description": "The use of outdated OCX components may introduce security vulnerabilities.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Replace Microsoft Access Database",
+          "problem_statement": "The current system uses a Microsoft Access database which is outdated and not suitable for modern applications.",
+          "scope": [
+            "Database"
+          ],
+          "risk_if_unaddressed": "Potential data loss and security vulnerabilities.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "DataEnvironment1.DCA"
+          ],
+          "suggested_approach": "Migrate the database to a modern RDBMS like PostgreSQL or MySQL.",
+          "success_criteria": [
+            "Database is successfully migrated to a new RDBMS.",
+            "All application components interact with the new database without errors."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "DataEnvironment1.DCA",
+              "line": 1,
+              "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7868,
+    "latency_ms": 15014.806747436523,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-27T12:42:21.836115+00:00"
+}
