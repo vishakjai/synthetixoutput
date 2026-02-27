@@ -1,0 +1,203 @@
+{
+  "header": {
+    "artifact_id": "d5745fd49ab745139e93f6c6f5ceca09",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-27T16:43:53.933533+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260227_164333_e738becc",
+      "stage_id": "context_layer",
+      "task_id": "34eb2fa37d874558922bfd1a9bdab9b7"
+    },
+    "parents": [],
+    "digest": "sha256:ecf0532774620fe5d3cec5dd6416bd270cf5a00311c1a201ba52ac4c88a84f00",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260227_164333_e738becc",
+      "bundle_version": "20260227T164353Z_20260227_164333_e738becc"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The health assessment of the legacy VB6 project indicates areas of concern, particularly in maintainability and modernization readiness."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 2,
+      "security": 3,
+      "reliability": 3,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: frmcustomer",
+      "description": "Complex form logic with minimal documentation.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "frmcustomer"
+        ],
+        "paths": [
+          "frmcustomer"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/BANK.vbp"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "ActiveX Dependency",
+      "description": "The project relies on outdated ActiveX components that may not be supported in modern environments.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation:remove_activex",
+      "title": "Remove ActiveX Dependencies",
+      "priority": "P0",
+      "business_value": "Potential security vulnerabilities and compatibility issues with modern systems.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node:BankApp1"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "MSCOMCTL.OCX",
+        "MSDBRPTR.DLL"
+      ],
+      "plan": [
+        "Refactor the application to remove ActiveX dependencies and replace them with modern equivalents"
+      ],
+      "acceptance_criteria": [
+        "No ActiveX components present in the project.",
+        "Application runs successfully without ActiveX dependencies."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation:remove_activex"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "remediation:remove_activex"
+    ]
+  }
+}
