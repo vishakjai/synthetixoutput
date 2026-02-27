@@ -1,0 +1,260 @@
+{
+  "run_id": "20260227_081224_ae358d9c",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 2 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260227T081250Z_20260227_081224_ae358d9c",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "e612af72cbaa421282c9772603b39d47",
+        "created_at": "2026-02-27T08:12:50.573807+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "0d41f525c81745cc97449b86ab7823e0",
+            "digest": "sha256:c4175b49f165dd6d0312eb1acffe682018aedcc1ba731cd9f5af8d23422046ae",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "36854012e87a4c5eb81dc9e4d3731a77",
+            "digest": "sha256:b81de98d023ef9ad6cc7546347a1e9de9d113a814042314f42fc2030fb174b93",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "b2d3fc647a5643dbbe9f385a1ea1b920",
+            "digest": "sha256:6af7f354aede789fb69c8c7dfe1c89b25a8cf58ac5b384712095c1c9338729f2",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-27T08:12:50.682155+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy VB6 banking application, identifying projects, forms, modules, ActiveX dependencies, and SQL behaviors for modernization.",
+        "nodes": [
+          {
+            "id": "node:project:banking_vbp",
+            "type": "Project",
+            "name": "BANKING.vbp",
+            "metadata": {
+              "type": "Exe",
+              "references": [
+                "OLE Automation",
+                "Microsoft ActiveX Data Objects 2.0 Library",
+                "Microsoft DAO 3.51 Object Library"
+              ],
+              "objects": [
+                "MSCOMCT2.OCX",
+                "COMCT232.OCX",
+                "COMCTL32.OCX",
+                "MSWINSCK.OCX"
+              ],
+              "forms": [
+                "LOGIN.frm",
+                "main.frm",
+                "frmcustomer.frm",
+                "deposit.frm",
+                "withdrawal.frm",
+                "transaction.frm",
+                "accounttype.frm",
+                "reports.frm",
+                "newlogin.frm",
+                "splash.frm"
+              ],
+              "modules": [
+                "Module1.bas"
+              ],
+              "designers": [
+                "DataEnvironment1.Dsr",
+                "customerReports.Dsr",
+                "depositreports.Dsr",
+                "withdrawals.Dsr"
+              ]
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node:database:bank1_mdb",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0",
+              "location": "E:\\project\\myBANKING\\BANK1.mdb"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node:project:banking_vbp",
+            "to": "node:database:bank1_mdb",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile evaluates the naming conventions, error handling, and other coding standards in the VB6 project.",
+        "rules": [
+          {
+            "id": "rule:naming:forms",
+            "category": "naming",
+            "rule": "Form names should be descriptive and follow PascalCase.",
+            "confidence": 0.8,
+            "examples": [
+              "MainForm",
+              "CustomerForm"
+            ],
+            "counterexamples": [
+              "frmcustomer"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all form names follow PascalCase for consistency."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment identifies maintainability and security issues in the legacy VB6 application.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 55,
+          "testability": 40
+        },
+        "hotspots": [
+          {
+            "scope": "Module1.bas",
+            "reason": "Complex logic with minimal comments",
+            "severity": "medium",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "Module1.bas",
+                "line": 1,
+                "evidence": "Complex logic without comments"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Dependency",
+            "description": "Reliance on outdated ActiveX controls may pose security risks.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:activex_removal",
+          "title": "Remove ActiveX Dependencies",
+          "problem_statement": "The project relies on outdated ActiveX controls which are no longer supported.",
+          "scope": [
+            "BANKING.vbp"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities and compatibility issues with modern systems.",
+          "effort": "L",
+          "severity": "high",
+          "dependencies": [
+            "node:project:banking_vbp"
+          ],
+          "suggested_approach": "Replace ActiveX controls with equivalent .NET components.",
+          "success_criteria": [
+            "All ActiveX controls are replaced with .NET components.",
+            "The application runs without ActiveX-related errors."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BANKING.vbp",
+              "line": 1,
+              "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7811,
+    "latency_ms": 18548.038482666016,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-27T08:12:50.725909+00:00"
+}
