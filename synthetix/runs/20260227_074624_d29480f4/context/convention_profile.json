@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "summary": "Convention analysis of the VB6 project focusing on naming conventions, error handling, and ActiveX dependencies.",
+  "rules": [
+    {
+      "id": "rule:naming_convention",
+      "category": "naming",
+      "rule": "Forms and modules should follow PascalCase naming convention.",
+      "confidence": 0.9,
+      "examples": [
+        "LOGIN.frm",
+        "main.frm"
+      ],
+      "counterexamples": [
+        "Form7"
+      ],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 24,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "rule:activex_dependency",
+      "category": "dependency",
+      "rule": "Avoid using deprecated ActiveX controls.",
+      "confidence": 0.85,
+      "examples": [
+        "MSCOMCTL.OCX"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 10,
+          "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor form and module names to follow consistent naming conventions.",
+    "Evaluate and replace deprecated ActiveX controls with modern equivalents."
+  ],
+  "scaffold_templates": [
+    "C# class templates for forms and modules",
+    "Entity Framework templates for database interactions"
+  ]
+}
