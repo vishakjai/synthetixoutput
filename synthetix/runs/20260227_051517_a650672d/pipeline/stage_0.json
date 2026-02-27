@@ -1,0 +1,323 @@
+{
+  "run_id": "20260227_051517_a650672d",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 3 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260227T051539Z_20260227_051517_a650672d",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "82e1ff026a1a4946b7357682046f02f0",
+        "created_at": "2026-02-27T05:15:39.551114+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "0e5031ac61d64298834db49d82693b6c",
+            "digest": "sha256:a351bdb2d832492f32a38e556cfcb57592940573f862a0f2b421a633fe182b00",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "73a8f5d23ce64bf9820f67d35f27f984",
+            "digest": "sha256:1c85c9139b0d44d0f656a08e991656bfe1e45ab8d493f6bce15c1f8051bb7d8b",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "038cf62e85b945eea02e2903eaf4cbcf",
+            "digest": "sha256:31a5ac3a68a76e0c9ba94bd3e79be0df6fe90d0f1c138f01835d50712e42544a",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-27T05:15:39.578385+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy VB6 banking application, detailing its components, dependencies, and interactions.",
+        "nodes": [
+          {
+            "id": "project:banking_vb6",
+            "type": "Project",
+            "name": "BANKING",
+            "metadata": {
+              "type": "Exe",
+              "version": "1.0.0",
+              "company": "isoft"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "form:login",
+            "type": "Form",
+            "name": "LOGIN",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "module:module1",
+            "type": "Module",
+            "name": "Module1",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 17,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "id": "dependency:msado20",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {
+              "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "id": "database:bank1",
+            "type": "Database",
+            "name": "BANK1",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0",
+              "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "project:banking_vb6",
+            "to": "dependency:msado20",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 3,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          },
+          {
+            "type": "USES_LIBRARY",
+            "from": "form:login",
+            "to": "module:module1",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "database:bank1",
+            "to": "form:login",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and practices observed in the legacy VB6 application.",
+        "rules": [
+          {
+            "id": "rule:naming_convention",
+            "category": "naming",
+            "rule": "Forms and modules should follow a consistent naming convention.",
+            "confidence": 0.85,
+            "examples": [
+              "LOGIN.frm",
+              "Module1.bas"
+            ],
+            "counterexamples": [
+              "Form7"
+            ],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "rule:active_x_usage",
+            "category": "api",
+            "rule": "ActiveX controls are used extensively for UI components.",
+            "confidence": 0.9,
+            "examples": [
+              "MSCOMCT2.OCX",
+              "COMCTL32.OCX"
+            ],
+            "counterexamples": [],
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 5,
+                "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Adopt consistent naming conventions for forms and modules.",
+          "Consider replacing ActiveX controls with modern UI components."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules",
+          "C# data access layer templates"
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy VB6 application highlights maintainability and security concerns.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "ActiveX dependencies",
+            "reason": "Legacy ActiveX controls may pose security risks.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 5,
+                "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Security Vulnerabilities",
+            "description": "ActiveX controls used in the application may have known vulnerabilities.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation:replace_activex",
+          "title": "Replace ActiveX Controls",
+          "problem_statement": "ActiveX controls are outdated and may pose security risks.",
+          "scope": [
+            "UI components"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities and compatibility issues.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "dependency:msado20"
+          ],
+          "suggested_approach": "Replace ActiveX controls with modern UI components in C#.",
+          "success_criteria": [
+            "All UI components are free from ActiveX dependencies."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BANKING.vbp",
+              "line": 5,
+              "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8289,
+    "latency_ms": 19831.939458847046,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-27T05:15:39.620353+00:00"
+}
