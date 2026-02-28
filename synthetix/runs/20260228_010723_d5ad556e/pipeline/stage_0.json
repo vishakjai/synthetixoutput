@@ -1,0 +1,286 @@
+{
+  "run_id": "20260228_010723_d5ad556e",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 3 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260228T010753Z_20260228_010723_d5ad556e",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "123da7e36d044f84a45420955bb3acf4",
+        "created_at": "2026-02-28T01:07:53.551134+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "c972a65aeee14827bb250cbeca3ba0ca",
+            "digest": "sha256:0094f5685a9089997d1631e843a43b11dccae835d2872358a6983365a301e174",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "1bcb897c455848bf8ad434cdbfdf1b55",
+            "digest": "sha256:b1ee7ef5ef93c2efc9f99b5b1b038dd10923345f391f7c1196eaadaf1a9806e2",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "18bd3599e92a4cefb6ffc80b86b03767",
+            "digest": "sha256:44267b189eba19d05c76a402d16881ff8a8197ba81f9283042d147e7c76872d0",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-28T01:07:53.601740+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Analysis of legacy VB6 banking application for modernization to C#.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "BANKING.vbp",
+            "metadata": {
+              "type": "Exe",
+              "startup": "main"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Form",
+            "name": "LOGIN.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 15,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Module",
+            "name": "Module1.bas",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "Database",
+            "name": "BANK1.mdb",
+            "metadata": {
+              "provider": "Microsoft.Jet.OLEDB.4.0"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-2",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 15,
+                "evidence": "Form=LOGIN.frm"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-3",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "BANKING.vbp",
+                "line": 16,
+                "evidence": "Module=Module1; Module1.bas"
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node-1",
+            "to": "node-4",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "DataEnvironment1.DCA",
+                "line": 1,
+                "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Legacy VB6 codebase with outdated conventions and dependencies.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Form names should be descriptive and follow PascalCase.",
+            "confidence": 0.7,
+            "examples": [
+              "MainForm",
+              "CustomerDetailsForm"
+            ],
+            "counterexamples": [
+              "Form1",
+              "Form2"
+            ],
+            "provenance": [
+              {
+                "file": "newlogin.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form Form7"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor form and module names to follow PascalCase convention."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The legacy VB6 application has several maintainability and security concerns.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "Form Handling",
+            "reason": "Hardcoded form names and lack of modularity.",
+            "severity": "medium",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "main.frm",
+                "line": 1,
+                "evidence": "Private Sub Command1_Click()"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Dependency",
+            "description": "The application relies on outdated ActiveX components, which may not be supported in modern environments.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Refactor Form Names",
+          "problem_statement": "Form names are not descriptive and do not follow modern naming conventions.",
+          "scope": [
+            "LOGIN.frm",
+            "main.frm",
+            "newlogin.frm"
+          ],
+          "risk_if_unaddressed": "Increased difficulty in maintaining and understanding the codebase.",
+          "effort": "S",
+          "severity": "medium",
+          "dependencies": [],
+          "suggested_approach": "Rename forms to follow PascalCase and ensure names are descriptive.",
+          "success_criteria": [
+            "All form names are in PascalCase and descriptive."
+          ],
+          "confidence": 0.8,
+          "provenance": [
+            {
+              "file": "newlogin.frm",
+              "line": 1,
+              "evidence": "Begin VB.Form Form7"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7779,
+    "latency_ms": 20146.746158599854,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-28T01:07:53.651427+00:00"
+}
