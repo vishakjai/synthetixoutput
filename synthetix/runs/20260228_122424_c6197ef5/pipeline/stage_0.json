@@ -1,0 +1,260 @@
+{
+  "run_id": "20260228_122424_c6197ef5",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260228T122446Z_20260228_122424_c6197ef5",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "adc71ca557544fa29e40a0d6a504b252",
+        "created_at": "2026-02-28T12:24:46.270270+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "0b6de47b93ef4ae8a85fb981c87a7de8",
+            "digest": "sha256:ec5c625406b9fee9d8081c3bee886b76b79c482bdbd1008b4d7ed1d3fc596acf",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "7b8d059b9d294a2281dd003452de272b",
+            "digest": "sha256:5b8918fb902a695a1c038148caccbf2137ed944d9581ef64fe2ca8356c86984e",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "1d4cc46312754b05b6e3aabba59df396",
+            "digest": "sha256:1326b098bc7d5845acaeb2250b7759da97dab72504fb73a9ae6351bb277a9efa",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-02-28T12:24:46.296088+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy VB6 BankApp1 system, identifying key components, dependencies, and interactions within the application.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "BANK.vbp",
+            "metadata": {
+              "type": "Exe",
+              "title": "BANK_SYSTEM",
+              "version": "1.0.0"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Module",
+            "name": "Mdl.bas",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 18,
+                "evidence": "Module=Mdl; Mdl.bas"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Form",
+            "name": "frmcustomer.frm",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 19,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "ExternalDependency",
+            "name": "stdole2.tlb",
+            "metadata": {
+              "description": "OLE Automation"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 3,
+                "evidence": "Reference=stdole2.tlb"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-4",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 3,
+                "evidence": "Reference=stdole2.tlb"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "The specific SQL behaviors and database connections are not detailed in the provided files."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and standards used within the legacy VB6 BankApp1 system.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Forms should be prefixed with 'frm'.",
+            "confidence": 0.9,
+            "examples": [
+              "frmcustomer.frm",
+              "frmdeposit.frm"
+            ],
+            "counterexamples": [
+              "customer.frm"
+            ],
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 19,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all forms follow the naming convention of prefixing with 'frm'."
+        ],
+        "scaffold_templates": [
+          "Form template with standard naming conventions and basic event handlers."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy VB6 BankApp1 system highlights maintainability and security concerns due to outdated dependencies.",
+        "scores": {
+          "maintainability": 2,
+          "security": 3,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "External Dependencies",
+            "reason": "Use of outdated ActiveX components.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 3,
+                "evidence": "Reference=stdole2.tlb"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Outdated Technology",
+            "description": "The use of VB6 and ActiveX components poses a risk due to lack of support and security updates.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation-1",
+          "title": "Upgrade ActiveX Dependencies",
+          "problem_statement": "The application relies on outdated ActiveX components which are no longer supported.",
+          "scope": [
+            "External Dependencies"
+          ],
+          "risk_if_unaddressed": "Increased risk of security vulnerabilities and compatibility issues.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "stdole2.tlb",
+            "MSDBRPTR.DLL"
+          ],
+          "suggested_approach": "Replace ActiveX components with modern equivalents or refactor to remove dependency.",
+          "success_criteria": [
+            "All ActiveX dependencies are replaced or removed.",
+            "No functionality is lost post-refactor."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BankApp1/BANK.vbp",
+              "line": 3,
+              "evidence": "Reference=stdole2.tlb"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8336,
+    "latency_ms": 10382.590770721436,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-02-28T12:24:46.338995+00:00"
+}
