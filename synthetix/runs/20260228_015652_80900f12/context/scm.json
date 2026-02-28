@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of a legacy VB6 banking application with ActiveX dependencies and SQL behaviors, prepared for modernization to C#.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Project",
+      "name": "BANKING",
+      "metadata": {
+        "type": "Exe",
+        "startup": "main",
+        "version": "1.0.0"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Form",
+      "name": "LOGIN",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 13,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node-3",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 14,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node-4",
+      "type": "ActiveX",
+      "name": "MSCOMCT2.OCX",
+      "metadata": {
+        "version": "2.0"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 6,
+          "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+        }
+      ]
+    },
+    {
+      "id": "node-5",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-1",
+      "to": "node-4",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 6,
+          "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "node-1",
+      "to": "node-5",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
