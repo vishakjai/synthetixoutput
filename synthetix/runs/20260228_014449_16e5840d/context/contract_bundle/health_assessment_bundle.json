@@ -1,0 +1,203 @@
+{
+  "header": {
+    "artifact_id": "3c9184af04694a608f9e6d8e3d08f2f6",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-28T01:45:08.208392+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260228_014449_16e5840d",
+      "stage_id": "context_layer",
+      "task_id": "e92c5ca460a64e649c255a6f864d1059"
+    },
+    "parents": [],
+    "digest": "sha256:30803f869e8066628759a622f0ec1f86a273b1efe029a70d66494ec6ca644ec8",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260228_014449_16e5840d",
+      "bundle_version": "20260228T014507Z_20260228_014449_16e5840d"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "The health assessment of the legacy VB6 codebase indicates areas of concern in maintainability and security."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 40,
+      "security": 50,
+      "reliability": 60,
+      "testability": 30
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Form Handling",
+      "description": "Multiple forms with hardcoded logic.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Form Handling"
+        ],
+        "paths": [
+          "Form Handling"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "main.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "ActiveX Control Vulnerabilities",
+      "description": "Potential security risks due to outdated ActiveX controls.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "task:modernize_forms",
+      "title": "Modernize VB6 Forms to C#",
+      "priority": "P1",
+      "business_value": "Continued use of outdated technology increases maintenance costs and security risks.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "form:login"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "dependency:msado"
+      ],
+      "plan": [
+        "Refactor each form into a C# Windows Form application, ensuring UI and business logic are separated"
+      ],
+      "acceptance_criteria": [
+        "All forms are functional in C# with equivalent features."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "task:modernize_forms"
+    ],
+    "stabilization": [
+      "task:modernize_forms"
+    ],
+    "modernization": [
+      "task:modernize_forms"
+    ]
+  }
+}
