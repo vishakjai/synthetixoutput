@@ -1,0 +1,238 @@
+{
+  "header": {
+    "artifact_id": "6b5b67e3dc43405bbf02756fbe256527",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-02-28T01:45:08.207156+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260228_014449_16e5840d",
+      "stage_id": "context_layer",
+      "task_id": "e92c5ca460a64e649c255a6f864d1059"
+    },
+    "parents": [],
+    "digest": "sha256:36de3d74281766c33ea974f0301075bdef6c834e61ed2e4cb437027ccf85bee9",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260228_014449_16e5840d",
+      "bundle_version": "20260228T014507Z_20260228_014449_16e5840d"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "project:banking_vb6",
+        "type": "component",
+        "name": "BANKING.vbp",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "form:login",
+        "type": "component",
+        "name": "LOGIN.frm",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "module:module1",
+        "type": "module",
+        "name": "Module1.bas",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "dependency:msado",
+        "type": "external_dependency",
+        "name": "Microsoft ActiveX Data Objects 2.0 Library",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "database:bank1",
+        "type": "database",
+        "name": "BANK1.mdb",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "DataEnvironment1.DCA"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "DataEnvironment1.DCA"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "depends_on",
+        "from": "project:banking_vb6",
+        "to": "dependency:msado",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "reads",
+        "from": "form:login",
+        "to": "database:bank1",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "DataEnvironment1.DCA"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 5,
+      "edge_count": 2,
+      "languages": []
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": []
+}
