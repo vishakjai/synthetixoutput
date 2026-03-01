@@ -1,0 +1,113 @@
+{
+  "version": "cp-v1.1.0",
+  "summary": "Python-centric multi-agent platform following modular agent pattern with JSON schema validation and file-based persistence",
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "rule": "Agent modules follow snake_case pattern with descriptive role names",
+      "confidence": 0.95,
+      "examples": [
+        "database_engineer.py",
+        "security_engineer.py",
+        "system_intelligence.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent snake_case naming across all agent modules"
+        }
+      ]
+    },
+    {
+      "id": "api-001",
+      "category": "api",
+      "rule": "FastAPI decorators used for HTTP endpoint definition",
+      "confidence": 0.9,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI decorator patterns"
+        },
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI endpoint definitions"
+        }
+      ]
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "rule": "JSON schema validation enforced through .schema.json files",
+      "confidence": 0.92,
+      "examples": [
+        "agent_result.schema.json",
+        "context_bundle.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive JSON schema definitions"
+        }
+      ]
+    },
+    {
+      "id": "error_handling-001",
+      "category": "error_handling",
+      "rule": "Future imports used for Python 2/3 compatibility",
+      "confidence": 0.88,
+      "examples": [
+        "from __future__ import"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 10,
+          "evidence": "__future__ import pattern"
+        }
+      ]
+    },
+    {
+      "id": "logging-001",
+      "category": "logging",
+      "rule": "Standard library imports suggest structured logging approach",
+      "confidence": 0.75,
+      "examples": [
+        "import json",
+        "import datetime"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "JSON and datetime imports for structured data"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce consistent import ordering across all Python modules",
+    "Add type hints validation using mypy for all agent interfaces",
+    "Implement consistent error handling patterns across agents",
+    "Add docstring standards enforcement for all public methods"
+  ],
+  "scaffold_templates": [
+    "New agent template following existing snake_case pattern",
+    "FastAPI endpoint template with schema validation",
+    "JSON schema template for new data contracts",
+    "Docker service template for new microservices"
+  ]
+}
