@@ -1,0 +1,116 @@
+{
+  "version": "cp-v1.2",
+  "summary": "Python-based modernization platform with strong typing, modular agent architecture, and schema-driven validation. VB6 legacy sample shows unsafe SQL practices requiring immediate remediation.",
+  "rules": [
+    {
+      "id": "rule:python_typing",
+      "category": "naming",
+      "rule": "Use type hints and typing module for all function signatures",
+      "confidence": 0.9,
+      "examples": [
+        "from typing import List, Dict, Optional"
+      ],
+      "counterexamples": [
+        "def process_data(data):"
+      ],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 15,
+          "evidence": "typing import usage"
+        }
+      ]
+    },
+    {
+      "id": "rule:sql_injection_prevention",
+      "category": "security",
+      "rule": "Never use string concatenation for SQL queries - always use parameterized queries",
+      "confidence": 1.0,
+      "examples": [
+        "cursor.execute('SELECT * FROM customer WHERE id = %s', (customer_id,))"
+      ],
+      "counterexamples": [
+        "rs.Open \"Select * from customer\", con"
+      ],
+      "provenance": [
+        {
+          "file": "legacy_sample",
+          "line": 2,
+          "evidence": "Unsafe SQL concatenation pattern"
+        }
+      ]
+    },
+    {
+      "id": "rule:agent_modularization",
+      "category": "naming",
+      "rule": "Agent modules follow single responsibility principle with clear naming",
+      "confidence": 0.85,
+      "examples": [
+        "database_engineer.py",
+        "security_engineer.py",
+        "system_intelligence.py"
+      ],
+      "counterexamples": [
+        "util.py",
+        "helper.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Specialized agent module imports"
+        }
+      ]
+    },
+    {
+      "id": "rule:schema_validation",
+      "category": "api",
+      "rule": "Use JSON schema validation for all data contracts",
+      "confidence": 0.9,
+      "examples": [
+        ".deliveryos/schemas/*.schema.json"
+      ],
+      "counterexamples": [
+        "Unvalidated dictionary passing"
+      ],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive schema definitions"
+        }
+      ]
+    },
+    {
+      "id": "rule:vb6_event_preservation",
+      "category": "api",
+      "rule": "VB6 event handlers must be mapped to equivalent C# event patterns with identical behavior",
+      "confidence": 0.8,
+      "examples": [
+        "private void Command1_Click(object sender, EventArgs e)"
+      ],
+      "counterexamples": [
+        "Generic button click without behavior preservation"
+      ],
+      "provenance": [
+        {
+          "file": "legacy_sample",
+          "line": 1,
+          "evidence": "Command1_Click event handler pattern"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement parameterized query validation for all database operations",
+    "Add type hints to all Python functions lacking them",
+    "Enforce schema validation at API boundaries",
+    "Create VB6-to-C# event mapping documentation"
+  ],
+  "scaffold_templates": [
+    "C# Windows Forms event handler template preserving VB6 behavior",
+    "PostgreSQL parameterized query template",
+    "Agent module template with typing and error handling",
+    "Schema validation decorator template"
+  ]
+}
