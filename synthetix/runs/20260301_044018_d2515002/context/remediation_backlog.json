@@ -1,0 +1,139 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement API Authentication",
+    "problem_statement": "Web API endpoints lack authentication/authorization, exposing agent orchestration to unauthorized access",
+    "scope": [
+      "web/server.py",
+      "utils/context_vault.py"
+    ],
+    "risk_if_unaddressed": "Critical security vulnerability allowing unauthorized agent execution and data access",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Implement JWT-based authentication with role-based access control for agent operations",
+    "success_criteria": [
+      "All API endpoints require valid authentication tokens",
+      "Role-based permissions for different agent operations",
+      "Audit logging for all authenticated requests"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "web/server.py",
+        "line": 1,
+        "evidence": "FastAPI endpoints without auth decorators"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Replace File-Based Storage with Transactional Database",
+    "problem_statement": "JSON file-based storage lacks ACID properties, backup, and concurrent access protection",
+    "scope": [
+      "team_data/",
+      "utils/context_vault.py"
+    ],
+    "risk_if_unaddressed": "Data corruption, loss of team/tenant data, race conditions in multi-agent scenarios",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "Migrate to PostgreSQL with proper schema, transactions, and backup strategy",
+    "success_criteria": [
+      "All team data stored in relational database with ACID guarantees",
+      "Automated backup and recovery procedures",
+      "Concurrent access handling with proper locking"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "team_data/",
+        "line": 1,
+        "evidence": "Direct JSON file manipulation without safeguards"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement Circuit Breaker Pattern for Agent Orchestration",
+    "problem_statement": "High coupling through 386 import edges creates cascade failure risk when individual agents fail",
+    "scope": [
+      "orchestrator/pipeline.py",
+      "agents/"
+    ],
+    "risk_if_unaddressed": "Single agent failure cascading to entire pipeline, reducing system reliability",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement circuit breaker pattern with agent health checks and graceful degradation",
+    "success_criteria": [
+      "Agent failures isolated and don't cascade to other agents",
+      "Health monitoring for all agents with automatic recovery",
+      "Graceful degradation when subset of agents unavailable"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "orchestrator/pipeline.py",
+        "line": 16,
+        "evidence": "16 imports indicating high coupling"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Add Comprehensive Error Handling and Logging",
+    "problem_statement": "Agents lack consistent error handling patterns and structured logging for debugging",
+    "scope": [
+      "agents/",
+      "orchestrator/"
+    ],
+    "risk_if_unaddressed": "Difficult debugging, silent failures, poor observability in production",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement structured logging with correlation IDs and consistent exception handling",
+    "success_criteria": [
+      "All agents use structured logging with correlation IDs",
+      "Consistent exception handling patterns across all modules",
+      "Centralized error monitoring and alerting"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 12,
+        "evidence": "JSON and datetime imports suggest logging intent but no structured implementation"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Implement Configuration Management",
+    "problem_statement": "No evidence of environment-specific configuration management or secrets handling",
+    "scope": [
+      "config.py",
+      "docker-compose.yml"
+    ],
+    "risk_if_unaddressed": "Configuration drift between environments, hardcoded secrets, deployment inconsistencies",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement environment-based configuration with secrets management integration",
+    "success_criteria": [
+      "Environment-specific configuration files",
+      "Secrets externalized to secure vault",
+      "Configuration validation on startup"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "config.py",
+        "line": 1,
+        "evidence": "Basic config file without environment handling"
+      }
+    ]
+  }
+]
