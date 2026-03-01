@@ -1,0 +1,176 @@
+{
+  "version": "scm-v2.1",
+  "summary": "Enterprise software modernization platform with Python-based agent orchestration system. No VB6 legacy code detected in repository - analysis based on provided VB6 sample showing ADO recordset SQL injection vulnerability.",
+  "nodes": [
+    {
+      "id": "service:modernization_platform",
+      "type": "Service",
+      "name": "Legacy Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "framework": "fastapi",
+        "deployment": "docker"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI application with agent orchestration"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker containerization setup"
+        }
+      ]
+    },
+    {
+      "id": "component:agent_orchestrator",
+      "type": "Component",
+      "name": "Agent Orchestration System",
+      "metadata": {
+        "agents": [
+          "analyst",
+          "architect",
+          "developer",
+          "database_engineer",
+          "security_engineer",
+          "tester",
+          "validator",
+          "deployer",
+          "system_intelligence"
+        ],
+        "pipeline_driven": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Agent module imports"
+        },
+        {
+          "file": "orchestrator/pipeline.py",
+          "line": 1,
+          "evidence": "Pipeline orchestration logic"
+        }
+      ]
+    },
+    {
+      "id": "module:vb6_legacy_sample",
+      "type": "Module",
+      "name": "VB6 Legacy Code Sample",
+      "metadata": {
+        "language": "vb6",
+        "sql_injection_risk": true,
+        "ado_recordset": true,
+        "event_handler": "Command1_Click"
+      },
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "legacy_sample",
+          "line": 2,
+          "evidence": "rs.Open \"Select * from customer\", con"
+        }
+      ]
+    },
+    {
+      "id": "database:target_postgresql",
+      "type": "Database",
+      "name": "Target PostgreSQL Database",
+      "metadata": {
+        "type": "postgresql",
+        "migration_target": true
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "context",
+          "line": 1,
+          "evidence": "Database conversion target specified as PostgreSQL"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:web_server",
+      "type": "Endpoint",
+      "name": "Web Server Endpoints",
+      "metadata": {
+        "framework": "fastapi",
+        "routes_detected": true
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get( endpoint patterns detected"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "service:modernization_platform",
+      "to": "component:agent_orchestrator",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "relationship": "composition"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "orchestrator/pipeline.py",
+          "line": 1,
+          "evidence": "Pipeline imports and orchestrates agents"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "component:agent_orchestrator",
+      "to": "endpoint:web_server",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "protocol": "http",
+        "framework": "fastapi"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI route handlers"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "module:vb6_legacy_sample",
+      "to": "database:target_postgresql",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "sql_pattern": "Select * from customer",
+        "injection_risk": true
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "legacy_sample",
+          "line": 2,
+          "evidence": "Unparameterized SQL query"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "VB6 source database schema and connection details",
+    "Complete VB6 application structure beyond provided sample",
+    "Authentication and authorization patterns in legacy system",
+    "Data validation rules in original VB6 application",
+    "Complete event handler dependencies and form lifecycle"
+  ]
+}
