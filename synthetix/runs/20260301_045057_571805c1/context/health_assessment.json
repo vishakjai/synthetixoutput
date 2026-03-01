@@ -1,0 +1,77 @@
+{
+  "version": "ha-v1.3",
+  "summary": "Modernization platform shows good architectural practices but VB6 legacy sample contains critical security vulnerability requiring immediate attention before migration.",
+  "scores": {
+    "maintainability": 75,
+    "security": 25,
+    "reliability": 60,
+    "testability": 70
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Legacy SQL Operations",
+      "reason": "Unparameterized SQL query vulnerable to injection attacks",
+      "severity": "high",
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "legacy_sample",
+          "line": 2,
+          "evidence": "rs.Open \"Select * from customer\", con - direct string concatenation"
+        }
+      ]
+    },
+    {
+      "scope": "VB6 Event Handler Migration",
+      "reason": "Event-driven architecture requires careful state management preservation",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "legacy_sample",
+          "line": 1,
+          "evidence": "Command1_Click event handler pattern"
+        }
+      ]
+    },
+    {
+      "scope": "Database Schema Migration",
+      "reason": "Unknown source database schema creates migration risk",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "context",
+          "line": 1,
+          "evidence": "Source database not specified"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Vulnerability",
+      "description": "VB6 legacy code uses unparameterized SQL queries that are vulnerable to injection attacks",
+      "severity": "critical",
+      "confidence": 1.0
+    },
+    {
+      "title": "Event Handler Behavior Loss",
+      "description": "VB6 event-driven patterns may not translate directly to C# without careful analysis",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Data Contract Mismatch",
+      "description": "Unknown source database schema may cause data integrity issues during migration",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "ADO Recordset Dependencies",
+      "description": "Legacy ADO recordset patterns require complete rewrite for modern data access",
+      "severity": "medium",
+      "confidence": 0.9
+    }
+  ]
+}
