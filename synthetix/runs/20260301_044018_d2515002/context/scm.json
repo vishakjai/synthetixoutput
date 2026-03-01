@@ -1,0 +1,382 @@
+{
+  "version": "scm-v1.2.3",
+  "summary": "Multi-agent enterprise software modernization platform with FastAPI web layer, agent orchestration pipeline, and persistent team/tenant memory storage",
+  "nodes": [
+    {
+      "id": "service:web-api",
+      "type": "Service",
+      "name": "Web API Service",
+      "metadata": {
+        "framework": "FastAPI",
+        "port": "8000",
+        "entry_point": "web/server.py"
+      },
+      "confidence": 0.92,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI application with route handlers"
+        }
+      ]
+    },
+    {
+      "id": "service:orchestrator",
+      "type": "Service",
+      "name": "Agent Orchestration Pipeline",
+      "metadata": {
+        "type": "pipeline_orchestrator",
+        "agents_managed": 9
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "orchestrator/pipeline.py",
+          "line": 16,
+          "evidence": "Pipeline orchestration with 16 imports"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-analyst",
+      "type": "Component",
+      "name": "Analyst Agent",
+      "metadata": {
+        "agent_type": "analyst",
+        "imports": 10
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Analyst agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-architect",
+      "type": "Component",
+      "name": "Architect Agent",
+      "metadata": {
+        "agent_type": "architect",
+        "imports": 5
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Architect agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-developer",
+      "type": "Component",
+      "name": "Developer Agent",
+      "metadata": {
+        "agent_type": "developer",
+        "imports": 8
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "Developer agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-database-engineer",
+      "type": "Component",
+      "name": "Database Engineer Agent",
+      "metadata": {
+        "agent_type": "database_engineer",
+        "imports": 4
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Database engineer agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-security-engineer",
+      "type": "Component",
+      "name": "Security Engineer Agent",
+      "metadata": {
+        "agent_type": "security_engineer",
+        "imports": 4
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Security engineer agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-tester",
+      "type": "Component",
+      "name": "Tester Agent",
+      "metadata": {
+        "agent_type": "tester",
+        "imports": 7
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Tester agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-validator",
+      "type": "Component",
+      "name": "Validator Agent",
+      "metadata": {
+        "agent_type": "validator",
+        "imports": 4
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/validator.py",
+          "line": 1,
+          "evidence": "Validator agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-deployer",
+      "type": "Component",
+      "name": "Deployer Agent",
+      "metadata": {
+        "agent_type": "deployer",
+        "imports": 6
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/deployer.py",
+          "line": 1,
+          "evidence": "Deployer agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-system-intelligence",
+      "type": "Component",
+      "name": "System Intelligence Agent",
+      "metadata": {
+        "agent_type": "system_intelligence",
+        "imports": 5
+      },
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "System intelligence agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:context-vault",
+      "type": "Component",
+      "name": "Context Vault",
+      "metadata": {
+        "type": "context_storage",
+        "endpoints": [
+          "@app.get",
+          "@app.post"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "Context vault with HTTP endpoints"
+        }
+      ]
+    },
+    {
+      "id": "database:team-data",
+      "type": "Database",
+      "name": "Team Data Storage",
+      "metadata": {
+        "type": "file_based",
+        "format": "json",
+        "tenant_structure": "workspace/client/project"
+      },
+      "confidence": 0.88,
+      "provenance": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "JSON-based team data storage with tenant hierarchy"
+        }
+      ]
+    },
+    {
+      "id": "container:app",
+      "type": "Container",
+      "name": "Application Container",
+      "metadata": {
+        "containerized": true,
+        "compose_managed": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Docker containerization"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker compose orchestration"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "service:orchestrator",
+      "to": "component:agent-analyst",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "module"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "service:orchestrator",
+      "to": "component:agent-architect",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "module"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 2,
+          "evidence": "from .architect import"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "service:orchestrator",
+      "to": "component:agent-developer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "module"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 3,
+          "evidence": "from .developer import"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "service:web-api",
+      "to": "database:team-data",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "access_pattern": "file_io"
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "JSON files accessed by web service"
+        }
+      ]
+    },
+    {
+      "type": "WRITES_TABLE",
+      "from": "service:orchestrator",
+      "to": "database:team-data",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "access_pattern": "file_io"
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "Pipeline writes to team data storage"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:web-api",
+      "to": "container:app",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "runtime": "docker"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Web service containerized"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:orchestrator",
+      "to": "container:app",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "runtime": "docker"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Orchestrator service containerized"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "External API dependencies for agent LLM calls",
+    "Database connection strings and credentials",
+    "Authentication/authorization mechanisms",
+    "Inter-service communication protocols beyond imports",
+    "Deployment target infrastructure details"
+  ]
+}
