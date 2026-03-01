@@ -1,0 +1,90 @@
+{
+  "version": "ha-v1.0.2",
+  "summary": "Moderate health with good modular structure but lacking explicit error handling, authentication, and comprehensive testing coverage",
+  "scores": {
+    "maintainability": 75,
+    "security": 45,
+    "reliability": 60,
+    "testability": 55
+  },
+  "hotspots": [
+    {
+      "scope": "agents/",
+      "reason": "High coupling through orchestrator with 386 import edges creating potential cascade failure points",
+      "severity": "medium",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "orchestrator/pipeline.py",
+          "line": 16,
+          "evidence": "16 imports indicating high coupling"
+        }
+      ]
+    },
+    {
+      "scope": "team_data/",
+      "reason": "File-based JSON storage without backup, versioning, or concurrent access protection",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "Direct JSON file manipulation without safeguards"
+        }
+      ]
+    },
+    {
+      "scope": "web/server.py",
+      "reason": "Web API endpoints lack visible authentication/authorization mechanisms",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI endpoints without auth decorators"
+        }
+      ]
+    },
+    {
+      "scope": "utils/context_vault.py",
+      "reason": "Context vault handles sensitive data without encryption evidence",
+      "severity": "medium",
+      "confidence": 0.75,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "Context storage without encryption patterns"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Data Loss Risk",
+      "description": "File-based JSON storage without atomic writes, backups, or corruption recovery mechanisms",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Security Exposure",
+      "description": "Web API lacks authentication, potentially exposing agent orchestration to unauthorized access",
+      "severity": "critical",
+      "confidence": 0.85
+    },
+    {
+      "title": "Cascade Failure Risk",
+      "description": "High import coupling means single agent failure could impact entire pipeline",
+      "severity": "medium",
+      "confidence": 0.8
+    },
+    {
+      "title": "Configuration Drift",
+      "description": "No evidence of configuration management or environment-specific settings",
+      "severity": "medium",
+      "confidence": 0.7
+    }
+  ]
+}
