@@ -1,0 +1,126 @@
+[
+  {
+    "id": "rb-001-sql-injection",
+    "title": "Eliminate SQL Injection Vulnerabilities",
+    "problem_statement": "VB6 legacy code contains unparameterized SQL queries vulnerable to injection attacks",
+    "scope": [
+      "VB6 database operations",
+      "ADO recordset usage"
+    ],
+    "risk_if_unaddressed": "Critical security vulnerability allowing unauthorized data access and manipulation",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema analysis",
+      "Query inventory"
+    ],
+    "suggested_approach": "Replace all string concatenation SQL with parameterized queries using Entity Framework or Dapper in C#",
+    "success_criteria": [
+      "All SQL queries use parameterized approach",
+      "Static analysis confirms no string concatenation in database operations",
+      "Security testing validates injection prevention"
+    ],
+    "confidence": 1.0,
+    "provenance": [
+      {
+        "file": "legacy_sample",
+        "line": 2,
+        "evidence": "rs.Open \"Select * from customer\", con"
+      }
+    ]
+  },
+  {
+    "id": "rb-002-event-mapping",
+    "title": "Create VB6 to C# Event Handler Mapping",
+    "problem_statement": "VB6 event handlers need precise behavioral mapping to C# equivalents",
+    "scope": [
+      "Form event handlers",
+      "Control events",
+      "Application lifecycle"
+    ],
+    "risk_if_unaddressed": "Loss of critical business logic and user interaction patterns",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "Complete VB6 form analysis",
+      "C# Windows Forms architecture"
+    ],
+    "suggested_approach": "Create comprehensive mapping document and automated conversion templates",
+    "success_criteria": [
+      "All VB6 events mapped to C# equivalents",
+      "Behavioral parity validated through testing",
+      "Conversion templates available for common patterns"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "legacy_sample",
+        "line": 1,
+        "evidence": "Command1_Click event handler"
+      }
+    ]
+  },
+  {
+    "id": "rb-003-schema-discovery",
+    "title": "Complete Database Schema Analysis",
+    "problem_statement": "Source database schema unknown, creating migration planning gaps",
+    "scope": [
+      "Database tables",
+      "Relationships",
+      "Constraints",
+      "Stored procedures"
+    ],
+    "risk_if_unaddressed": "Data integrity issues and incomplete migration",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Access to source database",
+      "Schema extraction tools"
+    ],
+    "suggested_approach": "Use database reverse engineering tools to extract complete schema and data relationships",
+    "success_criteria": [
+      "Complete schema documentation",
+      "Data relationship mapping",
+      "Migration script validation"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "context",
+        "line": 1,
+        "evidence": "Source database not specified"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-ado-modernization",
+    "title": "Replace ADO Recordsets with Modern Data Access",
+    "problem_statement": "ADO recordset patterns are obsolete and need modern replacement",
+    "scope": [
+      "Data access layer",
+      "Connection management",
+      "Result set handling"
+    ],
+    "risk_if_unaddressed": "Performance issues and maintenance complexity",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [
+      "Database schema analysis",
+      "ORM selection"
+    ],
+    "suggested_approach": "Implement Entity Framework Core with PostgreSQL provider",
+    "success_criteria": [
+      "All ADO recordsets replaced with EF Core",
+      "Connection pooling implemented",
+      "Performance benchmarks met"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "legacy_sample",
+        "line": 2,
+        "evidence": "rs.Open ADO recordset usage"
+      }
+    ]
+  }
+]
