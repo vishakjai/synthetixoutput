@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "summary": "The legacy codebase uses VB6 conventions, including form-based UI design and ADO for database operations. Modernization to C# will require adherence to .NET naming conventions, error handling, and security practices.",
+  "rules": [
+    {
+      "id": "rule-1",
+      "category": "naming",
+      "rule": "Use PascalCase for class names and camelCase for method names in C#.",
+      "confidence": 0.9,
+      "examples": [
+        "public class CustomerAccount { }"
+      ],
+      "counterexamples": [
+        "public class customer_account { }"
+      ],
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Attribute VB_Name = \"main\""
+        }
+      ]
+    },
+    {
+      "id": "rule-2",
+      "category": "error_handling",
+      "rule": "Implement try-catch blocks for error handling in C#.",
+      "confidence": 0.9,
+      "examples": [
+        "try { ... } catch (Exception ex) { ... }"
+      ],
+      "counterexamples": [
+        "On Error Resume Next"
+      ],
+      "provenance": [
+        {
+          "file": "Module1.bas",
+          "line": 1,
+          "evidence": "On Error Resume Next"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Ensure all methods have XML documentation comments."
+  ],
+  "scaffold_templates": [
+    "Use ASP.NET Core for web service scaffolding."
+  ]
+}
