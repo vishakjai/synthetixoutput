@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the system context of the repository, focusing on the import relationships between Python modules.",
+  "nodes": [
+    {
+      "id": "module:agents___init___py",
+      "type": "Module",
+      "name": "agents/__init__.py",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "import .analyst"
+        }
+      ]
+    },
+    {
+      "id": "module:agents_analyst_py",
+      "type": "Module",
+      "name": "agents/analyst.py",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 10,
+          "evidence": "import __future__"
+        }
+      ]
+    },
+    {
+      "id": "module:analyst",
+      "type": "Component",
+      "name": "analyst",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "inferred node from edge endpoint `module:analyst`"
+        }
+      ]
+    },
+    {
+      "id": "pkg:future",
+      "type": "Component",
+      "name": "future",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 10,
+          "evidence": "inferred node from edge endpoint `pkg:future`"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "module:agents___init___py",
+      "to": "module:analyst",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "import .analyst"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "module:agents_analyst_py",
+      "to": "pkg:future",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 10,
+          "evidence": "import __future__"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
