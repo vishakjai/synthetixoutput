@@ -1,0 +1,5512 @@
+{
+  "meta": {
+    "title": "Modernization Brief - Banking Application Modernization",
+    "repo_url": "https://github.com/vishakjai/TestVBProject1 @ detached (unknown)",
+    "generated_at": "2026-03-05T01:33:01.674003+00:00"
+  },
+  "qa": {
+    "status": "PASS",
+    "checks": {
+      "gherkin_syntax": {
+        "status": "PASS",
+        "detail": "BDD syntax validation for Feature/Scenario/Given/When/Then."
+      },
+      "requirements_completeness": {
+        "status": "PASS",
+        "detail": "Backlog grounded in discovered behavior (14 derived item(s), threshold 4)."
+      },
+      "compliance_constraints_applied": {
+        "status": "FAIL",
+        "detail": "No explicit compliance constraints were linked, but security/privacy risks were detected in legacy behavior."
+      },
+      "bdd_flow_grounding": {
+        "status": "PASS",
+        "detail": "BDD scenarios are grounded in extracted legacy flows."
+      },
+      "handler_inventory_completeness": {
+        "status": "PASS",
+        "detail": "All analyzed forms meet handler coverage threshold."
+      },
+      "report_model_reconciled": {
+        "status": "PASS",
+        "detail": "Reporting model and entrypoints reconciled."
+      },
+      "variant_resolution": {
+        "status": "FAIL",
+        "detail": "Variant scope unresolved and schema divergence detected across project variants. Resolve DEC-VARIANT-001 before planning."
+      },
+      "variant_schema_divergence": {
+        "status": "FAIL",
+        "detail": "Schema naming divergence detected in 3 variant pair(s); 3 pair(s) include transaction-like table conflicts."
+      },
+      "key_safety_issues_identified": {
+        "status": "PASS",
+        "detail": "Risk signals include SQL injection/credential handling issues (16 signal(s))."
+      },
+      "schema_key_verification": {
+        "status": "FAIL",
+        "detail": "Delete-by-customer pattern detected in transaction scope without explicit transaction key."
+      },
+      "identity_access_model": {
+        "status": "FAIL",
+        "detail": "Role model or credential handling requires confirmation."
+      },
+      "qa_structural_integrity": {
+        "status": "PASS",
+        "detail": "QA structural checks: pass=9, warn=0, fail=0, blockers=0."
+      },
+      "qa_semantic_plausibility": {
+        "status": "PASS",
+        "detail": "Semantic plausibility checks passed with no issues."
+      }
+    }
+  },
+  "decision_brief": {
+    "Modernization readiness": "54/100",
+    "Risk tier": "medium",
+    "Inventory": "3 project(s), 26 forms/usercontrols, 10 dependencies",
+    "Data touchpoints": "transctions, customer, accounttype, deposit, withdrawal, transactions, balancedt, LOGIN, logi, tblBalances, tblCustomers, tblTransactions",
+    "Headline": "Phased UI migration recommended."
+  },
+  "decisions": [
+    {
+      "id": "DEC-UI-001",
+      "description": "Target UI framework selection for migrated forms"
+    },
+    {
+      "id": "DEC-OCX-001",
+      "description": "ActiveX/OCX replacement strategy by dependency"
+    },
+    {
+      "id": "DEC-DB-001",
+      "description": "Database contract strategy during migration"
+    },
+    {
+      "id": "DEC-VARIANT-001",
+      "description": "Resolve legacy project variant scope before planning execution and address cross-variant schema divergence."
+    },
+    {
+      "id": "DEC-IAM-001",
+      "description": "Confirm identity/access model (role model, multi-user assumptions, and credential handling)."
+    },
+    {
+      "id": "DEC-SCHEMA-KEY-001",
+      "description": "Transaction delete-key behavior requires explicit decision."
+    },
+    {
+      "id": "Q-001",
+      "description": "Are there existing operational constraints or integration dependencies not listed?"
+    },
+    {
+      "id": "DEC-EVENTMAP-001",
+      "description": "Form2, Form9 have zero extracted UI events with rich form profiles. Confirm whether these are stub forms or rerun extraction before sprint planning."
+    },
+    {
+      "id": "DEC-COMPLIANCE-001",
+      "description": "Compliance constraints are not linked to detected security/privacy risks. No explicit compliance constraints were linked, but security/privacy risks were detected in legacy behavior."
+    }
+  ],
+  "backlog": [
+    {
+      "id": "FR-001",
+      "priority": "P0",
+      "type": "functional",
+      "outcome": "Modernize Account Types Form",
+      "acceptance": "The C# form replicates the layout and controls of the VB6 frmAccTypes form. / All functionalities, including account operations, are preserved and functional."
+    },
+    {
+      "id": "FR-002",
+      "priority": "P0",
+      "type": "functional",
+      "outcome": "Modernize Customer Management Form",
+      "acceptance": "The C# form matches the VB6 frmCustomers form in appearance and behavior. / Customer profile lookup and maintenance functionalities are operational."
+    },
+    {
+      "id": "FR-003",
+      "priority": "P1",
+      "type": "functional",
+      "outcome": "Modernize Deposits Form",
+      "acceptance": "The C# form accurately reflects the VB6 frmDeposits form's UI and controls. / Deposit operations are fully functional in the modernized form."
+    },
+    {
+      "id": "FR-004",
+      "priority": "P1",
+      "type": "functional",
+      "outcome": "Modernize Search Functionality",
+      "acceptance": "The C# form provides the same search capabilities as the VB6 frmSearch form. / Search results are accurate and displayed correctly."
+    },
+    {
+      "id": "FR-005",
+      "priority": "P0",
+      "type": "functional",
+      "outcome": "Modernize Transaction Management",
+      "acceptance": "The C# form replicates the VB6 frmTransactions form's layout and controls. / Transaction operations are fully functional and accurate."
+    },
+    {
+      "id": "FR-006",
+      "priority": "P2",
+      "type": "functional",
+      "outcome": "Modernize Withdrawal Form",
+      "acceptance": "The C# form matches the VB6 frmWithdrawal form in appearance and behavior. / Withdrawal operations are operational and accurate."
+    },
+    {
+      "id": "FR-007",
+      "priority": "P0",
+      "type": "functional",
+      "outcome": "Database Connection Modernization",
+      "acceptance": "All database connections are established using Entity Framework or ADO.NET. / Data operations are consistent with the legacy application."
+    },
+    {
+      "id": "FR-008",
+      "priority": "P1",
+      "type": "functional",
+      "outcome": "ActiveX Control Replacement",
+      "acceptance": "All ActiveX controls are replaced with equivalent .NET components. / The application maintains functional parity with the legacy version."
+    },
+    {
+      "id": "NFR-002",
+      "priority": "P1",
+      "type": "non_functional",
+      "outcome": "Security Compliance",
+      "acceptance": "No critical vulnerabilities are present in the application. / All data is encrypted in transit and at rest."
+    },
+    {
+      "id": "RM-001",
+      "priority": "P0",
+      "type": "risk_remediation",
+      "outcome": "Parameterize SQL and secure credential handling",
+      "acceptance": "Remediation implemented and validated against affected legacy flow. / Evidence artifacts updated with before/after traceability."
+    },
+    {
+      "id": "RM-002",
+      "priority": "P0",
+      "type": "risk_remediation",
+      "outcome": "Replace UI-caption-based balance arithmetic",
+      "acceptance": "Remediation implemented and validated against affected legacy flow. / Evidence artifacts updated with before/after traceability."
+    },
+    {
+      "id": "RM-003",
+      "priority": "P0",
+      "type": "risk_remediation",
+      "outcome": "Define identity and access model for modernization scope",
+      "acceptance": "Remediation implemented and validated against affected legacy flow. / Evidence artifacts updated with before/after traceability."
+    },
+    {
+      "id": "RM-004",
+      "priority": "P0",
+      "type": "risk_remediation",
+      "outcome": "Resolve cross-variant schema naming divergence",
+      "acceptance": "Remediation implemented and validated against affected legacy flow. / Evidence artifacts updated with before/after traceability."
+    },
+    {
+      "id": "RM-005",
+      "priority": "P0",
+      "type": "risk_remediation",
+      "outcome": "Remediate transaction schema key hazard",
+      "acceptance": "Remediation implemented and validated against affected legacy flow. / Evidence artifacts updated with before/after traceability."
+    }
+  ],
+  "projects": [
+    {
+      "project": "BANK_SYSTEM",
+      "type": "Exe",
+      "startup": "Main",
+      "members": "9",
+      "forms": "8",
+      "dependencies": "0",
+      "shared_tables": "7",
+      "project_display": "BANK_SYSTEM"
+    },
+    {
+      "project": "Project1 (BANKING.vbp)",
+      "type": "Exe",
+      "startup": "main",
+      "members": "10",
+      "forms": "8",
+      "dependencies": "0",
+      "shared_tables": "6",
+      "project_display": "Project1 (BANKING.vbp)"
+    },
+    {
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp)",
+      "type": "Exe",
+      "startup": "main",
+      "members": "11",
+      "forms": "10",
+      "dependencies": "1",
+      "shared_tables": "6",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp)"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "MSCOMCT2.OCX",
+      "type": "ocx",
+      "guid": "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX",
+      "forms": "BANK_SYSTEM::Main, BANK_SYSTEM::frmAccTypes, BANK_SYSTEM::frmCustomers, BANK_SYSTEM::frmDeposits, BANK_SYSTEM::frmSearch, BANK_SYSTEM::frmTransaction",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSCOMCTL.OCX",
+      "type": "ocx",
+      "guid": "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX",
+      "forms": "BANK_SYSTEM::Main, BANK_SYSTEM::frmAccTypes, BANK_SYSTEM::frmCustomers, BANK_SYSTEM::frmDeposits, BANK_SYSTEM::frmSearch, BANK_SYSTEM::frmTransaction",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSComCtl2.DTPicker",
+      "type": "com_typelib",
+      "guid": "ProgID: MSComCtl2.DTPicker",
+      "forms": "BANK_SYSTEM::Main, BANK_SYSTEM::frmAccTypes, BANK_SYSTEM::frmCustomers, BANK_SYSTEM::frmDeposits, BANK_SYSTEM::frmSearch, BANK_SYSTEM::frmTransaction",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSComctlLib.ListView",
+      "type": "com_typelib",
+      "guid": "ProgID: MSComctlLib.ListView",
+      "forms": "BANK_SYSTEM::Main, BANK_SYSTEM::frmAccTypes, BANK_SYSTEM::frmCustomers, BANK_SYSTEM::frmDeposits, BANK_SYSTEM::frmSearch, BANK_SYSTEM::frmTransaction",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSComctlLib.ProgressBar",
+      "type": "com_typelib",
+      "guid": "ProgID: MSComctlLib.ProgressBar",
+      "forms": "Project1 (BANKING.vbp)::Form1, Project1 (BANKING.vbp)::Form2, Project1 (BANKING.vbp)::Form3, Project1 (BANKING.vbp)::Form4, Project1 (BANKING.vbp)::Form6, Project1 (BANKING.vbp)::Form7",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSComctlLib.Toolbar",
+      "type": "com_typelib",
+      "guid": "ProgID: MSComctlLib.Toolbar",
+      "forms": "BANK_SYSTEM::Main, BANK_SYSTEM::frmAccTypes, BANK_SYSTEM::frmCustomers, BANK_SYSTEM::frmDeposits, BANK_SYSTEM::frmSearch, BANK_SYSTEM::frmTransaction",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSFLXGRD.OCX",
+      "type": "ocx",
+      "guid": "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0; MSFLXGRD.OCX",
+      "forms": "Project1 (BANKING.vbp)::Form1, Project1 (BANKING.vbp)::Form2, Project1 (BANKING.vbp)::Form3, Project1 (BANKING.vbp)::Form4, Project1 (BANKING.vbp)::Form6, Project1 (BANKING.vbp)::Form7",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSFlexGridLib.MSFlexGrid",
+      "type": "other",
+      "guid": "ProgID: MSFlexGridLib.MSFlexGrid",
+      "forms": "Project1 (BANKING.vbp)::Form1, Project1 (BANKING.vbp)::Form2, Project1 (BANKING.vbp)::Form3, Project1 (BANKING.vbp)::Form4, Project1 (BANKING.vbp)::Form6, Project1 (BANKING.vbp)::Form7",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSMask.MaskEdBox",
+      "type": "other",
+      "guid": "ProgID: MSMask.MaskEdBox",
+      "forms": "BANK_SYSTEM::Main, BANK_SYSTEM::frmAccTypes, BANK_SYSTEM::frmCustomers, BANK_SYSTEM::frmDeposits, BANK_SYSTEM::frmSearch, BANK_SYSTEM::frmTransaction",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "msmask32.ocx",
+      "type": "ocx",
+      "guid": "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0; msmask32.ocx",
+      "forms": "BANK_SYSTEM::Main, BANK_SYSTEM::frmAccTypes, BANK_SYSTEM::frmCustomers, BANK_SYSTEM::frmDeposits, BANK_SYSTEM::frmSearch, BANK_SYSTEM::frmTransaction",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "DAO350.DLL",
+      "type": "dll",
+      "guid": "*\\G{00025E01-0000-0000-C000-000000000046}#4.0#0#C:\\Program Files\\Common Files\\Microsoft Shared\\DAO\\DAO350.DLL#Microsoft DAO 3.51 Object Library",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSDERUN.DLL",
+      "type": "dll",
+      "guid": "*\\G{3D5C6BF0-69A3-11D0-B393-00A0C9055D8E}#1.0#0#C:\\Program Files\\Common Files\\designer\\MSDERUN.DLL#Microsoft Data Environment Instance 1.0; *\\G{3D5C6BF0-69A3-11D0-B393-00A0C9055D8E}#1.0#0#..\\..\\..\\..\\..\\Program Files\\Common Files\\designer\\MSDERUN.DLL#Microsoft Data Environment Instance 1.0",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSDBRPTR.DLL",
+      "type": "dll",
+      "guid": "*\\G{642AC760-AAB4-11D0-8494-00A0C90DC8A9}#1.0#0#C:\\WINDOWS\\system32\\MSDBRPTR.DLL#Microsoft Data Report Designer v6.0; *\\G{642AC760-AAB4-11D0-8494-00A0C90DC8A9}#1.0#0#..\\..\\..\\..\\..\\WINDOWS\\system32\\MSDBRPTR.DLL#Microsoft Data Report Designer v6.0",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "msstdfmt.dll",
+      "type": "dll",
+      "guid": "*\\G{6B263850-900B-11D0-9484-00A0C91110ED}#1.0#0#c:\\WINDOWS\\system32\\msstdfmt.dll#Microsoft Data Formatting Object Library 6.0 (SP4); *\\G{6B263850-900B-11D0-9484-00A0C91110ED}#1.0#0#..\\..\\..\\..\\..\\WINDOWS\\system32\\msstdfmt.dll#Microsoft Data Formatting Object Library",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSBIND.DLL",
+      "type": "dll",
+      "guid": "*\\G{56BF9020-7A2F-11D0-9482-00A0C91110ED}#1.0#0#C:\\WINDOWS\\system32\\MSBIND.DLL#Microsoft Data Binding Collection; *\\G{56BF9020-7A2F-11D0-9482-00A0C91110ED}#1.0#0#..\\..\\..\\..\\..\\WINDOWS\\system32\\MSBIND.DLL#Microsoft Data Binding Collection",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "COMCT232.OCX",
+      "type": "ocx",
+      "guid": "{FE0065C0-1B7B-11CF-9D53-00AA003C9CB6}#1.1#0; COMCT232.OCX",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "COMCTL32.OCX",
+      "type": "ocx",
+      "guid": "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0; COMCTL32.OCX",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSWINSCK.OCX",
+      "type": "ocx",
+      "guid": "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0; MSWINSCK.OCX",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "ieinfo5.ocx",
+      "type": "ocx",
+      "guid": "{25959BEC-E700-11D2-A7AF-00C04F806200}#1.0#0; ieinfo5.ocx",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "COMCT332.OCX",
+      "type": "ocx",
+      "guid": "{38911DA0-E448-11D0-84A3-00DD01104159}#1.1#0; COMCT332.OCX",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "MSADODC.OCX",
+      "type": "ocx",
+      "guid": "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0; MSADODC.OCX",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "msvidctl.dll",
+      "type": "dll",
+      "guid": "{B0EDF154-910A-11D2-B632-00C04F79498E}#1.0#0; msvidctl.dll",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "FLEXWIZ.OCX",
+      "type": "ocx",
+      "guid": "{BEC61919-E6C4-11D1-BE7D-C63815000000}#1.0#0; FLEXWIZ.OCX",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    },
+    {
+      "name": "agentctl.dll",
+      "type": "dll",
+      "guid": "{F5BE8BC2-7DE6-11D0-91FE-00C04FD701A5}#2.0#0; agentctl.dll",
+      "forms": "n/a",
+      "risk": "medium",
+      "action": "Assess replacement/interop strategy."
+    }
+  ],
+  "events": [
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "event": "Click",
+      "calls": "frm, RS, Form9, MsgBox",
+      "activex": "logi"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1",
+      "event": "Click",
+      "calls": "Form7",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "CON",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1",
+      "event": "Click",
+      "calls": "Form7",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "Click",
+      "calls": "frm, RS, txtAccountID, txtAccountName",
+      "activex": "accounttype"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "Click",
+      "calls": "CON, MsgBox",
+      "activex": "accounttype"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "Click",
+      "calls": "RS, txtAccountID, txtAccountName, txtDescription",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "Click",
+      "calls": "RS, txtAccountID, txtAccountName, txtDescription",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "Click",
+      "calls": "RS, txtAccountID, txtAccountName, txtDescription",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "MsgBox, Exit",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:Form_Controls",
+      "handler": "shared_module",
+      "event": "Form_Controls",
+      "calls": "ctrl",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "MsgBox",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "CheckDatabaseStatus, MsgBox, Exit",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "CheckDatabaseStatus, MsgBox, Exit",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "CheckDatabaseStatus, MsgBox, Exit",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "CheckDatabaseStatus, MsgBox, Exit",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:Form_Controls",
+      "handler": "shared_module",
+      "event": "Form_Controls",
+      "calls": "ctrl",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "KeyAscii, MsgBox",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "MsgBox, KeyAscii",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:Form_Controls",
+      "handler": "shared_module",
+      "event": "Form_Controls",
+      "calls": "ctrl",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "rsCustomers, rsDeposit, rsWithdrawal, rsBalances",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "cnBank",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "maskCtrl",
+      "activex": "n/a"
+    },
+    {
+      "form": "shared_module:event",
+      "handler": "shared_module",
+      "event": "",
+      "calls": "txtCtrl",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::Main:Load",
+      "handler": "BANK_SYSTEM::Main",
+      "event": "Load",
+      "calls": "connectDatabase",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::Main:ButtonClick",
+      "handler": "BANK_SYSTEM::Main",
+      "event": "ButtonClick",
+      "calls": "frmCustomers, frmDeposits, frmWithdrawal, frmTransactions",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::Main:ButtonMenuClick",
+      "handler": "BANK_SYSTEM::Main",
+      "event": "ButtonMenuClick",
+      "calls": "frmAccTypes, rptCustomers, rptDeposits, rptWithdrawals",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "event": "Click",
+      "calls": "n/a",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmAccTypes:event",
+      "handler": "BANK_SYSTEM::frmAccTypes",
+      "event": "",
+      "calls": "txtAccountID, txtAccountName, txtDescription, txtInterestRate",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8:Load",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "event": "Load",
+      "calls": "connectDatabase, cmdAdd, cmdSave, cmdCancel",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmAccTypes:event",
+      "handler": "BANK_SYSTEM::frmAccTypes",
+      "event": "",
+      "calls": "lastnumber, newnumber, txtAccountID",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmCustomers:Click",
+      "handler": "BANK_SYSTEM::frmCustomers",
+      "event": "Click",
+      "calls": "cmdAdd, cmdSave, cmdCancel, cmdEdit",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "Click",
+      "calls": "MoveToPrev, DisplayaccTypes, lblStatus",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "event": "Click",
+      "calls": "n/a",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmWithdrawal:event",
+      "handler": "BANK_SYSTEM::frmWithdrawal",
+      "event": "",
+      "calls": "lastnumber, newnumber, txtTransactionID",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "event": "Click",
+      "calls": "rsTemp, txtAccountNo, txtNarration, MsgBox",
+      "activex": "tblCustomers, tblBalances"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3:KeyPress",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "event": "KeyPress",
+      "calls": "n/a",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "event": "Click",
+      "calls": "NewRecord, clear_Form_Controls, GenerateNewTransactCode, cboCustomerNo",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "event": "Click",
+      "calls": "txtCheckNo, txtMode",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "event": "Click",
+      "calls": "n/a",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3:Change",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "event": "Change",
+      "calls": "n/a",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransaction:event",
+      "handler": "BANK_SYSTEM::frmTransaction",
+      "event": "",
+      "calls": "cboCustomerNo, txtAccountNo, txtNarration, txtCheckNo",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransaction:Click",
+      "handler": "BANK_SYSTEM::frmTransaction",
+      "event": "Click",
+      "calls": "Unload",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "event": "Click",
+      "calls": "NewRecord, clear_Form_Controls, GenerateNewTransactCode, cboCustomerNo",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmWithdrawal:Change",
+      "handler": "BANK_SYSTEM::frmWithdrawal",
+      "event": "Change",
+      "calls": "txtNarration",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmWithdrawal:KeyPress",
+      "handler": "BANK_SYSTEM::frmWithdrawal",
+      "event": "KeyPress",
+      "calls": "ValidNumeric",
+      "activex": "n/a"
+    },
+    {
+      "form": "BANK_SYSTEM::frmWithdrawal:KeyPress",
+      "handler": "BANK_SYSTEM::frmWithdrawal",
+      "event": "KeyPress",
+      "calls": "KeyAscii",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4:event",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "event": "",
+      "calls": "frm, RS, cboCustomerno",
+      "activex": "customer"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "event": "Click",
+      "calls": "Form3",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "event": "Click",
+      "calls": "Form4",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "event": "Click",
+      "calls": "Form9",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "event": "Click",
+      "calls": "DataReport4",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8:Timer",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "event": "Timer",
+      "calls": "main, Timer1, ProgressBar1, Unload",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:event",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "",
+      "calls": "msfgroom, RS, RNO",
+      "activex": "transctions"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "Click",
+      "calls": "z, txtCustomerID, txtAccountNo, txtNarration",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "event": "Click",
+      "calls": "RS, txtaccountno, balance",
+      "activex": "customer"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4:click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "event": "click",
+      "calls": "frm, RS, cboCustomerno, Exit",
+      "activex": "withdrawal"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6:event",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "event": "",
+      "calls": "txtAccountID, txtAccountName, txtDescription, txtInterestRate",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "event": "Click",
+      "calls": "Form6",
+      "activex": "n/a"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main:Click",
+      "handler": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "event": "Click",
+      "calls": "n/a",
+      "activex": "n/a"
+    }
+  ],
+  "sql_entries": [
+    {
+      "id": "sql:1",
+      "form": "Project-wide / unattributed SQL",
+      "handler": "unmapped_sql_reference",
+      "op": "unknown",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:2",
+      "form": "n/a",
+      "handler": "select * from transctions\"",
+      "op": "select",
+      "tables": "transctions",
+      "columns": "*"
+    },
+    {
+      "id": "sql:3",
+      "form": "n/a",
+      "handler": "select count(*) from transctions\"",
+      "op": "select",
+      "tables": "transctions",
+      "columns": "count(*"
+    },
+    {
+      "id": "sql:4",
+      "form": "n/a",
+      "handler": "select customerid from customer\"",
+      "op": "select",
+      "tables": "customer",
+      "columns": "customerid"
+    },
+    {
+      "id": "sql:5",
+      "form": "n/a",
+      "handler": "select max(AccountID) from accounttype\"",
+      "op": "select",
+      "tables": "accounttype",
+      "columns": "max(AccountID"
+    },
+    {
+      "id": "sql:6",
+      "form": "n/a",
+      "handler": "select max(TransactionID) from deposit\"",
+      "op": "select",
+      "tables": "deposit",
+      "columns": "max(TransactionID"
+    },
+    {
+      "id": "sql:7",
+      "form": "n/a",
+      "handler": "select max(accountid) from accounttype\"",
+      "op": "select",
+      "tables": "accounttype",
+      "columns": "max(accountid"
+    },
+    {
+      "id": "sql:8",
+      "form": "n/a",
+      "handler": "select max(transactionid) from deposit\"",
+      "op": "select",
+      "tables": "deposit",
+      "columns": "max(transactionid"
+    },
+    {
+      "id": "sql:9",
+      "form": "n/a",
+      "handler": "select max(transactionid) from withdrawal\"",
+      "op": "select",
+      "tables": "withdrawal",
+      "columns": "max(transactionid"
+    },
+    {
+      "id": "sql:10",
+      "form": "Project-wide / unattributed SQL",
+      "handler": "unmapped_sql_reference",
+      "op": "unknown",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:11",
+      "form": "n/a",
+      "handler": "insert into deposit values(\":expr,:expr,:expr,':expr',:expr,':expr','0',':expr\"')",
+      "op": "insert",
+      "tables": "deposit",
+      "columns": "\":expr, :expr, ':expr', '0', ':expr\"'"
+    },
+    {
+      "id": "sql:12",
+      "form": "n/a",
+      "handler": "insert into deposit values(\":expr,:expr,:expr,':expr',:expr,':expr',0,'CDate(txtDated.Value)\"')",
+      "op": "insert",
+      "tables": "deposit",
+      "columns": "\":expr, :expr, ':expr', 0, 'CDate(txtDated.Value"
+    },
+    {
+      "id": "sql:13",
+      "form": "n/a",
+      "handler": "insert into deposit values(\":expr,:expr,:expr,':expr',:expr,':expr',:expr,':expr\"')",
+      "op": "insert",
+      "tables": "deposit",
+      "columns": "\":expr, :expr, ':expr', ':expr\"'"
+    },
+    {
+      "id": "sql:14",
+      "form": "n/a",
+      "handler": "insert into transactions values(\":expr,:expr,':expr','00','CDate(txtDated.Value)',:expr,'0',:expr\",'cash')",
+      "op": "insert",
+      "tables": "transactions",
+      "columns": "\":expr, :expr, ':expr', '00', 'CDate(txtDated.Value"
+    },
+    {
+      "id": "sql:15",
+      "form": "n/a",
+      "handler": "insert into transactions values(\":expr,:expr,':expr',:expr,':expr',:expr,'0',:expr\",'cheque')",
+      "op": "insert",
+      "tables": "transactions",
+      "columns": "\":expr, :expr, ':expr', '0', :expr\", 'cheque'"
+    },
+    {
+      "id": "sql:16",
+      "form": "n/a",
+      "handler": "insert into withdrawal values(\":expr,:expr,:expr,':expr',:expr,:expr\")",
+      "op": "insert",
+      "tables": "withdrawal",
+      "columns": "\":expr, :expr, ':expr', :expr\""
+    },
+    {
+      "id": "sql:17",
+      "form": "n/a",
+      "handler": "update accounttype set AccountID=\":expr,AccountName=':expr',Description=':expr',InterestRate=:expr,MinBalance=:expr where AccountID=:expr",
+      "op": "update",
+      "tables": "accounttype",
+      "columns": "AccountID, AccountName, Description, InterestRate, MinBalance"
+    },
+    {
+      "id": "sql:18",
+      "form": "n/a",
+      "handler": "update balancedt set balance=\":expr where accno=:expr",
+      "op": "update",
+      "tables": "balancedt",
+      "columns": "balance"
+    },
+    {
+      "id": "sql:19",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "handler": "cmdSave_Click",
+      "op": "unknown",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:20",
+      "form": "n/a",
+      "handler": "DELETE",
+      "op": "delete",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:21",
+      "form": "shared_module",
+      "handler": "ValidNonNumeric",
+      "op": "unknown",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:22",
+      "form": "Project-wide / unattributed SQL",
+      "handler": "unmapped_sql_reference",
+      "op": "unknown",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:23",
+      "form": "Project-wide / unattributed SQL",
+      "handler": "unmapped_sql_reference",
+      "op": "unknown",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:24",
+      "form": "n/a",
+      "handler": "SELECT * FROM LOGIN WHERE USERNAME <>",
+      "op": "select",
+      "tables": "LOGIN",
+      "columns": "*"
+    },
+    {
+      "id": "sql:25",
+      "form": "n/a",
+      "handler": "SELECT * FROM LOGIN WHERE USERNAME <> ':expr' AND PASSWORD <> :expr\"\"",
+      "op": "select",
+      "tables": "LOGIN",
+      "columns": "*"
+    },
+    {
+      "id": "sql:26",
+      "form": "n/a",
+      "handler": "SELECT * FROM LOGIN WHERE USERNAME=",
+      "op": "select",
+      "tables": "LOGIN",
+      "columns": "*"
+    },
+    {
+      "id": "sql:27",
+      "form": "n/a",
+      "handler": "SELECT * FROM LOGIN WHERE USERNAME=':expr' AND PASSWORD=:expr\"\"",
+      "op": "select",
+      "tables": "LOGIN",
+      "columns": "*"
+    },
+    {
+      "id": "sql:28",
+      "form": "n/a",
+      "handler": "SELECT * FROM logi WHERE user1=",
+      "op": "select",
+      "tables": "logi",
+      "columns": "*"
+    },
+    {
+      "id": "sql:29",
+      "form": "n/a",
+      "handler": "SELECT * FROM logi WHERE user1=':expr' AND pass=':expr\"'\"",
+      "op": "select",
+      "tables": "logi",
+      "columns": "*"
+    },
+    {
+      "id": "sql:30",
+      "form": "n/a",
+      "handler": "Select * FROM tblBalances WHERE CustomerID=",
+      "op": "select",
+      "tables": "tblBalances",
+      "columns": "*"
+    },
+    {
+      "id": "sql:31",
+      "form": "n/a",
+      "handler": "Select * FROM tblBalances WHERE CustomerID=':expr\"'\"",
+      "op": "select",
+      "tables": "tblBalances",
+      "columns": "*"
+    },
+    {
+      "id": "sql:32",
+      "form": "n/a",
+      "handler": "Select * FROM tblCustomers WHERE CustomerID=",
+      "op": "select",
+      "tables": "tblCustomers",
+      "columns": "*"
+    },
+    {
+      "id": "sql:33",
+      "form": "n/a",
+      "handler": "Select * FROM tblCustomers WHERE CustomerID=':expr\"'\"",
+      "op": "select",
+      "tables": "tblCustomers",
+      "columns": "*"
+    },
+    {
+      "id": "sql:34",
+      "form": "n/a",
+      "handler": "Select * FROM tblTransactions WHERE Code=",
+      "op": "select",
+      "tables": "tblTransactions",
+      "columns": "*"
+    },
+    {
+      "id": "sql:35",
+      "form": "n/a",
+      "handler": "Select * FROM tblTransactions WHERE Code=:expr\" \"",
+      "op": "select",
+      "tables": "tblTransactions",
+      "columns": "*"
+    },
+    {
+      "id": "sql:36",
+      "form": "n/a",
+      "handler": "Select Case Button.Index",
+      "op": "select",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:37",
+      "form": "n/a",
+      "handler": "Select Case ButtonMenu.Key",
+      "op": "select",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:38",
+      "form": "n/a",
+      "handler": "Select Case KeyAscii",
+      "op": "select",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:39",
+      "form": "n/a",
+      "handler": "Select...",
+      "op": "select",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:40",
+      "form": "n/a",
+      "handler": "insert into deposit values(",
+      "op": "insert",
+      "tables": "deposit",
+      "columns": ""
+    },
+    {
+      "id": "sql:41",
+      "form": "n/a",
+      "handler": "insert into transactions values(",
+      "op": "insert",
+      "tables": "transactions",
+      "columns": ""
+    },
+    {
+      "id": "sql:42",
+      "form": "n/a",
+      "handler": "insert into withdrawal values(",
+      "op": "insert",
+      "tables": "withdrawal",
+      "columns": ""
+    },
+    {
+      "id": "sql:43",
+      "form": "Project-wide / unattributed SQL",
+      "handler": "unmapped_sql_reference",
+      "op": "unknown",
+      "tables": "n/a",
+      "columns": ""
+    },
+    {
+      "id": "sql:44",
+      "form": "n/a",
+      "handler": "select * from customer where customerid=",
+      "op": "select",
+      "tables": "customer",
+      "columns": "*"
+    },
+    {
+      "id": "sql:45",
+      "form": "n/a",
+      "handler": "select * from customer where customerid= :expr\"\"",
+      "op": "select",
+      "tables": "customer",
+      "columns": "*"
+    },
+    {
+      "id": "sql:46",
+      "form": "n/a",
+      "handler": "select * from transctions",
+      "op": "select",
+      "tables": "transctions",
+      "columns": "*"
+    },
+    {
+      "id": "sql:47",
+      "form": "n/a",
+      "handler": "select balance from balancedt where accno=",
+      "op": "select",
+      "tables": "balancedt",
+      "columns": "balance"
+    },
+    {
+      "id": "sql:48",
+      "form": "n/a",
+      "handler": "select balance from balancedt where accno= :expr\"\"",
+      "op": "select",
+      "tables": "balancedt",
+      "columns": "balance"
+    },
+    {
+      "id": "sql:49",
+      "form": "n/a",
+      "handler": "select count(*) from transctions",
+      "op": "select",
+      "tables": "transctions",
+      "columns": "count(*"
+    },
+    {
+      "id": "sql:50",
+      "form": "n/a",
+      "handler": "select customerid from customer",
+      "op": "select",
+      "tables": "customer",
+      "columns": "customerid"
+    },
+    {
+      "id": "sql:51",
+      "form": "n/a",
+      "handler": "select max(AccountID) from accounttype",
+      "op": "select",
+      "tables": "accounttype",
+      "columns": "max(AccountID"
+    },
+    {
+      "id": "sql:52",
+      "form": "n/a",
+      "handler": "select max(TransactionID) from deposit",
+      "op": "select",
+      "tables": "deposit",
+      "columns": "max(TransactionID"
+    },
+    {
+      "id": "sql:53",
+      "form": "n/a",
+      "handler": "select max(accountid) from accounttype",
+      "op": "select",
+      "tables": "accounttype",
+      "columns": "max(accountid"
+    },
+    {
+      "id": "sql:54",
+      "form": "n/a",
+      "handler": "select max(transactionid) from deposit",
+      "op": "select",
+      "tables": "deposit",
+      "columns": "max(transactionid"
+    },
+    {
+      "id": "sql:55",
+      "form": "n/a",
+      "handler": "select max(transactionid) from withdrawal",
+      "op": "select",
+      "tables": "withdrawal",
+      "columns": "max(transactionid"
+    },
+    {
+      "id": "sql:56",
+      "form": "n/a",
+      "handler": "update LOGIN set USERNAME=",
+      "op": "update",
+      "tables": "LOGIN",
+      "columns": "USERNAME"
+    },
+    {
+      "id": "sql:57",
+      "form": "n/a",
+      "handler": "update LOGIN set USERNAME=':expr',PASSWORD=:expr where USERNAME=':expr",
+      "op": "update",
+      "tables": "LOGIN",
+      "columns": "USERNAME, PASSWORD"
+    },
+    {
+      "id": "sql:58",
+      "form": "n/a",
+      "handler": "update accounttype set AccountID=",
+      "op": "update",
+      "tables": "accounttype",
+      "columns": "AccountID"
+    },
+    {
+      "id": "sql:59",
+      "form": "n/a",
+      "handler": "update accounttype set accountid=",
+      "op": "update",
+      "tables": "accounttype",
+      "columns": "accountid"
+    },
+    {
+      "id": "sql:60",
+      "form": "n/a",
+      "handler": "update accounttype set accountid=:expr,accountname=':expr',description=':expr',interestRate=':expr',minbalance=':expr' where accountid=:expr",
+      "op": "update",
+      "tables": "accounttype",
+      "columns": "accountid, accountname, description, interestRate, minbalance"
+    },
+    {
+      "id": "sql:61",
+      "form": "n/a",
+      "handler": "update balancedt set balance=",
+      "op": "update",
+      "tables": "balancedt",
+      "columns": "balance"
+    },
+    {
+      "id": "sql:62",
+      "form": "n/a",
+      "handler": "delete from transactions where CustomerID=:expr /* inferred from fragmented legacy SQL */",
+      "op": "delete",
+      "tables": "transactions",
+      "columns": ""
+    }
+  ],
+  "rules": [
+    {
+      "id": "BR-001",
+      "form": "n/a",
+      "layer": "Presentation",
+      "category": "business_objective",
+      "meaning": "Manage customer profile lookup and maintenance workflows.",
+      "evidence": "BANK_SYSTEM objective inference",
+      "risk": "none"
+    },
+    {
+      "id": "BR-002",
+      "form": "n/a",
+      "layer": "Presentation",
+      "category": "workflow_orchestration",
+      "meaning": "Workflow is orchestrated through UI event handlers and internal procedures.",
+      "evidence": "BANK_SYSTEM procedure map",
+      "risk": "none"
+    },
+    {
+      "id": "BR-003",
+      "form": "n/a",
+      "layer": "Data",
+      "category": "data_persistence",
+      "meaning": "Form persists and retrieves records from the listed tables.",
+      "evidence": "BANK_SYSTEM SQL/table hints",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-004",
+      "form": "n/a",
+      "layer": "Presentation",
+      "category": "business_objective",
+      "meaning": "Manage customer profile lookup and maintenance workflows.",
+      "evidence": "Project1 (BANKING.vbp) objective inference",
+      "risk": "none"
+    },
+    {
+      "id": "BR-005",
+      "form": "n/a",
+      "layer": "Presentation",
+      "category": "workflow_orchestration",
+      "meaning": "Workflow is orchestrated through UI event handlers and internal procedures.",
+      "evidence": "Project1 (BANKING.vbp) procedure map",
+      "risk": "none"
+    },
+    {
+      "id": "BR-006",
+      "form": "n/a",
+      "layer": "Data",
+      "category": "data_persistence",
+      "meaning": "Form persists and retrieves records from the listed tables.",
+      "evidence": "Project1 (BANKING.vbp) SQL/table hints",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-007",
+      "form": "n/a",
+      "layer": "Presentation",
+      "category": "business_objective",
+      "meaning": "User authentication is required before entering the workflow.",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp) objective inference",
+      "risk": "none"
+    },
+    {
+      "id": "BR-008",
+      "form": "n/a",
+      "layer": "Presentation",
+      "category": "workflow_orchestration",
+      "meaning": "Workflow is orchestrated through UI event handlers and internal procedures.",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp) procedure map",
+      "risk": "none"
+    },
+    {
+      "id": "BR-009",
+      "form": "n/a",
+      "layer": "Data",
+      "category": "data_persistence",
+      "meaning": "Form persists and retrieves records from the listed tables.",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp) SQL/table hints",
+      "risk": "none"
+    },
+    {
+      "id": "BR-010",
+      "form": "LOGIN",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when the recordset/connection is active.",
+      "evidence": "LOGIN.frm:158",
+      "risk": "none"
+    },
+    {
+      "id": "BR-016",
+      "form": "accounttype",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated using the entered amount and current account value.",
+      "evidence": "STUDENT BANKING/accounttype.frm:318",
+      "risk": "none"
+    },
+    {
+      "id": "BR-017",
+      "form": "n/a",
+      "layer": "Shared",
+      "category": "input_validation",
+      "meaning": "Input validation rule detected (IsNumeric/IsDate/Len).",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/Modules/Mdl.bas:95",
+      "risk": "none"
+    },
+    {
+      "id": "BR-018",
+      "form": "n/a",
+      "layer": "Shared",
+      "category": "decision_branching",
+      "meaning": "Keyboard input routing determines which action path is executed.",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/Modules/Mdl.bas:104",
+      "risk": "none"
+    },
+    {
+      "id": "BR-019",
+      "form": "main",
+      "layer": "Presentation",
+      "category": "decision_branching",
+      "meaning": "User menu selection routes the workflow to the corresponding module.",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/UserInterface/Main.frm:167",
+      "risk": "none"
+    },
+    {
+      "id": "BR-020",
+      "form": "main",
+      "layer": "Presentation",
+      "category": "decision_branching",
+      "meaning": "User menu selection routes the workflow to the corresponding module.",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/UserInterface/Main.frm:180",
+      "risk": "none"
+    },
+    {
+      "id": "BR-022",
+      "form": "frmDeposits",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when matching records are found.",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/UserInterface/frmDeposits.frm:284",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-023",
+      "form": "frmDeposits",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "Pressing Enter triggers the same action flow as the primary button.",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/UserInterface/frmDeposits.frm:311",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-024",
+      "form": "frmDeposits",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated from the displayed balance label and entered amount (UI-derived source).",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/UserInterface/frmDeposits.frm:382",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-027",
+      "form": "frmWithdrawal",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when matching records are found.",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/UserInterface/frmWithdrawal.frm:200",
+      "risk": "none"
+    },
+    {
+      "id": "BR-028",
+      "form": "frmWithdrawal",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "Pressing Enter triggers the same action flow as the primary button.",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/UserInterface/frmWithdrawal.frm:227",
+      "risk": "none"
+    },
+    {
+      "id": "BR-029",
+      "form": "frmWithdrawal",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated from the displayed balance label and entered amount (UI-derived source).",
+      "evidence": "STUDENT BANKING/banking finish/BANKING/UserInterface/frmWithdrawal.frm:280",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-034",
+      "form": "splash",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Splash/loading behavior advances progress state before opening workflow screens.",
+      "evidence": "STUDENT BANKING/splash.frm:47",
+      "risk": "none"
+    },
+    {
+      "id": "BR-046",
+      "form": "BANK_SYSTEM::frmDeposits",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when matching records are found.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-022)",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-047",
+      "form": "BANK_SYSTEM::frmDeposits",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "Pressing Enter triggers the same action flow as the primary button.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-023)",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-048",
+      "form": "BANK_SYSTEM::frmDeposits",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated from the displayed balance label and entered amount (UI-derived source).",
+      "evidence": "mirrored_from_variant_mapping (source=BR-024)",
+      "risk": "RISK-026"
+    },
+    {
+      "id": "BR-052",
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when matching records are found.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-027)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-053",
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "Pressing Enter triggers the same action flow as the primary button.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-028)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-054",
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated from the displayed balance label and entered amount (UI-derived source).",
+      "evidence": "mirrored_from_variant_mapping (source=BR-029)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-056",
+      "form": "BANK_SYSTEM::main",
+      "layer": "Presentation",
+      "category": "decision_branching",
+      "meaning": "User menu selection routes the workflow to the corresponding module.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-019)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-057",
+      "form": "BANK_SYSTEM::main",
+      "layer": "Presentation",
+      "category": "decision_branching",
+      "meaning": "User menu selection routes the workflow to the corresponding module.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-020)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-058",
+      "form": "Project1 (BANKING.vbp)::Form3",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when matching records are found.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-022)",
+      "risk": "RISK-010, RISK-011, RISK-012, RISK-013"
+    },
+    {
+      "id": "BR-059",
+      "form": "Project1 (BANKING.vbp)::Form3",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "Pressing Enter triggers the same action flow as the primary button.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-023)",
+      "risk": "RISK-010, RISK-011, RISK-012, RISK-013"
+    },
+    {
+      "id": "BR-060",
+      "form": "Project1 (BANKING.vbp)::Form3",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated from the displayed balance label and entered amount (UI-derived source).",
+      "evidence": "mirrored_from_variant_mapping (source=BR-024)",
+      "risk": "RISK-010, RISK-011, RISK-012, RISK-013"
+    },
+    {
+      "id": "BR-062",
+      "form": "Project1 (BANKING.vbp)::Form4",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when matching records are found.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-027)",
+      "risk": "RISK-016, RISK-017"
+    },
+    {
+      "id": "BR-063",
+      "form": "Project1 (BANKING.vbp)::Form4",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "Pressing Enter triggers the same action flow as the primary button.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-028)",
+      "risk": "RISK-016, RISK-017"
+    },
+    {
+      "id": "BR-064",
+      "form": "Project1 (BANKING.vbp)::Form4",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated from the displayed balance label and entered amount (UI-derived source).",
+      "evidence": "mirrored_from_variant_mapping (source=BR-029)",
+      "risk": "RISK-016, RISK-017"
+    },
+    {
+      "id": "BR-068",
+      "form": "Project1 (BANKING.vbp)::main",
+      "layer": "Presentation",
+      "category": "decision_branching",
+      "meaning": "User menu selection routes the workflow to the corresponding module.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-019)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-069",
+      "form": "Project1 (BANKING.vbp)::main",
+      "layer": "Presentation",
+      "category": "decision_branching",
+      "meaning": "User menu selection routes the workflow to the corresponding module.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-020)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-070",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when matching records are found.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-022)",
+      "risk": "RISK-010, RISK-011, RISK-012, RISK-013"
+    },
+    {
+      "id": "BR-071",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "Pressing Enter triggers the same action flow as the primary button.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-023)",
+      "risk": "RISK-010, RISK-011, RISK-012, RISK-013"
+    },
+    {
+      "id": "BR-072",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated from the displayed balance label and entered amount (UI-derived source).",
+      "evidence": "mirrored_from_variant_mapping (source=BR-024)",
+      "risk": "RISK-010, RISK-011, RISK-012, RISK-013"
+    },
+    {
+      "id": "BR-074",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when matching records are found.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-027)",
+      "risk": "RISK-016, RISK-017"
+    },
+    {
+      "id": "BR-075",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "Pressing Enter triggers the same action flow as the primary button.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-028)",
+      "risk": "RISK-016, RISK-017"
+    },
+    {
+      "id": "BR-076",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated from the displayed balance label and entered amount (UI-derived source).",
+      "evidence": "mirrored_from_variant_mapping (source=BR-029)",
+      "risk": "RISK-016, RISK-017"
+    },
+    {
+      "id": "BR-080",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "layer": "Presentation",
+      "category": "decision_branching",
+      "meaning": "User menu selection routes the workflow to the corresponding module.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-019)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-081",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "layer": "Presentation",
+      "category": "decision_branching",
+      "meaning": "User menu selection routes the workflow to the corresponding module.",
+      "evidence": "mirrored_from_variant_mapping (source=BR-020)",
+      "risk": "none"
+    },
+    {
+      "id": "BR-082",
+      "form": "BANK_SYSTEM::frmAccTypes",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated using the entered amount and current account value.",
+      "evidence": "variant_backfill_for_eq_sync (source=BR-021); source_rule=BR-021",
+      "risk": "none"
+    },
+    {
+      "id": "BR-083",
+      "form": "BANK_SYSTEM::frmTransaction",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated using the entered amount and current account value.",
+      "evidence": "variant_backfill_for_eq_sync (source=BR-026); source_rule=BR-026",
+      "risk": "none"
+    },
+    {
+      "id": "BR-084",
+      "form": "BANK_SYSTEM::frmTransactions",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated using the entered amount and current account value.",
+      "evidence": "variant_backfill_for_eq_sync (source=BR-026); source_rule=BR-026",
+      "risk": "none"
+    },
+    {
+      "id": "BR-085",
+      "form": "Project1 (BANKING.vbp)::Form6",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated using the entered amount and current account value.",
+      "evidence": "variant_backfill_for_eq_sync (source=BR-026); source_rule=BR-026",
+      "risk": "RISK-003, RISK-018, RISK-023"
+    },
+    {
+      "id": "BR-086",
+      "form": "Project1 (BANKING.vbp)::Form7",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when the recordset/connection is active.",
+      "evidence": "variant_backfill_for_eq_sync (source=BR-010); source_rule=BR-010",
+      "risk": "none"
+    },
+    {
+      "id": "BR-087",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "layer": "Data",
+      "category": "calculation_logic",
+      "meaning": "Balance is recalculated using the entered amount and current account value.",
+      "evidence": "variant_backfill_for_eq_sync (source=BR-026); source_rule=BR-026",
+      "risk": "RISK-003, RISK-018, RISK-023"
+    },
+    {
+      "id": "BR-088",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form7",
+      "layer": "Data",
+      "category": "threshold_rule",
+      "meaning": "The action proceeds only when the recordset/connection is active.",
+      "evidence": "variant_backfill_for_eq_sync (source=BR-010); source_rule=BR-010",
+      "risk": "none"
+    }
+  ],
+  "rule_consolidation": [
+    {
+      "rule_id": "BR-016",
+      "consolidated_count": 22,
+      "form_count": 19,
+      "forms": "BANK_SYSTEM::frmAccTypes, BANK_SYSTEM::frmDeposits, BANK_SYSTEM::frmTransaction, BANK_SYSTEM::frmTransactions, BANK_SYSTEM::frmWithdrawal, Project1 (BANKING.vbp)::Form3, Project1 (BANKING.vbp)::Form4, Project1 (BANKING.vbp)::Form6, Project1 (STUDENT BANKING/BANKING.vbp)::Form3, Project1 (STUDENT BANKING/BANKING.vbp)::Form4, Project1 (STUDENT BANKING/BANKING.vbp)::Form6, accounttype(+7 more)",
+      "canonical_meaning": "Balance is recalculated using the entered amount and current account value."
+    },
+    {
+      "rule_id": "BR-010",
+      "consolidated_count": 4,
+      "form_count": 4,
+      "forms": "LOGIN, Project1 (BANKING.vbp)::Form7, Project1 (STUDENT BANKING/BANKING.vbp)::Form7, n/a",
+      "canonical_meaning": "The action proceeds only when the recordset/connection is active."
+    }
+  ],
+  "findings": [
+    {
+      "id": "VB6-OOP-007",
+      "category": "medium",
+      "count": "20",
+      "form": "Form5.frm",
+      "description": "Legacy code uses default object/form instances, which can change behavior during migration.",
+      "action": "Refactor default-instance references to explicit object instances and update call sites.",
+      "form_display": "Form5 [Customer Management]"
+    },
+    {
+      "id": "VB6-UI-002",
+      "category": "medium",
+      "count": "78",
+      "form": "LOGIN.frm",
+      "description": "Legacy UI relies on control-array index patterns that require explicit replacement in the target UI.",
+      "action": "Define a control-array replacement strategy and validate event parity with focused tests.",
+      "form_display": "LOGIN.frm [Excluded]"
+    }
+  ],
+  "sql_map_rows": [
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main [Authentication]",
+      "procedure": "Command1_Click",
+      "tables": "logi",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main [Authentication]",
+      "procedure": "Command1_Click",
+      "tables": "logi",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6 [Transaction Ledger]",
+      "procedure": "cmdAdd_Click",
+      "tables": "accounttype",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6 [Transaction Ledger]",
+      "procedure": "cmdAdd_Click",
+      "tables": "accounttype",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6 [Transaction Ledger]",
+      "procedure": "cmdEdit_Click",
+      "tables": "accounttype",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6 [Transaction Ledger]",
+      "procedure": "cmdEdit_Click",
+      "tables": "accounttype",
+      "sql_ids": ""
+    },
+    {
+      "form": "shared_module",
+      "procedure": "ValidNonNumeric",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "shared_module",
+      "procedure": "ValidNonNumeric",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "shared_module",
+      "procedure": "ValidNumeric",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "shared_module",
+      "procedure": "ValidNumeric",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "BANK_SYSTEM::Main [Authentication]",
+      "procedure": "Toolbar1_ButtonClick",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "BANK_SYSTEM::Main [Authentication]",
+      "procedure": "Toolbar1_ButtonClick",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "BANK_SYSTEM::Main [Authentication]",
+      "procedure": "Toolbar1_ButtonMenuClick",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "BANK_SYSTEM::Main [Authentication]",
+      "procedure": "Toolbar1_ButtonMenuClick",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4 [Withdrawal Processing]",
+      "procedure": "cmdSave_Click",
+      "tables": "n/a",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3 [Deposit Capture]",
+      "procedure": "cboCustomerNo_Click",
+      "tables": "tblCustomers",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3 [Deposit Capture]",
+      "procedure": "cboCustomerNo_Click",
+      "tables": "tblCustomers",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3 [Deposit Capture]",
+      "procedure": "cboCustomerNo_Click",
+      "tables": "tblBalances",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3 [Deposit Capture]",
+      "procedure": "cboCustomerNo_Click",
+      "tables": "tblBalances",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4 [Withdrawal Processing]",
+      "procedure": "fill",
+      "tables": "customer",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4 [Withdrawal Processing]",
+      "procedure": "fill",
+      "tables": "customer",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6 [Transaction Ledger]",
+      "procedure": "display",
+      "tables": "transctions",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6 [Transaction Ledger]",
+      "procedure": "display",
+      "tables": "transctions",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6 [Transaction Ledger]",
+      "procedure": "display",
+      "tables": "transctions",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6 [Transaction Ledger]",
+      "procedure": "display",
+      "tables": "transctions",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4 [Withdrawal Processing]",
+      "procedure": "cboCustomerno_Click",
+      "tables": "customer",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4 [Withdrawal Processing]",
+      "procedure": "cboCustomerno_Click",
+      "tables": "customer",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4 [Withdrawal Processing]",
+      "procedure": "cmdwithdrawn_click",
+      "tables": "withdrawal",
+      "sql_ids": ""
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4 [Withdrawal Processing]",
+      "procedure": "cmdwithdrawn_click",
+      "tables": "withdrawal",
+      "sql_ids": ""
+    }
+  ],
+  "procedure_summaries": [
+    {
+      "callable": "Command1_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sql_ids": "sql:29, sql:28"
+    },
+    {
+      "callable": "Label3_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "frm",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Label4_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdAdd_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "sql:7, sql:53"
+    },
+    {
+      "callable": "cmdEdit_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "sql:60, sql:59"
+    },
+    {
+      "callable": "cmdFirst_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdLast_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdNext_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "CheckDatabaseStatus",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Lock_Form_Controls",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Messager",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "MoveToFirst",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "MoveToLast",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "MoveToNext",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "MoveToPrev",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "UnLock_Form_Controls",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "ValidNonNumeric",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "sql:38, sql:21"
+    },
+    {
+      "callable": "ValidNumeric",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "sql:38, sql:21"
+    },
+    {
+      "callable": "clear_Form_Controls",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "connectDatabase",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "disconnectDatabase",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "selectMaskControl",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "selectTextControl",
+      "kind": "shared_function",
+      "form": "shared_module",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "MDIForm_Load",
+      "kind": "event_handler",
+      "form": "BANK_SYSTEM::Main",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Toolbar1_ButtonClick",
+      "kind": "event_handler",
+      "form": "BANK_SYSTEM::Main",
+      "sql_ids": "sql:36, sql:21"
+    },
+    {
+      "callable": "Toolbar1_ButtonMenuClick",
+      "kind": "event_handler",
+      "form": "BANK_SYSTEM::Main",
+      "sql_ids": "sql:37, sql:21"
+    },
+    {
+      "callable": "cmdQuit_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "DisplayaccTypes",
+      "kind": "procedure",
+      "form": "BANK_SYSTEM::frmAccTypes",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Form_Load",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "GenerateNewAccountCode",
+      "kind": "procedure",
+      "form": "BANK_SYSTEM::frmAccTypes",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdCancel_Click",
+      "kind": "event_handler",
+      "form": "BANK_SYSTEM::frmCustomers",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdPrevious_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdSave_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "sql_ids": "sql:19"
+    },
+    {
+      "callable": "GenerateNewTransactCode",
+      "kind": "procedure",
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cboCustomerNo_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "sql_ids": "sql:33, sql:32, sql:31, sql:30"
+    },
+    {
+      "callable": "cboCustomerNo_KeyPress",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdDeposit_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "optCash_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "optCheque_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Text1_Change",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "DisplayTransact",
+      "kind": "procedure",
+      "form": "BANK_SYSTEM::frmTransaction",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdClose_Click",
+      "kind": "event_handler",
+      "form": "BANK_SYSTEM::frmTransaction",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cmdWithdraw_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "txtAccountNo_Change",
+      "kind": "event_handler",
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "txtAmountwithdrawn_KeyPress",
+      "kind": "event_handler",
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "txtNarration_KeyPress",
+      "kind": "event_handler",
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "fill",
+      "kind": "procedure",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "sql_ids": "sql:4, sql:50"
+    },
+    {
+      "callable": "Command2_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Command3_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Command6_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Command4_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Timer1_Timer",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "display",
+      "kind": "procedure",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "sql:3, sql:49, sql:2, sql:46"
+    },
+    {
+      "callable": "msfgroom_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "cboCustomerno_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "sql_ids": "sql:45, sql:44"
+    },
+    {
+      "callable": "cmdwithdrawn_click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "sql_ids": "sql:9, sql:55"
+    },
+    {
+      "callable": "clr",
+      "kind": "procedure",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Command5_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sql_ids": "n/a"
+    },
+    {
+      "callable": "Command7_Click",
+      "kind": "event_handler",
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sql_ids": "n/a"
+    }
+  ],
+  "mapped_forms": [
+    {
+      "form": "frmAccTypes",
+      "display_name": "frmAccTypes [Account Type Maintenance]",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Account type maintenance and account setup workflow.",
+      "inputs": "account id, account name, description, interest rate, min balance",
+      "outputs": "Account type master data maintained., Navigation routes the user to selected module screens.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, msmask32.ocx",
+      "db_tables": "n/a",
+      "actions": "2",
+      "coverage": "1.00",
+      "confidence": "0.74",
+      "exclusion_reason": "none",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "frmCustomers",
+      "display_name": "frmCustomers [Customer Management]",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Customer profile onboarding and maintenance workflow.",
+      "inputs": "acc type, account no, email, mobile no, opening bal, phone no",
+      "outputs": "Customer profile created or updated., Navigation routes the user to selected module screens.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, MSMask.MaskEdBox",
+      "db_tables": "n/a",
+      "actions": "1",
+      "coverage": "1.00",
+      "confidence": "0.71",
+      "exclusion_reason": "none",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "frmDeposits",
+      "display_name": "frmDeposits [Deposit Capture]",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Deposit capture and balance posting workflow.",
+      "inputs": "account no, amount deposited, cash, check no, cheque, customer no, dated, mode",
+      "outputs": "Account balance recalculated., Deposit transaction recorded., Transaction history updated.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, msmask32.ocx",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.51",
+      "exclusion_reason": "none",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "frmSearch",
+      "display_name": "frmSearch [Record Search]",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Record search and retrieval workflow.",
+      "inputs": "n/a",
+      "outputs": "Matching records displayed to the user.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, msmask32.ocx",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.46",
+      "exclusion_reason": "none",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "frmTransaction",
+      "display_name": "frmTransaction [Transaction Entry]",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Transaction ledger management and adjustment workflow.",
+      "inputs": "account no, balance, check no, code, credit, customer id, dated, debit",
+      "outputs": "Account balance recalculated., Deposit transaction recorded., Transaction history updated., Withdrawal transaction recorded.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, msmask32.ocx",
+      "db_tables": "n/a",
+      "actions": "2",
+      "coverage": "1.00",
+      "confidence": "0.74",
+      "exclusion_reason": "none",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "frmTransactions",
+      "display_name": "frmTransactions [Transaction History]",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Transaction ledger management and adjustment workflow.",
+      "inputs": "acc no, customer id, first, option 1, option 2",
+      "outputs": "Transaction history updated.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, msmask32.ocx",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.51",
+      "exclusion_reason": "none",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "frmWithdrawal",
+      "display_name": "frmWithdrawal [Withdrawal Processing]",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Withdrawal processing and balance deduction workflow.",
+      "inputs": "account no, amount withdrawn, amountwithdrawn, customer no, dated, narration, transaction id",
+      "outputs": "Account balance recalculated., Transaction history updated., Withdrawal transaction recorded.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, msmask32.ocx",
+      "db_tables": "n/a",
+      "actions": "4",
+      "coverage": "1.00",
+      "confidence": "0.81",
+      "exclusion_reason": "none",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Main",
+      "display_name": "Main [Authentication]",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "form_type": "MDI_Host",
+      "status": "mapped",
+      "purpose": "Application navigation and module routing workflow.",
+      "inputs": "n/a",
+      "outputs": "User access is validated before workflow continuation.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, msmask32.ocx",
+      "db_tables": "logi",
+      "actions": "10",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Form1",
+      "display_name": "Form1 [Navigation/Menu]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "2",
+      "coverage": "1.00",
+      "confidence": "0.49",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Form2",
+      "display_name": "Form2 [Date/Period Entry]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "date 1",
+      "outputs": "n/a",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.31",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Form3",
+      "display_name": "Form3 [Deposit Capture]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Deposit capture and balance posting workflow.",
+      "inputs": "account no, amount deposited, cash, check no, cheque, customer no, dated, narration",
+      "outputs": "Customer balance and account details displayed for review., Customer details displayed for review.",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "tblBalances, tblCustomers",
+      "actions": "6",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Form4",
+      "display_name": "Form4 [Withdrawal Processing]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Withdrawal processing and balance deduction workflow.",
+      "inputs": "account no, amount withdrawn, customer no, dated, narration, transaction id",
+      "outputs": "Customer details displayed for review., Withdrawal transaction recorded.",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "customer, withdrawal",
+      "actions": "6",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Form6",
+      "display_name": "Form6 [Transaction Ledger]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Transaction ledger management and adjustment workflow.",
+      "inputs": "account id, account name, account no, balance, check no, credit, customer id, dated",
+      "outputs": "Account type configuration updated., Account type details displayed for selection., Transaction history displayed for review., Transaction ledger updated.",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "accounttype, transctions",
+      "actions": "9",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Form7",
+      "display_name": "Form7 [Password Management]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "name, name 1, pass, pass 1",
+      "outputs": "User access is validated before workflow continuation.",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.31",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Form8",
+      "display_name": "Form8 [Splash/Loading]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "n/a",
+      "db_tables": "n/a",
+      "actions": "2",
+      "coverage": "1.00",
+      "confidence": "0.49",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "main",
+      "display_name": "main [Authentication]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "MDI_Host",
+      "status": "mapped",
+      "purpose": "Application navigation and module routing workflow.",
+      "inputs": "n/a",
+      "outputs": "User credentials validated against stored records.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, MSMask.MaskEdBox, msmask32.ocx",
+      "db_tables": "logi",
+      "actions": "10",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Form1",
+      "display_name": "Form1 [Navigation/Menu]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "2",
+      "coverage": "1.00",
+      "confidence": "0.49",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Form2",
+      "display_name": "Form2 [Date/Period Entry]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "date 1",
+      "outputs": "n/a",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.31",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Form3",
+      "display_name": "Form3 [Deposit Capture]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Deposit capture and balance posting workflow.",
+      "inputs": "account no, amount deposited, cash, check no, cheque, customer no, dated, narration",
+      "outputs": "Customer balance and account details displayed for review., Customer details displayed for review.",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "tblBalances, tblCustomers",
+      "actions": "6",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Form4",
+      "display_name": "Form4 [Withdrawal Processing]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Withdrawal processing and balance deduction workflow.",
+      "inputs": "account no, amount withdrawn, customer no, dated, narration, transaction id",
+      "outputs": "Customer details displayed for review., Withdrawal transaction recorded.",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "customer, withdrawal",
+      "actions": "6",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Form5",
+      "display_name": "Form5 [Customer Management]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Customer profile onboarding and maintenance workflow.",
+      "inputs": "acc no, account id, account name, customer id, description, first, interest rate, min balance",
+      "outputs": "Customer profile created or updated., Navigation routes the user to selected module screens.",
+      "activex": "n/a",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.51",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Form6",
+      "display_name": "Form6 [Transaction Ledger]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Transaction ledger management and adjustment workflow.",
+      "inputs": "account id, account name, account no, balance, check no, credit, customer id, dated",
+      "outputs": "Account type configuration updated., Account type details displayed for selection., Transaction history displayed for review., Transaction ledger updated.",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "accounttype, transctions",
+      "actions": "9",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Form7",
+      "display_name": "Form7 [Password Management]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "name, name 1, pass, pass 1",
+      "outputs": "User access is validated before workflow continuation.",
+      "activex": "MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.31",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Form8",
+      "display_name": "Form8 [Splash/Loading]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "n/a",
+      "db_tables": "n/a",
+      "actions": "2",
+      "coverage": "1.00",
+      "confidence": "0.49",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Form9",
+      "display_name": "Form9 [Authentication Entry]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "mapped",
+      "purpose": "Business workflow executed through event-driven UI controls.",
+      "inputs": "n/a",
+      "outputs": "User access is validated before workflow continuation.",
+      "activex": "n/a",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "1.00",
+      "confidence": "0.26",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "main",
+      "display_name": "main [Authentication]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "MDI_Host",
+      "status": "mapped",
+      "purpose": "Application navigation and module routing workflow.",
+      "inputs": "n/a",
+      "outputs": "User credentials validated against stored records.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ListView, MSComctlLib.Toolbar, MSMask.MaskEdBox, msmask32.ocx",
+      "db_tables": "logi",
+      "actions": "10",
+      "coverage": "1.00",
+      "confidence": "0.98",
+      "exclusion_reason": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    }
+  ],
+  "excluded_forms": [
+    {
+      "form": "accounttype.frm",
+      "display_name": "accounttype.frm [Account Type Maintenance]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Account Type Maintenance workflow.",
+      "inputs": "n/a",
+      "outputs": "Account type master data maintained., Navigation routes the user to selected module screens.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "deposit.frm",
+      "display_name": "deposit.frm [Deposit Capture]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Deposit Capture workflow.",
+      "inputs": "n/a",
+      "outputs": "Account balance recalculated., Deposit transaction recorded.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "frmcustomer.frm",
+      "display_name": "frmcustomer.frm [Customer Management]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Customer Management workflow.",
+      "inputs": "n/a",
+      "outputs": "Customer profile created or updated.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "LOGIN.frm",
+      "display_name": "LOGIN.frm [Authentication]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Login",
+      "status": "excluded",
+      "purpose": "Authentication workflow.",
+      "inputs": "n/a",
+      "outputs": "User access is validated before workflow continuation.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "newlogin.frm",
+      "display_name": "newlogin.frm [Authentication]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Login",
+      "status": "excluded",
+      "purpose": "Authentication workflow.",
+      "inputs": "n/a",
+      "outputs": "User access is validated before workflow continuation.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "splash.frm",
+      "display_name": "splash.frm [Splash/Loading]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Splash",
+      "status": "excluded",
+      "purpose": "Splash/Loading workflow.",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "transaction.frm",
+      "display_name": "transaction.frm",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "n/a",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "withdrawal.frm",
+      "display_name": "withdrawal.frm [Withdrawal Processing]",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Withdrawal Processing workflow.",
+      "inputs": "n/a",
+      "outputs": "Account balance recalculated., Withdrawal transaction recorded.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "accounttype.frm",
+      "display_name": "accounttype.frm [Account Type Maintenance]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Account Type Maintenance workflow.",
+      "inputs": "n/a",
+      "outputs": "Account type master data maintained., Navigation routes the user to selected module screens.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "deposit.frm",
+      "display_name": "deposit.frm [Deposit Capture]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Deposit Capture workflow.",
+      "inputs": "n/a",
+      "outputs": "Account balance recalculated., Deposit transaction recorded.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "frmcustomer.frm",
+      "display_name": "frmcustomer.frm [Customer Management]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Customer Management workflow.",
+      "inputs": "n/a",
+      "outputs": "Customer profile created or updated.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "LOGIN.frm",
+      "display_name": "LOGIN.frm [Authentication]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Login",
+      "status": "excluded",
+      "purpose": "Authentication workflow.",
+      "inputs": "n/a",
+      "outputs": "User access is validated before workflow continuation.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "newlogin.frm",
+      "display_name": "newlogin.frm [Authentication]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Login",
+      "status": "excluded",
+      "purpose": "Authentication workflow.",
+      "inputs": "n/a",
+      "outputs": "User access is validated before workflow continuation.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "report.frm",
+      "display_name": "report.frm [Reporting]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Reporting workflow.",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "splash.frm",
+      "display_name": "splash.frm [Splash/Loading]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Splash",
+      "status": "excluded",
+      "purpose": "Splash/Loading workflow.",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "transaction.frm",
+      "display_name": "transaction.frm",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "n/a",
+      "inputs": "n/a",
+      "outputs": "n/a",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "withdrawal.frm",
+      "display_name": "withdrawal.frm [Withdrawal Processing]",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "form_type": "Child",
+      "status": "excluded",
+      "purpose": "Withdrawal Processing workflow.",
+      "inputs": "n/a",
+      "outputs": "Account balance recalculated., Withdrawal transaction recorded.",
+      "activex": "MSCOMCT2.OCX, MSCOMCTL.OCX, MSComCtl2.DTPicker, MSComctlLib.ProgressBar, MSFLXGRD.OCX, MSFlexGridLib.MSFlexGrid",
+      "db_tables": "n/a",
+      "actions": "0",
+      "coverage": "0.00",
+      "confidence": "0.10",
+      "exclusion_reason": "missing_from_form_dossier",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    }
+  ],
+  "excluded_unique": [
+    {
+      "name": "accounttype.frm",
+      "type": "Child",
+      "projects": [
+        "Project1 (BANKING.vbp)",
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    },
+    {
+      "name": "deposit.frm",
+      "type": "Child",
+      "projects": [
+        "Project1 (BANKING.vbp)",
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    },
+    {
+      "name": "frmcustomer.frm",
+      "type": "Child",
+      "projects": [
+        "Project1 (BANKING.vbp)",
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    },
+    {
+      "name": "LOGIN.frm",
+      "type": "Login",
+      "projects": [
+        "Project1 (BANKING.vbp)",
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    },
+    {
+      "name": "newlogin.frm",
+      "type": "Login",
+      "projects": [
+        "Project1 (BANKING.vbp)",
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    },
+    {
+      "name": "splash.frm",
+      "type": "Splash",
+      "projects": [
+        "Project1 (BANKING.vbp)",
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    },
+    {
+      "name": "transaction.frm",
+      "type": "Child",
+      "projects": [
+        "Project1 (BANKING.vbp)",
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    },
+    {
+      "name": "withdrawal.frm",
+      "type": "Child",
+      "projects": [
+        "Project1 (BANKING.vbp)",
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    },
+    {
+      "name": "report.frm",
+      "type": "Child",
+      "projects": [
+        "Project1 (STUDENT BANKING/BANKING.vbp)"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "id": "RISK-001",
+      "severity": "medium",
+      "form": "Form5.frm",
+      "description": "Legacy code uses default object/form instances, which can change behavior during migration.",
+      "action": "Refactor default-instance references to explicit object instances and update call sites.",
+      "form_display": "Form5 [Customer Management]"
+    },
+    {
+      "id": "RISK-002",
+      "severity": "medium",
+      "form": "LOGIN.frm",
+      "description": "Legacy UI relies on control-array index patterns that require explicit replacement in the target UI.",
+      "action": "Define a control-array replacement strategy and validate event parity with focused tests.",
+      "form_display": "LOGIN.frm [Excluded]"
+    },
+    {
+      "id": "RISK-003",
+      "severity": "medium",
+      "form": "sql:2",
+      "description": "SQL risk flags for sql:2: select_star",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form6 [Transaction Ledger]"
+    },
+    {
+      "id": "RISK-004",
+      "severity": "high",
+      "form": "sql:24",
+      "description": "SQL risk flags for sql:24: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-005",
+      "severity": "high",
+      "form": "sql:25",
+      "description": "SQL risk flags for sql:25: select_star, sensitive_credential_query",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-006",
+      "severity": "high",
+      "form": "sql:26",
+      "description": "SQL risk flags for sql:26: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-007",
+      "severity": "high",
+      "form": "sql:27",
+      "description": "SQL risk flags for sql:27: select_star, string_concatenation, possible_injection, sensitive_credential_query",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-008",
+      "severity": "high",
+      "form": "sql:28",
+      "description": "SQL risk flags for sql:28: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Main [Authentication]"
+    },
+    {
+      "id": "RISK-009",
+      "severity": "high",
+      "form": "sql:29",
+      "description": "SQL risk flags for sql:29: select_star, string_concatenation, possible_injection, sensitive_credential_query",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Main [Authentication]"
+    },
+    {
+      "id": "RISK-010",
+      "severity": "high",
+      "form": "sql:30",
+      "description": "SQL risk flags for sql:30: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form3 [Deposit Capture]"
+    },
+    {
+      "id": "RISK-011",
+      "severity": "high",
+      "form": "sql:31",
+      "description": "SQL risk flags for sql:31: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form3 [Deposit Capture]"
+    },
+    {
+      "id": "RISK-012",
+      "severity": "high",
+      "form": "sql:32",
+      "description": "SQL risk flags for sql:32: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form3 [Deposit Capture]"
+    },
+    {
+      "id": "RISK-013",
+      "severity": "high",
+      "form": "sql:33",
+      "description": "SQL risk flags for sql:33: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form3 [Deposit Capture]"
+    },
+    {
+      "id": "RISK-014",
+      "severity": "high",
+      "form": "sql:34",
+      "description": "SQL risk flags for sql:34: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-015",
+      "severity": "medium",
+      "form": "sql:35",
+      "description": "SQL risk flags for sql:35: select_star",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-016",
+      "severity": "high",
+      "form": "sql:44",
+      "description": "SQL risk flags for sql:44: select_star, string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form4 [Withdrawal Processing]"
+    },
+    {
+      "id": "RISK-017",
+      "severity": "medium",
+      "form": "sql:45",
+      "description": "SQL risk flags for sql:45: select_star",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form4 [Withdrawal Processing]"
+    },
+    {
+      "id": "RISK-018",
+      "severity": "medium",
+      "form": "sql:46",
+      "description": "SQL risk flags for sql:46: select_star",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form6 [Transaction Ledger]"
+    },
+    {
+      "id": "RISK-019",
+      "severity": "high",
+      "form": "sql:47",
+      "description": "SQL risk flags for sql:47: string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-020",
+      "severity": "high",
+      "form": "sql:56",
+      "description": "SQL risk flags for sql:56: string_concatenation, possible_injection, missing_where_clause",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-021",
+      "severity": "high",
+      "form": "sql:57",
+      "description": "SQL risk flags for sql:57: string_concatenation, possible_injection, sensitive_credential_query",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-022",
+      "severity": "medium",
+      "form": "sql:58",
+      "description": "SQL risk flags for sql:58: missing_where_clause",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form6 [Transaction Ledger]"
+    },
+    {
+      "id": "RISK-023",
+      "severity": "medium",
+      "form": "sql:59",
+      "description": "SQL risk flags for sql:59: missing_where_clause",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Form6 [Transaction Ledger]"
+    },
+    {
+      "id": "RISK-024",
+      "severity": "medium",
+      "form": "sql:61",
+      "description": "SQL risk flags for sql:61: missing_where_clause",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-025",
+      "severity": "high",
+      "form": "sql:62",
+      "description": "SQL risk flags for sql:62: string_concatenation, possible_injection",
+      "action": "Parameterize query and align dialect/validation rules before migration.",
+      "form_display": "Project-wide / unattributed SQL"
+    },
+    {
+      "id": "RISK-026",
+      "severity": "high",
+      "form": "n/a",
+      "description": "Balance calculation depends on UI caption value instead of persisted balance source.",
+      "action": "Refactor balance calculations to use persisted/accounting source of truth and add parity tests covering caption/display mismatch scenarios.",
+      "form_display": "Project-wide"
+    }
+  ],
+  "dep_map": [
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "to": "frm",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command1_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "to": "Form9",
+      "type": "mdi_navigation",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command1_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "to": "frm",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdAdd_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "shared_module",
+      "to": "CheckDatabaseStatus",
+      "type": "shared_module_call",
+      "evidence": "shared_module::MoveToFirst",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "shared_module",
+      "to": "CheckDatabaseStatus",
+      "type": "shared_module_call",
+      "evidence": "shared_module::MoveToLast",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "shared_module",
+      "to": "CheckDatabaseStatus",
+      "type": "shared_module_call",
+      "evidence": "shared_module::MoveToNext",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "shared_module",
+      "to": "CheckDatabaseStatus",
+      "type": "shared_module_call",
+      "evidence": "shared_module::MoveToPrev",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "connectDatabase",
+      "type": "shared_module_call",
+      "evidence": "BANK_SYSTEM::Main::MDIForm_Load",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "frmCustomers",
+      "type": "mdi_navigation",
+      "evidence": "BANK_SYSTEM::Main::Toolbar1_ButtonClick",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "frmDeposits",
+      "type": "mdi_navigation",
+      "evidence": "BANK_SYSTEM::Main::Toolbar1_ButtonClick",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "frmWithdrawal",
+      "type": "mdi_navigation",
+      "evidence": "BANK_SYSTEM::Main::Toolbar1_ButtonClick",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "frmTransactions",
+      "type": "mdi_navigation",
+      "evidence": "BANK_SYSTEM::Main::Toolbar1_ButtonClick",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "frmAccTypes",
+      "type": "mdi_navigation",
+      "evidence": "BANK_SYSTEM::Main::Toolbar1_ButtonMenuClick",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "rptCustomers",
+      "type": "mdi_navigation",
+      "evidence": "BANK_SYSTEM::Main::Toolbar1_ButtonMenuClick",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "rptDeposits",
+      "type": "mdi_navigation",
+      "evidence": "BANK_SYSTEM::Main::Toolbar1_ButtonMenuClick",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::Main",
+      "to": "rptWithdrawals",
+      "type": "mdi_navigation",
+      "evidence": "BANK_SYSTEM::Main::Toolbar1_ButtonMenuClick",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "to": "connectDatabase",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8::Form_Load",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "to": "Lock_Form_Controls",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8::Form_Load",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::frmCustomers",
+      "to": "Lock_Form_Controls",
+      "type": "shared_module_call",
+      "evidence": "BANK_SYSTEM::frmCustomers::cmdCancel_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "to": "MoveToPrev",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdPrevious_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "to": "clear_Form_Controls",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::cmdDeposit_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "to": "clear_Form_Controls",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdWithdraw_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM::frmWithdrawal",
+      "to": "ValidNumeric",
+      "type": "shared_module_call",
+      "evidence": "BANK_SYSTEM::frmWithdrawal::txtAmountwithdrawn_KeyPress",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "to": "frm",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::fill",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "to": "Form3",
+      "type": "mdi_navigation",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command2_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "to": "Form4",
+      "type": "mdi_navigation",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command3_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "to": "Form9",
+      "type": "mdi_navigation",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command6_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "to": "DataReport4",
+      "type": "mdi_navigation",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command4_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "to": "frm",
+      "type": "shared_module_call",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdwithdrawn_click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "to": "Form6",
+      "type": "mdi_navigation",
+      "evidence": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command5_Click",
+      "blocks": "Sprint 1"
+    },
+    {
+      "from": "BANK_SYSTEM",
+      "to": "Project1 (BANKING.vbp)",
+      "type": "cross_variant_schema_conflict",
+      "evidence": "alias_mismatches=2, near_miss=2, transaction_conflict=yes",
+      "blocks": "Sprint 0"
+    },
+    {
+      "from": "BANK_SYSTEM",
+      "to": "Project1 (STUDENT BANKING/BANKING.vbp)",
+      "type": "cross_variant_schema_conflict",
+      "evidence": "alias_mismatches=1, near_miss=1, transaction_conflict=yes",
+      "blocks": "Sprint 0"
+    },
+    {
+      "from": "Project1 (BANKING.vbp)",
+      "to": "Project1 (STUDENT BANKING/BANKING.vbp)",
+      "type": "cross_variant_schema_conflict",
+      "evidence": "alias_mismatches=0, near_miss=2, transaction_conflict=yes",
+      "blocks": "Sprint 0"
+    }
+  ],
+  "form_traces": {
+    "frmAccTypes (BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp])": [
+      {
+        "callable": "DisplayaccTypes",
+        "kind": "procedure",
+        "event": "BANK_SYSTEM::frmAccTypes::DisplayaccTypes",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "GenerateNewAccountCode",
+        "kind": "procedure",
+        "event": "BANK_SYSTEM::frmAccTypes::GenerateNewAccountCode",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "frmCustomers (BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp])": [
+      {
+        "callable": "cmdCancel_Click",
+        "kind": "event_handler",
+        "event": "BANK_SYSTEM::frmCustomers::cmdCancel_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "frmDeposits (BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "frmSearch (BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "frmTransaction (BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp])": [
+      {
+        "callable": "DisplayTransact",
+        "kind": "procedure",
+        "event": "BANK_SYSTEM::frmTransaction::DisplayTransact",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdClose_Click",
+        "kind": "event_handler",
+        "event": "BANK_SYSTEM::frmTransaction::cmdClose_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "frmTransactions (BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "frmWithdrawal (BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp])": [
+      {
+        "callable": "GenerateNewTransactCode",
+        "kind": "procedure",
+        "event": "BANK_SYSTEM::frmWithdrawal::GenerateNewTransactCode",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "txtAccountNo_Change",
+        "kind": "event_handler",
+        "event": "BANK_SYSTEM::frmWithdrawal::txtAccountNo_Change",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "txtAmountwithdrawn_KeyPress",
+        "kind": "event_handler",
+        "event": "BANK_SYSTEM::frmWithdrawal::txtAmountwithdrawn_KeyPress",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "txtNarration_KeyPress",
+        "kind": "event_handler",
+        "event": "BANK_SYSTEM::frmWithdrawal::txtNarration_KeyPress",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Main (BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp])": [
+      {
+        "callable": "MDIForm_Load",
+        "kind": "event_handler",
+        "event": "BANK_SYSTEM::Main::MDIForm_Load",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Toolbar1_ButtonClick",
+        "kind": "procedure",
+        "event": "BANK_SYSTEM::Main::Toolbar1_ButtonClick",
+        "activex": "Toolbar1:MSComctlLib.Toolbar",
+        "sql_ids": "sql:21, sql:36",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Toolbar1_ButtonMenuClick",
+        "kind": "procedure",
+        "event": "BANK_SYSTEM::Main::Toolbar1_ButtonMenuClick",
+        "activex": "Toolbar1:MSComctlLib.Toolbar",
+        "sql_ids": "sql:21, sql:37",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form1 (Project1 (BANKING.vbp) [BANKING.vbp])": [
+      {
+        "callable": "Label3_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1::Label3_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Label4_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1::Label4_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form2 (Project1 (BANKING.vbp) [BANKING.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form3 (Project1 (BANKING.vbp) [BANKING.vbp])": [
+      {
+        "callable": "Text1_Change",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::Text1_Change",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cboCustomerNo_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::cboCustomerNo_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:30, sql:31, sql:32, sql:33",
+        "tables": "tblBalances, tblCustomers",
+        "status": "OK"
+      },
+      {
+        "callable": "cboCustomerNo_KeyPress",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::cboCustomerNo_KeyPress",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdDeposit_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::cmdDeposit_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "optCash_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::optCash_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "optCheque_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::optCheque_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form4 (Project1 (BANKING.vbp) [BANKING.vbp])": [
+      {
+        "callable": "cboCustomerno_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cboCustomerno_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:44, sql:45",
+        "tables": "customer",
+        "status": "OK"
+      },
+      {
+        "callable": "cmdQuit_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdQuit_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdSave_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdSave_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:19",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdWithdraw_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdWithdraw_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdwithdrawn_click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdwithdrawn_click",
+        "activex": "n/a",
+        "sql_ids": "sql:55, sql:9",
+        "tables": "withdrawal",
+        "status": "OK"
+      },
+      {
+        "callable": "fill",
+        "kind": "procedure",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::fill",
+        "activex": "n/a",
+        "sql_ids": "sql:4, sql:50",
+        "tables": "customer",
+        "status": "OK"
+      }
+    ],
+    "Form6 (Project1 (BANKING.vbp) [BANKING.vbp])": [
+      {
+        "callable": "clr",
+        "kind": "procedure",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::clr",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdAdd_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdAdd_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:53, sql:7",
+        "tables": "accounttype",
+        "status": "OK"
+      },
+      {
+        "callable": "cmdEdit_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdEdit_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:59, sql:60",
+        "tables": "accounttype",
+        "status": "OK"
+      },
+      {
+        "callable": "cmdFirst_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdFirst_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdLast_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdLast_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdNext_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdNext_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdPrevious_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdPrevious_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "display",
+        "kind": "procedure",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::display",
+        "activex": "n/a",
+        "sql_ids": "sql:2, sql:3, sql:46, sql:49",
+        "tables": "transctions",
+        "status": "OK"
+      },
+      {
+        "callable": "msfgroom_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::msfgroom_Click",
+        "activex": "msfgroom:MSFlexGridLib.MSFlexGrid",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form7 (Project1 (BANKING.vbp) [BANKING.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form8 (Project1 (BANKING.vbp) [BANKING.vbp])": [
+      {
+        "callable": "Form_Load",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8::Form_Load",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Timer1_Timer",
+        "kind": "procedure",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8::Timer1_Timer",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "main (Project1 (BANKING.vbp) [BANKING.vbp])": [
+      {
+        "callable": "Command1_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command1_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:28, sql:29",
+        "tables": "logi",
+        "status": "OK"
+      },
+      {
+        "callable": "Command2_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command2_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command3_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command3_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command4_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command4_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command5_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command5_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command6_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command6_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command7_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command7_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "MDIForm_Load",
+        "kind": "event_handler",
+        "event": "BANK_SYSTEM::Main::MDIForm_Load",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Toolbar1_ButtonClick",
+        "kind": "procedure",
+        "event": "BANK_SYSTEM::Main::Toolbar1_ButtonClick",
+        "activex": "n/a",
+        "sql_ids": "sql:21, sql:36",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Toolbar1_ButtonMenuClick",
+        "kind": "procedure",
+        "event": "BANK_SYSTEM::Main::Toolbar1_ButtonMenuClick",
+        "activex": "n/a",
+        "sql_ids": "sql:21, sql:37",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form1 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "Label3_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1::Label3_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Label4_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1::Label4_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form2 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form3 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "Text1_Change",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::Text1_Change",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cboCustomerNo_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::cboCustomerNo_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:30, sql:31, sql:32, sql:33",
+        "tables": "tblBalances, tblCustomers",
+        "status": "OK"
+      },
+      {
+        "callable": "cboCustomerNo_KeyPress",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::cboCustomerNo_KeyPress",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdDeposit_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::cmdDeposit_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "optCash_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::optCash_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "optCheque_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3::optCheque_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form4 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "cboCustomerno_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cboCustomerno_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:44, sql:45",
+        "tables": "customer",
+        "status": "OK"
+      },
+      {
+        "callable": "cmdQuit_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdQuit_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdSave_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdSave_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:19",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdWithdraw_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdWithdraw_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdwithdrawn_click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::cmdwithdrawn_click",
+        "activex": "n/a",
+        "sql_ids": "sql:55, sql:9",
+        "tables": "withdrawal",
+        "status": "OK"
+      },
+      {
+        "callable": "fill",
+        "kind": "procedure",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4::fill",
+        "activex": "n/a",
+        "sql_ids": "sql:4, sql:50",
+        "tables": "customer",
+        "status": "OK"
+      }
+    ],
+    "Form5 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form6 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "clr",
+        "kind": "procedure",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::clr",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdAdd_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdAdd_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:53, sql:7",
+        "tables": "accounttype",
+        "status": "OK"
+      },
+      {
+        "callable": "cmdEdit_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdEdit_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:59, sql:60",
+        "tables": "accounttype",
+        "status": "OK"
+      },
+      {
+        "callable": "cmdFirst_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdFirst_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdLast_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdLast_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdNext_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdNext_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "cmdPrevious_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::cmdPrevious_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "display",
+        "kind": "procedure",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::display",
+        "activex": "n/a",
+        "sql_ids": "sql:2, sql:3, sql:46, sql:49",
+        "tables": "transctions",
+        "status": "OK"
+      },
+      {
+        "callable": "msfgroom_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6::msfgroom_Click",
+        "activex": "msfgroom:MSFlexGridLib.MSFlexGrid",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form7 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form8 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "Form_Load",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8::Form_Load",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Timer1_Timer",
+        "kind": "procedure",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8::Timer1_Timer",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "Form9 (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "n/a",
+        "kind": "n/a",
+        "event": "n/a",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ],
+    "main (Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp])": [
+      {
+        "callable": "Command1_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command1_Click",
+        "activex": "n/a",
+        "sql_ids": "sql:28, sql:29",
+        "tables": "logi",
+        "status": "OK"
+      },
+      {
+        "callable": "Command2_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command2_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command3_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command3_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command4_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command4_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command5_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command5_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command6_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command6_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      },
+      {
+        "callable": "Command7_Click",
+        "kind": "event_handler",
+        "event": "Project1 (STUDENT BANKING/BANKING.vbp)::main::Command7_Click",
+        "activex": "n/a",
+        "sql_ids": "n/a",
+        "tables": "n/a",
+        "status": "TRACE_GAP"
+      }
+    ]
+  },
+  "traceability": [
+    {
+      "form": "BANK_SYSTEM::frmAccTypes",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 75,
+      "missing_links": "risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmCustomers",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 50,
+      "missing_links": "business_rules, risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmDeposits",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 75,
+      "missing_links": "event_map, procedure_summary",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmSearch",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "yes",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 25,
+      "missing_links": "event_map, business_rules, risk_register, procedure_summary",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransaction",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 75,
+      "missing_links": "risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransactions",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 50,
+      "missing_links": "event_map, risk_register, procedure_summary",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 75,
+      "missing_links": "risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::Main",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 80,
+      "missing_links": "risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form1",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 40,
+      "missing_links": "sql_map, business_rules, risk_register",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form2",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 0,
+      "missing_links": "event_map, sql_map, business_rules, risk_register, procedure_summary",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form3",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form4",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form6",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form7",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 20,
+      "missing_links": "event_map, sql_map, risk_register, procedure_summary",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form8",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 40,
+      "missing_links": "sql_map, business_rules, risk_register",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::main",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 80,
+      "missing_links": "risk_register",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 40,
+      "missing_links": "sql_map, business_rules, risk_register",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form2",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 0,
+      "missing_links": "event_map, sql_map, business_rules, risk_register, procedure_summary",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form5",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "yes",
+      "score": 20,
+      "missing_links": "event_map, sql_map, business_rules, procedure_summary",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form7",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 20,
+      "missing_links": "event_map, sql_map, risk_register, procedure_summary",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 40,
+      "missing_links": "sql_map, business_rules, risk_register",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form9",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 0,
+      "missing_links": "event_map, sql_map, business_rules, risk_register, procedure_summary",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 80,
+      "missing_links": "risk_register",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    }
+  ],
+  "active_q": [
+    {
+      "form": "BANK_SYSTEM::frmAccTypes",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 75,
+      "missing_links": "risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmCustomers",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 50,
+      "missing_links": "business_rules, risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmDeposits",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 75,
+      "missing_links": "event_map, procedure_summary",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmSearch",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "yes",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 25,
+      "missing_links": "event_map, business_rules, risk_register, procedure_summary",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransaction",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 75,
+      "missing_links": "risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransactions",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 50,
+      "missing_links": "event_map, risk_register, procedure_summary",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 75,
+      "missing_links": "risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::Main",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 80,
+      "missing_links": "risk_register",
+      "project_display": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form1",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 40,
+      "missing_links": "sql_map, business_rules, risk_register",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form2",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 0,
+      "missing_links": "event_map, sql_map, business_rules, risk_register, procedure_summary",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form3",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form4",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form6",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form7",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 20,
+      "missing_links": "event_map, sql_map, risk_register, procedure_summary",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form8",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 40,
+      "missing_links": "sql_map, business_rules, risk_register",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::main",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 80,
+      "missing_links": "risk_register",
+      "project_display": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 40,
+      "missing_links": "sql_map, business_rules, risk_register",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form2",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 0,
+      "missing_links": "event_map, sql_map, business_rules, risk_register, procedure_summary",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form5",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "yes",
+      "score": 20,
+      "missing_links": "event_map, sql_map, business_rules, procedure_summary",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "yes",
+      "score": 100,
+      "missing_links": "none",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form7",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 20,
+      "missing_links": "event_map, sql_map, risk_register, procedure_summary",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 40,
+      "missing_links": "sql_map, business_rules, risk_register",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form9",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "no",
+      "has_sql_map": "no",
+      "has_business_rules": "no",
+      "has_risk_entry": "no",
+      "score": 0,
+      "missing_links": "event_map, sql_map, business_rules, risk_register, procedure_summary",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]",
+      "has_event_map": "yes",
+      "has_sql_map": "yes",
+      "has_business_rules": "yes",
+      "has_risk_entry": "no",
+      "score": 80,
+      "missing_links": "risk_register",
+      "project_display": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    }
+  ],
+  "sprints": [
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form9",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form2",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form2",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmSearch",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form7",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form7",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransactions",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form5",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules, RISK-001",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "Lock_Form_Controls, connectDatabase",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form8",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "Lock_Form_Controls, connectDatabase",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form1",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmCustomers",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "Lock_Form_Controls",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmDeposits",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, RISK-026",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map",
+      "shared": "ValidNumeric",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransaction",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmAccTypes",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sprint": "Sprint 2 (Parity hardening)",
+      "depends_on": "DEC-VARIANT-001",
+      "shared": "frm",
+      "rationale": "Form has baseline traceability and can move into parity build/test.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::main",
+      "sprint": "Sprint 2 (Parity hardening)",
+      "depends_on": "DEC-VARIANT-001",
+      "shared": "connectDatabase, frm",
+      "rationale": "Form has baseline traceability and can move into parity build/test.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::Main",
+      "sprint": "Sprint 2 (Parity hardening)",
+      "depends_on": "DEC-VARIANT-001",
+      "shared": "connectDatabase",
+      "rationale": "Form has baseline traceability and can move into parity build/test.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-003, RISK-018",
+      "shared": "MoveToPrev, frm",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-016, RISK-017",
+      "shared": "clear_Form_Controls, frm",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-010, RISK-011",
+      "shared": "clear_Form_Controls",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form6",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-003, RISK-018",
+      "shared": "MoveToPrev, frm",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form4",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-016, RISK-017",
+      "shared": "clear_Form_Controls, frm",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form3",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-010, RISK-011",
+      "shared": "clear_Form_Controls",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    }
+  ],
+  "active_sprints": [
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form9",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form2",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form2",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmSearch",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form7",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form7",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransactions",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form5",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, Q.business_rules, RISK-001",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form8",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "Lock_Form_Controls, connectDatabase",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form1",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form8",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "Lock_Form_Controls, connectDatabase",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form1",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmCustomers",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.business_rules",
+      "shared": "Lock_Form_Controls",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmDeposits",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map, Q.event_map, RISK-026",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmWithdrawal",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map",
+      "shared": "ValidNumeric",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmTransaction",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::frmAccTypes",
+      "sprint": "Sprint 0 (Discovery closure)",
+      "depends_on": "DEC-VARIANT-001, Q.sql_map",
+      "shared": "none",
+      "rationale": "Close traceability gaps before modernization changes.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::main",
+      "sprint": "Sprint 2 (Parity hardening)",
+      "depends_on": "DEC-VARIANT-001",
+      "shared": "frm",
+      "rationale": "Form has baseline traceability and can move into parity build/test.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::main",
+      "sprint": "Sprint 2 (Parity hardening)",
+      "depends_on": "DEC-VARIANT-001",
+      "shared": "connectDatabase, frm",
+      "rationale": "Form has baseline traceability and can move into parity build/test.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "BANK_SYSTEM::Main",
+      "sprint": "Sprint 2 (Parity hardening)",
+      "depends_on": "DEC-VARIANT-001",
+      "shared": "connectDatabase",
+      "rationale": "Form has baseline traceability and can move into parity build/test.",
+      "project": "BANK_SYSTEM [STUDENT BANKING/banking finish/BANKING/BANK_SYSTEM.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form6",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-003, RISK-018",
+      "shared": "MoveToPrev, frm",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form4",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-016, RISK-017",
+      "shared": "clear_Form_Controls, frm",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (STUDENT BANKING/BANKING.vbp)::Form3",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-010, RISK-011",
+      "shared": "clear_Form_Controls",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (STUDENT BANKING/BANKING.vbp) [STUDENT BANKING/BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form6",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-003, RISK-018",
+      "shared": "MoveToPrev, frm",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form4",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-016, RISK-017",
+      "shared": "clear_Form_Controls, frm",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    },
+    {
+      "form": "Project1 (BANKING.vbp)::Form3",
+      "sprint": "Sprint 1 (Risk-first modernization)",
+      "depends_on": "DEC-VARIANT-001, RISK-010, RISK-011",
+      "shared": "clear_Form_Controls",
+      "rationale": "Implement remediation-first changes for high-risk legacy behavior.",
+      "project": "Project1 (BANKING.vbp) [BANKING.vbp]"
+    }
+  ],
+  "code_literal_scan": {
+    "status": "PASS",
+    "total_fields": 210,
+    "findings_count": 0,
+    "by_severity": {
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "findings": []
+  }
+}
