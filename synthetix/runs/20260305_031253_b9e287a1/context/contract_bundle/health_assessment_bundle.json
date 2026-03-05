@@ -1,0 +1,204 @@
+{
+  "header": {
+    "artifact_id": "7b9954f2b94f42a2b4059c9ad14156c6",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-05T03:13:22.996567+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260305_031253_b9e287a1",
+      "stage_id": "context_layer",
+      "task_id": "87705f0515e9401c9fd990be72b0b423"
+    },
+    "parents": [],
+    "digest": "sha256:20dad01e312de85457258a89e3318c6ee4c8f346936e79e6d8db95706f4dae3e",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260305_031253_b9e287a1",
+      "bundle_version": "20260305T031322Z_20260305_031253_b9e287a1"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The legacy codebase has maintainability and security concerns due to outdated practices."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 40,
+      "security": 30,
+      "reliability": 50,
+      "testability": 20
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: error_handling",
+      "description": "Use of 'On Error Resume Next' suppresses errors.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "error_handling"
+        ],
+        "paths": [
+          "error_handling"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "main.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "Security Risk due to Unsecured Data Access",
+      "description": "The application uses unsecured data access methods which may lead to SQL injection vulnerabilities.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "task:modernize_codebase",
+      "title": "Modernize Legacy Codebase to C#",
+      "priority": "P0",
+      "business_value": "Continued use of outdated code may lead to increased maintenance costs and security vulnerabilities.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "XL",
+        "hours_range": [
+          80,
+          160
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node:banking_vbp",
+          "node:login_form",
+          "node:main_form"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "task:database_migration"
+      ],
+      "plan": [
+        "Refactor the codebase to C# using modern conventions and practices"
+      ],
+      "acceptance_criteria": [
+        "Codebase is fully converted to C#.",
+        "All legacy functionality is preserved."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "task:modernize_codebase"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "task:modernize_codebase"
+    ]
+  }
+}
