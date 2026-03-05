@@ -1,0 +1,273 @@
+{
+  "header": {
+    "artifact_id": "817bfecbf6814e99a70be1edba71d387",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-05T10:24:25.582813+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260305_102356_8f27295d",
+      "stage_id": "context_layer",
+      "task_id": "924f332e2a124eadb51c9c853212ee6f"
+    },
+    "parents": [],
+    "digest": "sha256:9a8144ed3893a30edb9c88c0d45cda47002302017119cb8a66642f505b612292",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260305_102356_8f27295d",
+      "bundle_version": "20260305T102425Z_20260305_102356_8f27295d"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "project:banking",
+        "type": "service",
+        "name": "Banking Application",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "VB6",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "language": "VB6",
+          "entry_point": "main.frm"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "form:login",
+        "type": "component",
+        "name": "Login Form",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "file": "LOGIN.frm"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "form:main",
+        "type": "component",
+        "name": "Main Form",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "file": "main.frm"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "database:bank1",
+        "type": "database",
+        "name": "Bank1 Database",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "DataEnvironment1.DCA"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "provider": "Microsoft.Jet.OLEDB.4.0",
+          "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "DataEnvironment1.DCA"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "module:module1",
+        "type": "module",
+        "name": "Module1",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BANKING.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "file": "Module1.bas"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BANKING.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "depends_on",
+        "from": "project:banking",
+        "to": "database:bank1",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "DataEnvironment1.DCA"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "calls_http",
+        "from": "form:main",
+        "to": "form:login",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "main.frm"
+          }
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 5,
+      "edge_count": 2,
+      "languages": [
+        "VB6"
+      ]
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": [
+    {
+      "question": "ActiveX dependencies behavior",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "Exact business logic in modules",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    }
+  ]
+}
