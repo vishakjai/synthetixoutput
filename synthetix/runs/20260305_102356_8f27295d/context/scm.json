@@ -1,0 +1,126 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy VB6 banking application, detailing its components, dependencies, and interactions.",
+  "nodes": [
+    {
+      "id": "project:banking",
+      "type": "Service",
+      "name": "Banking Application",
+      "metadata": {
+        "language": "VB6",
+        "entry_point": "main.frm"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "form:login",
+      "type": "Component",
+      "name": "Login Form",
+      "metadata": {
+        "file": "LOGIN.frm"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 25,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "form:main",
+      "type": "Component",
+      "name": "Main Form",
+      "metadata": {
+        "file": "main.frm"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 26,
+          "evidence": "Form=main.frm"
+        }
+      ]
+    },
+    {
+      "id": "database:bank1",
+      "type": "Database",
+      "name": "Bank1 Database",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "id": "module:module1",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {
+        "file": "Module1.bas"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 27,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "project:banking",
+      "to": "database:bank1",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "connection_string": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "form:main",
+      "to": "form:login",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.7,
+      "evidence": [
+        {
+          "file": "main.frm",
+          "line": 10,
+          "evidence": "Form2.Show"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "ActiveX dependencies behavior",
+    "Exact business logic in modules"
+  ]
+}
