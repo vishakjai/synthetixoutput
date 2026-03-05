@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of the legacy VB6 repository for modernization, focusing on projects, forms, modules, ActiveX dependencies, business rules, and SQL behaviors.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Service",
+      "name": "BANKING",
+      "metadata": {
+        "type": "Exe",
+        "version": "1.0.0",
+        "company": "isoft"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Form",
+      "name": "LOGIN",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 19,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "node-3",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 20,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "node-4",
+      "type": "Database",
+      "name": "BANK1",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "data_source": "E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-1",
+      "to": "node-4",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
