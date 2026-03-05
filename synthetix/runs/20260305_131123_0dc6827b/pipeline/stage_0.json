@@ -1,0 +1,270 @@
+{
+  "run_id": "20260305_131123_0dc6827b",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260305T131231Z_20260305_131123_0dc6827b",
+        "repo": "app",
+        "branch": "detached",
+        "commit_sha": "unknown"
+      },
+      "context_bundle": {
+        "bundle_id": "8780487db4c94edabde61a710f7f2945",
+        "created_at": "2026-03-05T13:12:32.629160+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "app",
+          "default_branch": "detached",
+          "branch": "detached",
+          "commit_sha": "unknown",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "e7a3ceb09e3f4ca699971da94c6ec461",
+            "digest": "sha256:0052e0becbe1f787418b7e37a97646d65f2cf331467124f3f7e3a87054c48f91",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "975868b25ffa46038f6cc5faad77a70d",
+            "digest": "sha256:856f6faa60ec3a885a5df2c43bb58a79e72b0882290d34fa6036c52ffc576fd8",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "5abce58d99c04b9e8cf03ce845a9a46c",
+            "digest": "sha256:cdac8d710b7f92aeb5891b50499f7f9688994ad7033ebea3049d01fd9c8e2288",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-e0ad26f6953eff2d",
+          "knowledge_snapshot_id": "kctx-b5bbe5ad54a31f2d",
+          "delivery_constitution_id": "const-4b295b4c0a19",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-03-05T13:12:32.808699+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the structure and dependencies of the legacy VB6 application 'BankApp1', including forms, modules, and ActiveX dependencies.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "BANK.vbp",
+            "metadata": {
+              "type": "Exe",
+              "title": "BANK_SYSTEM",
+              "version": "1.0.0"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Form",
+            "name": "frmcustomer",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 24,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Module",
+            "name": "Mdl",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 21,
+                "evidence": "Module=Mdl; Mdl.bas"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {
+              "reference": "msado25.tlb"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 6,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-4",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 6,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "DataReport1.DCA binary content could not be parsed."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the conventions used in the legacy VB6 application, focusing on naming and dependency management.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Form names should start with 'frm'.",
+            "confidence": 0.9,
+            "examples": [
+              "frmcustomer",
+              "frmdeposit"
+            ],
+            "counterexamples": [
+              "customerForm"
+            ],
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 24,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all forms follow the 'frm' naming convention."
+        ],
+        "scaffold_templates": [
+          "C# class templates for forms and modules."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy VB6 application indicates potential maintainability and security issues.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 70,
+          "testability": 40
+        },
+        "hotspots": [
+          {
+            "scope": "Data Access",
+            "reason": "Use of ActiveX Data Objects without parameterized queries.",
+            "severity": "high",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 6,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "SQL Injection Risk",
+            "description": "Potential for SQL injection due to concatenated SQL strings.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "rem-1",
+          "title": "Refactor Data Access Layer",
+          "problem_statement": "Current data access uses ActiveX Data Objects with potential SQL injection vulnerabilities.",
+          "scope": [
+            "Data Access Layer"
+          ],
+          "risk_if_unaddressed": "High risk of SQL injection attacks.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "Microsoft ActiveX Data Objects 2.0 Library"
+          ],
+          "suggested_approach": "Refactor to use parameterized queries in ADO.NET.",
+          "success_criteria": [
+            "All data access operations use parameterized queries.",
+            "No instances of SQL injection vulnerabilities."
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "BankApp1/BANK.vbp",
+              "line": 6,
+              "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8713,
+    "latency_ms": 20095.787048339844,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-03-05T13:12:32.899886+00:00"
+}
