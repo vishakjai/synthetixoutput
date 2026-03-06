@@ -1,0 +1,201 @@
+{
+  "header": {
+    "artifact_id": "86ad954a9ebf447ab6593954107548d7",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-06T07:59:56.959296+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260306_075930_9e70f494",
+      "stage_id": "context_layer",
+      "task_id": "ea8a3d591e65459586fe0778f7c6a3a2"
+    },
+    "parents": [],
+    "digest": "sha256:56d2eab836b45677c5a6e7f13b80ccbcc964107886aa9909971196a53e66b6cd",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260306_075930_9e70f494",
+      "bundle_version": "20260306T075956Z_20260306_075930_9e70f494"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The health assessment identifies key areas of concern in the legacy codebase, such as maintainability and security risks."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 3,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Data Access",
+      "description": "Use of ADO without parameterized queries.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Data Access"
+        ],
+        "paths": [
+          "Data Access"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/BANK.vbp"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "SQL Injection Vulnerability",
+      "description": "The use of ADO with concatenated SQL strings poses a risk of SQL injection.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation-1",
+      "title": "Refactor Data Access Layer",
+      "priority": "P0",
+      "business_value": "Potential for SQL injection attacks.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Microsoft ActiveX Data Objects 2.0 Library"
+      ],
+      "plan": [
+        "Refactor to use parameterized queries in ADO",
+        "NET"
+      ],
+      "acceptance_criteria": [
+        "All data access operations use parameterized queries.",
+        "No direct concatenation of SQL strings."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation-1"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "remediation-1"
+    ]
+  }
+}
