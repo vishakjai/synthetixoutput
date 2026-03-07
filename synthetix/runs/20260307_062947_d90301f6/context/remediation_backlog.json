@@ -1,0 +1,56 @@
+[
+  {
+    "id": "RB-001",
+    "title": "Implement schema validation for configuration and data artifacts",
+    "problem_statement": "Current codebase includes JSON and YAML schema files but lacks explicit enforcement of validation, risking data integrity and runtime errors.",
+    "scope": [
+      ".deliveryos/schemas",
+      ".deliveryos/pipeline",
+      "agents/"
+    ],
+    "risk_if_unaddressed": "Invalid or malformed configuration and data artifacts may cause failures or inconsistent behavior in production.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Integrate JSON schema validation libraries in the code paths that load and process configuration and data artifacts. Add automated tests to verify validation enforcement.",
+    "success_criteria": [
+      "All configuration and data artifacts are validated against their schemas before use.",
+      "Automated tests cover schema validation scenarios.",
+      "No runtime errors due to invalid artifacts in staging environment."
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": ".deliveryos/schemas/agent_result.schema.json",
+        "line": 1,
+        "evidence": "Schema file present without detected validation usage"
+      }
+    ]
+  },
+  {
+    "id": "RB-002",
+    "title": "Refactor modules with high import counts to reduce complexity",
+    "problem_statement": "Modules such as agents.analyst have many imports, indicating potential high complexity and tight coupling.",
+    "scope": [
+      "agents/analyst.py"
+    ],
+    "risk_if_unaddressed": "High complexity may lead to maintainability challenges and increased defect rates.",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Analyze module dependencies and refactor to separate concerns, reduce import dependencies, and improve modularity.",
+    "success_criteria": [
+      "Reduced number of imports per module where feasible.",
+      "Improved code readability and modularity.",
+      "No regression in functionality as verified by tests."
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "Module with 11 import statements detected"
+      }
+    ]
+  }
+]
