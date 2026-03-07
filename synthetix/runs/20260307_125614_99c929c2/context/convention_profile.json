@@ -1,0 +1,129 @@
+{
+  "version": "cp-v1.1.0",
+  "summary": "Python-based multi-agent platform with strong typing, modular architecture, and containerized deployment. VB6 legacy system follows traditional Windows Forms patterns with ADO/DAO data access.",
+  "rules": [
+    {
+      "id": "naming_agent_modules",
+      "category": "naming",
+      "rule": "Agent modules follow snake_case naming with descriptive suffixes (e.g., system_intelligence.py, database_engineer.py)",
+      "confidence": 0.95,
+      "examples": [
+        "agents/analyst.py",
+        "agents/system_intelligence.py",
+        "agents/database_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent agent module naming pattern"
+        }
+      ]
+    },
+    {
+      "id": "typing_annotations",
+      "category": "typing",
+      "rule": "Modules use future annotations and typing imports for type safety",
+      "confidence": 0.92,
+      "examples": [
+        "from __future__ import annotations",
+        "from typing import Dict, List, Optional"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 10,
+          "evidence": "from __future__ import annotations"
+        }
+      ]
+    },
+    {
+      "id": "vb6_form_naming",
+      "category": "naming",
+      "rule": "VB6 forms use descriptive names with .frm extension, following camelCase or lowercase patterns",
+      "confidence": 0.9,
+      "examples": [
+        "main.frm",
+        "frmcustomer.frm",
+        "newlogin.frm"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 15,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "vb6_data_access",
+      "category": "api",
+      "rule": "VB6 application uses ADO 2.0 and DAO 3.51 for database connectivity with connection strings in DataEnvironment",
+      "confidence": 0.95,
+      "examples": [
+        "Microsoft ActiveX Data Objects 2.0 Library",
+        "Microsoft DAO 3.51 Object Library"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference to ADO and DAO libraries"
+        }
+      ]
+    },
+    {
+      "id": "docker_containerization",
+      "category": "deployment",
+      "rule": "Platform uses Docker for containerization with requirements.txt for Python dependencies",
+      "confidence": 0.88,
+      "examples": [
+        "Dockerfile",
+        "docker-compose.yml",
+        "requirements.txt"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Container definition present"
+        }
+      ]
+    },
+    {
+      "id": "schema_validation",
+      "category": "api",
+      "rule": "JSON schemas define contract structures in .deliveryos/schemas/ directory",
+      "confidence": 0.93,
+      "examples": [
+        ".deliveryos/schemas/agent_result.schema.json",
+        ".deliveryos/schemas/context_bundle.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Multiple schema files for contract validation"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement mypy type checking for Python modules",
+    "Add pylint configuration for consistent code style",
+    "Consider black formatter for Python code consistency",
+    "Add pre-commit hooks for code quality gates"
+  ],
+  "scaffold_templates": [
+    "Agent base class template with standard interface methods",
+    "FastAPI route template with proper error handling",
+    "Docker service template for new components",
+    "JSON schema template for new contract definitions"
+  ]
+}
