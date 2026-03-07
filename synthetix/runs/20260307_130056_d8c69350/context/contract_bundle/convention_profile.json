@@ -1,0 +1,338 @@
+{
+  "header": {
+    "artifact_id": "7752140606af4ee293f0991a841b4a8d",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T13:02:29.781641+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_130056_d8c69350",
+      "stage_id": "context_layer",
+      "task_id": "cc5ecfaaecd6411b8e9e8f5097da5340"
+    },
+    "parents": [],
+    "digest": "sha256:3cf891f650e374ca55d670a48d0c51e02ce36fa41c508d92c642e92a0665b943",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_130056_d8c69350",
+      "bundle_version": "20260307T130229Z_20260307_130056_d8c69350"
+    }
+  },
+  "rules": [
+    {
+      "id": "naming:agent-modules",
+      "category": "naming",
+      "title": "Agent modules follow snake_case naming with descriptive suffixes (e.g., database_engineer.py, security_engineer.py)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent modules follow snake_case naming with descriptive suffixes (e.g., database_engineer.py, security_engineer.py)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "database_engineer.py"
+        },
+        {
+          "file": "security_engineer.py"
+        },
+        {
+          "file": "system_intelligence.py"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "DatabaseEngineer.py"
+        },
+        {
+          "file": "db_eng.py"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "naming:vb6-forms",
+      "category": "naming",
+      "title": "VB6 forms use lowercase names with descriptive purposes (main.frm, login.frm, deposit.frm)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "VB6 forms use lowercase names with descriptive purposes (main.frm, login.frm, deposit.frm)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "main.frm"
+        },
+        {
+          "file": "login.frm"
+        },
+        {
+          "file": "deposit.frm"
+        },
+        {
+          "file": "withdrawal.frm"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "Form1.frm"
+        },
+        {
+          "file": "frmMain.frm"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BANKING.vbp"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "api:fastapi-decorators",
+      "category": "api_design",
+      "title": "API endpoints use FastAPI decorators (@app.get, @app.post) for route definition",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "API endpoints use FastAPI decorators (@app.get, @app.post) for route definition",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get"
+        },
+        {
+          "file": "@app.post"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "@route"
+        },
+        {
+          "file": "@endpoint"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "auth:vb6-forms",
+      "category": "authn_authz",
+      "title": "VB6 authentication uses password masking with PasswordChar property",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "VB6 authentication uses password masking with PasswordChar property",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "PasswordChar = \"*\""
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "plain text passwords"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "newlogin.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "error_handling:vb6-basic",
+      "category": "error_handling",
+      "title": "VB6 uses basic error handling with minimal exception management",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "VB6 uses basic error handling with minimal exception management",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "End statement for termination"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "try-catch blocks"
+        },
+        {
+          "file": "structured error handling"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "main.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "testing:schema-validation",
+      "category": "testing",
+      "title": "JSON schema validation used for agent contracts and data structures",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "JSON schema validation used for agent contracts and data structures",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agent_result.schema.json"
+        },
+        {
+          "file": "context_bundle.schema.json"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "no validation"
+        },
+        {
+          "file": "runtime-only validation"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "BaseAgent class template for new agent implementations",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "FastAPI endpoint template with standard error handling",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "VB6 form template with consistent control naming",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "Docker container template for agent deployment",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-005",
+      "language": "generic",
+      "name": "JSON schema template for agent contracts",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
