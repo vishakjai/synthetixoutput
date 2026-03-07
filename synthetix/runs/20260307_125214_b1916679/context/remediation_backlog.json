@@ -1,0 +1,140 @@
+[
+  {
+    "id": "rb_001_objective_alignment",
+    "title": "Resolve Business Objective Mismatch",
+    "problem_statement": "Business objective targets VB6 regression verification but repository contains Python modernization platform with no VB6 artifacts",
+    "scope": [
+      "business_requirements",
+      "repository_scope"
+    ],
+    "risk_if_unaddressed": "Complete project failure due to fundamental scope mismatch",
+    "effort": "S",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Clarify if this is the correct repository for VB6 work or if business objective needs updating",
+    "success_criteria": [
+      "Business objective aligns with repository contents",
+      "Clear scope definition established"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No VB6 files found in comprehensive scan"
+      }
+    ]
+  },
+  {
+    "id": "rb_002_config_discovery",
+    "title": "Locate Missing Firestore/GCS Configuration",
+    "problem_statement": "Firestore/GCS worker configuration mentioned in objective but not found in current repository",
+    "scope": [
+      "configuration",
+      "external_dependencies"
+    ],
+    "risk_if_unaddressed": "Cannot verify worker configuration fix without locating configuration files",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb_001_objective_alignment"
+    ],
+    "suggested_approach": "Search related repositories or configuration management systems for Firestore/GCS worker configs",
+    "success_criteria": [
+      "Firestore/GCS configuration files located",
+      "Worker configuration changes identified"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "config.py",
+        "line": 1,
+        "evidence": "No cloud service configuration detected"
+      }
+    ]
+  },
+  {
+    "id": "rb_003_dependency_analysis",
+    "title": "Analyze Import Dependency Complexity",
+    "problem_statement": "472 import edges detected indicating potential tight coupling and circular dependency risks",
+    "scope": [
+      "agents/",
+      "utils/",
+      "e2e/"
+    ],
+    "risk_if_unaddressed": "Maintenance difficulties, testing challenges, and potential circular import failures",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Generate dependency graph, identify circular imports, refactor to reduce coupling",
+    "success_criteria": [
+      "Dependency graph generated",
+      "Circular imports eliminated",
+      "Import count reduced by 20%"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "472 import edges detected"
+      }
+    ]
+  },
+  {
+    "id": "rb_004_error_handling_standardization",
+    "title": "Implement Standardized Error Handling",
+    "problem_statement": "No consistent error handling patterns detected across agent modules and API endpoints",
+    "scope": [
+      "agents/",
+      "web/",
+      "utils/"
+    ],
+    "risk_if_unaddressed": "Inconsistent error responses, difficult debugging, poor user experience",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Define error handling standards, implement base exception classes, add error middleware",
+    "success_criteria": [
+      "Error handling standards documented",
+      "Base exception classes implemented",
+      "All modules use consistent patterns"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/",
+        "line": 1,
+        "evidence": "No standardized error handling detected"
+      }
+    ]
+  },
+  {
+    "id": "rb_005_security_hardening",
+    "title": "Implement Security Configuration",
+    "problem_statement": "No explicit security configuration, authentication, or authorization patterns detected",
+    "scope": [
+      "web/",
+      "utils/",
+      "config.py"
+    ],
+    "risk_if_unaddressed": "Security vulnerabilities, unauthorized access, compliance failures",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Add authentication middleware, implement API key validation, add security headers",
+    "success_criteria": [
+      "Authentication implemented",
+      "API security configured",
+      "Security headers added"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "web/server.py",
+        "line": 1,
+        "evidence": "No authentication patterns detected in API endpoints"
+      }
+    ]
+  }
+]
