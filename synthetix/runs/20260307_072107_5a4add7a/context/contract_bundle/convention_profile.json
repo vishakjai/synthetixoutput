@@ -1,0 +1,233 @@
+{
+  "header": {
+    "artifact_id": "cd84413893554b35bf4dabc28a7ba6a4",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T07:22:12.286122+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4.1-mini",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_072107_5a4add7a",
+      "stage_id": "context_layer",
+      "task_id": "700b581576834754abe17e60b5a38183"
+    },
+    "parents": [],
+    "digest": "sha256:f15d1c35fdcb3c44a572f537874a80a63d493dd0669c729ab6d05e93149a181b",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_072107_5a4add7a",
+      "bundle_version": "20260307T072212Z_20260307_072107_5a4add7a"
+    }
+  },
+  "rules": [
+    {
+      "id": "naming-python-modules",
+      "category": "naming",
+      "title": "Python modules should use lowercase with underscores for multi-word names, matching the existing pattern in agents/*.py files.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Python modules should use lowercase with underscores for multi-word names, matching the existing pattern in agents/*.py files.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents_database_engineer.py"
+        },
+        {
+          "file": "agents_security_engineer.py"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "AgentsDatabaseEngineer.py"
+        },
+        {
+          "file": "agentsDatabaseEngineer.py"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/database_engineer.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "import-absolute-relative",
+      "category": "naming",
+      "title": "Use relative imports within the 'agents' package as per existing usage in agents/__init__.py.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Use relative imports within the 'agents' package as per existing usage in agents/__init__.py.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "from . import analyst"
+        },
+        {
+          "file": "from . import architect"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "import agents.analyst"
+        },
+        {
+          "file": "import agents.architect"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "json-schema-contracts",
+      "category": "api_design",
+      "title": "Use JSON Schema files under .deliveryos/schemas/ to define data contracts for agents and reports, ensuring validation and backward compatibility.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Use JSON Schema files under .deliveryos/schemas/ to define data contracts for agents and reports, ensuring validation and backward compatibility.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json"
+        },
+        {
+          "file": ".deliveryos/schemas/agent_task.schema.json"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "ad-hoc JSON validation in code"
+        },
+        {
+          "file": "no schema files"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/agent_result.schema.json"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "pipeline-specification",
+      "category": "api_design",
+      "title": "Define CI/CD pipeline stages and artifacts declaratively in .deliveryos/pipeline/pipeline_spec.yaml for consistent delivery automation.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Define CI/CD pipeline stages and artifacts declaratively in .deliveryos/pipeline/pipeline_spec.yaml for consistent delivery automation.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "pipeline defined only in scripts"
+        },
+        {
+          "file": "no pipeline specification"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "Python module template with relative imports and docstring header.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "JSON Schema template for agent data contracts with versioning metadata.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "YAML pipeline spec template defining stages, artifacts, and principles.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
