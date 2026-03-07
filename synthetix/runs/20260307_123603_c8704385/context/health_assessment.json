@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "summary": "Health assessment of legacy VB6 banking application for modernization readiness and risk areas.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 3,
+    "testability": 1
+  },
+  "hotspots": [
+    {
+      "scope": "Legacy VB6 Forms and Modules",
+      "reason": "Tightly coupled UI and business logic with event-driven code and no automated tests.",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 10,
+          "evidence": "Command buttons directly show/hide forms; no separation of concerns."
+        }
+      ]
+    },
+    {
+      "scope": "Database Access via ADO/DAO",
+      "reason": "Use of legacy COM libraries with potential for SQL injection and no ORM abstraction.",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "References to ADO 2.0 and DAO 3.51 libraries."
+        }
+      ]
+    },
+    {
+      "scope": "Authentication and Password Handling",
+      "reason": "Legacy forms use password masking but no evidence of secure password storage or authentication.",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "newlogin.frm",
+          "line": 15,
+          "evidence": "PasswordChar used in textbox but no secure storage indicated."
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Security Vulnerabilities from Legacy Data Access",
+      "description": "Legacy ADO/DAO usage without parameterized queries risks SQL injection attacks.",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "Lack of Automated Testing",
+      "description": "No existing automated tests increase risk of regressions during modernization.",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Tight Coupling of UI and Business Logic",
+      "description": "Event-driven VB6 forms tightly couple UI and logic, complicating modularization and reuse.",
+      "severity": "high",
+      "confidence": 0.95
+    }
+  ]
+}
