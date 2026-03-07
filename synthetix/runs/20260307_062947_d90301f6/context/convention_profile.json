@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "summary": "Coding and architectural conventions extracted from the repository focusing on Python module imports, naming, and configuration schema usage.",
+  "rules": [
+    {
+      "id": "CP-001",
+      "category": "naming",
+      "rule": "Python modules under 'agents' package should be named with lowercase and underscores separating words, matching file names.",
+      "confidence": 0.95,
+      "examples": [
+        "agents.database_engineer",
+        "agents.security_engineer"
+      ],
+      "counterexamples": [
+        "agents.DatabaseEngineer",
+        "agents.SecurityEngineer"
+      ],
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Module file named with lowercase and underscores"
+        }
+      ]
+    },
+    {
+      "id": "CP-002",
+      "category": "import_handling",
+      "rule": "Modules should import standard libraries explicitly and avoid wildcard imports to maintain clarity and prevent namespace pollution.",
+      "confidence": 0.9,
+      "examples": [
+        "import json",
+        "import re"
+      ],
+      "counterexamples": [
+        "from json import *",
+        "from re import *"
+      ],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "Explicit import of json module"
+        }
+      ]
+    },
+    {
+      "id": "CP-003",
+      "category": "config",
+      "rule": "Configuration and schema files should be stored under '.deliveryos/schemas' or '.deliveryos/pipeline' directories and follow JSON or YAML formats respectively.",
+      "confidence": 0.95,
+      "examples": [
+        ".deliveryos/schemas/agent_result.schema.json",
+        ".deliveryos/pipeline/pipeline_spec.yaml"
+      ],
+      "counterexamples": [
+        "config.json",
+        "pipeline.yaml"
+      ],
+      "provenance": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "Pipeline spec YAML file detected"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce explicit imports and avoid wildcard imports.",
+    "Validate configuration files against their JSON/YAML schemas before deployment.",
+    "Use consistent module naming conventions matching file names."
+  ],
+  "scaffold_templates": [
+    "Python module template with explicit imports and docstring header.",
+    "YAML pipeline specification template with version, name, artifacts, principles, and stages keys.",
+    "JSON schema template for agent task and result artifacts."
+  ]
+}
