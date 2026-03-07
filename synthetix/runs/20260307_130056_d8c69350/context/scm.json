@@ -1,0 +1,393 @@
+{
+  "version": "scm-v2.1",
+  "summary": "Multi-agent enterprise software modernization platform with Python-based agent orchestration, VB6 legacy analysis capabilities, and containerized deployment architecture",
+  "nodes": [
+    {
+      "id": "service:modernization-platform",
+      "type": "Service",
+      "name": "Enterprise Software Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "deployment_type": "containerized",
+        "agent_count": 11,
+        "legacy_support": [
+          "vb6",
+          "access_db"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import AnalystAgent"
+        },
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "FROM python:3.11-slim"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-orchestrator",
+      "type": "Component",
+      "name": "Agent Orchestration Layer",
+      "metadata": {
+        "agents": [
+          "analyst",
+          "architect",
+          "developer",
+          "database_engineer",
+          "security_engineer",
+          "tester",
+          "validator",
+          "deployer",
+          "system_intelligence"
+        ],
+        "base_class": "BaseAgent"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Agent imports and exports"
+        },
+        {
+          "file": "agents/base.py",
+          "line": 1,
+          "evidence": "Base agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:vb6-analyzer",
+      "type": "Component",
+      "name": "VB6 Legacy Code Analyzer",
+      "metadata": {
+        "supported_files": [
+          ".vbp",
+          ".frm",
+          ".frx",
+          ".bas",
+          ".cls",
+          ".dsr",
+          ".dca"
+        ],
+        "database_support": [
+          "access",
+          "ado",
+          "dao"
+        ],
+        "ui_components": [
+          "forms",
+          "controls",
+          "events"
+        ]
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe with VB6 project structure"
+        },
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "VERSION 5.00 VB6 form definition"
+        }
+      ]
+    },
+    {
+      "id": "component:web-server",
+      "type": "Component",
+      "name": "Web API Server",
+      "metadata": {
+        "framework": "fastapi",
+        "routes": [
+          "context_vault",
+          "server_endpoints"
+        ]
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get endpoint hints"
+        },
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get endpoint hints"
+        }
+      ]
+    },
+    {
+      "id": "database:access-legacy",
+      "type": "Database",
+      "name": "Microsoft Access Legacy Database",
+      "metadata": {
+        "path": "E:\\project\\myBANKING\\BANK1.mdb",
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "tables": [
+          "customer"
+        ],
+        "connection_type": "ado"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "id": "table:customer",
+      "type": "Table",
+      "name": "Customer Table",
+      "metadata": {
+        "columns": [
+          "customerid",
+          "firstname",
+          "lastname",
+          "contacttitle",
+          "nationalidno",
+          "datejoined",
+          "accounttype",
+          "accountno",
+          "openingbalance",
+          "address",
+          "postalcode",
+          "location",
+          "phoneno",
+          "mobileno",
+          "email"
+        ],
+        "primary_key": "customerid"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Command1 customer table definition with column metadata"
+        }
+      ]
+    },
+    {
+      "id": "container:app-container",
+      "type": "Container",
+      "name": "Application Container",
+      "metadata": {
+        "base_image": "python:3.11-slim",
+        "exposed_ports": [
+          "8000"
+        ],
+        "volumes": [
+          "/app"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "FROM python:3.11-slim"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Container orchestration configuration"
+        }
+      ]
+    },
+    {
+      "id": "module:config",
+      "type": "Module",
+      "name": "Configuration Module",
+      "metadata": {
+        "language": "python",
+        "imports": 3
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "config.py",
+          "line": 1,
+          "evidence": "Configuration module with 3 imports"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:context-vault-api",
+      "type": "Endpoint",
+      "name": "Context Vault API",
+      "metadata": {
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "framework": "fastapi"
+      },
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get and @app.post endpoint hints"
+        }
+      ]
+    },
+    {
+      "id": "external:firestore",
+      "type": "ExternalDependency",
+      "name": "Google Firestore",
+      "metadata": {
+        "purpose": "state_store",
+        "status": "recently_fixed"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "business_objectives",
+          "line": 1,
+          "evidence": "Firestore/GCS state-store fix mentioned"
+        }
+      ]
+    },
+    {
+      "id": "external:gcs",
+      "type": "ExternalDependency",
+      "name": "Google Cloud Storage",
+      "metadata": {
+        "purpose": "state_store",
+        "status": "recently_fixed"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "business_objectives",
+          "line": 1,
+          "evidence": "Firestore/GCS state-store fix mentioned"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "component:agent-orchestrator",
+      "to": "module:config",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "python_module"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "agents/base.py",
+          "line": 1,
+          "evidence": "Configuration imports in agent modules"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "component:vb6-analyzer",
+      "to": "table:customer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "connection_type": "ado",
+        "provider": "jet_oledb"
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Command1 customer table access"
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "database:access-legacy",
+      "to": "table:customer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "database_type": "access"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Customer table defined in BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:modernization-platform",
+      "to": "container:app-container",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "deployment_type": "docker"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Application containerization"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "service:modernization-platform",
+      "to": "external:firestore",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "dependency_type": "state_store"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "business_objectives",
+          "line": 1,
+          "evidence": "Firestore state-store dependency"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "service:modernization-platform",
+      "to": "external:gcs",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "dependency_type": "state_store"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "business_objectives",
+          "line": 1,
+          "evidence": "GCS state-store dependency"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Target modernization language not specified",
+    "Database conversion target not specified",
+    "Specific VB6 form event handlers and business logic",
+    "Authentication and authorization mechanisms",
+    "Production deployment configuration"
+  ]
+}
