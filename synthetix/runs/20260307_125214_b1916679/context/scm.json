@@ -1,0 +1,263 @@
+{
+  "version": "scm-v1.2.0",
+  "summary": "Python-based enterprise software modernization platform with multi-agent architecture, FastAPI web services, and comprehensive schema validation. No VB6 artifacts detected despite business objective targeting VB6 regression verification.",
+  "nodes": [
+    {
+      "id": "service:modernization_platform",
+      "type": "Service",
+      "name": "Enterprise Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "framework": "fastapi",
+        "agent_count": 9,
+        "schema_count": 27
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Multi-agent import structure"
+        },
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI service endpoint"
+        }
+      ]
+    },
+    {
+      "id": "component:agent_system",
+      "type": "Component",
+      "name": "Multi-Agent Processing System",
+      "metadata": {
+        "agents": [
+          "analyst",
+          "architect",
+          "developer",
+          "database_engineer",
+          "security_engineer",
+          "tester",
+          "validator",
+          "deployer",
+          "system_intelligence"
+        ],
+        "base_class": "BaseAgent"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Agent module imports"
+        },
+        {
+          "file": "agents/base.py",
+          "line": 1,
+          "evidence": "Base agent class definition"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:context_vault_api",
+      "type": "Endpoint",
+      "name": "Context Vault API",
+      "metadata": {
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "framework": "fastapi"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get and @app.post decorators detected"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:web_server_api",
+      "type": "Endpoint",
+      "name": "Web Server API",
+      "metadata": {
+        "methods": [
+          "GET"
+        ],
+        "framework": "fastapi"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get decorator detected"
+        }
+      ]
+    },
+    {
+      "id": "component:schema_validation",
+      "type": "Component",
+      "name": "JSON Schema Validation System",
+      "metadata": {
+        "schema_count": 27,
+        "location": ".deliveryos/schemas/",
+        "format": "json_schema"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "27 JSON schema files detected"
+        }
+      ]
+    },
+    {
+      "id": "component:pipeline_orchestration",
+      "type": "Component",
+      "name": "Pipeline Orchestration",
+      "metadata": {
+        "config_file": "pipeline_spec.yaml",
+        "stages": "multi-stage"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "Pipeline specification with stages"
+        }
+      ]
+    },
+    {
+      "id": "component:team_data_store",
+      "type": "Component",
+      "name": "Team Data Configuration",
+      "metadata": {
+        "files": [
+          "custom_agents.json",
+          "custom_teams.json",
+          "work_items.json"
+        ],
+        "format": "json"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "Team configuration JSON files"
+        }
+      ]
+    },
+    {
+      "id": "component:e2e_audit",
+      "type": "Component",
+      "name": "End-to-End Audit System",
+      "metadata": {
+        "audit_types": [
+          "business_analysis",
+          "technical"
+        ],
+        "modules": [
+          "ba_audit.py",
+          "tech_audit.py"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "e2e/audit/ba_audit.py",
+          "line": 1,
+          "evidence": "Business analysis audit module"
+        },
+        {
+          "file": "e2e/audit/tech_audit.py",
+          "line": 1,
+          "evidence": "Technical audit module"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "component:agent_system",
+      "to": "component:schema_validation",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "python_module"
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "agents/base.py",
+          "line": 1,
+          "evidence": "Schema validation imports in agent modules"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "endpoint:web_server_api",
+      "to": "component:agent_system",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "protocol": "http",
+        "framework": "fastapi"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "Web server routing to agent system"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "service:modernization_platform",
+      "to": "component:pipeline_orchestration",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "dependency_type": "configuration"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "Pipeline orchestration configuration"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "component:agent_system",
+      "to": "component:team_data_store",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "usage_type": "configuration_data"
+      },
+      "confidence": 0.75,
+      "evidence": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "Team configuration data usage"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "VB6 project location - business objective mentions three-project VB6 repo but no VB6 artifacts detected",
+    "Firestore/GCS worker configuration - mentioned in objective but not found in codebase",
+    "Database connection strings and schemas",
+    "External service dependencies and API contracts",
+    "Production deployment topology"
+  ]
+}
