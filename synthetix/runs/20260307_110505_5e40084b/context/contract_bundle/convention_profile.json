@@ -1,0 +1,194 @@
+{
+  "header": {
+    "artifact_id": "b8972eee6f8b467f9cb200262ab149e1",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T11:06:25.298870+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4.1-mini",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_110505_5e40084b",
+      "stage_id": "context_layer",
+      "task_id": "6eb0da927a384c1a89bb90840641fa20"
+    },
+    "parents": [],
+    "digest": "sha256:1c6f37f31e32f7b18da7e86eafece81334bd706cc3faf6adfe73f2f0d795436d",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_110505_5e40084b",
+      "bundle_version": "20260307T110625Z_20260307_110505_5e40084b"
+    }
+  },
+  "rules": [
+    {
+      "id": "CP-001",
+      "category": "naming",
+      "title": "Python module names for agents must be lowercase with underscores separating words, matching the pattern 'agents.<role>'.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Python module names for agents must be lowercase with underscores separating words, matching the pattern 'agents.<role>'.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents.analyst"
+        },
+        {
+          "file": "agents.security_engineer"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "Agents.Analyst"
+        },
+        {
+          "file": "agents-analyst"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "CP-002",
+      "category": "naming",
+      "title": "Modules should explicitly import standard libraries and internal modules with absolute or relative imports to maintain clarity and avoid ambiguity.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Modules should explicitly import standard libraries and internal modules with absolute or relative imports to maintain clarity and avoid ambiguity.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "import json"
+        },
+        {
+          "file": "from . import analyst"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "import *"
+        },
+        {
+          "file": "from unknown import *"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/analyst.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "CP-003",
+      "category": "api_design",
+      "title": "API endpoints should be declared with explicit route decorators and clear HTTP method annotations for maintainability and clarity.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "API endpoints should be declared with explicit route decorators and clear HTTP method annotations for maintainability and clarity.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get('/status')"
+        },
+        {
+          "file": "@app.post('/submit')"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "app.route('/status')"
+        },
+        {
+          "file": "def handler(): pass"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "Python agent module template with standard imports and class structure.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "FastAPI route handler template with GET and POST example methods.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "JSON schema template for agent task and result definitions.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
