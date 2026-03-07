@@ -1,0 +1,659 @@
+{
+  "header": {
+    "artifact_id": "60429f1decdf4d789a8165d677689447",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T13:02:29.782510+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_130056_d8c69350",
+      "stage_id": "context_layer",
+      "task_id": "cc5ecfaaecd6411b8e9e8f5097da5340"
+    },
+    "parents": [],
+    "digest": "sha256:5ea02f52381aa41f0691f200672ce75852bde830aad81075b6f17caaabdd3d71",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_130056_d8c69350",
+      "bundle_version": "20260307T130229Z_20260307_130056_d8c69350"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Mixed-health system with modern Python architecture but significant legacy VB6 technical debt and security vulnerabilities"
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 6,
+      "security": 3,
+      "reliability": 5,
+      "testability": 4
+    },
+    "finding_count": 8,
+    "backlog_count": 5
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: VB6 Legacy Authentication",
+      "description": "Hardcoded database paths, basic password masking, no modern authentication mechanisms",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "VB6 Legacy Authentication"
+        ],
+        "paths": [
+          "VB6 Legacy Authentication"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "DataEnvironment1.DCA"
+        },
+        {
+          "kind": "file_span",
+          "file": "newlogin.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Database Connection Security",
+      "description": "Legacy ADO connections with potential SQL injection vulnerabilities and hardcoded connection strings",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Database Connection Security"
+        ],
+        "paths": [
+          "Database Connection Security"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BANKING.vbp"
+        },
+        {
+          "kind": "file_span",
+          "file": "DataEnvironment1.DCA"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: Agent Orchestration Complexity",
+      "description": "High coupling between 11 different agent types with unclear error propagation",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Agent Orchestration Complexity"
+        ],
+        "paths": [
+          "Agent Orchestration Complexity"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-004",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: VB6 Form Event Handling",
+      "description": "Minimal error handling in form events, direct form navigation without validation",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "VB6 Form Event Handling"
+        ],
+        "paths": [
+          "VB6 Form Event Handling"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "main.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.75,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "Legacy Database Security Exposure",
+      "description": "VB6 application uses legacy ADO connections with hardcoded paths and minimal security controls, exposing customer financial data",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "State Store Dependency Risk",
+      "description": "Recent Firestore/GCS fixes indicate instability in core state management, potentially affecting agent coordination",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Legacy Code Maintenance Burden",
+      "description": "VB6 codebase with minimal documentation and basic error handling creates high maintenance overhead",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-004",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Agent Orchestration Failure Points",
+      "description": "Complex multi-agent system with unclear failure modes and error propagation patterns",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001-vb6-auth-modernization",
+      "title": "Modernize VB6 Authentication System",
+      "priority": "P0",
+      "business_value": "Customer financial data exposure, regulatory compliance violations, potential data breaches",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "table:customer"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "database-security-audit",
+        "compliance-requirements"
+      ],
+      "plan": [
+        "Implement modern authentication with encrypted connections, parameterized queries, and secure credential storage"
+      ],
+      "acceptance_criteria": [
+        "Encrypted database connections implemented",
+        "Parameterized queries replace direct SQL",
+        "Modern password hashing replaces basic masking",
+        "Security audit passes compliance checks"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-002-database-connection-security",
+      "title": "Secure Database Connection Layer",
+      "priority": "P1",
+      "business_value": "SQL injection attacks, data corruption, unauthorized data access",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "table:customer"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "rb-001-vb6-auth-modernization"
+      ],
+      "plan": [
+        "Replace hardcoded connections with configuration-based approach, implement parameterized queries, add connection pooling"
+      ],
+      "acceptance_criteria": [
+        "Configuration-based connection strings",
+        "All SQL queries parameterized",
+        "Connection pooling implemented",
+        "SQL injection testing passes"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003-agent-error-handling",
+      "title": "Implement Comprehensive Agent Error Handling",
+      "priority": "P1",
+      "business_value": "System instability, difficult debugging, cascading failures across agents",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "component:agent-orchestrator"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "state-store-stability"
+      ],
+      "plan": [
+        "Implement structured exception handling, circuit breaker patterns, and comprehensive logging across agent layer"
+      ],
+      "acceptance_criteria": [
+        "Structured exception hierarchy implemented",
+        "Circuit breaker patterns for external dependencies",
+        "Comprehensive logging and monitoring",
+        "Graceful degradation on agent failures"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-004-vb6-form-validation",
+      "title": "Add Input Validation to VB6 Forms",
+      "priority": "P2",
+      "business_value": "Invalid data entry, application crashes, poor user experience",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-004"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "component:vb6-analyzer"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Add input validation routines, implement proper error handling in event handlers, add user feedback mechanisms"
+      ],
+      "acceptance_criteria": [
+        "Input validation on all form controls",
+        "Error handling in all event handlers",
+        "User-friendly error messages",
+        "Form state management improved"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-005-state-store-monitoring",
+      "title": "Implement State Store Health Monitoring",
+      "priority": "P2",
+      "business_value": "Agent coordination failures, data loss, system unavailability",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Implement health checks, monitoring dashboards, and failover mechanisms for state store dependencies"
+      ],
+      "acceptance_criteria": [
+        "Health monitoring for Firestore/GCS",
+        "Automated alerting on failures",
+        "Failover mechanisms implemented",
+        "Performance metrics tracked"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001-vb6-auth-modernization",
+      "rb-002-database-connection-security",
+      "rb-003-agent-error-handling"
+    ],
+    "stabilization": [
+      "rb-002-database-connection-security",
+      "rb-003-agent-error-handling",
+      "rb-004-vb6-form-validation",
+      "rb-005-state-store-monitoring"
+    ],
+    "modernization": [
+      "rb-001-vb6-auth-modernization",
+      "rb-002-database-connection-security",
+      "rb-003-agent-error-handling",
+      "rb-004-vb6-form-validation",
+      "rb-005-state-store-monitoring"
+    ]
+  }
+}
