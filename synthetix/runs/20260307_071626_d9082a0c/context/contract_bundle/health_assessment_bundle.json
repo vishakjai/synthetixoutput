@@ -1,0 +1,475 @@
+{
+  "header": {
+    "artifact_id": "d91c484600424c96a2c879d29930de07",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T07:17:38.654125+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4.1-mini",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_071626_d9082a0c",
+      "stage_id": "context_layer",
+      "task_id": "4b3bf0c3e3524f65b62c55268b8be51d"
+    },
+    "parents": [],
+    "digest": "sha256:887bc18f291348d6a7f043574ba62790dbc185987db2589b7b157974e49378ba",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_071626_d9082a0c",
+      "bundle_version": "20260307T071738Z_20260307_071626_d9082a0c"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 3,
+      "impact": 3,
+      "score": 9,
+      "tier": "medium",
+      "rationale": "moderate risk posture"
+    },
+    "key_themes": [
+      "Health assessment based on static analysis of codebase and configuration artifacts, highlighting maintainability, security, reliability, and testability."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 75,
+      "security": 65,
+      "reliability": 70,
+      "testability": 60
+    },
+    "finding_count": 6,
+    "backlog_count": 3
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: agents/analyst.py",
+      "description": "High number of imports and complex logic may reduce maintainability and testability.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "agents/analyst.py"
+        ],
+        "paths": [
+          "agents/analyst.py"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/analyst.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: utils/context_vault.py",
+      "description": "Potential security risk if secrets are not properly managed; presence of FastAPI routes requires security review.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "utils/context_vault.py"
+        ],
+        "paths": [
+          "utils/context_vault.py"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: .deliveryos/pipeline/pipeline_spec.yaml",
+      "description": "Pipeline configuration is critical for deployment; any misconfiguration risks reliability.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          ".deliveryos/pipeline/pipeline_spec.yaml"
+        ],
+        "paths": [
+          ".deliveryos/pipeline/pipeline_spec.yaml"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Insufficient security controls for API endpoints",
+      "description": "Detected FastAPI routes may lack explicit authentication or authorization enforcement, risking unauthorized access.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Potential for import cycles or tight coupling",
+      "description": "High number of imports among agent modules may cause tight coupling, complicating maintenance and testing.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Lack of explicit test coverage information",
+      "description": "No test routes or test modules detected in static analysis, indicating possible gaps in automated testing.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.75,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "RB-001",
+      "title": "Implement authentication and authorization for FastAPI endpoints",
+      "priority": "P1",
+      "business_value": "Unauthorized users may access sensitive data or operations, leading to data breaches and compliance violations.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Integrate OAuth2 or JWT-based authentication middleware",
+        "enforce role-based access controls on routes"
+      ],
+      "acceptance_criteria": [
+        "All API endpoints require valid authentication tokens.",
+        "Role-based access control enforced per endpoint.",
+        "Security tests validate access restrictions."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "RB-002",
+      "title": "Refactor agent modules to reduce tight coupling",
+      "priority": "P2",
+      "business_value": "Complex interdependencies may cause regression risks and slow down development velocity.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:agents_analyst_py",
+          "module:agents_architect_py",
+          "module:agents_developer_py",
+          "module:agents_database_engineer_py",
+          "module:agents_security_engineer_py",
+          "module:agents_tester_py",
+          "module:agents_validator_py",
+          "module:agents_deployer_py",
+          "module:agents_system_intelligence_py"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Analyze dependency graph",
+        "apply modularization and interface segregation",
+        "introduce dependency injection where applicable"
+      ],
+      "acceptance_criteria": [
+        "Reduced import counts per module by at least 30%.",
+        "Clear module boundaries documented.",
+        "Automated tests validate module isolation."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "RB-003",
+      "title": "Establish automated test coverage and CI pipeline",
+      "priority": "P2",
+      "business_value": "Lack of automated testing may cause production defects and slow feedback cycles.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "RB-002"
+      ],
+      "plan": [
+        "Create unit and integration tests for critical modules",
+        "integrate tests into CI pipeline defined in",
+        "deliveryos/pipeline/pipeline_spec",
+        "yaml"
+      ],
+      "acceptance_criteria": [
+        "Test coverage above 80% for core modules.",
+        "CI pipeline runs tests on every commit.",
+        "Test failures block merges."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "RB-001"
+    ],
+    "stabilization": [
+      "RB-001",
+      "RB-002",
+      "RB-003"
+    ],
+    "modernization": [
+      "RB-001",
+      "RB-002",
+      "RB-003"
+    ]
+  }
+}
