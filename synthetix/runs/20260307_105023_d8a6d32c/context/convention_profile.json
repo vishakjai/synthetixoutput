@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "summary": "Coding and architectural conventions derived from the Python agent modules and config files in the repository, emphasizing modular imports and consistent naming.",
+  "rules": [
+    {
+      "id": "naming-python-modules",
+      "category": "naming",
+      "rule": "Python module files should use lowercase with underscores as separators, matching the package and module names.",
+      "confidence": 0.95,
+      "examples": [
+        "agents/analyst.py",
+        "agents/database_engineer.py"
+      ],
+      "counterexamples": [
+        "agents/DatabaseEngineer.py",
+        "AgentsAnalyst.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Consistent import of lowercase module names"
+        }
+      ]
+    },
+    {
+      "id": "error-handling-standard",
+      "category": "error_handling",
+      "rule": "Use try-except blocks to catch and handle expected exceptions, logging errors with context for troubleshooting.",
+      "confidence": 0.85,
+      "examples": [
+        "try:\n  ...\nexcept ValueError as e:\n  logger.error(f'Value error: {e}')"
+      ],
+      "counterexamples": [
+        "except:\n  pass"
+      ],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 50,
+          "evidence": "try-except usage with logging"
+        }
+      ]
+    },
+    {
+      "id": "testing-agent-modules",
+      "category": "testing",
+      "rule": "Each agent module should have corresponding unit tests covering key methods and edge cases.",
+      "confidence": 0.8,
+      "examples": [
+        "tests/test_analyst.py",
+        "tests/test_database_engineer.py"
+      ],
+      "counterexamples": [
+        "No test files for agents modules"
+      ],
+      "provenance": [
+        {
+          "file": "e2e/audit/ba_audit.py",
+          "line": 10,
+          "evidence": "Audit scripts referencing agent modules"
+        }
+      ]
+    },
+    {
+      "id": "logging-consistency",
+      "category": "logging",
+      "rule": "Use structured logging with consistent log levels and message formats across modules.",
+      "confidence": 0.9,
+      "examples": [
+        "logger.info('Starting analysis')",
+        "logger.error('Failed to deploy')"
+      ],
+      "counterexamples": [
+        "print('Error')",
+        "logger.debug('') without message"
+      ],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 60,
+          "evidence": "Use of logger for error and info messages"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce PEP8 style with flake8 or pylint",
+    "Use mypy for static type checking",
+    "Ensure all imports are sorted and grouped by standard, third-party, and local",
+    "Add docstrings to all public classes and functions"
+  ],
+  "scaffold_templates": [
+    "Python agent module template with import section, class definition, and error handling",
+    "Unit test template using pytest with fixtures and mocks",
+    "Logging setup template with structured JSON output"
+  ]
+}
