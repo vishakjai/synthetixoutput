@@ -1,0 +1,106 @@
+{
+  "artifact_type": "delivery_constitution_v1",
+  "artifact_version": "1.0",
+  "created_at": "2026-03-07T03:17:15.830807+00:00",
+  "project_identity": {
+    "run_id": "20260307_031713_a6e2e5e3",
+    "workspace": "default-workspace",
+    "project": "default-project",
+    "project_state": "unknown",
+    "use_case": "code_modernization",
+    "repo_ref": "https://github.com/vishakjai/TestVB6Project1",
+    "domain_pack_id": ""
+  },
+  "modernization_objective": "Analyze the public VB6 repo and generate the analyst MD, BA brief, tech workbook, and BRD.",
+  "non_negotiables": [
+    "Preserve legacy behavior first; any deviation requires explicit approval and tests.",
+    "Every major requirement/risk must be traceable to extracted evidence artifacts.",
+    "Do not change data contracts without migration and rollback plans.",
+    "Block planning when unresolved blockers exist (scope, IAM, schema-key, compliance)."
+  ],
+  "orchestration_hints": [
+    {
+      "when": "VB6 form/control/event patterns detected (.frm/.frx/.bas/.cls)",
+      "route_to": "VB6 UI/Forms specialist",
+      "reason": "Preserve event behavior and control wiring parity."
+    },
+    {
+      "when": "SQL or ADO patterns detected (Recordset, Open, Execute, concatenated SQL)",
+      "route_to": "Data/SQL specialist",
+      "reason": "Prevent injection and data-contract regressions."
+    },
+    {
+      "when": "Security/compliance risk detected (credentials, auth gaps, missing constraints)",
+      "route_to": "Security/Compliance specialist",
+      "reason": "Force citation-backed remediation and blocking decisions."
+    }
+  ],
+  "checklists": {
+    "pre_change": [
+      "Confirm scope variant/project decision is recorded.",
+      "Verify source snapshot and context bundle IDs are pinned.",
+      "Review top blocking risks and required decisions before planning."
+    ],
+    "post_change": [
+      "Re-run QA structural and semantic gates.",
+      "Re-validate traceability links (event/sql/rule/risk).",
+      "Update delivery docs/artifacts for any changed behavior assumptions."
+    ]
+  },
+  "known_failure_modes": [
+    {
+      "id": "GEN-001",
+      "label": "Behavioral parity drift",
+      "pattern": "Modernized implementation diverges from legacy runtime behavior.",
+      "mitigation": "Use evidence-linked acceptance + regression parity checks."
+    },
+    {
+      "id": "GEN-002",
+      "label": "Data contract breakage",
+      "pattern": "Schema/API assumptions changed without migration controls.",
+      "mitigation": "Require approved migration plan and rollback evidence."
+    }
+  ],
+  "linked_artifacts": [
+    {
+      "name": "system_context_model",
+      "ref": "artifact://context/system_context_model"
+    },
+    {
+      "name": "convention_profile",
+      "ref": "artifact://context/convention_profile"
+    },
+    {
+      "name": "health_assessment",
+      "ref": "artifact://context/health_assessment_bundle"
+    },
+    {
+      "name": "analyst_report",
+      "ref": "artifact://analyst/report_v2"
+    }
+  ],
+  "agent_scope": {
+    "stage_agent_ids": {
+      "1": "analyst-strategist",
+      "2": "architect-scalable",
+      "3": "developer-delivery",
+      "4": "db-engineer-migration",
+      "5": "security-engineer-principal",
+      "6": "tester-pragmatic",
+      "7": "validator-business",
+      "8": "deployer-local"
+    }
+  },
+  "knowledge_snapshot": {
+    "snapshot_id": "kctx-b2ff4c2dc6af0182",
+    "source_version_ids": [],
+    "source_count": 0,
+    "set_count": 0
+  },
+  "constitution_id": "const-d92dd824c16e",
+  "integrity": {
+    "constitution_hash": "d92dd824c16e4fd98becc10c29bf3dbf32dcee5a523b28996dc71f177ac52457",
+    "knowledge_snapshot_id": "kctx-b2ff4c2dc6af0182",
+    "source_version_ids": []
+  }
+}
