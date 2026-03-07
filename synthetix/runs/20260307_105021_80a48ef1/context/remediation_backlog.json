@@ -1,0 +1,85 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Add explicit API route definitions and documentation",
+    "problem_statement": "Static analysis found no HTTP route definitions; this limits understanding of service endpoints and hinders API modernization.",
+    "scope": [
+      "module:agents_analyst_py",
+      "module:agents_developer_py",
+      "module:agents_deployer_py"
+    ],
+    "risk_if_unaddressed": "API surface remains undocumented and untestable, increasing risk of breaking changes during modernization.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Introduce FastAPI or equivalent route decorators with clear path and method definitions, add OpenAPI documentation.",
+    "success_criteria": [
+      "All service endpoints have route decorators",
+      "Automated tests cover all routes",
+      "API documentation generated and validated"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "No route decorators detected in static analysis"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Implement secrets management using environment variables or vault",
+    "problem_statement": "No evidence of secrets management; potential for credentials to be hardcoded or exposed.",
+    "scope": [
+      "config.py",
+      "agents/deployer.py"
+    ],
+    "risk_if_unaddressed": "Security vulnerabilities due to leaked or hardcoded credentials.",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Refactor configuration to load secrets from environment variables or integrate with a secrets vault solution.",
+    "success_criteria": [
+      "No hardcoded secrets in source code",
+      "Secrets loaded securely at runtime",
+      "Security audit passes for secrets handling"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "config.py",
+        "line": 1,
+        "evidence": "No vault or env var usage detected in static analysis"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Increase unit test coverage and add integration tests",
+    "problem_statement": "Test coverage is below recommended levels; missing integration tests for key modules.",
+    "scope": [
+      "agents/analyst.py",
+      "agents/developer.py",
+      "agents/deployer.py"
+    ],
+    "risk_if_unaddressed": "Higher risk of regressions and undetected bugs during modernization.",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Develop unit tests for all public functions and integration tests for inter-module workflows using pytest.",
+    "success_criteria": [
+      "Test coverage above 80%",
+      "Integration tests cover main workflows",
+      "CI pipeline includes automated test runs"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "repo-scan",
+        "line": 1,
+        "evidence": "auto-filled provenance"
+      }
+    ]
+  }
+]
