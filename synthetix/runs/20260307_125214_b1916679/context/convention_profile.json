@@ -1,0 +1,111 @@
+{
+  "version": "cp-v1.1.0",
+  "summary": "Python enterprise application following FastAPI patterns with comprehensive schema validation, multi-agent architecture, and structured configuration management.",
+  "rules": [
+    {
+      "id": "naming_001",
+      "category": "naming",
+      "rule": "Module names use snake_case with descriptive agent role names (analyst, architect, developer, etc.)",
+      "confidence": 0.95,
+      "examples": [
+        "agents/analyst.py",
+        "agents/database_engineer.py",
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent snake_case naming across agent modules"
+        }
+      ]
+    },
+    {
+      "id": "api_001",
+      "category": "api",
+      "rule": "FastAPI decorators (@app.get, @app.post) used for HTTP endpoint definition",
+      "confidence": 0.9,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI decorator usage"
+        },
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI decorator usage"
+        }
+      ]
+    },
+    {
+      "id": "testing_001",
+      "category": "testing",
+      "rule": "Dedicated tester agent module for testing responsibilities",
+      "confidence": 0.85,
+      "examples": [
+        "agents/tester.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Dedicated testing agent module"
+        }
+      ]
+    },
+    {
+      "id": "security_001",
+      "category": "security",
+      "rule": "Dedicated security engineer agent for security concerns",
+      "confidence": 0.85,
+      "examples": [
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Dedicated security agent module"
+        }
+      ]
+    },
+    {
+      "id": "error_handling_001",
+      "category": "error_handling",
+      "rule": "JSON schema validation for data contracts and API responses",
+      "confidence": 0.9,
+      "examples": [
+        ".deliveryos/schemas/*.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive JSON schema validation"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent docstring standards across all agent modules",
+    "Add type hints for all function parameters and return values",
+    "Standardize error handling patterns across HTTP endpoints",
+    "Add logging configuration and structured logging patterns"
+  ],
+  "scaffold_templates": [
+    "New agent module template with BaseAgent inheritance",
+    "FastAPI endpoint template with schema validation",
+    "JSON schema template for new data contracts",
+    "Pipeline stage template for orchestration"
+  ]
+}
