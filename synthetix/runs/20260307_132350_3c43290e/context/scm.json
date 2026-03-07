@@ -1,0 +1,398 @@
+{
+  "version": "scm-v1.2.0",
+  "summary": "VB6 banking application with 3-tier architecture: UI forms, business logic modules, and Access database backend via ADO/DAO. Legacy codebase shows typical enterprise patterns with security vulnerabilities and modernization debt.",
+  "nodes": [
+    {
+      "id": "banking-app",
+      "type": "Service",
+      "name": "BANKING.vbp",
+      "metadata": {
+        "project_type": "VB6_Executable",
+        "startup_form": "main",
+        "version": "1.0.0",
+        "company": "isoft"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "main-form",
+      "type": "Component",
+      "name": "main.frm",
+      "metadata": {
+        "form_type": "MDI_Parent",
+        "controls": [
+          "Command1",
+          "Command2",
+          "Command3",
+          "Command4",
+          "Command5",
+          "Command6",
+          "Command7"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Begin VB.Form main"
+        }
+      ]
+    },
+    {
+      "id": "login-form",
+      "type": "Component",
+      "name": "LOGIN.frm",
+      "metadata": {
+        "form_type": "Authentication"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 15,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "newlogin-form",
+      "type": "Component",
+      "name": "newlogin.frm",
+      "metadata": {
+        "form_type": "Password_Change",
+        "controls": [
+          "txtname",
+          "txtpass",
+          "cmdok"
+        ],
+        "password_field": "txtpass"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "newlogin.frm",
+          "line": 1,
+          "evidence": "Begin VB.Form Form7"
+        }
+      ]
+    },
+    {
+      "id": "customer-form",
+      "type": "Component",
+      "name": "frmcustomer.frm",
+      "metadata": {
+        "form_type": "Data_Entry"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 17,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "deposit-form",
+      "type": "Component",
+      "name": "deposit.frm",
+      "metadata": {
+        "form_type": "Transaction"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 18,
+          "evidence": "Form=deposit.frm"
+        }
+      ]
+    },
+    {
+      "id": "withdrawal-form",
+      "type": "Component",
+      "name": "withdrawal.frm",
+      "metadata": {
+        "form_type": "Transaction"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 19,
+          "evidence": "Form=withdrawal.frm"
+        }
+      ]
+    },
+    {
+      "id": "transaction-form",
+      "type": "Component",
+      "name": "transaction.frm",
+      "metadata": {
+        "form_type": "Transaction_History"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 20,
+          "evidence": "Form=transaction.frm"
+        }
+      ]
+    },
+    {
+      "id": "module1",
+      "type": "Module",
+      "name": "Module1.bas",
+      "metadata": {
+        "module_type": "Standard_Module"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 16,
+          "evidence": "Module=Module1; Module1.bas"
+        }
+      ]
+    },
+    {
+      "id": "dataenv1",
+      "type": "Component",
+      "name": "DataEnvironment1.Dsr",
+      "metadata": {
+        "component_type": "Data_Environment",
+        "connection": "Connection1",
+        "provider": "Microsoft.Jet.OLEDB.4.0"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+        }
+      ]
+    },
+    {
+      "id": "bank1-db",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "database_type": "Microsoft_Access",
+        "path": "E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "id": "customer-table",
+      "type": "Table",
+      "name": "customer",
+      "metadata": {
+        "columns": [
+          "customerid",
+          "firstname",
+          "lastname",
+          "contacttitle",
+          "nationalidno",
+          "datejoined",
+          "accounttype",
+          "accountno",
+          "openingbalance",
+          "address",
+          "postalcode",
+          "location",
+          "phoneno",
+          "mobileno",
+          "email"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Command1 customer Connection1"
+        }
+      ]
+    },
+    {
+      "id": "ado-library",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0",
+      "metadata": {
+        "guid": "{00000200-0000-0010-8000-00AA006D2EA4}",
+        "version": "2.0"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=*\\G{00000200-0000-0010-8000-00AA006D2EA4}#2.0#0"
+        }
+      ]
+    },
+    {
+      "id": "dao-library",
+      "type": "ExternalDependency",
+      "name": "Microsoft DAO 3.51 Object Library",
+      "metadata": {
+        "guid": "{00025E01-0000-0000-C000-000000000046}",
+        "version": "4.0"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference=*\\G{00025E01-0000-0000-C000-000000000046}#4.0#0"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "banking-app",
+      "to": "main-form",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "startup": true
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 30,
+          "evidence": "Startup=\"main\""
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "main-form",
+      "to": "login-form",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "method": "Form2.Show"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Form2.Show"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "main-form",
+      "to": "customer-form",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "method": "Form3.Show"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Form3.Show"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "dataenv1",
+      "to": "customer-table",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "command": "Command1"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Command1 customer Connection1"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "dataenv1",
+      "to": "bank1-db",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "connection_string": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "banking-app",
+      "to": "ado-library",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "reference_type": "COM"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=*\\G{00000200-0000-0010-8000-00AA006D2EA4}#2.0#0"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "banking-app",
+      "to": "dao-library",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "reference_type": "COM"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference=*\\G{00025E01-0000-0000-C000-000000000046}#4.0#0"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database schema beyond customer table",
+    "Business logic implementation in Module1.bas",
+    "Authentication mechanism details",
+    "Transaction processing logic",
+    "Error handling patterns",
+    "Data validation rules"
+  ]
+}
