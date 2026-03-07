@@ -1,0 +1,536 @@
+{
+  "header": {
+    "artifact_id": "c2e5740497af420caf416efa3f42d132",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T12:06:16.614236+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_120455_2a84bbad",
+      "stage_id": "context_layer",
+      "task_id": "4b29ee9108c64d73835417c7a7488c27"
+    },
+    "parents": [],
+    "digest": "sha256:f18fc989926275c040b739509ad6ab8d5c2baad9f64986110002feed20b8da76",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_120455_2a84bbad",
+      "bundle_version": "20260307T120616Z_20260307_120455_2a84bbad"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "service:modernization-platform",
+        "type": "service",
+        "name": "Enterprise Modernization Platform",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "python",
+        "repo_paths": [
+          "agents/__init__.py",
+          "Dockerfile"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "language": "python",
+          "deployment": "containerized",
+          "agent_count": 9,
+          "schema_driven": true
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/__init__.py"
+          },
+          {
+            "kind": "file_span",
+            "file": "Dockerfile"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "component:agent-orchestrator",
+        "type": "component",
+        "name": "Agent Orchestration Layer",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "agents/__init__.py",
+          "agents/base.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "agents": [
+            "analyst",
+            "architect",
+            "developer",
+            "database_engineer",
+            "security_engineer",
+            "tester",
+            "validator",
+            "deployer",
+            "system_intelligence"
+          ],
+          "base_class": "agents.base"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/__init__.py"
+          },
+          {
+            "kind": "file_span",
+            "file": "agents/base.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "component:schema-validator",
+        "type": "component",
+        "name": "Schema Validation Engine",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          ".deliveryos/schemas/"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "schema_count": 11,
+          "format": "json-schema",
+          "validation_scope": [
+            "agent_results",
+            "reports",
+            "contexts",
+            "business_rules"
+          ]
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": ".deliveryos/schemas/"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "endpoint:context-vault-api",
+        "type": "endpoint",
+        "name": "Context Vault API",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "utils/context_vault.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "framework": "FastAPI",
+          "methods": [
+            "GET",
+            "POST"
+          ],
+          "purpose": "context_management"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "utils/context_vault.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "endpoint:web-server",
+        "type": "endpoint",
+        "name": "Web Server Interface",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "web/server.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "framework": "FastAPI",
+          "methods": [
+            "GET"
+          ],
+          "purpose": "web_interface"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "web/server.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "component:audit-engine",
+        "type": "component",
+        "name": "E2E Audit Engine",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "e2e/audit/ba_audit.py",
+          "e2e/audit/tech_audit.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "audit_types": [
+            "business_analysis",
+            "technical"
+          ],
+          "scope": "end_to_end"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "e2e/audit/ba_audit.py"
+          },
+          {
+            "kind": "file_span",
+            "file": "e2e/audit/tech_audit.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "database:team-data",
+        "type": "database",
+        "name": "Team Configuration Data",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "team_data/custom_agents.json",
+          "team_data/custom_teams.json",
+          "team_data/work_items.json"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "format": "json",
+          "entities": [
+            "custom_agents",
+            "custom_teams",
+            "work_items"
+          ],
+          "storage": "file_based"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "team_data/custom_agents.json"
+          },
+          {
+            "kind": "file_span",
+            "file": "team_data/custom_teams.json"
+          },
+          {
+            "kind": "file_span",
+            "file": "team_data/work_items.json"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "container:docker-runtime",
+        "type": "container",
+        "name": "Docker Runtime Environment",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "Dockerfile",
+          "docker-compose.yml"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "base_image": "python",
+          "orchestration": "docker-compose",
+          "ports_exposed": true
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "Dockerfile"
+          },
+          {
+            "kind": "file_span",
+            "file": "docker-compose.yml"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "imports",
+        "from": "component:agent-orchestrator",
+        "to": "component:schema-validator",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/analyst.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "runs_on",
+        "from": "service:modernization-platform",
+        "to": "container:docker-runtime",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "Dockerfile"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:3",
+        "type": "calls_http",
+        "from": "component:agent-orchestrator",
+        "to": "endpoint:context-vault-api",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "utils/context_vault.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:4",
+        "type": "reads",
+        "from": "component:agent-orchestrator",
+        "to": "database:team-data",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "team_data/"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:5",
+        "type": "depends_on",
+        "from": "component:audit-engine",
+        "to": "component:agent-orchestrator",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "e2e/audit/"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 8,
+      "edge_count": 5,
+      "languages": [
+        "python"
+      ]
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": [
+    {
+      "question": "VB6 legacy system artifacts not present in repository",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "Microsoft Access database schema and data contracts",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "PostgreSQL target schema design",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "Authentication and authorization mechanisms",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "External system integrations and APIs",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "Production deployment infrastructure details",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    }
+  ]
+}
