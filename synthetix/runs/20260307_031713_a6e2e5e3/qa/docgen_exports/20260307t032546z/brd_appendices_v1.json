@@ -1,0 +1,78 @@
+{
+  "artifact": "brd_appendices_v1",
+  "dependencies_and_integrations": [
+    "Reporting workflows depend on legacy report-generation mappings that require parity validation in the target solution.",
+    "Downstream workflows depend on consistent customer, account, balance, and transaction data availability."
+  ],
+  "issue_log": [
+    "DEC-COMPLIANCE-001: Compliance constraints are not linked to detected security/privacy risks. No explicit compliance constraints were linked, but security/privacy risks were detected in legacy behavior.",
+    "DEC-UI-001: Target UI framework selection for migrated forms",
+    "DEC-DB-001: Database contract strategy during migration",
+    "DEC-IAM-001: Confirm identity/access model (role model, multi-user assumptions, and credential handling).",
+    "Q-001: Are there existing operational constraints or integration dependencies not listed?",
+    "Q-002: What are target latency, throughput, and availability SLOs?",
+    "DEC-EVENTMAP-001: Two in-scope operational workflows have incomplete extracted interaction evidence and require confirmation before sprint planning is finalized.",
+    "frmstatement: Insufficient evidence for business-facing BRD module"
+  ],
+  "process_map_inventory": [
+    {
+      "ref": "PM-MOD-001",
+      "summary": "User opens customer management. Required customer or account details are entered or updated. System validates mandatory information and business rules. Master data is saved and made available to downstream workflows."
+    },
+    {
+      "ref": "PM-MOD-002",
+      "summary": "User opens daily processing. Required workflow data is captured. System validates the business rules for the transaction or request. The resulting business state is saved and available for downstream use."
+    },
+    {
+      "ref": "PM-MOD-003",
+      "summary": "User opens date range processing. Required workflow data is captured. System validates the business rules for the transaction or request. The resulting business state is saved and available for downstream use."
+    },
+    {
+      "ref": "PM-MOD-004",
+      "summary": "User opens deposit capture. Required workflow data is captured. System validates the business rules for the transaction or request. The resulting business state is saved and available for downstream use."
+    },
+    {
+      "ref": "PM-MOD-005",
+      "summary": "User opens the authentication workflow. User enters credentials and submits the request. System validates access rules and either rejects or authorizes the request. Authorized users proceed to the operational navigation hub."
+    },
+    {
+      "ref": "PM-MOD-006",
+      "summary": "User opens splash/loading. System performs startup and readiness checks. Progress or readiness feedback is shown. Operational workflow becomes available when startup gating completes."
+    },
+    {
+      "ref": "PM-MOD-007",
+      "summary": "User opens withdrawal processing. Required workflow data is captured. System validates the business rules for the transaction or request. The resulting business state is saved and available for downstream use."
+    }
+  ],
+  "data_entities": [
+    {
+      "entity": "Customer",
+      "business_meaning": "A bank account holder whose profile is created, maintained, and referenced across workflows."
+    },
+    {
+      "entity": "Deposit",
+      "business_meaning": "A recorded credit transaction posted against a customer account."
+    },
+    {
+      "entity": "Withdrawal",
+      "business_meaning": "A recorded debit transaction posted against a customer account."
+    },
+    {
+      "entity": "Transaction",
+      "business_meaning": "The consolidated ledger of debit/credit movements per account."
+    },
+    {
+      "entity": "Balance",
+      "business_meaning": "The running account balance maintained after each transaction action."
+    },
+    {
+      "entity": "Login",
+      "business_meaning": "Authentication records and credentials used to validate user access."
+    },
+    {
+      "entity": "Account",
+      "business_meaning": "Legacy data entity referenced by in-scope business workflows."
+    }
+  ],
+  "data_entities_note": "Refer to the Technical Workbook Data Dictionary artifact for full schema, column definitions, data types, keys, and ER diagram."
+}
