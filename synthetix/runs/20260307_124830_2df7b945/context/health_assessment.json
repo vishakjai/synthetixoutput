@@ -1,0 +1,90 @@
+{
+  "version": "ha-v1.0.2",
+  "summary": "Well-structured modern Python platform with good separation of concerns, but missing VB6 legacy integration despite business objective requirements.",
+  "scores": {
+    "maintainability": 75,
+    "security": 65,
+    "reliability": 70,
+    "testability": 60
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Integration Gap",
+      "reason": "Business objective specifies VB6 regression verification but no VB6 code detected in repository",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "repository_scan",
+          "line": 1,
+          "evidence": "No .frm/.frx/.bas/.cls files found despite VB6 objective"
+        }
+      ]
+    },
+    {
+      "scope": "agents/",
+      "reason": "High coupling between agent modules with 472 import edges across 74 modules",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "static_analysis",
+          "line": 1,
+          "evidence": "472 import edges across agent modules"
+        }
+      ]
+    },
+    {
+      "scope": "web/server.py",
+      "reason": "FastAPI routes detected but no explicit route definitions in static analysis",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "Route hints present but routes=0 in analysis"
+        }
+      ]
+    },
+    {
+      "scope": "utils/context_vault.py",
+      "reason": "Context vault API endpoints without clear authentication/authorization patterns",
+      "severity": "medium",
+      "confidence": 0.75,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "API endpoints without visible auth patterns"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Objective-Codebase Mismatch",
+      "description": "Business objective requires VB6 regression verification but repository contains no VB6 legacy code, indicating potential scope or repository selection error",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "Missing Test Coverage",
+      "description": "No test files detected in repository scan despite having tester agent and testability requirements",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Firestore/GCS Integration Unclear",
+      "description": "Business objective mentions Firestore/GCS run-state fix but no evidence of these integrations in codebase",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Security Configuration Gaps",
+      "description": "No explicit security configuration or authentication mechanisms visible in API endpoints",
+      "severity": "medium",
+      "confidence": 0.8
+    }
+  ]
+}
