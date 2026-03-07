@@ -1,0 +1,152 @@
+[
+  {
+    "id": "rb-001-security-audit",
+    "title": "Comprehensive Security Vulnerability Assessment",
+    "problem_statement": "Banking application lacks basic security controls for authentication, data protection, and SQL injection prevention",
+    "scope": [
+      "newlogin.frm",
+      "DataEnvironment1",
+      "customer table",
+      "Module1.bas"
+    ],
+    "risk_if_unaddressed": "Critical data breach, regulatory compliance violations, financial fraud exposure",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "1) Implement parameterized queries 2) Add password hashing 3) Encrypt PII fields 4) Add input validation 5) Implement audit logging",
+    "success_criteria": [
+      "Zero SQL injection vectors",
+      "Encrypted password storage",
+      "PII encryption at rest",
+      "Complete audit trail"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "newlogin.frm",
+        "line": 1,
+        "evidence": "PasswordChar = \"*\""
+      }
+    ]
+  },
+  {
+    "id": "rb-002-error-handling",
+    "title": "Implement Comprehensive Error Handling",
+    "problem_statement": "No error handling in form event handlers creates poor user experience and debugging challenges",
+    "scope": [
+      "main.frm",
+      "newlogin.frm",
+      "all form modules"
+    ],
+    "risk_if_unaddressed": "Application crashes, data corruption, poor user experience",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb-001-security-audit"
+    ],
+    "suggested_approach": "Add On Error GoTo statements, create centralized error logging module, implement user-friendly error messages",
+    "success_criteria": [
+      "All event handlers have error handling",
+      "Centralized error logging",
+      "No unhandled exceptions"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "main.frm",
+        "line": 1,
+        "evidence": "Private Sub Command1_Click()"
+      }
+    ]
+  },
+  {
+    "id": "rb-003-database-abstraction",
+    "title": "Create Database Abstraction Layer",
+    "problem_statement": "Hardcoded database connections and direct table access creates tight coupling and deployment issues",
+    "scope": [
+      "DataEnvironment1",
+      "all data access code"
+    ],
+    "risk_if_unaddressed": "Deployment failures, difficult database migrations, poor scalability",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "rb-001-security-audit"
+    ],
+    "suggested_approach": "Create connection manager class, implement repository pattern, externalize connection strings",
+    "success_criteria": [
+      "Configurable connection strings",
+      "Connection pooling",
+      "Database-agnostic data access"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "DataEnvironment1.DCA",
+        "line": 1,
+        "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-modernization-roadmap",
+    "title": "VB6 to Modern Platform Migration Strategy",
+    "problem_statement": "VB6 platform is deprecated with limited support and modern integration challenges",
+    "scope": [
+      "entire application"
+    ],
+    "risk_if_unaddressed": "Technical obsolescence, security vulnerabilities, maintenance difficulties",
+    "effort": "XL",
+    "severity": "medium",
+    "dependencies": [
+      "rb-001-security-audit",
+      "rb-002-error-handling",
+      "rb-003-database-abstraction"
+    ],
+    "suggested_approach": "1) Stabilize current system 2) Extract business logic 3) Migrate to .NET/web platform 4) Implement modern UI",
+    "success_criteria": [
+      "Feature parity",
+      "Improved security",
+      "Modern deployment model",
+      "Enhanced maintainability"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BANKING.vbp",
+        "line": 1,
+        "evidence": "Type=Exe"
+      }
+    ]
+  },
+  {
+    "id": "rb-005-testing-framework",
+    "title": "Implement Automated Testing Strategy",
+    "problem_statement": "No evidence of automated testing creates regression risk during modernization",
+    "scope": [
+      "all business logic",
+      "data access layer",
+      "UI workflows"
+    ],
+    "risk_if_unaddressed": "Regression bugs, difficult refactoring, poor code quality",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "rb-003-database-abstraction"
+    ],
+    "suggested_approach": "Create test harness for VB6 code, implement database fixtures, add UI automation tests",
+    "success_criteria": [
+      "80% code coverage",
+      "Automated regression suite",
+      "CI/CD integration"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "BANKING.vbp",
+        "line": 1,
+        "evidence": "Type=Exe"
+      }
+    ]
+  }
+]
