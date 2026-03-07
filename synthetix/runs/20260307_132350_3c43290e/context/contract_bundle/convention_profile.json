@@ -1,0 +1,287 @@
+{
+  "header": {
+    "artifact_id": "af823ed84c2b4d0588849b70610dc128",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T13:25:23.655578+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_132350_3c43290e",
+      "stage_id": "context_layer",
+      "task_id": "033f1696609e4ccd8efcf1c28f1f5c2a"
+    },
+    "parents": [],
+    "digest": "sha256:217263838cd113811f0743b271d42b62a10af00ccca055ab3108a0ea88f514a3",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_132350_3c43290e",
+      "bundle_version": "20260307T132523Z_20260307_132350_3c43290e"
+    }
+  },
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "title": "Forms use descriptive names (main, login, customer) but inconsistent prefixing (frm prefix sometimes used)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Forms use descriptive names (main, login, customer) but inconsistent prefixing (frm prefix sometimes used)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "main.frm"
+        },
+        {
+          "file": "frmcustomer.frm"
+        },
+        {
+          "file": "LOGIN.frm"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BANKING.vbp"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-control-naming",
+      "category": "naming",
+      "title": "Controls use Hungarian notation with type prefixes (txt, cmd)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Controls use Hungarian notation with type prefixes (txt, cmd)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "txtname"
+        },
+        {
+          "file": "txtpass"
+        },
+        {
+          "file": "cmdok"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "newlogin.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-password-handling",
+      "category": "authn_authz",
+      "title": "Password fields use PasswordChar property for masking",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Password fields use PasswordChar property for masking",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "PasswordChar = \"*\""
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "newlogin.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-form-navigation",
+      "category": "api_design",
+      "title": "Form navigation uses Show method calls in event handlers",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Form navigation uses Show method calls in event handlers",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "Form2.Show"
+        },
+        {
+          "file": "Form3.Show"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "main.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-data-access",
+      "category": "api_design",
+      "title": "Data access through DataEnvironment designers with ADO/DAO references",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Data access through DataEnvironment designers with ADO/DAO references",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "DataEnvironment1.Dsr"
+        },
+        {
+          "file": "Microsoft ActiveX Data Objects 2.0"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BANKING.vbp"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-error-handling-missing",
+      "category": "error_handling",
+      "title": "No visible error handling patterns in form event handlers",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "No visible error handling patterns in form event handlers",
+      "detection": {},
+      "enforcement": {},
+      "examples": [],
+      "counterexamples": [
+        {
+          "file": "Private Sub Command1_Click()\nForm2.Show\nEnd Sub"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "main.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "VB6 error handling wrapper template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "Form validation helper module",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "Database connection manager class",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "User session management module",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
