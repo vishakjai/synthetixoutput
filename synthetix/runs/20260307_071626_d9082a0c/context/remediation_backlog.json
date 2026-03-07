@@ -1,0 +1,91 @@
+[
+  {
+    "id": "RB-001",
+    "title": "Implement authentication and authorization for FastAPI endpoints",
+    "problem_statement": "Current FastAPI routes in utils/context_vault.py lack explicit security controls, risking unauthorized access.",
+    "scope": [
+      "utils/context_vault.py"
+    ],
+    "risk_if_unaddressed": "Unauthorized users may access sensitive data or operations, leading to data breaches and compliance violations.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Integrate OAuth2 or JWT-based authentication middleware; enforce role-based access controls on routes.",
+    "success_criteria": [
+      "All API endpoints require valid authentication tokens.",
+      "Role-based access control enforced per endpoint.",
+      "Security tests validate access restrictions."
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "utils/context_vault.py",
+        "line": 10,
+        "evidence": "FastAPI routes detected without visible auth enforcement."
+      }
+    ]
+  },
+  {
+    "id": "RB-002",
+    "title": "Refactor agent modules to reduce tight coupling",
+    "problem_statement": "High import counts and dependencies among agent modules increase complexity and reduce maintainability.",
+    "scope": [
+      "agents/analyst.py",
+      "agents/architect.py",
+      "agents/developer.py",
+      "agents/database_engineer.py",
+      "agents/security_engineer.py",
+      "agents/tester.py",
+      "agents/validator.py",
+      "agents/deployer.py",
+      "agents/system_intelligence.py"
+    ],
+    "risk_if_unaddressed": "Complex interdependencies may cause regression risks and slow down development velocity.",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Analyze dependency graph; apply modularization and interface segregation; introduce dependency injection where applicable.",
+    "success_criteria": [
+      "Reduced import counts per module by at least 30%.",
+      "Clear module boundaries documented.",
+      "Automated tests validate module isolation."
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "11 imports detected; similar patterns in other agent modules."
+      }
+    ]
+  },
+  {
+    "id": "RB-003",
+    "title": "Establish automated test coverage and CI pipeline",
+    "problem_statement": "No explicit test routes or test modules detected, risking undetected regressions and low reliability.",
+    "scope": [
+      "tests/",
+      "e2e/"
+    ],
+    "risk_if_unaddressed": "Lack of automated testing may cause production defects and slow feedback cycles.",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "RB-002"
+    ],
+    "suggested_approach": "Create unit and integration tests for critical modules; integrate tests into CI pipeline defined in .deliveryos/pipeline/pipeline_spec.yaml.",
+    "success_criteria": [
+      "Test coverage above 80% for core modules.",
+      "CI pipeline runs tests on every commit.",
+      "Test failures block merges."
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+        "line": 1,
+        "evidence": "Pipeline spec present but no test stage explicitly detected."
+      }
+    ]
+  }
+]
