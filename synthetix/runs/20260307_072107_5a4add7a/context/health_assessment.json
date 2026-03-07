@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "summary": "Health assessment based on static analysis of code modules, import dependencies, and configuration artifacts.",
+  "scores": {
+    "maintainability": 75,
+    "security": 70,
+    "reliability": 80,
+    "testability": 65
+  },
+  "hotspots": [
+    {
+      "scope": "agents/analyst.py",
+      "reason": "High import count (11) and use of dynamic JSON handling may increase complexity and risk of runtime errors.",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "import count and JSON usage"
+        }
+      ]
+    },
+    {
+      "scope": ".deliveryos/schemas/agent_result.schema.json",
+      "reason": "Critical data contract file; any changes require migration and rollback plans to preserve legacy behavior.",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json",
+          "line": 1,
+          "evidence": "data contract schema"
+        }
+      ]
+    },
+    {
+      "scope": "agents/__init__.py",
+      "reason": "Multiple relative imports; risk of circular dependencies if not carefully managed.",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "relative imports"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Lack of explicit API routes detected",
+      "description": "No HTTP routes or API endpoints were detected in the scanned modules, which may indicate missing or incomplete service interface definitions.",
+      "severity": "medium",
+      "confidence": 0.8
+    },
+    {
+      "title": "Potential data contract regression risk",
+      "description": "Changes to JSON schema files without migration and rollback plans could break existing integrations and legacy behavior.",
+      "severity": "high",
+      "confidence": 0.95
+    },
+    {
+      "title": "Test coverage gaps",
+      "description": "Limited evidence of test modules or test routes detected, which may impact testability and reliability.",
+      "severity": "medium",
+      "confidence": 0.85
+    }
+  ]
+}
