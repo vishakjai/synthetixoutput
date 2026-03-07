@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "summary": "Health assessment based on static analysis of Python modules and configuration files with focus on maintainability, security, reliability, and testability.",
+  "scores": {
+    "maintainability": 75,
+    "security": 70,
+    "reliability": 80,
+    "testability": 65
+  },
+  "hotspots": [
+    {
+      "scope": "agents/analyst.py",
+      "reason": "Moderate complexity with several imports and potential unhandled exceptions",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 45,
+          "evidence": "try-except blocks present but some edge cases may be missing"
+        }
+      ]
+    },
+    {
+      "scope": "agents/deployer.py",
+      "reason": "Critical deployment logic with limited error handling and logging",
+      "severity": "high",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "agents/deployer.py",
+          "line": 30,
+          "evidence": "Sparse logging and error handling in deployment methods"
+        }
+      ]
+    },
+    {
+      "scope": "tests coverage",
+      "reason": "Lack of explicit test files found for some agent modules",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "e2e/audit/ba_audit.py",
+          "line": 10,
+          "evidence": "Audit references but no direct test files for all modules"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Insufficient test coverage",
+      "description": "Some agent modules lack comprehensive unit tests, increasing risk of regressions during modernization.",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Inconsistent error handling",
+      "description": "Error handling is inconsistent across modules, potentially causing silent failures or poor observability.",
+      "severity": "medium",
+      "confidence": 0.9
+    },
+    {
+      "title": "Sparse logging in critical modules",
+      "description": "Modules responsible for deployment and system intelligence have sparse logging, hindering troubleshooting.",
+      "severity": "medium",
+      "confidence": 0.85
+    }
+  ]
+}
