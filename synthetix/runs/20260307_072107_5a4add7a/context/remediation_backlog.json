@@ -1,0 +1,78 @@
+[
+  {
+    "id": "RB-001",
+    "title": "Establish explicit API route definitions",
+    "problem_statement": "No HTTP routes or API endpoints were detected, limiting service interface clarity and integration capabilities.",
+    "scope": [
+      "agents/"
+    ],
+    "risk_if_unaddressed": "Difficulty in integrating or extending services; potential for inconsistent interfaces.",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Define and implement FastAPI or equivalent HTTP routes in appropriate modules, with OpenAPI documentation.",
+    "success_criteria": [
+      "API routes exist and are discoverable via OpenAPI schema.",
+      "Integration tests cover API endpoints."
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "static_analysis_report",
+        "line": 0,
+        "evidence": "no routes detected in scanned files"
+      }
+    ]
+  },
+  {
+    "id": "RB-002",
+    "title": "Implement migration and rollback plans for JSON schema changes",
+    "problem_statement": "JSON schema files define critical data contracts but lack explicit migration and rollback plans.",
+    "scope": [
+      ".deliveryos/schemas/"
+    ],
+    "risk_if_unaddressed": "Breaking changes could cause legacy behavior regressions and integration failures.",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Develop versioned schema migration scripts and rollback procedures; integrate into CI/CD pipeline.",
+    "success_criteria": [
+      "Migration scripts exist and are tested.",
+      "Rollback procedures documented and tested.",
+      "CI/CD pipeline enforces schema validation."
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": ".deliveryos/schemas/agent_result.schema.json",
+        "line": 1,
+        "evidence": "critical data contract schema"
+      }
+    ]
+  },
+  {
+    "id": "RB-003",
+    "title": "Increase test coverage for agents modules",
+    "problem_statement": "Limited evidence of test modules or test routes detected, risking lower reliability and maintainability.",
+    "scope": [
+      "agents/"
+    ],
+    "risk_if_unaddressed": "Undetected bugs and regressions; decreased confidence in code changes.",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Develop unit and integration tests for core agents modules; integrate with CI pipeline.",
+    "success_criteria": [
+      "Test coverage metrics improve to >80%.",
+      "Tests run successfully in CI pipeline."
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "static_analysis_report",
+        "line": 0,
+        "evidence": "lack of test modules detected"
+      }
+    ]
+  }
+]
