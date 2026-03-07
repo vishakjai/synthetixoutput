@@ -1,0 +1,82 @@
+[
+  {
+    "id": "RB-001",
+    "title": "Add explicit API route definitions with tests",
+    "problem_statement": "No explicit HTTP route definitions or API surface detected in static analysis, risking incomplete API coverage and unclear interface contracts.",
+    "scope": [
+      "utils/context_vault.py",
+      "web/server.py",
+      "agents/*.py"
+    ],
+    "risk_if_unaddressed": "Lack of clear API endpoints may cause integration failures and reduce maintainability.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Define explicit FastAPI route decorators with clear HTTP methods in relevant modules. Add integration tests to cover API endpoints.",
+    "success_criteria": [
+      "All API endpoints are explicitly declared with route decorators.",
+      "Automated tests cover all API routes with success and failure cases.",
+      "API documentation is generated and validated."
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "No routes detected despite decorator hints in utils/context_vault.py and web/server.py"
+      }
+    ]
+  },
+  {
+    "id": "RB-002",
+    "title": "Implement and document testing strategy",
+    "problem_statement": "No test modules or test routes detected, risking regressions and lower code reliability.",
+    "scope": [
+      "agents/*.py",
+      "e2e/audit/*.py"
+    ],
+    "risk_if_unaddressed": "Without tests, defects may go undetected and increase maintenance costs.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Create unit and integration test modules for agent logic and API endpoints. Use existing e2e audit scripts as basis for coverage.",
+    "success_criteria": [
+      "Test coverage metrics meet or exceed 80%.",
+      "Tests are integrated into CI pipeline.",
+      "Test failures block merges."
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "No test routes or test modules identified in scan"
+      }
+    ]
+  },
+  {
+    "id": "RB-003",
+    "title": "Refactor high-complexity modules to reduce import coupling",
+    "problem_statement": "Modules such as agents/analyst.py have high import counts, increasing complexity and maintenance risk.",
+    "scope": [
+      "agents/analyst.py"
+    ],
+    "risk_if_unaddressed": "High coupling may lead to bugs and harder feature additions.",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Analyze dependencies and split functionality into smaller, focused modules where possible.",
+    "success_criteria": [
+      "Import count per module reduced by at least 30%.",
+      "Module responsibilities are clearly separated."
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "11 imports detected indicating high complexity"
+      }
+    ]
+  }
+]
