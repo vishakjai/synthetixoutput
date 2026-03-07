@@ -1,0 +1,233 @@
+{
+  "header": {
+    "artifact_id": "e045a86ed4a74f07a27ddc72a2701404",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T07:17:38.652556+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4.1-mini",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_071626_d9082a0c",
+      "stage_id": "context_layer",
+      "task_id": "4b3bf0c3e3524f65b62c55268b8be51d"
+    },
+    "parents": [],
+    "digest": "sha256:a845428087dc496166e3d40c7fedcb682492b2a0d493635004b72b56119deebc",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_071626_d9082a0c",
+      "bundle_version": "20260307T071738Z_20260307_071626_d9082a0c"
+    }
+  },
+  "rules": [
+    {
+      "id": "CP-001",
+      "category": "naming",
+      "title": "Python modules and packages should use lowercase with underscores as separators, e.g., 'agents.database_engineer'.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Python modules and packages should use lowercase with underscores as separators, e.g., 'agents.database_engineer'.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents.database_engineer"
+        },
+        {
+          "file": "agents.system_intelligence"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "Agents.DatabaseEngineer"
+        },
+        {
+          "file": "agents-DatabaseEngineer"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/database_engineer.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "CP-002",
+      "category": "naming",
+      "title": "Use explicit relative imports within the 'agents' package to maintain clear module boundaries.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Use explicit relative imports within the 'agents' package to maintain clear module boundaries.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "from . import analyst"
+        },
+        {
+          "file": "from . import developer"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "import agents.analyst"
+        },
+        {
+          "file": "from agents import analyst"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "CP-003",
+      "category": "api_design",
+      "title": "REST API endpoints should be defined using FastAPI decorators such as '@app.get' or '@app.post' with explicit route paths.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "REST API endpoints should be defined using FastAPI decorators such as '@app.get' or '@app.post' with explicit route paths.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get('/items')"
+        },
+        {
+          "file": "@app.post('/submit')"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "app.route('/items')"
+        },
+        {
+          "file": "flask.route('/submit')"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "CP-004",
+      "category": "authn_authz",
+      "title": "Secrets and credentials must not be hardcoded in source code; use environment variables or secure vaults.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Secrets and credentials must not be hardcoded in source code; use environment variables or secure vaults.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "os.getenv('DB_PASSWORD')"
+        },
+        {
+          "file": "vault.get_secret('db_password')"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "DB_PASSWORD = 'hardcodedpassword'"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "repo-scan"
+        }
+      ],
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "Python FastAPI service scaffold with routing and dependency injection.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "JSON schema template for agent task and result contracts.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "YAML pipeline specification template with stages and artifact definitions.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
