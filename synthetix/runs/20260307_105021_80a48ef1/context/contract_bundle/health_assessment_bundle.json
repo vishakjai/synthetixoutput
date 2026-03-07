@@ -1,0 +1,468 @@
+{
+  "header": {
+    "artifact_id": "6fc39539df7f4ae084fb719d9218c290",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T10:51:28.441866+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4.1-mini",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_105021_80a48ef1",
+      "stage_id": "context_layer",
+      "task_id": "84e76e68eea4454cac9a39ef9ab8a72e"
+    },
+    "parents": [],
+    "digest": "sha256:393426b3debcfa5dfd93e70ed80be4bdb32d493f4bc41b3aacfef0a20347b388",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_105021_80a48ef1",
+      "bundle_version": "20260307T105128Z_20260307_105021_80a48ef1"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 3,
+      "impact": 3,
+      "score": 9,
+      "tier": "medium",
+      "rationale": "moderate risk posture"
+    },
+    "key_themes": [
+      "Health assessment based on static analysis of the repository modules and configuration artifacts."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 75,
+      "security": 70,
+      "reliability": 80,
+      "testability": 65
+    },
+    "finding_count": 6,
+    "backlog_count": 3
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: agents/analyst.py",
+      "description": "High import count and dependency on multiple standard libraries increase complexity.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "agents/analyst.py"
+        ],
+        "paths": [
+          "agents/analyst.py"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/analyst.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: agents/__init__.py",
+      "description": "Central module importing many submodules, changes here impact entire agents package.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "agents/__init__.py"
+        ],
+        "paths": [
+          "agents/__init__.py"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: Configuration files (.deliveryos/schemas/*.json)",
+      "description": "Schema files critical for validation but require ongoing synchronization with code.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Configuration files (.deliveryos/schemas/*.json)"
+        ],
+        "paths": [
+          "Configuration files (.deliveryos/schemas/*.json)"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/agent_result.schema.json"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Lack of explicit API route definitions",
+      "description": "No HTTP route definitions detected in static analysis; potential missing or incomplete API surface.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Potential insufficient test coverage",
+      "description": "No explicit test files or route tests detected; risk of regressions during modernization.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Hardcoded or missing secrets management",
+      "description": "No evidence of secrets vault or environment variable usage for sensitive data; risk of credential leaks.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.75,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001",
+      "title": "Add explicit API route definitions and documentation",
+      "priority": "P1",
+      "business_value": "API surface remains undocumented and untestable, increasing risk of breaking changes during modernization.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:agents_analyst_py",
+          "module:agents_developer_py",
+          "module:agents_deployer_py"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Introduce FastAPI or equivalent route decorators with clear path and method definitions, add OpenAPI documentation"
+      ],
+      "acceptance_criteria": [
+        "All service endpoints have route decorators",
+        "Automated tests cover all routes",
+        "API documentation generated and validated"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-002",
+      "title": "Implement secrets management using environment variables or vault",
+      "priority": "P1",
+      "business_value": "Security vulnerabilities due to leaked or hardcoded credentials.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:agents_deployer_py"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Refactor configuration to load secrets from environment variables or integrate with a secrets vault solution"
+      ],
+      "acceptance_criteria": [
+        "No hardcoded secrets in source code",
+        "Secrets loaded securely at runtime",
+        "Security audit passes for secrets handling"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003",
+      "title": "Increase unit test coverage and add integration tests",
+      "priority": "P2",
+      "business_value": "Higher risk of regressions and undetected bugs during modernization.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:agents_analyst_py",
+          "module:agents_developer_py",
+          "module:agents_deployer_py"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Develop unit tests for all public functions and integration tests for inter-module workflows using pytest"
+      ],
+      "acceptance_criteria": [
+        "Test coverage above 80%",
+        "Integration tests cover main workflows",
+        "CI pipeline includes automated test runs"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001",
+      "rb-002"
+    ],
+    "stabilization": [
+      "rb-001",
+      "rb-002",
+      "rb-003"
+    ],
+    "modernization": [
+      "rb-001",
+      "rb-002",
+      "rb-003"
+    ]
+  }
+}
