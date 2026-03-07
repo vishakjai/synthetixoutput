@@ -1,0 +1,83 @@
+[
+  {
+    "id": "RB-001",
+    "title": "Add explicit HTTP route definitions and API surface documentation",
+    "problem_statement": "No HTTP routes were detected in static analysis, potentially indicating missing or incomplete API endpoints.",
+    "scope": [
+      "module:agents_analyst_py",
+      "module:agents_architect_py",
+      "module:agents_developer_py"
+    ],
+    "risk_if_unaddressed": "Lack of API endpoints will block integration and modernization efforts, reducing system usability.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Review and implement FastAPI route decorators in relevant modules; add OpenAPI documentation for API surface.",
+    "success_criteria": [
+      "All intended API endpoints have explicit route decorators.",
+      "Automated tests cover route behavior.",
+      "OpenAPI spec generated and validated."
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "No route decorators detected in static analysis"
+      }
+    ]
+  },
+  {
+    "id": "RB-002",
+    "title": "Increase automated test coverage for agent modules",
+    "problem_statement": "Testability score is moderate; lack of visible test modules and route tests may lead to undetected regressions.",
+    "scope": [
+      "module:agents_analyst_py",
+      "module:agents_security_engineer_py",
+      "module:agents_deployer_py"
+    ],
+    "risk_if_unaddressed": "Low test coverage increases risk of bugs and slows modernization progress.",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Add unit and integration tests following naming conventions; include security and edge case tests.",
+    "success_criteria": [
+      "Test coverage metrics show >80% coverage on key modules.",
+      "CI pipeline enforces test execution and coverage thresholds."
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "e2e/audit/ba_audit.py",
+        "line": 1,
+        "evidence": "Existing test modules but limited coverage visibility"
+      }
+    ]
+  },
+  {
+    "id": "RB-003",
+    "title": "Conduct security review of configuration and secrets management",
+    "problem_statement": "Configuration module handles sensitive data; must ensure no secrets are hardcoded and environment variables are used securely.",
+    "scope": [
+      "module:config_py"
+    ],
+    "risk_if_unaddressed": "Hardcoded secrets or insecure handling can lead to data breaches and compliance violations.",
+    "effort": "S",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Audit config.py and related files for secrets; implement vault integration if needed; enforce environment variable usage.",
+    "success_criteria": [
+      "No secrets found in source or config files.",
+      "Secrets management documented and automated.",
+      "Security scans pass without findings."
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "config.py",
+        "line": 5,
+        "evidence": "No hardcoded secrets detected but sensitive area"
+      }
+    ]
+  }
+]
