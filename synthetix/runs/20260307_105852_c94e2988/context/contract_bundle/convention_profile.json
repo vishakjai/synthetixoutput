@@ -1,0 +1,236 @@
+{
+  "header": {
+    "artifact_id": "4cc5bf9e8c924dd488e3936c3a3b7361",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T11:00:07.811699+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4.1-mini",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_105852_c94e2988",
+      "stage_id": "context_layer",
+      "task_id": "653c3d955deb4747881eec2f8ea213a8"
+    },
+    "parents": [],
+    "digest": "sha256:22dd1e60ff2623732425f8dd424046783d890ac8222d14d1efcdbd47408ab861",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_105852_c94e2988",
+      "bundle_version": "20260307T110007Z_20260307_105852_c94e2988"
+    }
+  },
+  "rules": [
+    {
+      "id": "CP-001",
+      "category": "naming",
+      "title": "Python modules in the 'agents' package must be named using lowercase with underscores separating words, matching the file names exactly.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Python modules in the 'agents' package must be named using lowercase with underscores separating words, matching the file names exactly.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/analyst.py"
+        },
+        {
+          "file": "agents/database_engineer.py"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "agents/DatabaseEngineer.py"
+        },
+        {
+          "file": "agents/AnalystModule.py"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "CP-002",
+      "category": "api_design",
+      "title": "All REST API endpoints must be defined using FastAPI decorators with explicit HTTP method annotations (@app.get, @app.post, etc.) and must include path parameter typing.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "All REST API endpoints must be defined using FastAPI decorators with explicit HTTP method annotations (@app.get, @app.post, etc.) and must include path parameter typing.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get('/items/{item_id}')"
+        },
+        {
+          "file": "@app.post('/users/')"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "@app.route('/items')"
+        },
+        {
+          "file": "Flask-style route definitions without typing"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "CP-003",
+      "category": "authn_authz",
+      "title": "Secrets and credentials must never be hardcoded in source code or configuration files; use environment variables or secure vaults instead.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Secrets and credentials must never be hardcoded in source code or configuration files; use environment variables or secure vaults instead.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "os.getenv('DB_PASSWORD')"
+        },
+        {
+          "file": "vault.get_secret('api_key')"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "DB_PASSWORD='hardcodedpassword'"
+        },
+        {
+          "file": "api_key='123456'"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "config.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "CP-004",
+      "category": "testing",
+      "title": "Unit tests must be placed in the 'tests' directory and named with the prefix 'test_' followed by the module name.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Unit tests must be placed in the 'tests' directory and named with the prefix 'test_' followed by the module name.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "tests/test_analyst.py"
+        },
+        {
+          "file": "tests/test_database_engineer.py"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "tests/analyst_test.py"
+        },
+        {
+          "file": "test_analyst.py in root directory"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "e2e/audit/ba_audit.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "Python FastAPI module template with standard imports and route decorators.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "JSON schema template for defining agent task and result contracts.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "Dockerfile template for Python containerized applications.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
