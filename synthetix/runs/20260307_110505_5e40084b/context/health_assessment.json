@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "summary": "Health assessment based on static analysis of Python modules and configuration schemas. No runtime or security scanning data available. Codebase modularity is good, but no explicit endpoint or integration tests detected.",
+  "scores": {
+    "maintainability": 7,
+    "security": 5,
+    "reliability": 6,
+    "testability": 4
+  },
+  "hotspots": [
+    {
+      "scope": "agents/analyst.py",
+      "reason": "High import count and complexity may indicate maintenance challenges.",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "11 imports detected, including standard and internal modules"
+        }
+      ]
+    },
+    {
+      "scope": "lack_of_explicit_routes",
+      "reason": "No explicit HTTP route definitions found in scanned modules, despite hints of FastAPI usage.",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "static_analysis",
+          "line": 1,
+          "evidence": "No routes detected in static analysis despite decorator hints"
+        }
+      ]
+    },
+    {
+      "scope": "testing_coverage",
+      "reason": "No explicit test modules or test routes detected, impacting testability score.",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "static_analysis",
+          "line": 1,
+          "evidence": "No test routes or test modules identified in scan"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Potential insufficient API endpoint coverage",
+      "description": "Static analysis did not detect explicit API routes, which may indicate missing or incomplete API surface or documentation.",
+      "severity": "high",
+      "confidence": 0.7
+    },
+    {
+      "title": "Limited test coverage",
+      "description": "Absence of detected test modules or routes suggests risk of regressions and lower reliability.",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Complex module dependencies",
+      "description": "Modules with high import counts may be harder to maintain and evolve without introducing bugs.",
+      "severity": "medium",
+      "confidence": 0.9
+    }
+  ]
+}
