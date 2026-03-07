@@ -1,0 +1,98 @@
+{
+  "artifact_type": "migration_plan",
+  "artifact_version": "1.0",
+  "metadata": {
+    "generated_at": "2026-03-07T03:18:39.003765+00:00",
+    "skill_pack": {
+      "id": "vb6_legacy",
+      "version": "1.0.0",
+      "confidence": 0.99
+    },
+    "context_reference": {
+      "repo": "https://github.com/vishakjai/TestVB6Project1",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "version_id": "20260307T031744Z_20260307_031713_a6e2e5e3"
+    }
+  },
+  "strategy": {
+    "cutover": "phased",
+    "backfill": "table_by_table_with_reconciliation",
+    "rollback": "retain_source_snapshot_per_batch"
+  },
+  "sequence": [
+    {
+      "step": 1,
+      "title": "Create target schema and constraints in staging environment."
+    },
+    {
+      "step": 2,
+      "title": "Backfill reference/master tables, then transaction/history tables."
+    },
+    {
+      "step": 3,
+      "title": "Run reconciliation checks (row counts, financial aggregates, spot checks)."
+    },
+    {
+      "step": 4,
+      "title": "Perform controlled cutover and monitor verification dashboard."
+    }
+  ],
+  "target_tables": [
+    "bank_system",
+    "closeacount",
+    "controls",
+    "data_report",
+    "date",
+    "form9",
+    "frm_addinterest",
+    "frmcustomer",
+    "frmdeposit",
+    "frm_login",
+    "frmmonthlyreport",
+    "frmsettings",
+    "frm_splash",
+    "frmstatement",
+    "frmwithdraw",
+    "frm_within_date",
+    "iexport_format",
+    "iexport_formats",
+    "irpt_function",
+    "irpt_image",
+    "irpt_label",
+    "irpt_line",
+    "irpt_shape",
+    "irpt_text_box",
+    "menu",
+    "msdata_report_lib",
+    "rpt_error",
+    "rpt_function",
+    "sections",
+    "tblaccount",
+    "tbl_customers",
+    "tbltransaction",
+    "name_data_report1_type_report_description_represents_a_data_report_in_the_legacy_system_possibly_using_a_proprietary_format_for_report_generation_or_display"
+  ],
+  "unresolved_mappings": 0,
+  "blocking_items": [],
+  "artifact_id": "art_migration_plan_6ecba06998bd468d",
+  "run_id": "run_3a5a40bf7327",
+  "generated_at": "2026-03-07T03:18:39.003765+00:00",
+  "producer": {
+    "agent": "Analyst Agent",
+    "skill_pack": "vb6_legacy",
+    "skill_version": "1.0.0"
+  },
+  "context": {
+    "repo": "https://github.com/vishakjai/TestVB6Project1",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_ee367f5339f447bf",
+    "canonical_project": "BANK",
+    "target_stack": {
+      "language": "C#",
+      "ui": "Unknown",
+      "db": "Unknown"
+    }
+  }
+}
