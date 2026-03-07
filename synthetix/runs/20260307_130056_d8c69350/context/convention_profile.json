@@ -1,0 +1,146 @@
+{
+  "version": "cp-v2.1",
+  "summary": "Python-based multi-agent architecture with enterprise patterns, VB6 legacy support, and containerized deployment conventions",
+  "rules": [
+    {
+      "id": "naming:agent-modules",
+      "category": "naming",
+      "rule": "Agent modules follow snake_case naming with descriptive suffixes (e.g., database_engineer.py, security_engineer.py)",
+      "confidence": 0.95,
+      "examples": [
+        "database_engineer.py",
+        "security_engineer.py",
+        "system_intelligence.py"
+      ],
+      "counterexamples": [
+        "DatabaseEngineer.py",
+        "db_eng.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent snake_case naming across agent modules"
+        }
+      ]
+    },
+    {
+      "id": "naming:vb6-forms",
+      "category": "naming",
+      "rule": "VB6 forms use lowercase names with descriptive purposes (main.frm, login.frm, deposit.frm)",
+      "confidence": 0.9,
+      "examples": [
+        "main.frm",
+        "login.frm",
+        "deposit.frm",
+        "withdrawal.frm"
+      ],
+      "counterexamples": [
+        "Form1.frm",
+        "frmMain.frm"
+      ],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Form naming pattern in VB6 project"
+        }
+      ]
+    },
+    {
+      "id": "api:fastapi-decorators",
+      "category": "api",
+      "rule": "API endpoints use FastAPI decorators (@app.get, @app.post) for route definition",
+      "confidence": 0.8,
+      "examples": [
+        "@app.get",
+        "@app.post"
+      ],
+      "counterexamples": [
+        "@route",
+        "@endpoint"
+      ],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI decorator usage"
+        }
+      ]
+    },
+    {
+      "id": "auth:vb6-forms",
+      "category": "auth",
+      "rule": "VB6 authentication uses password masking with PasswordChar property",
+      "confidence": 0.85,
+      "examples": [
+        "PasswordChar = \"*\""
+      ],
+      "counterexamples": [
+        "plain text passwords"
+      ],
+      "provenance": [
+        {
+          "file": "newlogin.frm",
+          "line": 1,
+          "evidence": "PasswordChar = \"*\" in txtpass control"
+        }
+      ]
+    },
+    {
+      "id": "error_handling:vb6-basic",
+      "category": "error_handling",
+      "rule": "VB6 uses basic error handling with minimal exception management",
+      "confidence": 0.7,
+      "examples": [
+        "End statement for termination"
+      ],
+      "counterexamples": [
+        "try-catch blocks",
+        "structured error handling"
+      ],
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Simple End statement usage"
+        }
+      ]
+    },
+    {
+      "id": "testing:schema-validation",
+      "category": "testing",
+      "rule": "JSON schema validation used for agent contracts and data structures",
+      "confidence": 0.9,
+      "examples": [
+        "agent_result.schema.json",
+        "context_bundle.schema.json"
+      ],
+      "counterexamples": [
+        "no validation",
+        "runtime-only validation"
+      ],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive schema validation files"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement Python type hints across all agent modules",
+    "Add comprehensive error handling to VB6 form event handlers",
+    "Standardize API response formats across FastAPI endpoints",
+    "Add input validation for VB6 form controls",
+    "Implement logging standards across agent orchestration"
+  ],
+  "scaffold_templates": [
+    "BaseAgent class template for new agent implementations",
+    "FastAPI endpoint template with standard error handling",
+    "VB6 form template with consistent control naming",
+    "Docker container template for agent deployment",
+    "JSON schema template for agent contracts"
+  ]
+}
