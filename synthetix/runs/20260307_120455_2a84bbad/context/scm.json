@@ -1,0 +1,303 @@
+{
+  "version": "scm-v1.2.0",
+  "summary": "Multi-agent enterprise software modernization platform with Python-based agent orchestration, schema-driven validation, and containerized deployment architecture. System lacks VB6 legacy artifacts but provides modernization toolchain infrastructure.",
+  "nodes": [
+    {
+      "id": "service:modernization-platform",
+      "type": "Service",
+      "name": "Enterprise Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "deployment": "containerized",
+        "agent_count": 9,
+        "schema_driven": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Multi-agent imports with analyst, architect, developer roles"
+        },
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Containerized deployment configuration"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-orchestrator",
+      "type": "Component",
+      "name": "Agent Orchestration Layer",
+      "metadata": {
+        "agents": [
+          "analyst",
+          "architect",
+          "developer",
+          "database_engineer",
+          "security_engineer",
+          "tester",
+          "validator",
+          "deployer",
+          "system_intelligence"
+        ],
+        "base_class": "agents.base"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Centralized agent imports"
+        },
+        {
+          "file": "agents/base.py",
+          "line": 1,
+          "evidence": "Base agent class implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:schema-validator",
+      "type": "Component",
+      "name": "Schema Validation Engine",
+      "metadata": {
+        "schema_count": 11,
+        "format": "json-schema",
+        "validation_scope": [
+          "agent_results",
+          "reports",
+          "contexts",
+          "business_rules"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "11 JSON schema files for validation"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:context-vault-api",
+      "type": "Endpoint",
+      "name": "Context Vault API",
+      "metadata": {
+        "framework": "FastAPI",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "purpose": "context_management"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get and @app.post decorators detected"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:web-server",
+      "type": "Endpoint",
+      "name": "Web Server Interface",
+      "metadata": {
+        "framework": "FastAPI",
+        "methods": [
+          "GET"
+        ],
+        "purpose": "web_interface"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get decorator detected"
+        }
+      ]
+    },
+    {
+      "id": "component:audit-engine",
+      "type": "Component",
+      "name": "E2E Audit Engine",
+      "metadata": {
+        "audit_types": [
+          "business_analysis",
+          "technical"
+        ],
+        "scope": "end_to_end"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "e2e/audit/ba_audit.py",
+          "line": 1,
+          "evidence": "Business analysis audit implementation"
+        },
+        {
+          "file": "e2e/audit/tech_audit.py",
+          "line": 1,
+          "evidence": "Technical audit implementation"
+        }
+      ]
+    },
+    {
+      "id": "database:team-data",
+      "type": "Database",
+      "name": "Team Configuration Data",
+      "metadata": {
+        "format": "json",
+        "entities": [
+          "custom_agents",
+          "custom_teams",
+          "work_items"
+        ],
+        "storage": "file_based"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "team_data/custom_agents.json",
+          "line": 1,
+          "evidence": "Agent configuration data"
+        },
+        {
+          "file": "team_data/custom_teams.json",
+          "line": 1,
+          "evidence": "Team configuration data"
+        },
+        {
+          "file": "team_data/work_items.json",
+          "line": 1,
+          "evidence": "Work item tracking data"
+        }
+      ]
+    },
+    {
+      "id": "container:docker-runtime",
+      "type": "Container",
+      "name": "Docker Runtime Environment",
+      "metadata": {
+        "base_image": "python",
+        "orchestration": "docker-compose",
+        "ports_exposed": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Docker container configuration"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Container orchestration setup"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "component:agent-orchestrator",
+      "to": "component:schema-validator",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "module_dependency"
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 10,
+          "evidence": "Schema validation imports in agent modules"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:modernization-platform",
+      "to": "container:docker-runtime",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "deployment_type": "containerized"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Service containerization configuration"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "component:agent-orchestrator",
+      "to": "endpoint:context-vault-api",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "protocol": "HTTP",
+        "framework": "FastAPI"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "HTTP endpoint definitions for context management"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "component:agent-orchestrator",
+      "to": "database:team-data",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "access_type": "file_read",
+        "format": "json"
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "JSON data files for team configuration"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "component:audit-engine",
+      "to": "component:agent-orchestrator",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "dependency_type": "functional"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "e2e/audit/",
+          "line": 1,
+          "evidence": "Audit components depend on agent orchestration"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "VB6 legacy system artifacts not present in repository",
+    "Microsoft Access database schema and data contracts",
+    "PostgreSQL target schema design",
+    "Authentication and authorization mechanisms",
+    "External system integrations and APIs",
+    "Production deployment infrastructure details"
+  ]
+}
