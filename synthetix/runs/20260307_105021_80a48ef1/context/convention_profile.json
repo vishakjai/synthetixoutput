@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "summary": "Coding and architectural conventions extracted from the repository for consistent naming, error handling, testing, logging, auth, API, and security practices.",
+  "rules": [
+    {
+      "id": "naming-python-modules",
+      "category": "naming",
+      "rule": "Python module names should use lowercase with underscores as separators, matching the existing pattern in the agents package.",
+      "confidence": 0.9,
+      "examples": [
+        "agents.database_engineer",
+        "agents.security_engineer"
+      ],
+      "counterexamples": [
+        "agents.DatabaseEngineer",
+        "agents.SecurityEngineer"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Modules imported with lowercase underscore style"
+        }
+      ]
+    },
+    {
+      "id": "error-handling-python",
+      "category": "error_handling",
+      "rule": "Use try-except blocks to catch and handle exceptions explicitly, logging errors with context before re-raising or returning error responses.",
+      "confidence": 0.8,
+      "examples": [
+        "try:\n  ...\nexcept Exception as e:\n  logger.error(f'Error: {e}')\n  raise"
+      ],
+      "counterexamples": [
+        "except:\n  pass"
+      ],
+      "provenance": [
+        {
+          "file": "repo-scan",
+          "line": 1,
+          "evidence": "auto-filled provenance"
+        }
+      ]
+    },
+    {
+      "id": "testing-coverage",
+      "category": "testing",
+      "rule": "Maintain unit tests for all agents modules with coverage above 80%, using pytest or equivalent frameworks.",
+      "confidence": 0.7,
+      "examples": [
+        "def test_agent_function():\n  assert agent_function() == expected"
+      ],
+      "counterexamples": [
+        "No tests or manual test scripts"
+      ],
+      "provenance": [
+        {
+          "file": "repo-scan",
+          "line": 1,
+          "evidence": "auto-filled provenance"
+        }
+      ]
+    },
+    {
+      "id": "logging-usage",
+      "category": "logging",
+      "rule": "Use structured logging with context information for all major operations and error conditions.",
+      "confidence": 0.75,
+      "examples": [
+        "logger.info('Starting deployment', extra={'agent': 'deployer'})"
+      ],
+      "counterexamples": [
+        "print('Starting deployment')"
+      ],
+      "provenance": [
+        {
+          "file": "repo-scan",
+          "line": 1,
+          "evidence": "auto-filled provenance"
+        }
+      ]
+    },
+    {
+      "id": "auth-best-practices",
+      "category": "auth",
+      "rule": "Use token-based authentication with role-based access control for all API endpoints, avoiding hardcoded credentials.",
+      "confidence": 0.7,
+      "examples": [
+        "@app.route('/secure')\n@token_required\ndef secure_endpoint():\n  pass"
+      ],
+      "counterexamples": [
+        "Hardcoded passwords in source code"
+      ],
+      "provenance": [
+        {
+          "file": "repo-scan",
+          "line": 1,
+          "evidence": "auto-filled provenance"
+        }
+      ]
+    },
+    {
+      "id": "api-design",
+      "category": "api",
+      "rule": "Design RESTful APIs with clear resource naming, proper HTTP methods, and consistent response formats.",
+      "confidence": 0.8,
+      "examples": [
+        "GET /agents/{id}",
+        "POST /agents"
+      ],
+      "counterexamples": [
+        "RPC style endpoints with verbs in URLs"
+      ],
+      "provenance": [
+        {
+          "file": "repo-scan",
+          "line": 1,
+          "evidence": "auto-filled provenance"
+        }
+      ]
+    },
+    {
+      "id": "security-sensitive-data",
+      "category": "security",
+      "rule": "Do not store sensitive credentials or secrets in source code; use environment variables or secure vaults.",
+      "confidence": 0.9,
+      "examples": [
+        "os.environ.get('DB_PASSWORD')"
+      ],
+      "counterexamples": [
+        "db_password = 'hardcodedpassword'"
+      ],
+      "provenance": [
+        {
+          "file": "repo-scan",
+          "line": 1,
+          "evidence": "auto-filled provenance"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce PEP8 style for Python code with flake8 or black.",
+    "Use bandit or similar tools for security linting.",
+    "Validate JSON schema for configuration files before deployment."
+  ],
+  "scaffold_templates": [
+    "Python agent module template with logging, error handling, and configuration loading.",
+    "REST API endpoint scaffold with authentication and input validation.",
+    "Unit test template with pytest and coverage reporting."
+  ]
+}
