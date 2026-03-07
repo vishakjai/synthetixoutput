@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the legacy VB6 banking application, detailing its components, dependencies, and interactions.",
+  "nodes": [
+    {
+      "id": "node-vbp-BANKING",
+      "type": "Component",
+      "name": "BANKING.vbp",
+      "metadata": {
+        "type": "Exe",
+        "references": [
+          "OLE Automation",
+          "Microsoft ActiveX Data Objects 2.0 Library",
+          "Microsoft DAO 3.51 Object Library"
+        ],
+        "objects": [
+          "MSCOMCT2.OCX",
+          "COMCT232.OCX",
+          "COMCTL32.OCX",
+          "MSWINSCK.OCX",
+          "MSADODC.OCX"
+        ],
+        "forms": [
+          "LOGIN.frm",
+          "main.frm",
+          "frmcustomer.frm"
+        ],
+        "modules": [
+          "Module1.bas"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "node-form-main",
+      "type": "Form",
+      "name": "main.frm",
+      "metadata": {
+        "events": [
+          "Command1_Click",
+          "Command2_Click",
+          "Command3_Click"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Private Sub Command1_Click()"
+        }
+      ]
+    },
+    {
+      "id": "node-db-BANK1",
+      "type": "Database",
+      "name": "BANK1.mdb",
+      "metadata": {
+        "provider": "Microsoft.Jet.OLEDB.4.0",
+        "tables": [
+          "customer"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Provider=Microsoft.Jet.OLEDB.4.0"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "USES_LIBRARY",
+      "from": "node-vbp-BANKING",
+      "to": "node-db-BANK1",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "connection_string": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Connection1"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
