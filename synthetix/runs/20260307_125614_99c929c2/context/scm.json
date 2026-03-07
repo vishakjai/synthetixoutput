@@ -1,0 +1,368 @@
+{
+  "version": "scm-v1.2.0",
+  "summary": "Multi-agent enterprise software modernization platform with VB6 banking application analysis capability. Core architecture consists of specialized agents (analyst, architect, developer, etc.) with FastAPI web interface and context management utilities.",
+  "nodes": [
+    {
+      "id": "service:modernization_platform",
+      "type": "Service",
+      "name": "Enterprise Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "framework": "fastapi",
+        "agent_count": 9,
+        "deployment": "docker"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "config.py",
+          "line": 1,
+          "evidence": "Configuration module for platform"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Service orchestration definition"
+        }
+      ]
+    },
+    {
+      "id": "component:agent_system",
+      "type": "Component",
+      "name": "Multi-Agent System",
+      "metadata": {
+        "agent_types": [
+          "analyst",
+          "architect",
+          "developer",
+          "database_engineer",
+          "security_engineer",
+          "tester",
+          "validator",
+          "deployer",
+          "system_intelligence"
+        ],
+        "base_class": "BaseAgent"
+      },
+      "confidence": 0.98,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Agent module imports"
+        },
+        {
+          "file": "agents/base.py",
+          "line": 1,
+          "evidence": "Base agent class definition"
+        }
+      ]
+    },
+    {
+      "id": "component:web_interface",
+      "type": "Component",
+      "name": "Web Server Interface",
+      "metadata": {
+        "framework": "fastapi",
+        "routes": [
+          "context_vault",
+          "server"
+        ]
+      },
+      "confidence": 0.92,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI server implementation"
+        },
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "Context management endpoints"
+        }
+      ]
+    },
+    {
+      "id": "module:agents_analyst",
+      "type": "Module",
+      "name": "Analyst Agent",
+      "metadata": {
+        "specialization": "code_analysis",
+        "imports": 11,
+        "dependencies": [
+          "future",
+          "typing",
+          "pydantic",
+          "json",
+          "re",
+          "datetime",
+          "pathlib"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Analyst agent module definition"
+        }
+      ]
+    },
+    {
+      "id": "module:agents_system_intelligence",
+      "type": "Module",
+      "name": "System Intelligence Layer Agent",
+      "metadata": {
+        "specialization": "system_context_modeling",
+        "role": "SIL_agent",
+        "imports": 5
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "SIL agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "external_dep:vb6_banking_app",
+      "type": "ExternalDependency",
+      "name": "VB6 Banking Application",
+      "metadata": {
+        "project_file": "BANKING.vbp",
+        "forms": [
+          "LOGIN.frm",
+          "main.frm",
+          "frmcustomer.frm",
+          "deposit.frm",
+          "withdrawal.frm",
+          "transaction.frm",
+          "accounttype.frm",
+          "reports.frm",
+          "newlogin.frm",
+          "splash.frm"
+        ],
+        "database": "BANK1.mdb",
+        "data_access": [
+          "ADO",
+          "DAO"
+        ],
+        "controls": [
+          "MSCOMCT2.OCX",
+          "COMCTL32.OCX",
+          "MSCOMCTL.OCX",
+          "MSWINSCK.OCX"
+        ]
+      },
+      "confidence": 0.98,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "VB6 project file with references and forms"
+        },
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Main form implementation"
+        },
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Database connection configuration"
+        }
+      ]
+    },
+    {
+      "id": "database:bank1_mdb",
+      "type": "Database",
+      "name": "Bank Database",
+      "metadata": {
+        "type": "Microsoft Access",
+        "file": "BANK1.mdb",
+        "tables": [
+          "customer"
+        ],
+        "connection_string": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Connection string and table references"
+        }
+      ]
+    },
+    {
+      "id": "table:customer",
+      "type": "Table",
+      "name": "Customer Table",
+      "metadata": {
+        "columns": [
+          "customerid",
+          "firstname",
+          "lastname",
+          "contacttitle",
+          "nationalidno",
+          "datejoined",
+          "accounttype",
+          "accountno",
+          "openingbalance",
+          "address",
+          "postalcode",
+          "location",
+          "phoneno",
+          "mobileno",
+          "email"
+        ],
+        "primary_key": "customerid"
+      },
+      "confidence": 0.92,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Customer table schema definition"
+        }
+      ]
+    },
+    {
+      "id": "container:docker_platform",
+      "type": "Container",
+      "name": "Dockerized Platform",
+      "metadata": {
+        "base_image": "python",
+        "requirements_file": "requirements.txt",
+        "compose_services": 1
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Container definition"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Service orchestration"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "module:agents_analyst",
+      "to": "component:agent_system",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import AnalystAgent"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "module:agents_system_intelligence",
+      "to": "component:agent_system",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 9,
+          "evidence": "from .system_intelligence import SystemIntelligenceAgent"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "component:web_interface",
+      "to": "component:agent_system",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "dependency_type": "runtime"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "Web interface orchestrates agent execution"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "external_dep:vb6_banking_app",
+      "to": "table:customer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "access_method": "ADO/DAO"
+      },
+      "confidence": 0.92,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data environment command references customer table"
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "database:bank1_mdb",
+      "to": "table:customer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "ownership_type": "schema"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Customer table defined within BANK1.mdb schema"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:modernization_platform",
+      "to": "container:docker_platform",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "runtime": "docker"
+      },
+      "confidence": 0.88,
+      "evidence": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Platform service containerization"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "VB6 application runtime dependencies and COM object registrations",
+    "Database migration strategy from Access to target system",
+    "Authentication and session management implementation in VB6 app",
+    "Network communication protocols used by MSWINSCK.OCX",
+    "Data validation rules and business logic embedded in VB6 forms"
+  ]
+}
