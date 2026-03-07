@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "summary": "Health assessment based on static analysis of the repository modules and configuration artifacts.",
+  "scores": {
+    "maintainability": 75,
+    "security": 70,
+    "reliability": 80,
+    "testability": 65
+  },
+  "hotspots": [
+    {
+      "scope": "agents/analyst.py",
+      "reason": "High import count and dependency on multiple standard libraries increase complexity.",
+      "severity": "medium",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Imports json, re, datetime, pathlib and others"
+        }
+      ]
+    },
+    {
+      "scope": "agents/__init__.py",
+      "reason": "Central module importing many submodules, changes here impact entire agents package.",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Imports 9 submodules"
+        }
+      ]
+    },
+    {
+      "scope": "Configuration files (.deliveryos/schemas/*.json)",
+      "reason": "Schema files critical for validation but require ongoing synchronization with code.",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json",
+          "line": 1,
+          "evidence": "JSON schema for agent results"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Lack of explicit API route definitions",
+      "description": "No HTTP route definitions detected in static analysis; potential missing or incomplete API surface.",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Potential insufficient test coverage",
+      "description": "No explicit test files or route tests detected; risk of regressions during modernization.",
+      "severity": "medium",
+      "confidence": 0.7
+    },
+    {
+      "title": "Hardcoded or missing secrets management",
+      "description": "No evidence of secrets vault or environment variable usage for sensitive data; risk of credential leaks.",
+      "severity": "high",
+      "confidence": 0.75
+    }
+  ]
+}
