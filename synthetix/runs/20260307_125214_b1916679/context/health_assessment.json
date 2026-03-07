@@ -1,0 +1,90 @@
+{
+  "version": "ha-v1.1.0",
+  "summary": "Mature Python enterprise platform with strong architectural patterns but critical business objective mismatch - no VB6 artifacts found despite VB6 regression verification objective.",
+  "scores": {
+    "maintainability": 8,
+    "security": 6,
+    "reliability": 7,
+    "testability": 7
+  },
+  "hotspots": [
+    {
+      "scope": "Business Objective Alignment",
+      "reason": "Business objective targets VB6 regression verification but repository contains no VB6 artifacts (.frm, .frx, .bas, .cls files)",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "repository_scan",
+          "line": 1,
+          "evidence": "No VB6 file extensions detected in 122 scanned files"
+        }
+      ]
+    },
+    {
+      "scope": "Configuration Management",
+      "reason": "Firestore/GCS worker configuration mentioned in objective but not found in codebase",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "config.py",
+          "line": 1,
+          "evidence": "No Firestore/GCS configuration detected"
+        }
+      ]
+    },
+    {
+      "scope": "Import Dependencies",
+      "reason": "472 import edges detected with potential circular dependency risks",
+      "severity": "medium",
+      "confidence": 0.75,
+      "provenance": [
+        {
+          "file": "static_analysis",
+          "line": 1,
+          "evidence": "High import edge count requires dependency analysis"
+        }
+      ]
+    },
+    {
+      "scope": "Error Handling",
+      "reason": "No standardized error handling patterns detected across modules",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Inconsistent error handling across agent modules"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Business Objective Mismatch",
+      "description": "Repository does not contain VB6 artifacts required for stated regression verification objective",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "Missing Configuration Context",
+      "description": "Firestore/GCS worker configuration referenced in objective but not present in codebase",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Dependency Complexity",
+      "description": "High import edge count (472) may indicate tight coupling and maintenance challenges",
+      "severity": "medium",
+      "confidence": 0.75
+    },
+    {
+      "title": "Security Configuration Gaps",
+      "description": "No explicit security configuration or authentication patterns detected",
+      "severity": "medium",
+      "confidence": 0.7
+    }
+  ]
+}
