@@ -1,0 +1,99 @@
+{
+  "version": "1.0.0",
+  "summary": "Coding and architectural conventions extracted from the repository and its schemas for consistent modernization and maintainability.",
+  "rules": [
+    {
+      "id": "naming-python-modules",
+      "category": "naming",
+      "rule": "Python modules should use lowercase with underscores for multi-word names, matching the existing pattern in agents/*.py files.",
+      "confidence": 0.9,
+      "examples": [
+        "agents_database_engineer.py",
+        "agents_security_engineer.py"
+      ],
+      "counterexamples": [
+        "AgentsDatabaseEngineer.py",
+        "agentsDatabaseEngineer.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "module filename and import style"
+        }
+      ]
+    },
+    {
+      "id": "import-absolute-relative",
+      "category": "naming",
+      "rule": "Use relative imports within the 'agents' package as per existing usage in agents/__init__.py.",
+      "confidence": 0.95,
+      "examples": [
+        "from . import analyst",
+        "from . import architect"
+      ],
+      "counterexamples": [
+        "import agents.analyst",
+        "import agents.architect"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "relative imports used"
+        }
+      ]
+    },
+    {
+      "id": "json-schema-contracts",
+      "category": "api",
+      "rule": "Use JSON Schema files under .deliveryos/schemas/ to define data contracts for agents and reports, ensuring validation and backward compatibility.",
+      "confidence": 0.95,
+      "examples": [
+        ".deliveryos/schemas/agent_result.schema.json",
+        ".deliveryos/schemas/agent_task.schema.json"
+      ],
+      "counterexamples": [
+        "ad-hoc JSON validation in code",
+        "no schema files"
+      ],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json",
+          "line": 1,
+          "evidence": "presence of JSON schema files"
+        }
+      ]
+    },
+    {
+      "id": "pipeline-specification",
+      "category": "api",
+      "rule": "Define CI/CD pipeline stages and artifacts declaratively in .deliveryos/pipeline/pipeline_spec.yaml for consistent delivery automation.",
+      "confidence": 0.9,
+      "examples": [
+        ".deliveryos/pipeline/pipeline_spec.yaml"
+      ],
+      "counterexamples": [
+        "pipeline defined only in scripts",
+        "no pipeline specification"
+      ],
+      "provenance": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "pipeline specification file"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce PEP8 style for Python code with tools like flake8 or pylint.",
+    "Validate JSON schema files with jsonschema CLI tools before deployment.",
+    "Use relative imports consistently within the agents package."
+  ],
+  "scaffold_templates": [
+    "Python module template with relative imports and docstring header.",
+    "JSON Schema template for agent data contracts with versioning metadata.",
+    "YAML pipeline spec template defining stages, artifacts, and principles."
+  ]
+}
