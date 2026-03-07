@@ -1,0 +1,100 @@
+{
+  "version": "1.0.0",
+  "summary": "Coding and architectural conventions inferred from the repository, emphasizing Python module structure, import hygiene, and schema usage.",
+  "rules": [
+    {
+      "id": "CP-001",
+      "category": "naming",
+      "rule": "Python modules and packages should use lowercase with underscores as separators, e.g., 'agents.database_engineer'.",
+      "confidence": 0.9,
+      "examples": [
+        "agents.database_engineer",
+        "agents.system_intelligence"
+      ],
+      "counterexamples": [
+        "Agents.DatabaseEngineer",
+        "agents-DatabaseEngineer"
+      ],
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Module named 'database_engineer' follows lowercase underscore convention."
+        }
+      ]
+    },
+    {
+      "id": "CP-002",
+      "category": "import",
+      "rule": "Use explicit relative imports within the 'agents' package to maintain clear module boundaries.",
+      "confidence": 0.85,
+      "examples": [
+        "from . import analyst",
+        "from . import developer"
+      ],
+      "counterexamples": [
+        "import agents.analyst",
+        "from agents import analyst"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Relative imports used consistently for internal modules."
+        }
+      ]
+    },
+    {
+      "id": "CP-003",
+      "category": "api",
+      "rule": "REST API endpoints should be defined using FastAPI decorators such as '@app.get' or '@app.post' with explicit route paths.",
+      "confidence": 0.8,
+      "examples": [
+        "@app.get('/items')",
+        "@app.post('/submit')"
+      ],
+      "counterexamples": [
+        "app.route('/items')",
+        "flask.route('/submit')"
+      ],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 10,
+          "evidence": "FastAPI decorators '@app.get' and '@app.post' detected."
+        }
+      ]
+    },
+    {
+      "id": "CP-004",
+      "category": "security",
+      "rule": "Secrets and credentials must not be hardcoded in source code; use environment variables or secure vaults.",
+      "confidence": 0.7,
+      "examples": [
+        "os.getenv('DB_PASSWORD')",
+        "vault.get_secret('db_password')"
+      ],
+      "counterexamples": [
+        "DB_PASSWORD = 'hardcodedpassword'"
+      ],
+      "provenance": [
+        {
+          "file": "repo-scan",
+          "line": 1,
+          "evidence": "auto-filled provenance"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce PEP8 style for Python code with tools like flake8 or black.",
+    "Validate JSON schema files against their meta-schema before deployment.",
+    "Use static analysis tools to detect unused imports and dead code.",
+    "Implement security scanning for secrets in codebase."
+  ],
+  "scaffold_templates": [
+    "Python FastAPI service scaffold with routing and dependency injection.",
+    "JSON schema template for agent task and result contracts.",
+    "YAML pipeline specification template with stages and artifact definitions."
+  ]
+}
