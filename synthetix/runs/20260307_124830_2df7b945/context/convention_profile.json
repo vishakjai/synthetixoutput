@@ -1,0 +1,111 @@
+{
+  "version": "cp-v1.1.0",
+  "summary": "Python-centric enterprise development with agent-based architecture, schema-driven validation, and containerized deployment patterns.",
+  "rules": [
+    {
+      "id": "naming_agent_modules",
+      "category": "naming",
+      "rule": "Agent modules follow snake_case naming with descriptive role-based names (analyst, architect, developer, etc.)",
+      "confidence": 0.95,
+      "examples": [
+        "agents/analyst.py",
+        "agents/database_engineer.py",
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Consistent agent module naming pattern"
+        }
+      ]
+    },
+    {
+      "id": "schema_validation",
+      "category": "api",
+      "rule": "JSON schema validation enforced through .deliveryos/schemas/ directory with versioned schema files",
+      "confidence": 0.9,
+      "examples": [
+        "agent_result.schema.json",
+        "analyst_report_v2.schema.json",
+        "delivery_constitution_v1.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive schema validation structure"
+        }
+      ]
+    },
+    {
+      "id": "import_organization",
+      "category": "naming",
+      "rule": "Standard library imports first, followed by third-party, then local imports with clear separation",
+      "confidence": 0.85,
+      "examples": [
+        "__future__ imports at top",
+        "datetime, json, re standard libs",
+        "local module imports last"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 10,
+          "evidence": "Organized import structure pattern"
+        }
+      ]
+    },
+    {
+      "id": "containerization_standard",
+      "category": "api",
+      "rule": "Docker containerization with docker-compose for multi-service orchestration",
+      "confidence": 0.9,
+      "examples": [
+        "Dockerfile",
+        "docker-compose.yml",
+        ".dockerignore"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Containerization infrastructure"
+        }
+      ]
+    },
+    {
+      "id": "config_centralization",
+      "category": "naming",
+      "rule": "Centralized configuration through config.py module with environment-based settings",
+      "confidence": 0.8,
+      "examples": [
+        "config.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "config.py",
+          "line": 1,
+          "evidence": "Central configuration pattern"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent docstring standards across agent modules",
+    "Add type hints for better code maintainability",
+    "Standardize error handling patterns across components",
+    "Implement logging configuration standards"
+  ],
+  "scaffold_templates": [
+    "Agent module template with base class inheritance",
+    "FastAPI route module template with schema validation",
+    "Docker service template for new components",
+    "JSON schema template for API contracts"
+  ]
+}
