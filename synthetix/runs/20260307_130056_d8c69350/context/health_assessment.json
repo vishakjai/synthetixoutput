@@ -1,0 +1,100 @@
+{
+  "version": "ha-v2.1",
+  "summary": "Mixed-health system with modern Python architecture but significant legacy VB6 technical debt and security vulnerabilities",
+  "scores": {
+    "maintainability": 6,
+    "security": 3,
+    "reliability": 5,
+    "testability": 4
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Legacy Authentication",
+      "reason": "Hardcoded database paths, basic password masking, no modern authentication mechanisms",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Hardcoded path E:\\project\\myBANKING\\BANK1.mdb"
+        },
+        {
+          "file": "newlogin.frm",
+          "line": 1,
+          "evidence": "Basic PasswordChar masking only"
+        }
+      ]
+    },
+    {
+      "scope": "Database Connection Security",
+      "reason": "Legacy ADO connections with potential SQL injection vulnerabilities and hardcoded connection strings",
+      "severity": "high",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Microsoft ActiveX Data Objects 2.0 Library reference"
+        },
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Direct database connection without parameterization"
+        }
+      ]
+    },
+    {
+      "scope": "Agent Orchestration Complexity",
+      "reason": "High coupling between 11 different agent types with unclear error propagation",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "9 agent imports with complex interdependencies"
+        }
+      ]
+    },
+    {
+      "scope": "VB6 Form Event Handling",
+      "reason": "Minimal error handling in form events, direct form navigation without validation",
+      "severity": "medium",
+      "confidence": 0.75,
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Direct Form.Show calls without error handling"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Legacy Database Security Exposure",
+      "description": "VB6 application uses legacy ADO connections with hardcoded paths and minimal security controls, exposing customer financial data",
+      "severity": "critical",
+      "confidence": 0.9
+    },
+    {
+      "title": "State Store Dependency Risk",
+      "description": "Recent Firestore/GCS fixes indicate instability in core state management, potentially affecting agent coordination",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Legacy Code Maintenance Burden",
+      "description": "VB6 codebase with minimal documentation and basic error handling creates high maintenance overhead",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Agent Orchestration Failure Points",
+      "description": "Complex multi-agent system with unclear failure modes and error propagation patterns",
+      "severity": "medium",
+      "confidence": 0.7
+    }
+  ]
+}
