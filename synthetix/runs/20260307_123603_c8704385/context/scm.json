@@ -1,0 +1,248 @@
+{
+  "version": "1.0",
+  "summary": "System context model extracted from VB6 banking application project files and forms, detailing legacy components, references, and UI forms for modernization to C#.",
+  "nodes": [
+    {
+      "id": "project:banking_vbp",
+      "type": "Module",
+      "name": "Banking VB6 Project",
+      "metadata": {
+        "type": "Exe",
+        "references": [
+          "stdole2.tlb (OLE Automation)",
+          "msado20.tlb (Microsoft ActiveX Data Objects 2.0 Library)",
+          "DAO350.DLL (Microsoft DAO 3.51 Object Library)",
+          "MSCOMCT2.OCX",
+          "COMCT232.OCX",
+          "COMCTL32.OCX",
+          "MSCOMCTL.OCX",
+          "MSWINSCK.OCX",
+          "ieinfo5.ocx",
+          "COMCT332.OCX",
+          "MSADODC.OCX",
+          "msvidctl.dll",
+          "FLEXWIZ.OCX",
+          "agentctl.dll",
+          "MSFLXGRD.OCX",
+          "MSDERUN.DLL (Microsoft Data Environment Instance 1.0)",
+          "MSDBRPTR.DLL (Microsoft Data Report Designer v6.0)",
+          "msstdfmt.dll (Microsoft Data Formatting Object Library 6.0 SP4)",
+          "MSBIND.DLL (Microsoft Data Binding Collection)"
+        ],
+        "forms": [
+          "LOGIN.frm",
+          "main.frm",
+          "frmcustomer.frm",
+          "deposit.frm",
+          "withdrawal.frm",
+          "transaction.frm",
+          "accounttype.frm",
+          "reports.frm",
+          "newlogin.frm",
+          "splash.frm"
+        ],
+        "modules": [
+          "Module1.bas"
+        ],
+        "startup_form": "main",
+        "version_info": {
+          "major": 1,
+          "minor": 0,
+          "revision": 0
+        },
+        "company": "isoft"
+      },
+      "confidence": 0.99,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "VB6 project file listing references, forms, modules, and metadata."
+        }
+      ]
+    },
+    {
+      "id": "form:main_frm",
+      "type": "Form",
+      "name": "Main Form",
+      "metadata": {
+        "controls": [
+          "Command1",
+          "Command2",
+          "Command3",
+          "Command4",
+          "Command5",
+          "Command6",
+          "Command7"
+        ],
+        "behavior": "Each command button shows a different form or ends the application."
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "VB6 form with command buttons triggering other forms or application exit."
+        }
+      ]
+    },
+    {
+      "id": "form:newlogin_frm",
+      "type": "Form",
+      "name": "New Login Form",
+      "metadata": {
+        "controls": [
+          "txtname (TextBox)",
+          "txtpass (TextBox, PasswordChar='*')",
+          "cmdok (CommandButton, Caption='Change')"
+        ],
+        "layout": {
+          "client_width": 9945,
+          "client_height": 6600
+        }
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "newlogin.frm",
+          "line": 1,
+          "evidence": "VB6 form definition with textboxes for username/password and a command button."
+        }
+      ]
+    },
+    {
+      "id": "module:module1_bas",
+      "type": "Module",
+      "name": "Module1",
+      "metadata": {
+        "language": "VB6",
+        "contains": "Procedural code and business logic"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Module1.bas",
+          "line": 1,
+          "evidence": "VB6 module containing business logic and procedural code."
+        }
+      ]
+    },
+    {
+      "id": "legacy_dependency:msado20",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0 Library",
+      "metadata": {
+        "type": "COM Library",
+        "path": "C:\\Program Files\\Common Files\\system\\ado\\msado20.tlb"
+      },
+      "confidence": 0.99,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference to msado20.tlb for ADO data access."
+        }
+      ]
+    },
+    {
+      "id": "legacy_dependency:dao350",
+      "type": "ExternalDependency",
+      "name": "Microsoft DAO 3.51 Object Library",
+      "metadata": {
+        "type": "COM Library",
+        "path": "C:\\Program Files\\Common Files\\Microsoft Shared\\DAO\\DAO350.DLL"
+      },
+      "confidence": 0.99,
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Reference to DAO350.DLL for DAO data access."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "project:banking_vbp",
+      "to": "legacy_dependency:msado20",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Project references ADO 2.0 library."
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "project:banking_vbp",
+      "to": "legacy_dependency:dao350",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 4,
+          "evidence": "Project references DAO 3.51 library."
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "project:banking_vbp",
+      "to": "form:main_frm",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 20,
+          "evidence": "Main form listed as part of project forms."
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "project:banking_vbp",
+      "to": "form:newlogin_frm",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 40,
+          "evidence": "Newlogin form listed as part of project forms."
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "project:banking_vbp",
+      "to": "module:module1_bas",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BANKING.vbp",
+          "line": 21,
+          "evidence": "Module1.bas included as project module."
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Exact database schema and SQL queries used in legacy code",
+    "Authentication and authorization mechanisms beyond UI forms",
+    "Business logic details inside modules and forms",
+    "Integration points with external systems or services"
+  ]
+}
