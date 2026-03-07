@@ -1,0 +1,96 @@
+{
+  "version": "ha-v1.3.0",
+  "summary": "Legacy VB6 banking application with critical security vulnerabilities, poor maintainability, and high modernization risk. Requires immediate security hardening and systematic refactoring.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 3,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "newlogin.frm password handling",
+      "reason": "Password change functionality without encryption, validation, or secure storage",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "newlogin.frm",
+          "line": 1,
+          "evidence": "PasswordChar = \"*\""
+        }
+      ]
+    },
+    {
+      "scope": "DataEnvironment1 connection string",
+      "reason": "Hardcoded database path with no connection pooling or error handling",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+        }
+      ]
+    },
+    {
+      "scope": "main.frm event handlers",
+      "reason": "No error handling in form navigation logic",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Private Sub Command1_Click()"
+        }
+      ]
+    },
+    {
+      "scope": "customer table schema",
+      "reason": "Sensitive PII fields (nationalidno, email) without encryption indicators",
+      "severity": "high",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "nationalidno nationalidno"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Vulnerability",
+      "description": "ADO/DAO data access without parameterized queries creates injection attack surface",
+      "severity": "critical",
+      "confidence": 0.8
+    },
+    {
+      "title": "Plaintext Credential Storage",
+      "description": "No evidence of password hashing or encryption in authentication system",
+      "severity": "critical",
+      "confidence": 0.75
+    },
+    {
+      "title": "PII Data Exposure",
+      "description": "Customer table contains sensitive data (nationalidno) without encryption",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Single Point of Failure",
+      "description": "Hardcoded database path creates deployment and disaster recovery risks",
+      "severity": "high",
+      "confidence": 0.95
+    },
+    {
+      "title": "Legacy Runtime Dependencies",
+      "description": "VB6 runtime and ActiveX controls create maintenance and security update challenges",
+      "severity": "medium",
+      "confidence": 0.9
+    }
+  ]
+}
