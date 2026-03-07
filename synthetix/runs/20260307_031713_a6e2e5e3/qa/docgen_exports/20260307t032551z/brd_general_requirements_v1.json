@@ -1,0 +1,73 @@
+{
+  "artifact": "brd_general_requirements_v1",
+  "functional_requirements": [
+    "MOD-001: Customer Management — Operational reporting and statement generation workflow.",
+    "MOD-002: Daily Processing — Business workflow module derived from legacy operational behavior.",
+    "MOD-003: Date Range Processing — Business workflow module derived from legacy operational behavior.",
+    "MOD-004: Deposit Capture — Deposit capture and balance posting workflow.",
+    "MOD-005: Password Management — Authentication and credential validation workflow.",
+    "MOD-006: Splash/Loading — Startup/loading workflow that gates entry to the main application.",
+    "MOD-007: Withdrawal Processing — Withdrawal processing and balance deduction workflow."
+  ],
+  "non_functional_requirements": [
+    "Operational workflows should respond consistently and support day-to-day processing without avoidable delay.",
+    "Validation outcomes must be understandable to business users and recoverable without technical intervention.",
+    "Business outcomes and data changes must remain traceable for migration verification and audit review.",
+    "Modernized workflows must preserve role-appropriate access and protection of sensitive business data."
+  ],
+  "compliance_requirements": [
+    "Customer, account, and transaction data must be processed using approved security and privacy controls.",
+    "High-severity risks identified during discovery must be resolved before production approval.",
+    "Compliance constraints are not linked to detected security/privacy risks. No explicit compliance constraints were linked, but security/privacy risks were detected in legacy behavior."
+  ],
+  "business_rules": [
+    "The action proceeds only when the dataset is empty.",
+    "The action proceeds only when matching records are found.",
+    "Balance is recalculated using the entered amount and current account value.",
+    "Loading sequence gates the workflow at progress start and completion."
+  ],
+  "display_requirements": [
+    "Required fields are clearly marked before user submission.",
+    "Validation messages are shown in business language near the affected input.",
+    "Read-only computed values (for example balance displays) are visually distinct from editable fields.",
+    "Navigation actions and cancel/back options remain consistently available across modules.",
+    "Loading/progress states are visible whenever workflow execution is asynchronous."
+  ],
+  "validations": [
+    "User authentication is required before entering the workflow.",
+    "The action proceeds only when the dataset is empty.",
+    "Input validation rule detected (IsNumeric/IsDate/Len).",
+    "Input is restricted to numeric digits only.",
+    "The action proceeds only when matching records are found."
+  ],
+  "notifications": [],
+  "navigation_rules": [
+    "menu routes to frmdeposit (flow).",
+    "menu routes to frmwithdraw (flow).",
+    "menu routes to frmaddinterest (flow).",
+    "menu routes to frmcloseacount (flow).",
+    "menu routes to frmcustomer (flow).",
+    "menu routes to rpttransaction (flow).",
+    "menu routes to frminterest (flow).",
+    "menu routes to frmWithinDate (flow).",
+    "menu routes to frmstatement (flow).",
+    "menu routes to frmtransaction (flow).",
+    "menu routes to rptWithdrawals (flow).",
+    "menu routes to frmmonthlyreport (flow).",
+    "menu routes to frmsettings (flow)."
+  ],
+  "shared_integrations": [
+    "Reporting outputs rely on legacy report-generation mappings that require business validation in the target solution.",
+    "Shared workflows depend on customer, account, balance, and transaction data remaining consistent across modules."
+  ],
+  "common_nonfunctional_notes": [
+    "Compliance constraints are not linked to detected security/privacy risks. No explicit compliance constraints were linked, but security/privacy risks were detected in legacy behavior.",
+    "Target UI framework selection for migrated forms",
+    "ActiveX/OCX replacement strategy by dependency",
+    "Database contract strategy during migration",
+    "Confirm identity/access model (role model, multi-user assumptions, and credential handling).",
+    "Are there existing operational constraints or integration dependencies not listed?",
+    "What are target latency, throughput, and availability SLOs?",
+    "frmdeposit, frmstatement have zero extracted UI events with rich form profiles. Confirm whether these are stub forms or rerun extraction before sprint planning."
+  ]
+}
