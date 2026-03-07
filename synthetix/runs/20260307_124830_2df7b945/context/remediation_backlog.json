@@ -1,0 +1,142 @@
+[
+  {
+    "id": "rb_001_vb6_scope_clarification",
+    "title": "Resolve VB6 Legacy Code Location Discrepancy",
+    "problem_statement": "Business objective specifies VB6 regression verification but no VB6 files (.frm/.frx/.bas/.cls) found in repository",
+    "scope": [
+      "repository_scope",
+      "business_objectives"
+    ],
+    "risk_if_unaddressed": "Project will fail to meet stated regression verification requirements for VB6 legacy systems",
+    "effort": "S",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "1) Verify correct repository scope 2) Locate VB6 legacy codebase 3) Update repository context or business objectives",
+    "success_criteria": [
+      "VB6 legacy code located and accessible",
+      "Business objectives aligned with repository contents"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "language_counts shows no VB6 file types"
+      }
+    ]
+  },
+  {
+    "id": "rb_002_test_coverage_implementation",
+    "title": "Implement Comprehensive Test Suite",
+    "problem_statement": "No test files detected despite having dedicated tester agent and enterprise modernization requirements",
+    "scope": [
+      "agents/tester.py",
+      "overall_quality"
+    ],
+    "risk_if_unaddressed": "Regression verification impossible without test coverage, violating delivery constitution requirements",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "rb_001_vb6_scope_clarification"
+    ],
+    "suggested_approach": "1) Implement pytest framework 2) Create unit tests for each agent 3) Add integration tests for API endpoints 4) Establish CI/CD test automation",
+    "success_criteria": [
+      "80%+ code coverage",
+      "Automated test execution",
+      "Regression test suite for VB6 integration"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "No test files in scanned_files=122"
+      }
+    ]
+  },
+  {
+    "id": "rb_003_firestore_gcs_integration",
+    "title": "Clarify Firestore/GCS Run-State Integration",
+    "problem_statement": "Business objective mentions Firestore/GCS run-state fix but no evidence of these services in codebase",
+    "scope": [
+      "external_dependencies",
+      "run_state_management"
+    ],
+    "risk_if_unaddressed": "Cannot verify fix effectiveness or prevent regression in cloud service integration",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb_001_vb6_scope_clarification"
+    ],
+    "suggested_approach": "1) Locate Firestore/GCS integration code 2) Document current run-state architecture 3) Implement monitoring and verification",
+    "success_criteria": [
+      "Firestore/GCS integration documented",
+      "Run-state fix verified",
+      "Monitoring implemented"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "business_objectives",
+        "line": 1,
+        "evidence": "Firestore/GCS mentioned but not found in codebase"
+      }
+    ]
+  },
+  {
+    "id": "rb_004_api_security_hardening",
+    "title": "Implement API Security and Authentication",
+    "problem_statement": "FastAPI endpoints and context vault APIs lack visible authentication/authorization mechanisms",
+    "scope": [
+      "web/server.py",
+      "utils/context_vault.py"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to modernization platform and sensitive context data",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "1) Implement OAuth2/JWT authentication 2) Add role-based access control 3) Secure context vault endpoints 4) Add API rate limiting",
+    "success_criteria": [
+      "Authentication required for all endpoints",
+      "Role-based permissions implemented",
+      "Security audit passed"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "utils/context_vault.py",
+        "line": 1,
+        "evidence": "API endpoints without visible auth patterns"
+      }
+    ]
+  },
+  {
+    "id": "rb_005_agent_coupling_reduction",
+    "title": "Reduce Inter-Agent Module Coupling",
+    "problem_statement": "High coupling with 472 import edges across 74 modules may impact maintainability and testability",
+    "scope": [
+      "agents/",
+      "module_architecture"
+    ],
+    "risk_if_unaddressed": "Difficult maintenance, testing, and independent agent deployment",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [
+      "rb_002_test_coverage_implementation"
+    ],
+    "suggested_approach": "1) Implement dependency injection 2) Create agent interface contracts 3) Reduce direct imports 4) Add agent communication bus",
+    "success_criteria": [
+      "<200 import edges",
+      "Agent interface contracts defined",
+      "Independent agent testing possible"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "import_edges=472 across modules_analyzed=74"
+      }
+    ]
+  }
+]
