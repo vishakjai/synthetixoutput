@@ -1,0 +1,138 @@
+{
+  "version": "cp-v1.1.0",
+  "summary": "Python-centric enterprise development with schema-driven validation, agent-based architecture, and containerized deployment patterns. Strong emphasis on JSON schema validation and modular agent design.",
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "rule": "Agent modules use descriptive names with underscores (analyst.py, database_engineer.py, security_engineer.py)",
+      "confidence": 0.95,
+      "examples": [
+        "agents/analyst.py",
+        "agents/database_engineer.py",
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent underscore naming across agent modules"
+        }
+      ]
+    },
+    {
+      "id": "naming-002",
+      "category": "naming",
+      "rule": "Schema files follow pattern: {entity}_{version}.schema.json",
+      "confidence": 0.9,
+      "examples": [
+        "analyst_report_v2.schema.json",
+        "business_rule_catalog_v1.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Versioned schema naming pattern"
+        }
+      ]
+    },
+    {
+      "id": "api-001",
+      "category": "api",
+      "rule": "FastAPI decorators used for HTTP endpoint definition (@app.get, @app.post)",
+      "confidence": 0.85,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI decorator usage"
+        },
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "Consistent API decoration pattern"
+        }
+      ]
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "rule": "Dedicated tester agent for validation and testing concerns",
+      "confidence": 0.9,
+      "examples": [
+        "agents/tester.py",
+        "agents/validator.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Specialized testing agent"
+        },
+        {
+          "file": "agents/validator.py",
+          "line": 1,
+          "evidence": "Dedicated validation agent"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "Dedicated security engineer agent for security concerns",
+      "confidence": 0.9,
+      "examples": [
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Specialized security agent"
+        }
+      ]
+    },
+    {
+      "id": "error_handling-001",
+      "category": "error_handling",
+      "rule": "Schema-driven validation for data integrity and error prevention",
+      "confidence": 0.95,
+      "examples": [
+        "JSON schema validation",
+        "11 schema files for different entities"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive schema validation framework"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent import ordering across all Python modules",
+    "Add type hints to all agent class methods and functions",
+    "Standardize docstring format across agent implementations",
+    "Add pre-commit hooks for code formatting and linting",
+    "Implement consistent error handling patterns across agents"
+  ],
+  "scaffold_templates": [
+    "Agent base class template with standard interface methods",
+    "JSON schema template for new entity validation",
+    "FastAPI endpoint template with standard error handling",
+    "Docker service template for new microservices",
+    "Audit module template for new audit capabilities"
+  ]
+}
