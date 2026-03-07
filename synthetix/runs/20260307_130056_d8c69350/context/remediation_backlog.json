@@ -1,0 +1,159 @@
+[
+  {
+    "id": "rb-001-vb6-auth-modernization",
+    "title": "Modernize VB6 Authentication System",
+    "problem_statement": "Legacy VB6 authentication uses basic password masking and hardcoded database connections, exposing critical security vulnerabilities in banking application",
+    "scope": [
+      "newlogin.frm",
+      "DataEnvironment1.DCA",
+      "authentication flows"
+    ],
+    "risk_if_unaddressed": "Customer financial data exposure, regulatory compliance violations, potential data breaches",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "database-security-audit",
+      "compliance-requirements"
+    ],
+    "suggested_approach": "Implement modern authentication with encrypted connections, parameterized queries, and secure credential storage",
+    "success_criteria": [
+      "Encrypted database connections implemented",
+      "Parameterized queries replace direct SQL",
+      "Modern password hashing replaces basic masking",
+      "Security audit passes compliance checks"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "newlogin.frm",
+        "line": 1,
+        "evidence": "PasswordChar = \"*\" basic masking"
+      },
+      {
+        "file": "DataEnvironment1.DCA",
+        "line": 1,
+        "evidence": "Hardcoded database path"
+      }
+    ]
+  },
+  {
+    "id": "rb-002-database-connection-security",
+    "title": "Secure Database Connection Layer",
+    "problem_statement": "Legacy ADO connections use hardcoded paths and lack parameterization, creating SQL injection vulnerabilities",
+    "scope": [
+      "DataEnvironment1.DCA",
+      "database connections",
+      "SQL queries"
+    ],
+    "risk_if_unaddressed": "SQL injection attacks, data corruption, unauthorized data access",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb-001-vb6-auth-modernization"
+    ],
+    "suggested_approach": "Replace hardcoded connections with configuration-based approach, implement parameterized queries, add connection pooling",
+    "success_criteria": [
+      "Configuration-based connection strings",
+      "All SQL queries parameterized",
+      "Connection pooling implemented",
+      "SQL injection testing passes"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "DataEnvironment1.DCA",
+        "line": 1,
+        "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+      }
+    ]
+  },
+  {
+    "id": "rb-003-agent-error-handling",
+    "title": "Implement Comprehensive Agent Error Handling",
+    "problem_statement": "Multi-agent orchestration lacks structured error handling and failure recovery mechanisms",
+    "scope": [
+      "agents/base.py",
+      "agent orchestration",
+      "error propagation"
+    ],
+    "risk_if_unaddressed": "System instability, difficult debugging, cascading failures across agents",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "state-store-stability"
+    ],
+    "suggested_approach": "Implement structured exception handling, circuit breaker patterns, and comprehensive logging across agent layer",
+    "success_criteria": [
+      "Structured exception hierarchy implemented",
+      "Circuit breaker patterns for external dependencies",
+      "Comprehensive logging and monitoring",
+      "Graceful degradation on agent failures"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/__init__.py",
+        "line": 1,
+        "evidence": "Complex agent interdependencies without clear error handling"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-vb6-form-validation",
+    "title": "Add Input Validation to VB6 Forms",
+    "problem_statement": "VB6 forms lack input validation and proper error handling in event handlers",
+    "scope": [
+      "main.frm",
+      "newlogin.frm",
+      "form event handlers"
+    ],
+    "risk_if_unaddressed": "Invalid data entry, application crashes, poor user experience",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Add input validation routines, implement proper error handling in event handlers, add user feedback mechanisms",
+    "success_criteria": [
+      "Input validation on all form controls",
+      "Error handling in all event handlers",
+      "User-friendly error messages",
+      "Form state management improved"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "main.frm",
+        "line": 1,
+        "evidence": "Direct Form.Show calls without validation"
+      }
+    ]
+  },
+  {
+    "id": "rb-005-state-store-monitoring",
+    "title": "Implement State Store Health Monitoring",
+    "problem_statement": "Recent Firestore/GCS fixes indicate potential instability in core state management system",
+    "scope": [
+      "external dependencies",
+      "state management",
+      "monitoring"
+    ],
+    "risk_if_unaddressed": "Agent coordination failures, data loss, system unavailability",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement health checks, monitoring dashboards, and failover mechanisms for state store dependencies",
+    "success_criteria": [
+      "Health monitoring for Firestore/GCS",
+      "Automated alerting on failures",
+      "Failover mechanisms implemented",
+      "Performance metrics tracked"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "business_objectives",
+        "line": 1,
+        "evidence": "Firestore/GCS state-store fix mentioned"
+      }
+    ]
+  }
+]
