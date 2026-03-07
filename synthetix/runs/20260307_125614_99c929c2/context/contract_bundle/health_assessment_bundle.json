@@ -1,0 +1,608 @@
+{
+  "header": {
+    "artifact_id": "576aaaa7bf77411c88a5f3ada4ff60c4",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T12:57:45.872705+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_125614_99c929c2",
+      "stage_id": "context_layer",
+      "task_id": "8503b82d60d14e04a708d1bf7fcc2c3e"
+    },
+    "parents": [],
+    "digest": "sha256:1a4e3645865d97102f6e33a18f979e6aee70daf7a089d777cb141255b0b0c20e",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_125614_99c929c2",
+      "bundle_version": "20260307T125745Z_20260307_125614_99c929c2"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Platform shows good architectural separation but faces significant challenges with VB6 legacy system modernization. Critical risks around data migration, authentication, and COM dependency management."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 7,
+      "security": 4,
+      "reliability": 5,
+      "testability": 6
+    },
+    "finding_count": 7,
+    "backlog_count": 5
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: external_dep:vb6_banking_app",
+      "description": "Legacy VB6 application with hardcoded database paths, potential SQL injection vulnerabilities, and COM dependencies",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "external_dep:vb6_banking_app"
+        ],
+        "paths": [
+          "external_dep:vb6_banking_app"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BANKING.vbp"
+        },
+        {
+          "kind": "file_span",
+          "file": "DataEnvironment1.DCA"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.92,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.92,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: database:bank1_mdb",
+      "description": "Microsoft Access database with potential scalability and security limitations",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "database:bank1_mdb"
+        ],
+        "paths": [
+          "database:bank1_mdb"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "DataEnvironment1.DCA"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.88,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.88,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: component:agent_system",
+      "description": "High coupling between agents without clear error handling or circuit breaker patterns",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "component:agent_system"
+        ],
+        "paths": [
+          "component:agent_system"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.75,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "VB6 COM Dependency Hell",
+      "description": "VB6 application relies on 12+ COM objects that may not be available in modern environments or cloud deployments",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Hardcoded Database Paths",
+      "description": "Database connection strings contain absolute file paths that will break in different environments",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.98,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.98,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "No Authentication Framework",
+      "description": "VB6 banking application appears to have basic login forms but no modern authentication/authorization framework",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-004",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Data Migration Complexity",
+      "description": "Migration from Access database to modern system requires careful schema mapping and data validation",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb_001_vb6_com_inventory",
+      "title": "VB6 COM Object Dependency Analysis",
+      "priority": "P0",
+      "business_value": "Application will fail to run in modern environments without COM object registration",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "external_dep:vb6_banking_app"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Create inventory of all COM dependencies, identify modern equivalents, and create compatibility matrix"
+      ],
+      "acceptance_criteria": [
+        "Complete COM object inventory with GUIDs",
+        "Compatibility assessment for each dependency",
+        "Migration path defined for each COM object"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb_002_database_migration_plan",
+      "title": "Access Database Migration Strategy",
+      "priority": "P1",
+      "business_value": "Data loss, performance issues, and scalability limitations in production",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.92,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "database:bank1_mdb",
+          "table:customer"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "rb_001_vb6_com_inventory"
+      ],
+      "plan": [
+        "Extract schema, create migration scripts, implement data validation, and establish rollback procedures"
+      ],
+      "acceptance_criteria": [
+        "Complete schema mapping documented",
+        "Data migration scripts with validation",
+        "Rollback procedures tested",
+        "Performance benchmarks established"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb_003_authentication_modernization",
+      "title": "Banking Application Security Framework",
+      "priority": "P0",
+      "business_value": "Security vulnerabilities, compliance failures, and unauthorized access to financial data",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "XL",
+        "hours_range": [
+          80,
+          160
+        ],
+        "confidence": {
+          "score": 0.88,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "external_dep:vb6_banking_app"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "rb_002_database_migration_plan"
+      ],
+      "plan": [
+        "Implement OAuth2/OIDC, role-based access control, session management, and audit logging"
+      ],
+      "acceptance_criteria": [
+        "Modern authentication framework implemented",
+        "Role-based permissions defined and enforced",
+        "Comprehensive audit trail for all transactions",
+        "Security testing completed"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb_004_agent_error_handling",
+      "title": "Multi-Agent System Resilience",
+      "priority": "P2",
+      "business_value": "Cascading failures across agent network, difficult debugging, and system instability",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.82,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "component:agent_system"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Implement circuit breaker pattern, structured logging, health checks, and graceful degradation"
+      ],
+      "acceptance_criteria": [
+        "Circuit breakers implemented for agent communication",
+        "Structured logging with correlation IDs",
+        "Health check endpoints for all agents",
+        "Graceful degradation strategies defined"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb_005_configuration_externalization",
+      "title": "Environment Configuration Management",
+      "priority": "P2",
+      "business_value": "Deployment failures, configuration drift, and inability to support multiple environments",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "database:bank1_mdb",
+          "service:modernization_platform"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Implement 12-factor app configuration with environment variables and configuration management"
+      ],
+      "acceptance_criteria": [
+        "All hardcoded values externalized to configuration",
+        "Environment-specific configuration files",
+        "Configuration validation at startup",
+        "Documentation for all configuration options"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb_001_vb6_com_inventory",
+      "rb_002_database_migration_plan",
+      "rb_003_authentication_modernization"
+    ],
+    "stabilization": [
+      "rb_002_database_migration_plan",
+      "rb_004_agent_error_handling",
+      "rb_005_configuration_externalization"
+    ],
+    "modernization": [
+      "rb_001_vb6_com_inventory",
+      "rb_002_database_migration_plan",
+      "rb_003_authentication_modernization",
+      "rb_004_agent_error_handling",
+      "rb_005_configuration_externalization"
+    ]
+  }
+}
