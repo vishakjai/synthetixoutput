@@ -1,0 +1,156 @@
+{
+  "version": "1.0",
+  "summary": "Coding and modernization conventions for migrating VB6 banking application to C# with emphasis on naming, error handling, testing, logging, auth, API, and security.",
+  "rules": [
+    {
+      "id": "naming:pascal_case_classes_methods",
+      "category": "naming",
+      "rule": "Use PascalCase for all class names, method names, and public properties in C# modernization.",
+      "confidence": 0.95,
+      "examples": [
+        "public class CustomerAccount",
+        "public void DepositFunds()"
+      ],
+      "counterexamples": [
+        "public class customer_account",
+        "public void deposit_funds()"
+      ],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Legacy VB6 uses PascalCase for forms and modules; C# standard is PascalCase."
+        }
+      ]
+    },
+    {
+      "id": "error_handling:use_exceptions",
+      "category": "error_handling",
+      "rule": "Use structured exception handling (try-catch) in C# to replace VB6 error handling patterns.",
+      "confidence": 0.9,
+      "examples": [
+        "try { ... } catch (Exception ex) { Log(ex); throw; }"
+      ],
+      "counterexamples": [
+        "On Error Resume Next",
+        "On Error GoTo Label"
+      ],
+      "provenance": [
+        {
+          "file": "Module1.bas",
+          "line": 10,
+          "evidence": "Legacy VB6 code uses On Error statements; modern C# uses exceptions."
+        }
+      ]
+    },
+    {
+      "id": "testing:unit_tests_required",
+      "category": "testing",
+      "rule": "Develop comprehensive unit tests for all business logic migrated from VB6 modules to C# classes.",
+      "confidence": 0.9,
+      "examples": [
+        "NUnit or MSTest test classes covering deposit and withdrawal logic"
+      ],
+      "counterexamples": [
+        "No tests or manual testing only"
+      ],
+      "provenance": [
+        {
+          "file": "Module1.bas",
+          "line": 1,
+          "evidence": "Legacy code lacks automated tests; modernization requires test coverage."
+        }
+      ]
+    },
+    {
+      "id": "logging:centralized_logging",
+      "category": "logging",
+      "rule": "Implement centralized logging using a framework like Serilog or NLog in the modernized C# application.",
+      "confidence": 0.85,
+      "examples": [
+        "Log.Information(\"Deposit successful for account {AccountNo}\")"
+      ],
+      "counterexamples": [
+        "Console.WriteLine or no logging"
+      ],
+      "provenance": [
+        {
+          "file": "Module1.bas",
+          "line": 20,
+          "evidence": "Legacy VB6 code has no structured logging; modernization should improve observability."
+        }
+      ]
+    },
+    {
+      "id": "auth:secure_password_handling",
+      "category": "auth",
+      "rule": "Passwords must be securely handled and stored using salted hashing algorithms; do not store plaintext passwords as in legacy forms.",
+      "confidence": 0.95,
+      "examples": [
+        "Use ASP.NET Identity or similar for authentication"
+      ],
+      "counterexamples": [
+        "Storing passwords in plain text or reversible encryption"
+      ],
+      "provenance": [
+        {
+          "file": "newlogin.frm",
+          "line": 15,
+          "evidence": "Legacy form uses PasswordChar but no evidence of secure storage."
+        }
+      ]
+    },
+    {
+      "id": "api:use_restful_endpoints",
+      "category": "api",
+      "rule": "Expose business logic via RESTful APIs with JSON payloads for integration and UI decoupling.",
+      "confidence": 0.9,
+      "examples": [
+        "GET /api/accounts/{id}",
+        "POST /api/transactions"
+      ],
+      "counterexamples": [
+        "Monolithic UI-bound logic with no API layer"
+      ],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 1,
+          "evidence": "Legacy VB6 is monolithic; modernization requires API layer."
+        }
+      ]
+    },
+    {
+      "id": "security:prevent_sql_injection",
+      "category": "security",
+      "rule": "Use parameterized queries or ORM frameworks to prevent SQL injection vulnerabilities during database access modernization.",
+      "confidence": 0.95,
+      "examples": [
+        "Using Dapper or Entity Framework with parameters"
+      ],
+      "counterexamples": [
+        "Concatenating SQL strings with user input"
+      ],
+      "provenance": [
+        {
+          "file": "DataEnvironment1.DCA",
+          "line": 1,
+          "evidence": "Legacy uses DAO/ADO with potential concatenated SQL queries."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce PascalCase naming for all identifiers",
+    "Disallow use of legacy VB6 error handling constructs",
+    "Require unit test coverage for all migrated modules",
+    "Mandate use of secure password storage and authentication frameworks",
+    "Enforce parameterized queries for all database access"
+  ],
+  "scaffold_templates": [
+    "C# class template with exception handling and logging",
+    "REST API controller template using ASP.NET Core",
+    "Unit test project template using MSTest or NUnit",
+    "Secure authentication service template using ASP.NET Identity"
+  ]
+}
