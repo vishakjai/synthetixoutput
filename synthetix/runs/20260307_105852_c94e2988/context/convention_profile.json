@@ -1,0 +1,100 @@
+{
+  "version": "1.0",
+  "summary": "Coding and architectural conventions for the enterprise modernization repository, emphasizing modular Python code organization, JSON schema usage for data contracts, and containerization best practices.",
+  "rules": [
+    {
+      "id": "CP-001",
+      "category": "naming",
+      "rule": "Python modules in the 'agents' package must be named using lowercase with underscores separating words, matching the file names exactly.",
+      "confidence": 0.95,
+      "examples": [
+        "agents/analyst.py",
+        "agents/database_engineer.py"
+      ],
+      "counterexamples": [
+        "agents/DatabaseEngineer.py",
+        "agents/AnalystModule.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Consistent import statements and file names indicate naming convention"
+        }
+      ]
+    },
+    {
+      "id": "CP-002",
+      "category": "api",
+      "rule": "All REST API endpoints must be defined using FastAPI decorators with explicit HTTP method annotations (@app.get, @app.post, etc.) and must include path parameter typing.",
+      "confidence": 0.85,
+      "examples": [
+        "@app.get('/items/{item_id}')",
+        "@app.post('/users/')"
+      ],
+      "counterexamples": [
+        "@app.route('/items')",
+        "Flask-style route definitions without typing"
+      ],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 10,
+          "evidence": "Detected FastAPI decorators with explicit HTTP methods"
+        }
+      ]
+    },
+    {
+      "id": "CP-003",
+      "category": "security",
+      "rule": "Secrets and credentials must never be hardcoded in source code or configuration files; use environment variables or secure vaults instead.",
+      "confidence": 0.9,
+      "examples": [
+        "os.getenv('DB_PASSWORD')",
+        "vault.get_secret('api_key')"
+      ],
+      "counterexamples": [
+        "DB_PASSWORD='hardcodedpassword'",
+        "api_key='123456'"
+      ],
+      "provenance": [
+        {
+          "file": "config.py",
+          "line": 5,
+          "evidence": "No hardcoded secrets detected; environment variable usage recommended"
+        }
+      ]
+    },
+    {
+      "id": "CP-004",
+      "category": "testing",
+      "rule": "Unit tests must be placed in the 'tests' directory and named with the prefix 'test_' followed by the module name.",
+      "confidence": 0.8,
+      "examples": [
+        "tests/test_analyst.py",
+        "tests/test_database_engineer.py"
+      ],
+      "counterexamples": [
+        "tests/analyst_test.py",
+        "test_analyst.py in root directory"
+      ],
+      "provenance": [
+        {
+          "file": "e2e/audit/ba_audit.py",
+          "line": 1,
+          "evidence": "Test modules follow naming conventions"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce PEP8 style with flake8 or pylint for Python code.",
+    "Validate JSON schemas with jsonschema CLI during CI.",
+    "Use bandit or similar tools for security linting."
+  ],
+  "scaffold_templates": [
+    "Python FastAPI module template with standard imports and route decorators.",
+    "JSON schema template for defining agent task and result contracts.",
+    "Dockerfile template for Python containerized applications."
+  ]
+}
