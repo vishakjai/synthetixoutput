@@ -1,0 +1,113 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Decouple UI and Business Logic",
+    "problem_statement": "Legacy VB6 forms tightly couple UI controls with business logic, hindering maintainability and testability.",
+    "scope": [
+      "form:main_frm",
+      "form:newlogin_frm",
+      "module:module1_bas"
+    ],
+    "risk_if_unaddressed": "Continued difficulty in maintaining and evolving application; increased defect rates.",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Refactor business logic into separate C# service classes; implement MVVM or MVC pattern for UI.",
+    "success_criteria": [
+      "Business logic is fully separated from UI code",
+      "UI forms call service layer via defined interfaces",
+      "Automated unit tests cover business logic"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "main.frm",
+        "line": 10,
+        "evidence": "Command buttons directly invoke other forms or actions."
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Implement Secure Authentication and Password Storage",
+    "problem_statement": "Legacy password handling lacks secure storage and authentication mechanisms.",
+    "scope": [
+      "form:newlogin_frm"
+    ],
+    "risk_if_unaddressed": "User credentials vulnerable to compromise; non-compliance with security standards.",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Adopt ASP.NET Identity or equivalent; implement salted hashing and secure password reset flows.",
+    "success_criteria": [
+      "Passwords never stored or transmitted in plaintext",
+      "Authentication uses secure protocols and frameworks",
+      "User login functionality covered by automated tests"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "newlogin.frm",
+        "line": 15,
+        "evidence": "PasswordChar used but no secure storage evident."
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Migrate Data Access to Parameterized Queries or ORM",
+    "problem_statement": "Legacy use of ADO/DAO with potential concatenated SQL queries risks SQL injection.",
+    "scope": [
+      "legacy_dependency:msado20",
+      "legacy_dependency:dao350"
+    ],
+    "risk_if_unaddressed": "Application vulnerable to SQL injection attacks and data integrity issues.",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Replace legacy data access with Entity Framework or Dapper using parameterized queries.",
+    "success_criteria": [
+      "No concatenated SQL strings with user input",
+      "All data access covered by integration tests",
+      "Performance benchmarks meet or exceed legacy system"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "BANKING.vbp",
+        "line": 3,
+        "evidence": "References to legacy ADO/DAO libraries."
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Establish Automated Testing Framework",
+    "problem_statement": "No automated tests exist for legacy VB6 business logic and UI.",
+    "scope": [
+      "module:module1_bas",
+      "form:main_frm",
+      "form:newlogin_frm"
+    ],
+    "risk_if_unaddressed": "High risk of regression and defects during modernization and future changes.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "Implement unit and integration tests using MSTest, NUnit, or xUnit for C# code.",
+    "success_criteria": [
+      "Test coverage metrics meet enterprise standards",
+      "Continuous integration runs tests on each commit",
+      "Defects detected early in development cycle"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "Module1.bas",
+        "line": 1,
+        "evidence": "Legacy code lacks automated tests."
+      }
+    ]
+  }
+]
