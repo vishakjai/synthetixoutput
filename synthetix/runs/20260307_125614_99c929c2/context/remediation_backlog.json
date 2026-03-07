@@ -1,0 +1,147 @@
+[
+  {
+    "id": "rb_001_vb6_com_inventory",
+    "title": "VB6 COM Object Dependency Analysis",
+    "problem_statement": "VB6 application uses 12+ COM objects that need compatibility assessment for modernization",
+    "scope": [
+      "external_dep:vb6_banking_app"
+    ],
+    "risk_if_unaddressed": "Application will fail to run in modern environments without COM object registration",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Create inventory of all COM dependencies, identify modern equivalents, and create compatibility matrix",
+    "success_criteria": [
+      "Complete COM object inventory with GUIDs",
+      "Compatibility assessment for each dependency",
+      "Migration path defined for each COM object"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "BANKING.vbp",
+        "line": 4,
+        "evidence": "Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX"
+      }
+    ]
+  },
+  {
+    "id": "rb_002_database_migration_plan",
+    "title": "Access Database Migration Strategy",
+    "problem_statement": "BANK1.mdb Access database needs migration to modern database system with schema preservation",
+    "scope": [
+      "database:bank1_mdb",
+      "table:customer"
+    ],
+    "risk_if_unaddressed": "Data loss, performance issues, and scalability limitations in production",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "rb_001_vb6_com_inventory"
+    ],
+    "suggested_approach": "Extract schema, create migration scripts, implement data validation, and establish rollback procedures",
+    "success_criteria": [
+      "Complete schema mapping documented",
+      "Data migration scripts with validation",
+      "Rollback procedures tested",
+      "Performance benchmarks established"
+    ],
+    "confidence": 0.92,
+    "provenance": [
+      {
+        "file": "DataEnvironment1.DCA",
+        "line": 1,
+        "evidence": "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=E:\\project\\myBANKING\\BANK1.mdb"
+      }
+    ]
+  },
+  {
+    "id": "rb_003_authentication_modernization",
+    "title": "Banking Application Security Framework",
+    "problem_statement": "VB6 banking app has basic login forms but lacks modern authentication, authorization, and audit trails",
+    "scope": [
+      "external_dep:vb6_banking_app"
+    ],
+    "risk_if_unaddressed": "Security vulnerabilities, compliance failures, and unauthorized access to financial data",
+    "effort": "XL",
+    "severity": "critical",
+    "dependencies": [
+      "rb_002_database_migration_plan"
+    ],
+    "suggested_approach": "Implement OAuth2/OIDC, role-based access control, session management, and audit logging",
+    "success_criteria": [
+      "Modern authentication framework implemented",
+      "Role-based permissions defined and enforced",
+      "Comprehensive audit trail for all transactions",
+      "Security testing completed"
+    ],
+    "confidence": 0.88,
+    "provenance": [
+      {
+        "file": "LOGIN.frm",
+        "line": 1,
+        "evidence": "Basic login form without modern security"
+      },
+      {
+        "file": "newlogin.frm",
+        "line": 1,
+        "evidence": "Password change functionality"
+      }
+    ]
+  },
+  {
+    "id": "rb_004_agent_error_handling",
+    "title": "Multi-Agent System Resilience",
+    "problem_statement": "Agent system lacks proper error isolation, circuit breakers, and failure recovery mechanisms",
+    "scope": [
+      "component:agent_system"
+    ],
+    "risk_if_unaddressed": "Cascading failures across agent network, difficult debugging, and system instability",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement circuit breaker pattern, structured logging, health checks, and graceful degradation",
+    "success_criteria": [
+      "Circuit breakers implemented for agent communication",
+      "Structured logging with correlation IDs",
+      "Health check endpoints for all agents",
+      "Graceful degradation strategies defined"
+    ],
+    "confidence": 0.82,
+    "provenance": [
+      {
+        "file": "agents/base.py",
+        "line": 1,
+        "evidence": "Base agent class without error handling patterns"
+      }
+    ]
+  },
+  {
+    "id": "rb_005_configuration_externalization",
+    "title": "Environment Configuration Management",
+    "problem_statement": "Hardcoded paths and configuration values prevent deployment flexibility and environment promotion",
+    "scope": [
+      "database:bank1_mdb",
+      "service:modernization_platform"
+    ],
+    "risk_if_unaddressed": "Deployment failures, configuration drift, and inability to support multiple environments",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement 12-factor app configuration with environment variables and configuration management",
+    "success_criteria": [
+      "All hardcoded values externalized to configuration",
+      "Environment-specific configuration files",
+      "Configuration validation at startup",
+      "Documentation for all configuration options"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "DataEnvironment1.DCA",
+        "line": 1,
+        "evidence": "Hardcoded path E:\\project\\myBANKING\\BANK1.mdb"
+      }
+    ]
+  }
+]
