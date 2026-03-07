@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "summary": "Coding and architectural conventions extracted from repository and schema definitions, focusing on Python module imports, naming, and modular agent design.",
+  "rules": [
+    {
+      "id": "CP-001",
+      "category": "naming",
+      "rule": "Python module names for agents must be lowercase with underscores separating words, matching the pattern 'agents.<role>'.",
+      "confidence": 0.95,
+      "examples": [
+        "agents.analyst",
+        "agents.security_engineer"
+      ],
+      "counterexamples": [
+        "Agents.Analyst",
+        "agents-analyst"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Consistent import of submodules with lowercase underscore names"
+        }
+      ]
+    },
+    {
+      "id": "CP-002",
+      "category": "import_handling",
+      "rule": "Modules should explicitly import standard libraries and internal modules with absolute or relative imports to maintain clarity and avoid ambiguity.",
+      "confidence": 0.9,
+      "examples": [
+        "import json",
+        "from . import analyst"
+      ],
+      "counterexamples": [
+        "import *",
+        "from unknown import *"
+      ],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "Explicit imports of json, re, datetime, pathlib"
+        }
+      ]
+    },
+    {
+      "id": "CP-003",
+      "category": "api",
+      "rule": "API endpoints should be declared with explicit route decorators and clear HTTP method annotations for maintainability and clarity.",
+      "confidence": 0.7,
+      "examples": [
+        "@app.get('/status')",
+        "@app.post('/submit')"
+      ],
+      "counterexamples": [
+        "app.route('/status')",
+        "def handler(): pass"
+      ],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 10,
+          "evidence": "Detected @app.get and @app.post decorators in code hints"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Enforce PEP8 style for Python code.",
+    "Use explicit relative imports within the agents package.",
+    "Validate JSON schema files with schema validators before deployment."
+  ],
+  "scaffold_templates": [
+    "Python agent module template with standard imports and class structure.",
+    "FastAPI route handler template with GET and POST example methods.",
+    "JSON schema template for agent task and result definitions."
+  ]
+}
