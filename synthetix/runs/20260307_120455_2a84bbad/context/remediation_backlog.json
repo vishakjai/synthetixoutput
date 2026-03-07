@@ -1,0 +1,156 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Import VB6 Legacy System Artifacts",
+    "problem_statement": "VB6 modernization project lacks essential source artifacts including forms (.frm), modules (.bas), classes (.cls), and project files",
+    "scope": [
+      "legacy_import",
+      "source_analysis"
+    ],
+    "risk_if_unaddressed": "Cannot perform modernization analysis or generate C# conversion without VB6 source code",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "1. Locate and import VB6 project files 2. Run VBDepend analysis export 3. Update repository with legacy artifacts 4. Re-run SIL analysis",
+    "success_criteria": [
+      "VB6 source files present in repository",
+      "VBDepend analysis exports available",
+      "Legacy system context model generated"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No VB6 file extensions in 122 scanned files"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Define Database Migration Schema Contracts",
+    "problem_statement": "Microsoft Access to PostgreSQL migration lacks source schema definition and target schema design",
+    "scope": [
+      "database_migration",
+      "schema_design"
+    ],
+    "risk_if_unaddressed": "Data migration will fail without proper schema mapping and validation",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "1. Extract Access database schema 2. Design PostgreSQL target schema 3. Create migration scripts 4. Define rollback procedures",
+    "success_criteria": [
+      "Access schema documented",
+      "PostgreSQL schema designed",
+      "Migration scripts created",
+      "Data validation tests defined"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "context_analysis",
+        "line": 1,
+        "evidence": "Empty SQL sections in database conversion context"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement API Security Framework",
+    "problem_statement": "FastAPI endpoints lack authentication, authorization, and security controls",
+    "scope": [
+      "security",
+      "api_endpoints"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to modernization platform and sensitive legacy system data",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "1. Implement JWT authentication 2. Add role-based authorization 3. Secure API endpoints 4. Add security audit logging",
+    "success_criteria": [
+      "Authentication middleware implemented",
+      "Authorization controls active",
+      "Security audit logging enabled",
+      "Security tests passing"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "utils/context_vault.py",
+        "line": 1,
+        "evidence": "HTTP endpoints without auth decorators"
+      },
+      {
+        "file": "web/server.py",
+        "line": 1,
+        "evidence": "Web endpoints lack security"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Standardize Agent Error Handling",
+    "problem_statement": "Inconsistent error handling patterns across agent modules reduce reliability and debugging capability",
+    "scope": [
+      "agents",
+      "error_handling"
+    ],
+    "risk_if_unaddressed": "Unpredictable failures and difficult troubleshooting during modernization execution",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "1. Define standard error handling patterns 2. Implement base exception classes 3. Add consistent logging 4. Update all agent modules",
+    "success_criteria": [
+      "Standard error handling implemented",
+      "Consistent logging across agents",
+      "Error handling tests added",
+      "Documentation updated"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/",
+        "line": 1,
+        "evidence": "Varied error handling approaches across modules"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Implement Comprehensive Testing Framework",
+    "problem_statement": "Tester agent exists but lacks testing framework, coverage requirements, and validation criteria",
+    "scope": [
+      "testing",
+      "validation"
+    ],
+    "risk_if_unaddressed": "Modernization quality cannot be validated without proper testing infrastructure",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "rb-001",
+      "rb-002"
+    ],
+    "suggested_approach": "1. Define testing strategy 2. Implement test frameworks 3. Create validation criteria 4. Add coverage requirements",
+    "success_criteria": [
+      "Testing framework operational",
+      "Coverage requirements defined",
+      "Validation criteria implemented",
+      "Automated test execution"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/tester.py",
+        "line": 1,
+        "evidence": "Tester agent without framework"
+      },
+      {
+        "file": "agents/validator.py",
+        "line": 1,
+        "evidence": "Validator without criteria"
+      }
+    ]
+  }
+]
