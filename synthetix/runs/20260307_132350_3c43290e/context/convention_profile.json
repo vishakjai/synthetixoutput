@@ -1,0 +1,127 @@
+{
+  "version": "cp-v1.1.0",
+  "summary": "VB6 legacy conventions with Hungarian notation, form-based navigation, and direct database access patterns. Lacks modern security and error handling practices.",
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "rule": "Forms use descriptive names (main, login, customer) but inconsistent prefixing (frm prefix sometimes used)",
+      "confidence": 0.8,
+      "examples": [
+        "main.frm",
+        "frmcustomer.frm",
+        "LOGIN.frm"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 15,
+          "evidence": "Form=LOGIN.frm"
+        }
+      ]
+    },
+    {
+      "id": "vb6-control-naming",
+      "category": "naming",
+      "rule": "Controls use Hungarian notation with type prefixes (txt, cmd)",
+      "confidence": 0.9,
+      "examples": [
+        "txtname",
+        "txtpass",
+        "cmdok"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "newlogin.frm",
+          "line": 1,
+          "evidence": "Begin VB.TextBox txtname"
+        }
+      ]
+    },
+    {
+      "id": "vb6-password-handling",
+      "category": "security",
+      "rule": "Password fields use PasswordChar property for masking",
+      "confidence": 0.9,
+      "examples": [
+        "PasswordChar = \"*\""
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "newlogin.frm",
+          "line": 1,
+          "evidence": "PasswordChar = \"*\""
+        }
+      ]
+    },
+    {
+      "id": "vb6-form-navigation",
+      "category": "api",
+      "rule": "Form navigation uses Show method calls in event handlers",
+      "confidence": 0.9,
+      "examples": [
+        "Form2.Show",
+        "Form3.Show"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Form2.Show"
+        }
+      ]
+    },
+    {
+      "id": "vb6-data-access",
+      "category": "api",
+      "rule": "Data access through DataEnvironment designers with ADO/DAO references",
+      "confidence": 0.85,
+      "examples": [
+        "DataEnvironment1.Dsr",
+        "Microsoft ActiveX Data Objects 2.0"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BANKING.vbp",
+          "line": 3,
+          "evidence": "Reference=*\\G{00000200-0000-0010-8000-00AA006D2EA4}#2.0#0"
+        }
+      ]
+    },
+    {
+      "id": "vb6-error-handling-missing",
+      "category": "error_handling",
+      "rule": "No visible error handling patterns in form event handlers",
+      "confidence": 0.7,
+      "examples": [],
+      "counterexamples": [
+        "Private Sub Command1_Click()\nForm2.Show\nEnd Sub"
+      ],
+      "provenance": [
+        {
+          "file": "main.frm",
+          "line": 1,
+          "evidence": "Private Sub Command1_Click()"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Add On Error GoTo statements to all event handlers",
+    "Implement consistent form naming convention (frm prefix)",
+    "Add input validation for all text boxes",
+    "Replace hardcoded form references with constants",
+    "Add logging for user actions and errors"
+  ],
+  "scaffold_templates": [
+    "VB6 error handling wrapper template",
+    "Form validation helper module",
+    "Database connection manager class",
+    "User session management module"
+  ]
+}
