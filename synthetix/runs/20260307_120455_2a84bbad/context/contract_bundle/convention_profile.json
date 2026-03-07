@@ -1,0 +1,304 @@
+{
+  "header": {
+    "artifact_id": "efb550f46c0c47c2b46e93cfdfb82cef",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-07T12:06:16.615171+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260307_120455_2a84bbad",
+      "stage_id": "context_layer",
+      "task_id": "4b29ee9108c64d73835417c7a7488c27"
+    },
+    "parents": [],
+    "digest": "sha256:b0bfcaa4ca347838a4c7072d4d3d28733c26916471f747da739bacfb1f77a4ce",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260307_120455_2a84bbad",
+      "bundle_version": "20260307T120616Z_20260307_120455_2a84bbad"
+    }
+  },
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "title": "Agent modules use descriptive names with underscores (analyst.py, database_engineer.py, security_engineer.py)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent modules use descriptive names with underscores (analyst.py, database_engineer.py, security_engineer.py)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/analyst.py"
+        },
+        {
+          "file": "agents/database_engineer.py"
+        },
+        {
+          "file": "agents/security_engineer.py"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "naming-002",
+      "category": "naming",
+      "title": "Schema files follow pattern: {entity}_{version}.schema.json",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Schema files follow pattern: {entity}_{version}.schema.json",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "analyst_report_v2.schema.json"
+        },
+        {
+          "file": "business_rule_catalog_v1.schema.json"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "api-001",
+      "category": "api_design",
+      "title": "FastAPI decorators used for HTTP endpoint definition (@app.get, @app.post)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "FastAPI decorators used for HTTP endpoint definition (@app.get, @app.post)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get("
+        },
+        {
+          "file": "@app.post("
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        },
+        {
+          "kind": "file_span",
+          "file": "web/server.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "title": "Dedicated tester agent for validation and testing concerns",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Dedicated tester agent for validation and testing concerns",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/tester.py"
+        },
+        {
+          "file": "agents/validator.py"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/tester.py"
+        },
+        {
+          "kind": "file_span",
+          "file": "agents/validator.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "security-001",
+      "category": "authn_authz",
+      "title": "Dedicated security engineer agent for security concerns",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Dedicated security engineer agent for security concerns",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/security_engineer.py"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/security_engineer.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "error_handling-001",
+      "category": "error_handling",
+      "title": "Schema-driven validation for data integrity and error prevention",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Schema-driven validation for data integrity and error prevention",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "JSON schema validation"
+        },
+        {
+          "file": "11 schema files for different entities"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "Agent base class template with standard interface methods",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "JSON schema template for new entity validation",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "FastAPI endpoint template with standard error handling",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "Docker service template for new microservices",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-005",
+      "language": "generic",
+      "name": "Audit module template for new audit capabilities",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
