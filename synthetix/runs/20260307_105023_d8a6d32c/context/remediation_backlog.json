@@ -1,0 +1,87 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Add comprehensive unit tests for all agent modules",
+    "problem_statement": "Several core agent modules lack corresponding unit tests, risking undetected regressions.",
+    "scope": [
+      "module:agents_analyst_py",
+      "module:agents_deployer_py",
+      "module:agents_database_engineer_py",
+      "module:agents_security_engineer_py",
+      "module:agents_system_intelligence_py"
+    ],
+    "risk_if_unaddressed": "Regression bugs and decreased confidence in modernization changes.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Create pytest-based unit test suites covering key functions, edge cases, and error paths for each agent module.",
+    "success_criteria": [
+      "Test coverage > 80% for all agent modules",
+      "Automated tests pass in CI pipeline",
+      "Tests include error and edge case scenarios"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "e2e/audit/ba_audit.py",
+        "line": 10,
+        "evidence": "Audit references agent modules but no direct test files found"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Standardize error handling patterns across modules",
+    "problem_statement": "Inconsistent try-except usage and error logging reduces maintainability and observability.",
+    "scope": [
+      "module:agents_analyst_py",
+      "module:agents_deployer_py",
+      "module:agents_developer_py"
+    ],
+    "risk_if_unaddressed": "Silent failures and difficulty diagnosing issues in production.",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Define and enforce a common error handling pattern with structured logging and re-raising or graceful degradation.",
+    "success_criteria": [
+      "All modules use try-except with logging for expected exceptions",
+      "No bare except or pass statements",
+      "Error logs include context and stack traces"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 50,
+        "evidence": "Try-except blocks present but inconsistent"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Enhance logging in deployment and system intelligence modules",
+    "problem_statement": "Sparse logging in critical modules hinders troubleshooting and monitoring.",
+    "scope": [
+      "module:agents_deployer_py",
+      "module:agents_system_intelligence_py"
+    ],
+    "risk_if_unaddressed": "Operational issues may go undetected or be difficult to diagnose.",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement structured and consistent logging at key steps and error conditions in these modules.",
+    "success_criteria": [
+      "Logs include timestamps, severity levels, and contextual metadata",
+      "Key operations and errors are logged",
+      "Logging format consistent with other modules"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "agents/deployer.py",
+        "line": 30,
+        "evidence": "Sparse logging observed in deployment logic"
+      }
+    ]
+  }
+]
