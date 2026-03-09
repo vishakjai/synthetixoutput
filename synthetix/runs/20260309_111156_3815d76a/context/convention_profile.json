@@ -1,0 +1,129 @@
+{
+  "version": "cp-v1.0",
+  "summary": "VB6 legacy banking application following Windows Forms patterns with ADO data access. Mixed naming conventions and form-centric architecture.",
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "rule": "Forms prefixed with 'frm' followed by descriptive name (e.g., frmLogin, frmCustomer)",
+      "confidence": 0.95,
+      "examples": [
+        "frmLogin",
+        "frmcustomer",
+        "frmdeposit",
+        "frmwithdraw"
+      ],
+      "counterexamples": [
+        "menu",
+        "closeacount"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 11,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "vb6-module-naming",
+      "category": "naming",
+      "rule": "Modules use abbreviated names (Mdl) with .bas extension",
+      "confidence": 1.0,
+      "examples": [
+        "Mdl.bas"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 10,
+          "evidence": "Module=Mdl; Mdl.bas"
+        }
+      ]
+    },
+    {
+      "id": "vb6-designer-naming",
+      "category": "naming",
+      "rule": "Data Environment designers prefixed with 'de' (deBank.Dsr)",
+      "confidence": 1.0,
+      "examples": [
+        "deBank.Dsr"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 10,
+          "evidence": "Designer=deBank.Dsr"
+        }
+      ]
+    },
+    {
+      "id": "vb6-ado-data-access",
+      "category": "api",
+      "rule": "Uses ADO 2.5 for database connectivity and data manipulation",
+      "confidence": 1.0,
+      "examples": [
+        "Microsoft ActiveX Data Objects 2.0 Library"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "ADO 2.5 reference"
+        }
+      ]
+    },
+    {
+      "id": "vb6-splash-startup",
+      "category": "api",
+      "rule": "Application starts with splash screen form before main functionality",
+      "confidence": 1.0,
+      "examples": [
+        "Startup=\"frmSplash\""
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 19,
+          "evidence": "Startup=\"frmSplash\""
+        }
+      ]
+    },
+    {
+      "id": "vb6-com-dependencies",
+      "category": "api",
+      "rule": "Heavy reliance on COM components for UI controls and data access",
+      "confidence": 1.0,
+      "examples": [
+        "msmask32.ocx",
+        "MSCOMCTL.OCX",
+        "DBGRID32.OCX"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 7,
+          "evidence": "Object={C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0; msmask32.ocx"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Standardize form naming convention (all forms should use 'frm' prefix)",
+    "Implement consistent error handling across all forms",
+    "Add input validation for all user entry points",
+    "Document business logic in shared modules",
+    "Implement proper connection string management"
+  ],
+  "scaffold_templates": [
+    "C# Windows Forms application with Entity Framework",
+    "ASP.NET Core Web API with SQL Server backend",
+    "WPF desktop application with MVVM pattern",
+    "Blazor Server application for web-based banking"
+  ]
+}
