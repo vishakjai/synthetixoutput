@@ -1,0 +1,154 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Secure Data Access Layer",
+    "problem_statement": "Replace ADO direct SQL execution with parameterized queries and ORM to prevent SQL injection",
+    "scope": [
+      "de-bank",
+      "ado-library",
+      "all transaction forms"
+    ],
+    "risk_if_unaddressed": "Critical security vulnerability allowing unauthorized data access and manipulation",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "database schema analysis",
+      "connection string audit"
+    ],
+    "suggested_approach": "Implement Entity Framework Core with parameterized queries and connection pooling",
+    "success_criteria": [
+      "All SQL queries parameterized",
+      "Static analysis shows no SQL injection vectors",
+      "Performance benchmarks maintained"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 5,
+        "evidence": "ADO 2.5 reference indicates direct SQL usage"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Modernize Authentication and Authorization",
+    "problem_statement": "Replace basic login form with modern authentication supporting MFA and role-based access",
+    "scope": [
+      "frm-login",
+      "user management system"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to financial data and transactions",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "user role analysis",
+      "compliance requirements"
+    ],
+    "suggested_approach": "Implement ASP.NET Core Identity with JWT tokens and role-based authorization",
+    "success_criteria": [
+      "Multi-factor authentication enabled",
+      "Role-based access control implemented",
+      "Session management secure"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 15,
+        "evidence": "Single login form without modern security"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement Audit Trail and Logging",
+    "problem_statement": "Add comprehensive audit logging for all financial transactions and user actions",
+    "scope": [
+      "all transaction forms",
+      "user actions",
+      "data modifications"
+    ],
+    "risk_if_unaddressed": "Regulatory compliance violations and inability to track unauthorized activities",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "compliance requirements analysis"
+    ],
+    "suggested_approach": "Implement structured logging with Serilog and audit database tables",
+    "success_criteria": [
+      "All transactions logged with timestamps and user context",
+      "Immutable audit trail",
+      "Compliance reporting capability"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 13,
+        "evidence": "Transaction forms without visible audit mechanisms"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Replace COM Dependencies",
+    "problem_statement": "Eliminate COM component dependencies that create deployment and maintenance issues",
+    "scope": [
+      "msmask32.ocx",
+      "MSCOMCTL.OCX",
+      "DBGRID32.OCX",
+      "all UI controls"
+    ],
+    "risk_if_unaddressed": "Deployment failures and compatibility issues on modern systems",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [
+      "UI framework selection"
+    ],
+    "suggested_approach": "Replace with native .NET controls or modern web UI components",
+    "success_criteria": [
+      "No COM dependencies",
+      "Equivalent functionality maintained",
+      "Simplified deployment"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 7,
+        "evidence": "Multiple COM object references"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Implement Data Encryption",
+    "problem_statement": "Add encryption for sensitive financial data at rest and in transit",
+    "scope": [
+      "database connections",
+      "sensitive data fields",
+      "communication channels"
+    ],
+    "risk_if_unaddressed": "Data breach exposing customer financial information",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "encryption key management strategy"
+    ],
+    "suggested_approach": "Implement TLS for transport and AES encryption for sensitive database fields",
+    "success_criteria": [
+      "All sensitive data encrypted",
+      "Secure key management",
+      "Performance impact minimized"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 1,
+        "evidence": "Banking application handling financial data"
+      }
+    ]
+  }
+]
