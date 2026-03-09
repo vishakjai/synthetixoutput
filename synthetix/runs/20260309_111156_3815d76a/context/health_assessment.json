@@ -1,0 +1,90 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Legacy VB6 banking application with critical modernization needs. High security and maintainability risks due to outdated technology stack and potential SQL injection vulnerabilities.",
+  "scores": {
+    "maintainability": 2,
+    "security": 1,
+    "reliability": 3,
+    "testability": 1
+  },
+  "hotspots": [
+    {
+      "scope": "ADO Data Access Layer",
+      "reason": "Direct SQL execution with potential for injection attacks, no parameterized queries visible",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "ADO 2.5 library usage indicates direct SQL execution patterns"
+        }
+      ]
+    },
+    {
+      "scope": "Authentication System",
+      "reason": "Single login form with no visible multi-factor authentication or modern security practices",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 15,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "scope": "COM Dependencies",
+      "reason": "Multiple COM components create deployment and compatibility issues",
+      "severity": "medium",
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 7,
+          "evidence": "Object={C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0; msmask32.ocx"
+        }
+      ]
+    },
+    {
+      "scope": "Financial Transaction Forms",
+      "reason": "No visible audit trail or transaction logging mechanisms",
+      "severity": "high",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 13,
+          "evidence": "Form=frmdeposit.frm"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Vulnerability",
+      "description": "ADO-based data access without parameterized queries poses critical security risk for financial data",
+      "severity": "critical",
+      "confidence": 0.9
+    },
+    {
+      "title": "Technology Obsolescence",
+      "description": "VB6 runtime and COM components are deprecated, creating support and security update gaps",
+      "severity": "high",
+      "confidence": 1.0
+    },
+    {
+      "title": "Regulatory Compliance Gap",
+      "description": "Legacy system likely lacks modern banking compliance features (PCI DSS, audit trails, encryption)",
+      "severity": "critical",
+      "confidence": 0.8
+    },
+    {
+      "title": "Single Point of Failure",
+      "description": "Monolithic desktop application with no distributed architecture or failover capabilities",
+      "severity": "medium",
+      "confidence": 0.9
+    }
+  ]
+}
