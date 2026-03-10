@@ -1,0 +1,332 @@
+{
+  "run_id": "20260310_195249_19146ae8",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 2 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260310T235316Z_20260310_195249_19146ae8",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "bc85906ebc84cb22cdd62610df410b92dd271a60"
+      },
+      "context_bundle": {
+        "bundle_id": "ff655c97d85440a1ac3eb058edc8f3fc",
+        "created_at": "2026-03-10T23:53:16.652592+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "bc85906ebc84cb22cdd62610df410b92dd271a60",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "0115efdd9b2645b6b2bb02c3f7722de1",
+            "digest": "sha256:cd717d843791fe7fb7fa1a5ef7169bd9922372d3713d19f27ec637a600bb451d",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "511a1ec893f14c7f9a1985162d38e1b1",
+            "digest": "sha256:a49097b358be183c622768ea2d1072911a60b49f0d107dc9a7a677c98574d2df",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "34c198b13d3d486a8cf8f64b6a9e16f2",
+            "digest": "sha256:fa9ca580ee5d86f05c72cbe9b08227195f270667e37e7b626a7e88a7e7146b01",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-60b847cd6fa16d09",
+          "knowledge_snapshot_id": "kctx-b5bbe5ad54a31f2d",
+          "delivery_constitution_id": "const-c32edc2cf8c5",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-03-10T23:53:16.665251+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy VB6 repository, identifying key components such as projects, forms, modules, ActiveX dependencies, business rules, and SQL behaviors.",
+        "nodes": [
+          {
+            "id": "node-php-msgQueueListener",
+            "type": "Component",
+            "name": "Message Queue Listener",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 3,
+                "evidence": "PHP script for message queue listening"
+              }
+            ]
+          },
+          {
+            "id": "node-sql-innodb_index_stats",
+            "type": "Table",
+            "name": "innodb_index_stats",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 3,
+                "evidence": "CREATE TABLE `innodb_index_stats`"
+              }
+            ]
+          },
+          {
+            "id": "node-sql-innodb_table_stats",
+            "type": "Table",
+            "name": "innodb_table_stats",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 15,
+                "evidence": "CREATE TABLE `innodb_table_stats`"
+              }
+            ]
+          },
+          {
+            "id": "node-sql-slave_master_info",
+            "type": "Table",
+            "name": "slave_master_info",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 27,
+                "evidence": "CREATE TABLE `slave_master_info`"
+              }
+            ]
+          },
+          {
+            "id": "node-php-ConfigSearchController",
+            "type": "Component",
+            "name": "Config Search Controller",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 3,
+                "evidence": "PHP class for configuration search"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-php-msgQueueListener",
+            "to": "node-sql-innodb_index_stats",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 10,
+                "evidence": "global $db_connection"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-php-ConfigSearchController",
+            "to": "node-sql-slave_master_info",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 34,
+                "evidence": "SELECT * FROM config"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions identified within the legacy VB6 repository.",
+        "rules": [
+          {
+            "id": "rule-php-global-usage",
+            "category": "naming",
+            "rule": "Avoid using global variables directly.",
+            "confidence": 0.7,
+            "examples": [
+              "global $db_connection;"
+            ],
+            "counterexamples": [
+              "use dependency injection instead"
+            ],
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 5,
+                "evidence": "global $db_connection;"
+              }
+            ]
+          },
+          {
+            "id": "rule-sql-table-naming",
+            "category": "naming",
+            "rule": "Use snake_case for SQL table names.",
+            "confidence": 0.9,
+            "examples": [
+              "innodb_index_stats"
+            ],
+            "counterexamples": [
+              "InnodbIndexStats"
+            ],
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 3,
+                "evidence": "CREATE TABLE `innodb_index_stats`"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor global variable usage to use dependency injection.",
+          "Ensure all SQL table names follow snake_case convention."
+        ],
+        "scaffold_templates": [
+          "TypeScript class template for controllers",
+          "TypeScript interface for database access objects"
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "This assessment evaluates the maintainability, security, reliability, and testability of the legacy VB6 repository.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 55,
+          "testability": 45
+        },
+        "hotspots": [
+          {
+            "scope": "bin/msgQueueListner.php",
+            "reason": "Use of global variables and lack of error handling.",
+            "severity": "high",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 5,
+                "evidence": "global $db_connection;"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "SQL Injection Risk",
+            "description": "Direct SQL queries without parameterization.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "rem-001",
+          "title": "Refactor Global Variable Usage",
+          "problem_statement": "Global variables are used directly, which can lead to maintainability issues.",
+          "scope": [
+            "bin/msgQueueListner.php"
+          ],
+          "risk_if_unaddressed": "Increased difficulty in managing dependencies and potential for variable conflicts.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [],
+          "suggested_approach": "Refactor code to use dependency injection for managing global variables.",
+          "success_criteria": [
+            "No global variables are used directly in the code."
+          ],
+          "confidence": 0.8,
+          "provenance": [
+            {
+              "file": "bin/msgQueueListner.php",
+              "line": 5,
+              "evidence": "global $db_connection;"
+            }
+          ]
+        },
+        {
+          "id": "rem-002",
+          "title": "Implement SQL Parameterization",
+          "problem_statement": "SQL queries are constructed using string concatenation, posing a risk of SQL injection.",
+          "scope": [
+            "Controller/ConfigSearchController.php"
+          ],
+          "risk_if_unaddressed": "Potential for SQL injection attacks.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [],
+          "suggested_approach": "Use prepared statements or ORM to handle SQL queries.",
+          "success_criteria": [
+            "All SQL queries are parameterized."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "Controller/ConfigSearchController.php",
+              "line": 34,
+              "evidence": "SELECT * FROM config"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 6959,
+    "latency_ms": 24143.32914352417,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-03-10T23:53:16.683989+00:00"
+}
