@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "This profile outlines the coding conventions identified within the legacy VB6 repository.",
+  "rules": [
+    {
+      "id": "rule-php-global-usage",
+      "category": "naming",
+      "rule": "Avoid using global variables directly.",
+      "confidence": 0.7,
+      "examples": [
+        "global $db_connection;"
+      ],
+      "counterexamples": [
+        "use dependency injection instead"
+      ],
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 5,
+          "evidence": "global $db_connection;"
+        }
+      ]
+    },
+    {
+      "id": "rule-sql-table-naming",
+      "category": "naming",
+      "rule": "Use snake_case for SQL table names.",
+      "confidence": 0.9,
+      "examples": [
+        "innodb_index_stats"
+      ],
+      "counterexamples": [
+        "InnodbIndexStats"
+      ],
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 3,
+          "evidence": "CREATE TABLE `innodb_index_stats`"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor global variable usage to use dependency injection.",
+    "Ensure all SQL table names follow snake_case convention."
+  ],
+  "scaffold_templates": [
+    "TypeScript class template for controllers",
+    "TypeScript interface for database access objects"
+  ]
+}
