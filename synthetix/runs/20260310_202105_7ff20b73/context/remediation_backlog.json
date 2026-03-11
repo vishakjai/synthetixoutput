@@ -1,0 +1,52 @@
+[
+  {
+    "id": "remediation-php-global-refactor",
+    "title": "Refactor Global Variable Usage",
+    "problem_statement": "Global variables are used extensively, leading to potential maintainability issues.",
+    "scope": [
+      "bin/msgQueueListner.php"
+    ],
+    "risk_if_unaddressed": "Continued use of global variables could lead to difficult-to-maintain code and potential security issues.",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Refactor code to use dependency injection or encapsulate global state within classes.",
+    "success_criteria": [
+      "Eliminate all global variable usage.",
+      "Improve code maintainability and readability."
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "bin/msgQueueListner.php",
+        "line": 5,
+        "evidence": "Global variable usage detected."
+      }
+    ]
+  },
+  {
+    "id": "remediation-sql-injection",
+    "title": "Mitigate SQL Injection Risks",
+    "problem_statement": "Dynamic SQL query construction without parameterization poses SQL injection risks.",
+    "scope": [
+      "Controller/ConfigSearchController.php"
+    ],
+    "risk_if_unaddressed": "SQL injection vulnerabilities could lead to data breaches and unauthorized data access.",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Use parameterized queries or ORM frameworks to construct SQL queries.",
+    "success_criteria": [
+      "All SQL queries are parameterized.",
+      "Eliminate SQL injection vulnerabilities."
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "Controller/ConfigSearchController.php",
+        "line": 1,
+        "evidence": "Dynamic SQL query construction detected."
+      }
+    ]
+  }
+]
