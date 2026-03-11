@@ -1,0 +1,238 @@
+{
+  "header": {
+    "artifact_id": "fe271fd90efb4a799f78ce3ceb849058",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T09:47:44.840054+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260311_054717_13a6abb1",
+      "stage_id": "context_layer",
+      "task_id": "d369ee16dec243f2971c74434ea93e7c"
+    },
+    "parents": [],
+    "digest": "sha256:45d70e3ce87b0caa5d3eb1d60911990d0f22ebd5a36c9368aa8c6acc292af7e2",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260311_054717_13a6abb1",
+      "bundle_version": "20260311T094744Z_20260311_054717_13a6abb1"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "node-msgQueueListener",
+        "type": "component",
+        "name": "Message Queue Listener",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "bin/msgQueueListner.php"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "bin/msgQueueListner.php"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node-innodb_index_stats",
+        "type": "table",
+        "name": "innodb_index_stats",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "bin/percona_upgrade.sql"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "bin/percona_upgrade.sql"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node-innodb_table_stats",
+        "type": "table",
+        "name": "innodb_table_stats",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "bin/percona_upgrade.sql"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "bin/percona_upgrade.sql"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node-slave_master_info",
+        "type": "table",
+        "name": "slave_master_info",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "bin/percona_upgrade.sql"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "bin/percona_upgrade.sql"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node-ConfigSearchController",
+        "type": "component",
+        "name": "ConfigSearchController",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "Controller/ConfigSearchController.php"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "Controller/ConfigSearchController.php"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "depends_on",
+        "from": "node-msgQueueListener",
+        "to": "node-ConfigSearchController",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "bin/msgQueueListner.php"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "reads",
+        "from": "node-ConfigSearchController",
+        "to": "node-innodb_index_stats",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "Controller/ConfigSearchController.php"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 5,
+      "edge_count": 2,
+      "languages": []
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": []
+}
