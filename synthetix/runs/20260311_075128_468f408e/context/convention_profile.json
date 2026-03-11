@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "This profile outlines the coding conventions and potential improvements for the legacy codebase.",
+  "rules": [
+    {
+      "id": "rule-php-naming-conventions",
+      "category": "naming",
+      "rule": "Use consistent naming conventions for variables and functions.",
+      "confidence": 0.8,
+      "examples": [
+        "function getUserData()"
+      ],
+      "counterexamples": [
+        "function GetUserData()"
+      ],
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "Inconsistent naming conventions observed."
+        }
+      ]
+    },
+    {
+      "id": "rule-sql-security",
+      "category": "security",
+      "rule": "Avoid using plain text passwords in SQL scripts.",
+      "confidence": 0.9,
+      "examples": [
+        "Use environment variables for sensitive information."
+      ],
+      "counterexamples": [
+        "'User_password' text CHARACTER SET utf8 COLLATE utf8_bin"
+      ],
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 25,
+          "evidence": "Sensitive information stored in plain text."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor PHP scripts to adhere to PSR-12 coding standards.",
+    "Ensure all SQL queries are parameterized to prevent SQL injection."
+  ],
+  "scaffold_templates": [
+    "PHP class template with PSR-12 compliance.",
+    "C# class template for database interaction."
+  ]
+}
