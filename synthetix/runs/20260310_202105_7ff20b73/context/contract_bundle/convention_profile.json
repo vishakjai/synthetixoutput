@@ -1,0 +1,131 @@
+{
+  "header": {
+    "artifact_id": "75744f5e72e94533a245b58e833bbdcf",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T00:21:41.093788+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260310_202105_7ff20b73",
+      "stage_id": "context_layer",
+      "task_id": "d15fd0598828475186234e82d409b062"
+    },
+    "parents": [],
+    "digest": "sha256:d61a33e667b85646daf20ee1e6aa3de872581ae1979bd0527fd344f817a14de7",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260310_202105_7ff20b73",
+      "bundle_version": "20260311T002141Z_20260310_202105_7ff20b73"
+    }
+  },
+  "rules": [
+    {
+      "id": "rule-php-global-usage",
+      "category": "naming",
+      "title": "Avoid using global variables.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Avoid using global variables.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "global $db_connection;"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "Use dependency injection instead."
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/msgQueueListner.php"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "rule-sql-collation",
+      "category": "authn_authz",
+      "title": "Ensure consistent collation settings.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Ensure consistent collation settings.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "COLLATE utf8_bin"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "COLLATE utf8_general_ci"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/percona_upgrade.sql"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "TypeScript class template for message queue listener.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "TypeScript class template for configuration search controller.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
