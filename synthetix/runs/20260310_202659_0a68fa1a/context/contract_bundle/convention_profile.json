@@ -1,0 +1,131 @@
+{
+  "header": {
+    "artifact_id": "7be6089aeea24c6981ab1928af1fead4",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T00:27:19.992121+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260310_202659_0a68fa1a",
+      "stage_id": "context_layer",
+      "task_id": "76253dac746440458673cf0cf0882626"
+    },
+    "parents": [],
+    "digest": "sha256:2b8c391d2d3abbbb9e81cdd2a6aee191ace50a529a96d8e27a94adf8ddfd89d6",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260310_202659_0a68fa1a",
+      "bundle_version": "20260311T002719Z_20260310_202659_0a68fa1a"
+    }
+  },
+  "rules": [
+    {
+      "id": "rule-php-global-vars",
+      "category": "naming",
+      "title": "Avoid using global variables for database connections.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Avoid using global variables for database connections.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "Use dependency injection for database connections."
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "global $db_connection;"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/msgQueueListner.php"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "rule-sql-charset",
+      "category": "authn_authz",
+      "title": "Ensure SQL tables use UTF-8 charset for security and compatibility.",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Ensure SQL tables use UTF-8 charset for security and compatibility.",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "CREATE TABLE ... CHARSET=utf8;"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "CREATE TABLE ... CHARSET=latin1;"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/percona_upgrade.sql"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "TypeScript class templates for PHP components.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "SQL migration scripts for database schema updates.",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
