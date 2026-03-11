@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "Health assessment of the legacy codebase with focus on maintainability, security, reliability, and testability.",
+  "scores": {
+    "maintainability": 60,
+    "security": 50,
+    "reliability": 55,
+    "testability": 40
+  },
+  "hotspots": [
+    {
+      "scope": "bin/msgQueueListner.php",
+      "reason": "Use of global variables for critical operations.",
+      "severity": "high",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 9,
+          "evidence": "Global variable usage for database connection."
+        }
+      ]
+    },
+    {
+      "scope": "bin/percona_upgrade.sql",
+      "reason": "Potential SQL injection risk due to lack of parameterized queries.",
+      "severity": "medium",
+      "confidence": 0.75,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 1,
+          "evidence": "SQL script without parameterized queries."
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Global Variable Usage",
+      "description": "The use of global variables for database connections can lead to maintainability and security issues.",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "SQL Injection Risk",
+      "description": "Lack of parameterized queries in SQL scripts increases the risk of SQL injection attacks.",
+      "severity": "medium",
+      "confidence": 0.75
+    }
+  ]
+}
