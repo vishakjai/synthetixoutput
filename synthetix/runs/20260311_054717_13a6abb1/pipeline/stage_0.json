@@ -1,0 +1,306 @@
+{
+  "run_id": "20260311_054717_13a6abb1",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260311T094744Z_20260311_054717_13a6abb1",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d"
+      },
+      "context_bundle": {
+        "bundle_id": "55c12dbf93a844ca87a3064fa422e1ba",
+        "created_at": "2026-03-11T09:47:44.840716+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "fe271fd90efb4a799f78ce3ceb849058",
+            "digest": "sha256:45d70e3ce87b0caa5d3eb1d60911990d0f22ebd5a36c9368aa8c6acc292af7e2",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "7ee4b90f758e4af698e2c475f242a58f",
+            "digest": "sha256:0a2d6929dc73bb4331f65051e15af8fe471e66b7d7f44dfb66622c58e694fd51",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "07e71ea64eba4094a3e897d6232b106d",
+            "digest": "sha256:9d753c1ea303439618287b00f61b771390f9985d45a27df92a982cc3ddceb091",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-b54c80d94cfa25d1",
+          "knowledge_snapshot_id": "kctx-b5bbe5ad54a31f2d",
+          "delivery_constitution_id": "const-92bde4fcdf40",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-03-11T09:47:44.853001+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "Analysis of legacy PHP repository to identify application structure, dependencies, routes, SQL behavior, sessions, and async jobs.",
+        "nodes": [
+          {
+            "id": "node-msgQueueListener",
+            "type": "Component",
+            "name": "Message Queue Listener",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 1,
+                "evidence": "PHP script for message queue listening."
+              }
+            ]
+          },
+          {
+            "id": "node-innodb_index_stats",
+            "type": "Table",
+            "name": "innodb_index_stats",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 3,
+                "evidence": "SQL table definition for innodb_index_stats."
+              }
+            ]
+          },
+          {
+            "id": "node-innodb_table_stats",
+            "type": "Table",
+            "name": "innodb_table_stats",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 15,
+                "evidence": "SQL table definition for innodb_table_stats."
+              }
+            ]
+          },
+          {
+            "id": "node-slave_master_info",
+            "type": "Table",
+            "name": "slave_master_info",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 27,
+                "evidence": "SQL table definition for slave_master_info."
+              }
+            ]
+          },
+          {
+            "id": "node-ConfigSearchController",
+            "type": "Component",
+            "name": "ConfigSearchController",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 1,
+                "evidence": "PHP class for configuration search."
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-msgQueueListener",
+            "to": "node-ConfigSearchController",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 5,
+                "evidence": "Includes init.php which likely sets up dependencies."
+              }
+            ]
+          },
+          {
+            "type": "READS_TABLE",
+            "from": "node-ConfigSearchController",
+            "to": "node-innodb_index_stats",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.85,
+            "evidence": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 38,
+                "evidence": "SQL query reading from config table."
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Analysis of code conventions in the legacy PHP repository.",
+        "rules": [
+          {
+            "id": "rule-naming-convention",
+            "category": "naming",
+            "rule": "Use camelCase for variable names.",
+            "confidence": 0.7,
+            "examples": [
+              "$maxIdleTime"
+            ],
+            "counterexamples": [
+              "$db_connection"
+            ],
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 8,
+                "evidence": "Variable naming convention."
+              }
+            ]
+          },
+          {
+            "id": "rule-error-handling",
+            "category": "error_handling",
+            "rule": "Check for errors after file operations.",
+            "confidence": 0.8,
+            "examples": [
+              "if (!$pid) { ... }"
+            ],
+            "counterexamples": [
+              "@file_get_contents($file)"
+            ],
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 18,
+                "evidence": "Error handling in file operations."
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure consistent naming conventions across the codebase."
+        ],
+        "scaffold_templates": [
+          "TypeScript class template for controllers."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "Health assessment of the legacy PHP repository.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "bin/msgQueueListner.php",
+            "reason": "Use of global variables without encapsulation.",
+            "severity": "medium",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 5,
+                "evidence": "Global variable usage."
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Potential SQL Injection",
+            "description": "Direct SQL queries without parameterization.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation-global-vars",
+          "title": "Encapsulate Global Variables",
+          "problem_statement": "Global variables are used without encapsulation, leading to potential side effects.",
+          "scope": [
+            "bin/msgQueueListner.php"
+          ],
+          "risk_if_unaddressed": "Unintended side effects and difficult debugging.",
+          "effort": "M",
+          "severity": "medium",
+          "dependencies": [],
+          "suggested_approach": "Refactor to use class properties or dependency injection.",
+          "success_criteria": [
+            "No global variables are used in the script."
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "bin/msgQueueListner.php",
+              "line": 5,
+              "evidence": "Global variable usage."
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 6689,
+    "latency_ms": 23874.94993209839,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-03-11T09:47:44.867073+00:00"
+}
