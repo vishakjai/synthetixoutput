@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of legacy VB6 repository with focus on modernization to TypeScript, covering projects, forms, modules, ActiveX dependencies, business rules, and SQL behaviors.",
+  "nodes": [
+    {
+      "id": "node-php-msgQueueListener",
+      "type": "Component",
+      "name": "Message Queue Listener",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "PHP script for managing message queue listener process."
+        }
+      ]
+    },
+    {
+      "id": "node-sql-perconaUpgrade",
+      "type": "Database",
+      "name": "Percona Upgrade SQL",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 1,
+          "evidence": "SQL script for upgrading Percona database tables."
+        }
+      ]
+    },
+    {
+      "id": "node-php-configSearchController",
+      "type": "Component",
+      "name": "Config Search Controller",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "PHP class for managing configuration search operations."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-php-msgQueueListener",
+      "to": "node-sql-perconaUpgrade",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 10,
+          "evidence": "Global database connection dependency."
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-php-configSearchController",
+      "to": "node-sql-perconaUpgrade",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 48,
+          "evidence": "Database query execution for configuration data retrieval."
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
