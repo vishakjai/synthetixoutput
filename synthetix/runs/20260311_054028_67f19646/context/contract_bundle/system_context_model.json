@@ -1,0 +1,182 @@
+{
+  "header": {
+    "artifact_id": "bd650414a3d04264afea47db6c118cd1",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T09:41:01.647263+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260311_054028_67f19646",
+      "stage_id": "context_layer",
+      "task_id": "b4169e6637b0406c950c5490f8c53e43"
+    },
+    "parents": [],
+    "digest": "sha256:ed56dac942fc5905fd3104b2eb6f927eba805d1327df5f2191853aba9317f931",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260311_054028_67f19646",
+      "bundle_version": "20260311T094101Z_20260311_054028_67f19646"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "node-php-msgQueueListner",
+        "type": "component",
+        "name": "msgQueueListner",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "bin/msgQueueListner.php"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "bin/msgQueueListner.php"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node-sql-perconaUpgrade",
+        "type": "database",
+        "name": "percona_upgrade",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "bin/percona_upgrade.sql"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "bin/percona_upgrade.sql"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "node-php-ConfigSearchController",
+        "type": "component",
+        "name": "ConfigSearchController",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "Controller/ConfigSearchController.php"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "Controller/ConfigSearchController.php"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "depends_on",
+        "from": "node-php-msgQueueListner",
+        "to": "node-sql-perconaUpgrade",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "bin/msgQueueListner.php"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "depends_on",
+        "from": "node-php-ConfigSearchController",
+        "to": "node-sql-perconaUpgrade",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "Controller/ConfigSearchController.php"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 3,
+      "edge_count": 2,
+      "languages": []
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": []
+}
