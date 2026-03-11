@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of legacy PHP repository to identify application structure, dependencies, routes, SQL behavior, sessions, and async jobs.",
+  "nodes": [
+    {
+      "id": "node-msgQueueListener",
+      "type": "Component",
+      "name": "Message Queue Listener",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "PHP script for message queue listening."
+        }
+      ]
+    },
+    {
+      "id": "node-innodb_index_stats",
+      "type": "Table",
+      "name": "innodb_index_stats",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 3,
+          "evidence": "SQL table definition for innodb_index_stats."
+        }
+      ]
+    },
+    {
+      "id": "node-innodb_table_stats",
+      "type": "Table",
+      "name": "innodb_table_stats",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 15,
+          "evidence": "SQL table definition for innodb_table_stats."
+        }
+      ]
+    },
+    {
+      "id": "node-slave_master_info",
+      "type": "Table",
+      "name": "slave_master_info",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 27,
+          "evidence": "SQL table definition for slave_master_info."
+        }
+      ]
+    },
+    {
+      "id": "node-ConfigSearchController",
+      "type": "Component",
+      "name": "ConfigSearchController",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "PHP class for configuration search."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-msgQueueListener",
+      "to": "node-ConfigSearchController",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 5,
+          "evidence": "Includes init.php which likely sets up dependencies."
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "node-ConfigSearchController",
+      "to": "node-innodb_index_stats",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 38,
+          "evidence": "SQL query reading from config table."
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
