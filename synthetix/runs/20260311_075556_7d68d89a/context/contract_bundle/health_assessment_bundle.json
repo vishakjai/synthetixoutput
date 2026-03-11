@@ -1,0 +1,202 @@
+{
+  "header": {
+    "artifact_id": "ea9ff8de9353487abce1c5dad29faaa9",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T11:56:16.915624+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "0a4df5260a2b5b79933a99960afeaf3fd2767b92",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260311_075556_7d68d89a",
+      "stage_id": "context_layer",
+      "task_id": "4d3161f2bdbb4e21895986c960afedd3"
+    },
+    "parents": [],
+    "digest": "sha256:39af8cf6bf1aacdd616049b687ef165d6d48184fd1ba2844d646918cf0a5053e",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260311_075556_7d68d89a",
+      "bundle_version": "20260311T115616Z_20260311_075556_7d68d89a"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Health assessment of the legacy VB6 repository, highlighting maintainability and security concerns."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 2,
+      "security": 3,
+      "reliability": 2,
+      "testability": 1
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: bin/msgQueueListner.php",
+      "description": "Use of global variables and lack of error handling.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "bin/msgQueueListner.php"
+        ],
+        "paths": [
+          "bin/msgQueueListner.php"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/msgQueueListner.php"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "SQL Injection Risk",
+      "description": "Potential SQL injection vulnerabilities due to concatenated SQL queries.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation-001",
+      "title": "Refactor Global Variable Usage",
+      "priority": "P1",
+      "business_value": "Increased difficulty in maintaining and testing the code.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-php-msgQueueListener"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Refactor the code to use dependency injection"
+      ],
+      "acceptance_criteria": [
+        "Global variables are eliminated.",
+        "Code is easier to test and maintain."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation-001"
+    ],
+    "stabilization": [
+      "remediation-001"
+    ],
+    "modernization": [
+      "remediation-001"
+    ]
+  }
+}
