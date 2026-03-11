@@ -1,0 +1,52 @@
+[
+  {
+    "id": "remediation-001",
+    "title": "Refactor Global Variables",
+    "problem_statement": "Global variables are used for database connections, which can lead to maintainability issues.",
+    "scope": [
+      "bin/msgQueueListner.php"
+    ],
+    "risk_if_unaddressed": "Increased difficulty in maintaining and testing the code.",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Refactor to use dependency injection for database connections.",
+    "success_criteria": [
+      "No global variables for database connections.",
+      "Improved code maintainability and testability."
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "bin/msgQueueListner.php",
+        "line": 5,
+        "evidence": "Use of global $db_connection."
+      }
+    ]
+  },
+  {
+    "id": "remediation-002",
+    "title": "Implement Parameterized Queries",
+    "problem_statement": "Direct SQL query execution without parameterization poses a security risk.",
+    "scope": [
+      "Controller/ConfigSearchController.php"
+    ],
+    "risk_if_unaddressed": "Increased risk of SQL injection attacks.",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Refactor queries to use prepared statements or ORM.",
+    "success_criteria": [
+      "All SQL queries are parameterized.",
+      "Reduced risk of SQL injection."
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "Controller/ConfigSearchController.php",
+        "line": 41,
+        "evidence": "Direct SQL query execution."
+      }
+    ]
+  }
+]
