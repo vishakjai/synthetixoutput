@@ -1,0 +1,321 @@
+{
+  "run_id": "20260311_065155_4dd73a31",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260311T105214Z_20260311_065155_4dd73a31",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d"
+      },
+      "context_bundle": {
+        "bundle_id": "93668be45e70425693bcaaf505127ecb",
+        "created_at": "2026-03-11T10:52:14.423972+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "6511cbfb1683448d954bfe1206b49380",
+            "digest": "sha256:a56a07b8695c6e7caab593fd730f277b3dc8120d208e86ebec82af58c4a787a5",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "619f4fbe2fe0499395120b909692efb4",
+            "digest": "sha256:298e92ae346717112e12a5ba4c30fc112b4142ab2a3d6d4e456b95425cb803a8",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "8e0d9306e0144415948290f252b02e5a",
+            "digest": "sha256:a1e0935e2f6a5f920c582d9a5ba3f4e4d332071d1e3de3759db0623c6838372e",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-13db58c402d06f74",
+          "knowledge_snapshot_id": "kctx-b5bbe5ad54a31f2d",
+          "delivery_constitution_id": "const-3a3600388af7",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-03-11T10:52:14.435955+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the structure and dependencies of a legacy VB6 banking application, detailing forms, modules, ActiveX dependencies, and SQL behaviors.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Project",
+            "name": "BANK_SYSTEM",
+            "metadata": {
+              "version": "1.0.0",
+              "company": "KENEX Ltd"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Form",
+            "name": "frmcustomer",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 18,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Form",
+            "name": "closeacount",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 25,
+                "evidence": "Form=closeacount.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "ActiveX",
+            "name": "MSCOMCTL.OCX",
+            "metadata": {
+              "version": "2.0"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 11,
+                "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+              }
+            ]
+          },
+          {
+            "id": "node-5",
+            "type": "ActiveX",
+            "name": "DBGRID32.OCX",
+            "metadata": {
+              "version": "1.0"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 13,
+                "evidence": "Object={00028C01-0000-0000-0000-000000000046}#1.0#0; DBGRID32.OCX"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-4",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 11,
+                "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-5",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 13,
+                "evidence": "Object={00028C01-0000-0000-0000-000000000046}#1.0#0; DBGRID32.OCX"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "SQL behaviors and database conversion context not specified"
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and standards used in the legacy VB6 application, focusing on naming, error handling, and ActiveX usage.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Form names should be prefixed with 'frm'.",
+            "confidence": 0.85,
+            "examples": [
+              "frmcustomer",
+              "frmLogin"
+            ],
+            "counterexamples": [
+              "customerForm"
+            ],
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 18,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "rule-2",
+            "category": "error_handling",
+            "rule": "Use of 'On Error' for error handling.",
+            "confidence": 0.8,
+            "examples": [
+              "On Error GoTo ErrorHandler"
+            ],
+            "counterexamples": [
+              "try-catch"
+            ],
+            "provenance": [
+              {
+                "file": "BankApp1/close account.frm",
+                "line": 1,
+                "evidence": "VERSION 5.00"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all form names follow the 'frm' prefix convention."
+        ],
+        "scaffold_templates": [
+          "C# form conversion template"
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment identifies key areas of risk and maintainability concerns within the legacy VB6 application.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 55,
+          "testability": 40
+        },
+        "hotspots": [
+          {
+            "scope": "ActiveX dependencies",
+            "reason": "Reliance on outdated ActiveX controls.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 11,
+                "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Control Security",
+            "description": "ActiveX controls may pose security risks due to lack of updates and potential vulnerabilities.",
+            "severity": "critical",
+            "confidence": 0.95
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Replace ActiveX Controls",
+          "problem_statement": "The application relies on outdated ActiveX controls which may pose security and compatibility issues.",
+          "scope": [
+            "ActiveX",
+            "UI"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities and compatibility issues with modern systems.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node-4",
+            "node-5"
+          ],
+          "suggested_approach": "Replace ActiveX controls with modern equivalents in C#.",
+          "success_criteria": [
+            "All ActiveX controls are replaced with .NET equivalents.",
+            "Application functions correctly without ActiveX dependencies."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BankApp1/BANK.vbp",
+              "line": 11,
+              "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 8206,
+    "latency_ms": 15728.983879089355,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-03-11T10:52:14.456839+00:00"
+}
