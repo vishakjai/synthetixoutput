@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "summary": "This profile identifies coding conventions and potential improvements for the legacy PHP codebase.",
+  "rules": [
+    {
+      "id": "rule-naming-001",
+      "category": "naming",
+      "rule": "Class names should be in PascalCase.",
+      "confidence": 0.8,
+      "examples": [
+        "ConfigSearchController"
+      ],
+      "counterexamples": [
+        "msgQueueListner"
+      ],
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "Class name follows PascalCase."
+        }
+      ]
+    },
+    {
+      "id": "rule-security-001",
+      "category": "security",
+      "rule": "Avoid using global variables for database connections.",
+      "confidence": 0.85,
+      "examples": [],
+      "counterexamples": [
+        "global $db_connection;"
+      ],
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 5,
+          "evidence": "Global variable for database connection."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor global variables to use dependency injection."
+  ],
+  "scaffold_templates": [
+    "TypeScript class templates for controllers and services."
+  ]
+}
