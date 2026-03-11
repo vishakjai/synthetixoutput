@@ -1,0 +1,202 @@
+{
+  "header": {
+    "artifact_id": "736de7d232e24494bbac2b2cc2efd355",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T10:55:23.733427+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260311_065506_ea9d8dce",
+      "stage_id": "context_layer",
+      "task_id": "4338080f4d0742a0921a34ded17653ce"
+    },
+    "parents": [],
+    "digest": "sha256:664709b863bcb65325cbbc9e90b6c5b54b3f57ffa770e8839d97eb2085a2ef1f",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260311_065506_ea9d8dce",
+      "bundle_version": "20260311T105523Z_20260311_065506_ea9d8dce"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The health assessment of the VB6 application reveals maintainability and security concerns due to outdated dependencies and coding practices."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 4,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: MSCOMCTL.OCX",
+      "description": "Outdated ActiveX control with known security vulnerabilities.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "MSCOMCTL.OCX"
+        ],
+        "paths": [
+          "MSCOMCTL.OCX"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/BANK.vbp"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "ActiveX Control Vulnerability",
+      "description": "The application relies on outdated ActiveX controls which may have security vulnerabilities.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rem-1",
+      "title": "Replace Outdated ActiveX Controls",
+      "priority": "P0",
+      "business_value": "Potential security breaches due to vulnerabilities in ActiveX controls.",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-4"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "node-4"
+      ],
+      "plan": [
+        "Identify modern equivalents or remove dependency on ActiveX controls"
+      ],
+      "acceptance_criteria": [
+        "All ActiveX controls are replaced or removed.",
+        "Security vulnerabilities are mitigated."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rem-1"
+    ],
+    "stabilization": [],
+    "modernization": [
+      "rem-1"
+    ]
+  }
+}
