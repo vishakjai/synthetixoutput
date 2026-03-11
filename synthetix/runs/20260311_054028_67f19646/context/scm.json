@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "summary": "This model captures the structure and dependencies of the legacy VB6 repository, identifying key components, services, and database interactions.",
+  "nodes": [
+    {
+      "id": "node-php-msgQueueListner",
+      "type": "Component",
+      "name": "msgQueueListner",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "PHP script for message queue listening"
+        }
+      ]
+    },
+    {
+      "id": "node-sql-perconaUpgrade",
+      "type": "Database",
+      "name": "percona_upgrade",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 1,
+          "evidence": "SQL script for Percona upgrade"
+        }
+      ]
+    },
+    {
+      "id": "node-php-ConfigSearchController",
+      "type": "Component",
+      "name": "ConfigSearchController",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "PHP controller for configuration search"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-php-msgQueueListner",
+      "to": "node-sql-perconaUpgrade",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 10,
+          "evidence": "Database connection used in msgQueueListner"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-php-ConfigSearchController",
+      "to": "node-sql-perconaUpgrade",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 40,
+          "evidence": "SQL query execution in ConfigSearchController"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
