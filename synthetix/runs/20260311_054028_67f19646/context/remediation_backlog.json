@@ -1,0 +1,52 @@
+[
+  {
+    "id": "remediation-001",
+    "title": "Refactor Global Variables",
+    "problem_statement": "Global variables are used in the codebase, leading to potential maintainability issues.",
+    "scope": [
+      "bin/msgQueueListner.php"
+    ],
+    "risk_if_unaddressed": "Increased difficulty in maintaining and testing the code.",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Refactor to use dependency injection.",
+    "success_criteria": [
+      "No global variables present",
+      "All dependencies injected via constructor"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "bin/msgQueueListner.php",
+        "line": 5,
+        "evidence": "global $db_connection;"
+      }
+    ]
+  },
+  {
+    "id": "remediation-002",
+    "title": "Implement Parameterized Queries",
+    "problem_statement": "Hardcoded SQL queries are used, posing a security risk.",
+    "scope": [
+      "Controller/ConfigSearchController.php"
+    ],
+    "risk_if_unaddressed": "Potential for SQL injection attacks.",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Refactor to use parameterized queries.",
+    "success_criteria": [
+      "All SQL queries are parameterized",
+      "No hardcoded SQL strings"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "Controller/ConfigSearchController.php",
+        "line": 40,
+        "evidence": "SELECT * FROM config"
+      }
+    ]
+  }
+]
