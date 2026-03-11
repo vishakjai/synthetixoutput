@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of code conventions in legacy PHP and SQL code.",
+  "rules": [
+    {
+      "id": "rule-php-global-usage",
+      "category": "naming",
+      "rule": "Avoid using global variables.",
+      "confidence": 0.8,
+      "examples": [
+        "global $db_connection;"
+      ],
+      "counterexamples": [
+        "Use dependency injection instead."
+      ],
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 5,
+          "evidence": "Global variable usage detected."
+        }
+      ]
+    },
+    {
+      "id": "rule-sql-collation",
+      "category": "security",
+      "rule": "Ensure consistent collation settings.",
+      "confidence": 0.9,
+      "examples": [
+        "COLLATE utf8_bin"
+      ],
+      "counterexamples": [
+        "COLLATE utf8_general_ci"
+      ],
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 3,
+          "evidence": "Collation setting for SQL tables."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor global variable usage in PHP code.",
+    "Ensure consistent collation settings across SQL tables."
+  ],
+  "scaffold_templates": [
+    "TypeScript class template for message queue listener.",
+    "TypeScript class template for configuration search controller."
+  ]
+}
