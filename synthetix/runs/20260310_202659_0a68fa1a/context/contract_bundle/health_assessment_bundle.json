@@ -1,0 +1,331 @@
+{
+  "header": {
+    "artifact_id": "9e94480b07d14a80a02808760962b8ac",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T00:27:19.992442+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260310_202659_0a68fa1a",
+      "stage_id": "context_layer",
+      "task_id": "76253dac746440458673cf0cf0882626"
+    },
+    "parents": [],
+    "digest": "sha256:13a354e0daddad61b0c81755ffde7772d1f0cf7a9e9756802a0534d8f169ad19",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260310_202659_0a68fa1a",
+      "bundle_version": "20260311T002719Z_20260310_202659_0a68fa1a"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "Health assessment of the legacy codebase with focus on maintainability, security, reliability, and testability."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 60,
+      "security": 50,
+      "reliability": 55,
+      "testability": 40
+    },
+    "finding_count": 4,
+    "backlog_count": 2
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: bin/msgQueueListner.php",
+      "description": "Use of global variables for critical operations.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "bin/msgQueueListner.php"
+        ],
+        "paths": [
+          "bin/msgQueueListner.php"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/msgQueueListner.php"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: bin/percona_upgrade.sql",
+      "description": "Potential SQL injection risk due to lack of parameterized queries.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "bin/percona_upgrade.sql"
+        ],
+        "paths": [
+          "bin/percona_upgrade.sql"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/percona_upgrade.sql"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.75,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Global Variable Usage",
+      "description": "The use of global variables for database connections can lead to maintainability and security issues.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "SQL Injection Risk",
+      "description": "Lack of parameterized queries in SQL scripts increases the risk of SQL injection attacks.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.75,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation-global-vars",
+      "title": "Refactor Global Variable Usage",
+      "priority": "P1",
+      "business_value": "Increased risk of security vulnerabilities and code that is difficult to maintain.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-php-msgQueueListener"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Refactor the code to use dependency injection for database connections"
+      ],
+      "acceptance_criteria": [
+        "No global variables used for database connections.",
+        "Improved code maintainability and security."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "remediation-sql-injection",
+      "title": "Mitigate SQL Injection Risk",
+      "priority": "P2",
+      "business_value": "Potential for SQL injection attacks compromising data integrity.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-sql-perconaUpgrade"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Implement parameterized queries in SQL scripts"
+      ],
+      "acceptance_criteria": [
+        "All SQL queries are parameterized.",
+        "Reduced risk of SQL injection attacks."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation-global-vars"
+    ],
+    "stabilization": [
+      "remediation-global-vars",
+      "remediation-sql-injection"
+    ],
+    "modernization": [
+      "remediation-global-vars",
+      "remediation-sql-injection"
+    ]
+  }
+}
