@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+  "summary": "This profile evaluates the adherence to coding conventions in the legacy PHP codebase.",
+  "rules": [
+    {
+      "id": "rule-naming-conventions",
+      "category": "naming",
+      "rule": "Use camelCase for variable names and PascalCase for class names.",
+      "confidence": 0.7,
+      "examples": [
+        "$dbConnection",
+        "class ConfigSearchController"
+      ],
+      "counterexamples": [
+        "$db_connection",
+        "class configsearchcontroller"
+      ],
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "Class name follows PascalCase."
+        }
+      ]
+    },
+    {
+      "id": "rule-error-handling",
+      "category": "error_handling",
+      "rule": "Use try-catch blocks for error handling.",
+      "confidence": 0.6,
+      "examples": [
+        "try { ... } catch (Exception $e) { ... }"
+      ],
+      "counterexamples": [
+        "@file_get_contents($file)"
+      ],
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 17,
+          "evidence": "Use of error suppression with @ operator."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor variable naming to camelCase.",
+    "Implement try-catch blocks for error handling."
+  ],
+  "scaffold_templates": [
+    "TypeScript class templates for controllers.",
+    "TypeScript interfaces for database models."
+  ]
+}
