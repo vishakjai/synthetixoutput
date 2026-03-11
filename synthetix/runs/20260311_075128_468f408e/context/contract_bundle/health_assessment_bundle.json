@@ -1,0 +1,251 @@
+{
+  "header": {
+    "artifact_id": "8b8bed6ba157487daf23e09758b18eb3",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T11:52:00.497262+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "0a4df5260a2b5b79933a99960afeaf3fd2767b92",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260311_075128_468f408e",
+      "stage_id": "context_layer",
+      "task_id": "4eb222b695f74a42bd1b4ca1586413b3"
+    },
+    "parents": [],
+    "digest": "sha256:4fcd4aa27a9eb4d427612f62ca2ecca5cfddd8a24e61e30db2be7d92846af8dd",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260311_075128_468f408e",
+      "bundle_version": "20260311T115200Z_20260311_075128_468f408e"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "The health assessment identifies key areas of concern in the legacy codebase, focusing on maintainability and security."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 60,
+      "security": 50,
+      "reliability": 70,
+      "testability": 55
+    },
+    "finding_count": 2,
+    "backlog_count": 2
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: bin/msgQueueListner.php",
+      "description": "Lack of error handling and logging.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "bin/msgQueueListner.php"
+        ],
+        "paths": [
+          "bin/msgQueueListner.php"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/msgQueueListner.php"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "SQL Injection Risk",
+      "description": "Potential SQL injection vulnerabilities due to unparameterized queries.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation-001",
+      "title": "Refactor PHP Codebase",
+      "priority": "P2",
+      "business_value": "Increased maintenance burden and potential security vulnerabilities.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-php-msgQueueListener",
+          "node-php-ConfigSearchController"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Refactor the PHP code to comply with PSR-12 standards and improve error handling"
+      ],
+      "acceptance_criteria": [
+        "Codebase complies with PSR-12 standards.",
+        "Improved error handling and logging mechanisms in place."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "remediation-002",
+      "title": "Secure SQL Queries",
+      "priority": "P1",
+      "business_value": "High risk of SQL injection attacks.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-sql-innodbIndexStats",
+          "node-sql-innodbTableStats",
+          "node-sql-slaveMasterInfo"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Parameterize all SQL queries to prevent SQL injection"
+      ],
+      "acceptance_criteria": [
+        "All SQL queries are parameterized.",
+        "No SQL injection vulnerabilities detected."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation-002"
+    ],
+    "stabilization": [
+      "remediation-001",
+      "remediation-002"
+    ],
+    "modernization": [
+      "remediation-001",
+      "remediation-002"
+    ]
+  }
+}
