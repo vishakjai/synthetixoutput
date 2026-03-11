@@ -1,0 +1,248 @@
+{
+  "header": {
+    "artifact_id": "f4e06fb2feb044c4a03ce4a8e0f020aa",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-11T00:21:41.093961+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "main",
+      "branch": "main",
+      "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260310_202105_7ff20b73",
+      "stage_id": "context_layer",
+      "task_id": "d15fd0598828475186234e82d409b062"
+    },
+    "parents": [],
+    "digest": "sha256:ac2ff9b120666035c264d0ede8a073eabe386a3ff2b2aafe826fe334f2c170ab",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260310_202105_7ff20b73",
+      "bundle_version": "20260311T002141Z_20260310_202105_7ff20b73"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "Health assessment of legacy PHP and SQL code."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 60,
+      "security": 50,
+      "reliability": 55,
+      "testability": 45
+    },
+    "finding_count": 2,
+    "backlog_count": 2
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: bin/msgQueueListner.php",
+      "description": "Use of global variables and lack of error handling.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "bin/msgQueueListner.php"
+        ],
+        "paths": [
+          "bin/msgQueueListner.php"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/msgQueueListner.php"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "SQL Injection Risk",
+      "description": "Potential for SQL injection due to dynamic query construction.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "remediation-php-global-refactor",
+      "title": "Refactor Global Variable Usage",
+      "priority": "P2",
+      "business_value": "Continued use of global variables could lead to difficult-to-maintain code and potential security issues.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-php-msgQueueListener"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Refactor code to use dependency injection or encapsulate global state within classes"
+      ],
+      "acceptance_criteria": [
+        "Eliminate all global variable usage.",
+        "Improve code maintainability and readability."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "remediation-sql-injection",
+      "title": "Mitigate SQL Injection Risks",
+      "priority": "P1",
+      "business_value": "SQL injection vulnerabilities could lead to data breaches and unauthorized data access.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-php-configSearchController"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Use parameterized queries or ORM frameworks to construct SQL queries"
+      ],
+      "acceptance_criteria": [
+        "All SQL queries are parameterized.",
+        "Eliminate SQL injection vulnerabilities."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "remediation-sql-injection"
+    ],
+    "stabilization": [
+      "remediation-php-global-refactor",
+      "remediation-sql-injection"
+    ],
+    "modernization": [
+      "remediation-php-global-refactor",
+      "remediation-sql-injection"
+    ]
+  }
+}
