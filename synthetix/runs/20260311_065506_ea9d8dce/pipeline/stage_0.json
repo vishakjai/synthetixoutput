@@ -1,0 +1,268 @@
+{
+  "run_id": "20260311_065506_ea9d8dce",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 4 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260311T105523Z_20260311_065506_ea9d8dce",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d"
+      },
+      "context_bundle": {
+        "bundle_id": "9ba729441f6b415a97964a3a49c67d42",
+        "created_at": "2026-03-11T10:55:23.733591+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "492622b2b6ca4a819c2d51e1562b3039",
+            "digest": "sha256:4f508c52af7c92cd75488f0205947fd463a6c6afc156bba61527ceb9ffe43e54",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "311a158535e74b61afc031871a0ab6fc",
+            "digest": "sha256:9e929b9518b42ae404f92f478c25280c7053d6e25bd85a36dc8920d03a7072db",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "736de7d232e24494bbac2b2cc2efd355",
+            "digest": "sha256:664709b863bcb65325cbbc9e90b6c5b54b3f57ffa770e8839d97eb2085a2ef1f",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-55c58905fb4db8eb",
+          "knowledge_snapshot_id": "kctx-b5bbe5ad54a31f2d",
+          "delivery_constitution_id": "const-628e75b6ab7a",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-03-11T10:55:23.744031+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the structure and dependencies of a legacy VB6 banking application, identifying key components such as forms, modules, and ActiveX dependencies.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "BANK.vbp",
+            "metadata": {
+              "type": "Exe",
+              "title": "BANK_SYSTEM",
+              "version": "1.0.0"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 1,
+                "evidence": "Type=Exe"
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Form",
+            "name": "frmcustomer",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 20,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "Module",
+            "name": "Mdl",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 18,
+                "evidence": "Module=Mdl; Mdl.bas"
+              }
+            ]
+          },
+          {
+            "id": "node-4",
+            "type": "ExternalDependency",
+            "name": "MSCOMCTL.OCX",
+            "metadata": {
+              "version": "2.0"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 15,
+                "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-4",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.9,
+            "evidence": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 15,
+                "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and rules identified in the legacy VB6 codebase.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Form names should start with 'frm'.",
+            "confidence": 0.8,
+            "examples": [
+              "frmcustomer",
+              "frmdeposit"
+            ],
+            "counterexamples": [
+              "customerForm"
+            ],
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 20,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all form names adhere to the 'frm' prefix convention."
+        ],
+        "scaffold_templates": [
+          "FormTemplate.frm"
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the VB6 application reveals maintainability and security concerns due to outdated dependencies and coding practices.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 4,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "MSCOMCTL.OCX",
+            "reason": "Outdated ActiveX control with known security vulnerabilities.",
+            "severity": "high",
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 15,
+                "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Control Vulnerability",
+            "description": "The application relies on outdated ActiveX controls which may have security vulnerabilities.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "rem-1",
+          "title": "Replace Outdated ActiveX Controls",
+          "problem_statement": "The application uses outdated ActiveX controls that pose security risks.",
+          "scope": [
+            "MSCOMCTL.OCX"
+          ],
+          "risk_if_unaddressed": "Potential security breaches due to vulnerabilities in ActiveX controls.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node-4"
+          ],
+          "suggested_approach": "Identify modern equivalents or remove dependency on ActiveX controls.",
+          "success_criteria": [
+            "All ActiveX controls are replaced or removed.",
+            "Security vulnerabilities are mitigated."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BankApp1/BANK.vbp",
+              "line": 15,
+              "evidence": "Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7813,
+    "latency_ms": 13893.556118011475,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-03-11T10:55:23.755461+00:00"
+}
