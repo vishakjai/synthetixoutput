@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of code conventions in the legacy PHP repository.",
+  "rules": [
+    {
+      "id": "rule-naming-convention",
+      "category": "naming",
+      "rule": "Use camelCase for variable names.",
+      "confidence": 0.7,
+      "examples": [
+        "$maxIdleTime"
+      ],
+      "counterexamples": [
+        "$db_connection"
+      ],
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 8,
+          "evidence": "Variable naming convention."
+        }
+      ]
+    },
+    {
+      "id": "rule-error-handling",
+      "category": "error_handling",
+      "rule": "Check for errors after file operations.",
+      "confidence": 0.8,
+      "examples": [
+        "if (!$pid) { ... }"
+      ],
+      "counterexamples": [
+        "@file_get_contents($file)"
+      ],
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 18,
+          "evidence": "Error handling in file operations."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Ensure consistent naming conventions across the codebase."
+  ],
+  "scaffold_templates": [
+    "TypeScript class template for controllers."
+  ]
+}
