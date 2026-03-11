@@ -1,0 +1,256 @@
+{
+  "run_id": "20260311_064609_9c334210",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 3 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260311T104633Z_20260311_064609_9c334210",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d"
+      },
+      "context_bundle": {
+        "bundle_id": "aea59ff7b34641988164a023d6894c0e",
+        "created_at": "2026-03-11T10:46:33.943669+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "93e338b1f4ed4d95ba694c0ff840e571",
+            "digest": "sha256:54cdd6bba1fa92fc7ecf48fba3468541cd0a9a166d7134480a4a502bef02fcc7",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "37d2cdb0ccca41f7b32af074b6e4c929",
+            "digest": "sha256:d21b6a622a4a96292b1a9ac142fe23e8eae815babdd4fd65ae66eac0b907e2ea",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "cc344568828e47da8d0c736a04988cf5",
+            "digest": "sha256:42767a6f13a6d0deaa81358cb3b130fb3fa69c80cfb5d4586fcca9f0bb5d31e9",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-8a17620f8304da7a",
+          "knowledge_snapshot_id": "kctx-b5bbe5ad54a31f2d",
+          "delivery_constitution_id": "const-d1942f4a2211",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-03-11T10:46:34.001158+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the legacy VB6 application 'BANK_SYSTEM', detailing its components, dependencies, and interactions for modernization to C#.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Service",
+            "name": "BANK_SYSTEM",
+            "metadata": {
+              "version": "1.0.0",
+              "company": "KENEX Ltd"
+            },
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 1,
+                "evidence": "Title=\"BANK_SYSTEM\""
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Form",
+            "name": "frmcustomer",
+            "metadata": {},
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 25,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          },
+          {
+            "id": "node-3",
+            "type": "ExternalDependency",
+            "name": "Microsoft ActiveX Data Objects 2.0 Library",
+            "metadata": {
+              "guid": "{00000205-0000-0010-8000-00AA006D2EA4}",
+              "version": "2.5"
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 7,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-3",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.95,
+            "evidence": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 7,
+                "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+              }
+            ]
+          }
+        ],
+        "unknowns": [
+          "The specific database used by the application is not specified."
+        ]
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and practices identified in the legacy VB6 application.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "naming",
+            "rule": "Form names should be prefixed with 'frm'.",
+            "confidence": 0.85,
+            "examples": [
+              "frmcustomer",
+              "frmdeposit"
+            ],
+            "counterexamples": [
+              "customerForm"
+            ],
+            "provenance": [
+              {
+                "file": "BankApp1/BANK.vbp",
+                "line": 25,
+                "evidence": "Form=frmcustomer.frm"
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Ensure all form names follow the 'frm' prefix convention."
+        ],
+        "scaffold_templates": [
+          "C# WinForms template for form conversion."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment of the legacy VB6 application indicates areas for improvement in maintainability and security.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 70,
+          "testability": 40
+        },
+        "hotspots": [
+          {
+            "scope": "frmcheckbalance",
+            "reason": "Complex form logic with potential for errors.",
+            "severity": "high",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "BankApp1/close account.frm",
+                "line": 1,
+                "evidence": "Begin VB.Form frmcheckbalance"
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "ActiveX Dependency",
+            "description": "The application relies on outdated ActiveX controls which may not be supported in modern environments.",
+            "severity": "critical",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "task-1",
+          "title": "Replace ActiveX Controls",
+          "problem_statement": "ActiveX controls are outdated and pose compatibility and security risks.",
+          "scope": [
+            "BANK_SYSTEM"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities and lack of support in modern environments.",
+          "effort": "L",
+          "severity": "critical",
+          "dependencies": [
+            "node-3"
+          ],
+          "suggested_approach": "Replace ActiveX controls with equivalent .NET components.",
+          "success_criteria": [
+            "All ActiveX controls are replaced with .NET components.",
+            "Application functions correctly without ActiveX dependencies."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "BankApp1/BANK.vbp",
+              "line": 7,
+              "evidence": "Reference=...#Microsoft ActiveX Data Objects 2.0 Library"
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7643,
+    "latency_ms": 14293.756008148193,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-03-11T10:46:34.015341+00:00"
+}
