@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "summary": "This model captures the key components and interactions within the legacy VB6 repository, focusing on PHP scripts and SQL database structures.",
+  "nodes": [
+    {
+      "id": "node-php-msgQueueListener",
+      "type": "Component",
+      "name": "Message Queue Listener",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "PHP script for message queue listening and process management."
+        }
+      ]
+    },
+    {
+      "id": "node-sql-innodbIndexStats",
+      "type": "Table",
+      "name": "innodb_index_stats",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 3,
+          "evidence": "SQL table definition for InnoDB index statistics."
+        }
+      ]
+    },
+    {
+      "id": "node-sql-innodbTableStats",
+      "type": "Table",
+      "name": "innodb_table_stats",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 14,
+          "evidence": "SQL table definition for InnoDB table statistics."
+        }
+      ]
+    },
+    {
+      "id": "node-sql-slaveMasterInfo",
+      "type": "Table",
+      "name": "slave_master_info",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 25,
+          "evidence": "SQL table definition for slave master information."
+        }
+      ]
+    },
+    {
+      "id": "node-php-ConfigSearchController",
+      "type": "Component",
+      "name": "Config Search Controller",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "PHP class for configuration search functionality."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-php-msgQueueListener",
+      "to": "node-sql-innodbIndexStats",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "PHP script interacts with MySQL database tables."
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-php-ConfigSearchController",
+      "to": "node-sql-slaveMasterInfo",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "PHP controller interacts with MySQL database tables."
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
