@@ -1,0 +1,335 @@
+{
+  "run_id": "20260311_075128_468f408e",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 2 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260311T115200Z_20260311_075128_468f408e",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "0a4df5260a2b5b79933a99960afeaf3fd2767b92"
+      },
+      "context_bundle": {
+        "bundle_id": "1f9f9bf6d86942d2b73b28dd9c50d4f4",
+        "created_at": "2026-03-11T11:52:00.497562+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "0a4df5260a2b5b79933a99960afeaf3fd2767b92",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "b88ac701206842068dfd6949c74eb0e1",
+            "digest": "sha256:23427168fd95e20a4a459773f6ce500d09500b6ae48f6fab7c1662353cefabc0",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "e3a4dd49eee34da5a1f4417a3c8d55dc",
+            "digest": "sha256:74e7ee000f530b54a51f1c67d6c393c5ff76a2c764d45109ea63e7d382703d05",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "8b8bed6ba157487daf23e09758b18eb3",
+            "digest": "sha256:4fcd4aa27a9eb4d427612f62ca2ecca5cfddd8a24e61e30db2be7d92846af8dd",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-059a7ae223147e99",
+          "knowledge_snapshot_id": "kctx-b5bbe5ad54a31f2d",
+          "delivery_constitution_id": "const-4b22274523e6",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-03-11T11:52:00.710051+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model captures the key components and interactions within the legacy VB6 repository, focusing on PHP scripts and SQL database structures.",
+        "nodes": [
+          {
+            "id": "node-php-msgQueueListener",
+            "type": "Component",
+            "name": "Message Queue Listener",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 1,
+                "evidence": "PHP script for message queue listening and process management."
+              }
+            ]
+          },
+          {
+            "id": "node-sql-innodbIndexStats",
+            "type": "Table",
+            "name": "innodb_index_stats",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 3,
+                "evidence": "SQL table definition for InnoDB index statistics."
+              }
+            ]
+          },
+          {
+            "id": "node-sql-innodbTableStats",
+            "type": "Table",
+            "name": "innodb_table_stats",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 14,
+                "evidence": "SQL table definition for InnoDB table statistics."
+              }
+            ]
+          },
+          {
+            "id": "node-sql-slaveMasterInfo",
+            "type": "Table",
+            "name": "slave_master_info",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 25,
+                "evidence": "SQL table definition for slave master information."
+              }
+            ]
+          },
+          {
+            "id": "node-php-ConfigSearchController",
+            "type": "Component",
+            "name": "Config Search Controller",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 1,
+                "evidence": "PHP class for configuration search functionality."
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-php-msgQueueListener",
+            "to": "node-sql-innodbIndexStats",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 1,
+                "evidence": "PHP script interacts with MySQL database tables."
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-php-ConfigSearchController",
+            "to": "node-sql-slaveMasterInfo",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 1,
+                "evidence": "PHP controller interacts with MySQL database tables."
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile outlines the coding conventions and potential improvements for the legacy codebase.",
+        "rules": [
+          {
+            "id": "rule-php-naming-conventions",
+            "category": "naming",
+            "rule": "Use consistent naming conventions for variables and functions.",
+            "confidence": 0.8,
+            "examples": [
+              "function getUserData()"
+            ],
+            "counterexamples": [
+              "function GetUserData()"
+            ],
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 1,
+                "evidence": "Inconsistent naming conventions observed."
+              }
+            ]
+          },
+          {
+            "id": "rule-sql-security",
+            "category": "security",
+            "rule": "Avoid using plain text passwords in SQL scripts.",
+            "confidence": 0.9,
+            "examples": [
+              "Use environment variables for sensitive information."
+            ],
+            "counterexamples": [
+              "'User_password' text CHARACTER SET utf8 COLLATE utf8_bin"
+            ],
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 25,
+                "evidence": "Sensitive information stored in plain text."
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor PHP scripts to adhere to PSR-12 coding standards.",
+          "Ensure all SQL queries are parameterized to prevent SQL injection."
+        ],
+        "scaffold_templates": [
+          "PHP class template with PSR-12 compliance.",
+          "C# class template for database interaction."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "The health assessment identifies key areas of concern in the legacy codebase, focusing on maintainability and security.",
+        "scores": {
+          "maintainability": 60,
+          "security": 50,
+          "reliability": 70,
+          "testability": 55
+        },
+        "hotspots": [
+          {
+            "scope": "bin/msgQueueListner.php",
+            "reason": "Lack of error handling and logging.",
+            "severity": "medium",
+            "confidence": 0.85,
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 1,
+                "evidence": "No error handling mechanisms observed."
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "SQL Injection Risk",
+            "description": "Potential SQL injection vulnerabilities due to unparameterized queries.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation-001",
+          "title": "Refactor PHP Codebase",
+          "problem_statement": "The PHP codebase lacks adherence to modern coding standards.",
+          "scope": [
+            "bin/msgQueueListner.php",
+            "Controller/ConfigSearchController.php"
+          ],
+          "risk_if_unaddressed": "Increased maintenance burden and potential security vulnerabilities.",
+          "effort": "M",
+          "severity": "medium",
+          "dependencies": [],
+          "suggested_approach": "Refactor the PHP code to comply with PSR-12 standards and improve error handling.",
+          "success_criteria": [
+            "Codebase complies with PSR-12 standards.",
+            "Improved error handling and logging mechanisms in place."
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "bin/msgQueueListner.php",
+              "line": 1,
+              "evidence": "Non-compliance with coding standards."
+            }
+          ]
+        },
+        {
+          "id": "remediation-002",
+          "title": "Secure SQL Queries",
+          "problem_statement": "SQL queries are not parameterized, posing a security risk.",
+          "scope": [
+            "bin/percona_upgrade.sql"
+          ],
+          "risk_if_unaddressed": "High risk of SQL injection attacks.",
+          "effort": "S",
+          "severity": "high",
+          "dependencies": [],
+          "suggested_approach": "Parameterize all SQL queries to prevent SQL injection.",
+          "success_criteria": [
+            "All SQL queries are parameterized.",
+            "No SQL injection vulnerabilities detected."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "bin/percona_upgrade.sql",
+              "line": 25,
+              "evidence": "Unparameterized SQL queries."
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7027,
+    "latency_ms": 27182.98602104187,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-03-11T11:52:00.732398+00:00"
+}
