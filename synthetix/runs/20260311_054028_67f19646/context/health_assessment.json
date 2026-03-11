@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "summary": "The health assessment evaluates the maintainability, security, reliability, and testability of the legacy codebase.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 3,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "bin/msgQueueListner.php",
+      "reason": "Use of global variables",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 5,
+          "evidence": "global $db_connection;"
+        }
+      ]
+    },
+    {
+      "scope": "Controller/ConfigSearchController.php",
+      "reason": "Hardcoded SQL query",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 40,
+          "evidence": "SELECT * FROM config"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Risk",
+      "description": "Hardcoded SQL queries without parameterization can lead to SQL injection vulnerabilities.",
+      "severity": "critical",
+      "confidence": 0.9
+    }
+  ]
+}
