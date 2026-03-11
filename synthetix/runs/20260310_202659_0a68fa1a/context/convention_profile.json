@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "Convention analysis of legacy PHP and SQL codebase for modernization to TypeScript.",
+  "rules": [
+    {
+      "id": "rule-php-global-vars",
+      "category": "naming",
+      "rule": "Avoid using global variables for database connections.",
+      "confidence": 0.85,
+      "examples": [
+        "Use dependency injection for database connections."
+      ],
+      "counterexamples": [
+        "global $db_connection;"
+      ],
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 9,
+          "evidence": "Use of global variable for database connection."
+        }
+      ]
+    },
+    {
+      "id": "rule-sql-charset",
+      "category": "security",
+      "rule": "Ensure SQL tables use UTF-8 charset for security and compatibility.",
+      "confidence": 0.9,
+      "examples": [
+        "CREATE TABLE ... CHARSET=utf8;"
+      ],
+      "counterexamples": [
+        "CREATE TABLE ... CHARSET=latin1;"
+      ],
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 2,
+          "evidence": "SQL table creation with utf8 charset."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor global variable usage for better maintainability.",
+    "Ensure all SQL tables use UTF-8 charset."
+  ],
+  "scaffold_templates": [
+    "TypeScript class templates for PHP components.",
+    "SQL migration scripts for database schema updates."
+  ]
+}
