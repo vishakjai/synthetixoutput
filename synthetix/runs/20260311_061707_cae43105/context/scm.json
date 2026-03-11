@@ -1,0 +1,153 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the structure and dependencies of a legacy PHP application, focusing on message queue handling and database schema definitions.",
+  "nodes": [
+    {
+      "id": "node-msgQueueListener",
+      "type": "Component",
+      "name": "Message Queue Listener",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "Message queue listener script with process management."
+        }
+      ]
+    },
+    {
+      "id": "node-innodbIndexStats",
+      "type": "Table",
+      "name": "innodb_index_stats",
+      "metadata": {
+        "columns": [
+          "database_name",
+          "table_name",
+          "index_name",
+          "last_update",
+          "stat_name",
+          "stat_value",
+          "sample_size",
+          "stat_description"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 3,
+          "evidence": "CREATE TABLE `innodb_index_stats`"
+        }
+      ]
+    },
+    {
+      "id": "node-innodbTableStats",
+      "type": "Table",
+      "name": "innodb_table_stats",
+      "metadata": {
+        "columns": [
+          "database_name",
+          "table_name",
+          "last_update",
+          "n_rows",
+          "clustered_index_size",
+          "sum_of_other_index_sizes"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 14,
+          "evidence": "CREATE TABLE `innodb_table_stats`"
+        }
+      ]
+    },
+    {
+      "id": "node-slaveMasterInfo",
+      "type": "Table",
+      "name": "slave_master_info",
+      "metadata": {
+        "columns": [
+          "Number_of_lines",
+          "Master_log_name",
+          "Master_log_pos",
+          "Host",
+          "User_name",
+          "User_password",
+          "Port",
+          "Connect_retry",
+          "Enabled_ssl",
+          "Ssl_ca",
+          "Ssl_capath",
+          "Ssl_cert",
+          "Ssl_cipher",
+          "Ssl_key",
+          "Ssl_verify_server_cert",
+          "Heartbeat",
+          "Bind",
+          "Ignored_server_ids",
+          "Uuid",
+          "Retry_count",
+          "Ssl_crl"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 25,
+          "evidence": "CREATE TABLE `slave_master_info`"
+        }
+      ]
+    },
+    {
+      "id": "node-configSearchController",
+      "type": "Component",
+      "name": "Config Search Controller",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "PHP class for searching configuration entities."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-msgQueueListener",
+      "to": "node-innodbIndexStats",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 5,
+          "evidence": "Includes database connection from init.php"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-configSearchController",
+      "to": "node-innodbTableStats",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 41,
+          "evidence": "SQL query execution using db_get_rows"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
