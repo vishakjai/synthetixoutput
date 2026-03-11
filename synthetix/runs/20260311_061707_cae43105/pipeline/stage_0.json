@@ -1,0 +1,380 @@
+{
+  "run_id": "20260311_061707_cae43105",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 5 nodes, 2 edges, 2 conventions, 2 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260311T101730Z_20260311_061707_cae43105",
+        "repo": "Synthetix",
+        "branch": "main",
+        "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d"
+      },
+      "context_bundle": {
+        "bundle_id": "48f092468d494b0ab5b1f70f079d9a48",
+        "created_at": "2026-03-11T10:17:30.041692+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "main",
+          "branch": "main",
+          "commit_sha": "ca070647c3e6304014d6a4db61f09e989786066d",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "fe73d65d4c3049ef8c0b3c0621e21ef2",
+            "digest": "sha256:e8ae02445f2c048ec12bf66d9264fe45ba35ebb06d457eda5e8329210fab0115",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "7dd80f4b0b264d438a5b22726f0425f6",
+            "digest": "sha256:cdf4d1cea3dfb949c1d01abf7868ce504ecf753a23404597bce7d0bbc19229bd",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "d6669f24a72d4d7f85827b88842257ea",
+            "digest": "sha256:cb54145d17f98825b40fed72609c1c635fe9292810e6de952935b412a7f9df05",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-3736c2f41d7cfb65",
+          "knowledge_snapshot_id": "kctx-b5bbe5ad54a31f2d",
+          "delivery_constitution_id": "const-fee49d6acdbf",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-03-11T10:17:30.051990+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the structure and dependencies of a legacy PHP application, focusing on message queue handling and database schema definitions.",
+        "nodes": [
+          {
+            "id": "node-msgQueueListener",
+            "type": "Component",
+            "name": "Message Queue Listener",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 1,
+                "evidence": "Message queue listener script with process management."
+              }
+            ]
+          },
+          {
+            "id": "node-innodbIndexStats",
+            "type": "Table",
+            "name": "innodb_index_stats",
+            "metadata": {
+              "columns": [
+                "database_name",
+                "table_name",
+                "index_name",
+                "last_update",
+                "stat_name",
+                "stat_value",
+                "sample_size",
+                "stat_description"
+              ]
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 3,
+                "evidence": "CREATE TABLE `innodb_index_stats`"
+              }
+            ]
+          },
+          {
+            "id": "node-innodbTableStats",
+            "type": "Table",
+            "name": "innodb_table_stats",
+            "metadata": {
+              "columns": [
+                "database_name",
+                "table_name",
+                "last_update",
+                "n_rows",
+                "clustered_index_size",
+                "sum_of_other_index_sizes"
+              ]
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 14,
+                "evidence": "CREATE TABLE `innodb_table_stats`"
+              }
+            ]
+          },
+          {
+            "id": "node-slaveMasterInfo",
+            "type": "Table",
+            "name": "slave_master_info",
+            "metadata": {
+              "columns": [
+                "Number_of_lines",
+                "Master_log_name",
+                "Master_log_pos",
+                "Host",
+                "User_name",
+                "User_password",
+                "Port",
+                "Connect_retry",
+                "Enabled_ssl",
+                "Ssl_ca",
+                "Ssl_capath",
+                "Ssl_cert",
+                "Ssl_cipher",
+                "Ssl_key",
+                "Ssl_verify_server_cert",
+                "Heartbeat",
+                "Bind",
+                "Ignored_server_ids",
+                "Uuid",
+                "Retry_count",
+                "Ssl_crl"
+              ]
+            },
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "bin/percona_upgrade.sql",
+                "line": 25,
+                "evidence": "CREATE TABLE `slave_master_info`"
+              }
+            ]
+          },
+          {
+            "id": "node-configSearchController",
+            "type": "Component",
+            "name": "Config Search Controller",
+            "metadata": {},
+            "confidence": 0.9,
+            "provenance": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 1,
+                "evidence": "PHP class for searching configuration entities."
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-msgQueueListener",
+            "to": "node-innodbIndexStats",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 5,
+                "evidence": "Includes database connection from init.php"
+              }
+            ]
+          },
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-configSearchController",
+            "to": "node-innodbTableStats",
+            "directionality": "directed",
+            "protocol_metadata": {},
+            "confidence": 0.8,
+            "evidence": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 41,
+                "evidence": "SQL query execution using db_get_rows"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "This profile evaluates the adherence to coding conventions in the legacy PHP codebase.",
+        "rules": [
+          {
+            "id": "rule-naming-conventions",
+            "category": "naming",
+            "rule": "Use camelCase for variable names and PascalCase for class names.",
+            "confidence": 0.7,
+            "examples": [
+              "$dbConnection",
+              "class ConfigSearchController"
+            ],
+            "counterexamples": [
+              "$db_connection",
+              "class configsearchcontroller"
+            ],
+            "provenance": [
+              {
+                "file": "Controller/ConfigSearchController.php",
+                "line": 1,
+                "evidence": "Class name follows PascalCase."
+              }
+            ]
+          },
+          {
+            "id": "rule-error-handling",
+            "category": "error_handling",
+            "rule": "Use try-catch blocks for error handling.",
+            "confidence": 0.6,
+            "examples": [
+              "try { ... } catch (Exception $e) { ... }"
+            ],
+            "counterexamples": [
+              "@file_get_contents($file)"
+            ],
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 17,
+                "evidence": "Use of error suppression with @ operator."
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Refactor variable naming to camelCase.",
+          "Implement try-catch blocks for error handling."
+        ],
+        "scaffold_templates": [
+          "TypeScript class templates for controllers.",
+          "TypeScript interfaces for database models."
+        ]
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "This assessment evaluates the maintainability, security, reliability, and testability of the legacy PHP codebase.",
+        "scores": {
+          "maintainability": 3,
+          "security": 2,
+          "reliability": 3,
+          "testability": 2
+        },
+        "hotspots": [
+          {
+            "scope": "bin/msgQueueListner.php",
+            "reason": "Use of global variables and error suppression.",
+            "severity": "medium",
+            "confidence": 0.8,
+            "provenance": [
+              {
+                "file": "bin/msgQueueListner.php",
+                "line": 5,
+                "evidence": "Global variable $db_connection."
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "SQL Injection Risk",
+            "description": "Potential for SQL injection due to direct query execution without parameterization.",
+            "severity": "high",
+            "confidence": 0.9
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "remediation-001",
+          "title": "Refactor Global Variables",
+          "problem_statement": "Global variables are used for database connections, which can lead to maintainability issues.",
+          "scope": [
+            "bin/msgQueueListner.php"
+          ],
+          "risk_if_unaddressed": "Increased difficulty in maintaining and testing the code.",
+          "effort": "M",
+          "severity": "medium",
+          "dependencies": [],
+          "suggested_approach": "Refactor to use dependency injection for database connections.",
+          "success_criteria": [
+            "No global variables for database connections.",
+            "Improved code maintainability and testability."
+          ],
+          "confidence": 0.85,
+          "provenance": [
+            {
+              "file": "bin/msgQueueListner.php",
+              "line": 5,
+              "evidence": "Use of global $db_connection."
+            }
+          ]
+        },
+        {
+          "id": "remediation-002",
+          "title": "Implement Parameterized Queries",
+          "problem_statement": "Direct SQL query execution without parameterization poses a security risk.",
+          "scope": [
+            "Controller/ConfigSearchController.php"
+          ],
+          "risk_if_unaddressed": "Increased risk of SQL injection attacks.",
+          "effort": "L",
+          "severity": "high",
+          "dependencies": [],
+          "suggested_approach": "Refactor queries to use prepared statements or ORM.",
+          "success_criteria": [
+            "All SQL queries are parameterized.",
+            "Reduced risk of SQL injection."
+          ],
+          "confidence": 0.9,
+          "provenance": [
+            {
+              "file": "Controller/ConfigSearchController.php",
+              "line": 41,
+              "evidence": "Direct SQL query execution."
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 7175,
+    "latency_ms": 18250.269889831543,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from LLM response"
+    ]
+  },
+  "saved_at": "2026-03-11T10:17:30.067510+00:00"
+}
