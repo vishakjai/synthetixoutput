@@ -1,0 +1,52 @@
+[
+  {
+    "id": "remediation-global-vars",
+    "title": "Refactor Global Variable Usage",
+    "problem_statement": "Global variables are used for database connections, which can lead to maintainability and security issues.",
+    "scope": [
+      "bin/msgQueueListner.php"
+    ],
+    "risk_if_unaddressed": "Increased risk of security vulnerabilities and code that is difficult to maintain.",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Refactor the code to use dependency injection for database connections.",
+    "success_criteria": [
+      "No global variables used for database connections.",
+      "Improved code maintainability and security."
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "bin/msgQueueListner.php",
+        "line": 9,
+        "evidence": "Global variable usage for database connection."
+      }
+    ]
+  },
+  {
+    "id": "remediation-sql-injection",
+    "title": "Mitigate SQL Injection Risk",
+    "problem_statement": "SQL scripts lack parameterized queries, increasing the risk of SQL injection attacks.",
+    "scope": [
+      "bin/percona_upgrade.sql"
+    ],
+    "risk_if_unaddressed": "Potential for SQL injection attacks compromising data integrity.",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement parameterized queries in SQL scripts.",
+    "success_criteria": [
+      "All SQL queries are parameterized.",
+      "Reduced risk of SQL injection attacks."
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "bin/percona_upgrade.sql",
+        "line": 1,
+        "evidence": "SQL script without parameterized queries."
+      }
+    ]
+  }
+]
