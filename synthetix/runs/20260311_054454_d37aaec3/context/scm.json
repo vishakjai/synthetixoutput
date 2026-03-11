@@ -1,0 +1,153 @@
+{
+  "version": "1.0",
+  "summary": "Analysis of a legacy VB6 repository with PHP and SQL components, identifying key modules, dependencies, and database interactions.",
+  "nodes": [
+    {
+      "id": "node-php-msgQueueListener",
+      "type": "Component",
+      "name": "Message Queue Listener",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "PHP script for message queue listening with process management."
+        }
+      ]
+    },
+    {
+      "id": "node-sql-innodbIndexStats",
+      "type": "Table",
+      "name": "innodb_index_stats",
+      "metadata": {
+        "columns": [
+          "database_name",
+          "table_name",
+          "index_name",
+          "last_update",
+          "stat_name",
+          "stat_value",
+          "sample_size",
+          "stat_description"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 3,
+          "evidence": "CREATE TABLE statement for innodb_index_stats."
+        }
+      ]
+    },
+    {
+      "id": "node-sql-innodbTableStats",
+      "type": "Table",
+      "name": "innodb_table_stats",
+      "metadata": {
+        "columns": [
+          "database_name",
+          "table_name",
+          "last_update",
+          "n_rows",
+          "clustered_index_size",
+          "sum_of_other_index_sizes"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 13,
+          "evidence": "CREATE TABLE statement for innodb_table_stats."
+        }
+      ]
+    },
+    {
+      "id": "node-sql-slaveMasterInfo",
+      "type": "Table",
+      "name": "slave_master_info",
+      "metadata": {
+        "columns": [
+          "Number_of_lines",
+          "Master_log_name",
+          "Master_log_pos",
+          "Host",
+          "User_name",
+          "User_password",
+          "Port",
+          "Connect_retry",
+          "Enabled_ssl",
+          "Ssl_ca",
+          "Ssl_capath",
+          "Ssl_cert",
+          "Ssl_cipher",
+          "Ssl_key",
+          "Ssl_verify_server_cert",
+          "Heartbeat",
+          "Bind",
+          "Ignored_server_ids",
+          "Uuid",
+          "Retry_count",
+          "Ssl_crl"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "bin/percona_upgrade.sql",
+          "line": 23,
+          "evidence": "CREATE TABLE statement for slave_master_info."
+        }
+      ]
+    },
+    {
+      "id": "node-php-configSearchController",
+      "type": "Component",
+      "name": "Config Search Controller",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "PHP class for configuration search functionality."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-php-msgQueueListener",
+      "to": "node-sql-innodbIndexStats",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "bin/msgQueueListner.php",
+          "line": 1,
+          "evidence": "PHP script likely interacts with SQL tables based on context."
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-php-configSearchController",
+      "to": "node-sql-innodbTableStats",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "Controller/ConfigSearchController.php",
+          "line": 1,
+          "evidence": "PHP controller interacts with database for configuration data."
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
