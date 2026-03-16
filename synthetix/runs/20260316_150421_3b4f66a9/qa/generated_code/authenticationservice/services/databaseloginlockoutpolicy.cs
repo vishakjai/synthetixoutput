@@ -16,11 +16,20 @@ public sealed class DatabaseLoginLockoutPolicy : ILoginLockoutPolicy
 
     public Task RegisterFailureAsync(UserCredentialRecord credential, CancellationToken cancellationToken)
     {
-        return _repository.RecordFailedAttemptAsync(credential.UserId, _options.FailureThreshold, cancellationToken);
+        return RegisterFailureCoreAsync(credential, cancellationToken);
     }
 
     public Task ResetAsync(UserCredentialRecord credential, CancellationToken cancellationToken)
     {
         return _repository.ResetFailedAttemptsAsync(credential.UserId, cancellationToken);
+    }
+
+    private async Task RegisterFailureCoreAsync(UserCredentialRecord credential, CancellationToken cancellationToken)
+    {
+        var failedAttempts = await _repository.IncrementFailedAttemptsAsync(credential.UserId, cancellationToken);
+        if (failedAttempts >= _options.FailureThreshold)
+        {
+            await _repository.DeactivateUserAsync(credential.UserId, cancellationToken);
+        }
     }
 }
