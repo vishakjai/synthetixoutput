@@ -4,5 +4,5 @@ namespace AuthenticationService.Services;
 
 public interface IAuthenticationService
 {
-    AuthenticationResult Authenticate(LoginRequest request);
+    Task<LoginResponse> LoginAsync(LoginRequest request, CancellationToken cancellationToken);
 }
