@@ -1,19 +1,13 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 8080
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["AuthenticationService.csproj", "."]
-RUN dotnet restore "./AuthenticationService.csproj"
 COPY . .
-WORKDIR "/src/"
-RUN dotnet build "AuthenticationService.csproj" -c Release -o /app/build
+RUN dotnet restore "AuthenticationService.csproj"
+RUN dotnet publish "AuthenticationService.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-FROM build AS publish
-RUN dotnet publish "AuthenticationService.csproj" -c Release -o /app/publish
-
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+RUN adduser --disabled-password --gecos '' appuser && chown -R appuser /app
+ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT:-8080}
+COPY --from=build /app/publish .
+USER appuser
 ENTRYPOINT ["dotnet", "AuthenticationService.dll"]
