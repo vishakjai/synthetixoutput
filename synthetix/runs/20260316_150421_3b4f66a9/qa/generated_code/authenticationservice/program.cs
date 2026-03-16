@@ -1,5 +1,4 @@
 using System.Text;
-using System.Text.RegularExpressions;
 using AuthenticationService.Data;
 using AuthenticationService.Models;
 using AuthenticationService.Services;
@@ -18,9 +17,9 @@ var tokenOptions = new AuthTokenOptions
     SigningKey = builder.Configuration["AUTH_TOKEN_SIGNING_KEY"] ?? throw new InvalidOperationException("AUTH_TOKEN_SIGNING_KEY is required."),
     ExpiryMinutes = int.TryParse(builder.Configuration["AUTH_TOKEN_EXPIRY_MINUTES"], out var expiryMinutes) ? expiryMinutes : 30,
 };
-if (tokenOptions.SigningKey.Length < 32)
+if (Encoding.UTF8.GetByteCount(tokenOptions.SigningKey) < 32)
 {
-    throw new InvalidOperationException("AUTH_TOKEN_SIGNING_KEY must be at least 32 characters.");
+    throw new InvalidOperationException("AUTH_TOKEN_SIGNING_KEY must be at least 32 bytes.");
 }
 
 var lockoutOptions = new AuthLockoutOptions
@@ -30,7 +29,7 @@ var lockoutOptions = new AuthLockoutOptions
 
 var repoOptions = new PostgresCredentialRepositoryOptions
 {
-    TableName = ResolveTableName(builder.Configuration["AUTH_DB_TABLE"]),
+    TableName = builder.Configuration["AUTH_DB_TABLE"] ?? "user_credentials",
 };
 
 builder.Services.AddSingleton(tokenOptions);
@@ -66,14 +65,3 @@ app.MapControllers();
 app.Run();
 
 public partial class Program;
-
-static string ResolveTableName(string? configuredName)
-{
-    var candidate = string.IsNullOrWhiteSpace(configuredName) ? "user_credentials" : configuredName.Trim();
-    if (!Regex.IsMatch(candidate, "^[A-Za-z_][A-Za-z0-9_]*$"))
-    {
-        throw new InvalidOperationException("AUTH_DB_TABLE contains unsupported characters.");
-    }
-
-    return candidate;
-}
