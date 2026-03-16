@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AuthenticationService.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class AuthController : ControllerBase
+public sealed class AuthController : ControllerBase
 {
     private readonly IAuthenticationService _authenticationService;
 
@@ -15,14 +14,19 @@ public class AuthController : ControllerBase
         _authenticationService = authenticationService;
     }
 
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginRequest request)
+    [HttpPost(AuthRoutes.Login)]
+    [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request, CancellationToken cancellationToken)
     {
-        var result = _authenticationService.Authenticate(request);
-        if (result.IsAuthenticated)
+        try
         {
-            return Ok(new { token = result.Token, expires_at = result.ExpiresAt });
+            var response = await _authenticationService.LoginAsync(request, cancellationToken);
+            return Ok(response);
         }
-        return Unauthorized(new { error = "invalid_credentials" });
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized(new { error = "invalid_credentials" });
+        }
     }
 }
