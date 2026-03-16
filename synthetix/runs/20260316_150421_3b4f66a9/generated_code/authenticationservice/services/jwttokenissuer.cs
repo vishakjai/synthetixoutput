@@ -21,6 +21,10 @@ public sealed class JwtTokenIssuer : ITokenIssuer
     {
         _options = options;
         var keyBytes = Encoding.UTF8.GetBytes(_options.SigningKey);
+        if (keyBytes.Length < 32)
+        {
+            throw new InvalidOperationException("AUTH_TOKEN_SIGNING_KEY must be at least 32 bytes.");
+        }
         _signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(keyBytes),
             SecurityAlgorithms.HmacSha256);
