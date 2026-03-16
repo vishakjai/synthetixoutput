@@ -13,7 +13,7 @@ Deterministic brownfield authentication vertical slice for `/auth/login`.
 - `PORT`
 - `AUTH_DB_CONNECTION_STRING`
 - `AUTH_DB_TABLE` (optional, defaults to `user_credentials`)
-- `AUTH_TOKEN_SIGNING_KEY` (minimum 32 characters)
+- `AUTH_TOKEN_SIGNING_KEY` (minimum 32 bytes)
 - `AUTH_TOKEN_ISSUER` (optional)
 - `AUTH_TOKEN_AUDIENCE` (optional)
 - `AUTH_TOKEN_EXPIRY_MINUTES` (optional)
