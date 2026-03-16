@@ -41,15 +41,15 @@ public sealed class PostgresUserCredentialRepository : IUserCredentialRepository
     public async Task RecordFailedAttemptAsync(int userId, int failureThreshold, CancellationToken cancellationToken)
     {
         await using var connection = await _connectionFactory.OpenConnectionAsync(cancellationToken);
-        const string commandText = @"
-            update 0
+        var commandText = $@"
+            update {_options.TableName}
                set failed_attempt_count = coalesce(failed_attempt_count, 0) + 1,
                    is_active = case
                        when coalesce(failed_attempt_count, 0) + 1 >= @failureThreshold then false
                        else is_active
                    end
              where user_id = @userId;";
-        await using var command = new NpgsqlCommand(string.Format(commandText, _options.TableName), connection);
+        await using var command = new NpgsqlCommand(commandText, connection);
         command.Parameters.AddWithValue("failureThreshold", failureThreshold);
         command.Parameters.AddWithValue("userId", userId);
         await command.ExecuteNonQueryAsync(cancellationToken);
