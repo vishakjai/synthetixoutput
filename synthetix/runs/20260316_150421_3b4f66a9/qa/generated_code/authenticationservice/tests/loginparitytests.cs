@@ -33,8 +33,22 @@ public sealed class LoginParityTests
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
             service.LoginAsync(new LoginRequest("bank-user", "wrong-password"), CancellationToken.None));
 
-        Assert.Equal(1, repository.RecordFailedAttemptCalls);
+        Assert.Equal(1, repository.IncrementFailedAttemptCalls);
+        Assert.Equal(0, repository.DeactivateUserCalls);
         Assert.Equal(0, repository.ResetFailedAttemptCalls);
+    }
+
+    [Fact]
+    public async Task Login_deactivates_user_when_lockout_threshold_is_reached()
+    {
+        var repository = BuildRepositorySpy(record: BuildCredentialRecord(failedAttemptCount: 4));
+        var service = BuildService(repository);
+
+        await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
+            service.LoginAsync(new LoginRequest("bank-user", "wrong-password"), CancellationToken.None));
+
+        Assert.Equal(1, repository.IncrementFailedAttemptCalls);
+        Assert.Equal(1, repository.DeactivateUserCalls);
     }
 
     [Fact]
@@ -75,6 +89,21 @@ public sealed class LoginParityTests
         var verifier = new PasswordHashVerifier();
 
         Assert.False(verifier.Verify("correct-password", "not-a-valid-hash"));
+    }
+
+    [Fact]
+    public void Repository_sql_builders_reference_real_table_name()
+    {
+        var increment = PostgresUserCredentialRepository.BuildIncrementFailedAttemptsCommandText("user_credentials");
+        var deactivate = PostgresUserCredentialRepository.BuildDeactivateUserCommandText("user_credentials");
+        var reset = PostgresUserCredentialRepository.BuildResetFailedAttemptsCommandText("user_credentials");
+
+        Assert.Contains("update user_credentials", increment, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("failed_attempt_count", increment, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("returning", increment, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("is_active = false", deactivate, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("failed_attempt_count = 0", reset, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("update 0", increment, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -138,7 +167,8 @@ public sealed class LoginParityTests
         }
 
         public int FindByUsernameCalls { get; private set; }
-        public int RecordFailedAttemptCalls { get; private set; }
+        public int IncrementFailedAttemptCalls { get; private set; }
+        public int DeactivateUserCalls { get; private set; }
         public int ResetFailedAttemptCalls { get; private set; }
 
         public Task<UserCredentialRecord?> FindByUsernameAsync(string username, CancellationToken cancellationToken)
@@ -147,9 +177,15 @@ public sealed class LoginParityTests
             return Task.FromResult(_record is not null && _record.Username == username ? _record : null);
         }
 
-        public Task RecordFailedAttemptAsync(int userId, int failureThreshold, CancellationToken cancellationToken)
+        public Task<int> IncrementFailedAttemptsAsync(int userId, CancellationToken cancellationToken)
         {
-            RecordFailedAttemptCalls += 1;
+            IncrementFailedAttemptCalls += 1;
+            return Task.FromResult((_record?.FailedAttemptCount ?? 0) + 1);
+        }
+
+        public Task DeactivateUserAsync(int userId, CancellationToken cancellationToken)
+        {
+            DeactivateUserCalls += 1;
             return Task.CompletedTask;
         }
 
