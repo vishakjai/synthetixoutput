@@ -1,26 +1,23 @@
 using AuthenticationService.Data;
-using AuthenticationService.Models;
 using AuthenticationService.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure services
+builder.Services.AddDbContext<CredentialStoreContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService.Services.AuthenticationService>();
+builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSingleton(new AuthTokenOptions
-{
-    Issuer = builder.Configuration["AUTH_TOKEN_ISSUER"] ?? "synthetix-auth",
-    Audience = builder.Configuration["AUTH_TOKEN_AUDIENCE"] ?? "modernized-app",
-    SigningKey = builder.Configuration["AUTH_TOKEN_SIGNING_KEY"] ?? throw new InvalidOperationException("AUTH_TOKEN_SIGNING_KEY is required."),
-    ExpiryMinutes = int.TryParse(builder.Configuration["AUTH_TOKEN_EXPIRY_MINUTES"], out var expiryMinutes) ? expiryMinutes : 30,
-});
-builder.Services.AddSingleton<ITokenIssuer, HmacTokenIssuer>();
-builder.Services.AddSingleton<IPasswordHashVerifier, PasswordHashVerifier>();
-builder.Services.AddScoped<INpgsqlConnectionFactory, NpgsqlConnectionFactory>();
-builder.Services.AddScoped<IUserCredentialRepository, PostgresUserCredentialRepository>();
-builder.Services.AddScoped<IAuthenticationService, CredentialAuthenticationService>();
 
 var app = builder.Build();
-app.MapControllers();
-app.Run();
 
-public partial class Program;
+// Configure middleware
+app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
+app.Run();
