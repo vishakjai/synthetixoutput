@@ -1,0 +1,21 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy csproj and restore
+COPY src/AuthenticationService/AuthenticationService.csproj src/AuthenticationService/
+RUN dotnet restore src/AuthenticationService/AuthenticationService.csproj
+
+# Copy source and build
+COPY src/AuthenticationService/ src/AuthenticationService/
+RUN dotnet publish src/AuthenticationService/AuthenticationService.csproj -c Release -o /app/publish /p:UseAppHost=false
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/publish ./
+ENV ASPNETCORE_URLS=http://0.0.0.0:8080
+ENV DOTNET_EnableDiagnostics=0
+# Do not set JWT_SECRET or DB creds here; supply via env at runtime
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "AuthenticationService.dll"]
