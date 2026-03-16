@@ -1,26 +1,28 @@
 # AuthenticationService
 
-Deterministic brownfield authentication vertical slice for `/auth/login`.
+This service handles user authentication and manages login sessions.
 
-## Included behavior
-- Implements `POST /auth/login`
-- Verifies credentials against PostgreSQL-backed credential data
-- Returns a signed authentication token and an `expires_at` value
-- Preserves the scoped parity assertion: Valid credentials result in an authenticated session and navigation to the main customer workflow.
+## Build and Run
 
-## Environment variables
-- `PORT`
-- `AUTH_DB_CONNECTION_STRING`
-- `AUTH_DB_TABLE` (optional, defaults to `user_credentials`)
-- `AUTH_TOKEN_SIGNING_KEY`
-- `AUTH_TOKEN_ISSUER` (optional)
-- `AUTH_TOKEN_AUDIENCE` (optional)
-- `AUTH_TOKEN_EXPIRY_MINUTES` (optional)
-
-## Run
 ```bash
-dotnet restore
 dotnet build
-dotnet test Tests/AuthenticationService.Tests.csproj
-PORT=8080 AUTH_DB_CONNECTION_STRING="Host=localhost;Database=bank;Username=app;Password=secret" AUTH_TOKEN_SIGNING_KEY="change-me" dotnet run --project AuthenticationService.csproj
+```
+
+## Run with Docker
+
+```bash
+docker build -t authenticationservice .
+docker run -p 8080:8080 authenticationservice
+```
+
+## Endpoints
+
+- `POST /api/auth/login`: Authenticates a user and returns a token.
+- `GET /api/health/health`: Returns the health status of the service.
+- `GET /api/health/ready`: Returns the readiness status of the service.
+
+## Testing
+
+```bash
+dotnet test
 ```
