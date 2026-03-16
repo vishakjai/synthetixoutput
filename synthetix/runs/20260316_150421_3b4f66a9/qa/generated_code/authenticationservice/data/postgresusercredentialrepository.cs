@@ -38,19 +38,33 @@ public sealed class PostgresUserCredentialRepository : IUserCredentialRepository
             reader.GetInt32(4));
     }
 
-    public async Task RecordFailedAttemptAsync(int userId, int failureThreshold, CancellationToken cancellationToken)
+    internal static string BuildIncrementFailedAttemptsCommandText(string tableName) => $@"
+            update {tableName}
+               set failed_attempt_count = coalesce(failed_attempt_count, 0) + 1
+             where user_id = @userId
+         returning coalesce(failed_attempt_count, 0);";
+
+    internal static string BuildDeactivateUserCommandText(string tableName) =>
+        $"update {tableName} set is_active = false where user_id = @userId;";
+
+    internal static string BuildResetFailedAttemptsCommandText(string tableName) =>
+        $"update {tableName} set failed_attempt_count = 0 where user_id = @userId;";
+
+    public async Task<int> IncrementFailedAttemptsAsync(int userId, CancellationToken cancellationToken)
     {
         await using var connection = await _connectionFactory.OpenConnectionAsync(cancellationToken);
-        var commandText = $@"
-            update {_options.TableName}
-               set failed_attempt_count = coalesce(failed_attempt_count, 0) + 1,
-                   is_active = case
-                       when coalesce(failed_attempt_count, 0) + 1 >= @failureThreshold then false
-                       else is_active
-                   end
-             where user_id = @userId;";
+        var commandText = BuildIncrementFailedAttemptsCommandText(_options.TableName);
         await using var command = new NpgsqlCommand(commandText, connection);
-        command.Parameters.AddWithValue("failureThreshold", failureThreshold);
+        command.Parameters.AddWithValue("userId", userId);
+        var result = await command.ExecuteScalarAsync(cancellationToken);
+        return result is int count ? count : Convert.ToInt32(result);
+    }
+
+    public async Task DeactivateUserAsync(int userId, CancellationToken cancellationToken)
+    {
+        await using var connection = await _connectionFactory.OpenConnectionAsync(cancellationToken);
+        var commandText = BuildDeactivateUserCommandText(_options.TableName);
+        await using var command = new NpgsqlCommand(commandText, connection);
         command.Parameters.AddWithValue("userId", userId);
         await command.ExecuteNonQueryAsync(cancellationToken);
     }
@@ -58,7 +72,7 @@ public sealed class PostgresUserCredentialRepository : IUserCredentialRepository
     public async Task ResetFailedAttemptsAsync(int userId, CancellationToken cancellationToken)
     {
         await using var connection = await _connectionFactory.OpenConnectionAsync(cancellationToken);
-        var commandText = $"update {_options.TableName} set failed_attempt_count = 0 where user_id = @userId;";
+        var commandText = BuildResetFailedAttemptsCommandText(_options.TableName);
         await using var command = new NpgsqlCommand(commandText, connection);
         command.Parameters.AddWithValue("userId", userId);
         await command.ExecuteNonQueryAsync(cancellationToken);
