@@ -1,0 +1,94 @@
+{
+  "artifact_type": "ui_scaffold_package_v1",
+  "artifact_version": "1.0",
+  "screen_id": "frmtransaction",
+  "screen_name": "Transaction ledger management and adjustment workflow",
+  "source_screen_contract_id": "frmtransaction",
+  "contract_version": "1.0.0",
+  "framework_target": "ASP.NET Core Razor Pages",
+  "route": "/ui/frmtransaction",
+  "target_view_path": "Pages/Frmtransaction/Index.cshtml",
+  "state_model": {
+    "screen_state_type": "FrmtransactionState",
+    "field_ids": [
+      "lvwtransactions",
+      "cboaccno",
+      "frame1",
+      "frame3",
+      "fraaccountno",
+      "label2",
+      "label5",
+      "option1",
+      "option2"
+    ],
+    "action_ids": [
+      "action_save"
+    ]
+  },
+  "validation_map": [
+    {
+      "field_id": "fraaccountno",
+      "rule_ids": [
+        "VR-fraaccountno-REQUIRED",
+        "VR-fraaccountno-NUMERIC"
+      ]
+    }
+  ],
+  "event_wiring": [
+    {
+      "event_id": "evt_save",
+      "trigger": "action_save:on_click",
+      "step_count": 3
+    }
+  ],
+  "navigation_map": {
+    "default_route": "/ui/frmtransaction",
+    "opens": [
+      {
+        "screen_id": "ui_frmtransaction_list",
+        "route": "/ui/frmtransaction",
+        "trigger_event_id": "evt_save",
+        "mode": "same_tab"
+      }
+    ]
+  },
+  "api_binding_map": [
+    {
+      "event_id": "evt_save",
+      "targets": [
+        "POST /reporting/expireitemswithindate"
+      ]
+    }
+  ],
+  "accessibility_hooks": {
+    "keyboard_navigation": true,
+    "label_association": true,
+    "tab_order_defined": true
+  },
+  "annotations": [
+    "UI_SCAFFOLD",
+    "VISUAL_DESIGN_OUT_OF_SCOPE"
+  ],
+  "files": [
+    {
+      "path": "Pages/Frmtransaction/Index.cshtml",
+      "kind": "view",
+      "purpose": "Screen view scaffold"
+    },
+    {
+      "path": "Pages/Frmtransaction/Index.cshtml.cs",
+      "kind": "page_model",
+      "purpose": "Screen state and event wiring"
+    },
+    {
+      "path": "Scaffolds/frmtransaction.ui_scaffold_package.json",
+      "kind": "artifact",
+      "purpose": "Serialized scaffold package for conformance checks"
+    },
+    {
+      "path": "Models/frmtransactionActions.json",
+      "kind": "metadata",
+      "purpose": "Action metadata derived from the Screen Contract"
+    }
+  ]
+}
