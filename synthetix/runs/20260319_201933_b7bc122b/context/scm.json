@@ -1,0 +1,172 @@
+{
+  "version": "scm-v1.0",
+  "summary": "VB6 banking application with 13 forms, ADO data access, and modernization tooling infrastructure. Legacy system uses COM components, masked input controls, and direct SQL execution patterns.",
+  "nodes": [
+    {
+      "id": "vb6-bank-app",
+      "type": "Service",
+      "name": "BANK_SYSTEM",
+      "metadata": {
+        "version": "1.0.0",
+        "company": "KENEX Ltd",
+        "startup_form": "frmSplash",
+        "project_type": "Exe"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        },
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 20,
+          "evidence": "Startup=\"frmSplash\""
+        }
+      ]
+    },
+    {
+      "id": "frm-check-balance",
+      "type": "Component",
+      "name": "frmcheckbalance",
+      "metadata": {
+        "form_type": "MDI_Child",
+        "window_state": "Maximized",
+        "controls": [
+          "Frame",
+          "TextBox",
+          "CommandButton",
+          "ComboBox"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        },
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 9,
+          "evidence": "MDIChild = -1 'True"
+        }
+      ]
+    },
+    {
+      "id": "ado-data-objects",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0",
+      "metadata": {
+        "version": "2.5",
+        "guid": "{00000205-0000-0010-8000-00AA006D2EA4}",
+        "path": "C:\\Program Files\\Common Files\\system\\ado\\msado25.tlb"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#C:\\Program Files\\Common Files\\system\\ado\\msado25.tlb#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "modernization-agent-system",
+      "type": "Service",
+      "name": "DeliveryOS Agent Framework",
+      "metadata": {
+        "agent_count": 13,
+        "language": "Python",
+        "framework": "FastAPI"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import Analyst"
+        }
+      ]
+    },
+    {
+      "id": "system-intelligence-agent",
+      "type": "Component",
+      "name": "SystemIntelligenceAgent",
+      "metadata": {
+        "role": "SIL_contract_generator",
+        "imports": 5
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "module:agents_system_intelligence_py"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "vb6-bank-app",
+      "to": "ado-data-objects",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "reference_type": "COM_TypeLib",
+        "version": "2.5"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference to Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "vb6-bank-app",
+      "to": "frm-check-balance",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "relationship": "form_container"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 15,
+          "evidence": "Form=closeacount.frm"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "modernization-agent-system",
+      "to": "system-intelligence-agent",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative_module"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 10,
+          "evidence": "from .system_intelligence import SystemIntelligenceAgent"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database schema and connection strings",
+    "Authentication mechanism implementation",
+    "Business rule validation logic",
+    "Report generation data sources",
+    "COM component initialization parameters"
+  ]
+}
