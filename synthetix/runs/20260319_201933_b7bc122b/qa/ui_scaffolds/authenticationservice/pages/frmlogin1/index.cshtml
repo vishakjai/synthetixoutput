@@ -1,0 +1,40 @@
+@page "/ui/frmlogin1"
+@model AuthenticationService.Pages.FrmLogin1.IndexModel
+@{
+    ViewData["Title"] = "Authentication and credential validation workflow";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<main aria-label="Authentication and credential validation workflow">
+    <h1>Authentication and credential validation workflow</h1>
+    <p>Behavioral scaffold derived from Screen Contract <code>frmLogin1</code>.</p>
+    <form method="post">
+        <div class="ui-scaffold-field">
+            <label for="lbllabels">Lbl Labels</label>
+            <input id="lbllabels" name="lbllabels" value="@Model.State.GetValueOrDefault("lbllabels", string.Empty)" />
+            @if (Model.Errors.ContainsKey("lbllabels"))
+            {
+                <span data-error-for="lbllabels">@Model.Errors["lbllabels"]</span>
+            }
+        </div>
+        <div class="ui-scaffold-field">
+            <label for="txtpass">Txt Pass</label>
+            <input id="txtpass" name="txtpass" value="@Model.State.GetValueOrDefault("txtpass", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtpass"))
+            {
+                <span data-error-for="txtpass">@Model.Errors["txtpass"]</span>
+            }
+        </div>
+        <div class="ui-scaffold-field">
+            <label for="txtun">Txt Un</label>
+            <input id="txtun" name="txtun" value="@Model.State.GetValueOrDefault("txtun", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtun"))
+            {
+                <span data-error-for="txtun">@Model.Errors["txtun"]</span>
+            }
+        </div>
+        <div class="ui-scaffold-actions">
+        <button type="submit" formaction="?handler=EvtSave">Save</button>
+        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
+        </div>
+    </form>
+</main>
