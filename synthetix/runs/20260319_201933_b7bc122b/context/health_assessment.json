@@ -1,0 +1,71 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Legacy VB6 system with critical security and maintainability issues. Modernization framework is well-structured but incomplete for full migration scope.",
+  "scores": {
+    "maintainability": 2,
+    "security": 1,
+    "reliability": 3,
+    "testability": 1
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Data Access Layer",
+      "reason": "Direct SQL execution without parameterization creates SQL injection vulnerabilities",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "ADO 2.0 reference suggests direct SQL execution patterns"
+        }
+      ]
+    },
+    {
+      "scope": "Authentication System",
+      "reason": "frmLogin form suggests custom authentication without modern security standards",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 13,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "scope": "COM Dependencies",
+      "reason": "Multiple COM components create deployment and compatibility issues",
+      "severity": "medium",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 8,
+          "evidence": "Object={C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0; msmask32.ocx"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Vulnerability",
+      "description": "Legacy ADO patterns likely use string concatenation for SQL queries, creating critical security exposure in banking application",
+      "severity": "critical",
+      "confidence": 0.85
+    },
+    {
+      "title": "Incomplete Modernization Scope",
+      "description": "Current repository contains modernization tooling but lacks complete VB6 source code for full system analysis",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "COM Component Dependencies",
+      "description": "Multiple ActiveX controls and COM references will require significant rearchitecture for .NET Core compatibility",
+      "severity": "medium",
+      "confidence": 0.95
+    }
+  ]
+}
