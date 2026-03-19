@@ -1,0 +1,129 @@
+[
+  {
+    "id": "rb-001-sql-injection",
+    "title": "Eliminate SQL Injection Vulnerabilities",
+    "problem_statement": "Legacy VB6 application uses ADO with likely string concatenation for SQL queries, creating critical security exposure",
+    "scope": [
+      "Data Access Layer",
+      "All forms with database operations"
+    ],
+    "risk_if_unaddressed": "Critical security breach in production banking system with potential data theft and regulatory violations",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "Complete VB6 source code analysis",
+      "Database schema documentation"
+    ],
+    "suggested_approach": "Replace all ADO Recordset operations with Entity Framework parameterized queries, implement repository pattern with proper input validation",
+    "success_criteria": [
+      "Zero string concatenation in SQL queries",
+      "All database operations use parameterized queries",
+      "Security audit passes with no SQL injection findings"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 5,
+        "evidence": "Reference to Microsoft ActiveX Data Objects 2.0 Library indicates direct SQL execution patterns"
+      }
+    ]
+  },
+  {
+    "id": "rb-002-authentication-modernization",
+    "title": "Modernize Authentication System",
+    "problem_statement": "Custom VB6 login form lacks modern security standards like multi-factor authentication, secure session management, and password policies",
+    "scope": [
+      "frmLogin.frm",
+      "Session management",
+      "User credential storage"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to banking system, compliance violations, weak credential management",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Identity provider selection",
+      "Compliance requirements review"
+    ],
+    "suggested_approach": "Implement ASP.NET Core Identity with JWT tokens, integrate with enterprise SSO, add MFA support",
+    "success_criteria": [
+      "Integration with enterprise identity provider",
+      "Multi-factor authentication implemented",
+      "Secure session management with proper timeout",
+      "Password policy enforcement"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 13,
+        "evidence": "Form=frmLogin.frm indicates custom authentication implementation"
+      }
+    ]
+  },
+  {
+    "id": "rb-003-com-component-replacement",
+    "title": "Replace COM Components with .NET Equivalents",
+    "problem_statement": "Multiple ActiveX controls and COM components create deployment complexity and compatibility issues in modern environments",
+    "scope": [
+      "msmask32.ocx",
+      "MSCOMCTL.OCX",
+      "MSCOMCT2.OCX",
+      "DBGRID32.OCX",
+      "MSFLXGRD.OCX"
+    ],
+    "risk_if_unaddressed": "Deployment failures, compatibility issues, inability to run on modern operating systems",
+    "effort": "XL",
+    "severity": "medium",
+    "dependencies": [
+      "UI component mapping",
+      "Control behavior analysis"
+    ],
+    "suggested_approach": "Map each COM control to equivalent ASP.NET Core/Blazor components, implement custom controls where necessary",
+    "success_criteria": [
+      "Zero COM dependencies in modernized application",
+      "All UI functionality preserved with .NET equivalents",
+      "Cross-platform compatibility achieved"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 8,
+        "evidence": "Object={C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0; msmask32.ocx"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-complete-source-analysis",
+    "title": "Complete VB6 Source Code Analysis",
+    "problem_statement": "Current repository contains only partial VB6 source code, preventing comprehensive modernization planning",
+    "scope": [
+      "All VB6 forms",
+      "Business logic modules",
+      "Data access code",
+      "Report definitions"
+    ],
+    "risk_if_unaddressed": "Incomplete modernization with missing functionality, unexpected runtime failures",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [
+      "Access to complete VB6 source repository"
+    ],
+    "suggested_approach": "Obtain complete VB6 source code, run comprehensive static analysis, document all dependencies and business rules",
+    "success_criteria": [
+      "Complete VB6 source code inventory",
+      "All business rules documented",
+      "Dependency graph completed",
+      "Data flow analysis completed"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/close account.frm",
+        "line": 1,
+        "evidence": "Truncated form file indicates incomplete source code availability"
+      }
+    ]
+  }
+]
