@@ -1,0 +1,86 @@
+{
+  "version": "cp-v1.0",
+  "summary": "VB6 legacy patterns with Hungarian notation, COM dependencies, and direct SQL execution. Modernization framework follows Python/FastAPI conventions with agent-based architecture.",
+  "rules": [
+    {
+      "id": "vb6-naming-hungarian",
+      "category": "naming",
+      "rule": "Controls use Hungarian notation prefixes (frm, txt, cmd, lbl)",
+      "confidence": 0.95,
+      "examples": [
+        "frmcheckbalance",
+        "txtacno",
+        "cmdsearch",
+        "lblaccno"
+      ],
+      "counterexamples": [
+        "CheckBalanceForm",
+        "AccountNumberTextBox"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        },
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 25,
+          "evidence": "Begin VB.TextBox txtacno"
+        }
+      ]
+    },
+    {
+      "id": "vb6-com-references",
+      "category": "api",
+      "rule": "External dependencies declared as COM references with GUIDs",
+      "confidence": 0.95,
+      "examples": [
+        "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0"
+      ],
+      "counterexamples": [
+        "using System.Data.SqlClient;"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#C:\\Program Files\\Common Files\\system\\ado\\msado25.tlb#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "python-agent-imports",
+      "category": "naming",
+      "rule": "Agent modules use relative imports with descriptive class names",
+      "confidence": 0.9,
+      "examples": [
+        "from .analyst import Analyst",
+        "from .system_intelligence import SystemIntelligenceAgent"
+      ],
+      "counterexamples": [
+        "import analyst",
+        "from agents import *"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import Analyst"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Replace Hungarian notation with descriptive Pascal case names",
+    "Eliminate COM dependencies in favor of .NET equivalents",
+    "Replace direct SQL concatenation with parameterized queries",
+    "Implement proper error handling instead of VB6 'On Error' statements"
+  ],
+  "scaffold_templates": [
+    "ASP.NET Core Razor Pages for VB6 forms",
+    "Entity Framework models for ADO Recordsets",
+    "Dependency injection containers for COM components",
+    "Bootstrap UI components for VB6 controls"
+  ]
+}
