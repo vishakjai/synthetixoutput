@@ -7,198 +7,141 @@
 <main aria-label="Interest calculation and posting workflow">
     <h1>Interest calculation and posting workflow</h1>
     <p>Behavioral scaffold derived from Screen Contract <code>frmaddinterest</code>.</p>
+    
+
     <form method="post">
-        <div class="ui-scaffold-field">
-            <label for="txtdate">Txtdate</label>
-            <input id="txtdate" name="txtdate" value="@Model.State.GetValueOrDefault("txtdate", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="txtdate">
+            <label for="txtdate">Date</label>
+            <input type="date" id="txtdate" name="txtdate" placeholder="Optional date" value="@Model.State.GetValueOrDefault("txtdate", string.Empty)" />
             @if (Model.Errors.ContainsKey("txtdate"))
             {
                 <span data-error-for="txtdate">@Model.Errors["txtdate"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="cbomonth">Cbomonth</label>
-            <input id="cbomonth" name="cbomonth" value="@Model.State.GetValueOrDefault("cbomonth", string.Empty)" />
-            @if (Model.Errors.ContainsKey("cbomonth"))
-            {
-                <span data-error-for="cbomonth">@Model.Errors["cbomonth"]</span>
-            }
+        <div class="ui-scaffold-field" data-field-id="cbomonth">
+            <label for="cbomonth">Month</label>
+            <select id="cbomonth" name="cbomonth">
+                <option value="Select an option">Select an option</option>
+            </select>
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="cboyear">Cboyear</label>
-            <input id="cboyear" name="cboyear" value="@Model.State.GetValueOrDefault("cboyear", string.Empty)" />
-            @if (Model.Errors.ContainsKey("cboyear"))
-            {
-                <span data-error-for="cboyear">@Model.Errors["cboyear"]</span>
-            }
+        <div class="ui-scaffold-field" data-field-id="cboyear">
+            <label for="cboyear">Year</label>
+            <select id="cboyear" name="cboyear">
+                <option value="Select an option">Select an option</option>
+            </select>
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="frame1">Frame1</label>
-            <input id="frame1" name="frame1" value="@Model.State.GetValueOrDefault("frame1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("frame1"))
-            {
-                <span data-error-for="frame1">@Model.Errors["frame1"]</span>
-            }
+        <fieldset class="ui-scaffold-group" data-field-id="frame1">
+            <legend>Group 1</legend>
+            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
+        </fieldset>
+        <fieldset class="ui-scaffold-group" data-field-id="frame2">
+            <legend>Group 2</legend>
+            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
+        </fieldset>
+        <fieldset class="ui-scaffold-group" data-field-id="fra">
+            <legend>Fra</legend>
+            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
+        </fieldset>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="label1">
+            <label for="label1">Label 1</label>
+            <output id="label1" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("label1", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="frame2">Frame2</label>
-            <input id="frame2" name="frame2" value="@Model.State.GetValueOrDefault("frame2", string.Empty)" />
-            @if (Model.Errors.ContainsKey("frame2"))
-            {
-                <span data-error-for="frame2">@Model.Errors["frame2"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="label5">
+            <label for="label5">Label 5</label>
+            <output id="label5" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("label5", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="fra">Fra</label>
-            <input id="fra" name="fra" value="@Model.State.GetValueOrDefault("fra", string.Empty)" />
-            @if (Model.Errors.ContainsKey("fra"))
-            {
-                <span data-error-for="fra">@Model.Errors["fra"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblamount">
+            <label for="lblamount">Amount</label>
+            <output id="lblamount" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblamount", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="label1">Label1</label>
-            <input id="label1" name="label1" value="@Model.State.GetValueOrDefault("label1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("label1"))
-            {
-                <span data-error-for="label1">@Model.Errors["label1"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblbal">
+            <label for="lblbal">Bal</label>
+            <output id="lblbal" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblbal", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="label5">Label5</label>
-            <input id="label5" name="label5" value="@Model.State.GetValueOrDefault("label5", string.Empty)" />
-            @if (Model.Errors.ContainsKey("label5"))
-            {
-                <span data-error-for="label5">@Model.Errors["label5"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblbalance">
+            <label for="lblbalance">Balance</label>
+            <output id="lblbalance" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblbalance", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblamount">Lblamount</label>
-            <input id="lblamount" name="lblamount" value="@Model.State.GetValueOrDefault("lblamount", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblamount"))
-            {
-                <span data-error-for="lblamount">@Model.Errors["lblamount"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcurrentbalance">
+            <label for="lblcurrentbalance">Currentbalance</label>
+            <output id="lblcurrentbalance" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcurrentbalance", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblbal">Lblbal</label>
-            <input id="lblbal" name="lblbal" value="@Model.State.GetValueOrDefault("lblbal", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblbal"))
-            {
-                <span data-error-for="lblbal">@Model.Errors["lblbal"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcustomerid">
+            <label for="lblcustomerid">Customer Id</label>
+            <output id="lblcustomerid" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcustomerid", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblbalance">Lblbalance</label>
-            <input id="lblbalance" name="lblbalance" value="@Model.State.GetValueOrDefault("lblbalance", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblbalance"))
-            {
-                <span data-error-for="lblbalance">@Model.Errors["lblbalance"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblfirst">
+            <label for="lblfirst">First</label>
+            <output id="lblfirst" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblfirst", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblcurrentbalance">Lblcurrentbalance</label>
-            <input id="lblcurrentbalance" name="lblcurrentbalance" value="@Model.State.GetValueOrDefault("lblcurrentbalance", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblcurrentbalance"))
-            {
-                <span data-error-for="lblcurrentbalance">@Model.Errors["lblcurrentbalance"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblfirstname">
+            <label for="lblfirstname">First Name</label>
+            <output id="lblfirstname" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblfirstname", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblcustomerid">Lblcustomerid</label>
-            <input id="lblcustomerid" name="lblcustomerid" value="@Model.State.GetValueOrDefault("lblcustomerid", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblcustomerid"))
-            {
-                <span data-error-for="lblcustomerid">@Model.Errors["lblcustomerid"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblid">
+            <label for="lblid">Id</label>
+            <output id="lblid" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblid", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblfirst">Lblfirst</label>
-            <input id="lblfirst" name="lblfirst" value="@Model.State.GetValueOrDefault("lblfirst", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblfirst"))
-            {
-                <span data-error-for="lblfirst">@Model.Errors["lblfirst"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblinterest">
+            <label for="lblinterest">Interest</label>
+            <output id="lblinterest" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblinterest", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblfirstname">Lblfirstname</label>
-            <input id="lblfirstname" name="lblfirstname" value="@Model.State.GetValueOrDefault("lblfirstname", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblfirstname"))
-            {
-                <span data-error-for="lblfirstname">@Model.Errors["lblfirstname"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbllast">
+            <label for="lbllast">Last</label>
+            <output id="lbllast" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbllast", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblid">Lblid</label>
-            <input id="lblid" name="lblid" value="@Model.State.GetValueOrDefault("lblid", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblid"))
-            {
-                <span data-error-for="lblid">@Model.Errors["lblid"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbllastname">
+            <label for="lbllastname">Last Name</label>
+            <output id="lbllastname" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbllastname", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblinterest">Lblinterest</label>
-            <input id="lblinterest" name="lblinterest" value="@Model.State.GetValueOrDefault("lblinterest", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblinterest"))
-            {
-                <span data-error-for="lblinterest">@Model.Errors["lblinterest"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbltransaction">
+            <label for="lbltransaction">Transaction</label>
+            <output id="lbltransaction" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbltransaction", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lbllast">Lbllast</label>
-            <input id="lbllast" name="lbllast" value="@Model.State.GetValueOrDefault("lbllast", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbllast"))
-            {
-                <span data-error-for="lbllast">@Model.Errors["lbllast"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbltransactionid">
+            <label for="lbltransactionid">Transaction Id</label>
+            <output id="lbltransactionid" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbltransactionid", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lbllastname">Lbllastname</label>
-            <input id="lbllastname" name="lbllastname" value="@Model.State.GetValueOrDefault("lbllastname", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbllastname"))
-            {
-                <span data-error-for="lbllastname">@Model.Errors["lbllastname"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbltype">
+            <label for="lbltype">Type</label>
+            <output id="lbltype" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbltype", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lbltransaction">Lbltransaction</label>
-            <input id="lbltransaction" name="lbltransaction" value="@Model.State.GetValueOrDefault("lbltransaction", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbltransaction"))
-            {
-                <span data-error-for="lbltransaction">@Model.Errors["lbltransaction"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lbltransactionid">Lbltransactionid</label>
-            <input id="lbltransactionid" name="lbltransactionid" value="@Model.State.GetValueOrDefault("lbltransactionid", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbltransactionid"))
-            {
-                <span data-error-for="lbltransactionid">@Model.Errors["lbltransactionid"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lbltype">Lbltype</label>
-            <input id="lbltype" name="lbltype" value="@Model.State.GetValueOrDefault("lbltype", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbltype"))
-            {
-                <span data-error-for="lbltype">@Model.Errors["lbltype"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="txtaccountno">Txtaccountno</label>
-            <input id="txtaccountno" name="txtaccountno" value="@Model.State.GetValueOrDefault("txtaccountno", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="txtaccountno">
+            <label for="txtaccountno">Account No</label>
+            <input type="number" id="txtaccountno" name="txtaccountno" placeholder="Enter account no" value="@Model.State.GetValueOrDefault("txtaccountno", string.Empty)" />
             @if (Model.Errors.ContainsKey("txtaccountno"))
             {
                 <span data-error-for="txtaccountno">@Model.Errors["txtaccountno"]</span>
             }
+            <p class="ui-scaffold-hint">Txtaccountno is required.</p>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="txtcurrentdate">Txtcurrentdate</label>
-            <input id="txtcurrentdate" name="txtcurrentdate" value="@Model.State.GetValueOrDefault("txtcurrentdate", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="txtcurrentdate">
+            <label for="txtcurrentdate">Currentdate</label>
+            <input type="date" id="txtcurrentdate" name="txtcurrentdate" placeholder="Optional currentdate" value="@Model.State.GetValueOrDefault("txtcurrentdate", string.Empty)" />
             @if (Model.Errors.ContainsKey("txtcurrentdate"))
             {
                 <span data-error-for="txtcurrentdate">@Model.Errors["txtcurrentdate"]</span>
             }
+            
         </div>
         <div class="ui-scaffold-actions">
         <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
