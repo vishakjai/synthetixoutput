@@ -1,0 +1,107 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Mixed legacy VB6 patterns with modern Python agent architecture. VB6 follows Hungarian notation and event-driven patterns, while Python follows PEP8 and class-based agent design.",
+  "rules": [
+    {
+      "id": "vb6-naming-hungarian",
+      "category": "naming",
+      "rule": "VB6 controls use Hungarian notation prefixes (frm, txt, cmd, lbl)",
+      "confidence": 0.95,
+      "examples": [
+        "frmcheckbalance",
+        "txtacno",
+        "cmdsearch",
+        "lblaccno"
+      ],
+      "counterexamples": [
+        "checkBalanceForm",
+        "accountNumber",
+        "searchButton"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        }
+      ]
+    },
+    {
+      "id": "vb6-mdi-pattern",
+      "category": "ui",
+      "rule": "Forms are MDI children with maximized window state",
+      "confidence": 0.9,
+      "examples": [
+        "MDIChild = -1 'True",
+        "WindowState = 2 'Maximized"
+      ],
+      "counterexamples": [
+        "Modal dialogs",
+        "Fixed size windows"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 11,
+          "evidence": "MDIChild = -1 'True"
+        }
+      ]
+    },
+    {
+      "id": "python-agent-naming",
+      "category": "naming",
+      "rule": "Agent classes follow PascalCase with 'Agent' suffix",
+      "confidence": 0.95,
+      "examples": [
+        "AnalystAgent",
+        "UIScaffoldAgent",
+        "DeveloperAgent"
+      ],
+      "counterexamples": [
+        "analyst_agent",
+        "ui_scaffold",
+        "Developer"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import AnalystAgent"
+        }
+      ]
+    },
+    {
+      "id": "python-import-relative",
+      "category": "imports",
+      "rule": "Use relative imports for agent modules within package",
+      "confidence": 0.9,
+      "examples": [
+        "from .analyst import AnalystAgent",
+        "from .ui_scaffold import UIScaffoldAgent"
+      ],
+      "counterexamples": [
+        "from agents.analyst import AnalystAgent",
+        "import agents.analyst"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import AnalystAgent"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement VB6 to C# naming convention mapping for modernization",
+    "Add validation for Hungarian notation consistency in legacy code",
+    "Enforce PEP8 compliance for Python agent modules",
+    "Add type hints to Python agent classes and methods"
+  ],
+  "scaffold_templates": [
+    "ASP.NET Core Razor Page template for VB6 form conversion",
+    "Entity Framework model template for ADO data access conversion",
+    "Bootstrap UI component templates for VB6 control mapping",
+    "Authentication middleware template for VB6 login form replacement"
+  ]
+}
