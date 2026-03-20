@@ -1,0 +1,126 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Mixed VB6 legacy patterns with modern Python conventions. VB6 uses Hungarian notation and event-driven architecture. Python follows PEP standards with agent-based architecture.",
+  "rules": [
+    {
+      "id": "vb6-naming-hungarian",
+      "category": "naming",
+      "rule": "VB6 controls use Hungarian notation prefixes (frm, txt, cmd, lbl)",
+      "confidence": 0.95,
+      "examples": [
+        "frmcheckbalance",
+        "txtacno",
+        "cmdsearch",
+        "lblaccno"
+      ],
+      "counterexamples": [
+        "checkBalanceForm",
+        "accountNumber",
+        "searchButton"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        }
+      ]
+    },
+    {
+      "id": "python-agent-naming",
+      "category": "naming",
+      "rule": "Python agent modules use snake_case with descriptive names",
+      "confidence": 0.9,
+      "examples": [
+        "system_intelligence.py",
+        "database_engineer.py",
+        "security_engineer.py"
+      ],
+      "counterexamples": [
+        "SystemIntelligence.py",
+        "DatabaseEngineer.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "module naming pattern"
+        }
+      ]
+    },
+    {
+      "id": "vb6-form-structure",
+      "category": "api",
+      "rule": "VB6 forms use BEGIN/END blocks with nested control definitions",
+      "confidence": 0.95,
+      "examples": [
+        "Begin VB.Form frmcheckbalance",
+        "Begin VB.Frame Frame1"
+      ],
+      "counterexamples": [
+        "class CheckBalanceForm",
+        "<form id=\"checkBalance\">"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        }
+      ]
+    },
+    {
+      "id": "python-import-organization",
+      "category": "api",
+      "rule": "Python modules organize imports with standard library first, then relative imports",
+      "confidence": 0.9,
+      "examples": [
+        "import json",
+        "import os",
+        "from .analyst import Analyst"
+      ],
+      "counterexamples": [
+        "from .analyst import Analyst",
+        "import json"
+      ],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "import json"
+        }
+      ]
+    },
+    {
+      "id": "schema-validation-pattern",
+      "category": "api",
+      "rule": "JSON schemas use $schema, $id, and structured validation rules",
+      "confidence": 0.95,
+      "examples": [
+        "\"$schema\": \"...\", \"$id\": \"...\", \"type\": \"object\""
+      ],
+      "counterexamples": [
+        "simple object validation without schema metadata"
+      ],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/common.schema.json",
+          "line": 1,
+          "evidence": "top_level_keys=[\"$schema\",\"$id\",title,type,\"$defs\"]"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement VB6 to C# naming convention mapping (Hungarian to PascalCase)",
+    "Add Python type hints to all agent method signatures",
+    "Enforce consistent JSON schema validation across all API endpoints",
+    "Standardize error handling patterns across agent implementations"
+  ],
+  "scaffold_templates": [
+    "ASP.NET Core form template with VB6 control mapping",
+    "Entity Framework model template for MS Access to PostgreSQL migration",
+    "Python agent base class template with standardized interfaces",
+    "JSON schema template for modernization artifacts"
+  ]
+}
