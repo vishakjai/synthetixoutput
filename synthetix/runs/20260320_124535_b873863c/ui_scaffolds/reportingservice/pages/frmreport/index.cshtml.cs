@@ -35,15 +35,15 @@ public sealed class IndexModel : PageModel
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtaccountno"]))
         {
-            Errors["txtaccountno"] = "Accountno is required.";
+            Errors["txtaccountno"] = "Account No is required.";
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtcustomerid"]))
         {
-            Errors["txtcustomerid"] = "Customerid is required.";
+            Errors["txtcustomerid"] = "Customer Id is required.";
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txttypeofaccount"]))
         {
-            Errors["txttypeofaccount"] = "Typeofaccount is required.";
+            Errors["txttypeofaccount"] = "Type Of Account is required.";
         }
         if (Errors.Count > 0)
         {
