@@ -1,0 +1,77 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Legacy VB6 application with critical modernization needs. High security and maintainability risks due to outdated technology stack, but well-structured agent system for modernization support.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 4,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Data Access Layer",
+      "reason": "Direct ADO usage with potential SQL injection vulnerabilities and no connection pooling",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 4,
+          "evidence": "Reference to Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "scope": "Authentication System",
+      "reason": "Legacy VB6 authentication with no modern security standards (OAuth, JWT, MFA)",
+      "severity": "high",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 10,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "scope": "UI Architecture",
+      "reason": "MDI forms with tight coupling between UI and business logic, difficult to test and maintain",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 11,
+          "evidence": "MDIChild = -1 'True"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "End-of-Life Technology Stack",
+      "description": "VB6 is no longer supported by Microsoft, creating security and compliance risks",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "SQL Injection Vulnerability",
+      "description": "Direct ADO usage without parameterized queries exposes application to SQL injection attacks",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "No Automated Testing",
+      "description": "Legacy VB6 architecture makes unit testing extremely difficult, increasing regression risk",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Monolithic Architecture",
+      "description": "Single executable with all functionality makes scaling and maintenance challenging",
+      "severity": "medium",
+      "confidence": 0.85
+    }
+  ]
+}
