@@ -1,0 +1,124 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Modernize Authentication System",
+    "problem_statement": "Legacy VB6 login form lacks modern security standards and cannot integrate with enterprise identity systems",
+    "scope": [
+      "frmLogin",
+      "authentication_logic"
+    ],
+    "risk_if_unaddressed": "Security breaches, compliance violations, inability to integrate with SSO systems",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "database_schema_analysis",
+      "security_requirements"
+    ],
+    "suggested_approach": "Replace VB6 login form with ASP.NET Core Identity, implement JWT tokens, add MFA support",
+    "success_criteria": [
+      "Modern authentication UI deployed",
+      "JWT token-based session management",
+      "Multi-factor authentication support",
+      "Integration with enterprise identity provider"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 10,
+        "evidence": "Form=frmLogin.frm"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Convert Check Balance Form to ASP.NET Core",
+    "problem_statement": "frmcheckbalance form represents core banking functionality that needs modern web UI",
+    "scope": [
+      "frmcheckbalance",
+      "balance_inquiry_logic"
+    ],
+    "risk_if_unaddressed": "Continued dependency on legacy UI, poor user experience, maintenance burden",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb-001",
+      "data_access_modernization"
+    ],
+    "suggested_approach": "Create Razor Page with Bootstrap UI, implement async data access, add input validation",
+    "success_criteria": [
+      "Responsive web UI for balance inquiry",
+      "Async database operations",
+      "Client and server-side validation",
+      "Audit logging for balance checks"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "BankApp1/close account.frm",
+        "line": 3,
+        "evidence": "Begin VB.Form frmcheckbalance"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Replace ADO with Entity Framework",
+    "problem_statement": "Direct ADO usage creates security vulnerabilities and maintenance challenges",
+    "scope": [
+      "data_access_layer",
+      "ado_references"
+    ],
+    "risk_if_unaddressed": "SQL injection attacks, poor performance, difficult database migrations",
+    "effort": "XL",
+    "severity": "high",
+    "dependencies": [
+      "database_schema_documentation"
+    ],
+    "suggested_approach": "Create Entity Framework models, implement repository pattern, add connection pooling",
+    "success_criteria": [
+      "All database operations use Entity Framework",
+      "Parameterized queries prevent SQL injection",
+      "Connection pooling improves performance",
+      "Database migrations support schema changes"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 4,
+        "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Implement Automated Testing Framework",
+    "problem_statement": "No automated testing capability increases regression risk during modernization",
+    "scope": [
+      "testing_infrastructure",
+      "all_business_logic"
+    ],
+    "risk_if_unaddressed": "Undetected regressions, poor code quality, difficult refactoring",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [
+      "rb-003"
+    ],
+    "suggested_approach": "Add xUnit test project, implement integration tests, set up CI/CD pipeline",
+    "success_criteria": [
+      "Unit tests for all business logic",
+      "Integration tests for database operations",
+      "UI tests for critical user journeys",
+      "Automated test execution in CI/CD"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 1,
+        "evidence": "Type=Exe (monolithic architecture)"
+      }
+    ]
+  }
+]
