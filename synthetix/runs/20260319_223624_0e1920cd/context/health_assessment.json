@@ -1,0 +1,90 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Legacy VB6 application with significant modernization challenges. Modern Python agent system shows good architectural patterns but lacks comprehensive testing coverage.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 3,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Data Access Layer",
+      "reason": "Direct ADO usage without parameterized queries creates SQL injection risk",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "scope": "VB6 Form Event Handlers",
+      "reason": "Business logic embedded in UI event handlers reduces testability and maintainability",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 20,
+          "evidence": "Begin VB.CommandButton cmdsearch"
+        }
+      ]
+    },
+    {
+      "scope": "Python Agent Error Handling",
+      "reason": "Inconsistent error handling patterns across agent implementations",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "25 imports suggest complex dependencies"
+        }
+      ]
+    },
+    {
+      "scope": "Schema Validation Coverage",
+      "reason": "53 schema files indicate comprehensive validation but may create maintenance overhead",
+      "severity": "low",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "53 config files with JSON schema format"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Vulnerability",
+      "description": "VB6 application uses ADO without parameterized queries, creating potential for SQL injection attacks",
+      "severity": "critical",
+      "confidence": 0.9
+    },
+    {
+      "title": "Data Migration Complexity",
+      "description": "MS Access to PostgreSQL migration requires careful schema mapping and data type conversion",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Business Logic Preservation",
+      "description": "VB6 form event handlers contain undocumented business rules that must be preserved during modernization",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Agent System Scalability",
+      "description": "Python agent system lacks distributed processing capabilities for large-scale modernization projects",
+      "severity": "medium",
+      "confidence": 0.7
+    }
+  ]
+}
