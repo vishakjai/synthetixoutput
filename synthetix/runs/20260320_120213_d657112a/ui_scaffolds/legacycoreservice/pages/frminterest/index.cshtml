@@ -4,21 +4,29 @@
     ViewData["Title"] = "Interest calculation and posting workflow";
 }
 <!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
-<main aria-label="Interest calculation and posting workflow">
-    <h1>Interest calculation and posting workflow</h1>
-    <p>Behavioral scaffold derived from Screen Contract <code>frminterest</code>.</p>
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Interest calculation and posting workflow">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frminterest</p>
+        <h1>Interest calculation and posting workflow</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frminterest</code>.</p>
+    </header>
+    
     <form method="post">
-        <div class="ui-scaffold-field">
-            <label for="listview1">List View1</label>
-            <input id="listview1" name="listview1" value="@Model.State.GetValueOrDefault("listview1", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="listview1">
+        <label for="listview1">List View1</label>
+        <input type="text" id="listview1" name="listview1" placeholder="Optional list view1" value="@Model.State.GetValueOrDefault("listview1", string.Empty)" />
             @if (Model.Errors.ContainsKey("listview1"))
             {
                 <span data-error-for="listview1">@Model.Errors["listview1"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-actions">
-        <button type="submit" formaction="?handler=EvtSave">Save</button>
-        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
-        </div>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-primary" type="submit" formaction="?handler=EvtSave"><span>Save</span><small>POST /legacycore/addinterest, list</small></button>
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
     </form>
 </main>
