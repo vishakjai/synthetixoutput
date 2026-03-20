@@ -1,0 +1,260 @@
+{
+  "header": {
+    "artifact_id": "66b1791b27924a52ac594089c8d78de3",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-20T12:04:20.181333+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260320_120213_d657112a",
+      "stage_id": "context_layer",
+      "task_id": "39feaa98e6ea43b8975944a138f4ff21"
+    },
+    "parents": [],
+    "digest": "sha256:0b88685047961d78d606f680c02ed4623e02240f54d8c16943ff1d06c9857dd5",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260320_120213_d657112a",
+      "bundle_version": "20260320T120420Z_20260320_120213_d657112a"
+    }
+  },
+  "rules": [
+    {
+      "id": "vb6-naming-hungarian",
+      "category": "naming",
+      "title": "VB6 controls use Hungarian notation prefixes (frm, txt, cmd, lbl)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "VB6 controls use Hungarian notation prefixes (frm, txt, cmd, lbl)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "frmcheckbalance"
+        },
+        {
+          "file": "txtacno"
+        },
+        {
+          "file": "cmdsearch"
+        },
+        {
+          "file": "lblaccno"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "checkBalanceForm"
+        },
+        {
+          "file": "accountNumber"
+        },
+        {
+          "file": "searchButton"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/close account.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-mdi-pattern",
+      "category": "naming",
+      "title": "Forms are MDI children with maximized window state",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Forms are MDI children with maximized window state",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "MDIChild = -1 'True"
+        },
+        {
+          "file": "WindowState = 2 'Maximized"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "Modal dialogs"
+        },
+        {
+          "file": "Fixed size windows"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/close account.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "python-agent-naming",
+      "category": "naming",
+      "title": "Agent classes follow PascalCase with 'Agent' suffix",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent classes follow PascalCase with 'Agent' suffix",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "AnalystAgent"
+        },
+        {
+          "file": "UIScaffoldAgent"
+        },
+        {
+          "file": "DeveloperAgent"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "analyst_agent"
+        },
+        {
+          "file": "ui_scaffold"
+        },
+        {
+          "file": "Developer"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "python-import-relative",
+      "category": "naming",
+      "title": "Use relative imports for agent modules within package",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Use relative imports for agent modules within package",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "from .analyst import AnalystAgent"
+        },
+        {
+          "file": "from .ui_scaffold import UIScaffoldAgent"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "from agents.analyst import AnalystAgent"
+        },
+        {
+          "file": "import agents.analyst"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "ASP.NET Core Razor Page template for VB6 form conversion",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "Entity Framework model template for ADO data access conversion",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "Bootstrap UI component templates for VB6 control mapping",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "Authentication middleware template for VB6 login form replacement",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
