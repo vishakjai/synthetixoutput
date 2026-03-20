@@ -16,10 +16,9 @@ Deterministic UI scaffold slice generated from Screen Contracts.
 - Typography, spacing, and colors
 
 ## Included screens
-- Account closure and settlement workflow (/ui/frmcloseacount)
+- Account closure and settlement workflow (/ui/frmcloseaccount)
 - Customer profile onboarding and maintenance workflow (/ui/frmcustomer)
 - Account type maintenance and account setup workflow (/ui/frmsettings)
-- Account closure and settlement workflow (/ui/frmcloseaccount)
 
 ## Run
 ```bash
