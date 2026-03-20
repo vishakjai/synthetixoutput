@@ -1,0 +1,98 @@
+{
+  "version": "cp-v1.0",
+  "summary": "VB6 legacy application with COM dependencies, MDI interface, and ADO data access patterns requiring modernization to ASP.NET Core MVC with Razor Pages",
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "rule": "Forms prefixed with 'frm' followed by functional description",
+      "confidence": 0.9,
+      "examples": [
+        "frmcustomer",
+        "frmdeposit",
+        "frmwithdraw",
+        "frmLogin"
+      ],
+      "counterexamples": [
+        "menu",
+        "Form9"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 9,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "vb6-mdi-pattern",
+      "category": "api",
+      "rule": "Child forms use MDIChild = -1 'True for multi-document interface",
+      "confidence": 0.85,
+      "examples": [
+        "MDIChild = -1 'True"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 9,
+          "evidence": "MDIChild = -1 'True"
+        }
+      ]
+    },
+    {
+      "id": "vb6-ado-data-access",
+      "category": "api",
+      "rule": "Data access through ADO 2.5 COM objects and Data Environment designers",
+      "confidence": 0.95,
+      "examples": [
+        "Microsoft ActiveX Data Objects 2.0 Library",
+        "Designer=deBank.Dsr"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0"
+        }
+      ]
+    },
+    {
+      "id": "vb6-control-naming",
+      "category": "naming",
+      "rule": "Controls prefixed with type abbreviation (txt, cmd, lbl) followed by purpose",
+      "confidence": 0.85,
+      "examples": [
+        "txtacno",
+        "cmdsearch",
+        "lblaccno"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 19,
+          "evidence": "Begin VB.TextBox txtacno"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Replace VB6 form events with ASP.NET Core controller actions",
+    "Convert ADO Recordsets to Entity Framework Core DbContext",
+    "Replace COM references with .NET Standard libraries",
+    "Implement proper async/await patterns for data operations",
+    "Add input validation and sanitization for all user inputs",
+    "Replace MDI interface with responsive web UI layout"
+  ],
+  "scaffold_templates": [
+    "ASP.NET Core MVC controller template for form-to-action mapping",
+    "Razor Page template for VB6 form UI preservation",
+    "Entity Framework model template for ADO data structures",
+    "Authentication middleware template for login form replacement",
+    "Repository pattern template for data access layer modernization"
+  ]
+}
