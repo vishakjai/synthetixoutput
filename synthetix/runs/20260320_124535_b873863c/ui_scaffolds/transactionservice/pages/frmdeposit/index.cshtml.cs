@@ -23,11 +23,11 @@ public sealed class IndexModel : PageModel
         Errors.Clear();
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtbankname"]))
         {
-            Errors["txtbankname"] = "Bankname is required.";
+            Errors["txtbankname"] = "Bank Name is required.";
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtsearchaccountno"]))
         {
-            Errors["txtsearchaccountno"] = "Searchaccountno is required.";
+            Errors["txtsearchaccountno"] = "Search Account No is required.";
         }
         if (Errors.Count > 0)
         {
