@@ -2,107 +2,19 @@ namespace CustomerService.Services;
 
 public static class UiScaffoldRegistry
 {
-    public const string FrmcloseacountDescriptorJson = @"{
-  ""screen_id"": ""frmcloseacount"",
+    public const string FrmcloseaccountDescriptorJson = @"{
+  ""screen_id"": ""frmcloseaccount"",
   ""screen_name"": ""Account closure and settlement workflow"",
-  ""route"": ""/ui/frmcloseacount"",
+  ""route"": ""/ui/frmcloseaccount"",
   ""state_model"": {
-    ""screen_state_type"": ""FrmcloseacountState"",
-    ""field_ids"": [
-      ""txtdateofopen"",
-      ""cbosex"",
-      ""frame1"",
-      ""frame2"",
-      ""fracheque"",
-      ""franominee"",
-      ""frasearch"",
-      ""lblcheque"",
-      ""lbldateofopen"",
-      ""lblnominee"",
-      ""lblphoneno"",
-      ""lblaccountno"",
-      ""lbladdress"",
-      ""lblbalance"",
-      ""lblcustid"",
-      ""lblcustomerid"",
-      ""lbldateofbirth"",
-      ""lblfirstname"",
-      ""lbllastname"",
-      ""lblmiddlename"",
-      ""lblrelationship"",
-      ""lblsex"",
-      ""lbltype"",
-      ""optmajor"",
-      ""optminor"",
-      ""optno"",
-      ""optyes"",
-      ""txtaccountno"",
-      ""txtaddress"",
-      ""txtbalance"",
-      ""txtcustid"",
-      ""txtcustomerid"",
-      ""txtdob"",
-      ""txtfirstname"",
-      ""txtlastname"",
-      ""txtmiddlename"",
-      ""txtmobileno"",
-      ""txtnominee"",
-      ""txtphoneno"",
-      ""txtpincode"",
-      ""txtrelationship""
-    ],
+    ""screen_state_type"": ""FrmcloseaccountState"",
+    ""field_ids"": [],
     ""action_ids"": [
       ""action_save"",
       ""action_cancel""
     ]
   },
-  ""validation_map"": [
-    {
-      ""field_id"": ""txtaccountno"",
-      ""rule_ids"": [
-        ""VR-txtaccountno-REQUIRED"",
-        ""VR-txtaccountno-NUMERIC""
-      ]
-    },
-    {
-      ""field_id"": ""txtbalance"",
-      ""rule_ids"": [
-        ""VR-txtbalance-NUMERIC""
-      ]
-    },
-    {
-      ""field_id"": ""txtcustid"",
-      ""rule_ids"": [
-        ""VR-txtcustid-NUMERIC""
-      ]
-    },
-    {
-      ""field_id"": ""txtcustomerid"",
-      ""rule_ids"": [
-        ""VR-txtcustomerid-REQUIRED"",
-        ""VR-txtcustomerid-NUMERIC""
-      ]
-    },
-    {
-      ""field_id"": ""txtfirstname"",
-      ""rule_ids"": [
-        ""VR-txtfirstname-REQUIRED""
-      ]
-    },
-    {
-      ""field_id"": ""txtlastname"",
-      ""rule_ids"": [
-        ""VR-txtlastname-REQUIRED""
-      ]
-    },
-    {
-      ""field_id"": ""txtmiddlename"",
-      ""rule_ids"": [
-        ""VR-txtmiddlename-REQUIRED"",
-        ""VR-txtmiddlename-NUMERIC""
-      ]
-    }
-  ],
+  ""validation_map"": [],
   ""event_wiring"": [
     {
       ""id"": ""evt_save"",
@@ -123,11 +35,11 @@ public static class UiScaffoldRegistry
     }
   ],
   ""navigation_map"": {
-    ""default_route"": ""/ui/frmcloseacount"",
+    ""default_route"": ""/ui/frmcloseaccount"",
     ""opens"": [
       {
-        ""screen_id"": ""ui_frmcloseacount_list"",
-        ""route"": ""/ui/frmcloseacount"",
+        ""screen_id"": ""ui_frmcloseaccount_list"",
+        ""route"": ""/ui/frmcloseaccount"",
         ""trigger_event_id"": ""evt_save"",
         ""mode"": ""same_tab""
       },
@@ -154,7 +66,7 @@ public static class UiScaffoldRegistry
   ""accessibility_hooks"": {
     ""keyboard_navigation"": true,
     ""label_association"": true,
-    ""tab_order_defined"": true
+    ""tab_order_defined"": false
   },
   ""annotations"": [
     ""UI_SCAFFOLD"",
@@ -418,7 +330,7 @@ public static class UiScaffoldRegistry
 
     public static readonly Dictionary<string, string> RouteMap = new(StringComparer.OrdinalIgnoreCase)
     {
-            ["/frmcloseacount"] = "/ui/frmcloseacount",
+            ["/frmcloseaccount"] = "/ui/frmcloseaccount",
             ["/frmcustomer"] = "/ui/frmcustomer",
             ["/frmsettings"] = "/ui/frmsettings",
     };
