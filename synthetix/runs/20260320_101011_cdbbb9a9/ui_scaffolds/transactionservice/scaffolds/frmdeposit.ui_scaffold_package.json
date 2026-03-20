@@ -1,0 +1,186 @@
+{
+  "artifact_type": "ui_scaffold_package_v1",
+  "artifact_version": "1.0",
+  "screen_id": "frmdeposit",
+  "screen_name": "Deposit capture and balance posting workflow",
+  "source_screen_contract_id": "frmdeposit",
+  "contract_version": "1.0.0",
+  "framework_target": "ASP.NET Core Razor Pages",
+  "route": "/ui/frmdeposit",
+  "target_view_path": "Pages/Frmdeposit/Index.cshtml",
+  "state_model": {
+    "screen_state_type": "FrmdepositState",
+    "field_ids": [
+      "txtdateoftransaction",
+      "frame1",
+      "frame2",
+      "frame3",
+      "fracheque",
+      "fraext",
+      "framode",
+      "label2",
+      "lblfieldlabel",
+      "lblaccount",
+      "lblbalance",
+      "lblbankname",
+      "lblchequeissued",
+      "lblcustomer",
+      "lblcustomerid",
+      "lbldate",
+      "lblfirst",
+      "lblfirstname",
+      "lbllast",
+      "lbllastname",
+      "lbltypeofaccount",
+      "optcash",
+      "optcheque",
+      "optno",
+      "optyes",
+      "txtbankname",
+      "txtchequeno",
+      "txtsearchaccountno"
+    ],
+    "action_ids": [
+      "action_save",
+      "action_cancel"
+    ]
+  },
+  "validation_map": [
+    {
+      "field_id": "lblaccount",
+      "rule_ids": [
+        "VR-lblaccount-REQUIRED",
+        "VR-lblaccount-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "lblbalance",
+      "rule_ids": [
+        "VR-lblbalance-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "lblbankname",
+      "rule_ids": [
+        "VR-lblbankname-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "lblcustomer",
+      "rule_ids": [
+        "VR-lblcustomer-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "lblcustomerid",
+      "rule_ids": [
+        "VR-lblcustomerid-REQUIRED",
+        "VR-lblcustomerid-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "lblfirstname",
+      "rule_ids": [
+        "VR-lblfirstname-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "lbllastname",
+      "rule_ids": [
+        "VR-lbllastname-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "lbltypeofaccount",
+      "rule_ids": [
+        "VR-lbltypeofaccount-REQUIRED",
+        "VR-lbltypeofaccount-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtbankname",
+      "rule_ids": [
+        "VR-txtbankname-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "txtsearchaccountno",
+      "rule_ids": [
+        "VR-txtsearchaccountno-REQUIRED",
+        "VR-txtsearchaccountno-NUMERIC"
+      ]
+    }
+  ],
+  "event_wiring": [
+    {
+      "event_id": "evt_save",
+      "trigger": "action_save:on_click",
+      "step_count": 3
+    },
+    {
+      "event_id": "evt_cancel",
+      "trigger": "action_cancel:on_click",
+      "step_count": 1
+    }
+  ],
+  "navigation_map": {
+    "default_route": "/ui/frmdeposit",
+    "opens": [
+      {
+        "screen_id": "ui_frmdeposit_list",
+        "route": "/ui/frmdeposit",
+        "trigger_event_id": "evt_save",
+        "mode": "same_tab"
+      },
+      {
+        "screen_id": "previous",
+        "route": "",
+        "trigger_event_id": "evt_cancel",
+        "mode": "same_tab"
+      }
+    ]
+  },
+  "api_binding_map": [
+    {
+      "event_id": "evt_save",
+      "targets": [
+        "POST /transactions/deposit"
+      ]
+    },
+    {
+      "event_id": "evt_cancel",
+      "targets": []
+    }
+  ],
+  "accessibility_hooks": {
+    "keyboard_navigation": true,
+    "label_association": true,
+    "tab_order_defined": true
+  },
+  "annotations": [
+    "UI_SCAFFOLD",
+    "VISUAL_DESIGN_OUT_OF_SCOPE"
+  ],
+  "files": [
+    {
+      "path": "Pages/Frmdeposit/Index.cshtml",
+      "kind": "view",
+      "purpose": "Screen view scaffold"
+    },
+    {
+      "path": "Pages/Frmdeposit/Index.cshtml.cs",
+      "kind": "page_model",
+      "purpose": "Screen state and event wiring"
+    },
+    {
+      "path": "Scaffolds/frmdeposit.ui_scaffold_package.json",
+      "kind": "artifact",
+      "purpose": "Serialized scaffold package for conformance checks"
+    },
+    {
+      "path": "Models/frmdepositActions.json",
+      "kind": "metadata",
+      "purpose": "Action metadata derived from the Screen Contract"
+    }
+  ]
+}
