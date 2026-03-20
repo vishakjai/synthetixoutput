@@ -23,7 +23,7 @@ public sealed class IndexModel : PageModel
         Errors.Clear();
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtaccountno"]))
         {
-            Errors["txtaccountno"] = "Accountno is required.";
+            Errors["txtaccountno"] = "Account No is required.";
         }
         if (Errors.Count > 0)
         {
