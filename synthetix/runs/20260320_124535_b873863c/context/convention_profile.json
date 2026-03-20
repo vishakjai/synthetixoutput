@@ -1,0 +1,95 @@
+{
+  "version": "1.0.0",
+  "summary": "VB6 legacy conventions with COM dependencies, event-driven architecture, and data binding patterns. Modernization framework follows Python/FastAPI patterns with agent-based architecture.",
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "rule": "Forms prefixed with 'frm' followed by descriptive name (e.g., frmLogin, frmdeposit)",
+      "confidence": 0.95,
+      "examples": [
+        "frmLogin",
+        "frmcustomer",
+        "frmdeposit"
+      ],
+      "counterexamples": [
+        "menu",
+        "Form9"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 19,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "id": "vb6-control-naming",
+      "category": "naming",
+      "rule": "Controls prefixed with type abbreviation (txt for TextBox, cmd for CommandButton)",
+      "confidence": 0.9,
+      "examples": [
+        "txtacno",
+        "cmdsearch",
+        "txtcustomerid"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 25,
+          "evidence": "Begin VB.TextBox txtacno"
+        }
+      ]
+    },
+    {
+      "id": "python-agent-imports",
+      "category": "api",
+      "rule": "Agent modules imported using relative imports in __init__.py",
+      "confidence": 0.95,
+      "examples": [
+        "from .analyst import Analyst",
+        "from .architect import Architect"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import Analyst"
+        }
+      ]
+    },
+    {
+      "id": "vb6-data-access",
+      "category": "api",
+      "rule": "Data access through ADO 2.5 and Data Environment designers",
+      "confidence": 0.9,
+      "examples": [
+        "Designer=deBank.Dsr"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent error handling patterns across VB6 forms",
+    "Standardize data validation in form controls",
+    "Add input sanitization for SQL injection prevention",
+    "Implement consistent logging across all transactions",
+    "Add unit tests for Python modernization agents"
+  ],
+  "scaffold_templates": [
+    "VB6 Form to React Component mapping template",
+    "ADO Recordset to REST API endpoint template",
+    "VB6 Event Handler to JavaScript event listener template",
+    "Data Environment to ORM model template"
+  ]
+}
