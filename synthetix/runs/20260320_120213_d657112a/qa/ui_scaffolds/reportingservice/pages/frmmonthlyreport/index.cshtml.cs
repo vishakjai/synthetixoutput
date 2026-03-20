@@ -14,7 +14,7 @@ public sealed class IndexModel : PageModel
         State["screenId"] = "frmmonthlyreport";
         foreach (var fieldId in new[] { "label1", "lblfrom", "lblto" })
         {
-            DisplayValues[fieldId] = "Pending lookup";
+            DisplayValues[fieldId] = string.Empty;
         }
     }
 
