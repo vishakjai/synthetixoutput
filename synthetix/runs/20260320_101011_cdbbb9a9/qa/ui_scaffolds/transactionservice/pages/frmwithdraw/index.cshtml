@@ -1,0 +1,123 @@
+@page "/ui/frmwithdraw"
+@model TransactionService.Pages.Frmwithdraw.IndexModel
+@{
+    ViewData["Title"] = "Withdrawal processing and balance deduction workflow";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Withdrawal processing and balance deduction workflow">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmwithdraw</p>
+        <h1>Withdrawal processing and balance deduction workflow</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmwithdraw</code>.</p>
+    </header>
+    
+    <form method="post">
+        <div class="ui-scaffold-field" data-field-id="txtdateoftransaction">
+        <label for="txtdateoftransaction">Date Of Transaction</label>
+        <input type="date" id="txtdateoftransaction" name="txtdateoftransaction" placeholder="Optional date of transaction" value="@Model.State.GetValueOrDefault("txtdateoftransaction", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtdateoftransaction"))
+            {
+                <span data-error-for="txtdateoftransaction">@Model.Errors["txtdateoftransaction"]</span>
+            }
+            
+        </div>
+        <fieldset class="ui-scaffold-group" data-field-id="fracheque">
+            <legend>Cheque</legend>
+        </fieldset>
+        <fieldset class="ui-scaffold-group" data-field-id="frawithdrawn">
+            <legend>Wit Hdr Awn</legend>
+        </fieldset>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblaccountno">
+            <label for="lblaccountno">Account No</label>
+            <output id="lblaccountno" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblaccountno", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblaccounttype">
+            <label for="lblaccounttype">Account Type</label>
+            <output id="lblaccounttype" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblaccounttype", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblbalance">
+            <label for="lblbalance">Balance</label>
+            <output id="lblbalance" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblbalance", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcheque">
+            <label for="lblcheque">Cheque</label>
+            <output id="lblcheque" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcheque", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblchequeissued">
+            <label for="lblchequeissued">Cheque Issued</label>
+            <output id="lblchequeissued" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblchequeissued", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcustid">
+            <label for="lblcustid">Cus Tid</label>
+            <output id="lblcustid" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcustid", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcustomerid">
+            <label for="lblcustomerid">Customer ID</label>
+            <output id="lblcustomerid" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcustomerid", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbldate">
+            <label for="lbldate">Date</label>
+            <output id="lbldate" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbldate", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblfirstname">
+            <label for="lblfirstname">First Name</label>
+            <output id="lblfirstname" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblfirstname", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbllastname">
+            <label for="lbllastname">Last Name</label>
+            <output id="lbllastname" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbllastname", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbltag">
+            <label for="lbltag">Tag</label>
+            <output id="lbltag" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbltag", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbltypeofaccount">
+            <label for="lbltypeofaccount">Type Of Account</label>
+            <output id="lbltypeofaccount" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbltypeofaccount", "—")</output>
+        </div>
+        <fieldset class="ui-scaffold-choice" data-radio-group="yesno">
+            <legend>Yes Or No</legend>
+            <label class="ui-scaffold-choice-option">
+                <input type="radio" id="optno" name="yesno" value="No" />
+                <span>No</span>
+            </label>
+            <label class="ui-scaffold-choice-option">
+                <input type="radio" id="optyes" name="yesno" value="Yes" />
+                <span>Yes</span>
+            </label>
+        </fieldset>
+        <div class="ui-scaffold-field" data-field-id="txtaccountno">
+        <label for="txtaccountno">Account No</label>
+        <input type="number" id="txtaccountno" name="txtaccountno" placeholder="Enter account no" value="@Model.State.GetValueOrDefault("txtaccountno", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtaccountno"))
+            {
+                <span data-error-for="txtaccountno">@Model.Errors["txtaccountno"]</span>
+            }
+            <p class="ui-scaffold-hint">Enter digits only.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txttransactionid">
+        <label for="txttransactionid">Transaction ID</label>
+        <input type="number" id="txttransactionid" name="txttransactionid" placeholder="Optional transaction id" value="@Model.State.GetValueOrDefault("txttransactionid", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txttransactionid"))
+            {
+                <span data-error-for="txttransactionid">@Model.Errors["txttransactionid"]</span>
+            }
+            <p class="ui-scaffold-hint">Enter digits only.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtwithdrawn">
+        <label for="txtwithdrawn">Wit Hdr Awn</label>
+        <input type="text" id="txtwithdrawn" name="txtwithdrawn" placeholder="Optional wit hdr awn" value="@Model.State.GetValueOrDefault("txtwithdrawn", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtwithdrawn"))
+            {
+                <span data-error-for="txtwithdrawn">@Model.Errors["txtwithdrawn"]</span>
+            }
+            
+        </div>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
+    </form>
+</main>
