@@ -1,0 +1,124 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Replace ADO Data Access with Entity Framework Core",
+    "problem_statement": "Legacy ADO 2.5 COM objects are incompatible with .NET Core and pose security risks",
+    "scope": [
+      "data-environment",
+      "ado-reference"
+    ],
+    "risk_if_unaddressed": "Application cannot run on modern .NET runtime, potential SQL injection vulnerabilities",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema analysis",
+      "Connection string migration"
+    ],
+    "suggested_approach": "Create Entity Framework DbContext, map ADO Recordsets to POCO models, implement repository pattern",
+    "success_criteria": [
+      "All database operations use parameterized queries",
+      "Entity Framework migrations handle schema changes",
+      "Unit tests cover all data access operations"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 5,
+        "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Convert VB6 Forms to ASP.NET Core Razor Pages",
+    "problem_statement": "VB6 forms with MDI interface need web-compatible UI implementation",
+    "scope": [
+      "frm-customer",
+      "frm-deposit",
+      "frm-withdraw",
+      "frm-login",
+      "frm-statement",
+      "frm-checkbalance"
+    ],
+    "risk_if_unaddressed": "Complete loss of user interface functionality, business process disruption",
+    "effort": "XL",
+    "severity": "critical",
+    "dependencies": [
+      "UI behavior analysis",
+      "Event mapping documentation"
+    ],
+    "suggested_approach": "Create Razor Pages for each form, implement server-side validation, preserve business logic flow",
+    "success_criteria": [
+      "All form fields and validations preserved",
+      "User workflows maintain identical behavior",
+      "Responsive design works across devices"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 9,
+        "evidence": "Form=frmcustomer.frm"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement Modern Authentication System",
+    "problem_statement": "Custom VB6 login form lacks modern security standards and integration capabilities",
+    "scope": [
+      "frm-login"
+    ],
+    "risk_if_unaddressed": "Security vulnerabilities, compliance failures, integration limitations",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Identity provider selection",
+      "Security requirements analysis"
+    ],
+    "suggested_approach": "Implement ASP.NET Core Identity with JWT tokens, add MFA support, integrate with enterprise SSO",
+    "success_criteria": [
+      "Multi-factor authentication enabled",
+      "Session management with secure tokens",
+      "Integration with enterprise identity systems"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 14,
+        "evidence": "Form=frmLogin.frm"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Migrate Shared Module Logic",
+    "problem_statement": "VB6 standard module contains shared business logic that needs .NET implementation",
+    "scope": [
+      "mdl-module"
+    ],
+    "risk_if_unaddressed": "Loss of critical business logic, calculation errors, process failures",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Module code analysis",
+      "Business logic documentation"
+    ],
+    "suggested_approach": "Create .NET service classes, implement dependency injection, add comprehensive unit tests",
+    "success_criteria": [
+      "All business calculations preserved",
+      "Service layer properly abstracted",
+      "100% unit test coverage for business logic"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 7,
+        "evidence": "Module=Mdl; Mdl.bas"
+      }
+    ]
+  }
+]
