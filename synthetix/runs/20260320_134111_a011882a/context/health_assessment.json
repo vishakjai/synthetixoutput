@@ -1,0 +1,90 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Legacy VB6 application with critical modernization needs: COM dependencies, potential SQL injection risks, and outdated UI patterns requiring comprehensive refactoring",
+  "scores": {
+    "maintainability": 2,
+    "security": 1,
+    "reliability": 3,
+    "testability": 1
+  },
+  "hotspots": [
+    {
+      "scope": "ADO Data Access Layer",
+      "reason": "Legacy ADO 2.5 COM objects create deployment and security vulnerabilities",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0"
+        }
+      ]
+    },
+    {
+      "scope": "Form Event Handling",
+      "reason": "VB6 event-driven architecture requires complete restructuring for web-based implementation",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        }
+      ]
+    },
+    {
+      "scope": "Authentication System",
+      "reason": "Login form suggests custom authentication without modern security standards",
+      "severity": "high",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 14,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "scope": "Data Validation",
+      "reason": "Client-side VB6 validation needs server-side implementation with proper sanitization",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 19,
+          "evidence": "Begin VB.TextBox txtacno"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "COM Dependency Obsolescence",
+      "description": "ADO 2.5 and other COM references will not function in .NET Core environment",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "SQL Injection Vulnerability",
+      "description": "Legacy ADO patterns likely use string concatenation for SQL queries",
+      "severity": "critical",
+      "confidence": 0.85
+    },
+    {
+      "title": "Authentication Security Gap",
+      "description": "Custom VB6 authentication lacks modern security features like MFA, token-based auth",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "UI Behavior Preservation Challenge",
+      "description": "MDI interface and VB6 control events require careful mapping to web UI patterns",
+      "severity": "high",
+      "confidence": 0.9
+    }
+  ]
+}
