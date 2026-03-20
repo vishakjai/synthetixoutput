@@ -1,0 +1,193 @@
+{
+  "artifact_type": "ui_scaffold_package_v1",
+  "artifact_version": "1.0",
+  "screen_id": "frmcustomer",
+  "screen_name": "Customer profile onboarding and maintenance workflow",
+  "source_screen_contract_id": "frmcustomer",
+  "contract_version": "1.0.0",
+  "framework_target": "ASP.NET Core Razor Pages",
+  "route": "/ui/frmcustomer",
+  "target_view_path": "Pages/Frmcustomer/Index.cshtml",
+  "state_model": {
+    "screen_state_type": "FrmcustomerState",
+    "field_ids": [
+      "txtdateofopen",
+      "txtdob",
+      "cbosex",
+      "frame1",
+      "frame2",
+      "fracheque",
+      "franominee",
+      "frasearch",
+      "label2",
+      "label3",
+      "lblcheque",
+      "lbldateofopen",
+      "lblnominee",
+      "lblphoneno",
+      "lblpincode",
+      "lbladdress",
+      "lblbalance",
+      "lbldateofbirth",
+      "lblmiddlename",
+      "lblrelationship",
+      "lblsex",
+      "lbltype",
+      "lbltypeofaccount",
+      "optmajor",
+      "optminor",
+      "optno",
+      "optyes",
+      "txtaccountno",
+      "txtaddress",
+      "txtbalance",
+      "txtcustomerid",
+      "txtfirstname",
+      "txtlastname",
+      "txtmiddlename",
+      "txtmobileno",
+      "txtnominee",
+      "txtphoneno",
+      "txtpincode",
+      "txtrelationship",
+      "txtsearch"
+    ],
+    "action_ids": [
+      "action_save",
+      "action_cancel"
+    ]
+  },
+  "validation_map": [
+    {
+      "field_id": "lblbalance",
+      "rule_ids": [
+        "VR-lblbalance-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "lblmiddlename",
+      "rule_ids": [
+        "VR-lblmiddlename-REQUIRED",
+        "VR-lblmiddlename-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "lbltypeofaccount",
+      "rule_ids": [
+        "VR-lbltypeofaccount-REQUIRED",
+        "VR-lbltypeofaccount-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtaccountno",
+      "rule_ids": [
+        "VR-txtaccountno-REQUIRED",
+        "VR-txtaccountno-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtbalance",
+      "rule_ids": [
+        "VR-txtbalance-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtcustomerid",
+      "rule_ids": [
+        "VR-txtcustomerid-REQUIRED",
+        "VR-txtcustomerid-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtfirstname",
+      "rule_ids": [
+        "VR-txtfirstname-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "txtlastname",
+      "rule_ids": [
+        "VR-txtlastname-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "txtmiddlename",
+      "rule_ids": [
+        "VR-txtmiddlename-REQUIRED",
+        "VR-txtmiddlename-NUMERIC"
+      ]
+    }
+  ],
+  "event_wiring": [
+    {
+      "event_id": "evt_save",
+      "trigger": "action_save:on_click",
+      "step_count": 3
+    },
+    {
+      "event_id": "evt_cancel",
+      "trigger": "action_cancel:on_click",
+      "step_count": 1
+    }
+  ],
+  "navigation_map": {
+    "default_route": "/ui/frmcustomer",
+    "opens": [
+      {
+        "screen_id": "ui_frmcustomer_list",
+        "route": "/ui/frmcustomer",
+        "trigger_event_id": "evt_save",
+        "mode": "same_tab"
+      },
+      {
+        "screen_id": "previous",
+        "route": "",
+        "trigger_event_id": "evt_cancel",
+        "mode": "same_tab"
+      }
+    ]
+  },
+  "api_binding_map": [
+    {
+      "event_id": "evt_save",
+      "targets": [
+        "PUT /customer/closeacount"
+      ]
+    },
+    {
+      "event_id": "evt_cancel",
+      "targets": []
+    }
+  ],
+  "accessibility_hooks": {
+    "keyboard_navigation": true,
+    "label_association": true,
+    "tab_order_defined": true
+  },
+  "annotations": [
+    "UI_SCAFFOLD",
+    "VISUAL_DESIGN_OUT_OF_SCOPE"
+  ],
+  "files": [
+    {
+      "path": "Pages/Frmcustomer/Index.cshtml",
+      "kind": "view",
+      "purpose": "Screen view scaffold"
+    },
+    {
+      "path": "Pages/Frmcustomer/Index.cshtml.cs",
+      "kind": "page_model",
+      "purpose": "Screen state and event wiring"
+    },
+    {
+      "path": "Scaffolds/frmcustomer.ui_scaffold_package.json",
+      "kind": "artifact",
+      "purpose": "Serialized scaffold package for conformance checks"
+    },
+    {
+      "path": "Models/frmcustomerActions.json",
+      "kind": "metadata",
+      "purpose": "Action metadata derived from the Screen Contract"
+    }
+  ]
+}
