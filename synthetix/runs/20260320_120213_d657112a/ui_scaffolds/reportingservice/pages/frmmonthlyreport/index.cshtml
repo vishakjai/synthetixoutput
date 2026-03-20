@@ -4,68 +4,52 @@
     ViewData["Title"] = "Operational reporting and statement generation workflow";
 }
 <!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
-<main aria-label="Operational reporting and statement generation workflow">
-    <h1>Operational reporting and statement generation workflow</h1>
-    <p>Behavioral scaffold derived from Screen Contract <code>frmmonthlyreport</code>.</p>
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Operational reporting and statement generation workflow">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmmonthlyreport</p>
+        <h1>Operational reporting and statement generation workflow</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmmonthlyreport</code>.</p>
+    </header>
+    
     <form method="post">
-        <div class="ui-scaffold-field">
-            <label for="dtpfrom">D T P From</label>
-            <input id="dtpfrom" name="dtpfrom" value="@Model.State.GetValueOrDefault("dtpfrom", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="dtpfrom">
+        <label for="dtpfrom">D T P From</label>
+        <input type="text" id="dtpfrom" name="dtpfrom" placeholder="Optional d t p from" value="@Model.State.GetValueOrDefault("dtpfrom", string.Empty)" />
             @if (Model.Errors.ContainsKey("dtpfrom"))
             {
                 <span data-error-for="dtpfrom">@Model.Errors["dtpfrom"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="dtpto">D T P To</label>
-            <input id="dtpto" name="dtpto" value="@Model.State.GetValueOrDefault("dtpto", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="dtpto">
+        <label for="dtpto">D T P To</label>
+        <input type="text" id="dtpto" name="dtpto" placeholder="Optional d t p to" value="@Model.State.GetValueOrDefault("dtpto", string.Empty)" />
             @if (Model.Errors.ContainsKey("dtpto"))
             {
                 <span data-error-for="dtpto">@Model.Errors["dtpto"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="cmbcustomerid">Cmbcustomerid</label>
-            <input id="cmbcustomerid" name="cmbcustomerid" value="@Model.State.GetValueOrDefault("cmbcustomerid", string.Empty)" />
-            @if (Model.Errors.ContainsKey("cmbcustomerid"))
-            {
-                <span data-error-for="cmbcustomerid">@Model.Errors["cmbcustomerid"]</span>
-            }
+        <div class="ui-scaffold-field" data-field-id="cmbcustomerid">
+            <label for="cmbcustomerid">Customer ID</label>
+            <select id="cmbcustomerid" name="cmbcustomerid">
+                <option value="Select an option">Select an option</option>
+            </select>
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="frame1">Frame1</label>
-            <input id="frame1" name="frame1" value="@Model.State.GetValueOrDefault("frame1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("frame1"))
-            {
-                <span data-error-for="frame1">@Model.Errors["frame1"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblfrom">
+            <label for="lblfrom">From</label>
+            <output id="lblfrom" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblfrom", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="label1">Label1</label>
-            <input id="label1" name="label1" value="@Model.State.GetValueOrDefault("label1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("label1"))
-            {
-                <span data-error-for="label1">@Model.Errors["label1"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblto">
+            <label for="lblto">To</label>
+            <output id="lblto" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblto", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblfrom">Lbl From</label>
-            <input id="lblfrom" name="lblfrom" value="@Model.State.GetValueOrDefault("lblfrom", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblfrom"))
-            {
-                <span data-error-for="lblfrom">@Model.Errors["lblfrom"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lblto">Lbl To</label>
-            <input id="lblto" name="lblto" value="@Model.State.GetValueOrDefault("lblto", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblto"))
-            {
-                <span data-error-for="lblto">@Model.Errors["lblto"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-actions">
-        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
-        </div>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
     </form>
 </main>
