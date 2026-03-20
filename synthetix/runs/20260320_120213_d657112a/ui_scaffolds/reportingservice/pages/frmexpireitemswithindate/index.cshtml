@@ -4,61 +4,38 @@
     ViewData["Title"] = "Business workflow executed through event-driven UI controls";
 }
 <!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
-<main aria-label="Business workflow executed through event-driven UI controls">
-    <h1>Business workflow executed through event-driven UI controls</h1>
-    <p>Behavioral scaffold derived from Screen Contract <code>frmExpireItemsWithinDate</code>.</p>
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Business workflow executed through event-driven UI controls">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmExpireItemsWithinDate</p>
+        <h1>Business workflow executed through event-driven UI controls</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmExpireItemsWithinDate</code>.</p>
+    </header>
+    
     <form method="post">
-        <div class="ui-scaffold-field">
-            <label for="dtfrom">D T From</label>
-            <input id="dtfrom" name="dtfrom" value="@Model.State.GetValueOrDefault("dtfrom", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="dtfrom">
+        <label for="dtfrom">D T From</label>
+        <input type="text" id="dtfrom" name="dtfrom" placeholder="Optional d t from" value="@Model.State.GetValueOrDefault("dtfrom", string.Empty)" />
             @if (Model.Errors.ContainsKey("dtfrom"))
             {
                 <span data-error-for="dtfrom">@Model.Errors["dtfrom"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="dtto">D T To</label>
-            <input id="dtto" name="dtto" value="@Model.State.GetValueOrDefault("dtto", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="dtto">
+        <label for="dtto">D T To</label>
+        <input type="text" id="dtto" name="dtto" placeholder="Optional d t to" value="@Model.State.GetValueOrDefault("dtto", string.Empty)" />
             @if (Model.Errors.ContainsKey("dtto"))
             {
                 <span data-error-for="dtto">@Model.Errors["dtto"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="frame1">Frame1</label>
-            <input id="frame1" name="frame1" value="@Model.State.GetValueOrDefault("frame1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("frame1"))
-            {
-                <span data-error-for="frame1">@Model.Errors["frame1"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="frame2">Frame2</label>
-            <input id="frame2" name="frame2" value="@Model.State.GetValueOrDefault("frame2", string.Empty)" />
-            @if (Model.Errors.ContainsKey("frame2"))
-            {
-                <span data-error-for="frame2">@Model.Errors["frame2"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="label1">Label1</label>
-            <input id="label1" name="label1" value="@Model.State.GetValueOrDefault("label1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("label1"))
-            {
-                <span data-error-for="label1">@Model.Errors["label1"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="label2">Label2</label>
-            <input id="label2" name="label2" value="@Model.State.GetValueOrDefault("label2", string.Empty)" />
-            @if (Model.Errors.ContainsKey("label2"))
-            {
-                <span data-error-for="label2">@Model.Errors["label2"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-actions">
-        <button type="submit" formaction="?handler=EvtSave">Save</button>
-        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
-        </div>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-primary" type="submit" formaction="?handler=EvtSave"><span>Save</span><small>POST /reporting/expireitemswithindate, list</small></button>
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
     </form>
 </main>
