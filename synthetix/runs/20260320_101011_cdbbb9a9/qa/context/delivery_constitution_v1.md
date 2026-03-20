@@ -1,6 +1,6 @@
 # Delivery Constitution
 
-- Constitution ID: const-b55855bb9f76
+- Constitution ID: const-438e290110c9
 - Run ID: 20260320_101011_cdbbb9a9
 - Workspace/Project: default-workspace / default-project
 - Use Case: code_modernization
