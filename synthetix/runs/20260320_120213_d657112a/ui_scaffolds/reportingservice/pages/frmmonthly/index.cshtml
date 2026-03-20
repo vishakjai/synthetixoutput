@@ -1,0 +1,24 @@
+@page "/ui/frmmonthly"
+@model ReportingService.Pages.FrmMonthly.IndexModel
+@{
+    ViewData["Title"] = "Operational reporting and statement generation workflow";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<main aria-label="Operational reporting and statement generation workflow">
+    <h1>Operational reporting and statement generation workflow</h1>
+    <p>Behavioral scaffold derived from Screen Contract <code>frmMonthly</code>.</p>
+    <form method="post">
+        <div class="ui-scaffold-field">
+            <label for="cmbreport">Cmb Report</label>
+            <input id="cmbreport" name="cmbreport" value="@Model.State.GetValueOrDefault("cmbreport", string.Empty)" />
+            @if (Model.Errors.ContainsKey("cmbreport"))
+            {
+                <span data-error-for="cmbreport">@Model.Errors["cmbreport"]</span>
+            }
+        </div>
+        <div class="ui-scaffold-actions">
+        <button type="submit" formaction="?handler=EvtSave">Save</button>
+        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
+        </div>
+    </form>
+</main>
