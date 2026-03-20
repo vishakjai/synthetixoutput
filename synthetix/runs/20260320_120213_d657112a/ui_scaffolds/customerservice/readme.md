@@ -11,15 +11,14 @@ Deterministic UI scaffold slice generated from Screen Contracts.
 - Contract-conformance test hooks
 
 ## Out of scope
-- Visual styling
-- Design system choices
-- Typography, spacing, and colors
+- Client-specific visual design decisions
+- Brand customization beyond the shared Synthetix stylesheet
+- Pixel-perfect layout work or wireframes
 
 ## Included screens
 - Account closure and settlement workflow (/ui/frmcloseacount)
 - Customer profile onboarding and maintenance workflow (/ui/frmcustomer)
 - Account type maintenance and account setup workflow (/ui/frmsettings)
-- Account closure and settlement workflow (/ui/frmcloseaccount)
 
 ## Run
 ```bash
