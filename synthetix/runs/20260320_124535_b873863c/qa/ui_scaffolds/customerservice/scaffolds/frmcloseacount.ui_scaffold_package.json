@@ -1,0 +1,180 @@
+{
+  "artifact_type": "ui_scaffold_package_v1",
+  "artifact_version": "1.0",
+  "screen_id": "frmcloseacount",
+  "screen_name": "Account closure and settlement workflow",
+  "source_screen_contract_id": "frmcloseacount",
+  "contract_version": "1.0.0",
+  "framework_target": "ASP.NET Core Razor Pages",
+  "route": "/ui/frmcloseacount",
+  "target_view_path": "Pages/Frmcloseacount/Index.cshtml",
+  "state_model": {
+    "screen_state_type": "FrmcloseacountState",
+    "field_ids": [
+      "txtdateofopen",
+      "cbosex",
+      "frame1",
+      "frame2",
+      "fracheque",
+      "franominee",
+      "frasearch",
+      "lblcheque",
+      "lbldateofopen",
+      "lblnominee",
+      "lblphoneno",
+      "lblaccountno",
+      "lbladdress",
+      "lblbalance",
+      "lblcustid",
+      "lblcustomerid",
+      "lbldateofbirth",
+      "lblfirstname",
+      "lbllastname",
+      "lblmiddlename",
+      "lblrelationship",
+      "lblsex",
+      "lbltype",
+      "optmajor",
+      "optminor",
+      "optno",
+      "optyes",
+      "txtaccountno",
+      "txtaddress",
+      "txtbalance",
+      "txtcustid",
+      "txtcustomerid",
+      "txtdob",
+      "txtfirstname",
+      "txtlastname",
+      "txtmiddlename",
+      "txtmobileno",
+      "txtnominee",
+      "txtphoneno",
+      "txtpincode",
+      "txtrelationship"
+    ],
+    "action_ids": [
+      "action_save",
+      "action_cancel"
+    ]
+  },
+  "validation_map": [
+    {
+      "field_id": "txtaccountno",
+      "rule_ids": [
+        "VR-txtaccountno-REQUIRED",
+        "VR-txtaccountno-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtbalance",
+      "rule_ids": [
+        "VR-txtbalance-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtcustid",
+      "rule_ids": [
+        "VR-txtcustid-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtcustomerid",
+      "rule_ids": [
+        "VR-txtcustomerid-REQUIRED",
+        "VR-txtcustomerid-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtfirstname",
+      "rule_ids": [
+        "VR-txtfirstname-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "txtlastname",
+      "rule_ids": [
+        "VR-txtlastname-REQUIRED"
+      ]
+    },
+    {
+      "field_id": "txtmiddlename",
+      "rule_ids": [
+        "VR-txtmiddlename-REQUIRED",
+        "VR-txtmiddlename-NUMERIC"
+      ]
+    }
+  ],
+  "event_wiring": [
+    {
+      "event_id": "evt_save",
+      "trigger": "action_save:on_click",
+      "step_count": 3
+    },
+    {
+      "event_id": "evt_cancel",
+      "trigger": "action_cancel:on_click",
+      "step_count": 1
+    }
+  ],
+  "navigation_map": {
+    "default_route": "/ui/frmcloseacount",
+    "opens": [
+      {
+        "screen_id": "ui_frmcloseacount_list",
+        "route": "/ui/frmcloseacount",
+        "trigger_event_id": "evt_save",
+        "mode": "same_tab"
+      },
+      {
+        "screen_id": "previous",
+        "route": "",
+        "trigger_event_id": "evt_cancel",
+        "mode": "same_tab"
+      }
+    ]
+  },
+  "api_binding_map": [
+    {
+      "event_id": "evt_save",
+      "targets": [
+        "PUT /customer/closeacount"
+      ]
+    },
+    {
+      "event_id": "evt_cancel",
+      "targets": []
+    }
+  ],
+  "accessibility_hooks": {
+    "keyboard_navigation": true,
+    "label_association": true,
+    "tab_order_defined": true
+  },
+  "annotations": [
+    "UI_SCAFFOLD",
+    "VISUAL_DESIGN_OUT_OF_SCOPE"
+  ],
+  "files": [
+    {
+      "path": "Pages/Frmcloseacount/Index.cshtml",
+      "kind": "view",
+      "purpose": "Screen view scaffold"
+    },
+    {
+      "path": "Pages/Frmcloseacount/Index.cshtml.cs",
+      "kind": "page_model",
+      "purpose": "Screen state and event wiring"
+    },
+    {
+      "path": "Scaffolds/frmcloseacount.ui_scaffold_package.json",
+      "kind": "artifact",
+      "purpose": "Serialized scaffold package for conformance checks"
+    },
+    {
+      "path": "Models/frmcloseacountActions.json",
+      "kind": "metadata",
+      "purpose": "Action metadata derived from the Screen Contract"
+    }
+  ]
+}
