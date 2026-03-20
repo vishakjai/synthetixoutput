@@ -1,0 +1,249 @@
+{
+  "version": "scm-v1.0",
+  "summary": "VB6 banking application with 13 forms, ADO data access, and MS Access backend. Modern Python-based agent system for code modernization with FastAPI endpoints and comprehensive schema validation.",
+  "nodes": [
+    {
+      "id": "vb6-bank-app",
+      "type": "Service",
+      "name": "BANK_SYSTEM",
+      "metadata": {
+        "language": "VB6",
+        "startup_form": "frmSplash",
+        "company": "KENEX Ltd",
+        "version": "1.0.0"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    },
+    {
+      "id": "form-frmcheckbalance",
+      "type": "Component",
+      "name": "Check Balance Form",
+      "metadata": {
+        "form_type": "MDIChild",
+        "window_state": "Maximized",
+        "controls": [
+          "Frame",
+          "TextBox",
+          "CommandButton",
+          "ComboBox"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        }
+      ]
+    },
+    {
+      "id": "ado-data-objects",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0",
+      "metadata": {
+        "version": "2.5",
+        "guid": "{00000205-0000-0010-8000-00AA006D2EA4}"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#C:\\Program Files\\Common Files\\system\\ado\\msado25.tlb#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "modernization-agent-system",
+      "type": "Service",
+      "name": "Code Modernization Agent System",
+      "metadata": {
+        "language": "Python",
+        "framework": "FastAPI",
+        "agent_count": 12
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import Analyst"
+        }
+      ]
+    },
+    {
+      "id": "agent-analyst",
+      "type": "Component",
+      "name": "Analyst Agent",
+      "metadata": {
+        "role": "code_analysis",
+        "imports": 25
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "module:agents_analyst_py"
+        }
+      ]
+    },
+    {
+      "id": "agent-system-intelligence",
+      "type": "Component",
+      "name": "System Intelligence Agent",
+      "metadata": {
+        "role": "system_context_modeling",
+        "imports": 5
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "module:agents_system_intelligence_py"
+        }
+      ]
+    },
+    {
+      "id": "context-vault-api",
+      "type": "Endpoint",
+      "name": "Context Vault API",
+      "metadata": {
+        "framework": "FastAPI",
+        "routes": [
+          "GET",
+          "POST"
+        ]
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get("
+        }
+      ]
+    },
+    {
+      "id": "schema-validation",
+      "type": "Component",
+      "name": "JSON Schema Validation",
+      "metadata": {
+        "schema_count": 53,
+        "format": "JSON Schema"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json",
+          "line": 1,
+          "evidence": "top_level_keys=<nested_list>"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "vb6-bank-app",
+      "to": "ado-data-objects",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "reference_type": "COM",
+        "version": "2.5"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "vb6-bank-app",
+      "to": "form-frmcheckbalance",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "relationship": "form_container"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 15,
+          "evidence": "Form=closeacount.frm"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "modernization-agent-system",
+      "to": "agent-analyst",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import Analyst"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "modernization-agent-system",
+      "to": "agent-system-intelligence",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 10,
+          "evidence": "from .system_intelligence import SystemIntelligence"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "context-vault-api",
+      "to": "schema-validation",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "validation_framework": "JSON Schema"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json",
+          "line": 1,
+          "evidence": "schema validation structure"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database schema structure and table relationships",
+    "Authentication and authorization mechanisms in VB6 app",
+    "Business rule implementations in form event handlers",
+    "Data validation logic embedded in VB6 controls",
+    "Integration points between forms and external systems"
+  ]
+}
