@@ -1,0 +1,275 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Legacy VB6 banking application with 14 forms, ADO data access, and modernization toolchain. Contains critical UI forms (login, customer, deposit, withdraw, statement) with embedded SQL and event-driven architecture.",
+  "nodes": [
+    {
+      "id": "vb6-bank-app",
+      "type": "Service",
+      "name": "BANK_SYSTEM",
+      "metadata": {
+        "startup_form": "frmSplash",
+        "company": "KENEX Ltd",
+        "version": "1.0.0"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 18,
+          "evidence": "Title=\"BANK_SYSTEM\""
+        }
+      ]
+    },
+    {
+      "id": "frm-splash",
+      "type": "Component",
+      "name": "frmSplash",
+      "metadata": {
+        "form_type": "startup",
+        "ui_component": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 17,
+          "evidence": "Startup=\"frmSplash\""
+        }
+      ]
+    },
+    {
+      "id": "frm-login",
+      "type": "Component",
+      "name": "frmLogin",
+      "metadata": {
+        "form_type": "authentication",
+        "ui_component": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 10,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-customer",
+      "type": "Component",
+      "name": "frmcustomer",
+      "metadata": {
+        "form_type": "data_entry",
+        "ui_component": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-checkbalance",
+      "type": "Component",
+      "name": "frmcheckbalance",
+      "metadata": {
+        "form_type": "inquiry",
+        "ui_component": true,
+        "caption": "Check Balance",
+        "mdi_child": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        }
+      ]
+    },
+    {
+      "id": "ado-library",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0",
+      "metadata": {
+        "version": "2.5",
+        "guid": "{00000205-0000-0010-8000-00AA006D2EA4}"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 4,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#C:\\Program Files\\Common Files\\system\\ado\\msado25.tlb#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "data-environment",
+      "type": "Component",
+      "name": "deBank",
+      "metadata": {
+        "designer_type": "data_environment"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Designer=deBank.Dsr"
+        }
+      ]
+    },
+    {
+      "id": "modernization-agent-system",
+      "type": "Service",
+      "name": "DeliveryOS Agent System",
+      "metadata": {
+        "agent_count": 13,
+        "framework": "python",
+        "purpose": "code_modernization"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import AnalystAgent"
+        }
+      ]
+    },
+    {
+      "id": "agent-analyst",
+      "type": "Component",
+      "name": "AnalystAgent",
+      "metadata": {
+        "agent_type": "analysis",
+        "language": "python"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "class AnalystAgent"
+        }
+      ]
+    },
+    {
+      "id": "agent-ui-scaffold",
+      "type": "Component",
+      "name": "UIScaffoldAgent",
+      "metadata": {
+        "agent_type": "ui_generation",
+        "language": "python"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/ui_scaffold.py",
+          "line": 1,
+          "evidence": "class UIScaffoldAgent"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "vb6-bank-app",
+      "to": "ado-library",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "reference_type": "COM",
+        "version": "2.5"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 4,
+          "evidence": "Reference to Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "vb6-bank-app",
+      "to": "frm-splash",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "startup_form": true
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 17,
+          "evidence": "Startup=\"frmSplash\""
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "vb6-bank-app",
+      "to": "data-environment",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "designer_type": "data_environment"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Designer=deBank.Dsr"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "modernization-agent-system",
+      "to": "agent-analyst",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import AnalystAgent"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "modernization-agent-system",
+      "to": "agent-ui-scaffold",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 3,
+          "evidence": "from .ui_scaffold import UIScaffoldAgent"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database schema and connection strings for VB6 application",
+    "Authentication mechanism and user management system",
+    "Business rules for account operations (deposit, withdraw, balance checks)",
+    "Data validation rules and constraints",
+    "Report generation logic and templates",
+    "Error handling patterns across VB6 forms"
+  ]
+}
