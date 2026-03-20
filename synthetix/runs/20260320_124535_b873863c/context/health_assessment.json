@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "summary": "Legacy VB6 banking application with critical security and maintainability risks. Modernization framework shows good architectural patterns but requires integration planning.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 4,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Data Access Layer",
+      "reason": "ADO 2.5 dependency creates SQL injection vulnerability and limits scalability",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "scope": "Authentication System",
+      "reason": "frmLogin form lacks modern security patterns and session management",
+      "severity": "critical",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 19,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "scope": "Transaction Forms",
+      "reason": "Financial transaction forms (deposit/withdraw) lack audit trails and validation",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 16,
+          "evidence": "Form=frmdeposit.frm"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Legacy COM Dependency Lock-in",
+      "description": "Heavy reliance on VB6 COM components and ADO 2.5 creates modernization complexity and security vulnerabilities",
+      "severity": "high",
+      "confidence": 0.95
+    },
+    {
+      "title": "Missing Business Logic Documentation",
+      "description": "Critical banking business rules embedded in VB6 event handlers without documentation or tests",
+      "severity": "critical",
+      "confidence": 0.85
+    },
+    {
+      "title": "Data Contract Preservation Risk",
+      "description": "Unknown database schema and data validation rules risk data integrity during modernization",
+      "severity": "high",
+      "confidence": 0.9
+    }
+  ]
+}
