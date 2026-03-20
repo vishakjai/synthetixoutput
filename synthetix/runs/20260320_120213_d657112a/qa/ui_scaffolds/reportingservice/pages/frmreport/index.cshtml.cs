@@ -14,7 +14,7 @@ public sealed class IndexModel : PageModel
         State["screenId"] = "frmreport";
         foreach (var fieldId in new[] { "label1", "label2", "label5", "label6", "label7", "label8", "lblcustomerid" })
         {
-            DisplayValues[fieldId] = "Pending lookup";
+            DisplayValues[fieldId] = string.Empty;
         }
     }
 
@@ -39,7 +39,7 @@ public sealed class IndexModel : PageModel
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtcustomerid"]))
         {
-            Errors["txtcustomerid"] = "Customer Id is required.";
+            Errors["txtcustomerid"] = "Customer ID is required.";
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txttypeofaccount"]))
         {
