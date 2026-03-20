@@ -4,15 +4,20 @@
     ViewData["Title"] = "Transaction ledger management and adjustment workflow";
 }
 <!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
-<main aria-label="Transaction ledger management and adjustment workflow">
-    <h1>Transaction ledger management and adjustment workflow</h1>
-    <p>Behavioral scaffold derived from Screen Contract <code>frmtransaction</code>.</p>
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Transaction ledger management and adjustment workflow">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmtransaction</p>
+        <h1>Transaction ledger management and adjustment workflow</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmtransaction</code>.</p>
+    </header>
     
-
     <form method="post">
         <div class="ui-scaffold-field" data-field-id="lvwtransactions">
-            <label for="lvwtransactions">Lvw Transactions</label>
-            <input type="text" id="lvwtransactions" name="lvwtransactions" placeholder="Optional lvw transactions" value="@Model.State.GetValueOrDefault("lvwtransactions", string.Empty)" />
+        <label for="lvwtransactions">Lvw Transactions</label>
+        <input type="text" id="lvwtransactions" name="lvwtransactions" placeholder="Optional lvw transactions" value="@Model.State.GetValueOrDefault("lvwtransactions", string.Empty)" />
             @if (Model.Errors.ContainsKey("lvwtransactions"))
             {
                 <span data-error-for="lvwtransactions">@Model.Errors["lvwtransactions"]</span>
@@ -22,48 +27,30 @@
         <div class="ui-scaffold-field" data-field-id="cboaccno">
             <label for="cboaccno">Acc No</label>
             <select id="cboaccno" name="cboaccno">
-                <option value="Select an option">Select an option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
             </select>
             
         </div>
-        <fieldset class="ui-scaffold-group" data-field-id="frame1">
-            <legend>Group 1</legend>
-            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
-        </fieldset>
-        <fieldset class="ui-scaffold-group" data-field-id="frame3">
-            <legend>Group 3</legend>
-            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
-        </fieldset>
         <fieldset class="ui-scaffold-group" data-field-id="fraaccountno">
             <legend>Account No</legend>
-            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
         </fieldset>
-        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="label2">
-            <label for="label2">Label 2</label>
-            <output id="label2" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("label2", "Pending lookup")</output>
-            <p class="ui-scaffold-hint">Legacy display-only value.</p>
-        </div>
-        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="label5">
-            <label for="label5">Label 5</label>
-            <output id="label5" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("label5", "Pending lookup")</output>
-            <p class="ui-scaffold-hint">Legacy display-only value.</p>
-        </div>
         <fieldset class="ui-scaffold-choice" data-radio-group="option1">
-            <legend>Ion1</legend>
+            <legend>I On1</legend>
             <label class="ui-scaffold-choice-option">
-                <input type="radio" id="option1" name="option1" value="Ion1" />
-                <span>Ion1</span>
+                <input type="radio" id="option1" name="option1" value="I On1" />
+                <span>I On1</span>
             </label>
         </fieldset>
         <fieldset class="ui-scaffold-choice" data-radio-group="option2">
-            <legend>Ion2</legend>
+            <legend>I On2</legend>
             <label class="ui-scaffold-choice-option">
-                <input type="radio" id="option2" name="option2" value="Ion2" />
-                <span>Ion2</span>
+                <input type="radio" id="option2" name="option2" value="I On2" />
+                <span>I On2</span>
             </label>
         </fieldset>
-        <div class="ui-scaffold-actions">
-        <button type="submit" formaction="?handler=EvtSave">Save</button>
-        </div>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-primary" type="submit" formaction="?handler=EvtSave"><span>Save</span><small>POST /reporting/expireitemswithindate, list</small></button>
+        </nav>
     </form>
 </main>
