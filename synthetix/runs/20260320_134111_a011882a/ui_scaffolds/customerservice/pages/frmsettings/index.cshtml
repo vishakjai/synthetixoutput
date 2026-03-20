@@ -1,0 +1,82 @@
+@page "/ui/frmsettings"
+@model CustomerService.Pages.Frmsettings.IndexModel
+@{
+    ViewData["Title"] = "Account type maintenance and account setup workflow";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<main aria-label="Account type maintenance and account setup workflow">
+    <h1>Account type maintenance and account setup workflow</h1>
+    <p>Behavioral scaffold derived from Screen Contract <code>frmsettings</code>.</p>
+    
+
+    <form method="post">
+        <fieldset class="ui-scaffold-group" data-field-id="frasettings">
+            <legend>Settings</legend>
+            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
+        </fieldset>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="label1">
+            <label for="label1">Label 1</label>
+            <output id="label1" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("label1", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblfieldlabel">
+            <label for="lblfieldlabel">Field Label</label>
+            <output id="lblfieldlabel" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblfieldlabel", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblaccountid">
+            <label for="lblaccountid">Account Id</label>
+            <output id="lblaccountid" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblaccountid", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtaccountid">
+            <label for="txtaccountid">Account Id</label>
+            <input type="number" id="txtaccountid" name="txtaccountid" placeholder="Enter account id" value="@Model.State.GetValueOrDefault("txtaccountid", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtaccountid"))
+            {
+                <span data-error-for="txtaccountid">@Model.Errors["txtaccountid"]</span>
+            }
+            <p class="ui-scaffold-hint">Txtaccountid is required.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtaccounttype">
+            <label for="txtaccounttype">Account Type</label>
+            <input type="number" id="txtaccounttype" name="txtaccounttype" placeholder="Enter account type" value="@Model.State.GetValueOrDefault("txtaccounttype", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtaccounttype"))
+            {
+                <span data-error-for="txtaccounttype">@Model.Errors["txtaccounttype"]</span>
+            }
+            <p class="ui-scaffold-hint">Txtaccounttype is required.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtcheque">
+            <label for="txtcheque">Cheque</label>
+            <input type="text" id="txtcheque" name="txtcheque" placeholder="Optional cheque" value="@Model.State.GetValueOrDefault("txtcheque", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtcheque"))
+            {
+                <span data-error-for="txtcheque">@Model.Errors["txtcheque"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtinterestrate">
+            <label for="txtinterestrate">Interestrate</label>
+            <input type="number" id="txtinterestrate" name="txtinterestrate" placeholder="Optional interestrate" value="@Model.State.GetValueOrDefault("txtinterestrate", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtinterestrate"))
+            {
+                <span data-error-for="txtinterestrate">@Model.Errors["txtinterestrate"]</span>
+            }
+            <p class="ui-scaffold-hint">Txtinterestrate must be numeric.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtnocheque">
+            <label for="txtnocheque">No Cheque</label>
+            <input type="text" id="txtnocheque" name="txtnocheque" placeholder="Optional no cheque" value="@Model.State.GetValueOrDefault("txtnocheque", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtnocheque"))
+            {
+                <span data-error-for="txtnocheque">@Model.Errors["txtnocheque"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-actions">
+        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
+        <button type="submit" formaction="?handler=EvtSave">Save</button>
+        </div>
+    </form>
+</main>
