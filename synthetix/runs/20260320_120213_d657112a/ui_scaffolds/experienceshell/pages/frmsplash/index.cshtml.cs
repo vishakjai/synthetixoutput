@@ -7,13 +7,18 @@ public sealed class IndexModel : PageModel
 {
     public Dictionary<string, string> State { get; } = new(StringComparer.OrdinalIgnoreCase);
     public Dictionary<string, string> Errors { get; } = new(StringComparer.OrdinalIgnoreCase);
+    public Dictionary<string, string> DisplayValues { get; } = new(StringComparer.OrdinalIgnoreCase);
 
     public void OnGet()
     {
         State["screenId"] = "frmSplash";
+        foreach (var fieldId in new[] { "lblcompany", "lblcompanyproduct", "lblcopyright", "lbllicenseto", "lblwarning", "lbldisplay" })
+        {
+            DisplayValues[fieldId] = string.Empty;
+        }
     }
 
-    public IActionResult OnPost()
+    private IActionResult HandleEvent(string eventId)
     {
         Errors.Clear();
         // No contract validation rules were provided.
@@ -21,7 +26,18 @@ public sealed class IndexModel : PageModel
         {
             return Page();
         }
-        State["lastAction"] = "submitted";
-        return Redirect("/ui/frmsplash");
+        switch (eventId)
+        {
+            case "evt_cancel":
+                State["lastTriggeredEvent"] = "evt_cancel";
+                State["lastNavigationTarget"] = "/";
+                break;
+            default:
+                State["lastTriggeredEvent"] = eventId;
+                break;
+        }
+        return Page();
     }
+
+    public IActionResult OnPostEvtCancel() => HandleEvent("evt_cancel");
 }
