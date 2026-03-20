@@ -11,9 +11,9 @@ Deterministic UI scaffold slice generated from Screen Contracts.
 - Contract-conformance test hooks
 
 ## Out of scope
-- Visual styling
-- Design system choices
-- Typography, spacing, and colors
+- Client-specific visual design decisions
+- Brand customization beyond the shared Synthetix stylesheet
+- Pixel-perfect layout work or wireframes
 
 ## Included screens
 - Business workflow executed through event-driven UI controls (/ui/frmwithindate)
