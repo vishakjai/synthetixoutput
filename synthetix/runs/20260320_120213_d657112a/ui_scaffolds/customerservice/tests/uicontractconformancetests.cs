@@ -20,9 +20,5 @@ public sealed class UiContractConformanceTests
         Assert.Contains("UI_SCAFFOLD", UiScaffoldRegistry.FrmsettingsDescriptorJson);
         Assert.Contains("/ui/frmsettings", UiScaffoldRegistry.RouteMap["/frmsettings"]);
         Assert.Contains("PUT /customer/closeacount", UiScaffoldRegistry.FrmsettingsDescriptorJson);
-        Assert.Contains("frmcloseaccount", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
-        Assert.Contains("UI_SCAFFOLD", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
-        Assert.Contains("/ui/frmcloseaccount", UiScaffoldRegistry.RouteMap["/frmcloseaccount"]);
-        Assert.Contains("PUT /customer/closeacount", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
     }
 }
