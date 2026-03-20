@@ -1,0 +1,62 @@
+@page "/ui/form1"
+@model ReportingService.Pages.Form1.IndexModel
+@{
+    ViewData["Title"] = "Business workflow executed through event-driven UI controls";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<main aria-label="Business workflow executed through event-driven UI controls">
+    <h1>Business workflow executed through event-driven UI controls</h1>
+    <p>Behavioral scaffold derived from Screen Contract <code>Form1</code>.</p>
+    
+    <form method="post">
+        <div class="ui-scaffold-field" data-field-id="dtpicker1">
+            <label for="dtpicker1">D T Picker1</label>
+            <input type="text" id="dtpicker1" name="dtpicker1" placeholder="Optional d t picker1" value="@Model.State.GetValueOrDefault("dtpicker1", string.Empty)" />
+            @if (Model.Errors.ContainsKey("dtpicker1"))
+            {
+                <span data-error-for="dtpicker1">@Model.Errors["dtpicker1"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="dtpicker2">
+            <label for="dtpicker2">D T Picker2</label>
+            <input type="text" id="dtpicker2" name="dtpicker2" placeholder="Optional d t picker2" value="@Model.State.GetValueOrDefault("dtpicker2", string.Empty)" />
+            @if (Model.Errors.ContainsKey("dtpicker2"))
+            {
+                <span data-error-for="dtpicker2">@Model.Errors["dtpicker2"]</span>
+            }
+            
+        </div>
+        <fieldset class="ui-scaffold-group" data-field-id="frame1">
+            <legend>Group 1</legend>
+            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
+        </fieldset>
+        <fieldset class="ui-scaffold-group" data-field-id="frame2">
+            <legend>Group 2</legend>
+            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
+        </fieldset>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="label1">
+            <label for="label1">Label 1</label>
+            <output id="label1" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("label1", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="label2">
+            <label for="label2">Label 2</label>
+            <output id="label2" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("label2", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="shape5">
+            <label for="shape5">Shape5</label>
+            <input type="text" id="shape5" name="shape5" placeholder="Optional shape5" value="@Model.State.GetValueOrDefault("shape5", string.Empty)" />
+            @if (Model.Errors.ContainsKey("shape5"))
+            {
+                <span data-error-for="shape5">@Model.Errors["shape5"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-actions">
+        <button type="submit" formaction="?handler=EvtSave">Save</button>
+        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
+        </div>
+    </form>
+</main>
