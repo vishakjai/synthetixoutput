@@ -1,0 +1,31 @@
+@page "/ui/frmdaily"
+@model ReportingService.Pages.Frmdaily.IndexModel
+@{
+    ViewData["Title"] = "Business workflow executed through event-driven UI controls";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<main aria-label="Business workflow executed through event-driven UI controls">
+    <h1>Business workflow executed through event-driven UI controls</h1>
+    <p>Behavioral scaffold derived from Screen Contract <code>frmdaily</code>.</p>
+    <form method="post">
+        <div class="ui-scaffold-field">
+            <label for="txtdaily">Txtdaily</label>
+            <input id="txtdaily" name="txtdaily" value="@Model.State.GetValueOrDefault("txtdaily", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtdaily"))
+            {
+                <span data-error-for="txtdaily">@Model.Errors["txtdaily"]</span>
+            }
+        </div>
+        <div class="ui-scaffold-field">
+            <label for="fradaily">Fradaily</label>
+            <input id="fradaily" name="fradaily" value="@Model.State.GetValueOrDefault("fradaily", string.Empty)" />
+            @if (Model.Errors.ContainsKey("fradaily"))
+            {
+                <span data-error-for="fradaily">@Model.Errors["fradaily"]</span>
+            }
+        </div>
+        <div class="ui-scaffold-actions">
+        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
+        </div>
+    </form>
+</main>
