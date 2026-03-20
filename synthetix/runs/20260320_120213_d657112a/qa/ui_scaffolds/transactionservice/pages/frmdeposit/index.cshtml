@@ -4,237 +4,127 @@
     ViewData["Title"] = "Deposit capture and balance posting workflow";
 }
 <!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
-<main aria-label="Deposit capture and balance posting workflow">
-    <h1>Deposit capture and balance posting workflow</h1>
-    <p>Behavioral scaffold derived from Screen Contract <code>frmdeposit</code>.</p>
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Deposit capture and balance posting workflow">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmdeposit</p>
+        <h1>Deposit capture and balance posting workflow</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmdeposit</code>.</p>
+    </header>
+    
     <form method="post">
-        <div class="ui-scaffold-field">
-            <label for="txtdateoftransaction">Txtdateoftransaction</label>
-            <input id="txtdateoftransaction" name="txtdateoftransaction" value="@Model.State.GetValueOrDefault("txtdateoftransaction", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="txtdateoftransaction">
+        <label for="txtdateoftransaction">Date Of Transaction</label>
+        <input type="date" id="txtdateoftransaction" name="txtdateoftransaction" placeholder="Optional date of transaction" value="@Model.State.GetValueOrDefault("txtdateoftransaction", string.Empty)" />
             @if (Model.Errors.ContainsKey("txtdateoftransaction"))
             {
                 <span data-error-for="txtdateoftransaction">@Model.Errors["txtdateoftransaction"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="frame1">Frame1</label>
-            <input id="frame1" name="frame1" value="@Model.State.GetValueOrDefault("frame1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("frame1"))
-            {
-                <span data-error-for="frame1">@Model.Errors["frame1"]</span>
-            }
+        <fieldset class="ui-scaffold-group" data-field-id="fracheque">
+            <legend>Cheque</legend>
+        </fieldset>
+        <fieldset class="ui-scaffold-group" data-field-id="fraext">
+            <legend>Ext</legend>
+        </fieldset>
+        <fieldset class="ui-scaffold-group" data-field-id="framode">
+            <legend>Mode</legend>
+        </fieldset>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblaccount">
+            <label for="lblaccount">Account</label>
+            <output id="lblaccount" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblaccount", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="frame2">Frame2</label>
-            <input id="frame2" name="frame2" value="@Model.State.GetValueOrDefault("frame2", string.Empty)" />
-            @if (Model.Errors.ContainsKey("frame2"))
-            {
-                <span data-error-for="frame2">@Model.Errors["frame2"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblbalance">
+            <label for="lblbalance">Balance</label>
+            <output id="lblbalance" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblbalance", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="frame3">Frame3</label>
-            <input id="frame3" name="frame3" value="@Model.State.GetValueOrDefault("frame3", string.Empty)" />
-            @if (Model.Errors.ContainsKey("frame3"))
-            {
-                <span data-error-for="frame3">@Model.Errors["frame3"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblbankname">
+            <label for="lblbankname">Bank Name</label>
+            <output id="lblbankname" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblbankname", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="fracheque">Fracheque</label>
-            <input id="fracheque" name="fracheque" value="@Model.State.GetValueOrDefault("fracheque", string.Empty)" />
-            @if (Model.Errors.ContainsKey("fracheque"))
-            {
-                <span data-error-for="fracheque">@Model.Errors["fracheque"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblchequeissued">
+            <label for="lblchequeissued">Cheque Issued</label>
+            <output id="lblchequeissued" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblchequeissued", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="fraext">Fraext</label>
-            <input id="fraext" name="fraext" value="@Model.State.GetValueOrDefault("fraext", string.Empty)" />
-            @if (Model.Errors.ContainsKey("fraext"))
-            {
-                <span data-error-for="fraext">@Model.Errors["fraext"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcustomer">
+            <label for="lblcustomer">Customer</label>
+            <output id="lblcustomer" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcustomer", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="framode">Framode</label>
-            <input id="framode" name="framode" value="@Model.State.GetValueOrDefault("framode", string.Empty)" />
-            @if (Model.Errors.ContainsKey("framode"))
-            {
-                <span data-error-for="framode">@Model.Errors["framode"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcustomerid">
+            <label for="lblcustomerid">Customer ID</label>
+            <output id="lblcustomerid" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcustomerid", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="label2">Label2</label>
-            <input id="label2" name="label2" value="@Model.State.GetValueOrDefault("label2", string.Empty)" />
-            @if (Model.Errors.ContainsKey("label2"))
-            {
-                <span data-error-for="label2">@Model.Errors["label2"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbldate">
+            <label for="lbldate">Date</label>
+            <output id="lbldate" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbldate", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblfieldlabel">Lbl Field Label</label>
-            <input id="lblfieldlabel" name="lblfieldlabel" value="@Model.State.GetValueOrDefault("lblfieldlabel", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblfieldlabel"))
-            {
-                <span data-error-for="lblfieldlabel">@Model.Errors["lblfieldlabel"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblfirstname">
+            <label for="lblfirstname">First Name</label>
+            <output id="lblfirstname" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblfirstname", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblaccount">Lblaccount</label>
-            <input id="lblaccount" name="lblaccount" value="@Model.State.GetValueOrDefault("lblaccount", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblaccount"))
-            {
-                <span data-error-for="lblaccount">@Model.Errors["lblaccount"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbllastname">
+            <label for="lbllastname">Last Name</label>
+            <output id="lbllastname" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbllastname", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblbalance">Lblbalance</label>
-            <input id="lblbalance" name="lblbalance" value="@Model.State.GetValueOrDefault("lblbalance", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblbalance"))
-            {
-                <span data-error-for="lblbalance">@Model.Errors["lblbalance"]</span>
-            }
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbltypeofaccount">
+            <label for="lbltypeofaccount">Type Of Account</label>
+            <output id="lbltypeofaccount" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbltypeofaccount", "—")</output>
         </div>
-        <div class="ui-scaffold-field">
-            <label for="lblbankname">Lblbankname</label>
-            <input id="lblbankname" name="lblbankname" value="@Model.State.GetValueOrDefault("lblbankname", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblbankname"))
-            {
-                <span data-error-for="lblbankname">@Model.Errors["lblbankname"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lblchequeissued">Lblchequeissued</label>
-            <input id="lblchequeissued" name="lblchequeissued" value="@Model.State.GetValueOrDefault("lblchequeissued", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblchequeissued"))
-            {
-                <span data-error-for="lblchequeissued">@Model.Errors["lblchequeissued"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lblcustomer">Lblcustomer</label>
-            <input id="lblcustomer" name="lblcustomer" value="@Model.State.GetValueOrDefault("lblcustomer", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblcustomer"))
-            {
-                <span data-error-for="lblcustomer">@Model.Errors["lblcustomer"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lblcustomerid">Lblcustomerid</label>
-            <input id="lblcustomerid" name="lblcustomerid" value="@Model.State.GetValueOrDefault("lblcustomerid", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblcustomerid"))
-            {
-                <span data-error-for="lblcustomerid">@Model.Errors["lblcustomerid"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lbldate">Lbldate</label>
-            <input id="lbldate" name="lbldate" value="@Model.State.GetValueOrDefault("lbldate", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbldate"))
-            {
-                <span data-error-for="lbldate">@Model.Errors["lbldate"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lblfirst">Lblfirst</label>
-            <input id="lblfirst" name="lblfirst" value="@Model.State.GetValueOrDefault("lblfirst", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblfirst"))
-            {
-                <span data-error-for="lblfirst">@Model.Errors["lblfirst"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lblfirstname">Lblfirstname</label>
-            <input id="lblfirstname" name="lblfirstname" value="@Model.State.GetValueOrDefault("lblfirstname", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lblfirstname"))
-            {
-                <span data-error-for="lblfirstname">@Model.Errors["lblfirstname"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lbllast">Lbllast</label>
-            <input id="lbllast" name="lbllast" value="@Model.State.GetValueOrDefault("lbllast", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbllast"))
-            {
-                <span data-error-for="lbllast">@Model.Errors["lbllast"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lbllastname">Lbllastname</label>
-            <input id="lbllastname" name="lbllastname" value="@Model.State.GetValueOrDefault("lbllastname", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbllastname"))
-            {
-                <span data-error-for="lbllastname">@Model.Errors["lbllastname"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="lbltypeofaccount">Lbltypeofaccount</label>
-            <input id="lbltypeofaccount" name="lbltypeofaccount" value="@Model.State.GetValueOrDefault("lbltypeofaccount", string.Empty)" />
-            @if (Model.Errors.ContainsKey("lbltypeofaccount"))
-            {
-                <span data-error-for="lbltypeofaccount">@Model.Errors["lbltypeofaccount"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="optcash">Optcash</label>
-            <input id="optcash" name="optcash" value="@Model.State.GetValueOrDefault("optcash", string.Empty)" />
-            @if (Model.Errors.ContainsKey("optcash"))
-            {
-                <span data-error-for="optcash">@Model.Errors["optcash"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="optcheque">Optcheque</label>
-            <input id="optcheque" name="optcheque" value="@Model.State.GetValueOrDefault("optcheque", string.Empty)" />
-            @if (Model.Errors.ContainsKey("optcheque"))
-            {
-                <span data-error-for="optcheque">@Model.Errors["optcheque"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="optno">Optno</label>
-            <input id="optno" name="optno" value="@Model.State.GetValueOrDefault("optno", string.Empty)" />
-            @if (Model.Errors.ContainsKey("optno"))
-            {
-                <span data-error-for="optno">@Model.Errors["optno"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="optyes">Optyes</label>
-            <input id="optyes" name="optyes" value="@Model.State.GetValueOrDefault("optyes", string.Empty)" />
-            @if (Model.Errors.ContainsKey("optyes"))
-            {
-                <span data-error-for="optyes">@Model.Errors["optyes"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-field">
-            <label for="txtbankname">Txtbankname</label>
-            <input id="txtbankname" name="txtbankname" value="@Model.State.GetValueOrDefault("txtbankname", string.Empty)" />
+        <fieldset class="ui-scaffold-choice" data-radio-group="paymentmode">
+            <legend>Payment Mode</legend>
+            <label class="ui-scaffold-choice-option">
+                <input type="radio" id="optcash" name="paymentmode" value="Cash" />
+                <span>Cash</span>
+            </label>
+            <label class="ui-scaffold-choice-option">
+                <input type="radio" id="optcheque" name="paymentmode" value="Cheque" />
+                <span>Cheque</span>
+            </label>
+        </fieldset>
+        <fieldset class="ui-scaffold-choice" data-radio-group="yesno">
+            <legend>Yes Or No</legend>
+            <label class="ui-scaffold-choice-option">
+                <input type="radio" id="optno" name="yesno" value="No" />
+                <span>No</span>
+            </label>
+            <label class="ui-scaffold-choice-option">
+                <input type="radio" id="optyes" name="yesno" value="Yes" />
+                <span>Yes</span>
+            </label>
+        </fieldset>
+        <div class="ui-scaffold-field" data-field-id="txtbankname">
+        <label for="txtbankname">Bank Name</label>
+        <input type="text" id="txtbankname" name="txtbankname" placeholder="Enter bank name" value="@Model.State.GetValueOrDefault("txtbankname", string.Empty)" />
             @if (Model.Errors.ContainsKey("txtbankname"))
             {
                 <span data-error-for="txtbankname">@Model.Errors["txtbankname"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="txtchequeno">Txtchequeno</label>
-            <input id="txtchequeno" name="txtchequeno" value="@Model.State.GetValueOrDefault("txtchequeno", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="txtchequeno">
+        <label for="txtchequeno">Cheque No</label>
+        <input type="text" id="txtchequeno" name="txtchequeno" placeholder="Optional cheque no" value="@Model.State.GetValueOrDefault("txtchequeno", string.Empty)" />
             @if (Model.Errors.ContainsKey("txtchequeno"))
             {
                 <span data-error-for="txtchequeno">@Model.Errors["txtchequeno"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="txtsearchaccountno">Txtsearchaccountno</label>
-            <input id="txtsearchaccountno" name="txtsearchaccountno" value="@Model.State.GetValueOrDefault("txtsearchaccountno", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="txtsearchaccountno">
+        <label for="txtsearchaccountno">Search Account No</label>
+        <input type="number" id="txtsearchaccountno" name="txtsearchaccountno" placeholder="Enter search account no" value="@Model.State.GetValueOrDefault("txtsearchaccountno", string.Empty)" />
             @if (Model.Errors.ContainsKey("txtsearchaccountno"))
             {
                 <span data-error-for="txtsearchaccountno">@Model.Errors["txtsearchaccountno"]</span>
             }
+            <p class="ui-scaffold-hint">Enter digits only.</p>
         </div>
-        <div class="ui-scaffold-actions">
-        <button type="submit" formaction="?handler=EvtSave">Save</button>
-        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
-        </div>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-primary" type="submit" formaction="?handler=EvtSave"><span>Save</span><small>POST /transactions/deposit, list</small></button>
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
     </form>
 </main>
