@@ -4,28 +4,31 @@
     ViewData["Title"] = "Business workflow executed through event-driven UI controls";
 }
 <!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
-<main aria-label="Business workflow executed through event-driven UI controls">
-    <h1>Business workflow executed through event-driven UI controls</h1>
-    <p>Behavioral scaffold derived from Screen Contract <code>frmdaily</code>.</p>
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Business workflow executed through event-driven UI controls">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmdaily</p>
+        <h1>Business workflow executed through event-driven UI controls</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmdaily</code>.</p>
+    </header>
+    
     <form method="post">
-        <div class="ui-scaffold-field">
-            <label for="txtdaily">Txtdaily</label>
-            <input id="txtdaily" name="txtdaily" value="@Model.State.GetValueOrDefault("txtdaily", string.Empty)" />
+        <div class="ui-scaffold-field" data-field-id="txtdaily">
+        <label for="txtdaily">Da Ily</label>
+        <input type="text" id="txtdaily" name="txtdaily" placeholder="Optional da ily" value="@Model.State.GetValueOrDefault("txtdaily", string.Empty)" />
             @if (Model.Errors.ContainsKey("txtdaily"))
             {
                 <span data-error-for="txtdaily">@Model.Errors["txtdaily"]</span>
             }
+            
         </div>
-        <div class="ui-scaffold-field">
-            <label for="fradaily">Fradaily</label>
-            <input id="fradaily" name="fradaily" value="@Model.State.GetValueOrDefault("fradaily", string.Empty)" />
-            @if (Model.Errors.ContainsKey("fradaily"))
-            {
-                <span data-error-for="fradaily">@Model.Errors["fradaily"]</span>
-            }
-        </div>
-        <div class="ui-scaffold-actions">
-        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
-        </div>
+        <fieldset class="ui-scaffold-group" data-field-id="fradaily">
+            <legend>Da Ily</legend>
+        </fieldset>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
     </form>
 </main>
