@@ -23,19 +23,19 @@ public sealed class IndexModel : PageModel
         Errors.Clear();
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtcustomerid"]))
         {
-            Errors["txtcustomerid"] = "Customerid is required.";
+            Errors["txtcustomerid"] = "Customer Id is required.";
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtfirstname"]))
         {
-            Errors["txtfirstname"] = "Firstname is required.";
+            Errors["txtfirstname"] = "First Name is required.";
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtlastname"]))
         {
-            Errors["txtlastname"] = "Lastname is required.";
+            Errors["txtlastname"] = "Last Name is required.";
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txttypeofaccount"]))
         {
-            Errors["txttypeofaccount"] = "Typeofaccount is required.";
+            Errors["txttypeofaccount"] = "Type Of Account is required.";
         }
         if (Errors.Count > 0)
         {
