@@ -1,0 +1,202 @@
+{
+  "header": {
+    "artifact_id": "24258fc79d4e4a9ca49b4d2af937a684",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-20T07:27:29.296597+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260320_072624_02113145",
+      "stage_id": "context_layer",
+      "task_id": "2c36f41c7e614406905dc20099b29d7f"
+    },
+    "parents": [],
+    "digest": "sha256:895aa8bc6cf7105406b04f07cb549231ea75b79de98653a188ef549fa798d3a9",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260320_072624_02113145",
+      "bundle_version": "20260320T072729Z_20260320_072624_02113145"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The legacy system has maintainability and security challenges typical of VB6 applications."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 40,
+      "security": 30,
+      "reliability": 50,
+      "testability": 20
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: frmcheckbalance",
+      "description": "Legacy VB6 form with potential UI/UX issues when ported to C#.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "frmcheckbalance"
+        ],
+        "paths": [
+          "frmcheckbalance"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/close account.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Security Risk",
+      "description": "Potential for SQL injection due to concatenated SQL strings.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-1",
+      "title": "Modernize frmcustomer to C#",
+      "priority": "P2",
+      "business_value": "Loss of functionality and inability to maintain the form.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-1"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "frmcheckbalance"
+      ],
+      "plan": [
+        "Use a C# WinForms template to recreate the form and ensure all event handlers are correctly mapped"
+      ],
+      "acceptance_criteria": [
+        "Form loads correctly in C# application.",
+        "All buttons and fields function as expected."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [],
+    "stabilization": [
+      "rb-1"
+    ],
+    "modernization": [
+      "rb-1"
+    ]
+  }
+}
