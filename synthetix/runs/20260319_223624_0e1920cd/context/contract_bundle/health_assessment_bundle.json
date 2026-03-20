@@ -1,0 +1,601 @@
+{
+  "header": {
+    "artifact_id": "686d6bf571304438b5063a91431f5e1a",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-20T21:28:07.915216+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260319_223624_0e1920cd",
+      "stage_id": "context_layer",
+      "task_id": "93c67d364fcc42068a599f60ecae7b88"
+    },
+    "parents": [],
+    "digest": "sha256:8603b0eb092989b38b1fc18cb8fe648892cf6755820c53f1e4de14835474453a",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260319_223624_0e1920cd",
+      "bundle_version": "20260320T212807Z_20260319_223624_0e1920cd"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Legacy VB6 application with significant modernization challenges. Modern Python agent system shows good architectural patterns but lacks comprehensive testing coverage."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 3,
+      "testability": 2
+    },
+    "finding_count": 8,
+    "backlog_count": 4
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: VB6 Data Access Layer",
+      "description": "Direct ADO usage without parameterized queries creates SQL injection risk",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "VB6 Data Access Layer"
+        ],
+        "paths": [
+          "VB6 Data Access Layer"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/BANK.vbp"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: VB6 Form Event Handlers",
+      "description": "Business logic embedded in UI event handlers reduces testability and maintainability",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "VB6 Form Event Handlers"
+        ],
+        "paths": [
+          "VB6 Form Event Handlers"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/close account.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: Python Agent Error Handling",
+      "description": "Inconsistent error handling patterns across agent implementations",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Python Agent Error Handling"
+        ],
+        "paths": [
+          "Python Agent Error Handling"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/analyst.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-004",
+      "type": "hotspot",
+      "severity": "low",
+      "title": "Hotspot: Schema Validation Coverage",
+      "description": "53 schema files indicate comprehensive validation but may create maintenance overhead",
+      "risk": {
+        "likelihood": 2,
+        "impact": 2,
+        "score": 4,
+        "tier": "low",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Schema Validation Coverage"
+        ],
+        "paths": [
+          "Schema Validation Coverage"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "SQL Injection Vulnerability",
+      "description": "VB6 application uses ADO without parameterized queries, creating potential for SQL injection attacks",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Data Migration Complexity",
+      "description": "MS Access to PostgreSQL migration requires careful schema mapping and data type conversion",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Business Logic Preservation",
+      "description": "VB6 form event handlers contain undocumented business rules that must be preserved during modernization",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-004",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Agent System Scalability",
+      "description": "Python agent system lacks distributed processing capabilities for large-scale modernization projects",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001-sql-injection-fix",
+      "title": "Implement Parameterized Queries",
+      "priority": "P0",
+      "business_value": "Critical security vulnerability allowing unauthorized data access and manipulation",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Database schema analysis",
+        "Query pattern identification"
+      ],
+      "plan": [
+        "Replace concatenated SQL with parameterized queries using Command objects with Parameters collection"
+      ],
+      "acceptance_criteria": [
+        "All SQL operations use parameterized queries",
+        "Static analysis confirms no string concatenation in SQL statements",
+        "Security testing validates injection prevention"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-002-business-logic-extraction",
+      "title": "Extract Business Logic from UI Forms",
+      "priority": "P1",
+      "business_value": "Business logic loss during modernization, reduced maintainability, no unit testing capability",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Form analysis completion",
+        "Business rule documentation"
+      ],
+      "plan": [
+        "Create separate business logic classes and move validation/calculation logic from form events"
+      ],
+      "acceptance_criteria": [
+        "Business logic separated into testable classes",
+        "Form events only handle UI interactions",
+        "Unit tests cover all business rules",
+        "Documentation captures all extracted rules"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003-database-migration-plan",
+      "title": "MS Access to PostgreSQL Migration Strategy",
+      "priority": "P1",
+      "business_value": "Data loss, performance degradation, application compatibility issues",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "XL",
+        "hours_range": [
+          80,
+          160
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Current schema analysis",
+        "PostgreSQL environment setup"
+      ],
+      "plan": [
+        "Use automated migration tools with manual validation for complex data types and relationships"
+      ],
+      "acceptance_criteria": [
+        "Complete schema migration with preserved relationships",
+        "All data migrated without loss",
+        "Performance benchmarks meet or exceed current system",
+        "Rollback plan validated and documented"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-004-agent-testing-framework",
+      "title": "Implement Comprehensive Agent Testing",
+      "priority": "P2",
+      "business_value": "Unreliable modernization results, difficult debugging, regression introduction",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-004"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Testing framework selection",
+        "Mock data preparation"
+      ],
+      "plan": [
+        "Implement pytest-based testing with mocking for external dependencies and comprehensive coverage reporting"
+      ],
+      "acceptance_criteria": [
+        "90%+ code coverage across all agent modules",
+        "Integration tests for all API endpoints",
+        "Automated testing in CI/CD pipeline",
+        "Performance benchmarks for agent operations"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001-sql-injection-fix",
+      "rb-002-business-logic-extraction",
+      "rb-003-database-migration-plan"
+    ],
+    "stabilization": [
+      "rb-002-business-logic-extraction",
+      "rb-003-database-migration-plan",
+      "rb-004-agent-testing-framework"
+    ],
+    "modernization": [
+      "rb-001-sql-injection-fix",
+      "rb-002-business-logic-extraction",
+      "rb-003-database-migration-plan",
+      "rb-004-agent-testing-framework"
+    ]
+  }
+}
