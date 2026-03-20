@@ -8,10 +8,10 @@ public sealed class UiContractConformanceTests
     [Fact]
     public void Screen_contract_descriptors_include_ui_scaffold_annotations()
     {
-        Assert.Contains("frmcloseacount", UiScaffoldRegistry.FrmcloseacountDescriptorJson);
-        Assert.Contains("UI_SCAFFOLD", UiScaffoldRegistry.FrmcloseacountDescriptorJson);
-        Assert.Contains("/ui/frmcloseacount", UiScaffoldRegistry.RouteMap["/frmcloseacount"]);
-        Assert.Contains("PUT /customer/closeacount", UiScaffoldRegistry.FrmcloseacountDescriptorJson);
+        Assert.Contains("frmcloseaccount", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
+        Assert.Contains("UI_SCAFFOLD", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
+        Assert.Contains("/ui/frmcloseaccount", UiScaffoldRegistry.RouteMap["/frmcloseaccount"]);
+        Assert.Contains("PUT /customer/closeacount", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
         Assert.Contains("frmcustomer", UiScaffoldRegistry.FrmcustomerDescriptorJson);
         Assert.Contains("UI_SCAFFOLD", UiScaffoldRegistry.FrmcustomerDescriptorJson);
         Assert.Contains("/ui/frmcustomer", UiScaffoldRegistry.RouteMap["/frmcustomer"]);
@@ -20,9 +20,5 @@ public sealed class UiContractConformanceTests
         Assert.Contains("UI_SCAFFOLD", UiScaffoldRegistry.FrmsettingsDescriptorJson);
         Assert.Contains("/ui/frmsettings", UiScaffoldRegistry.RouteMap["/frmsettings"]);
         Assert.Contains("PUT /customer/closeacount", UiScaffoldRegistry.FrmsettingsDescriptorJson);
-        Assert.Contains("frmcloseaccount", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
-        Assert.Contains("UI_SCAFFOLD", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
-        Assert.Contains("/ui/frmcloseaccount", UiScaffoldRegistry.RouteMap["/frmcloseaccount"]);
-        Assert.Contains("PUT /customer/closeacount", UiScaffoldRegistry.FrmcloseaccountDescriptorJson);
     }
 }
