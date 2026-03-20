@@ -23,11 +23,11 @@ public sealed class IndexModel : PageModel
         Errors.Clear();
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtaccountid"]))
         {
-            Errors["txtaccountid"] = "Accountid is required.";
+            Errors["txtaccountid"] = "Account Id is required.";
         }
         if (!Request.HasFormContentType || string.IsNullOrWhiteSpace(Request.Form["txtaccounttype"]))
         {
-            Errors["txtaccounttype"] = "Accounttype is required.";
+            Errors["txtaccounttype"] = "Account Type is required.";
         }
         if (Errors.Count > 0)
         {
