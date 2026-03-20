@@ -7,14 +7,15 @@
 <main aria-label="Operational reporting and statement generation workflow">
     <h1>Operational reporting and statement generation workflow</h1>
     <p>Behavioral scaffold derived from Screen Contract <code>frmMonthly</code>.</p>
+    
+
     <form method="post">
-        <div class="ui-scaffold-field">
-            <label for="cmbreport">Cmb Report</label>
-            <input id="cmbreport" name="cmbreport" value="@Model.State.GetValueOrDefault("cmbreport", string.Empty)" />
-            @if (Model.Errors.ContainsKey("cmbreport"))
-            {
-                <span data-error-for="cmbreport">@Model.Errors["cmbreport"]</span>
-            }
+        <div class="ui-scaffold-field" data-field-id="cmbreport">
+            <label for="cmbreport">Report</label>
+            <select id="cmbreport" name="cmbreport">
+                <option value="Select an option">Select an option</option>
+            </select>
+            
         </div>
         <div class="ui-scaffold-actions">
         <button type="submit" formaction="?handler=EvtSave">Save</button>
