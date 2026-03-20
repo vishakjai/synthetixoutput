@@ -1,0 +1,130 @@
+[
+  {
+    "id": "rb-001-sql-injection-fix",
+    "title": "Implement Parameterized Queries",
+    "problem_statement": "VB6 application uses concatenated SQL strings creating SQL injection vulnerabilities",
+    "scope": [
+      "VB6 Data Access Layer",
+      "ADO Recordset Operations"
+    ],
+    "risk_if_unaddressed": "Critical security vulnerability allowing unauthorized data access and manipulation",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema analysis",
+      "Query pattern identification"
+    ],
+    "suggested_approach": "Replace concatenated SQL with parameterized queries using Command objects with Parameters collection",
+    "success_criteria": [
+      "All SQL operations use parameterized queries",
+      "Static analysis confirms no string concatenation in SQL statements",
+      "Security testing validates injection prevention"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 5,
+        "evidence": "ADO 2.0 Library reference indicates direct SQL usage"
+      }
+    ]
+  },
+  {
+    "id": "rb-002-business-logic-extraction",
+    "title": "Extract Business Logic from UI Forms",
+    "problem_statement": "Business rules embedded in VB6 form event handlers are not testable or reusable",
+    "scope": [
+      "frmcheckbalance",
+      "frmdeposit",
+      "frmwithdraw",
+      "All VB6 Forms"
+    ],
+    "risk_if_unaddressed": "Business logic loss during modernization, reduced maintainability, no unit testing capability",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "Form analysis completion",
+      "Business rule documentation"
+    ],
+    "suggested_approach": "Create separate business logic classes and move validation/calculation logic from form events",
+    "success_criteria": [
+      "Business logic separated into testable classes",
+      "Form events only handle UI interactions",
+      "Unit tests cover all business rules",
+      "Documentation captures all extracted rules"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "BankApp1/close account.frm",
+        "line": 20,
+        "evidence": "CommandButton with embedded logic"
+      }
+    ]
+  },
+  {
+    "id": "rb-003-database-migration-plan",
+    "title": "MS Access to PostgreSQL Migration Strategy",
+    "problem_statement": "Database migration from MS Access to PostgreSQL requires schema conversion and data type mapping",
+    "scope": [
+      "Database Schema",
+      "Data Types",
+      "Stored Procedures",
+      "Relationships"
+    ],
+    "risk_if_unaddressed": "Data loss, performance degradation, application compatibility issues",
+    "effort": "XL",
+    "severity": "high",
+    "dependencies": [
+      "Current schema analysis",
+      "PostgreSQL environment setup"
+    ],
+    "suggested_approach": "Use automated migration tools with manual validation for complex data types and relationships",
+    "success_criteria": [
+      "Complete schema migration with preserved relationships",
+      "All data migrated without loss",
+      "Performance benchmarks meet or exceed current system",
+      "Rollback plan validated and documented"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 5,
+        "evidence": "ADO reference suggests MS Access backend"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-agent-testing-framework",
+    "title": "Implement Comprehensive Agent Testing",
+    "problem_statement": "Python agent system lacks comprehensive unit and integration testing coverage",
+    "scope": [
+      "All Agent Modules",
+      "API Endpoints",
+      "Schema Validation"
+    ],
+    "risk_if_unaddressed": "Unreliable modernization results, difficult debugging, regression introduction",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "Testing framework selection",
+      "Mock data preparation"
+    ],
+    "suggested_approach": "Implement pytest-based testing with mocking for external dependencies and comprehensive coverage reporting",
+    "success_criteria": [
+      "90%+ code coverage across all agent modules",
+      "Integration tests for all API endpoints",
+      "Automated testing in CI/CD pipeline",
+      "Performance benchmarks for agent operations"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "Complex agent with 25 imports needs comprehensive testing"
+      }
+    ]
+  }
+]
