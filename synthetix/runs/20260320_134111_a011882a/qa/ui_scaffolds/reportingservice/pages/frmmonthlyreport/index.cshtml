@@ -1,0 +1,61 @@
+@page "/ui/frmmonthlyreport"
+@model ReportingService.Pages.Frmmonthlyreport.IndexModel
+@{
+    ViewData["Title"] = "Operational reporting and statement generation workflow";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<main aria-label="Operational reporting and statement generation workflow">
+    <h1>Operational reporting and statement generation workflow</h1>
+    <p>Behavioral scaffold derived from Screen Contract <code>frmmonthlyreport</code>.</p>
+    
+
+    <form method="post">
+        <div class="ui-scaffold-field" data-field-id="dtpfrom">
+            <label for="dtpfrom">D T P From</label>
+            <input type="text" id="dtpfrom" name="dtpfrom" placeholder="Optional d t p from" value="@Model.State.GetValueOrDefault("dtpfrom", string.Empty)" />
+            @if (Model.Errors.ContainsKey("dtpfrom"))
+            {
+                <span data-error-for="dtpfrom">@Model.Errors["dtpfrom"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="dtpto">
+            <label for="dtpto">D T P To</label>
+            <input type="text" id="dtpto" name="dtpto" placeholder="Optional d t p to" value="@Model.State.GetValueOrDefault("dtpto", string.Empty)" />
+            @if (Model.Errors.ContainsKey("dtpto"))
+            {
+                <span data-error-for="dtpto">@Model.Errors["dtpto"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="cmbcustomerid">
+            <label for="cmbcustomerid">Customer Id</label>
+            <select id="cmbcustomerid" name="cmbcustomerid">
+                <option value="Select an option">Select an option</option>
+            </select>
+            
+        </div>
+        <fieldset class="ui-scaffold-group" data-field-id="frame1">
+            <legend>Group 1</legend>
+            <p class="ui-scaffold-hint">Legacy grouping container preserved for behavioral structure.</p>
+        </fieldset>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="label1">
+            <label for="label1">Label 1</label>
+            <output id="label1" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("label1", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblfrom">
+            <label for="lblfrom">From</label>
+            <output id="lblfrom" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblfrom", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblto">
+            <label for="lblto">To</label>
+            <output id="lblto" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblto", "Pending lookup")</output>
+            <p class="ui-scaffold-hint">Legacy display-only value.</p>
+        </div>
+        <div class="ui-scaffold-actions">
+        <button type="submit" formaction="?handler=EvtCancel">Cancel</button>
+        </div>
+    </form>
+</main>
