@@ -1,0 +1,128 @@
+[
+  {
+    "id": "RB-001",
+    "title": "Extract and Document VB6 Business Rules",
+    "problem_statement": "Critical banking business logic is embedded in VB6 form event handlers without documentation, creating risk during modernization",
+    "scope": [
+      "frmdeposit.frm",
+      "frmwithdraw.frm",
+      "frmLogin.frm",
+      "frmcustomer.frm"
+    ],
+    "risk_if_unaddressed": "Loss of critical business logic during modernization leading to functional regressions and compliance violations",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "VB6 source code analysis",
+      "Business stakeholder interviews"
+    ],
+    "suggested_approach": "Use VB6 AST parsing to extract event handlers, create business rule catalog with test cases",
+    "success_criteria": [
+      "All form event handlers documented with business rules",
+      "Test cases created for each business rule",
+      "Stakeholder validation of extracted rules"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 16,
+        "evidence": "Form=frmdeposit.frm"
+      }
+    ]
+  },
+  {
+    "id": "RB-002",
+    "title": "Database Schema Discovery and Documentation",
+    "problem_statement": "Database schema, connection strings, and data contracts are unknown, creating risk for data integrity during modernization",
+    "scope": [
+      "deBank.Dsr",
+      "ADO connections",
+      "Data binding"
+    ],
+    "risk_if_unaddressed": "Data corruption, loss of referential integrity, and failed modernization due to unknown data dependencies",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Database access",
+      "Data Environment analysis"
+    ],
+    "suggested_approach": "Reverse engineer database schema from Data Environment, create data dictionary and migration scripts",
+    "success_criteria": [
+      "Complete database schema documented",
+      "Data relationships mapped",
+      "Migration and rollback scripts created"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 13,
+        "evidence": "Designer=deBank.Dsr"
+      }
+    ]
+  },
+  {
+    "id": "RB-003",
+    "title": "Security Model Modernization",
+    "problem_statement": "VB6 authentication and authorization model lacks modern security patterns and audit capabilities",
+    "scope": [
+      "frmLogin.frm",
+      "User permissions",
+      "Session management"
+    ],
+    "risk_if_unaddressed": "Security vulnerabilities, compliance violations, and unauthorized access to banking functions",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "Authentication requirements",
+      "Compliance standards"
+    ],
+    "suggested_approach": "Implement OAuth2/JWT authentication, role-based access control, and audit logging",
+    "success_criteria": [
+      "Modern authentication implemented",
+      "Role-based permissions defined",
+      "Audit trail for all transactions"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 19,
+        "evidence": "Form=frmLogin.frm"
+      }
+    ]
+  },
+  {
+    "id": "RB-004",
+    "title": "VB6 to Web UI Component Mapping",
+    "problem_statement": "13 VB6 forms need systematic mapping to modern web components while preserving user experience and functionality",
+    "scope": [
+      "All .frm files",
+      "Control event handlers",
+      "Data binding"
+    ],
+    "risk_if_unaddressed": "Inconsistent user experience, missing functionality, and extended development timeline",
+    "effort": "XL",
+    "severity": "medium",
+    "dependencies": [
+      "UI framework selection",
+      "Component library",
+      "Business rule extraction"
+    ],
+    "suggested_approach": "Create form-to-component mapping matrix, develop reusable component templates, implement progressive migration",
+    "success_criteria": [
+      "All forms mapped to web components",
+      "User experience parity achieved",
+      "Component library created"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/close account.frm",
+        "line": 3,
+        "evidence": "Begin VB.Form frmcheckbalance"
+      }
+    ]
+  }
+]
