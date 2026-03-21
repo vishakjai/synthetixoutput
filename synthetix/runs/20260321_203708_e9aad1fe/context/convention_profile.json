@@ -1,0 +1,114 @@
+{
+  "version": "cp-v1.0-2d0cf721c226bb3e",
+  "summary": "Python-centric multi-agent architecture with FastAPI services, JSON schema validation, and Docker containerization. Strong separation of concerns with specialized agent modules.",
+  "rules": [
+    {
+      "id": "naming_001",
+      "category": "naming",
+      "rule": "Agent modules follow snake_case naming with descriptive suffixes (_agent.py)",
+      "confidence": 0.95,
+      "examples": [
+        "agents/analyst.py",
+        "agents/architect.py",
+        "agents/developer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent snake_case naming across all agent modules"
+        }
+      ]
+    },
+    {
+      "id": "api_001",
+      "category": "api",
+      "rule": "REST endpoints use FastAPI decorators with explicit HTTP methods",
+      "confidence": 0.85,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI decorator patterns detected"
+        },
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI router patterns detected"
+        }
+      ]
+    },
+    {
+      "id": "testing_001",
+      "category": "testing",
+      "rule": "JSON schema validation enforced through dedicated schema files",
+      "confidence": 0.9,
+      "examples": [
+        ".deliveryos/schemas/agent_result.schema.json",
+        ".deliveryos/schemas/context_bundle.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive JSON schema collection for validation"
+        }
+      ]
+    },
+    {
+      "id": "auth_001",
+      "category": "auth",
+      "rule": "Tenant-based memory isolation with workspace/client hierarchy",
+      "confidence": 0.8,
+      "examples": [
+        "team_data/tenant_memory/default-workspace/default-client/"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "team_data/tenant_memory/",
+          "line": 1,
+          "evidence": "Hierarchical tenant memory structure detected"
+        }
+      ]
+    },
+    {
+      "id": "logging_001",
+      "category": "logging",
+      "rule": "Configuration-driven approach with YAML pipeline specifications",
+      "confidence": 0.85,
+      "examples": [
+        ".deliveryos/pipeline/pipeline_spec.yaml"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "YAML-based pipeline configuration detected"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent error handling patterns across all agent modules",
+    "Add comprehensive logging configuration for production deployment",
+    "Establish API versioning strategy for FastAPI endpoints",
+    "Implement authentication middleware for tenant isolation",
+    "Add comprehensive unit test coverage for agent modules"
+  ],
+  "scaffold_templates": [
+    "FastAPI service template with router configuration",
+    "Agent module template with base class inheritance",
+    "JSON schema template for data validation",
+    "Docker multi-stage build template",
+    "Tenant memory storage template"
+  ]
+}
