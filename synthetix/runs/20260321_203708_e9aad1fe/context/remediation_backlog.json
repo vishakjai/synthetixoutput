@@ -1,0 +1,157 @@
+[
+  {
+    "id": "rb_001",
+    "title": "Align System Architecture with Banking Objectives",
+    "problem_statement": "Current system is a modernization platform, not a banking application. Need to either scope banking components or clarify business objectives.",
+    "scope": [
+      "system_architecture",
+      "business_requirements"
+    ],
+    "risk_if_unaddressed": "Complete project failure due to architecture-objective mismatch",
+    "effort": "XL",
+    "severity": "critical",
+    "dependencies": [
+      "business_requirements_clarification"
+    ],
+    "suggested_approach": "Conduct requirements analysis to determine if banking components should be added to current system or if objectives need rescoping",
+    "success_criteria": [
+      "Clear alignment between system capabilities and business objectives",
+      "Defined scope for banking component integration",
+      "Updated architecture documentation"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No banking components found in 290 files despite banking modernization objectives"
+      }
+    ]
+  },
+  {
+    "id": "rb_002",
+    "title": "Implement Banking-Grade Authentication",
+    "problem_statement": "No authentication mechanisms suitable for retail banking customer access and regulatory compliance",
+    "scope": [
+      "authentication",
+      "security",
+      "compliance"
+    ],
+    "risk_if_unaddressed": "Regulatory violations, security breaches, customer data exposure",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "rb_001"
+    ],
+    "suggested_approach": "Implement OAuth2/OIDC with MFA, session management, and audit logging for banking compliance",
+    "success_criteria": [
+      "Multi-factor authentication implemented",
+      "Session management with timeout controls",
+      "Audit trail for all authentication events",
+      "Compliance with banking security standards"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/security_engineer.py",
+        "line": 1,
+        "evidence": "Security agent exists but no banking auth implementation"
+      }
+    ]
+  },
+  {
+    "id": "rb_003",
+    "title": "Replace File Storage with Banking Database",
+    "problem_statement": "JSON file storage insufficient for banking transaction integrity, ACID compliance, and regulatory requirements",
+    "scope": [
+      "data_persistence",
+      "transaction_integrity",
+      "compliance"
+    ],
+    "risk_if_unaddressed": "Data corruption, transaction failures, regulatory violations, audit failures",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "rb_001"
+    ],
+    "suggested_approach": "Implement PostgreSQL or similar ACID-compliant database with encryption at rest and in transit",
+    "success_criteria": [
+      "ACID-compliant database implemented",
+      "Data encryption at rest and in transit",
+      "Transaction logging and audit trails",
+      "Backup and recovery procedures"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "team_data/tenant_memory/",
+        "line": 1,
+        "evidence": "File-based JSON storage detected, inappropriate for banking"
+      }
+    ]
+  },
+  {
+    "id": "rb_004",
+    "title": "Develop Core Banking Transaction Services",
+    "problem_statement": "Missing all core banking services: deposits, withdrawals, balance inquiry, interest calculation",
+    "scope": [
+      "transaction_processing",
+      "banking_services",
+      "api_endpoints"
+    ],
+    "risk_if_unaddressed": "Cannot fulfill basic banking functionality requirements",
+    "effort": "XL",
+    "severity": "high",
+    "dependencies": [
+      "rb_001",
+      "rb_003"
+    ],
+    "suggested_approach": "Develop RESTful banking services with transaction validation, balance management, and interest calculation engines",
+    "success_criteria": [
+      "Deposit service with validation and limits",
+      "Withdrawal service with balance checks",
+      "Real-time balance inquiry API",
+      "Interest calculation engine",
+      "Transaction history and reporting"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No banking transaction services found in system"
+      }
+    ]
+  },
+  {
+    "id": "rb_005",
+    "title": "Define Legacy VB6 Migration Strategy",
+    "problem_statement": "No clear path for migrating from legacy VB6 banking systems to current Python architecture",
+    "scope": [
+      "legacy_migration",
+      "data_migration",
+      "integration"
+    ],
+    "risk_if_unaddressed": "Cannot retire legacy systems or migrate existing banking operations",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "rb_001"
+    ],
+    "suggested_approach": "Analyze legacy VB6 systems, design migration strategy, implement data transformation and integration layers",
+    "success_criteria": [
+      "Legacy system analysis completed",
+      "Data migration strategy defined",
+      "Integration layer for gradual migration",
+      "Rollback procedures established"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "business_objectives",
+        "line": 1,
+        "evidence": "OCX retirement mentioned but no legacy components found in system"
+      }
+    ]
+  }
+]
