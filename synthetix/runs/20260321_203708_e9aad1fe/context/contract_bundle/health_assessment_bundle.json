@@ -1,9 +1,9 @@
 {
   "header": {
-    "artifact_id": "835bca887e11469abaeba752fd22fd86",
+    "artifact_id": "96ac106b8b0b4d3ca96d720534ee191f",
     "artifact_type": "health_assessment_bundle",
     "schema_version": "1.0.0",
-    "created_at": "2026-03-21T20:38:21.492288+00:00",
+    "created_at": "2026-03-21T20:40:26.143517+00:00",
     "repo_ref": {
       "provider": "other",
       "repo_url": "app",
@@ -23,26 +23,26 @@
       ],
       "run_id": "20260321_203708_e9aad1fe",
       "stage_id": "context_layer",
-      "task_id": "c8ae3c205c5b4b3b9781a56339c906fa"
+      "task_id": "3140b2ada4704d21a5e5d3b4ff458b5d"
     },
     "parents": [],
-    "digest": "sha256:2128bfc5cf24c6c9a190f7d9eb8ce021426a7bcb09fb49d36f49efc4626497f9",
+    "digest": "sha256:30cded813f4a022ea12335cdfedef055f1a53268cc95a7201f288c6df8e242bf",
     "labels": {
       "pipeline": "synthetix",
       "run_id": "20260321_203708_e9aad1fe",
-      "bundle_version": "20260321T203821Z_20260321_203708_e9aad1fe"
+      "bundle_version": "20260321T204026Z_20260321_203708_e9aad1fe"
     }
   },
   "summary": {
     "overall_risk": {
-      "likelihood": 4,
-      "impact": 4,
-      "score": 16,
-      "tier": "high",
-      "rationale": "elevated risk posture"
+      "likelihood": 3,
+      "impact": 3,
+      "score": 9,
+      "tier": "medium",
+      "rationale": "moderate risk posture"
     },
     "key_themes": [
-      "Modern Python architecture with good separation of concerns but critical gaps for banking modernization objectives. Missing legacy VB6 integration components and banking-specific security controls."
+      "Moderately healthy modernization platform with strong architectural foundations but lacking legacy system integration clarity. High modularity and schema-driven design provide good maintainability, but missing banking domain specifics and unclear OCX retirement path present risks."
     ],
     "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
     "notes": "Generated from SIL health assessment and remediation backlog"
@@ -50,9 +50,9 @@
   "signals": {
     "scores": {
       "maintainability": 75,
-      "security": 45,
-      "reliability": 60,
-      "testability": 55
+      "security": 65,
+      "reliability": 70,
+      "testability": 60
     },
     "finding_count": 8,
     "backlog_count": 5
@@ -61,28 +61,28 @@
     {
       "id": "F-HOT-001",
       "type": "hotspot",
-      "severity": "high",
-      "title": "Hotspot: Legacy Integration Gap",
-      "description": "No VB6 or legacy banking components detected despite business objectives requiring retail banking modernization",
+      "severity": "medium",
+      "title": "Hotspot: agents/analyst.py",
+      "description": "High complexity with 25 imports suggests potential over-coupling and single responsibility violations",
       "risk": {
-        "likelihood": 4,
-        "impact": 4,
-        "score": 16,
-        "tier": "high",
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
         "rationale": "hotspot severity"
       },
       "affected": {
         "scm_node_ids": [
-          "Legacy Integration Gap"
+          "agents/analyst.py"
         ],
         "paths": [
-          "Legacy Integration Gap"
+          "agents/analyst.py"
         ]
       },
       "evidence": [
         {
           "kind": "file_span",
-          "file": "repository_scan"
+          "file": "agents/analyst.py"
         }
       ],
       "suggested_remediation": "Prioritize stabilization and targeted tests",
@@ -93,13 +93,13 @@
           40
         ],
         "confidence": {
-          "score": 0.95,
+          "score": 0.8,
           "rationale": "estimated from artifact metadata",
           "signals": []
         }
       },
       "confidence": {
-        "score": 0.95,
+        "score": 0.8,
         "rationale": "from hotspot analysis",
         "signals": []
       }
@@ -108,8 +108,8 @@
       "id": "F-HOT-002",
       "type": "hotspot",
       "severity": "high",
-      "title": "Hotspot: Authentication Security",
-      "description": "No banking-grade authentication or authorization mechanisms detected for customer onboarding and account access",
+      "title": "Hotspot: team_data/tenant_memory/",
+      "description": "File-based tenant isolation may not scale and lacks transactional guarantees for banking operations",
       "risk": {
         "likelihood": 4,
         "impact": 4,
@@ -119,56 +119,10 @@
       },
       "affected": {
         "scm_node_ids": [
-          "Authentication Security"
+          "team_data/tenant_memory/"
         ],
         "paths": [
-          "Authentication Security"
-        ]
-      },
-      "evidence": [
-        {
-          "kind": "file_span",
-          "file": "agents/security_engineer.py"
-        }
-      ],
-      "suggested_remediation": "Prioritize stabilization and targeted tests",
-      "effort": {
-        "tshirt": "M",
-        "hours_range": [
-          16,
-          40
-        ],
-        "confidence": {
-          "score": 0.9,
-          "rationale": "estimated from artifact metadata",
-          "signals": []
-        }
-      },
-      "confidence": {
-        "score": 0.9,
-        "rationale": "from hotspot analysis",
-        "signals": []
-      }
-    },
-    {
-      "id": "F-HOT-003",
-      "type": "hotspot",
-      "severity": "high",
-      "title": "Hotspot: Data Persistence",
-      "description": "File-based JSON storage insufficient for banking transaction integrity and ACID compliance",
-      "risk": {
-        "likelihood": 4,
-        "impact": 4,
-        "score": 16,
-        "tier": "high",
-        "rationale": "hotspot severity"
-      },
-      "affected": {
-        "scm_node_ids": [
-          "Data Persistence"
-        ],
-        "paths": [
-          "Data Persistence"
+          "team_data/tenant_memory/"
         ]
       },
       "evidence": [
@@ -197,11 +151,11 @@
       }
     },
     {
-      "id": "F-HOT-004",
+      "id": "F-HOT-003",
       "type": "hotspot",
       "severity": "high",
-      "title": "Hotspot: Transaction Processing",
-      "description": "No deposit, withdrawal, or balance inquiry transaction handlers detected",
+      "title": "Hotspot: utils/context_vault.py",
+      "description": "Context vault endpoints lack visible authentication and authorization controls",
       "risk": {
         "likelihood": 4,
         "impact": 4,
@@ -211,16 +165,16 @@
       },
       "affected": {
         "scm_node_ids": [
-          "Transaction Processing"
+          "utils/context_vault.py"
         ],
         "paths": [
-          "Transaction Processing"
+          "utils/context_vault.py"
         ]
       },
       "evidence": [
         {
           "kind": "file_span",
-          "file": "repository_scan"
+          "file": "utils/context_vault.py"
         }
       ],
       "suggested_remediation": "Prioritize stabilization and targeted tests",
@@ -231,13 +185,59 @@
           40
         ],
         "confidence": {
-          "score": 0.95,
+          "score": 0.7,
           "rationale": "estimated from artifact metadata",
           "signals": []
         }
       },
       "confidence": {
-        "score": 0.95,
+        "score": 0.7,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-004",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: Legacy Integration Layer",
+      "description": "No visible integration points or adapters for legacy banking systems and OCX components",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Legacy Integration Layer"
+        ],
+        "paths": [
+          "Legacy Integration Layer"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "repository scan"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
         "rationale": "from hotspot analysis",
         "signals": []
       }
@@ -246,8 +246,8 @@
       "id": "F-RSK-001",
       "type": "operational_risk",
       "severity": "critical",
-      "title": "Architecture-Business Objective Mismatch",
-      "description": "Current system is a software modernization platform, not a retail banking application. Missing all core banking components required for stated objectives.",
+      "title": "Missing Legacy System Integration",
+      "description": "No visible adapters or integration points for legacy VB6 banking application or OCX components, creating a gap between modernization platform and target systems",
       "risk": {
         "likelihood": 5,
         "impact": 5,
@@ -282,14 +282,14 @@
     {
       "id": "F-RSK-002",
       "type": "operational_risk",
-      "severity": "critical",
-      "title": "Regulatory Compliance Gap",
-      "description": "No banking compliance, audit trails, or regulatory reporting mechanisms detected for retail banking operations.",
+      "severity": "high",
+      "title": "Banking Compliance Gaps",
+      "description": "No evidence of banking-specific compliance controls, audit trails, or regulatory reporting capabilities required for retail banking operations",
       "risk": {
-        "likelihood": 5,
-        "impact": 5,
-        "score": 25,
-        "tier": "critical",
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
         "rationale": "risk item severity"
       },
       "affected": {
@@ -305,13 +305,13 @@
           16
         ],
         "confidence": {
-          "score": 0.9,
+          "score": 0.8,
           "rationale": "estimated from artifact metadata",
           "signals": []
         }
       },
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "rationale": "from risk analysis",
         "signals": []
       }
@@ -320,8 +320,8 @@
       "id": "F-RSK-003",
       "type": "operational_risk",
       "severity": "high",
-      "title": "Data Security Vulnerability",
-      "description": "File-based storage and lack of encryption mechanisms inappropriate for banking customer data and financial transactions.",
+      "title": "Data Persistence Scalability",
+      "description": "File-based tenant memory storage lacks ACID properties and scalability required for production banking workloads",
       "risk": {
         "likelihood": 4,
         "impact": 4,
@@ -357,8 +357,8 @@
       "id": "F-RSK-004",
       "type": "operational_risk",
       "severity": "high",
-      "title": "Legacy Migration Path Undefined",
-      "description": "No clear integration or migration path from legacy VB6 banking systems to current Python architecture.",
+      "title": "Authentication Architecture Unclear",
+      "description": "No clear authentication strategy visible for banking customer authentication, session management, or multi-factor authentication requirements",
       "risk": {
         "likelihood": 4,
         "impact": 4,
@@ -379,13 +379,13 @@
           16
         ],
         "confidence": {
-          "score": 0.9,
+          "score": 0.8,
           "rationale": "estimated from artifact metadata",
           "signals": []
         }
       },
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "rationale": "from risk analysis",
         "signals": []
       }
@@ -393,55 +393,10 @@
   ],
   "backlog": [
     {
-      "id": "rb_001",
-      "title": "Align System Architecture with Banking Objectives",
+      "id": "rb-001",
+      "title": "Implement Legacy Banking System Integration Layer",
       "priority": "P0",
-      "business_value": "Complete project failure due to architecture-objective mismatch",
-      "risk": {
-        "likelihood": 5,
-        "impact": 5,
-        "score": 25,
-        "tier": "critical",
-        "rationale": "derived from backlog severity"
-      },
-      "effort": {
-        "tshirt": "XL",
-        "hours_range": [
-          80,
-          160
-        ],
-        "confidence": {
-          "score": 0.95,
-          "rationale": "estimated from artifact metadata",
-          "signals": []
-        }
-      },
-      "linked_findings": [
-        "F-HOT-001"
-      ],
-      "scm_impact": {
-        "scm_node_ids": [],
-        "expected_edges_touched": []
-      },
-      "dependencies": [
-        "business_requirements_clarification"
-      ],
-      "plan": [
-        "Conduct requirements analysis to determine if banking components should be added to current system or if objectives need rescoping"
-      ],
-      "acceptance_criteria": [
-        "Clear alignment between system capabilities and business objectives",
-        "Defined scope for banking component integration",
-        "Updated architecture documentation"
-      ],
-      "owner_role": "Tech Lead",
-      "suggested_agent_roles": []
-    },
-    {
-      "id": "rb_002",
-      "title": "Implement Banking-Grade Authentication",
-      "priority": "P0",
-      "business_value": "Regulatory violations, security breaches, customer data exposure",
+      "business_value": "Cannot modernize existing banking application without breaking customer-facing operations and losing transaction history",
       "risk": {
         "likelihood": 5,
         "impact": 5,
@@ -462,32 +417,183 @@
         }
       },
       "linked_findings": [
-        "F-HOT-002"
+        "F-HOT-001"
       ],
       "scm_impact": {
         "scm_node_ids": [],
         "expected_edges_touched": []
       },
       "dependencies": [
-        "rb_001"
+        "Legacy system discovery",
+        "OCX component inventory",
+        "Data schema mapping"
       ],
       "plan": [
-        "Implement OAuth2/OIDC with MFA, session management, and audit logging for banking compliance"
+        "Create dedicated legacy integration agent with VB6 form parsing, OCX component mapping, and database migration capabilities"
       ],
       "acceptance_criteria": [
-        "Multi-factor authentication implemented",
-        "Session management with timeout controls",
-        "Audit trail for all authentication events",
-        "Compliance with banking security standards"
+        "Legacy system components catalogued",
+        "Integration adapters functional",
+        "Data migration path validated"
       ],
       "owner_role": "Tech Lead",
       "suggested_agent_roles": []
     },
     {
-      "id": "rb_003",
-      "title": "Replace File Storage with Banking Database",
+      "id": "rb-002",
+      "title": "Implement Banking-Grade Authentication and Authorization",
       "priority": "P1",
-      "business_value": "Data corruption, transaction failures, regulatory violations, audit failures",
+      "business_value": "Cannot deploy to production banking environment without proper customer authentication and regulatory compliance",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:security-engineer",
+          "component:context-vault",
+          "service:modernization-platform",
+          "component:web-server"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Banking compliance requirements",
+        "Customer identity provider selection",
+        "Multi-factor authentication strategy"
+      ],
+      "plan": [
+        "Enhance security engineer agent with banking-specific auth patterns, implement OAuth2/OIDC integration, add audit logging"
+      ],
+      "acceptance_criteria": [
+        "Customer authentication flow implemented",
+        "Regulatory audit trails active",
+        "Session management compliant"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003",
+      "title": "Replace File-Based Storage with Banking-Grade Database",
+      "priority": "P1",
+      "business_value": "Data corruption, loss of transaction integrity, inability to meet banking regulatory requirements for data persistence",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:database-engineer"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Database technology selection",
+        "Migration strategy",
+        "Backup and recovery procedures"
+      ],
+      "plan": [
+        "Implement PostgreSQL or similar ACID-compliant database with proper transaction management, encryption at rest, and audit logging"
+      ],
+      "acceptance_criteria": [
+        "ACID transactions implemented",
+        "Data encryption active",
+        "Audit trail functional",
+        "Backup procedures validated"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-004",
+      "title": "Reduce Analyst Agent Complexity",
+      "priority": "P2",
+      "business_value": "Difficult maintenance, testing challenges, increased bug risk, reduced code reusability",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-004"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:analyst-agent"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Agent responsibility analysis",
+        "Refactoring strategy"
+      ],
+      "plan": [
+        "Split analyst agent into specialized sub-agents (code analyzer, dependency analyzer, risk assessor) with clear interfaces"
+      ],
+      "acceptance_criteria": [
+        "Import count reduced below 15",
+        "Single responsibility maintained",
+        "Test coverage improved"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-005",
+      "title": "Implement Banking Domain Model and Business Rules",
+      "priority": "P1",
+      "business_value": "Cannot accurately modernize banking operations without proper domain modeling and business rule enforcement",
       "risk": {
         "likelihood": 4,
         "impact": 4,
@@ -508,117 +614,26 @@
         }
       },
       "linked_findings": [
-        "F-HOT-003"
-      ],
-      "scm_impact": {
-        "scm_node_ids": [],
-        "expected_edges_touched": []
-      },
-      "dependencies": [
-        "rb_001"
-      ],
-      "plan": [
-        "Implement PostgreSQL or similar ACID-compliant database with encryption at rest and in transit"
-      ],
-      "acceptance_criteria": [
-        "ACID-compliant database implemented",
-        "Data encryption at rest and in transit",
-        "Transaction logging and audit trails",
-        "Backup and recovery procedures"
-      ],
-      "owner_role": "Tech Lead",
-      "suggested_agent_roles": []
-    },
-    {
-      "id": "rb_004",
-      "title": "Develop Core Banking Transaction Services",
-      "priority": "P1",
-      "business_value": "Cannot fulfill basic banking functionality requirements",
-      "risk": {
-        "likelihood": 4,
-        "impact": 4,
-        "score": 16,
-        "tier": "high",
-        "rationale": "derived from backlog severity"
-      },
-      "effort": {
-        "tshirt": "XL",
-        "hours_range": [
-          80,
-          160
-        ],
-        "confidence": {
-          "score": 0.9,
-          "rationale": "estimated from artifact metadata",
-          "signals": []
-        }
-      },
-      "linked_findings": [
-        "F-HOT-004"
-      ],
-      "scm_impact": {
-        "scm_node_ids": [],
-        "expected_edges_touched": []
-      },
-      "dependencies": [
-        "rb_001",
-        "rb_003"
-      ],
-      "plan": [
-        "Develop RESTful banking services with transaction validation, balance management, and interest calculation engines"
-      ],
-      "acceptance_criteria": [
-        "Deposit service with validation and limits",
-        "Withdrawal service with balance checks",
-        "Real-time balance inquiry API",
-        "Interest calculation engine",
-        "Transaction history and reporting"
-      ],
-      "owner_role": "Tech Lead",
-      "suggested_agent_roles": []
-    },
-    {
-      "id": "rb_005",
-      "title": "Define Legacy VB6 Migration Strategy",
-      "priority": "P1",
-      "business_value": "Cannot retire legacy systems or migrate existing banking operations",
-      "risk": {
-        "likelihood": 4,
-        "impact": 4,
-        "score": 16,
-        "tier": "high",
-        "rationale": "derived from backlog severity"
-      },
-      "effort": {
-        "tshirt": "L",
-        "hours_range": [
-          40,
-          80
-        ],
-        "confidence": {
-          "score": 0.8,
-          "rationale": "estimated from artifact metadata",
-          "signals": []
-        }
-      },
-      "linked_findings": [
         "F-RSK-001"
       ],
       "scm_impact": {
-        "scm_node_ids": [],
+        "scm_node_ids": [
+          "config:schema-registry"
+        ],
         "expected_edges_touched": []
       },
       "dependencies": [
-        "rb_001"
+        "Banking requirements analysis",
+        "Legacy business rule extraction",
+        "Regulatory compliance review"
       ],
       "plan": [
-        "Analyze legacy VB6 systems, design migration strategy, implement data transformation and integration layers"
+        "Create banking domain agent with account models, transaction processing, interest calculation, and regulatory compliance rules"
       ],
       "acceptance_criteria": [
-        "Legacy system analysis completed",
-        "Data migration strategy defined",
-        "Integration layer for gradual migration",
-        "Rollback procedures established"
+        "Banking domain models defined",
+        "Business rules implemented",
+        "Regulatory compliance validated"
       ],
       "owner_role": "Tech Lead",
       "suggested_agent_roles": []
@@ -626,23 +641,23 @@
   ],
   "roadmap_options": {
     "quick_wins": [
-      "rb_001",
-      "rb_002",
-      "rb_003",
-      "rb_004",
-      "rb_005"
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-005"
     ],
     "stabilization": [
-      "rb_003",
-      "rb_004",
-      "rb_005"
+      "rb-002",
+      "rb-003",
+      "rb-004",
+      "rb-005"
     ],
     "modernization": [
-      "rb_001",
-      "rb_002",
-      "rb_003",
-      "rb_004",
-      "rb_005"
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004",
+      "rb-005"
     ]
   }
 }
