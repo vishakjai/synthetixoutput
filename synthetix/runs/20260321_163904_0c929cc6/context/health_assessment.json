@@ -1,0 +1,96 @@
+{
+  "version": "ha-v1.0.0",
+  "summary": "Moderately healthy modernization platform with good architectural patterns but lacking comprehensive testing, security hardening, and production readiness indicators.",
+  "scores": {
+    "maintainability": 7,
+    "security": 4,
+    "reliability": 5,
+    "testability": 3
+  },
+  "hotspots": [
+    {
+      "scope": "agents/analyst.py",
+      "reason": "High complexity with 25 imports suggests potential monolithic responsibilities",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "25 imports detected indicating high coupling"
+        }
+      ]
+    },
+    {
+      "scope": "Security configuration",
+      "reason": "No visible authentication, authorization, or security configuration files",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "repository_scan",
+          "line": 1,
+          "evidence": "No security-related configuration files detected in scan"
+        }
+      ]
+    },
+    {
+      "scope": "Testing infrastructure",
+      "reason": "No test files or testing framework configuration detected",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "repository_scan",
+          "line": 1,
+          "evidence": "No test files found in 291 scanned files"
+        }
+      ]
+    },
+    {
+      "scope": "Database integration",
+      "reason": "No database configuration or ORM setup detected for banking data persistence",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "repository_scan",
+          "line": 1,
+          "evidence": "No database configuration files or ORM imports detected"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Missing Banking Domain Logic",
+      "description": "No evidence of core banking functionality (authentication, account management, transactions) in current codebase despite business objectives",
+      "severity": "critical",
+      "confidence": 0.9
+    },
+    {
+      "title": "Production Security Gaps",
+      "description": "No authentication, authorization, or security hardening visible for banking application requirements",
+      "severity": "critical",
+      "confidence": 0.9
+    },
+    {
+      "title": "Data Persistence Strategy Undefined",
+      "description": "No database layer or data persistence strategy evident for banking transaction processing",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Testing Strategy Absent",
+      "description": "No testing framework or test coverage for mission-critical banking operations",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Legacy Integration Unclear",
+      "description": "No visible integration patterns or adapters for legacy banking system migration",
+      "severity": "medium",
+      "confidence": 0.7
+    }
+  ]
+}
