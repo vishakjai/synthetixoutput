@@ -1,0 +1,186 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Core Banking Domain Services",
+    "problem_statement": "Current system lacks fundamental banking services (authentication, accounts, transactions, interest calculation) required for business objectives",
+    "scope": [
+      "agents/",
+      "services/",
+      "domain/"
+    ],
+    "risk_if_unaddressed": "Cannot deliver banking modernization objectives; system remains incomplete prototype",
+    "effort": "XL",
+    "severity": "critical",
+    "dependencies": [
+      "rb-003",
+      "rb-004"
+    ],
+    "suggested_approach": "Create dedicated banking domain agents and services following existing agent pattern, implement transaction processing workflows",
+    "success_criteria": [
+      "Authentication service operational",
+      "Account management CRUD operations",
+      "Transaction processing with audit trail",
+      "Interest calculation engine",
+      "Balance inquiry service"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No banking domain logic detected in agent modules"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Establish Comprehensive Testing Framework",
+    "problem_statement": "No testing infrastructure exists for validating banking operations and agent behaviors",
+    "scope": [
+      "tests/",
+      "agents/",
+      "services/"
+    ],
+    "risk_if_unaddressed": "Cannot ensure reliability of financial operations; regulatory compliance issues",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Implement pytest framework with unit, integration, and end-to-end tests for all agents and banking services",
+    "success_criteria": [
+      "80%+ code coverage across all modules",
+      "Automated test suite in CI/CD pipeline",
+      "Banking transaction test scenarios",
+      "Agent behavior validation tests"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No test files detected in 291 scanned files"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement Security and Authentication Layer",
+    "problem_statement": "No authentication, authorization, or security controls for banking application",
+    "scope": [
+      "security/",
+      "auth/",
+      "middleware/"
+    ],
+    "risk_if_unaddressed": "Critical security vulnerabilities; regulatory non-compliance; data breach risk",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Implement OAuth2/JWT authentication, role-based access control, API security middleware, audit logging",
+    "success_criteria": [
+      "Multi-factor authentication implemented",
+      "Role-based access control operational",
+      "API endpoints secured with proper authorization",
+      "Audit logging for all financial transactions",
+      "Security headers and HTTPS enforcement"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No security configuration files detected"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Design and Implement Data Persistence Layer",
+    "problem_statement": "No database layer or data persistence strategy for banking data management",
+    "scope": [
+      "database/",
+      "models/",
+      "repositories/"
+    ],
+    "risk_if_unaddressed": "Cannot persist banking transactions; data loss risk; no audit trail",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Implement database layer with ORM (SQLAlchemy), design banking schema, implement repository pattern",
+    "success_criteria": [
+      "Database schema for accounts, transactions, users",
+      "ORM models with proper relationships",
+      "Repository pattern for data access",
+      "Database migration strategy",
+      "Backup and recovery procedures"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No database configuration or ORM imports detected"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Refactor Analyst Agent Complexity",
+    "problem_statement": "Analyst agent has high complexity with 25 imports suggesting monolithic responsibilities",
+    "scope": [
+      "agents/analyst.py"
+    ],
+    "risk_if_unaddressed": "Reduced maintainability; testing difficulties; single point of failure",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "rb-002"
+    ],
+    "suggested_approach": "Break down analyst agent into specialized sub-agents or extract utility modules, implement dependency injection",
+    "success_criteria": [
+      "Analyst agent imports reduced to <15",
+      "Clear separation of concerns",
+      "Improved testability",
+      "Maintained functionality"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "25 imports detected indicating high coupling"
+      }
+    ]
+  },
+  {
+    "id": "rb-006",
+    "title": "Define Legacy System Integration Strategy",
+    "problem_statement": "No visible integration patterns for legacy banking system migration and OCX retirement",
+    "scope": [
+      "integrations/",
+      "adapters/",
+      "migration/"
+    ],
+    "risk_if_unaddressed": "Cannot migrate from legacy systems; business continuity risk during transition",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [
+      "rb-001",
+      "rb-004"
+    ],
+    "suggested_approach": "Design adapter pattern for legacy system integration, implement data migration utilities, create transition workflows",
+    "success_criteria": [
+      "Legacy system adapter interfaces defined",
+      "Data migration scripts operational",
+      "Parallel processing capability during transition",
+      "Rollback procedures documented",
+      "OCX retirement timeline established"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No legacy integration or migration utilities detected"
+      }
+    ]
+  }
+]
