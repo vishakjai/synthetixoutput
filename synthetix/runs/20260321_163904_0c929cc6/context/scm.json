@@ -1,0 +1,274 @@
+{
+  "version": "scm-v1.0.0",
+  "summary": "Enterprise software modernization platform with agent-based architecture for banking application transformation. Core system consists of specialized agents (analyst, architect, developer, etc.) with web interface, provider abstraction layer, and utility services.",
+  "nodes": [
+    {
+      "id": "service:web-server",
+      "type": "Service",
+      "name": "Web Server",
+      "metadata": {
+        "framework": "FastAPI",
+        "port": "unknown",
+        "language": "python"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI endpoint hints detected"
+        }
+      ]
+    },
+    {
+      "id": "service:context-vault",
+      "type": "Service",
+      "name": "Context Vault Service",
+      "metadata": {
+        "framework": "FastAPI",
+        "purpose": "context_management",
+        "language": "python"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI endpoint hints with GET/POST routes detected"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-core",
+      "type": "Module",
+      "name": "Agents Core Module",
+      "metadata": {
+        "agent_count": 14,
+        "specializations": [
+          "analyst",
+          "architect",
+          "developer",
+          "security",
+          "database",
+          "tester",
+          "validator",
+          "deployer"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "11 agent imports detected in module initialization"
+        }
+      ]
+    },
+    {
+      "id": "component:analyst-agent",
+      "type": "Component",
+      "name": "Analyst Agent",
+      "metadata": {
+        "import_count": 25,
+        "complexity": "high"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "25 imports detected indicating complex analysis capabilities"
+        }
+      ]
+    },
+    {
+      "id": "component:base-provider",
+      "type": "Component",
+      "name": "Base Provider",
+      "metadata": {
+        "pattern": "abstract_base",
+        "purpose": "provider_abstraction"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "providers/base_provider.py",
+          "line": 1,
+          "evidence": "Base provider abstraction layer detected"
+        }
+      ]
+    },
+    {
+      "id": "infra:docker-compose",
+      "type": "InfraResource",
+      "name": "Docker Compose Configuration",
+      "metadata": {
+        "orchestration": "docker-compose",
+        "services": "unknown"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker compose configuration file present"
+        }
+      ]
+    },
+    {
+      "id": "infra:dockerfile",
+      "type": "InfraResource",
+      "name": "Docker Container Definition",
+      "metadata": {
+        "containerization": "docker"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Dockerfile present for containerization"
+        }
+      ]
+    },
+    {
+      "id": "config:delivery-pipeline",
+      "type": "Component",
+      "name": "Delivery Pipeline Configuration",
+      "metadata": {
+        "format": "yaml",
+        "stages": "unknown",
+        "version_controlled": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "Pipeline specification with version, name, artifacts, principles, stages keys"
+        }
+      ]
+    },
+    {
+      "id": "config:schema-definitions",
+      "type": "Component",
+      "name": "Schema Definitions",
+      "metadata": {
+        "schema_count": 10,
+        "format": "json_schema",
+        "coverage": [
+          "agent_result",
+          "business_rules",
+          "context_bundle",
+          "convention_profile"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Multiple JSON schema files detected for system contracts"
+        }
+      ]
+    },
+    {
+      "id": "pkg:json",
+      "type": "Component",
+      "name": "json",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "inferred node from edge endpoint `pkg:json`"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "module:agents-core",
+      "to": "component:analyst-agent",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative",
+        "target": ".analyst"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import statement"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "service:web-server",
+      "to": "module:agents-core",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "dependency_type": "runtime"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "Web server likely orchestrates agent interactions"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:web-server",
+      "to": "infra:docker-compose",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "deployment_type": "containerized"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker compose configuration suggests service orchestration"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "component:analyst-agent",
+      "to": "pkg:json",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "library_type": "standard"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "import json statement detected"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database connection details and schema",
+    "Authentication/authorization mechanisms",
+    "External API integrations",
+    "Monitoring and observability setup",
+    "Production deployment configuration",
+    "Legacy banking system integration points",
+    "Data migration strategies",
+    "Security compliance frameworks"
+  ]
+}
