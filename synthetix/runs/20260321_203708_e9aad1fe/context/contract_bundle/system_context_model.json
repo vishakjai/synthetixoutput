@@ -1,9 +1,9 @@
 {
   "header": {
-    "artifact_id": "5839d865c26a40fdae238904c5fe8a69",
+    "artifact_id": "4cac4f7657744fc395241848c5491c71",
     "artifact_type": "system_context_model",
     "schema_version": "1.0.0",
-    "created_at": "2026-03-21T20:38:21.491160+00:00",
+    "created_at": "2026-03-21T20:40:26.142697+00:00",
     "repo_ref": {
       "provider": "other",
       "repo_url": "app",
@@ -23,54 +23,108 @@
       ],
       "run_id": "20260321_203708_e9aad1fe",
       "stage_id": "context_layer",
-      "task_id": "c8ae3c205c5b4b3b9781a56339c906fa"
+      "task_id": "3140b2ada4704d21a5e5d3b4ff458b5d"
     },
     "parents": [],
-    "digest": "sha256:bcdd50a5241477d1f0a0320cef056d88f158ddebc63bb11a3cc8985c89df99ff",
+    "digest": "sha256:a8782bd3c1872f2df45e980dfb5926f5dae7db4173f17e20e1f07172238b036b",
     "labels": {
       "pipeline": "synthetix",
       "run_id": "20260321_203708_e9aad1fe",
-      "bundle_version": "20260321T203821Z_20260321_203708_e9aad1fe"
+      "bundle_version": "20260321T204026Z_20260321_203708_e9aad1fe"
     }
   },
   "graph": {
     "nodes": [
       {
-        "id": "service:web_server",
+        "id": "service:modernization-platform",
         "type": "service",
-        "name": "Web Server",
+        "name": "Enterprise Modernization Platform",
         "description": "",
         "labels": {
           "source": "sil"
         },
-        "language": "",
+        "language": "python",
         "repo_paths": [
+          "agents/__init__.py",
           "web/server.py"
         ],
         "runtime": {},
         "interfaces": [],
         "data": {},
         "attributes": {
-          "framework": "FastAPI",
-          "port": "unknown",
-          "routes_detected": 0
+          "language": "python",
+          "framework": "fastapi",
+          "agent_count": 11,
+          "tenant_support": true
         },
         "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/__init__.py"
+          },
           {
             "kind": "file_span",
             "file": "web/server.py"
           }
         ],
         "confidence": {
-          "score": 0.85,
+          "score": 0.95,
           "rationale": "from SIL node extraction",
           "signals": []
         }
       },
       {
-        "id": "service:context_vault",
-        "type": "service",
-        "name": "Context Vault API",
+        "id": "component:agent-orchestrator",
+        "type": "component",
+        "name": "Agent Orchestration Layer",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "agents/__init__.py",
+          "agents/base.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "agents": [
+            "analyst",
+            "architect",
+            "developer",
+            "security_engineer",
+            "database_engineer",
+            "tester",
+            "validator",
+            "deployer",
+            "ui_scaffold",
+            "planning",
+            "system_intelligence"
+          ],
+          "base_class": "agents.base"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/__init__.py"
+          },
+          {
+            "kind": "file_span",
+            "file": "agents/base.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "component:context-vault",
+        "type": "component",
+        "name": "Context Vault Service",
         "description": "",
         "labels": {
           "source": "sil"
@@ -83,8 +137,12 @@
         "interfaces": [],
         "data": {},
         "attributes": {
-          "framework": "FastAPI",
-          "purpose": "context_management"
+          "endpoints": [
+            "@app.get",
+            "@app.post"
+          ],
+          "storage": "file-based",
+          "tenant_isolation": true
         },
         "evidence": [
           {
@@ -99,8 +157,74 @@
         }
       },
       {
-        "id": "module:analyst_agent",
+        "id": "component:web-server",
         "type": "component",
+        "name": "Web Server Interface",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "web/server.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "framework": "fastapi",
+          "endpoints": [
+            "@app.get"
+          ],
+          "routing": true
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "web/server.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "database:tenant-memory",
+        "type": "database",
+        "name": "Tenant Memory Storage",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "team_data/tenant_memory/default-workspace/default-client/discover/memory.json"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "type": "json-file-based",
+          "structure": "workspace/client/project hierarchy",
+          "isolation_level": "tenant"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "team_data/tenant_memory/default-workspace/default-client/discover/memory.json"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "module:analyst-agent",
+        "type": "module",
         "name": "Analyst Agent",
         "description": "",
         "labels": {
@@ -114,8 +238,9 @@
         "interfaces": [],
         "data": {},
         "attributes": {
-          "agent_type": "analyst",
-          "imports": 25
+          "imports": 25,
+          "specialization": "system_analysis",
+          "banking_focus": true
         },
         "evidence": [
           {
@@ -124,107 +249,14 @@
           }
         ],
         "confidence": {
-          "score": 0.95,
+          "score": 0.9,
           "rationale": "from SIL node extraction",
           "signals": []
         }
       },
       {
-        "id": "module:architect_agent",
-        "type": "component",
-        "name": "Architect Agent",
-        "description": "",
-        "labels": {
-          "source": "sil"
-        },
-        "language": "",
-        "repo_paths": [
-          "agents/architect.py"
-        ],
-        "runtime": {},
-        "interfaces": [],
-        "data": {},
-        "attributes": {
-          "agent_type": "architect",
-          "imports": 9
-        },
-        "evidence": [
-          {
-            "kind": "file_span",
-            "file": "agents/architect.py"
-          }
-        ],
-        "confidence": {
-          "score": 0.95,
-          "rationale": "from SIL node extraction",
-          "signals": []
-        }
-      },
-      {
-        "id": "module:developer_agent",
-        "type": "component",
-        "name": "Developer Agent",
-        "description": "",
-        "labels": {
-          "source": "sil"
-        },
-        "language": "",
-        "repo_paths": [
-          "agents/developer.py"
-        ],
-        "runtime": {},
-        "interfaces": [],
-        "data": {},
-        "attributes": {
-          "agent_type": "developer",
-          "imports": 14
-        },
-        "evidence": [
-          {
-            "kind": "file_span",
-            "file": "agents/developer.py"
-          }
-        ],
-        "confidence": {
-          "score": 0.95,
-          "rationale": "from SIL node extraction",
-          "signals": []
-        }
-      },
-      {
-        "id": "module:database_engineer_agent",
-        "type": "component",
-        "name": "Database Engineer Agent",
-        "description": "",
-        "labels": {
-          "source": "sil"
-        },
-        "language": "",
-        "repo_paths": [
-          "agents/database_engineer.py"
-        ],
-        "runtime": {},
-        "interfaces": [],
-        "data": {},
-        "attributes": {
-          "agent_type": "database_engineer",
-          "imports": 4
-        },
-        "evidence": [
-          {
-            "kind": "file_span",
-            "file": "agents/database_engineer.py"
-          }
-        ],
-        "confidence": {
-          "score": 0.95,
-          "rationale": "from SIL node extraction",
-          "signals": []
-        }
-      },
-      {
-        "id": "module:security_engineer_agent",
-        "type": "component",
+        "id": "module:security-engineer",
+        "type": "module",
         "name": "Security Engineer Agent",
         "description": "",
         "labels": {
@@ -238,8 +270,9 @@
         "interfaces": [],
         "data": {},
         "attributes": {
-          "agent_type": "security_engineer",
-          "imports": 4
+          "imports": 4,
+          "specialization": "security_assessment",
+          "banking_compliance": true
         },
         "evidence": [
           {
@@ -248,106 +281,45 @@
           }
         ],
         "confidence": {
-          "score": 0.95,
+          "score": 0.85,
           "rationale": "from SIL node extraction",
           "signals": []
         }
       },
       {
-        "id": "module:tester_agent",
-        "type": "component",
-        "name": "Tester Agent",
+        "id": "module:database-engineer",
+        "type": "module",
+        "name": "Database Engineer Agent",
         "description": "",
         "labels": {
           "source": "sil"
         },
         "language": "",
         "repo_paths": [
-          "agents/tester.py"
+          "agents/database_engineer.py"
         ],
         "runtime": {},
         "interfaces": [],
         "data": {},
         "attributes": {
-          "agent_type": "tester",
-          "imports": 7
+          "imports": 4,
+          "specialization": "data_migration",
+          "schema_management": true
         },
         "evidence": [
           {
             "kind": "file_span",
-            "file": "agents/tester.py"
+            "file": "agents/database_engineer.py"
           }
         ],
         "confidence": {
-          "score": 0.95,
+          "score": 0.85,
           "rationale": "from SIL node extraction",
           "signals": []
         }
       },
       {
-        "id": "module:ui_scaffold_agent",
-        "type": "component",
-        "name": "UI Scaffold Agent",
-        "description": "",
-        "labels": {
-          "source": "sil"
-        },
-        "language": "",
-        "repo_paths": [
-          "agents/ui_scaffold.py"
-        ],
-        "runtime": {},
-        "interfaces": [],
-        "data": {},
-        "attributes": {
-          "agent_type": "ui_scaffold",
-          "imports": 7
-        },
-        "evidence": [
-          {
-            "kind": "file_span",
-            "file": "agents/ui_scaffold.py"
-          }
-        ],
-        "confidence": {
-          "score": 0.95,
-          "rationale": "from SIL node extraction",
-          "signals": []
-        }
-      },
-      {
-        "id": "module:system_intelligence_agent",
-        "type": "component",
-        "name": "System Intelligence Agent",
-        "description": "",
-        "labels": {
-          "source": "sil"
-        },
-        "language": "",
-        "repo_paths": [
-          "agents/system_intelligence.py"
-        ],
-        "runtime": {},
-        "interfaces": [],
-        "data": {},
-        "attributes": {
-          "agent_type": "system_intelligence",
-          "imports": 5
-        },
-        "evidence": [
-          {
-            "kind": "file_span",
-            "file": "agents/system_intelligence.py"
-          }
-        ],
-        "confidence": {
-          "score": 0.95,
-          "rationale": "from SIL node extraction",
-          "signals": []
-        }
-      },
-      {
-        "id": "container:docker_app",
+        "id": "infra:docker-container",
         "type": "container",
         "name": "Application Container",
         "description": "",
@@ -363,7 +335,8 @@
         "interfaces": [],
         "data": {},
         "attributes": {
-          "containerized": true
+          "base_image": "python",
+          "orchestration": "docker-compose"
         },
         "evidence": [
           {
@@ -382,94 +355,33 @@
         }
       },
       {
-        "id": "database:tenant_memory",
-        "type": "database",
-        "name": "Tenant Memory Store",
-        "description": "",
-        "labels": {
-          "source": "sil"
-        },
-        "language": "",
-        "repo_paths": [
-          "team_data/tenant_memory/default-workspace/default-client/discover/memory.json"
-        ],
-        "runtime": {},
-        "interfaces": [],
-        "data": {},
-        "attributes": {
-          "storage_type": "file_based",
-          "format": "json"
-        },
-        "evidence": [
-          {
-            "kind": "file_span",
-            "file": "team_data/tenant_memory/default-workspace/default-client/discover/memory.json"
-          }
-        ],
-        "confidence": {
-          "score": 0.8,
-          "rationale": "from SIL node extraction",
-          "signals": []
-        }
-      },
-      {
-        "id": "module:base",
+        "id": "config:schema-registry",
         "type": "component",
-        "name": "base",
+        "name": "JSON Schema Registry",
         "description": "",
         "labels": {
           "source": "sil"
         },
         "language": "",
         "repo_paths": [
-          "agents/__init__.py"
+          ".deliveryos/schemas/"
         ],
         "runtime": {},
         "interfaces": [],
         "data": {},
         "attributes": {
-          "inferred": true,
-          "inferred_from_edge": true
+          "schema_count": 72,
+          "validation": "json-schema",
+          "agent_contracts": true
         },
         "evidence": [
           {
             "kind": "file_span",
-            "file": "agents/__init__.py"
+            "file": ".deliveryos/schemas/"
           }
         ],
         "confidence": {
-          "score": 0.45,
-          "rationale": "from SIL node extraction",
-          "signals": []
-        }
-      },
-      {
-        "id": "pkg:fastapi",
-        "type": "component",
-        "name": "fastapi",
-        "description": "",
-        "labels": {
-          "source": "sil"
-        },
-        "language": "",
-        "repo_paths": [
-          "web/server.py"
-        ],
-        "runtime": {},
-        "interfaces": [],
-        "data": {},
-        "attributes": {
-          "inferred": true,
-          "inferred_from_edge": true
-        },
-        "evidence": [
-          {
-            "kind": "file_span",
-            "file": "web/server.py"
-          }
-        ],
-        "confidence": {
-          "score": 0.45,
+          "score": 0.95,
           "rationale": "from SIL node extraction",
           "signals": []
         }
@@ -479,8 +391,8 @@
       {
         "id": "edge:1",
         "type": "imports",
-        "from": "module:analyst_agent",
-        "to": "module:base",
+        "from": "component:agent-orchestrator",
+        "to": "module:analyst-agent",
         "labels": {
           "source": "sil"
         },
@@ -500,8 +412,8 @@
       {
         "id": "edge:2",
         "type": "imports",
-        "from": "module:architect_agent",
-        "to": "module:base",
+        "from": "component:agent-orchestrator",
+        "to": "module:security-engineer",
         "labels": {
           "source": "sil"
         },
@@ -520,9 +432,9 @@
       },
       {
         "id": "edge:3",
-        "type": "runs_on",
-        "from": "service:web_server",
-        "to": "container:docker_app",
+        "type": "imports",
+        "from": "component:agent-orchestrator",
+        "to": "module:database-engineer",
         "labels": {
           "source": "sil"
         },
@@ -530,11 +442,11 @@
         "evidence": [
           {
             "kind": "file_span",
-            "file": "Dockerfile"
+            "file": "agents/__init__.py"
           }
         ],
         "confidence": {
-          "score": 0.85,
+          "score": 0.95,
           "rationale": "from SIL edge extraction",
           "signals": []
         }
@@ -542,8 +454,8 @@
       {
         "id": "edge:4",
         "type": "runs_on",
-        "from": "service:context_vault",
-        "to": "container:docker_app",
+        "from": "service:modernization-platform",
+        "to": "infra:docker-container",
         "labels": {
           "source": "sil"
         },
@@ -555,7 +467,7 @@
           }
         ],
         "confidence": {
-          "score": 0.85,
+          "score": 0.9,
           "rationale": "from SIL edge extraction",
           "signals": []
         }
@@ -563,8 +475,8 @@
       {
         "id": "edge:5",
         "type": "depends_on",
-        "from": "service:web_server",
-        "to": "pkg:fastapi",
+        "from": "component:web-server",
+        "to": "component:context-vault",
         "labels": {
           "source": "sil"
         },
@@ -572,7 +484,49 @@
         "evidence": [
           {
             "kind": "file_span",
-            "file": "web/server.py"
+            "file": "utils/context_vault.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:6",
+        "type": "reads",
+        "from": "component:agent-orchestrator",
+        "to": "database:tenant-memory",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "team_data/tenant_memory/"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:7",
+        "type": "depends_on",
+        "from": "service:modernization-platform",
+        "to": "config:schema-registry",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": ".deliveryos/schemas/"
           }
         ],
         "confidence": {
@@ -583,9 +537,11 @@
       }
     ],
     "statistics": {
-      "node_count": 14,
-      "edge_count": 5,
-      "languages": []
+      "node_count": 10,
+      "edge_count": 7,
+      "languages": [
+        "python"
+      ]
     }
   },
   "views": {
@@ -598,7 +554,7 @@
   },
   "unknowns": [
     {
-      "question": "Legacy VB6 banking application components referenced in business objectives",
+      "question": "External banking system integration points",
       "scope": "system",
       "suggested_validation": "Trace and verify in staging",
       "confidence": {
@@ -608,7 +564,7 @@
       }
     },
     {
-      "question": "Authentication service integration points",
+      "question": "OCX component retirement timeline and dependencies",
       "scope": "system",
       "suggested_validation": "Trace and verify in staging",
       "confidence": {
@@ -618,7 +574,7 @@
       }
     },
     {
-      "question": "Customer onboarding workflow components",
+      "question": "Production deployment infrastructure specifications",
       "scope": "system",
       "suggested_validation": "Trace and verify in staging",
       "confidence": {
@@ -628,7 +584,7 @@
       }
     },
     {
-      "question": "Balance inquiry service endpoints",
+      "question": "Legacy VB6 application source code location and structure",
       "scope": "system",
       "suggested_validation": "Trace and verify in staging",
       "confidence": {
@@ -638,7 +594,7 @@
       }
     },
     {
-      "question": "Deposit/withdrawal transaction handlers",
+      "question": "Database migration source and target specifications",
       "scope": "system",
       "suggested_validation": "Trace and verify in staging",
       "confidence": {
@@ -648,47 +604,7 @@
       }
     },
     {
-      "question": "Interest calculation modules",
-      "scope": "system",
-      "suggested_validation": "Trace and verify in staging",
-      "confidence": {
-        "score": 0.4,
-        "rationale": "unknown from SIL",
-        "signals": []
-      }
-    },
-    {
-      "question": "Reporting service components",
-      "scope": "system",
-      "suggested_validation": "Trace and verify in staging",
-      "confidence": {
-        "score": 0.4,
-        "rationale": "unknown from SIL",
-        "signals": []
-      }
-    },
-    {
-      "question": "OCX retirement migration targets",
-      "scope": "system",
-      "suggested_validation": "Trace and verify in staging",
-      "confidence": {
-        "score": 0.4,
-        "rationale": "unknown from SIL",
-        "signals": []
-      }
-    },
-    {
-      "question": "Database schema and connection details",
-      "scope": "system",
-      "suggested_validation": "Trace and verify in staging",
-      "confidence": {
-        "score": 0.4,
-        "rationale": "unknown from SIL",
-        "signals": []
-      }
-    },
-    {
-      "question": "External banking system integrations",
+      "question": "Authentication provider integration details",
       "scope": "system",
       "suggested_validation": "Trace and verify in staging",
       "confidence": {
