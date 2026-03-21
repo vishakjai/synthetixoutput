@@ -1,9 +1,9 @@
 {
   "header": {
-    "artifact_id": "e16dcc0f5fe440c8a7e0647c48756c46",
+    "artifact_id": "a976dd39916e4a178a14bf43d1af8fc3",
     "artifact_type": "convention_profile",
     "schema_version": "1.0.0",
-    "created_at": "2026-03-21T20:38:21.491901+00:00",
+    "created_at": "2026-03-21T20:40:26.143169+00:00",
     "repo_ref": {
       "provider": "other",
       "repo_url": "app",
@@ -23,39 +23,39 @@
       ],
       "run_id": "20260321_203708_e9aad1fe",
       "stage_id": "context_layer",
-      "task_id": "c8ae3c205c5b4b3b9781a56339c906fa"
+      "task_id": "3140b2ada4704d21a5e5d3b4ff458b5d"
     },
     "parents": [],
-    "digest": "sha256:fe588c86ffb9ea1bcf49ded3b548eb9cdd477ca89005e1ce3fe3f103918cb2c5",
+    "digest": "sha256:3772c563571238abd77a175bcf1c03afbda3d4d443f7ede304df559fbcf9e599",
     "labels": {
       "pipeline": "synthetix",
       "run_id": "20260321_203708_e9aad1fe",
-      "bundle_version": "20260321T203821Z_20260321_203708_e9aad1fe"
+      "bundle_version": "20260321T204026Z_20260321_203708_e9aad1fe"
     }
   },
   "rules": [
     {
-      "id": "naming_001",
+      "id": "naming-001",
       "category": "naming",
-      "title": "Agent modules follow snake_case naming with descriptive suffixes (_agent.py)",
+      "title": "Agent modules follow snake_case naming with descriptive suffixes (e.g., security_engineer.py, database_engineer.py)",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "Agent modules follow snake_case naming with descriptive suffixes (_agent.py)",
+      "statement": "Agent modules follow snake_case naming with descriptive suffixes (e.g., security_engineer.py, database_engineer.py)",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": "agents/analyst.py"
+          "file": "security_engineer.py"
         },
         {
-          "file": "agents/architect.py"
+          "file": "database_engineer.py"
         },
         {
-          "file": "agents/developer.py"
+          "file": "system_intelligence.py"
         }
       ],
       "counterexamples": [],
@@ -73,63 +73,24 @@
       "exceptions": []
     },
     {
-      "id": "api_001",
-      "category": "api_design",
-      "title": "REST endpoints use FastAPI decorators with explicit HTTP methods",
+      "id": "naming-002",
+      "category": "naming",
+      "title": "Schema files use descriptive names with version suffixes and .schema.json extension",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "REST endpoints use FastAPI decorators with explicit HTTP methods",
+      "statement": "Schema files use descriptive names with version suffixes and .schema.json extension",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": "@app.get("
+          "file": "analyst_report_v2.schema.json"
         },
         {
-          "file": "@app.post("
-        }
-      ],
-      "counterexamples": [],
-      "evidence": [
-        {
-          "kind": "file_span",
-          "file": "web/server.py"
-        },
-        {
-          "kind": "file_span",
-          "file": "utils/context_vault.py"
-        }
-      ],
-      "confidence": {
-        "score": 0.85,
-        "rationale": "from convention extraction",
-        "signals": []
-      },
-      "exceptions": []
-    },
-    {
-      "id": "testing_001",
-      "category": "testing",
-      "title": "JSON schema validation enforced through dedicated schema files",
-      "scope": {
-        "languages": [],
-        "file_globs": [],
-        "scm_node_ids": [],
-        "applies_to": "all"
-      },
-      "statement": "JSON schema validation enforced through dedicated schema files",
-      "detection": {},
-      "enforcement": {},
-      "examples": [
-        {
-          "file": ".deliveryos/schemas/agent_result.schema.json"
-        },
-        {
-          "file": ".deliveryos/schemas/context_bundle.schema.json"
+          "file": "business_rule_catalog_v1.schema.json"
         }
       ],
       "counterexamples": [],
@@ -147,16 +108,87 @@
       "exceptions": []
     },
     {
-      "id": "auth_001",
-      "category": "authn_authz",
-      "title": "Tenant-based memory isolation with workspace/client hierarchy",
+      "id": "api-001",
+      "category": "api_design",
+      "title": "FastAPI decorators (@app.get, @app.post) used for HTTP endpoint definition",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "Tenant-based memory isolation with workspace/client hierarchy",
+      "statement": "FastAPI decorators (@app.get, @app.post) used for HTTP endpoint definition",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get"
+        },
+        {
+          "file": "@app.post"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        },
+        {
+          "kind": "file_span",
+          "file": "web/server.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "title": "Dedicated tester agent module for test automation and validation",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Dedicated tester agent module for test automation and validation",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/tester.py"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/tester.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "security-001",
+      "category": "authn_authz",
+      "title": "Tenant-based isolation implemented through hierarchical directory structure",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Tenant-based isolation implemented through hierarchical directory structure",
       "detection": {},
       "enforcement": {},
       "examples": [
@@ -172,39 +204,39 @@
         }
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.85,
         "rationale": "from convention extraction",
         "signals": []
       },
       "exceptions": []
     },
     {
-      "id": "logging_001",
-      "category": "logging_observability",
-      "title": "Configuration-driven approach with YAML pipeline specifications",
+      "id": "auth-001",
+      "category": "authn_authz",
+      "title": "Security engineer agent handles authentication and authorization concerns",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "Configuration-driven approach with YAML pipeline specifications",
+      "statement": "Security engineer agent handles authentication and authorization concerns",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+          "file": "agents/security_engineer.py"
         }
       ],
       "counterexamples": [],
       "evidence": [
         {
           "kind": "file_span",
-          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+          "file": "agents/security_engineer.py"
         }
       ],
       "confidence": {
-        "score": 0.85,
+        "score": 0.8,
         "rationale": "from convention extraction",
         "signals": []
       },
@@ -215,7 +247,7 @@
     {
       "id": "TPL-001",
       "language": "generic",
-      "name": "FastAPI service template with router configuration",
+      "name": "agent_base_template.py - Base class template for new agent types",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -224,7 +256,7 @@
     {
       "id": "TPL-002",
       "language": "generic",
-      "name": "Agent module template with base class inheritance",
+      "name": "fastapi_endpoint_template.py - Standard endpoint structure with error handling",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -233,7 +265,7 @@
     {
       "id": "TPL-003",
       "language": "generic",
-      "name": "JSON schema template for data validation",
+      "name": "json_schema_template.json - Schema template with common validation patterns",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -242,7 +274,7 @@
     {
       "id": "TPL-004",
       "language": "generic",
-      "name": "Docker multi-stage build template",
+      "name": "docker_service_template - Container template for new services",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -251,7 +283,7 @@
     {
       "id": "TPL-005",
       "language": "generic",
-      "name": "Tenant memory storage template",
+      "name": "tenant_memory_template.json - Standard tenant data structure",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
