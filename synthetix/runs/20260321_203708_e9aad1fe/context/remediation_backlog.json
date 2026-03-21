@@ -1,156 +1,159 @@
 [
   {
-    "id": "rb_001",
-    "title": "Align System Architecture with Banking Objectives",
-    "problem_statement": "Current system is a modernization platform, not a banking application. Need to either scope banking components or clarify business objectives.",
+    "id": "rb-001",
+    "title": "Implement Legacy Banking System Integration Layer",
+    "problem_statement": "Platform lacks integration adapters for legacy VB6 banking application and OCX components, preventing effective modernization of existing banking operations",
     "scope": [
-      "system_architecture",
-      "business_requirements"
+      "agents/",
+      "utils/",
+      "new integration layer"
     ],
-    "risk_if_unaddressed": "Complete project failure due to architecture-objective mismatch",
-    "effort": "XL",
-    "severity": "critical",
-    "dependencies": [
-      "business_requirements_clarification"
-    ],
-    "suggested_approach": "Conduct requirements analysis to determine if banking components should be added to current system or if objectives need rescoping",
-    "success_criteria": [
-      "Clear alignment between system capabilities and business objectives",
-      "Defined scope for banking component integration",
-      "Updated architecture documentation"
-    ],
-    "confidence": 0.95,
-    "provenance": [
-      {
-        "file": "repository_scan",
-        "line": 1,
-        "evidence": "No banking components found in 290 files despite banking modernization objectives"
-      }
-    ]
-  },
-  {
-    "id": "rb_002",
-    "title": "Implement Banking-Grade Authentication",
-    "problem_statement": "No authentication mechanisms suitable for retail banking customer access and regulatory compliance",
-    "scope": [
-      "authentication",
-      "security",
-      "compliance"
-    ],
-    "risk_if_unaddressed": "Regulatory violations, security breaches, customer data exposure",
+    "risk_if_unaddressed": "Cannot modernize existing banking application without breaking customer-facing operations and losing transaction history",
     "effort": "L",
     "severity": "critical",
     "dependencies": [
-      "rb_001"
+      "Legacy system discovery",
+      "OCX component inventory",
+      "Data schema mapping"
     ],
-    "suggested_approach": "Implement OAuth2/OIDC with MFA, session management, and audit logging for banking compliance",
+    "suggested_approach": "Create dedicated legacy integration agent with VB6 form parsing, OCX component mapping, and database migration capabilities",
     "success_criteria": [
-      "Multi-factor authentication implemented",
-      "Session management with timeout controls",
-      "Audit trail for all authentication events",
-      "Compliance with banking security standards"
+      "Legacy system components catalogued",
+      "Integration adapters functional",
+      "Data migration path validated"
     ],
     "confidence": 0.9,
     "provenance": [
       {
-        "file": "agents/security_engineer.py",
+        "file": "repository scan",
         "line": 1,
-        "evidence": "Security agent exists but no banking auth implementation"
+        "evidence": "No legacy system integration artifacts found"
       }
     ]
   },
   {
-    "id": "rb_003",
-    "title": "Replace File Storage with Banking Database",
-    "problem_statement": "JSON file storage insufficient for banking transaction integrity, ACID compliance, and regulatory requirements",
+    "id": "rb-002",
+    "title": "Implement Banking-Grade Authentication and Authorization",
+    "problem_statement": "Current platform lacks banking-specific authentication controls, session management, and regulatory compliance for customer authentication",
     "scope": [
-      "data_persistence",
-      "transaction_integrity",
-      "compliance"
+      "agents/security_engineer.py",
+      "utils/context_vault.py",
+      "web/server.py"
     ],
-    "risk_if_unaddressed": "Data corruption, transaction failures, regulatory violations, audit failures",
-    "effort": "L",
+    "risk_if_unaddressed": "Cannot deploy to production banking environment without proper customer authentication and regulatory compliance",
+    "effort": "M",
     "severity": "high",
     "dependencies": [
-      "rb_001"
+      "Banking compliance requirements",
+      "Customer identity provider selection",
+      "Multi-factor authentication strategy"
     ],
-    "suggested_approach": "Implement PostgreSQL or similar ACID-compliant database with encryption at rest and in transit",
+    "suggested_approach": "Enhance security engineer agent with banking-specific auth patterns, implement OAuth2/OIDC integration, add audit logging",
     "success_criteria": [
-      "ACID-compliant database implemented",
-      "Data encryption at rest and in transit",
-      "Transaction logging and audit trails",
-      "Backup and recovery procedures"
+      "Customer authentication flow implemented",
+      "Regulatory audit trails active",
+      "Session management compliant"
     ],
     "confidence": 0.85,
     "provenance": [
       {
-        "file": "team_data/tenant_memory/",
+        "file": "agents/security_engineer.py",
         "line": 1,
-        "evidence": "File-based JSON storage detected, inappropriate for banking"
+        "evidence": "Security agent exists but banking-specific controls not evident"
       }
     ]
   },
   {
-    "id": "rb_004",
-    "title": "Develop Core Banking Transaction Services",
-    "problem_statement": "Missing all core banking services: deposits, withdrawals, balance inquiry, interest calculation",
+    "id": "rb-003",
+    "title": "Replace File-Based Storage with Banking-Grade Database",
+    "problem_statement": "Current JSON file-based tenant memory storage lacks ACID properties, scalability, and audit capabilities required for banking operations",
     "scope": [
-      "transaction_processing",
-      "banking_services",
-      "api_endpoints"
+      "team_data/tenant_memory/",
+      "agents/database_engineer.py",
+      "new database layer"
     ],
-    "risk_if_unaddressed": "Cannot fulfill basic banking functionality requirements",
-    "effort": "XL",
+    "risk_if_unaddressed": "Data corruption, loss of transaction integrity, inability to meet banking regulatory requirements for data persistence",
+    "effort": "M",
     "severity": "high",
     "dependencies": [
-      "rb_001",
-      "rb_003"
+      "Database technology selection",
+      "Migration strategy",
+      "Backup and recovery procedures"
     ],
-    "suggested_approach": "Develop RESTful banking services with transaction validation, balance management, and interest calculation engines",
+    "suggested_approach": "Implement PostgreSQL or similar ACID-compliant database with proper transaction management, encryption at rest, and audit logging",
     "success_criteria": [
-      "Deposit service with validation and limits",
-      "Withdrawal service with balance checks",
-      "Real-time balance inquiry API",
-      "Interest calculation engine",
-      "Transaction history and reporting"
+      "ACID transactions implemented",
+      "Data encryption active",
+      "Audit trail functional",
+      "Backup procedures validated"
     ],
     "confidence": 0.9,
     "provenance": [
       {
-        "file": "repository_scan",
+        "file": "team_data/tenant_memory/",
         "line": 1,
-        "evidence": "No banking transaction services found in system"
+        "evidence": "JSON file-based storage detected"
       }
     ]
   },
   {
-    "id": "rb_005",
-    "title": "Define Legacy VB6 Migration Strategy",
-    "problem_statement": "No clear path for migrating from legacy VB6 banking systems to current Python architecture",
+    "id": "rb-004",
+    "title": "Reduce Analyst Agent Complexity",
+    "problem_statement": "Analyst agent has 25 imports indicating potential over-coupling and violation of single responsibility principle",
     "scope": [
-      "legacy_migration",
-      "data_migration",
-      "integration"
+      "agents/analyst.py"
     ],
-    "risk_if_unaddressed": "Cannot retire legacy systems or migrate existing banking operations",
-    "effort": "L",
-    "severity": "high",
+    "risk_if_unaddressed": "Difficult maintenance, testing challenges, increased bug risk, reduced code reusability",
+    "effort": "S",
+    "severity": "medium",
     "dependencies": [
-      "rb_001"
+      "Agent responsibility analysis",
+      "Refactoring strategy"
     ],
-    "suggested_approach": "Analyze legacy VB6 systems, design migration strategy, implement data transformation and integration layers",
+    "suggested_approach": "Split analyst agent into specialized sub-agents (code analyzer, dependency analyzer, risk assessor) with clear interfaces",
     "success_criteria": [
-      "Legacy system analysis completed",
-      "Data migration strategy defined",
-      "Integration layer for gradual migration",
-      "Rollback procedures established"
+      "Import count reduced below 15",
+      "Single responsibility maintained",
+      "Test coverage improved"
     ],
     "confidence": 0.8,
     "provenance": [
       {
-        "file": "business_objectives",
+        "file": "agents/analyst.py",
         "line": 1,
-        "evidence": "OCX retirement mentioned but no legacy components found in system"
+        "evidence": "25 import statements detected"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Implement Banking Domain Model and Business Rules",
+    "problem_statement": "Platform lacks banking-specific domain models for accounts, transactions, customers, and business rules for interest calculation, withdrawal limits, etc.",
+    "scope": [
+      "new domain layer",
+      "agents/",
+      ".deliveryos/schemas/"
+    ],
+    "risk_if_unaddressed": "Cannot accurately modernize banking operations without proper domain modeling and business rule enforcement",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "Banking requirements analysis",
+      "Legacy business rule extraction",
+      "Regulatory compliance review"
+    ],
+    "suggested_approach": "Create banking domain agent with account models, transaction processing, interest calculation, and regulatory compliance rules",
+    "success_criteria": [
+      "Banking domain models defined",
+      "Business rules implemented",
+      "Regulatory compliance validated"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "repository scan",
+        "line": 1,
+        "evidence": "No banking-specific domain models detected"
       }
     ]
   }
