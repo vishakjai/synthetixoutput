@@ -1,16 +1,16 @@
 {
-  "version": "cp-v1.0-2d0cf721c226bb3e",
-  "summary": "Python-centric multi-agent architecture with FastAPI services, JSON schema validation, and Docker containerization. Strong separation of concerns with specialized agent modules.",
+  "version": "cp-v1.2.0",
+  "summary": "Python-centric enterprise development with FastAPI web services, JSON Schema validation, agent-based architecture, and Docker containerization. Strong emphasis on modular agent design, tenant isolation, and schema-driven contracts.",
   "rules": [
     {
-      "id": "naming_001",
+      "id": "naming-001",
       "category": "naming",
-      "rule": "Agent modules follow snake_case naming with descriptive suffixes (_agent.py)",
+      "rule": "Agent modules follow snake_case naming with descriptive suffixes (e.g., security_engineer.py, database_engineer.py)",
       "confidence": 0.95,
       "examples": [
-        "agents/analyst.py",
-        "agents/architect.py",
-        "agents/developer.py"
+        "security_engineer.py",
+        "database_engineer.py",
+        "system_intelligence.py"
       ],
       "counterexamples": [],
       "provenance": [
@@ -22,51 +22,68 @@
       ]
     },
     {
-      "id": "api_001",
-      "category": "api",
-      "rule": "REST endpoints use FastAPI decorators with explicit HTTP methods",
-      "confidence": 0.85,
-      "examples": [
-        "@app.get(",
-        "@app.post("
-      ],
-      "counterexamples": [],
-      "provenance": [
-        {
-          "file": "web/server.py",
-          "line": 1,
-          "evidence": "FastAPI decorator patterns detected"
-        },
-        {
-          "file": "utils/context_vault.py",
-          "line": 1,
-          "evidence": "FastAPI router patterns detected"
-        }
-      ]
-    },
-    {
-      "id": "testing_001",
-      "category": "testing",
-      "rule": "JSON schema validation enforced through dedicated schema files",
+      "id": "naming-002",
+      "category": "naming",
+      "rule": "Schema files use descriptive names with version suffixes and .schema.json extension",
       "confidence": 0.9,
       "examples": [
-        ".deliveryos/schemas/agent_result.schema.json",
-        ".deliveryos/schemas/context_bundle.schema.json"
+        "analyst_report_v2.schema.json",
+        "business_rule_catalog_v1.schema.json"
       ],
       "counterexamples": [],
       "provenance": [
         {
           "file": ".deliveryos/schemas/",
           "line": 1,
-          "evidence": "Comprehensive JSON schema collection for validation"
+          "evidence": "Versioned schema naming pattern"
         }
       ]
     },
     {
-      "id": "auth_001",
-      "category": "auth",
-      "rule": "Tenant-based memory isolation with workspace/client hierarchy",
+      "id": "api-001",
+      "category": "api",
+      "rule": "FastAPI decorators (@app.get, @app.post) used for HTTP endpoint definition",
+      "confidence": 0.85,
+      "examples": [
+        "@app.get",
+        "@app.post"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI decorator usage"
+        },
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI endpoint definitions"
+        }
+      ]
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "rule": "Dedicated tester agent module for test automation and validation",
       "confidence": 0.8,
+      "examples": [
+        "agents/tester.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Specialized testing agent module"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "Tenant-based isolation implemented through hierarchical directory structure",
+      "confidence": 0.85,
       "examples": [
         "team_data/tenant_memory/default-workspace/default-client/"
       ],
@@ -75,40 +92,40 @@
         {
           "file": "team_data/tenant_memory/",
           "line": 1,
-          "evidence": "Hierarchical tenant memory structure detected"
+          "evidence": "Hierarchical tenant isolation structure"
         }
       ]
     },
     {
-      "id": "logging_001",
-      "category": "logging",
-      "rule": "Configuration-driven approach with YAML pipeline specifications",
-      "confidence": 0.85,
+      "id": "auth-001",
+      "category": "auth",
+      "rule": "Security engineer agent handles authentication and authorization concerns",
+      "confidence": 0.8,
       "examples": [
-        ".deliveryos/pipeline/pipeline_spec.yaml"
+        "agents/security_engineer.py"
       ],
       "counterexamples": [],
       "provenance": [
         {
-          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "file": "agents/security_engineer.py",
           "line": 1,
-          "evidence": "YAML-based pipeline configuration detected"
+          "evidence": "Dedicated security agent for auth concerns"
         }
       ]
     }
   ],
   "lint_recommendations": [
-    "Implement consistent error handling patterns across all agent modules",
-    "Add comprehensive logging configuration for production deployment",
-    "Establish API versioning strategy for FastAPI endpoints",
-    "Implement authentication middleware for tenant isolation",
-    "Add comprehensive unit test coverage for agent modules"
+    "Implement consistent import ordering across all agent modules",
+    "Add type hints to all agent method signatures",
+    "Standardize error handling patterns across FastAPI endpoints",
+    "Add docstrings to all agent classes and methods",
+    "Implement consistent logging patterns across all modules"
   ],
   "scaffold_templates": [
-    "FastAPI service template with router configuration",
-    "Agent module template with base class inheritance",
-    "JSON schema template for data validation",
-    "Docker multi-stage build template",
-    "Tenant memory storage template"
+    "agent_base_template.py - Base class template for new agent types",
+    "fastapi_endpoint_template.py - Standard endpoint structure with error handling",
+    "json_schema_template.json - Schema template with common validation patterns",
+    "docker_service_template - Container template for new services",
+    "tenant_memory_template.json - Standard tenant data structure"
   ]
 }
