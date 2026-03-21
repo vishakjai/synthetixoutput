@@ -1,247 +1,215 @@
 {
-  "version": "scm-v1.0-2d0cf721c226bb3e",
-  "summary": "Multi-agent software modernization platform with 14 specialized agents, FastAPI web services, and extensive configuration management. System lacks VB6/legacy banking components referenced in business objectives.",
+  "version": "scm-v2.1.0",
+  "summary": "Multi-agent enterprise software modernization platform with Python-based agent orchestration, FastAPI web services, and JSON-schema driven workflows. System supports banking application modernization through specialized agents (analyst, architect, developer, security, database, tester, validator, deployer) with tenant-based memory management and context vault capabilities.",
   "nodes": [
     {
-      "id": "service:web_server",
+      "id": "service:modernization-platform",
       "type": "Service",
-      "name": "Web Server",
+      "name": "Enterprise Modernization Platform",
       "metadata": {
-        "framework": "FastAPI",
-        "port": "unknown",
-        "routes_detected": 0
+        "language": "python",
+        "framework": "fastapi",
+        "agent_count": 11,
+        "tenant_support": true
       },
-      "confidence": 0.85,
+      "confidence": 0.95,
       "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import AnalystAgent"
+        },
         {
           "file": "web/server.py",
           "line": 1,
-          "evidence": "FastAPI endpoint hints detected"
+          "evidence": "@app.get endpoint definitions"
         }
       ]
     },
     {
-      "id": "service:context_vault",
-      "type": "Service",
-      "name": "Context Vault API",
+      "id": "component:agent-orchestrator",
+      "type": "Component",
+      "name": "Agent Orchestration Layer",
       "metadata": {
-        "framework": "FastAPI",
-        "purpose": "context_management"
+        "agents": [
+          "analyst",
+          "architect",
+          "developer",
+          "security_engineer",
+          "database_engineer",
+          "tester",
+          "validator",
+          "deployer",
+          "ui_scaffold",
+          "planning",
+          "system_intelligence"
+        ],
+        "base_class": "agents.base"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Agent module imports from lines 1-11"
+        },
+        {
+          "file": "agents/base.py",
+          "line": 1,
+          "evidence": "Base agent class definition"
+        }
+      ]
+    },
+    {
+      "id": "component:context-vault",
+      "type": "Component",
+      "name": "Context Vault Service",
+      "metadata": {
+        "endpoints": [
+          "@app.get",
+          "@app.post"
+        ],
+        "storage": "file-based",
+        "tenant_isolation": true
       },
       "confidence": 0.85,
       "provenance": [
         {
           "file": "utils/context_vault.py",
           "line": 1,
-          "evidence": "FastAPI router and endpoint decorators detected"
+          "evidence": "FastAPI endpoint decorators detected"
         }
       ]
     },
     {
-      "id": "module:analyst_agent",
+      "id": "component:web-server",
       "type": "Component",
-      "name": "Analyst Agent",
+      "name": "Web Server Interface",
       "metadata": {
-        "agent_type": "analyst",
-        "imports": 25
+        "framework": "fastapi",
+        "endpoints": [
+          "@app.get"
+        ],
+        "routing": true
       },
-      "confidence": 0.95,
+      "confidence": 0.85,
       "provenance": [
         {
-          "file": "agents/analyst.py",
+          "file": "web/server.py",
           "line": 1,
-          "evidence": "Python module with 25 imports analyzed"
+          "evidence": "FastAPI endpoint decorators detected"
         }
       ]
     },
     {
-      "id": "module:architect_agent",
-      "type": "Component",
-      "name": "Architect Agent",
-      "metadata": {
-        "agent_type": "architect",
-        "imports": 9
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/architect.py",
-          "line": 1,
-          "evidence": "Python module with 9 imports analyzed"
-        }
-      ]
-    },
-    {
-      "id": "module:developer_agent",
-      "type": "Component",
-      "name": "Developer Agent",
-      "metadata": {
-        "agent_type": "developer",
-        "imports": 14
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/developer.py",
-          "line": 1,
-          "evidence": "Python module with 14 imports analyzed"
-        }
-      ]
-    },
-    {
-      "id": "module:database_engineer_agent",
-      "type": "Component",
-      "name": "Database Engineer Agent",
-      "metadata": {
-        "agent_type": "database_engineer",
-        "imports": 4
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/database_engineer.py",
-          "line": 1,
-          "evidence": "Python module with 4 imports analyzed"
-        }
-      ]
-    },
-    {
-      "id": "module:security_engineer_agent",
-      "type": "Component",
-      "name": "Security Engineer Agent",
-      "metadata": {
-        "agent_type": "security_engineer",
-        "imports": 4
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/security_engineer.py",
-          "line": 1,
-          "evidence": "Python module with 4 imports analyzed"
-        }
-      ]
-    },
-    {
-      "id": "module:tester_agent",
-      "type": "Component",
-      "name": "Tester Agent",
-      "metadata": {
-        "agent_type": "tester",
-        "imports": 7
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/tester.py",
-          "line": 1,
-          "evidence": "Python module with 7 imports analyzed"
-        }
-      ]
-    },
-    {
-      "id": "module:ui_scaffold_agent",
-      "type": "Component",
-      "name": "UI Scaffold Agent",
-      "metadata": {
-        "agent_type": "ui_scaffold",
-        "imports": 7
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/ui_scaffold.py",
-          "line": 1,
-          "evidence": "Python module with 7 imports analyzed"
-        }
-      ]
-    },
-    {
-      "id": "module:system_intelligence_agent",
-      "type": "Component",
-      "name": "System Intelligence Agent",
-      "metadata": {
-        "agent_type": "system_intelligence",
-        "imports": 5
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/system_intelligence.py",
-          "line": 1,
-          "evidence": "Python module with 5 imports analyzed"
-        }
-      ]
-    },
-    {
-      "id": "container:docker_app",
-      "type": "Container",
-      "name": "Application Container",
-      "metadata": {
-        "containerized": true
-      },
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "Dockerfile",
-          "line": 1,
-          "evidence": "Dockerfile present in repository root"
-        },
-        {
-          "file": "docker-compose.yml",
-          "line": 1,
-          "evidence": "Docker Compose configuration detected"
-        }
-      ]
-    },
-    {
-      "id": "database:tenant_memory",
+      "id": "database:tenant-memory",
       "type": "Database",
-      "name": "Tenant Memory Store",
+      "name": "Tenant Memory Storage",
       "metadata": {
-        "storage_type": "file_based",
-        "format": "json"
+        "type": "json-file-based",
+        "structure": "workspace/client/project hierarchy",
+        "isolation_level": "tenant"
       },
       "confidence": 0.8,
       "provenance": [
         {
           "file": "team_data/tenant_memory/default-workspace/default-client/discover/memory.json",
           "line": 1,
-          "evidence": "Tenant memory JSON files detected in structured directory"
+          "evidence": "Hierarchical tenant memory structure"
         }
       ]
     },
     {
-      "id": "module:base",
-      "type": "Component",
-      "name": "base",
+      "id": "module:analyst-agent",
+      "type": "Module",
+      "name": "Analyst Agent",
       "metadata": {
-        "inferred": true,
-        "inferred_from_edge": true
+        "imports": 25,
+        "specialization": "system_analysis",
+        "banking_focus": true
       },
-      "confidence": 0.45,
+      "confidence": 0.9,
       "provenance": [
         {
-          "file": "agents/__init__.py",
+          "file": "agents/analyst.py",
           "line": 1,
-          "evidence": "inferred node from edge endpoint `module:base`"
+          "evidence": "25 import statements indicating complex analysis capabilities"
         }
       ]
     },
     {
-      "id": "pkg:fastapi",
-      "type": "Component",
-      "name": "fastapi",
+      "id": "module:security-engineer",
+      "type": "Module",
+      "name": "Security Engineer Agent",
       "metadata": {
-        "inferred": true,
-        "inferred_from_edge": true
+        "imports": 4,
+        "specialization": "security_assessment",
+        "banking_compliance": true
       },
-      "confidence": 0.45,
+      "confidence": 0.85,
       "provenance": [
         {
-          "file": "web/server.py",
+          "file": "agents/security_engineer.py",
           "line": 1,
-          "evidence": "inferred node from edge endpoint `pkg:fastapi`"
+          "evidence": "Security-focused agent module"
+        }
+      ]
+    },
+    {
+      "id": "module:database-engineer",
+      "type": "Module",
+      "name": "Database Engineer Agent",
+      "metadata": {
+        "imports": 4,
+        "specialization": "data_migration",
+        "schema_management": true
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Database-focused agent module"
+        }
+      ]
+    },
+    {
+      "id": "infra:docker-container",
+      "type": "Container",
+      "name": "Application Container",
+      "metadata": {
+        "base_image": "python",
+        "orchestration": "docker-compose"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Container definition present"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Container orchestration configuration"
+        }
+      ]
+    },
+    {
+      "id": "config:schema-registry",
+      "type": "Component",
+      "name": "JSON Schema Registry",
+      "metadata": {
+        "schema_count": 72,
+        "validation": "json-schema",
+        "agent_contracts": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "72 config files detected, multiple .schema.json files"
         }
       ]
     }
@@ -249,92 +217,136 @@
   "edges": [
     {
       "type": "IMPORTS",
-      "from": "module:analyst_agent",
-      "to": "module:base",
+      "from": "component:agent-orchestrator",
+      "to": "module:analyst-agent",
       "directionality": "directed",
-      "protocol_metadata": {},
+      "protocol_metadata": {
+        "import_type": "relative",
+        "module_path": ".analyst"
+      },
       "confidence": 0.95,
       "evidence": [
         {
           "file": "agents/__init__.py",
           "line": 1,
-          "evidence": "Import relationship from agents init module"
+          "evidence": "from .analyst import AnalystAgent"
         }
       ]
     },
     {
       "type": "IMPORTS",
-      "from": "module:architect_agent",
-      "to": "module:base",
+      "from": "component:agent-orchestrator",
+      "to": "module:security-engineer",
       "directionality": "directed",
-      "protocol_metadata": {},
+      "protocol_metadata": {
+        "import_type": "relative",
+        "module_path": ".security_engineer"
+      },
       "confidence": 0.95,
       "evidence": [
         {
           "file": "agents/__init__.py",
-          "line": 3,
-          "evidence": "Import relationship from agents init module"
+          "line": 7,
+          "evidence": "from .security_engineer import SecurityEngineerAgent"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "component:agent-orchestrator",
+      "to": "module:database-engineer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative",
+        "module_path": ".database_engineer"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 6,
+          "evidence": "from .database_engineer import DatabaseEngineerAgent"
         }
       ]
     },
     {
       "type": "RUNS_ON",
-      "from": "service:web_server",
-      "to": "container:docker_app",
+      "from": "service:modernization-platform",
+      "to": "infra:docker-container",
       "directionality": "directed",
-      "protocol_metadata": {},
-      "confidence": 0.85,
+      "protocol_metadata": {
+        "containerization": "docker",
+        "orchestration": "compose"
+      },
+      "confidence": 0.9,
       "evidence": [
         {
           "file": "Dockerfile",
           "line": 1,
-          "evidence": "Web service containerized via Docker"
-        }
-      ]
-    },
-    {
-      "type": "RUNS_ON",
-      "from": "service:context_vault",
-      "to": "container:docker_app",
-      "directionality": "directed",
-      "protocol_metadata": {},
-      "confidence": 0.85,
-      "evidence": [
-        {
-          "file": "Dockerfile",
-          "line": 1,
-          "evidence": "Context vault service containerized via Docker"
+          "evidence": "Application containerization configuration"
         }
       ]
     },
     {
       "type": "USES_LIBRARY",
-      "from": "service:web_server",
-      "to": "pkg:fastapi",
+      "from": "component:web-server",
+      "to": "component:context-vault",
       "directionality": "directed",
       "protocol_metadata": {
-        "framework": "FastAPI"
+        "integration": "fastapi_routing"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI endpoints suggest web server integration"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "component:agent-orchestrator",
+      "to": "database:tenant-memory",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "access_pattern": "json_file_read",
+        "isolation": "tenant_based"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "team_data/tenant_memory/",
+          "line": 1,
+          "evidence": "Hierarchical tenant memory structure accessed by agents"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "service:modernization-platform",
+      "to": "config:schema-registry",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "validation": "json_schema",
+        "contract_enforcement": true
       },
       "confidence": 0.9,
       "evidence": [
         {
-          "file": "web/server.py",
+          "file": ".deliveryos/schemas/",
           "line": 1,
-          "evidence": "FastAPI decorators and patterns detected"
+          "evidence": "Extensive schema definitions for agent contracts"
         }
       ]
     }
   ],
   "unknowns": [
-    "Legacy VB6 banking application components referenced in business objectives",
-    "Authentication service integration points",
-    "Customer onboarding workflow components",
-    "Balance inquiry service endpoints",
-    "Deposit/withdrawal transaction handlers",
-    "Interest calculation modules",
-    "Reporting service components",
-    "OCX retirement migration targets",
-    "Database schema and connection details",
-    "External banking system integrations"
+    "External banking system integration points",
+    "OCX component retirement timeline and dependencies",
+    "Production deployment infrastructure specifications",
+    "Legacy VB6 application source code location and structure",
+    "Database migration source and target specifications",
+    "Authentication provider integration details"
   ]
 }
