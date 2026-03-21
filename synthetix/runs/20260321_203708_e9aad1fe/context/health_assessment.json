@@ -1,90 +1,90 @@
 {
-  "version": "ha-v1.0-2d0cf721c226bb3e",
-  "summary": "Modern Python architecture with good separation of concerns but critical gaps for banking modernization objectives. Missing legacy VB6 integration components and banking-specific security controls.",
+  "version": "ha-v1.1.0",
+  "summary": "Moderately healthy modernization platform with strong architectural foundations but lacking legacy system integration clarity. High modularity and schema-driven design provide good maintainability, but missing banking domain specifics and unclear OCX retirement path present risks.",
   "scores": {
     "maintainability": 75,
-    "security": 45,
-    "reliability": 60,
-    "testability": 55
+    "security": 65,
+    "reliability": 70,
+    "testability": 60
   },
   "hotspots": [
     {
-      "scope": "Legacy Integration Gap",
-      "reason": "No VB6 or legacy banking components detected despite business objectives requiring retail banking modernization",
-      "severity": "high",
-      "confidence": 0.95,
+      "scope": "agents/analyst.py",
+      "reason": "High complexity with 25 imports suggests potential over-coupling and single responsibility violations",
+      "severity": "medium",
+      "confidence": 0.8,
       "provenance": [
         {
-          "file": "repository_scan",
+          "file": "agents/analyst.py",
           "line": 1,
-          "evidence": "290 files scanned, no VB6 (.frm, .frx, .bas, .cls) or banking-specific components found"
+          "evidence": "25 import statements indicating high complexity"
         }
       ]
     },
     {
-      "scope": "Authentication Security",
-      "reason": "No banking-grade authentication or authorization mechanisms detected for customer onboarding and account access",
-      "severity": "high",
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "agents/security_engineer.py",
-          "line": 1,
-          "evidence": "Security engineer agent exists but no banking auth implementation detected"
-        }
-      ]
-    },
-    {
-      "scope": "Data Persistence",
-      "reason": "File-based JSON storage insufficient for banking transaction integrity and ACID compliance",
+      "scope": "team_data/tenant_memory/",
+      "reason": "File-based tenant isolation may not scale and lacks transactional guarantees for banking operations",
       "severity": "high",
       "confidence": 0.85,
       "provenance": [
         {
           "file": "team_data/tenant_memory/",
           "line": 1,
-          "evidence": "JSON file-based storage detected, no database connections found"
+          "evidence": "JSON file-based storage for tenant data"
         }
       ]
     },
     {
-      "scope": "Transaction Processing",
-      "reason": "No deposit, withdrawal, or balance inquiry transaction handlers detected",
+      "scope": "utils/context_vault.py",
+      "reason": "Context vault endpoints lack visible authentication and authorization controls",
       "severity": "high",
-      "confidence": 0.95,
+      "confidence": 0.7,
       "provenance": [
         {
-          "file": "repository_scan",
+          "file": "utils/context_vault.py",
           "line": 1,
-          "evidence": "No banking transaction processing components found in 290 scanned files"
+          "evidence": "FastAPI endpoints without visible auth decorators"
+        }
+      ]
+    },
+    {
+      "scope": "Legacy Integration Layer",
+      "reason": "No visible integration points or adapters for legacy banking systems and OCX components",
+      "severity": "critical",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "repository scan",
+          "line": 1,
+          "evidence": "No VB6, OCX, or legacy banking system artifacts detected"
         }
       ]
     }
   ],
   "risks": [
     {
-      "title": "Architecture-Business Objective Mismatch",
-      "description": "Current system is a software modernization platform, not a retail banking application. Missing all core banking components required for stated objectives.",
+      "title": "Missing Legacy System Integration",
+      "description": "No visible adapters or integration points for legacy VB6 banking application or OCX components, creating a gap between modernization platform and target systems",
       "severity": "critical",
       "confidence": 0.95
     },
     {
-      "title": "Regulatory Compliance Gap",
-      "description": "No banking compliance, audit trails, or regulatory reporting mechanisms detected for retail banking operations.",
-      "severity": "critical",
-      "confidence": 0.9
+      "title": "Banking Compliance Gaps",
+      "description": "No evidence of banking-specific compliance controls, audit trails, or regulatory reporting capabilities required for retail banking operations",
+      "severity": "high",
+      "confidence": 0.8
     },
     {
-      "title": "Data Security Vulnerability",
-      "description": "File-based storage and lack of encryption mechanisms inappropriate for banking customer data and financial transactions.",
+      "title": "Data Persistence Scalability",
+      "description": "File-based tenant memory storage lacks ACID properties and scalability required for production banking workloads",
       "severity": "high",
       "confidence": 0.85
     },
     {
-      "title": "Legacy Migration Path Undefined",
-      "description": "No clear integration or migration path from legacy VB6 banking systems to current Python architecture.",
+      "title": "Authentication Architecture Unclear",
+      "description": "No clear authentication strategy visible for banking customer authentication, session management, or multi-factor authentication requirements",
       "severity": "high",
-      "confidence": 0.9
+      "confidence": 0.8
     }
   ]
 }
