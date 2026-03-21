@@ -1,0 +1,262 @@
+{
+  "header": {
+    "artifact_id": "e16dcc0f5fe440c8a7e0647c48756c46",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-21T20:38:21.491901+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260321_203708_e9aad1fe",
+      "stage_id": "context_layer",
+      "task_id": "c8ae3c205c5b4b3b9781a56339c906fa"
+    },
+    "parents": [],
+    "digest": "sha256:fe588c86ffb9ea1bcf49ded3b548eb9cdd477ca89005e1ce3fe3f103918cb2c5",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260321_203708_e9aad1fe",
+      "bundle_version": "20260321T203821Z_20260321_203708_e9aad1fe"
+    }
+  },
+  "rules": [
+    {
+      "id": "naming_001",
+      "category": "naming",
+      "title": "Agent modules follow snake_case naming with descriptive suffixes (_agent.py)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent modules follow snake_case naming with descriptive suffixes (_agent.py)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/analyst.py"
+        },
+        {
+          "file": "agents/architect.py"
+        },
+        {
+          "file": "agents/developer.py"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "api_001",
+      "category": "api_design",
+      "title": "REST endpoints use FastAPI decorators with explicit HTTP methods",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "REST endpoints use FastAPI decorators with explicit HTTP methods",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get("
+        },
+        {
+          "file": "@app.post("
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "web/server.py"
+        },
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "testing_001",
+      "category": "testing",
+      "title": "JSON schema validation enforced through dedicated schema files",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "JSON schema validation enforced through dedicated schema files",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json"
+        },
+        {
+          "file": ".deliveryos/schemas/context_bundle.schema.json"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "auth_001",
+      "category": "authn_authz",
+      "title": "Tenant-based memory isolation with workspace/client hierarchy",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Tenant-based memory isolation with workspace/client hierarchy",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "team_data/tenant_memory/default-workspace/default-client/"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "team_data/tenant_memory/"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "logging_001",
+      "category": "logging_observability",
+      "title": "Configuration-driven approach with YAML pipeline specifications",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Configuration-driven approach with YAML pipeline specifications",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "FastAPI service template with router configuration",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "Agent module template with base class inheritance",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "JSON schema template for data validation",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "Docker multi-stage build template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-005",
+      "language": "generic",
+      "name": "Tenant memory storage template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
