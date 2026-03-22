@@ -1,0 +1,127 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Secure Authentication System",
+    "problem_statement": "Current VB6 login form lacks modern security practices including password hashing, secure session management, and multi-factor authentication",
+    "scope": [
+      "frmLogin.frm",
+      "authentication_middleware"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to banking system, credential theft, regulatory compliance violations",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "database_schema_analysis",
+      "user_role_mapping"
+    ],
+    "suggested_approach": "Replace VB6 login with OAuth2/JWT-based authentication service, implement bcrypt password hashing, add session timeout controls",
+    "success_criteria": [
+      "All passwords stored with bcrypt hashing",
+      "JWT tokens with 15-minute expiration",
+      "Failed login attempt lockout after 3 tries",
+      "Audit trail for all authentication events"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 18,
+        "evidence": "Form=frmLogin.frm"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Eliminate SQL Injection Vulnerabilities",
+    "problem_statement": "ADO data access layer likely uses string concatenation for SQL queries, creating injection attack vectors",
+    "scope": [
+      "deBank.Dsr",
+      "data_access_layer"
+    ],
+    "risk_if_unaddressed": "Database compromise, unauthorized data access, data corruption or deletion",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "database_schema_extraction",
+      "query_pattern_analysis"
+    ],
+    "suggested_approach": "Replace ADO with parameterized queries using modern ORM, implement stored procedures for sensitive operations, add query validation",
+    "success_criteria": [
+      "All database queries use parameterized statements",
+      "No dynamic SQL string concatenation",
+      "Database access audit logging enabled",
+      "Penetration testing passes for injection attacks"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 12,
+        "evidence": "Designer=deBank.Dsr"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Add Comprehensive Input Validation",
+    "problem_statement": "Form controls lack client-side and server-side validation for financial data integrity",
+    "scope": [
+      "frmdeposit.frm",
+      "frmwithdraw.frm",
+      "frmcustomer.frm"
+    ],
+    "risk_if_unaddressed": "Invalid transactions, data corruption, business logic bypass, regulatory compliance issues",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "business_rule_extraction",
+      "validation_framework_selection"
+    ],
+    "suggested_approach": "Implement validation middleware with business rule engine, add client-side validation for UX, create validation schemas for all financial operations",
+    "success_criteria": [
+      "All monetary inputs validated for format and range",
+      "Account number validation with check digits",
+      "Transaction limits enforced at API level",
+      "Validation error messages user-friendly and logged"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/close account.frm",
+        "line": 18,
+        "evidence": "TextBox controls without validation"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Establish Agent Framework Testing Strategy",
+    "problem_statement": "Modernization agent framework lacks unit tests, integration tests, and banking domain validation",
+    "scope": [
+      "agents/",
+      "test_framework"
+    ],
+    "risk_if_unaddressed": "Unreliable modernization process, potential data loss during migration, extended development timeline",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [
+      "test_framework_setup",
+      "banking_domain_test_data"
+    ],
+    "suggested_approach": "Implement pytest-based testing with banking transaction test scenarios, add integration tests for agent workflows, create test data fixtures",
+    "success_criteria": [
+      "90% code coverage for all agent modules",
+      "Integration tests for complete modernization workflows",
+      "Banking domain-specific test scenarios",
+      "Automated test execution in CI/CD pipeline"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "25 imports but no test files detected"
+      }
+    ]
+  }
+]
