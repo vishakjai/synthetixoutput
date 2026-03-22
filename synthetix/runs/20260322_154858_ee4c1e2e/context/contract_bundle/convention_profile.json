@@ -1,0 +1,363 @@
+{
+  "header": {
+    "artifact_id": "f075ce6221a9481983f9a138e3803f72",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-22T15:50:36.837665+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260322_154858_ee4c1e2e",
+      "stage_id": "context_layer",
+      "task_id": "57df936e965f410c8fd2913b64cb7854"
+    },
+    "parents": [],
+    "digest": "sha256:bf988689219dfd2204c04cb59c64ac47e068e0dee2629b156dd3d27827ac6a1d",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260322_154858_ee4c1e2e",
+      "bundle_version": "20260322T155036Z_20260322_154858_ee4c1e2e"
+    }
+  },
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "title": "Agent modules use descriptive role-based names with underscore separation",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent modules use descriptive role-based names with underscore separation",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "analyst.py"
+        },
+        {
+          "file": "architect.py"
+        },
+        {
+          "file": "security_engineer.py"
+        },
+        {
+          "file": "database_engineer.py"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "agent1.py"
+        },
+        {
+          "file": "helper.py"
+        },
+        {
+          "file": "utils.py"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "naming-002",
+      "category": "naming",
+      "title": "Configuration files use descriptive prefixes and JSON format for data",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Configuration files use descriptive prefixes and JSON format for data",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "custom_agents.json"
+        },
+        {
+          "file": "custom_teams.json"
+        },
+        {
+          "file": "work_items.json"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "data.json"
+        },
+        {
+          "file": "config.json"
+        },
+        {
+          "file": "settings.json"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "team_data/"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "api-001",
+      "category": "api_design",
+      "title": "Web endpoints use FastAPI decorators with explicit HTTP methods",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Web endpoints use FastAPI decorators with explicit HTTP methods",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get("
+        },
+        {
+          "file": "@app.post("
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "app.route("
+        },
+        {
+          "file": "flask.route("
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        },
+        {
+          "kind": "file_span",
+          "file": "web/server.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "title": "Dedicated tester agent for test generation and validation",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Dedicated tester agent for test generation and validation",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/tester.py"
+        },
+        {
+          "file": "agents/validator.py"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "inline test methods"
+        },
+        {
+          "file": "manual testing only"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/tester.py"
+        },
+        {
+          "kind": "file_span",
+          "file": "agents/validator.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "security-001",
+      "category": "authn_authz",
+      "title": "Dedicated security engineer agent for security analysis",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Dedicated security engineer agent for security analysis",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/security_engineer.py"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "inline security checks"
+        },
+        {
+          "file": "no security validation"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/security_engineer.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "auth-001",
+      "category": "authn_authz",
+      "title": "No explicit authentication patterns detected in current codebase",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "No explicit authentication patterns detected in current codebase",
+      "detection": {},
+      "enforcement": {},
+      "examples": [],
+      "counterexamples": [
+        {
+          "file": "@require_auth"
+        },
+        {
+          "file": "jwt.decode"
+        },
+        {
+          "file": "session.user"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "static_analysis"
+        }
+      ],
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "FastAPI agent endpoint template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "Agent base class template with standard methods",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "Docker containerization template for agents",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "JSON schema template for agent configurations",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-005",
+      "language": "generic",
+      "name": "Agent integration test template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-006",
+      "language": "generic",
+      "name": "DeliveryOS pipeline stage template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
