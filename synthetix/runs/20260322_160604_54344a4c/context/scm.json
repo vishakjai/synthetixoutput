@@ -1,0 +1,270 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Legacy VB6 banking application with 13 forms, ADO data access, and modern Python agent framework for modernization. Critical data flow through deBank.Dsr designer and multiple report generators.",
+  "nodes": [
+    {
+      "id": "vb6-bank-app",
+      "type": "Service",
+      "name": "BANK_SYSTEM",
+      "metadata": {
+        "startup_form": "frmSplash",
+        "company": "KENEX Ltd",
+        "version": "1.0.0",
+        "executable_type": "Exe"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        },
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 25,
+          "evidence": "Title=\"BANK_SYSTEM\""
+        }
+      ]
+    },
+    {
+      "id": "frm-splash",
+      "type": "Component",
+      "name": "frmSplash",
+      "metadata": {
+        "form_type": "startup",
+        "ui_component": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 23,
+          "evidence": "Startup=\"frmSplash\""
+        }
+      ]
+    },
+    {
+      "id": "frm-customer",
+      "type": "Component",
+      "name": "frmcustomer",
+      "metadata": {
+        "form_type": "data_entry",
+        "ui_component": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 14,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-deposit",
+      "type": "Component",
+      "name": "frmdeposit",
+      "metadata": {
+        "form_type": "transaction",
+        "ui_component": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 16,
+          "evidence": "Form=frmdeposit.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-withdraw",
+      "type": "Component",
+      "name": "frmwithdraw",
+      "metadata": {
+        "form_type": "transaction",
+        "ui_component": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 18,
+          "evidence": "Form=frmwithdraw.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-login",
+      "type": "Component",
+      "name": "frmLogin",
+      "metadata": {
+        "form_type": "authentication",
+        "ui_component": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 19,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-checkbalance",
+      "type": "Component",
+      "name": "frmcheckbalance",
+      "metadata": {
+        "form_type": "inquiry",
+        "ui_component": true,
+        "caption": "Check Balance"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Begin VB.Form frmcheckbalance"
+        },
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 5,
+          "evidence": "Caption = \"Check Balance\""
+        }
+      ]
+    },
+    {
+      "id": "debank-designer",
+      "type": "Component",
+      "name": "deBank.Dsr",
+      "metadata": {
+        "component_type": "data_environment",
+        "data_access": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 13,
+          "evidence": "Designer=deBank.Dsr"
+        }
+      ]
+    },
+    {
+      "id": "ado-library",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0",
+      "metadata": {
+        "version": "2.5",
+        "guid": "{00000205-0000-0010-8000-00AA006D2EA4}",
+        "data_access": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#...#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "modernization-agent-framework",
+      "type": "Service",
+      "name": "Agent Framework",
+      "metadata": {
+        "language": "python",
+        "agent_count": 14,
+        "framework_type": "modernization"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import *"
+        }
+      ]
+    },
+    {
+      "id": "system-intelligence-agent",
+      "type": "Component",
+      "name": "SystemIntelligenceAgent",
+      "metadata": {
+        "agent_type": "analysis",
+        "role": "system_context_extraction"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "module:agents_system_intelligence_py"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "vb6-bank-app",
+      "to": "ado-library",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "reference_type": "COM",
+        "version": "2.5"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "vb6-bank-app",
+      "to": "debank-designer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "component_type": "data_environment"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 13,
+          "evidence": "Designer=deBank.Dsr"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "modernization-agent-framework",
+      "to": "system-intelligence-agent",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 11,
+          "evidence": "from .system_intelligence import *"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database schema and connection strings",
+    "Authentication mechanism implementation",
+    "Transaction processing business rules",
+    "Report generation data sources",
+    "Error handling patterns across forms",
+    "Data validation rules in VB6 forms"
+  ]
+}
