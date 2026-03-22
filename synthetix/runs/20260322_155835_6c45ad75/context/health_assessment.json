@@ -1,0 +1,82 @@
+{
+  "version": "ha-v1.0-61cf90a0512fcd60",
+  "summary": "Moderately healthy codebase with good modular architecture but lacking comprehensive testing, documentation, and production-ready configurations. Strong foundation with room for operational maturity improvements.",
+  "scores": {
+    "maintainability": 7,
+    "security": 5,
+    "reliability": 6,
+    "testability": 4
+  },
+  "hotspots": [
+    {
+      "scope": "agents/",
+      "reason": "High complexity agent modules with extensive imports and potential circular dependencies",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 10,
+          "evidence": "25 imports detected indicating high coupling"
+        },
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "14 imports suggesting complex dependencies"
+        }
+      ]
+    },
+    {
+      "scope": "web/server.py",
+      "reason": "API endpoints without visible authentication or rate limiting",
+      "severity": "high",
+      "confidence": 0.75,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "HTTP endpoints detected without security middleware"
+        }
+      ]
+    },
+    {
+      "scope": "utils/context_vault.py",
+      "reason": "Context vault handling sensitive data without encryption evidence",
+      "severity": "high",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "Context vault operations without encryption patterns"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Missing Authentication Layer",
+      "description": "Web API endpoints appear to lack authentication and authorization mechanisms, exposing potential security vulnerabilities",
+      "severity": "high",
+      "confidence": 0.75
+    },
+    {
+      "title": "Insufficient Test Coverage",
+      "description": "No visible test files or test directories detected, indicating potential reliability issues in production",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Complex Agent Dependencies",
+      "description": "High import counts in agent modules suggest tight coupling that could impact maintainability and testing",
+      "severity": "medium",
+      "confidence": 0.8
+    },
+    {
+      "title": "Production Configuration Gaps",
+      "description": "Missing production-ready configurations for logging, monitoring, and error handling",
+      "severity": "medium",
+      "confidence": 0.7
+    }
+  ]
+}
