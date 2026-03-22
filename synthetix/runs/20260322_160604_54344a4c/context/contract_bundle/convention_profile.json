@@ -1,0 +1,268 @@
+{
+  "header": {
+    "artifact_id": "5a275035bb654598aee8a6158402a99c",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-22T16:13:45.261116+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260322_160604_54344a4c",
+      "stage_id": "context_layer",
+      "task_id": "191c9fd96df04a7db4894c768c18b437"
+    },
+    "parents": [],
+    "digest": "sha256:fd2866039d25bdc8d7bd9c1a0479ed491b83870da06fceeaaf7fc45be055163a",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260322_160604_54344a4c",
+      "bundle_version": "20260322T161345Z_20260322_160604_54344a4c"
+    }
+  },
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "title": "Forms prefixed with 'frm' followed by descriptive name",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Forms prefixed with 'frm' followed by descriptive name",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "frmcustomer"
+        },
+        {
+          "file": "frmdeposit"
+        },
+        {
+          "file": "frmwithdraw"
+        },
+        {
+          "file": "frmLogin"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "Form9"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/BANK.vbp"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-control-naming",
+      "category": "naming",
+      "title": "Controls prefixed with type abbreviation (txt, cmd, lbl)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Controls prefixed with type abbreviation (txt, cmd, lbl)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "txtacno"
+        },
+        {
+          "file": "cmdsearch"
+        },
+        {
+          "file": "lblaccno"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/close account.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "python-agent-pattern",
+      "category": "naming",
+      "title": "Agent classes follow PascalCase with 'Agent' suffix",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent classes follow PascalCase with 'Agent' suffix",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "SystemIntelligenceAgent"
+        },
+        {
+          "file": "AnalystAgent"
+        },
+        {
+          "file": "DeveloperAgent"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/system_intelligence.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-data-access",
+      "category": "api_design",
+      "title": "Data access through ADO 2.5 and Data Environment designers",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Data access through ADO 2.5 and Data Environment designers",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "deBank.Dsr"
+        },
+        {
+          "file": "Microsoft ActiveX Data Objects 2.0"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/BANK.vbp"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "python-import-structure",
+      "category": "api_design",
+      "title": "Relative imports for agent modules with wildcard exports",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Relative imports for agent modules with wildcard exports",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "from .analyst import *"
+        },
+        {
+          "file": "from .system_intelligence import *"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "VB6 form template with standard control naming",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "Python agent base class template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "ADO data access wrapper template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "VB6 to Python form migration template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
