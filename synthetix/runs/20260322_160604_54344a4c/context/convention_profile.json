@@ -1,0 +1,115 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Mixed legacy VB6 patterns with modern Python agent architecture. VB6 follows Hungarian notation and event-driven patterns, Python follows PEP8 with class-based agents.",
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "rule": "Forms prefixed with 'frm' followed by descriptive name",
+      "confidence": 0.9,
+      "examples": [
+        "frmcustomer",
+        "frmdeposit",
+        "frmwithdraw",
+        "frmLogin"
+      ],
+      "counterexamples": [
+        "Form9"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 14,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "vb6-control-naming",
+      "category": "naming",
+      "rule": "Controls prefixed with type abbreviation (txt, cmd, lbl)",
+      "confidence": 0.85,
+      "examples": [
+        "txtacno",
+        "cmdsearch",
+        "lblaccno"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 25,
+          "evidence": "Begin VB.TextBox txtacno"
+        }
+      ]
+    },
+    {
+      "id": "python-agent-pattern",
+      "category": "naming",
+      "rule": "Agent classes follow PascalCase with 'Agent' suffix",
+      "confidence": 0.9,
+      "examples": [
+        "SystemIntelligenceAgent",
+        "AnalystAgent",
+        "DeveloperAgent"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "class SystemIntelligenceAgent"
+        }
+      ]
+    },
+    {
+      "id": "vb6-data-access",
+      "category": "api",
+      "rule": "Data access through ADO 2.5 and Data Environment designers",
+      "confidence": 0.9,
+      "examples": [
+        "deBank.Dsr",
+        "Microsoft ActiveX Data Objects 2.0"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "python-import-structure",
+      "category": "api",
+      "rule": "Relative imports for agent modules with wildcard exports",
+      "confidence": 0.85,
+      "examples": [
+        "from .analyst import *",
+        "from .system_intelligence import *"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import *"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement explicit imports instead of wildcard imports in Python agents",
+    "Add type hints to Python agent methods",
+    "Standardize VB6 error handling patterns across forms",
+    "Document data validation rules in VB6 forms",
+    "Add logging framework to Python agents"
+  ],
+  "scaffold_templates": [
+    "VB6 form template with standard control naming",
+    "Python agent base class template",
+    "ADO data access wrapper template",
+    "VB6 to Python form migration template"
+  ]
+}
