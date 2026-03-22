@@ -1,151 +1,135 @@
 [
   {
-    "id": "rb-001-vb6-parser",
-    "title": "Implement VB6 Source Code Parser",
-    "problem_statement": "Platform cannot analyze VB6 forms, modules, and business logic without dedicated parsing capabilities",
+    "id": "rb-001",
+    "title": "Implement Authentication and Authorization",
+    "problem_statement": "FastAPI services lack authentication mechanisms, creating security vulnerabilities for the modernization platform",
     "scope": [
-      "agents/analyst.py",
-      "utils/",
-      "parsers/"
+      "service:web-server",
+      "service:context-vault"
     ],
-    "risk_if_unaddressed": "Cannot extract business rules, UI patterns, or data access logic from legacy VB6 application",
-    "effort": "L",
+    "risk_if_unaddressed": "Unauthorized access to modernization tools and sensitive legacy code analysis data",
+    "effort": "M",
     "severity": "critical",
     "dependencies": [],
-    "suggested_approach": "Create VB6 AST parser using pyparsing or similar library to extract forms, controls, events, and business logic",
+    "suggested_approach": "Implement JWT-based authentication with role-based access control for agent operations and API endpoints",
     "success_criteria": [
-      "Parse .frm files and extract control hierarchies",
-      "Extract event handlers and business logic from .bas/.cls files",
-      "Generate system context model from VB6 source"
+      "All FastAPI endpoints require valid authentication tokens",
+      "Role-based permissions for different agent operations",
+      "Audit logging for all authenticated operations"
     ],
     "confidence": 0.9,
     "provenance": [
       {
-        "file": "business_context",
+        "file": "web/server.py",
         "line": 1,
-        "evidence": "VB6 forms and modules require parsing for modernization"
+        "evidence": "No authentication decorators or middleware detected"
       }
     ]
   },
   {
-    "id": "rb-002-security-middleware",
-    "title": "Implement API Security Framework",
-    "problem_statement": "FastAPI endpoints lack authentication, authorization, and input validation security controls",
+    "id": "rb-002",
+    "title": "Refactor Analyst Agent Dependencies",
+    "problem_statement": "Analyst agent has excessive import complexity (25 imports) indicating potential architectural violations and maintenance burden",
     "scope": [
-      "web/server.py",
-      "utils/context_vault.py",
-      "middleware/"
+      "agent:analyst"
     ],
-    "risk_if_unaddressed": "Unauthorized access to modernization platform and potential data exposure",
-    "effort": "M",
+    "risk_if_unaddressed": "Increased maintenance cost, reduced testability, and potential circular dependency issues",
+    "effort": "L",
     "severity": "high",
-    "dependencies": [
-      "rb-001-vb6-parser"
-    ],
-    "suggested_approach": "Implement JWT-based authentication, role-based authorization, and input validation middleware",
+    "dependencies": [],
+    "suggested_approach": "Apply dependency injection and interface segregation to reduce direct dependencies and improve modularity",
     "success_criteria": [
-      "All endpoints require valid JWT tokens",
-      "Role-based access control for agent operations",
-      "Input validation using Pydantic models"
+      "Reduce analyst agent imports to under 15",
+      "Implement clear interface contracts",
+      "Maintain functional parity with legacy behavior"
     ],
     "confidence": 0.85,
     "provenance": [
       {
-        "file": "web/server.py",
+        "file": "agents/analyst.py",
         "line": 1,
-        "evidence": "FastAPI endpoints without security decorators"
+        "evidence": "25 imports significantly exceeds other agents (4-14 range)"
       }
     ]
   },
   {
-    "id": "rb-003-database-migration",
-    "title": "Build Access to PostgreSQL Migration Engine",
-    "problem_statement": "No capability to migrate Access database schema and data to PostgreSQL target",
+    "id": "rb-003",
+    "title": "Implement Persistent Data Storage",
+    "problem_statement": "JSON file-based team data storage lacks ACID properties and concurrent access safety",
     "scope": [
-      "agents/database_engineer.py",
-      "migration/",
-      "utils/"
+      "database:team-data"
     ],
-    "risk_if_unaddressed": "Cannot preserve data integrity during modernization process",
-    "effort": "L",
-    "severity": "high",
-    "dependencies": [
-      "rb-001-vb6-parser"
-    ],
-    "suggested_approach": "Create migration engine using SQLAlchemy and pyodbc for schema translation and data transfer",
+    "risk_if_unaddressed": "Data corruption, lost work items, and inconsistent agent state during concurrent operations",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Migrate to PostgreSQL with proper transaction handling and connection pooling",
     "success_criteria": [
-      "Extract Access schema and generate PostgreSQL DDL",
-      "Migrate data with referential integrity preservation",
-      "Generate rollback scripts for safe deployment"
+      "All team data operations use ACID-compliant transactions",
+      "Concurrent access safety verified through testing",
+      "Data migration path preserves existing team configurations"
     ],
     "confidence": 0.8,
     "provenance": [
       {
-        "file": "business_context",
+        "file": "team_data/",
         "line": 1,
-        "evidence": "Access to PostgreSQL migration required"
+        "evidence": "Multiple JSON files without transaction coordination"
       }
     ]
   },
   {
-    "id": "rb-004-testing-framework",
-    "title": "Establish Comprehensive Testing Strategy",
-    "problem_statement": "No evidence of unit tests, integration tests, or agent contract validation",
+    "id": "rb-004",
+    "title": "Establish Comprehensive Testing Infrastructure",
+    "problem_statement": "No visible test files or testing infrastructure despite having a dedicated tester agent",
     "scope": [
-      "tests/",
-      "agents/",
-      "web/"
+      "agent:tester",
+      "module:agent-orchestrator"
     ],
-    "risk_if_unaddressed": "Unreliable modernization results and potential regression issues",
-    "effort": "M",
+    "risk_if_unaddressed": "Quality regressions, unreliable modernization outputs, and reduced confidence in agent behavior",
+    "effort": "L",
     "severity": "medium",
     "dependencies": [
-      "rb-001-vb6-parser",
-      "rb-002-security-middleware"
+      "rb-002"
     ],
-    "suggested_approach": "Implement pytest-based testing with agent mocking, contract testing, and integration test suites",
+    "suggested_approach": "Implement pytest-based testing with agent behavior verification and integration tests",
     "success_criteria": [
-      "80% code coverage for all agents",
-      "Contract tests for agent communication",
-      "Integration tests for end-to-end workflows"
+      "Unit tests for all agent interfaces",
+      "Integration tests for agent orchestration workflows",
+      "Automated testing in CI/CD pipeline"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/tester.py",
+        "line": 1,
+        "evidence": "Tester agent exists but no test files detected in repository"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Implement Agent Communication Monitoring",
+    "problem_statement": "Complex agent orchestration (1038 import edges) lacks visibility into inter-agent communication and error propagation",
+    "scope": [
+      "module:agent-orchestrator"
+    ],
+    "risk_if_unaddressed": "Difficult debugging, unpredictable agent failures, and reduced system observability",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Add structured logging and metrics collection for agent interactions and execution flows",
+    "success_criteria": [
+      "All agent communications logged with correlation IDs",
+      "Performance metrics for agent execution times",
+      "Error tracking and alerting for agent failures"
     ],
     "confidence": 0.75,
     "provenance": [
       {
-        "file": "repository_scan",
+        "file": "agents/__init__.py",
         "line": 1,
-        "evidence": "No test files detected in repository structure"
-      }
-    ]
-  },
-  {
-    "id": "rb-005-deployment-automation",
-    "title": "Create Production Deployment Pipeline",
-    "problem_statement": "Missing CI/CD pipeline and production deployment automation for modernization platform",
-    "scope": [
-      ".github/workflows/",
-      "docker/",
-      "k8s/"
-    ],
-    "risk_if_unaddressed": "Manual deployment errors and inconsistent environment configurations",
-    "effort": "S",
-    "severity": "medium",
-    "dependencies": [
-      "rb-002-security-middleware",
-      "rb-004-testing-framework"
-    ],
-    "suggested_approach": "Implement GitHub Actions pipeline with Docker containerization and Kubernetes deployment",
-    "success_criteria": [
-      "Automated testing and deployment pipeline",
-      "Container orchestration with health checks",
-      "Environment-specific configuration management"
-    ],
-    "confidence": 0.7,
-    "provenance": [
-      {
-        "file": "Dockerfile",
-        "line": 1,
-        "evidence": "Docker configuration exists but lacks CI/CD integration"
+        "evidence": "High import complexity without visible monitoring infrastructure"
       }
     ]
   }
