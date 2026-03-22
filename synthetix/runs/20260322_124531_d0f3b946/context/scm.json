@@ -1,0 +1,288 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Python-based modernization platform with agent-driven architecture for VB6 banking application transformation. Core system consists of specialized agents, web interfaces, configuration management, and team collaboration features.",
+  "nodes": [
+    {
+      "id": "service-modernization-platform",
+      "type": "Service",
+      "name": "Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "framework": "fastapi",
+        "purpose": "vb6_banking_modernization"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI web server with modernization endpoints"
+        },
+        {
+          "file": "config.py",
+          "line": 1,
+          "evidence": "Central configuration management"
+        }
+      ]
+    },
+    {
+      "id": "component-agent-analyst",
+      "type": "Component",
+      "name": "Analyst Agent",
+      "metadata": {
+        "specialization": "vb6_forms_data_analysis",
+        "imports": 25
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Analyst agent with 25 imports for VB6 analysis"
+        }
+      ]
+    },
+    {
+      "id": "component-agent-architect",
+      "type": "Component",
+      "name": "Architect Agent",
+      "metadata": {
+        "specialization": "system_design_modernization",
+        "imports": 9
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Architect agent for system design"
+        }
+      ]
+    },
+    {
+      "id": "component-agent-developer",
+      "type": "Component",
+      "name": "Developer Agent",
+      "metadata": {
+        "specialization": "code_generation_csharp",
+        "imports": 14
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "Developer agent with 14 imports for code generation"
+        }
+      ]
+    },
+    {
+      "id": "component-agent-database-engineer",
+      "type": "Component",
+      "name": "Database Engineer Agent",
+      "metadata": {
+        "specialization": "access_to_postgresql_migration",
+        "imports": 4
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Database engineer for Access to PostgreSQL migration"
+        }
+      ]
+    },
+    {
+      "id": "component-agent-security-engineer",
+      "type": "Component",
+      "name": "Security Engineer Agent",
+      "metadata": {
+        "specialization": "security_compliance_banking",
+        "imports": 4
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Security engineer for banking compliance"
+        }
+      ]
+    },
+    {
+      "id": "component-context-vault",
+      "type": "Component",
+      "name": "Context Vault",
+      "metadata": {
+        "purpose": "context_storage_retrieval",
+        "endpoints": [
+          "@app.get",
+          "@app.post"
+        ]
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "Context vault with GET/POST endpoints"
+        }
+      ]
+    },
+    {
+      "id": "database-team-data",
+      "type": "Database",
+      "name": "Team Data Store",
+      "metadata": {
+        "format": "json_files",
+        "tables": [
+          "work_items",
+          "settings_state",
+          "custom_teams",
+          "custom_agents",
+          "tenant_memory"
+        ]
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "team_data/work_items.json",
+          "line": 1,
+          "evidence": "Work items storage"
+        },
+        {
+          "file": "team_data/settings_state.json",
+          "line": 1,
+          "evidence": "Settings state storage"
+        }
+      ]
+    },
+    {
+      "id": "module-agents-base",
+      "type": "Module",
+      "name": "Base Agent Module",
+      "metadata": {
+        "imports": 9,
+        "purpose": "agent_base_class"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/base.py",
+          "line": 1,
+          "evidence": "Base agent class with 9 imports"
+        }
+      ]
+    },
+    {
+      "id": "external-vb6-banking-legacy",
+      "type": "ExternalDependency",
+      "name": "VB6 Banking Legacy System",
+      "metadata": {
+        "forms": [
+          "frmcheckbalance",
+          "frmdeposit",
+          "frmwithdraw",
+          "frmcustomer",
+          "frmsettings",
+          "frmlogin1",
+          "frmmonthlyreport",
+          "frmcloseaccount",
+          "frmaddinterest"
+        ],
+        "tables": [
+          "tblCustomers",
+          "tblAccount",
+          "tblTransaction"
+        ],
+        "database": "Access"
+      },
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "legacy_context",
+          "line": 1,
+          "evidence": "VB6 banking application with 9 forms and 3 core tables"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "component-agent-analyst",
+      "to": "module-agents-base",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Analyst imports from agents module"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "service-modernization-platform",
+      "to": "external-vb6-banking-legacy",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "purpose": "modernization_target"
+      },
+      "confidence": 1.0,
+      "evidence": [
+        {
+          "file": "legacy_context",
+          "line": 1,
+          "evidence": "Platform modernizes VB6 banking application"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "service-modernization-platform",
+      "to": "component-context-vault",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "Context vault provides storage services"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "service-modernization-platform",
+      "to": "database-team-data",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "tables": [
+          "work_items",
+          "settings_state",
+          "custom_teams"
+        ]
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "team_data/work_items.json",
+          "line": 1,
+          "evidence": "Platform reads team data files"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "VB6 source code location and accessibility",
+    "Access database schema and connection details",
+    "Authentication integration with legacy system",
+    "Data migration strategy and timeline",
+    "Legacy system API endpoints or integration points"
+  ]
+}
