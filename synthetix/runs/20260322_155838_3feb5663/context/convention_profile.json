@@ -1,0 +1,113 @@
+{
+  "version": "cp-v1.0",
+  "summary": "VB6 legacy patterns with Hungarian notation, COM dependencies, and modern Python agent framework following clean architecture principles",
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "rule": "Forms prefixed with 'frm' followed by descriptive name (frmcustomer, frmdeposit)",
+      "confidence": 0.9,
+      "examples": [
+        "frmcustomer.frm",
+        "frmdeposit.frm",
+        "frmLogin.frm"
+      ],
+      "counterexamples": [
+        "Form9.frm"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 13,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "vb6-control-naming",
+      "category": "naming",
+      "rule": "Controls use Hungarian notation with type prefix (txt, cmd, lbl)",
+      "confidence": 0.85,
+      "examples": [
+        "txtacno",
+        "cmdsearch",
+        "lblaccno"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 18,
+          "evidence": "Begin VB.TextBox txtacno"
+        }
+      ]
+    },
+    {
+      "id": "python-agent-imports",
+      "category": "api",
+      "rule": "Agent modules imported via relative imports in __init__.py",
+      "confidence": 0.95,
+      "examples": [
+        "from .analyst import *",
+        "from .architect import *"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import *"
+        }
+      ]
+    },
+    {
+      "id": "vb6-mdi-pattern",
+      "category": "api",
+      "rule": "Forms configured as MDI children with maximized window state",
+      "confidence": 0.8,
+      "examples": [
+        "MDIChild = -1 'True",
+        "WindowState = 2 'Maximized"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 8,
+          "evidence": "MDIChild = -1 'True"
+        }
+      ]
+    },
+    {
+      "id": "ado-dependency-pattern",
+      "category": "api",
+      "rule": "ADO 2.5 library referenced via COM GUID for data access",
+      "confidence": 0.95,
+      "examples": [
+        "{00000205-0000-0010-8000-00AA006D2EA4}#2.5"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference to ADO library"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent error handling patterns across VB6 forms",
+    "Add input validation for all text controls",
+    "Replace magic numbers with named constants",
+    "Add comprehensive logging for transaction operations",
+    "Implement proper connection string management"
+  ],
+  "scaffold_templates": [
+    "Modern React form components with validation",
+    "RESTful API endpoints for banking operations",
+    "Database migration scripts for schema modernization",
+    "Authentication middleware with JWT tokens",
+    "Docker containerization templates"
+  ]
+}
