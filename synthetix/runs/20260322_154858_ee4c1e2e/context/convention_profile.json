@@ -1,0 +1,161 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Python-based multi-agent platform following modular architecture with specialized agent roles, FastAPI web framework, and containerized deployment patterns",
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "rule": "Agent modules use descriptive role-based names with underscore separation",
+      "confidence": 0.9,
+      "examples": [
+        "analyst.py",
+        "architect.py",
+        "security_engineer.py",
+        "database_engineer.py"
+      ],
+      "counterexamples": [
+        "agent1.py",
+        "helper.py",
+        "utils.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent agent naming pattern across all agent modules"
+        }
+      ]
+    },
+    {
+      "id": "naming-002",
+      "category": "naming",
+      "rule": "Configuration files use descriptive prefixes and JSON format for data",
+      "confidence": 0.85,
+      "examples": [
+        "custom_agents.json",
+        "custom_teams.json",
+        "work_items.json"
+      ],
+      "counterexamples": [
+        "data.json",
+        "config.json",
+        "settings.json"
+      ],
+      "provenance": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "Descriptive naming for team data configuration files"
+        }
+      ]
+    },
+    {
+      "id": "api-001",
+      "category": "api",
+      "rule": "Web endpoints use FastAPI decorators with explicit HTTP methods",
+      "confidence": 0.8,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [
+        "app.route(",
+        "flask.route("
+      ],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI endpoint patterns"
+        },
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI web server implementation"
+        }
+      ]
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "rule": "Dedicated tester agent for test generation and validation",
+      "confidence": 0.9,
+      "examples": [
+        "agents/tester.py",
+        "agents/validator.py"
+      ],
+      "counterexamples": [
+        "inline test methods",
+        "manual testing only"
+      ],
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Dedicated tester agent implementation"
+        },
+        {
+          "file": "agents/validator.py",
+          "line": 1,
+          "evidence": "Dedicated validator agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "Dedicated security engineer agent for security analysis",
+      "confidence": 0.9,
+      "examples": [
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [
+        "inline security checks",
+        "no security validation"
+      ],
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Dedicated security engineer agent"
+        }
+      ]
+    },
+    {
+      "id": "auth-001",
+      "category": "auth",
+      "rule": "No explicit authentication patterns detected in current codebase",
+      "confidence": 0.7,
+      "examples": [],
+      "counterexamples": [
+        "@require_auth",
+        "jwt.decode",
+        "session.user"
+      ],
+      "provenance": [
+        {
+          "file": "static_analysis",
+          "line": 1,
+          "evidence": "No authentication imports or decorators found in scanned files"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Add type hints to all agent method signatures",
+    "Implement consistent error handling across all agents",
+    "Add docstrings to all agent classes and methods",
+    "Standardize logging patterns across agent modules",
+    "Add input validation for all agent interfaces",
+    "Implement consistent configuration management",
+    "Add unit tests for all agent implementations"
+  ],
+  "scaffold_templates": [
+    "FastAPI agent endpoint template",
+    "Agent base class template with standard methods",
+    "Docker containerization template for agents",
+    "JSON schema template for agent configurations",
+    "Agent integration test template",
+    "DeliveryOS pipeline stage template"
+  ]
+}
