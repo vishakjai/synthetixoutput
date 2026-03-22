@@ -1,15 +1,15 @@
 {
   "header": {
-    "artifact_id": "02ff45c4494d449bb5cb4fa9bf51ab13",
+    "artifact_id": "740bd0a8ba274ab29a1fb5b675801b27",
     "artifact_type": "convention_profile",
     "schema_version": "1.0.0",
-    "created_at": "2026-03-22T12:47:42.603216+00:00",
+    "created_at": "2026-03-22T12:48:23.910322+00:00",
     "repo_ref": {
       "provider": "other",
-      "repo_url": "Synthetix",
-      "default_branch": "codex-local-feature-sandbox",
-      "branch": "codex-local-feature-sandbox",
-      "commit_sha": "331fdd24c2d3f419964a5cc4bc88a991df9091c8",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
       "subpath": ""
     },
     "generated_by": {
@@ -23,53 +23,46 @@
       ],
       "run_id": "20260322_124531_d0f3b946",
       "stage_id": "context_layer",
-      "task_id": "62cf55e20d8d4ad0aa7a90254a245f3c"
+      "task_id": "4bdf5ddb37c844b5a5cdf78a2806b1a7"
     },
     "parents": [],
-    "digest": "sha256:f04c412b122e42810997c0e8acc25ecdaf6cb34ed93141604d129f087e217ce4",
+    "digest": "sha256:b2f519b2ff8d374692a7c87c13bb4c1e49507e55791b157638aaae66c4d3c56d",
     "labels": {
       "pipeline": "synthetix",
       "run_id": "20260322_124531_d0f3b946",
-      "bundle_version": "20260322T124742Z_20260322_124531_d0f3b946"
+      "bundle_version": "20260322T124823Z_20260322_124531_d0f3b946"
     }
   },
   "rules": [
     {
-      "id": "naming-agent-modules",
+      "id": "naming-001",
       "category": "naming",
-      "title": "Agent modules follow snake_case naming with descriptive suffixes (e.g., database_engineer.py, security_engineer.py)",
+      "title": "Agent modules use singular noun naming (analyst.py, architect.py, developer.py)",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "Agent modules follow snake_case naming with descriptive suffixes (e.g., database_engineer.py, security_engineer.py)",
+      "statement": "Agent modules use singular noun naming (analyst.py, architect.py, developer.py)",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": "database_engineer.py"
+          "file": "agents/analyst.py"
         },
         {
-          "file": "security_engineer.py"
+          "file": "agents/architect.py"
         },
         {
-          "file": "system_intelligence.py"
+          "file": "agents/developer.py"
         }
       ],
-      "counterexamples": [
-        {
-          "file": "DatabaseEngineer.py"
-        },
-        {
-          "file": "db_eng.py"
-        }
-      ],
+      "counterexamples": [],
       "evidence": [
         {
           "kind": "file_span",
-          "file": "agents/database_engineer.py"
+          "file": "agents/"
         }
       ],
       "confidence": {
@@ -80,38 +73,31 @@
       "exceptions": []
     },
     {
-      "id": "schema-validation-required",
+      "id": "api-001",
       "category": "api_design",
-      "title": "All agent communications must use JSON schema validation with versioned schemas",
+      "title": "FastAPI decorators for HTTP endpoint definition (@app.get, @app.post)",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "All agent communications must use JSON schema validation with versioned schemas",
+      "statement": "FastAPI decorators for HTTP endpoint definition (@app.get, @app.post)",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": ".deliveryos/schemas/agent_result.schema.json"
+          "file": "@app.get("
         },
         {
-          "file": ".deliveryos/schemas/analyst_report_v2.schema.json"
+          "file": "@app.post("
         }
       ],
-      "counterexamples": [
-        {
-          "file": "unvalidated JSON responses"
-        },
-        {
-          "file": "ad-hoc data structures"
-        }
-      ],
+      "counterexamples": [],
       "evidence": [
         {
           "kind": "file_span",
-          "file": ".deliveryos/schemas/"
+          "file": "web/server.py"
         }
       ],
       "confidence": {
@@ -122,38 +108,28 @@
       "exceptions": []
     },
     {
-      "id": "fastapi-endpoint-pattern",
-      "category": "api_design",
-      "title": "HTTP endpoints use FastAPI decorators with explicit HTTP methods",
+      "id": "testing-001",
+      "category": "testing",
+      "title": "Dedicated tester agent for automated testing workflows",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "HTTP endpoints use FastAPI decorators with explicit HTTP methods",
+      "statement": "Dedicated tester agent for automated testing workflows",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": "@app.get('/endpoint')"
-        },
-        {
-          "file": "@app.post('/endpoint')"
+          "file": "agents/tester.py"
         }
       ],
-      "counterexamples": [
-        {
-          "file": "flask routes"
-        },
-        {
-          "file": "raw HTTP handlers"
-        }
-      ],
+      "counterexamples": [],
       "evidence": [
         {
           "kind": "file_span",
-          "file": "utils/context_vault.py"
+          "file": "agents/tester.py"
         }
       ],
       "confidence": {
@@ -164,38 +140,60 @@
       "exceptions": []
     },
     {
-      "id": "agent-import-centralization",
-      "category": "naming",
-      "title": "Agent imports centralized through __init__.py with explicit exports",
+      "id": "security-001",
+      "category": "authn_authz",
+      "title": "Dedicated security engineer agent for security analysis",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "Agent imports centralized through __init__.py with explicit exports",
+      "statement": "Dedicated security engineer agent for security analysis",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": "from .analyst import AnalystAgent"
-        },
-        {
-          "file": "from .architect import ArchitectAgent"
+          "file": "agents/security_engineer.py"
         }
       ],
-      "counterexamples": [
-        {
-          "file": "direct agent imports"
-        },
-        {
-          "file": "wildcard imports"
-        }
-      ],
+      "counterexamples": [],
       "evidence": [
         {
           "kind": "file_span",
-          "file": "agents/__init__.py"
+          "file": "agents/security_engineer.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "api-002",
+      "category": "api_design",
+      "title": "JSON Schema validation for API contracts and data structures",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "JSON Schema validation for API contracts and data structures",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": ".deliveryos/schemas/*.schema.json"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/"
         }
       ],
       "confidence": {
@@ -206,35 +204,31 @@
       "exceptions": []
     },
     {
-      "id": "configuration-yaml-format",
-      "category": "api_design",
-      "title": "Pipeline and configuration files use YAML format with version metadata",
+      "id": "naming-002",
+      "category": "naming",
+      "title": "Configuration files use descriptive names with format suffixes (.schema.json, .spec.yaml)",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "Pipeline and configuration files use YAML format with version metadata",
+      "statement": "Configuration files use descriptive names with format suffixes (.schema.json, .spec.yaml)",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
-        }
-      ],
-      "counterexamples": [
-        {
-          "file": "JSON configuration files"
+          "file": "pipeline_spec.yaml"
         },
         {
-          "file": "unversioned configs"
+          "file": "agent_result.schema.json"
         }
       ],
+      "counterexamples": [],
       "evidence": [
         {
           "kind": "file_span",
-          "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+          "file": ".deliveryos/"
         }
       ],
       "confidence": {
@@ -249,7 +243,7 @@
     {
       "id": "TPL-001",
       "language": "generic",
-      "name": "Agent base class template with standard interface",
+      "name": "FastAPI service template with JSON Schema validation",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -258,7 +252,7 @@
     {
       "id": "TPL-002",
       "language": "generic",
-      "name": "FastAPI service template with schema validation",
+      "name": "Agent base class template with standardized interface",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -267,7 +261,7 @@
     {
       "id": "TPL-003",
       "language": "generic",
-      "name": "JSON schema template for agent communication",
+      "name": "Docker multi-stage build template for Python services",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -276,16 +270,7 @@
     {
       "id": "TPL-004",
       "language": "generic",
-      "name": "Docker containerization template",
-      "description": "generated scaffold template",
-      "file_path_template": "",
-      "parameters": [],
-      "content_snippet": ""
-    },
-    {
-      "id": "TPL-005",
-      "language": "generic",
-      "name": "CI/CD pipeline template for agent deployment",
+      "name": "JSON Schema template for API contract definition",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
