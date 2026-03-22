@@ -1,0 +1,504 @@
+{
+  "header": {
+    "artifact_id": "fd2b3683725e415ba93b318200548a81",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-22T15:59:51.275329+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260322_155835_6c45ad75",
+      "stage_id": "context_layer",
+      "task_id": "2b803e9ab1f844ff8e36909975199fa1"
+    },
+    "parents": [],
+    "digest": "sha256:50f3a5d2aad49c9f995e2bdd6e9eb99269dabe04108e548cd483a5206015c848",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260322_155835_6c45ad75",
+      "bundle_version": "20260322T155951Z_20260322_155835_6c45ad75"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "service:web-api",
+        "type": "service",
+        "name": "Web API Service",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "web/server.py",
+          "utils/context_vault.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "framework": "FastAPI",
+          "port": "8000",
+          "endpoints": [
+            "context_vault",
+            "server"
+          ]
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "web/server.py"
+          },
+          {
+            "kind": "file_span",
+            "file": "utils/context_vault.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "container:main-app",
+        "type": "container",
+        "name": "Main Application Container",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "Dockerfile",
+          "docker-compose.yml"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "base_image": "python",
+          "dockerfile": "Dockerfile",
+          "compose_service": "app"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "Dockerfile"
+          },
+          {
+            "kind": "file_span",
+            "file": "docker-compose.yml"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "module:agents-core",
+        "type": "module",
+        "name": "Agents Core Module",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "agents/__init__.py",
+          "agents/analyst.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "agent_count": 14,
+          "specializations": [
+            "analyst",
+            "architect",
+            "developer",
+            "tester",
+            "deployer",
+            "security_engineer",
+            "database_engineer"
+          ]
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/__init__.py"
+          },
+          {
+            "kind": "file_span",
+            "file": "agents/analyst.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "component:delivery-pipeline",
+        "type": "component",
+        "name": "DeliveryOS Pipeline",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          ".deliveryos/pipeline/pipeline_spec.yaml",
+          ".deliveryos/schemas/"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "version": "pipeline_spec.yaml",
+          "schema_count": 15,
+          "artifact_types": [
+            "agent_result",
+            "agent_task",
+            "analyst_report",
+            "context_bundle"
+          ]
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": ".deliveryos/pipeline/pipeline_spec.yaml"
+          },
+          {
+            "kind": "file_span",
+            "file": ".deliveryos/schemas/"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "module:utils",
+        "type": "module",
+        "name": "Utilities Module",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "utils/context_vault.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "services": [
+            "context_vault"
+          ],
+          "api_endpoints": true
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "utils/context_vault.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "config:team-data",
+        "type": "component",
+        "name": "Team Configuration",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "team_data/custom_agents.json",
+          "team_data/custom_teams.json"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "custom_agents": "team_data/custom_agents.json",
+          "custom_teams": "team_data/custom_teams.json",
+          "work_items": "team_data/work_items.json"
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "team_data/custom_agents.json"
+          },
+          {
+            "kind": "file_span",
+            "file": "team_data/custom_teams.json"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "module:analyst",
+        "type": "component",
+        "name": "analyst",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "agents/__init__.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "inferred": true,
+          "inferred_from_edge": true
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/__init__.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.45,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "pkg:json",
+        "type": "component",
+        "name": "json",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "agents/analyst.py"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {
+          "inferred": true,
+          "inferred_from_edge": true
+        },
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/analyst.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.45,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "imports",
+        "from": "module:agents-core",
+        "to": "module:analyst",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/__init__.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "runs_on",
+        "from": "service:web-api",
+        "to": "container:main-app",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "Dockerfile"
+          },
+          {
+            "kind": "file_span",
+            "file": "web/server.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:3",
+        "type": "depends_on",
+        "from": "module:agents-core",
+        "to": "pkg:json",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "agents/analyst.py"
+          }
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:4",
+        "type": "depends_on",
+        "from": "component:delivery-pipeline",
+        "to": "module:agents-core",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": ".deliveryos/schemas/agent_result.schema.json"
+          },
+          {
+            "kind": "file_span",
+            "file": ".deliveryos/schemas/agent_task.schema.json"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 8,
+      "edge_count": 4,
+      "languages": []
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": [
+    {
+      "question": "Database connection details and schema",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "External service dependencies beyond detected imports",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "Authentication and authorization mechanisms",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "Production deployment configuration",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "Message queue or event streaming infrastructure",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "Monitoring and observability stack",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    }
+  ]
+}
