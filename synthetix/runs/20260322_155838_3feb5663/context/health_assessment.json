@@ -1,0 +1,90 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Legacy VB6 application with critical security and maintainability issues. Modern Python framework shows good architectural patterns but lacks integration testing.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 4,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Authentication System",
+      "reason": "No visible password hashing, encryption, or secure session management in frmLogin",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 18,
+          "evidence": "Form=frmLogin.frm with no security references"
+        }
+      ]
+    },
+    {
+      "scope": "ADO Data Access Layer",
+      "reason": "Direct ADO usage without parameterized queries increases SQL injection risk",
+      "severity": "high",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "ADO 2.0 library reference"
+        }
+      ]
+    },
+    {
+      "scope": "Form Event Handlers",
+      "reason": "No visible error handling or input validation in form controls",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 18,
+          "evidence": "TextBox controls without validation"
+        }
+      ]
+    },
+    {
+      "scope": "Agent Framework Testing",
+      "reason": "No test files detected for critical modernization agents",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "172 Python files with no corresponding test files"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Data Security Vulnerability",
+      "description": "Legacy VB6 application likely stores sensitive banking data without encryption and uses unparameterized SQL queries",
+      "severity": "critical",
+      "confidence": 0.8
+    },
+    {
+      "title": "Authentication Bypass Risk",
+      "description": "No modern authentication mechanisms visible, potential for credential theft or session hijacking",
+      "severity": "high",
+      "confidence": 0.75
+    },
+    {
+      "title": "Modernization Framework Gaps",
+      "description": "Agent framework lacks comprehensive testing and integration validation for banking domain",
+      "severity": "medium",
+      "confidence": 0.85
+    },
+    {
+      "title": "Legacy Technology Dependencies",
+      "description": "VB6 runtime and ADO 2.5 dependencies create maintenance and security update challenges",
+      "severity": "medium",
+      "confidence": 0.9
+    }
+  ]
+}
