@@ -1,0 +1,128 @@
+[
+  {
+    "id": "rb-001-banking-security",
+    "title": "Implement Banking-Grade Security Controls",
+    "problem_statement": "Platform lacks encryption, audit trails, and access controls required for banking compliance",
+    "scope": [
+      "utils/context_vault.py",
+      "team_data/",
+      "web/server.py"
+    ],
+    "risk_if_unaddressed": "Regulatory violations, data breaches, failed compliance audits",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "security architecture review",
+      "compliance requirements analysis"
+    ],
+    "suggested_approach": "Implement OAuth2/JWT authentication, encrypt data at rest, add comprehensive audit logging, establish role-based access controls",
+    "success_criteria": [
+      "All data encrypted with AES-256",
+      "Complete audit trail for all operations",
+      "Role-based access control implemented",
+      "SOX compliance validation passed"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "utils/context_vault.py",
+        "line": 1,
+        "evidence": "No encryption or access controls detected"
+      }
+    ]
+  },
+  {
+    "id": "rb-002-data-migration",
+    "title": "Design Transactional Data Migration Strategy",
+    "problem_statement": "No evidence of ACID-compliant migration from Access to PostgreSQL with rollback capabilities",
+    "scope": [
+      "agents/database_engineer.py",
+      "legacy integration"
+    ],
+    "risk_if_unaddressed": "Data corruption, transaction loss, inability to rollback failed migrations",
+    "effort": "XL",
+    "severity": "high",
+    "dependencies": [
+      "Access database schema analysis",
+      "PostgreSQL target schema design"
+    ],
+    "suggested_approach": "Implement dual-write pattern, create migration validation framework, establish rollback procedures, add data integrity checks",
+    "success_criteria": [
+      "Zero data loss during migration",
+      "Sub-second rollback capability",
+      "Automated data integrity validation",
+      "Migration progress tracking and reporting"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/database_engineer.py",
+        "line": 1,
+        "evidence": "Database engineer exists but no migration strategy evident"
+      }
+    ]
+  },
+  {
+    "id": "rb-003-production-storage",
+    "title": "Replace File-Based Storage with Enterprise Database",
+    "problem_statement": "JSON file storage lacks ACID properties, concurrent access controls, and scalability for banking operations",
+    "scope": [
+      "team_data/",
+      "config management"
+    ],
+    "risk_if_unaddressed": "Data corruption under load, configuration drift, inability to handle banking transaction volumes",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "PostgreSQL deployment",
+      "configuration schema design"
+    ],
+    "suggested_approach": "Migrate to PostgreSQL-based configuration store, implement connection pooling, add transaction support, create backup/recovery procedures",
+    "success_criteria": [
+      "ACID-compliant configuration storage",
+      "Support for 10,000+ concurrent operations",
+      "Automated backup and recovery",
+      "Zero-downtime configuration updates"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "team_data/work_items.json",
+        "line": 1,
+        "evidence": "File-based storage insufficient for production banking"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-comprehensive-testing",
+    "title": "Implement Banking-Grade Test Coverage",
+    "problem_statement": "No evidence of unit tests, integration tests, or compliance validation tests for banking domain",
+    "scope": [
+      "all agent modules",
+      "web interfaces",
+      "data migration"
+    ],
+    "risk_if_unaddressed": "Production failures, regulatory violations, inability to validate VB6 behavior parity",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "test framework selection",
+      "VB6 behavior documentation"
+    ],
+    "suggested_approach": "Implement pytest-based testing, create VB6 behavior validation tests, add load testing, establish CI/CD pipeline with compliance gates",
+    "success_criteria": [
+      "90%+ code coverage across all modules",
+      "VB6 behavior parity validation suite",
+      "Load testing for banking transaction volumes",
+      "Automated compliance validation"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/tester.py",
+        "line": 1,
+        "evidence": "Tester agent exists but no test implementation visible"
+      }
+    ]
+  }
+]
