@@ -1,0 +1,279 @@
+{
+  "version": "scm-v1.0-61cf90a0512fcd60",
+  "summary": "Multi-agent software development platform with 14 specialized agents, FastAPI web services, Docker containerization, and DeliveryOS pipeline orchestration. Primary architecture consists of agent modules, utilities, web services, and configuration management.",
+  "nodes": [
+    {
+      "id": "service:web-api",
+      "type": "Service",
+      "name": "Web API Service",
+      "metadata": {
+        "framework": "FastAPI",
+        "port": "8000",
+        "endpoints": [
+          "context_vault",
+          "server"
+        ]
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get( endpoint pattern detected"
+        },
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI( pattern detected"
+        }
+      ]
+    },
+    {
+      "id": "container:main-app",
+      "type": "Container",
+      "name": "Main Application Container",
+      "metadata": {
+        "base_image": "python",
+        "dockerfile": "Dockerfile",
+        "compose_service": "app"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Container definition present"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker compose service configuration"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-core",
+      "type": "Module",
+      "name": "Agents Core Module",
+      "metadata": {
+        "agent_count": 14,
+        "specializations": [
+          "analyst",
+          "architect",
+          "developer",
+          "tester",
+          "deployer",
+          "security_engineer",
+          "database_engineer"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "11 agent imports detected"
+        },
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Analyst agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "component:delivery-pipeline",
+      "type": "Component",
+      "name": "DeliveryOS Pipeline",
+      "metadata": {
+        "version": "pipeline_spec.yaml",
+        "schema_count": 15,
+        "artifact_types": [
+          "agent_result",
+          "agent_task",
+          "analyst_report",
+          "context_bundle"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "Pipeline specification with stages and artifacts"
+        },
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "15+ JSON schema definitions"
+        }
+      ]
+    },
+    {
+      "id": "module:utils",
+      "type": "Module",
+      "name": "Utilities Module",
+      "metadata": {
+        "services": [
+          "context_vault"
+        ],
+        "api_endpoints": true
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "Context vault utility with API endpoints"
+        }
+      ]
+    },
+    {
+      "id": "config:team-data",
+      "type": "Component",
+      "name": "Team Configuration",
+      "metadata": {
+        "custom_agents": "team_data/custom_agents.json",
+        "custom_teams": "team_data/custom_teams.json",
+        "work_items": "team_data/work_items.json"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "team_data/custom_agents.json",
+          "line": 1,
+          "evidence": "Custom agent configurations"
+        },
+        {
+          "file": "team_data/custom_teams.json",
+          "line": 1,
+          "evidence": "Team configuration data"
+        }
+      ]
+    },
+    {
+      "id": "module:analyst",
+      "type": "Component",
+      "name": "analyst",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "inferred node from edge endpoint `module:analyst`"
+        }
+      ]
+    },
+    {
+      "id": "pkg:json",
+      "type": "Component",
+      "name": "json",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "inferred node from edge endpoint `pkg:json`"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "module:agents-core",
+      "to": "module:analyst",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative",
+        "target": ".analyst"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import analyst"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:web-api",
+      "to": "container:main-app",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "runtime": "python",
+        "framework": "FastAPI"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Python application containerization"
+        },
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI service implementation"
+        }
+      ]
+    },
+    {
+      "type": "USES_LIBRARY",
+      "from": "module:agents-core",
+      "to": "pkg:json",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "standard_library"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "import json"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "component:delivery-pipeline",
+      "to": "module:agents-core",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "dependency_type": "orchestration"
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json",
+          "line": 1,
+          "evidence": "Agent result schema definitions"
+        },
+        {
+          "file": ".deliveryos/schemas/agent_task.schema.json",
+          "line": 1,
+          "evidence": "Agent task schema definitions"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database connection details and schema",
+    "External service dependencies beyond detected imports",
+    "Authentication and authorization mechanisms",
+    "Production deployment configuration",
+    "Message queue or event streaming infrastructure",
+    "Monitoring and observability stack"
+  ]
+}
