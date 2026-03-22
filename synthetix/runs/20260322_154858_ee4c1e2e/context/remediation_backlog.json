@@ -1,0 +1,147 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Authentication and Authorization",
+    "problem_statement": "Platform lacks authentication mechanisms, exposing agent endpoints to unauthorized access",
+    "scope": [
+      "web/server.py",
+      "utils/context_vault.py",
+      "agents/"
+    ],
+    "risk_if_unaddressed": "Security breach, unauthorized agent access, data exposure",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Implement JWT-based authentication with role-based access control for agent endpoints",
+    "success_criteria": [
+      "All endpoints require valid authentication",
+      "Role-based access control implemented",
+      "Security tests pass",
+      "Authentication documented"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "No authentication patterns detected in endpoint analysis"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Add Comprehensive Test Suite",
+    "problem_statement": "No test files detected, indicating lack of automated testing and quality assurance",
+    "scope": [
+      "agents/",
+      "web/",
+      "utils/"
+    ],
+    "risk_if_unaddressed": "Production bugs, regression issues, maintenance difficulties",
+    "effort": "XL",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Implement unit tests for all agents, integration tests for web endpoints, and end-to-end workflow tests",
+    "success_criteria": [
+      "80%+ code coverage achieved",
+      "All agents have unit tests",
+      "Integration tests for web endpoints",
+      "CI/CD pipeline includes test execution"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "No test files found in 264 scanned files"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Refactor High-Complexity Agents",
+    "problem_statement": "Analyst agent has 25 imports suggesting high complexity and tight coupling",
+    "scope": [
+      "agents/analyst.py"
+    ],
+    "risk_if_unaddressed": "Maintenance difficulties, testing challenges, reduced modularity",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "rb-002"
+    ],
+    "suggested_approach": "Break down analyst agent into smaller, focused components with clear interfaces",
+    "success_criteria": [
+      "Analyst agent import count reduced to <15",
+      "Clear separation of concerns",
+      "Maintained functionality",
+      "Improved test coverage"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "25 import statements indicating high complexity"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Implement Production Logging and Monitoring",
+    "problem_statement": "No standardized logging or monitoring patterns detected for production deployment",
+    "scope": [
+      "agents/",
+      "web/",
+      "config.py"
+    ],
+    "risk_if_unaddressed": "Difficult troubleshooting, no visibility into production issues",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement structured logging with correlation IDs and integrate monitoring for agent performance",
+    "success_criteria": [
+      "Structured logging implemented across all components",
+      "Monitoring dashboards available",
+      "Alert mechanisms configured",
+      "Log aggregation working"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "No logging framework imports detected"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Secure Team Data Storage",
+    "problem_statement": "Team data stored in plain JSON files without encryption or access controls",
+    "scope": [
+      "team_data/"
+    ],
+    "risk_if_unaddressed": "Data exposure, unauthorized access to sensitive team information",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "Implement encrypted storage for team data with proper access controls",
+    "success_criteria": [
+      "Team data encrypted at rest",
+      "Access controls implemented",
+      "Audit logging for data access",
+      "Backup and recovery procedures"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "team_data/custom_agents.json",
+        "line": 1,
+        "evidence": "Plain text JSON storage for team data"
+      }
+    ]
+  }
+]
