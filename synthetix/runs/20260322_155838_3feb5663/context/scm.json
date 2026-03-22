@@ -1,0 +1,341 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Legacy VB6 banking application with 13 forms, ADO data access, and modern Python agent framework for modernization. Critical data flow through deBank.Dsr designer and multiple transaction forms.",
+  "nodes": [
+    {
+      "id": "vb6-bank-app",
+      "type": "Service",
+      "name": "BANK_SYSTEM",
+      "metadata": {
+        "version": "1.0.0",
+        "company": "KENEX Ltd",
+        "startup_form": "frmSplash",
+        "mdi_application": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 20,
+          "evidence": "Title=\"BANK_SYSTEM\""
+        },
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 23,
+          "evidence": "VersionCompanyName=\"KENEX Ltd\""
+        }
+      ]
+    },
+    {
+      "id": "frm-customer",
+      "type": "Component",
+      "name": "Customer Management Form",
+      "metadata": {
+        "form_type": "customer_crud",
+        "mdi_child": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 13,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-deposit",
+      "type": "Component",
+      "name": "Deposit Transaction Form",
+      "metadata": {
+        "form_type": "transaction",
+        "operation": "deposit"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 15,
+          "evidence": "Form=frmdeposit.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-withdraw",
+      "type": "Component",
+      "name": "Withdrawal Transaction Form",
+      "metadata": {
+        "form_type": "transaction",
+        "operation": "withdraw"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 17,
+          "evidence": "Form=frmwithdraw.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-login",
+      "type": "Component",
+      "name": "Authentication Form",
+      "metadata": {
+        "form_type": "authentication",
+        "security_critical": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 18,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-statement",
+      "type": "Component",
+      "name": "Account Statement Form",
+      "metadata": {
+        "form_type": "reporting",
+        "data_sensitive": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 19,
+          "evidence": "Form=frmstatement.frm"
+        }
+      ]
+    },
+    {
+      "id": "frm-checkbalance",
+      "type": "Component",
+      "name": "Balance Check Form",
+      "metadata": {
+        "form_type": "inquiry",
+        "window_state": "maximized"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 3,
+          "evidence": "Caption = \"Check Balance\""
+        },
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 9,
+          "evidence": "WindowState = 2 'Maximized"
+        }
+      ]
+    },
+    {
+      "id": "debank-designer",
+      "type": "Component",
+      "name": "Data Environment Designer",
+      "metadata": {
+        "component_type": "data_environment",
+        "ado_connection": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 12,
+          "evidence": "Designer=deBank.Dsr"
+        }
+      ]
+    },
+    {
+      "id": "ado-library",
+      "type": "ExternalDependency",
+      "name": "Microsoft ActiveX Data Objects 2.0",
+      "metadata": {
+        "version": "2.5",
+        "guid": "{00000205-0000-0010-8000-00AA006D2EA4}",
+        "critical_dependency": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#C:\\Program Files\\Common Files\\system\\ado\\msado25.tlb#Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "id": "modernization-agent-framework",
+      "type": "Service",
+      "name": "Python Agent Framework",
+      "metadata": {
+        "language": "python",
+        "agent_count": 14,
+        "purpose": "modernization_orchestration"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import *"
+        },
+        {
+          "file": "config.py",
+          "line": 1,
+          "evidence": "Configuration module for agent framework"
+        }
+      ]
+    },
+    {
+      "id": "agent-analyst",
+      "type": "Component",
+      "name": "System Analyst Agent",
+      "metadata": {
+        "agent_type": "analysis",
+        "import_count": 25
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "System analyst agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "agent-architect",
+      "type": "Component",
+      "name": "System Architect Agent",
+      "metadata": {
+        "agent_type": "architecture",
+        "import_count": 9
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "System architect agent implementation"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "vb6-bank-app",
+      "to": "ado-library",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "dependency_type": "com_reference",
+        "version": "2.5"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 5,
+          "evidence": "Reference to ADO 2.5 library"
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "vb6-bank-app",
+      "to": "frm-customer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "relationship": "form_ownership"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 13,
+          "evidence": "Form=frmcustomer.frm"
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "vb6-bank-app",
+      "to": "frm-deposit",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "relationship": "form_ownership"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 15,
+          "evidence": "Form=frmdeposit.frm"
+        }
+      ]
+    },
+    {
+      "type": "OWNS_RESOURCE",
+      "from": "vb6-bank-app",
+      "to": "debank-designer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "relationship": "data_environment"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 12,
+          "evidence": "Designer=deBank.Dsr"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "modernization-agent-framework",
+      "to": "agent-analyst",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "python_module"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import *"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "modernization-agent-framework",
+      "to": "agent-architect",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "python_module"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 3,
+          "evidence": "from .architect import *"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database schema and connection strings in deBank.Dsr",
+    "Business logic implementation in form event handlers",
+    "Authentication mechanism and user roles",
+    "Data validation rules and constraints",
+    "Integration points with external banking systems"
+  ]
+}
