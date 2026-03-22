@@ -1,0 +1,115 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Python-centric multi-agent platform following modular architecture with FastAPI services, JSON schema validation, and Docker containerization patterns.",
+  "rules": [
+    {
+      "id": "naming_001",
+      "category": "naming",
+      "rule": "Agent modules use snake_case naming with descriptive suffixes (_agent.py pattern)",
+      "confidence": 0.9,
+      "examples": [
+        "analyst.py",
+        "architect.py",
+        "developer.py",
+        "security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent snake_case naming across all agent modules"
+        }
+      ]
+    },
+    {
+      "id": "api_001",
+      "category": "api",
+      "rule": "FastAPI decorators used for HTTP endpoint definition with explicit route patterns",
+      "confidence": 0.85,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI decorator patterns detected"
+        },
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI router patterns detected"
+        }
+      ]
+    },
+    {
+      "id": "testing_001",
+      "category": "testing",
+      "rule": "Dedicated tester agent component suggests automated testing integration",
+      "confidence": 0.8,
+      "examples": [
+        "agents/tester.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Specialized testing agent with 7 import dependencies"
+        }
+      ]
+    },
+    {
+      "id": "security_001",
+      "category": "security",
+      "rule": "Dedicated security engineer agent for security-focused analysis and remediation",
+      "confidence": 0.9,
+      "examples": [
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Specialized security agent component"
+        }
+      ]
+    },
+    {
+      "id": "api_002",
+      "category": "api",
+      "rule": "JSON schema validation enforced through .deliveryos/schemas/ directory structure",
+      "confidence": 0.95,
+      "examples": [
+        "agent_result.schema.json",
+        "context_bundle.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "11 JSON schema files for API contract validation"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent docstring standards across all agent modules",
+    "Add type hints for all function parameters and return values",
+    "Standardize error handling patterns across FastAPI endpoints",
+    "Implement consistent logging format across all components",
+    "Add input validation decorators for agent method parameters"
+  ],
+  "scaffold_templates": [
+    "FastAPI service template with router configuration",
+    "Agent base class template with standard interface methods",
+    "JSON schema template for new API contracts",
+    "Docker service template for new microservices",
+    "Pipeline stage template for DeliveryOS integration"
+  ]
+}
