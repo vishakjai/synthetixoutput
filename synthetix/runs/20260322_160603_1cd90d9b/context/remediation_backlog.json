@@ -1,0 +1,146 @@
+[
+  {
+    "id": "rb_001",
+    "title": "Implement Comprehensive Error Handling",
+    "problem_statement": "FastAPI services lack standardized error handling, validation middleware, and proper HTTP status code management",
+    "scope": [
+      "web/server.py",
+      "utils/context_vault.py"
+    ],
+    "risk_if_unaddressed": "Service instability, poor user experience, and difficult debugging in production",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Implement FastAPI exception handlers, validation middleware, and standardized error response schemas",
+    "success_criteria": [
+      "All endpoints return consistent error response format",
+      "Input validation implemented for all API endpoints",
+      "Proper HTTP status codes for all error conditions"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "web/server.py",
+        "line": 1,
+        "evidence": "FastAPI endpoints without visible error handling patterns"
+      }
+    ]
+  },
+  {
+    "id": "rb_002",
+    "title": "Add Authentication and Authorization",
+    "problem_statement": "No visible authentication or authorization mechanisms for API endpoints and agent access",
+    "scope": [
+      "web/server.py",
+      "utils/context_vault.py",
+      "agents/"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to sensitive agent capabilities and data manipulation",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "rb_001"
+    ],
+    "suggested_approach": "Implement JWT-based authentication with role-based access control for different agent capabilities",
+    "success_criteria": [
+      "All API endpoints require valid authentication",
+      "Role-based access control implemented",
+      "Secure token management and refresh mechanisms"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "web/server.py",
+        "line": 1,
+        "evidence": "No authentication decorators or middleware detected"
+      }
+    ]
+  },
+  {
+    "id": "rb_003",
+    "title": "Implement Comprehensive Testing Suite",
+    "problem_statement": "Despite having a tester agent, no visible unit tests, integration tests, or test automation",
+    "scope": [
+      "agents/",
+      "web/",
+      "utils/"
+    ],
+    "risk_if_unaddressed": "Regression bugs, unstable releases, and difficult maintenance",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Create pytest-based test suite with unit tests for agents, integration tests for APIs, and automated test execution",
+    "success_criteria": [
+      "80%+ code coverage across all modules",
+      "Automated test execution in CI/CD pipeline",
+      "Integration tests for all API endpoints"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/tester.py",
+        "line": 1,
+        "evidence": "Tester agent exists but no test files detected in repository"
+      }
+    ]
+  },
+  {
+    "id": "rb_004",
+    "title": "Secure Configuration Management",
+    "problem_statement": "Critical configuration data stored in plain JSON files without encryption or validation",
+    "scope": [
+      "team_data/",
+      "config.py"
+    ],
+    "risk_if_unaddressed": "Configuration tampering, credential exposure, and system compromise",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb_002"
+    ],
+    "suggested_approach": "Implement encrypted configuration storage with schema validation and access controls",
+    "success_criteria": [
+      "All sensitive configuration encrypted at rest",
+      "Schema validation for all configuration files",
+      "Audit logging for configuration changes"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "team_data/custom_agents.json",
+        "line": 1,
+        "evidence": "Critical configuration in unencrypted JSON files"
+      }
+    ]
+  },
+  {
+    "id": "rb_005",
+    "title": "Production Deployment Hardening",
+    "problem_statement": "Docker configuration lacks production security hardening and scalability considerations",
+    "scope": [
+      "Dockerfile",
+      "docker-compose.yml"
+    ],
+    "risk_if_unaddressed": "Security vulnerabilities and poor performance in production environment",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "rb_002",
+      "rb_004"
+    ],
+    "suggested_approach": "Implement multi-stage Docker builds, security scanning, and production-ready compose configuration",
+    "success_criteria": [
+      "Multi-stage Docker builds with minimal attack surface",
+      "Container security scanning integrated",
+      "Production-ready orchestration configuration"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "Dockerfile",
+        "line": 1,
+        "evidence": "Basic Docker configuration without production hardening"
+      }
+    ]
+  }
+]
