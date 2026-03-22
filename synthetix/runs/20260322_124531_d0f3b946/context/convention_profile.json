@@ -1,42 +1,87 @@
 {
-  "version": "cp-v1.0",
-  "summary": "Python modernization platform following enterprise patterns with agent-based architecture, comprehensive schema validation, and structured JSON communication protocols.",
+  "version": "cp-v1.1.0",
+  "summary": "Python-centric development with FastAPI web services, JSON Schema validation, Docker containerization, and agent-based architecture patterns. Strong emphasis on configuration-driven behavior and schema-first API design.",
   "rules": [
     {
-      "id": "naming-agent-modules",
+      "id": "naming-001",
       "category": "naming",
-      "rule": "Agent modules follow snake_case naming with descriptive suffixes (e.g., database_engineer.py, security_engineer.py)",
+      "rule": "Agent modules use singular noun naming (analyst.py, architect.py, developer.py)",
       "confidence": 0.95,
       "examples": [
-        "database_engineer.py",
-        "security_engineer.py",
-        "system_intelligence.py"
+        "agents/analyst.py",
+        "agents/architect.py",
+        "agents/developer.py"
       ],
-      "counterexamples": [
-        "DatabaseEngineer.py",
-        "db_eng.py"
-      ],
+      "counterexamples": [],
       "provenance": [
         {
-          "file": "agents/database_engineer.py",
+          "file": "agents/",
           "line": 1,
-          "evidence": "Consistent snake_case naming pattern"
+          "evidence": "Consistent singular naming across all agent modules"
         }
       ]
     },
     {
-      "id": "schema-validation-required",
+      "id": "api-001",
       "category": "api",
-      "rule": "All agent communications must use JSON schema validation with versioned schemas",
+      "rule": "FastAPI decorators for HTTP endpoint definition (@app.get, @app.post)",
       "confidence": 0.9,
       "examples": [
-        ".deliveryos/schemas/agent_result.schema.json",
-        ".deliveryos/schemas/analyst_report_v2.schema.json"
+        "@app.get(",
+        "@app.post("
       ],
-      "counterexamples": [
-        "unvalidated JSON responses",
-        "ad-hoc data structures"
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI decorator patterns in endpoint hints"
+        }
+      ]
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "rule": "Dedicated tester agent for automated testing workflows",
+      "confidence": 0.85,
+      "examples": [
+        "agents/tester.py"
       ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Specialized testing agent with 7 imports"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "Dedicated security engineer agent for security analysis",
+      "confidence": 0.85,
+      "examples": [
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Specialized security agent implementation"
+        }
+      ]
+    },
+    {
+      "id": "api-002",
+      "category": "api",
+      "rule": "JSON Schema validation for API contracts and data structures",
+      "confidence": 0.95,
+      "examples": [
+        ".deliveryos/schemas/*.schema.json"
+      ],
+      "counterexamples": [],
       "provenance": [
         {
           "file": ".deliveryos/schemas/",
@@ -46,80 +91,34 @@
       ]
     },
     {
-      "id": "fastapi-endpoint-pattern",
-      "category": "api",
-      "rule": "HTTP endpoints use FastAPI decorators with explicit HTTP methods",
-      "confidence": 0.85,
-      "examples": [
-        "@app.get('/endpoint')",
-        "@app.post('/endpoint')"
-      ],
-      "counterexamples": [
-        "flask routes",
-        "raw HTTP handlers"
-      ],
-      "provenance": [
-        {
-          "file": "utils/context_vault.py",
-          "line": 1,
-          "evidence": "@app.get and @app.post decorators"
-        }
-      ]
-    },
-    {
-      "id": "agent-import-centralization",
+      "id": "naming-002",
       "category": "naming",
-      "rule": "Agent imports centralized through __init__.py with explicit exports",
-      "confidence": 0.95,
-      "examples": [
-        "from .analyst import AnalystAgent",
-        "from .architect import ArchitectAgent"
-      ],
-      "counterexamples": [
-        "direct agent imports",
-        "wildcard imports"
-      ],
-      "provenance": [
-        {
-          "file": "agents/__init__.py",
-          "line": 1,
-          "evidence": "11 explicit agent imports"
-        }
-      ]
-    },
-    {
-      "id": "configuration-yaml-format",
-      "category": "api",
-      "rule": "Pipeline and configuration files use YAML format with version metadata",
+      "rule": "Configuration files use descriptive names with format suffixes (.schema.json, .spec.yaml)",
       "confidence": 0.9,
       "examples": [
-        ".deliveryos/pipeline/pipeline_spec.yaml"
+        "pipeline_spec.yaml",
+        "agent_result.schema.json"
       ],
-      "counterexamples": [
-        "JSON configuration files",
-        "unversioned configs"
-      ],
+      "counterexamples": [],
       "provenance": [
         {
-          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "file": ".deliveryos/",
           "line": 1,
-          "evidence": "YAML format with version field"
+          "evidence": "Consistent naming with format indicators"
         }
       ]
     }
   ],
   "lint_recommendations": [
-    "Implement pylint configuration for consistent Python code style",
-    "Add mypy type checking for agent interfaces",
-    "Enforce JSON schema validation in CI/CD pipeline",
-    "Add pre-commit hooks for code formatting",
-    "Implement agent contract testing"
+    "Implement Python type hints across all agent modules for better IDE support",
+    "Add docstring standards for agent interface documentation",
+    "Establish consistent error handling patterns across FastAPI endpoints",
+    "Implement logging standards for agent execution tracing"
   ],
   "scaffold_templates": [
-    "Agent base class template with standard interface",
-    "FastAPI service template with schema validation",
-    "JSON schema template for agent communication",
-    "Docker containerization template",
-    "CI/CD pipeline template for agent deployment"
+    "FastAPI service template with JSON Schema validation",
+    "Agent base class template with standardized interface",
+    "Docker multi-stage build template for Python services",
+    "JSON Schema template for API contract definition"
   ]
 }
