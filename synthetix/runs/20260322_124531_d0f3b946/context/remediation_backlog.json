@@ -1,127 +1,151 @@
 [
   {
-    "id": "rb-001-banking-security",
-    "title": "Implement Banking-Grade Security Controls",
-    "problem_statement": "Platform lacks encryption, audit trails, and access controls required for banking compliance",
+    "id": "rb-001-vb6-parser",
+    "title": "Implement VB6 Source Code Parser",
+    "problem_statement": "Platform cannot analyze VB6 forms, modules, and business logic without dedicated parsing capabilities",
     "scope": [
-      "utils/context_vault.py",
-      "team_data/",
-      "web/server.py"
+      "agents/analyst.py",
+      "utils/",
+      "parsers/"
     ],
-    "risk_if_unaddressed": "Regulatory violations, data breaches, failed compliance audits",
+    "risk_if_unaddressed": "Cannot extract business rules, UI patterns, or data access logic from legacy VB6 application",
     "effort": "L",
     "severity": "critical",
-    "dependencies": [
-      "security architecture review",
-      "compliance requirements analysis"
-    ],
-    "suggested_approach": "Implement OAuth2/JWT authentication, encrypt data at rest, add comprehensive audit logging, establish role-based access controls",
+    "dependencies": [],
+    "suggested_approach": "Create VB6 AST parser using pyparsing or similar library to extract forms, controls, events, and business logic",
     "success_criteria": [
-      "All data encrypted with AES-256",
-      "Complete audit trail for all operations",
-      "Role-based access control implemented",
-      "SOX compliance validation passed"
-    ],
-    "confidence": 0.95,
-    "provenance": [
-      {
-        "file": "utils/context_vault.py",
-        "line": 1,
-        "evidence": "No encryption or access controls detected"
-      }
-    ]
-  },
-  {
-    "id": "rb-002-data-migration",
-    "title": "Design Transactional Data Migration Strategy",
-    "problem_statement": "No evidence of ACID-compliant migration from Access to PostgreSQL with rollback capabilities",
-    "scope": [
-      "agents/database_engineer.py",
-      "legacy integration"
-    ],
-    "risk_if_unaddressed": "Data corruption, transaction loss, inability to rollback failed migrations",
-    "effort": "XL",
-    "severity": "high",
-    "dependencies": [
-      "Access database schema analysis",
-      "PostgreSQL target schema design"
-    ],
-    "suggested_approach": "Implement dual-write pattern, create migration validation framework, establish rollback procedures, add data integrity checks",
-    "success_criteria": [
-      "Zero data loss during migration",
-      "Sub-second rollback capability",
-      "Automated data integrity validation",
-      "Migration progress tracking and reporting"
+      "Parse .frm files and extract control hierarchies",
+      "Extract event handlers and business logic from .bas/.cls files",
+      "Generate system context model from VB6 source"
     ],
     "confidence": 0.9,
     "provenance": [
       {
-        "file": "agents/database_engineer.py",
+        "file": "business_context",
         "line": 1,
-        "evidence": "Database engineer exists but no migration strategy evident"
+        "evidence": "VB6 forms and modules require parsing for modernization"
       }
     ]
   },
   {
-    "id": "rb-003-production-storage",
-    "title": "Replace File-Based Storage with Enterprise Database",
-    "problem_statement": "JSON file storage lacks ACID properties, concurrent access controls, and scalability for banking operations",
+    "id": "rb-002-security-middleware",
+    "title": "Implement API Security Framework",
+    "problem_statement": "FastAPI endpoints lack authentication, authorization, and input validation security controls",
     "scope": [
-      "team_data/",
-      "config management"
+      "web/server.py",
+      "utils/context_vault.py",
+      "middleware/"
     ],
-    "risk_if_unaddressed": "Data corruption under load, configuration drift, inability to handle banking transaction volumes",
+    "risk_if_unaddressed": "Unauthorized access to modernization platform and potential data exposure",
     "effort": "M",
     "severity": "high",
     "dependencies": [
-      "PostgreSQL deployment",
-      "configuration schema design"
+      "rb-001-vb6-parser"
     ],
-    "suggested_approach": "Migrate to PostgreSQL-based configuration store, implement connection pooling, add transaction support, create backup/recovery procedures",
+    "suggested_approach": "Implement JWT-based authentication, role-based authorization, and input validation middleware",
     "success_criteria": [
-      "ACID-compliant configuration storage",
-      "Support for 10,000+ concurrent operations",
-      "Automated backup and recovery",
-      "Zero-downtime configuration updates"
+      "All endpoints require valid JWT tokens",
+      "Role-based access control for agent operations",
+      "Input validation using Pydantic models"
     ],
     "confidence": 0.85,
     "provenance": [
       {
-        "file": "team_data/work_items.json",
+        "file": "web/server.py",
         "line": 1,
-        "evidence": "File-based storage insufficient for production banking"
+        "evidence": "FastAPI endpoints without security decorators"
       }
     ]
   },
   {
-    "id": "rb-004-comprehensive-testing",
-    "title": "Implement Banking-Grade Test Coverage",
-    "problem_statement": "No evidence of unit tests, integration tests, or compliance validation tests for banking domain",
+    "id": "rb-003-database-migration",
+    "title": "Build Access to PostgreSQL Migration Engine",
+    "problem_statement": "No capability to migrate Access database schema and data to PostgreSQL target",
     "scope": [
-      "all agent modules",
-      "web interfaces",
-      "data migration"
+      "agents/database_engineer.py",
+      "migration/",
+      "utils/"
     ],
-    "risk_if_unaddressed": "Production failures, regulatory violations, inability to validate VB6 behavior parity",
+    "risk_if_unaddressed": "Cannot preserve data integrity during modernization process",
     "effort": "L",
     "severity": "high",
     "dependencies": [
-      "test framework selection",
-      "VB6 behavior documentation"
+      "rb-001-vb6-parser"
     ],
-    "suggested_approach": "Implement pytest-based testing, create VB6 behavior validation tests, add load testing, establish CI/CD pipeline with compliance gates",
+    "suggested_approach": "Create migration engine using SQLAlchemy and pyodbc for schema translation and data transfer",
     "success_criteria": [
-      "90%+ code coverage across all modules",
-      "VB6 behavior parity validation suite",
-      "Load testing for banking transaction volumes",
-      "Automated compliance validation"
+      "Extract Access schema and generate PostgreSQL DDL",
+      "Migrate data with referential integrity preservation",
+      "Generate rollback scripts for safe deployment"
     ],
     "confidence": 0.8,
     "provenance": [
       {
-        "file": "agents/tester.py",
+        "file": "business_context",
         "line": 1,
-        "evidence": "Tester agent exists but no test implementation visible"
+        "evidence": "Access to PostgreSQL migration required"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-testing-framework",
+    "title": "Establish Comprehensive Testing Strategy",
+    "problem_statement": "No evidence of unit tests, integration tests, or agent contract validation",
+    "scope": [
+      "tests/",
+      "agents/",
+      "web/"
+    ],
+    "risk_if_unaddressed": "Unreliable modernization results and potential regression issues",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "rb-001-vb6-parser",
+      "rb-002-security-middleware"
+    ],
+    "suggested_approach": "Implement pytest-based testing with agent mocking, contract testing, and integration test suites",
+    "success_criteria": [
+      "80% code coverage for all agents",
+      "Contract tests for agent communication",
+      "Integration tests for end-to-end workflows"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No test files detected in repository structure"
+      }
+    ]
+  },
+  {
+    "id": "rb-005-deployment-automation",
+    "title": "Create Production Deployment Pipeline",
+    "problem_statement": "Missing CI/CD pipeline and production deployment automation for modernization platform",
+    "scope": [
+      ".github/workflows/",
+      "docker/",
+      "k8s/"
+    ],
+    "risk_if_unaddressed": "Manual deployment errors and inconsistent environment configurations",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [
+      "rb-002-security-middleware",
+      "rb-004-testing-framework"
+    ],
+    "suggested_approach": "Implement GitHub Actions pipeline with Docker containerization and Kubernetes deployment",
+    "success_criteria": [
+      "Automated testing and deployment pipeline",
+      "Container orchestration with health checks",
+      "Environment-specific configuration management"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "Dockerfile",
+        "line": 1,
+        "evidence": "Docker configuration exists but lacks CI/CD integration"
       }
     ]
   }
