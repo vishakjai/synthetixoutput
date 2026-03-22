@@ -1,0 +1,266 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Multi-agent software development platform with 14 specialized agents, FastAPI web services, and DeliveryOS pipeline orchestration. Architecture follows modular agent pattern with shared utilities and configuration management.",
+  "nodes": [
+    {
+      "id": "service:web_server",
+      "type": "Service",
+      "name": "Web Server",
+      "metadata": {
+        "framework": "FastAPI",
+        "port": "unknown",
+        "routes_detected": true
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI endpoint patterns detected"
+        }
+      ]
+    },
+    {
+      "id": "service:context_vault",
+      "type": "Service",
+      "name": "Context Vault Service",
+      "metadata": {
+        "framework": "FastAPI",
+        "purpose": "context_management"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI router and endpoint patterns detected"
+        }
+      ]
+    },
+    {
+      "id": "module:agents_core",
+      "type": "Module",
+      "name": "Agents Core Module",
+      "metadata": {
+        "agent_count": 14,
+        "specializations": [
+          "analyst",
+          "architect",
+          "developer",
+          "tester",
+          "deployer",
+          "security",
+          "database",
+          "ui_scaffold",
+          "validator",
+          "planning",
+          "system_intelligence",
+          "interaction"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "11 agent imports detected in module initialization"
+        }
+      ]
+    },
+    {
+      "id": "component:analyst_agent",
+      "type": "Component",
+      "name": "Analyst Agent",
+      "metadata": {
+        "imports": 25,
+        "specialization": "analysis"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Agent class with 25 import dependencies"
+        }
+      ]
+    },
+    {
+      "id": "component:architect_agent",
+      "type": "Component",
+      "name": "Architect Agent",
+      "metadata": {
+        "imports": 9,
+        "specialization": "architecture"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Agent class with 9 import dependencies"
+        }
+      ]
+    },
+    {
+      "id": "component:developer_agent",
+      "type": "Component",
+      "name": "Developer Agent",
+      "metadata": {
+        "imports": 14,
+        "specialization": "development"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "Agent class with 14 import dependencies"
+        }
+      ]
+    },
+    {
+      "id": "component:deliveryos_pipeline",
+      "type": "Component",
+      "name": "DeliveryOS Pipeline",
+      "metadata": {
+        "config_file": "pipeline_spec.yaml",
+        "schema_count": 11
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "Pipeline specification with version, name, artifacts, principles, stages"
+        }
+      ]
+    },
+    {
+      "id": "database:team_data",
+      "type": "Database",
+      "name": "Team Data Storage",
+      "metadata": {
+        "format": "json",
+        "entities": [
+          "custom_agents",
+          "custom_teams",
+          "work_items"
+        ]
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "team_data/custom_agents.json",
+          "line": 1,
+          "evidence": "JSON data files for team configuration"
+        }
+      ]
+    },
+    {
+      "id": "infra:docker_container",
+      "type": "InfraResource",
+      "name": "Docker Container",
+      "metadata": {
+        "dockerfile_present": true,
+        "compose_present": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Docker containerization configuration"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "module:agents_core",
+      "to": "component:analyst_agent",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import *"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "module:agents_core",
+      "to": "component:architect_agent",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 3,
+          "evidence": "from .architect import *"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "module:agents_core",
+      "to": "component:developer_agent",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 5,
+          "evidence": "from .developer import *"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:web_server",
+      "to": "infra:docker_container",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "containerization": "docker"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker compose configuration for service deployment"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "component:deliveryos_pipeline",
+      "to": "module:agents_core",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "orchestration": "pipeline"
+      },
+      "confidence": 0.7,
+      "evidence": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "Pipeline orchestrates agent execution"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database connection strings and credentials",
+    "External API endpoints and authentication",
+    "Production deployment configuration",
+    "Load balancing and scaling parameters",
+    "Monitoring and logging endpoints",
+    "Legacy system integration points"
+  ]
+}
