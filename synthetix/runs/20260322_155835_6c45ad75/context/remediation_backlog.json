@@ -1,0 +1,153 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement API Authentication and Authorization",
+    "problem_statement": "Web API endpoints lack authentication mechanisms, creating security vulnerabilities",
+    "scope": [
+      "web/server.py",
+      "utils/context_vault.py"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to sensitive agent operations and context data",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "security-framework-selection",
+      "user-management-system"
+    ],
+    "suggested_approach": "Implement JWT-based authentication with role-based access control using FastAPI security utilities",
+    "success_criteria": [
+      "All API endpoints require valid authentication",
+      "Role-based permissions for different agent operations",
+      "Secure token management and refresh mechanisms"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "web/server.py",
+        "line": 1,
+        "evidence": "Unprotected API endpoints detected"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Establish Comprehensive Test Suite",
+    "problem_statement": "No test files detected, indicating lack of automated testing coverage",
+    "scope": [
+      "agents/",
+      "web/",
+      "utils/"
+    ],
+    "risk_if_unaddressed": "Production bugs, regression issues, and difficulty maintaining code quality",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "testing-framework-setup"
+    ],
+    "suggested_approach": "Implement pytest-based test suite with unit tests for agents, integration tests for APIs, and contract tests for schemas",
+    "success_criteria": [
+      "80%+ code coverage across all modules",
+      "Unit tests for all agent classes",
+      "Integration tests for API endpoints",
+      "Schema validation tests"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/tester.py",
+        "line": 1,
+        "evidence": "Tester agent exists but no test files found"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Reduce Agent Module Coupling",
+    "problem_statement": "High import counts in agent modules indicate tight coupling and potential circular dependencies",
+    "scope": [
+      "agents/analyst.py",
+      "agents/developer.py"
+    ],
+    "risk_if_unaddressed": "Difficult maintenance, testing challenges, and potential runtime dependency issues",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "architecture-review"
+    ],
+    "suggested_approach": "Implement dependency injection pattern and extract common interfaces to reduce direct imports",
+    "success_criteria": [
+      "Reduce import count per agent module by 50%",
+      "Implement common agent interface",
+      "Eliminate circular dependencies",
+      "Improve agent testability"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "agents/analyst.py",
+        "line": 10,
+        "evidence": "25 imports indicating high coupling"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Implement Production Monitoring and Logging",
+    "problem_statement": "Missing structured logging, monitoring, and observability for production operations",
+    "scope": [
+      "web/",
+      "agents/",
+      "utils/"
+    ],
+    "risk_if_unaddressed": "Difficult troubleshooting, no visibility into system health, potential downtime",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "monitoring-stack-selection"
+    ],
+    "suggested_approach": "Implement structured logging with correlation IDs, health check endpoints, and metrics collection",
+    "success_criteria": [
+      "Structured JSON logging across all components",
+      "Health check endpoints for all services",
+      "Metrics collection for agent performance",
+      "Distributed tracing for request flows"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "web/server.py",
+        "line": 1,
+        "evidence": "No logging configuration detected in web service"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Secure Context Vault Operations",
+    "problem_statement": "Context vault handles sensitive data without visible encryption or security measures",
+    "scope": [
+      "utils/context_vault.py"
+    ],
+    "risk_if_unaddressed": "Data breaches, compliance violations, unauthorized access to sensitive context data",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [
+      "encryption-key-management"
+    ],
+    "suggested_approach": "Implement encryption at rest and in transit for context data with proper key management",
+    "success_criteria": [
+      "All context data encrypted at rest",
+      "Secure key management system",
+      "Audit logging for context access",
+      "Data retention policies implemented"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "utils/context_vault.py",
+        "line": 1,
+        "evidence": "Context vault operations without encryption patterns"
+      }
+    ]
+  }
+]
