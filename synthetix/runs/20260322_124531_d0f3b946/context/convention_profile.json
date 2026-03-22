@@ -1,121 +1,125 @@
 {
   "version": "cp-v1.0",
-  "summary": "Python-based modernization platform following FastAPI patterns, agent-based architecture, and JSON configuration management with strong separation of concerns.",
+  "summary": "Python modernization platform following enterprise patterns with agent-based architecture, comprehensive schema validation, and structured JSON communication protocols.",
   "rules": [
     {
       "id": "naming-agent-modules",
       "category": "naming",
-      "rule": "Agent modules follow snake_case naming with descriptive specialization suffixes",
-      "confidence": 0.9,
+      "rule": "Agent modules follow snake_case naming with descriptive suffixes (e.g., database_engineer.py, security_engineer.py)",
+      "confidence": 0.95,
       "examples": [
-        "analyst.py",
         "database_engineer.py",
-        "security_engineer.py"
+        "security_engineer.py",
+        "system_intelligence.py"
       ],
       "counterexamples": [
-        "Agent.py",
-        "dbEng.py"
+        "DatabaseEngineer.py",
+        "db_eng.py"
       ],
       "provenance": [
         {
-          "file": "agents/analyst.py",
+          "file": "agents/database_engineer.py",
           "line": 1,
           "evidence": "Consistent snake_case naming pattern"
         }
       ]
     },
     {
-      "id": "imports-future-annotations",
+      "id": "schema-validation-required",
       "category": "api",
-      "rule": "Use __future__ annotations for forward compatibility",
-      "confidence": 0.85,
-      "examples": [
-        "from __future__ import annotations"
-      ],
-      "counterexamples": [
-        "missing future imports"
-      ],
-      "provenance": [
-        {
-          "file": "agents/analyst.py",
-          "line": 10,
-          "evidence": "from __future__ import annotations"
-        }
-      ]
-    },
-    {
-      "id": "config-json-storage",
-      "category": "api",
-      "rule": "Team data and configuration stored as JSON files with structured naming",
+      "rule": "All agent communications must use JSON schema validation with versioned schemas",
       "confidence": 0.9,
       "examples": [
-        "team_data/work_items.json",
-        "team_data/settings_state.json"
+        ".deliveryos/schemas/agent_result.schema.json",
+        ".deliveryos/schemas/analyst_report_v2.schema.json"
       ],
       "counterexamples": [
-        "config.xml",
-        "settings.ini"
+        "unvalidated JSON responses",
+        "ad-hoc data structures"
       ],
       "provenance": [
         {
-          "file": "team_data/work_items.json",
+          "file": ".deliveryos/schemas/",
           "line": 1,
-          "evidence": "JSON-based configuration storage"
+          "evidence": "67 JSON schema files for comprehensive validation"
         }
       ]
     },
     {
-      "id": "agent-specialization",
+      "id": "fastapi-endpoint-pattern",
       "category": "api",
-      "rule": "Agents are specialized by domain with clear separation of concerns",
+      "rule": "HTTP endpoints use FastAPI decorators with explicit HTTP methods",
+      "confidence": 0.85,
+      "examples": [
+        "@app.get('/endpoint')",
+        "@app.post('/endpoint')"
+      ],
+      "counterexamples": [
+        "flask routes",
+        "raw HTTP handlers"
+      ],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get and @app.post decorators"
+        }
+      ]
+    },
+    {
+      "id": "agent-import-centralization",
+      "category": "naming",
+      "rule": "Agent imports centralized through __init__.py with explicit exports",
       "confidence": 0.95,
       "examples": [
-        "analyst for VB6 analysis",
-        "database_engineer for migration",
-        "security_engineer for compliance"
+        "from .analyst import AnalystAgent",
+        "from .architect import ArchitectAgent"
       ],
       "counterexamples": [
-        "generic agent handling all concerns"
+        "direct agent imports",
+        "wildcard imports"
       ],
       "provenance": [
         {
-          "file": "agents/database_engineer.py",
+          "file": "agents/__init__.py",
           "line": 1,
-          "evidence": "Specialized database migration agent"
+          "evidence": "11 explicit agent imports"
         }
       ]
     },
     {
-      "id": "schema-validation",
+      "id": "configuration-yaml-format",
       "category": "api",
-      "rule": "JSON schemas define contract validation for agent interactions",
-      "confidence": 0.8,
+      "rule": "Pipeline and configuration files use YAML format with version metadata",
+      "confidence": 0.9,
       "examples": [
-        ".deliveryos/schemas/agent_result.schema.json"
+        ".deliveryos/pipeline/pipeline_spec.yaml"
       ],
       "counterexamples": [
-        "unvalidated JSON exchanges"
+        "JSON configuration files",
+        "unversioned configs"
       ],
       "provenance": [
         {
-          "file": ".deliveryos/schemas/agent_result.schema.json",
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
           "line": 1,
-          "evidence": "Schema-based validation"
+          "evidence": "YAML format with version field"
         }
       ]
     }
   ],
   "lint_recommendations": [
-    "Implement consistent error handling patterns across all agent modules",
-    "Add type hints to all function signatures for better IDE support",
-    "Standardize logging configuration across the platform",
-    "Add docstrings to all public methods following Google style",
-    "Implement consistent async/await patterns for I/O operations"
+    "Implement pylint configuration for consistent Python code style",
+    "Add mypy type checking for agent interfaces",
+    "Enforce JSON schema validation in CI/CD pipeline",
+    "Add pre-commit hooks for code formatting",
+    "Implement agent contract testing"
   ],
   "scaffold_templates": [
-    "agent_base_template.py - Base class for new specialized agents",
-    "fastapi_endpoint_template.py - Standard REST endpoint pattern",
-    "json_config_schema.json - Configuration file validation schema",
-    "docker_service_template - Containerized service deployment pattern"
+    "Agent base class template with standard interface",
+    "FastAPI service template with schema validation",
+    "JSON schema template for agent communication",
+    "Docker containerization template",
+    "CI/CD pipeline template for agent deployment"
   ]
 }
