@@ -1,243 +1,189 @@
 {
-  "version": "scm-v1.0",
-  "summary": "Python-based modernization platform with agent-driven architecture for VB6 banking application transformation. Contains 13 specialized agents, FastAPI web services, and comprehensive schema validation for enterprise software modernization workflows.",
+  "version": "scm-v1.2.0",
+  "summary": "Multi-agent software modernization platform with Python-based agent orchestration, FastAPI web services, and JSON-based configuration management. The system implements a pipeline-driven approach to legacy code analysis and modernization with specialized agents for different aspects of software transformation.",
   "nodes": [
     {
-      "id": "service-modernization-platform",
+      "id": "service:web-server",
       "type": "Service",
-      "name": "ModernizationPlatform",
+      "name": "Web Server",
       "metadata": {
-        "language": "python",
-        "framework": "fastapi",
-        "agent_count": 13,
-        "schema_count": 67
+        "framework": "FastAPI",
+        "language": "Python",
+        "entry_point": "web/server.py"
       },
       "confidence": 0.95,
       "provenance": [
         {
           "file": "web/server.py",
           "line": 1,
-          "evidence": "FastAPI application with modernization endpoints"
-        },
-        {
-          "file": "agents/__init__.py",
-          "line": 1,
-          "evidence": "Agent module initialization with 11 imports"
+          "evidence": "FastAPI endpoint patterns detected"
         }
       ]
     },
     {
-      "id": "agent-analyst",
-      "type": "Component",
-      "name": "AnalystAgent",
-      "metadata": {
-        "specialization": "vb6_modernization",
-        "import_count": 25,
-        "route_count": 0
-      },
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "agents/analyst.py",
-          "line": 1,
-          "evidence": "Analyst agent with 25 imports for modernization analysis"
-        }
-      ]
-    },
-    {
-      "id": "agent-architect",
-      "type": "Component",
-      "name": "ArchitectAgent",
-      "metadata": {
-        "specialization": "system_design",
-        "import_count": 9
-      },
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "agents/architect.py",
-          "line": 1,
-          "evidence": "Architect agent for system design"
-        }
-      ]
-    },
-    {
-      "id": "agent-developer",
-      "type": "Component",
-      "name": "DeveloperAgent",
-      "metadata": {
-        "specialization": "code_generation",
-        "import_count": 14
-      },
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "agents/developer.py",
-          "line": 1,
-          "evidence": "Developer agent with 14 imports for code generation"
-        }
-      ]
-    },
-    {
-      "id": "agent-database-engineer",
-      "type": "Component",
-      "name": "DatabaseEngineerAgent",
-      "metadata": {
-        "specialization": "database_migration",
-        "import_count": 4
-      },
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "agents/database_engineer.py",
-          "line": 1,
-          "evidence": "Database engineer agent for migration tasks"
-        }
-      ]
-    },
-    {
-      "id": "agent-security-engineer",
-      "type": "Component",
-      "name": "SecurityEngineerAgent",
-      "metadata": {
-        "specialization": "security_assessment",
-        "import_count": 4
-      },
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "agents/security_engineer.py",
-          "line": 1,
-          "evidence": "Security engineer agent"
-        }
-      ]
-    },
-    {
-      "id": "agent-system-intelligence",
-      "type": "Component",
-      "name": "SystemIntelligenceAgent",
-      "metadata": {
-        "specialization": "system_analysis",
-        "import_count": 5
-      },
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "agents/system_intelligence.py",
-          "line": 1,
-          "evidence": "System intelligence agent"
-        }
-      ]
-    },
-    {
-      "id": "context-vault-service",
+      "id": "service:context-vault",
       "type": "Service",
-      "name": "ContextVaultService",
+      "name": "Context Vault Service",
       "metadata": {
-        "framework": "fastapi",
-        "endpoints": [
-          "@app.get",
-          "@app.post"
-        ]
+        "framework": "FastAPI",
+        "language": "Python",
+        "entry_point": "utils/context_vault.py"
       },
-      "confidence": 0.85,
+      "confidence": 0.95,
       "provenance": [
         {
           "file": "utils/context_vault.py",
           "line": 1,
-          "evidence": "FastAPI endpoints for context management"
+          "evidence": "FastAPI router and endpoint definitions"
         }
       ]
     },
     {
-      "id": "web-server",
-      "type": "Service",
-      "name": "WebServer",
+      "id": "module:agent-orchestrator",
+      "type": "Module",
+      "name": "Agent Orchestration System",
       "metadata": {
-        "framework": "fastapi",
-        "endpoints": [
-          "@app.get"
+        "agents": [
+          "analyst",
+          "architect",
+          "developer",
+          "tester",
+          "validator",
+          "deployer"
+        ],
+        "base_class": "agents/base.py"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "11 agent imports detected"
+        }
+      ]
+    },
+    {
+      "id": "agent:analyst",
+      "type": "Component",
+      "name": "Analyst Agent",
+      "metadata": {
+        "specialization": "code_analysis",
+        "import_count": 25
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Heavy import footprint suggests complex analysis capabilities"
+        }
+      ]
+    },
+    {
+      "id": "agent:architect",
+      "type": "Component",
+      "name": "Architect Agent",
+      "metadata": {
+        "specialization": "system_design",
+        "import_count": 9
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Moderate import footprint for design patterns"
+        }
+      ]
+    },
+    {
+      "id": "agent:developer",
+      "type": "Component",
+      "name": "Developer Agent",
+      "metadata": {
+        "specialization": "code_generation",
+        "import_count": 14
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "Significant import count for code generation"
+        }
+      ]
+    },
+    {
+      "id": "database:team-data",
+      "type": "Database",
+      "name": "Team Data Store",
+      "metadata": {
+        "type": "JSON-based",
+        "tables": [
+          "work_items",
+          "settings_state",
+          "custom_teams",
+          "custom_agents",
+          "tenant_memory"
         ]
       },
       "confidence": 0.85,
       "provenance": [
         {
-          "file": "web/server.py",
+          "file": "team_data/",
           "line": 1,
-          "evidence": "FastAPI web server with GET endpoints"
+          "evidence": "Multiple JSON data files in team_data directory"
         }
       ]
     },
     {
-      "id": "schema-validation-system",
+      "id": "config:pipeline-spec",
       "type": "Component",
-      "name": "SchemaValidationSystem",
+      "name": "Pipeline Specification",
       "metadata": {
-        "schema_count": 67,
-        "format": "json_schema"
+        "format": "YAML",
+        "version_controlled": true
       },
       "confidence": 0.9,
       "provenance": [
         {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "YAML pipeline configuration with version, stages, artifacts"
+        }
+      ]
+    },
+    {
+      "id": "config:json-schemas",
+      "type": "Component",
+      "name": "JSON Schema Definitions",
+      "metadata": {
+        "schema_count": 67,
+        "validation_enabled": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
           "file": ".deliveryos/schemas/",
           "line": 1,
-          "evidence": "67 JSON schema files for validation"
+          "evidence": "67 JSON schema files for data validation"
         }
       ]
     },
     {
-      "id": "legacy-vb6-banking-app",
-      "type": "ExternalDependency",
-      "name": "VB6BankingApplication",
+      "id": "container:docker-app",
+      "type": "Container",
+      "name": "Application Container",
       "metadata": {
-        "forms": [
-          "frmcheckbalance",
-          "frmdeposit",
-          "frmwithdraw",
-          "frmcustomer",
-          "frmsettings",
-          "frmlogin1",
-          "frmmonthlyreport",
-          "frmcloseaccount",
-          "frmaddinterest"
-        ],
-        "tables": [
-          "tblCustomers",
-          "tblAccount",
-          "tblTransaction"
-        ],
-        "database": "Access"
+        "base_image": "python",
+        "orchestration": "docker-compose"
       },
-      "confidence": 1.0,
+      "confidence": 0.9,
       "provenance": [
         {
-          "file": "business_context",
+          "file": "Dockerfile",
           "line": 1,
-          "evidence": "Legacy VB6 banking application with 9 forms and 3 core tables"
-        }
-      ]
-    },
-    {
-      "id": "target-csharp-services",
-      "type": "ExternalDependency",
-      "name": "CSharpServicePlatform",
-      "metadata": {
-        "services": [
-          "TransactionService",
-          "CustomerService",
-          "AuthenticationService",
-          "ExperienceShell",
-          "ReportingService",
-          "LegacyCoreService"
-        ],
-        "database": "PostgreSQL"
-      },
-      "confidence": 1.0,
-      "provenance": [
-        {
-          "file": "business_context",
-          "line": 1,
-          "evidence": "Target C# service platform with 6 services and PostgreSQL"
+          "evidence": "Dockerfile and docker-compose.yml present"
         }
       ]
     }
@@ -245,94 +191,130 @@
   "edges": [
     {
       "type": "IMPORTS",
-      "from": "agent-analyst",
-      "to": "agent-system-intelligence",
+      "from": "module:agent-orchestrator",
+      "to": "agent:analyst",
       "directionality": "directed",
-      "protocol_metadata": {},
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
       "confidence": 0.95,
       "evidence": [
         {
           "file": "agents/__init__.py",
-          "line": 11,
-          "evidence": "from .system_intelligence import SystemIntelligenceAgent"
+          "line": 1,
+          "evidence": "from .analyst import"
         }
       ]
     },
     {
       "type": "IMPORTS",
-      "from": "agent-analyst",
-      "to": "schema-validation-system",
+      "from": "module:agent-orchestrator",
+      "to": "agent:architect",
       "directionality": "directed",
-      "protocol_metadata": {},
-      "confidence": 0.8,
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
       "evidence": [
         {
-          "file": "agents/analyst.py",
-          "line": 12,
-          "evidence": "import json for schema validation"
+          "file": "agents/__init__.py",
+          "line": 3,
+          "evidence": "from .architect import"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "module:agent-orchestrator",
+      "to": "agent:developer",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 5,
+          "evidence": "from .developer import"
         }
       ]
     },
     {
       "type": "CALLS_HTTP",
-      "from": "web-server",
-      "to": "context-vault-service",
+      "from": "service:web-server",
+      "to": "service:context-vault",
       "directionality": "directed",
       "protocol_metadata": {
-        "methods": [
-          "GET",
-          "POST"
-        ]
+        "protocol": "HTTP",
+        "framework": "FastAPI"
       },
-      "confidence": 0.7,
+      "confidence": 0.8,
       "evidence": [
         {
           "file": "web/server.py",
           "line": 1,
-          "evidence": "FastAPI router integration"
+          "evidence": "FastAPI service integration patterns"
         }
       ]
     },
     {
-      "type": "DEPENDS_ON",
-      "from": "service-modernization-platform",
-      "to": "legacy-vb6-banking-app",
+      "type": "READS_TABLE",
+      "from": "module:agent-orchestrator",
+      "to": "database:team-data",
       "directionality": "directed",
       "protocol_metadata": {
-        "relationship": "modernization_source"
+        "format": "JSON"
       },
-      "confidence": 1.0,
+      "confidence": 0.85,
       "evidence": [
         {
-          "file": "business_context",
+          "file": "team_data/",
           "line": 1,
-          "evidence": "Platform modernizes VB6 banking application"
+          "evidence": "JSON data files accessed by agents"
         }
       ]
     },
     {
-      "type": "DEPENDS_ON",
-      "from": "target-csharp-services",
-      "to": "service-modernization-platform",
+      "type": "USES_LIBRARY",
+      "from": "service:web-server",
+      "to": "config:json-schemas",
       "directionality": "directed",
       "protocol_metadata": {
-        "relationship": "modernization_target"
+        "validation": "runtime"
       },
-      "confidence": 1.0,
+      "confidence": 0.8,
       "evidence": [
         {
-          "file": "business_context",
+          "file": ".deliveryos/schemas/",
           "line": 1,
-          "evidence": "C# services are modernization target"
+          "evidence": "Schema validation for API contracts"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:web-server",
+      "to": "container:docker-app",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "runtime": "docker"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Container orchestration configuration"
         }
       ]
     }
   ],
   "unknowns": [
-    "VB6 source code location and accessibility",
-    "Database connection strings and credentials",
-    "Authentication integration patterns",
-    "Deployment infrastructure specifications",
-    "Legacy business rule extraction completeness"
+    "External API dependencies for agent communication",
+    "Database persistence layer implementation details",
+    "Authentication and authorization mechanisms",
+    "Inter-agent communication protocols",
+    "Deployment target infrastructure specifications"
   ]
 }
