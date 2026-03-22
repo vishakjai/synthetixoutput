@@ -1,0 +1,128 @@
+[
+  {
+    "id": "rb-001-auth-modernization",
+    "title": "Implement Modern Authentication Service",
+    "problem_statement": "Current VB6 login form lacks modern security standards required for banking applications",
+    "scope": [
+      "frm-login",
+      "authentication-service"
+    ],
+    "risk_if_unaddressed": "Unauthorized access, regulatory compliance violations, data breaches",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "database-migration",
+      "session-management"
+    ],
+    "suggested_approach": "Create OAuth2/JWT-based authentication service with MFA support, replace VB6 login form with secure web interface",
+    "success_criteria": [
+      "Multi-factor authentication implemented",
+      "Secure session management with JWT tokens",
+      "Password policies enforced",
+      "Login attempts logged and monitored"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 18,
+        "evidence": "Form=frmLogin.frm"
+      }
+    ]
+  },
+  {
+    "id": "rb-002-database-security",
+    "title": "Secure Database Access Layer",
+    "problem_statement": "ADO-based database access creates SQL injection vulnerabilities and lacks modern security patterns",
+    "scope": [
+      "de-bank",
+      "ado-reference",
+      "database-layer"
+    ],
+    "risk_if_unaddressed": "SQL injection attacks, data corruption, unauthorized data access",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "database-schema-analysis"
+    ],
+    "suggested_approach": "Replace ADO with parameterized queries using modern ORM, implement connection pooling and encryption",
+    "success_criteria": [
+      "All database queries use parameterized statements",
+      "Database connections encrypted in transit",
+      "Connection pooling implemented",
+      "Database access logging enabled"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 6,
+        "evidence": "Microsoft ActiveX Data Objects 2.0 Library"
+      }
+    ]
+  },
+  {
+    "id": "rb-003-transaction-services",
+    "title": "Modernize Transaction Processing",
+    "problem_statement": "VB6 forms handle financial transactions without proper validation, audit trails, or error handling",
+    "scope": [
+      "frm-deposit",
+      "frm-withdraw",
+      "transaction-service"
+    ],
+    "risk_if_unaddressed": "Financial data corruption, regulatory non-compliance, transaction failures",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "database-security",
+      "auth-modernization"
+    ],
+    "suggested_approach": "Create RESTful transaction services with comprehensive validation, audit logging, and rollback capabilities",
+    "success_criteria": [
+      "All transactions logged with full audit trail",
+      "Input validation on all transaction parameters",
+      "Atomic transaction processing with rollback",
+      "Real-time balance validation"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 15,
+        "evidence": "Form=frmdeposit.frm"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-ui-modernization",
+    "title": "Convert VB6 Forms to Modern Web UI",
+    "problem_statement": "VB6 MDI forms are outdated and not accessible via modern web browsers or mobile devices",
+    "scope": [
+      "frm-customer",
+      "frm-balance-check",
+      "ui-layer"
+    ],
+    "risk_if_unaddressed": "Poor user experience, accessibility issues, deployment limitations",
+    "effort": "XL",
+    "severity": "medium",
+    "dependencies": [
+      "transaction-services",
+      "auth-modernization"
+    ],
+    "suggested_approach": "Generate React/Angular components from VB6 forms, maintain functional parity with improved UX",
+    "success_criteria": [
+      "All VB6 forms converted to responsive web components",
+      "Functional parity maintained",
+      "Accessibility standards met",
+      "Mobile-friendly interface"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/close account.frm",
+        "line": 9,
+        "evidence": "MDIChild = -1 'True"
+      }
+    ]
+  }
+]
