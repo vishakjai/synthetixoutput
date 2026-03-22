@@ -1,0 +1,160 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Extract and Document VB6 Business Rules",
+    "problem_statement": "Critical business logic embedded in VB6 forms without documentation, risking data contract violations during modernization",
+    "scope": [
+      "frmcustomer.frm",
+      "frmdeposit.frm",
+      "frmwithdraw.frm",
+      "close account.frm"
+    ],
+    "risk_if_unaddressed": "Loss of critical banking business rules leading to data integrity issues and regulatory compliance failures",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "VB6 source code analysis",
+      "Business stakeholder interviews"
+    ],
+    "suggested_approach": "Systematic analysis of all VB6 forms to extract validation rules, business logic, and data flow patterns into documented specifications",
+    "success_criteria": [
+      "All form validation rules documented",
+      "Business logic extracted to specification documents",
+      "Data flow diagrams created",
+      "Stakeholder validation completed"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "BankApp1/close account.frm",
+        "line": 25,
+        "evidence": "Begin VB.TextBox txtacno"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Implement Secure Authentication Framework",
+    "problem_statement": "Legacy frmLogin form lacks modern security patterns, exposing banking application to authentication vulnerabilities",
+    "scope": [
+      "frmLogin.frm",
+      "authentication system"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to banking functions, regulatory compliance violations, potential data breaches",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Security requirements analysis",
+      "Identity provider selection"
+    ],
+    "suggested_approach": "Replace VB6 login form with modern authentication service supporting MFA, session management, and audit logging",
+    "success_criteria": [
+      "Multi-factor authentication implemented",
+      "Session management with timeout",
+      "Audit logging for all authentication events",
+      "Integration with enterprise identity provider"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 19,
+        "evidence": "Form=frmLogin.frm"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Database Schema Discovery and Documentation",
+    "problem_statement": "Database structure unknown, preventing accurate data contract preservation during modernization",
+    "scope": [
+      "deBank.Dsr",
+      "database connections",
+      "data access layer"
+    ],
+    "risk_if_unaddressed": "Data migration failures, broken relationships, loss of referential integrity",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Database access",
+      "ADO connection analysis"
+    ],
+    "suggested_approach": "Reverse engineer database schema from Data Environment and ADO connections, document all tables, relationships, and constraints",
+    "success_criteria": [
+      "Complete database schema documented",
+      "All relationships mapped",
+      "Constraints and indexes catalogued",
+      "Data migration plan created"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 13,
+        "evidence": "Designer=deBank.Dsr"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Refactor Python Agent Import Structure",
+    "problem_statement": "Wildcard imports in agent framework reduce maintainability and increase coupling between components",
+    "scope": [
+      "agents/__init__.py",
+      "all agent modules"
+    ],
+    "risk_if_unaddressed": "Increased technical debt, harder debugging, potential circular import issues",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [
+      "Agent interface analysis"
+    ],
+    "suggested_approach": "Replace wildcard imports with explicit imports, add type hints, implement proper dependency injection",
+    "success_criteria": [
+      "All wildcard imports replaced with explicit imports",
+      "Type hints added to all agent methods",
+      "Dependency injection pattern implemented",
+      "Import cycle detection added to CI"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "agents/__init__.py",
+        "line": 1,
+        "evidence": "from .analyst import *"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Implement Transaction Audit and Rollback Mechanisms",
+    "problem_statement": "Banking transaction forms lack visible audit trails and rollback capabilities required for financial applications",
+    "scope": [
+      "frmdeposit.frm",
+      "frmwithdraw.frm",
+      "transaction processing"
+    ],
+    "risk_if_unaddressed": "Regulatory compliance violations, inability to trace transactions, data integrity issues",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema discovery",
+      "Audit requirements analysis"
+    ],
+    "suggested_approach": "Implement comprehensive transaction logging with ACID compliance and rollback capabilities",
+    "success_criteria": [
+      "All transactions logged with full audit trail",
+      "Rollback mechanism implemented and tested",
+      "ACID compliance verified",
+      "Regulatory audit requirements met"
+    ],
+    "confidence": 0.75,
+    "provenance": [
+      {
+        "file": "BankApp1/BANK.vbp",
+        "line": 16,
+        "evidence": "Form=frmdeposit.frm"
+      }
+    ]
+  }
+]
