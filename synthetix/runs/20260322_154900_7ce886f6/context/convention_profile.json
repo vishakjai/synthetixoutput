@@ -1,0 +1,105 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Mixed legacy VB6 patterns with modern Python conventions. VB6 follows Hungarian notation and event-driven architecture. Python follows PEP-8 with agent-based patterns.",
+  "rules": [
+    {
+      "id": "vb6-naming-hungarian",
+      "category": "naming",
+      "rule": "VB6 controls use Hungarian notation prefixes (frm=Form, txt=TextBox, cmd=CommandButton)",
+      "confidence": 0.95,
+      "examples": [
+        "frmcustomer",
+        "txtacno",
+        "cmdsearch"
+      ],
+      "counterexamples": [
+        "customerForm",
+        "accountNumber",
+        "searchButton"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 19,
+          "evidence": "Begin VB.TextBox txtacno"
+        }
+      ]
+    },
+    {
+      "id": "vb6-mdi-architecture",
+      "category": "api",
+      "rule": "Forms are MDI children with maximized window state for consistent UX",
+      "confidence": 0.9,
+      "examples": [
+        "MDIChild = -1 'True",
+        "WindowState = 2 'Maximized"
+      ],
+      "counterexamples": [
+        "standalone windows",
+        "modal dialogs"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/close account.frm",
+          "line": 9,
+          "evidence": "MDIChild = -1 'True"
+        }
+      ]
+    },
+    {
+      "id": "python-agent-imports",
+      "category": "naming",
+      "rule": "Agent modules use relative imports with descriptive class names",
+      "confidence": 0.95,
+      "examples": [
+        "from .analyst import Analyst",
+        "from .system_intelligence import SystemIntelligence"
+      ],
+      "counterexamples": [
+        "import analyst",
+        "from agents import *"
+      ],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import Analyst"
+        }
+      ]
+    },
+    {
+      "id": "vb6-com-references",
+      "category": "api",
+      "rule": "External dependencies declared as COM references with GUIDs and version numbers",
+      "confidence": 0.95,
+      "examples": [
+        "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0"
+      ],
+      "counterexamples": [
+        "import statements",
+        "package.json dependencies"
+      ],
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Reference=*\\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent error handling patterns across VB6 forms",
+    "Add input validation for all user-facing controls",
+    "Standardize database connection management",
+    "Add logging for transaction operations",
+    "Implement proper resource disposal for ADO objects"
+  ],
+  "scaffold_templates": [
+    "VB6-to-React form conversion template",
+    "ADO-to-REST API conversion template",
+    "Authentication service template",
+    "Transaction service template",
+    "Customer management service template"
+  ]
+}
