@@ -1,0 +1,614 @@
+{
+  "header": {
+    "artifact_id": "4a3d8ef26feb4264995731a5fed1a8d6",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-22T15:59:51.277470+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260322_155835_6c45ad75",
+      "stage_id": "context_layer",
+      "task_id": "2b803e9ab1f844ff8e36909975199fa1"
+    },
+    "parents": [],
+    "digest": "sha256:865bcd5d1f00aae3cf670c5ffbad05c2d31775e7b90b755212635ca9b33f2be5",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260322_155835_6c45ad75",
+      "bundle_version": "20260322T155951Z_20260322_155835_6c45ad75"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Moderately healthy codebase with good modular architecture but lacking comprehensive testing, documentation, and production-ready configurations. Strong foundation with room for operational maturity improvements."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 7,
+      "security": 5,
+      "reliability": 6,
+      "testability": 4
+    },
+    "finding_count": 7,
+    "backlog_count": 5
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: agents/",
+      "description": "High complexity agent modules with extensive imports and potential circular dependencies",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "agents/"
+        ],
+        "paths": [
+          "agents/"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/analyst.py"
+        },
+        {
+          "kind": "file_span",
+          "file": "agents/developer.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: web/server.py",
+      "description": "API endpoints without visible authentication or rate limiting",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "web/server.py"
+        ],
+        "paths": [
+          "web/server.py"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "web/server.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.75,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: utils/context_vault.py",
+      "description": "Context vault handling sensitive data without encryption evidence",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "utils/context_vault.py"
+        ],
+        "paths": [
+          "utils/context_vault.py"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Missing Authentication Layer",
+      "description": "Web API endpoints appear to lack authentication and authorization mechanisms, exposing potential security vulnerabilities",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.75,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Insufficient Test Coverage",
+      "description": "No visible test files or test directories detected, indicating potential reliability issues in production",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Complex Agent Dependencies",
+      "description": "High import counts in agent modules suggest tight coupling that could impact maintainability and testing",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-004",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Production Configuration Gaps",
+      "description": "Missing production-ready configurations for logging, monitoring, and error handling",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001",
+      "title": "Implement API Authentication and Authorization",
+      "priority": "P1",
+      "business_value": "Unauthorized access to sensitive agent operations and context data",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "service:web-api",
+          "module:utils"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "security-framework-selection",
+        "user-management-system"
+      ],
+      "plan": [
+        "Implement JWT-based authentication with role-based access control using FastAPI security utilities"
+      ],
+      "acceptance_criteria": [
+        "All API endpoints require valid authentication",
+        "Role-based permissions for different agent operations",
+        "Secure token management and refresh mechanisms"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-002",
+      "title": "Establish Comprehensive Test Suite",
+      "priority": "P1",
+      "business_value": "Production bugs, regression issues, and difficulty maintaining code quality",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "testing-framework-setup"
+      ],
+      "plan": [
+        "Implement pytest-based test suite with unit tests for agents, integration tests for APIs, and contract tests for schemas"
+      ],
+      "acceptance_criteria": [
+        "80%+ code coverage across all modules",
+        "Unit tests for all agent classes",
+        "Integration tests for API endpoints",
+        "Schema validation tests"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003",
+      "title": "Reduce Agent Module Coupling",
+      "priority": "P2",
+      "business_value": "Difficult maintenance, testing challenges, and potential runtime dependency issues",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.75,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:agents-core",
+          "pkg:json"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "architecture-review"
+      ],
+      "plan": [
+        "Implement dependency injection pattern and extract common interfaces to reduce direct imports"
+      ],
+      "acceptance_criteria": [
+        "Reduce import count per agent module by 50%",
+        "Implement common agent interface",
+        "Eliminate circular dependencies",
+        "Improve agent testability"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-004",
+      "title": "Implement Production Monitoring and Logging",
+      "priority": "P2",
+      "business_value": "Difficult troubleshooting, no visibility into system health, potential downtime",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "monitoring-stack-selection"
+      ],
+      "plan": [
+        "Implement structured logging with correlation IDs, health check endpoints, and metrics collection"
+      ],
+      "acceptance_criteria": [
+        "Structured JSON logging across all components",
+        "Health check endpoints for all services",
+        "Metrics collection for agent performance",
+        "Distributed tracing for request flows"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-005",
+      "title": "Secure Context Vault Operations",
+      "priority": "P1",
+      "business_value": "Data breaches, compliance violations, unauthorized access to sensitive context data",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "service:web-api",
+          "module:utils"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "encryption-key-management"
+      ],
+      "plan": [
+        "Implement encryption at rest and in transit for context data with proper key management"
+      ],
+      "acceptance_criteria": [
+        "All context data encrypted at rest",
+        "Secure key management system",
+        "Audit logging for context access",
+        "Data retention policies implemented"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001",
+      "rb-002",
+      "rb-005"
+    ],
+    "stabilization": [
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004",
+      "rb-005"
+    ],
+    "modernization": [
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004",
+      "rb-005"
+    ]
+  }
+}
