@@ -1,0 +1,268 @@
+{
+  "header": {
+    "artifact_id": "dd8a90d1db5e430eb47e74732cc954ca",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-22T16:02:57.973606+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260322_155838_3feb5663",
+      "stage_id": "context_layer",
+      "task_id": "a519398620e64f80a29b5ae787fef178"
+    },
+    "parents": [],
+    "digest": "sha256:87ef6900656d9f61f714cc9a29e4423576c447dd8bb1689f055b566f114fcbf2",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260322_155838_3feb5663",
+      "bundle_version": "20260322T160257Z_20260322_155838_3feb5663"
+    }
+  },
+  "rules": [
+    {
+      "id": "vb6-form-naming",
+      "category": "naming",
+      "title": "Forms prefixed with 'frm' followed by descriptive name (frmcustomer, frmdeposit)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Forms prefixed with 'frm' followed by descriptive name (frmcustomer, frmdeposit)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "frmcustomer.frm"
+        },
+        {
+          "file": "frmdeposit.frm"
+        },
+        {
+          "file": "frmLogin.frm"
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "Form9.frm"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/BANK.vbp"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-control-naming",
+      "category": "naming",
+      "title": "Controls use Hungarian notation with type prefix (txt, cmd, lbl)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Controls use Hungarian notation with type prefix (txt, cmd, lbl)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "txtacno"
+        },
+        {
+          "file": "cmdsearch"
+        },
+        {
+          "file": "lblaccno"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/close account.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "python-agent-imports",
+      "category": "api_design",
+      "title": "Agent modules imported via relative imports in __init__.py",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent modules imported via relative imports in __init__.py",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "from .analyst import *"
+        },
+        {
+          "file": "from .architect import *"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "vb6-mdi-pattern",
+      "category": "api_design",
+      "title": "Forms configured as MDI children with maximized window state",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Forms configured as MDI children with maximized window state",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "MDIChild = -1 'True"
+        },
+        {
+          "file": "WindowState = 2 'Maximized"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/close account.frm"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "ado-dependency-pattern",
+      "category": "api_design",
+      "title": "ADO 2.5 library referenced via COM GUID for data access",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "ADO 2.5 library referenced via COM GUID for data access",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "{00000205-0000-0010-8000-00AA006D2EA4}#2.5"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/BANK.vbp"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "Modern React form components with validation",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "RESTful API endpoints for banking operations",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "Database migration scripts for schema modernization",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "Authentication middleware with JWT tokens",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-005",
+      "language": "generic",
+      "name": "Docker containerization templates",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
