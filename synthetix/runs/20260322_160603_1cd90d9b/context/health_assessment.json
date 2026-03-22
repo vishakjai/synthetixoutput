@@ -1,0 +1,77 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Moderately healthy multi-agent platform with good modular structure but lacking comprehensive testing, documentation, and production-ready configuration.",
+  "scores": {
+    "maintainability": 7,
+    "security": 5,
+    "reliability": 6,
+    "testability": 4
+  },
+  "hotspots": [
+    {
+      "scope": "agents/analyst.py",
+      "reason": "Highest complexity agent with 25 import dependencies - potential single point of failure",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "25 import dependencies indicate high coupling"
+        }
+      ]
+    },
+    {
+      "scope": "utils/context_vault.py",
+      "reason": "Critical context management service without visible error handling or validation",
+      "severity": "high",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI endpoints detected without visible validation patterns"
+        }
+      ]
+    },
+    {
+      "scope": "team_data/",
+      "reason": "JSON data files without schema validation or backup mechanisms",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "team_data/custom_agents.json",
+          "line": 1,
+          "evidence": "Critical configuration data in unvalidated JSON files"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Missing Production Configuration",
+      "description": "No visible production-ready configuration for database connections, secrets management, or environment-specific settings",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Insufficient Error Handling",
+      "description": "FastAPI services lack comprehensive error handling and validation middleware",
+      "severity": "medium",
+      "confidence": 0.7
+    },
+    {
+      "title": "Testing Coverage Gap",
+      "description": "Despite having a tester agent, no visible unit tests or integration test suites",
+      "severity": "medium",
+      "confidence": 0.8
+    },
+    {
+      "title": "Security Hardening Required",
+      "description": "No visible authentication, authorization, or input sanitization mechanisms",
+      "severity": "high",
+      "confidence": 0.7
+    }
+  ]
+}
