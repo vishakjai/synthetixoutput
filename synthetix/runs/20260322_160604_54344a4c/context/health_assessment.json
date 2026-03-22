@@ -1,0 +1,95 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Legacy VB6 application with critical modernization risks. High technical debt in data access patterns, authentication gaps, and mixed technology stack complexity.",
+  "scores": {
+    "maintainability": 3,
+    "security": 2,
+    "reliability": 4,
+    "testability": 2
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 Data Access Layer",
+      "reason": "Direct ADO usage without abstraction, potential SQL injection vulnerabilities",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "scope": "Authentication System",
+      "reason": "frmLogin form without visible security framework integration",
+      "severity": "high",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 19,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "scope": "Transaction Processing",
+      "reason": "Multiple transaction forms without visible audit trail or rollback mechanisms",
+      "severity": "medium",
+      "confidence": 0.75,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 16,
+          "evidence": "Form=frmdeposit.frm"
+        },
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 18,
+          "evidence": "Form=frmwithdraw.frm"
+        }
+      ]
+    },
+    {
+      "scope": "Python Agent Framework",
+      "reason": "Wildcard imports reduce code clarity and increase coupling",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import *"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Data Contract Preservation Risk",
+      "description": "Legacy VB6 forms may contain undocumented business rules and data validation logic that could be lost during modernization",
+      "severity": "critical",
+      "confidence": 0.8
+    },
+    {
+      "title": "Authentication Security Gap",
+      "description": "No visible modern authentication framework integration in legacy application",
+      "severity": "high",
+      "confidence": 0.7
+    },
+    {
+      "title": "Database Schema Unknown",
+      "description": "Database structure and relationships not visible in provided artifacts",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Transaction Integrity Risk",
+      "description": "Banking transactions without visible ACID compliance or audit mechanisms",
+      "severity": "critical",
+      "confidence": 0.75
+    }
+  ]
+}
