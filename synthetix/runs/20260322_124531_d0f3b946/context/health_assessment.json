@@ -1,90 +1,90 @@
 {
-  "version": "ha-v1.0",
-  "summary": "Modernization platform shows strong architectural foundation with comprehensive schema validation but lacks VB6 source integration, security hardening, and production deployment readiness.",
+  "version": "ha-v1.1.0",
+  "summary": "Moderately healthy system with strong architectural patterns but potential scalability and maintainability concerns. High complexity in agent orchestration with limited error handling visibility.",
   "scores": {
-    "maintainability": 75,
-    "security": 45,
+    "maintainability": 65,
+    "security": 70,
     "reliability": 60,
-    "testability": 50
+    "testability": 55
   },
   "hotspots": [
     {
       "scope": "agents/analyst.py",
-      "reason": "High complexity with 25 imports suggests potential coupling issues and maintenance burden",
-      "severity": "medium",
-      "confidence": 0.8,
-      "provenance": [
-        {
-          "file": "agents/analyst.py",
-          "line": 1,
-          "evidence": "25 imports indicating high coupling"
-        }
-      ]
-    },
-    {
-      "scope": "VB6 source integration",
-      "reason": "No evidence of VB6 source code parsing or integration capabilities in current codebase",
-      "severity": "high",
-      "confidence": 0.9,
-      "provenance": [
-        {
-          "file": "repository_scan",
-          "line": 1,
-          "evidence": "No VB6 files (.frm, .bas, .cls) detected in repository"
-        }
-      ]
-    },
-    {
-      "scope": "Authentication and authorization",
-      "reason": "No security middleware or authentication patterns detected in FastAPI services",
+      "reason": "Highest import complexity (25 imports) suggests potential over-coupling and single responsibility violations",
       "severity": "high",
       "confidence": 0.85,
       "provenance": [
         {
-          "file": "web/server.py",
+          "file": "agents/analyst.py",
           "line": 1,
-          "evidence": "FastAPI endpoints without authentication decorators"
+          "evidence": "25 imports detected, significantly higher than other agents"
         }
       ]
     },
     {
-      "scope": "Database connectivity",
-      "reason": "No database connection or ORM patterns detected for PostgreSQL target",
-      "severity": "high",
+      "scope": "module:agent-orchestrator",
+      "reason": "Complex inter-agent dependencies with 1038 import edges may create maintenance bottlenecks",
+      "severity": "medium",
       "confidence": 0.8,
       "provenance": [
         {
-          "file": "repository_scan",
+          "file": "agents/__init__.py",
           "line": 1,
-          "evidence": "No database connection libraries in requirements or imports"
+          "evidence": "High import edge count indicates complex dependency graph"
+        }
+      ]
+    },
+    {
+      "scope": "database:team-data",
+      "reason": "JSON-based data storage without ACID guarantees may cause data consistency issues under concurrent access",
+      "severity": "medium",
+      "confidence": 0.75,
+      "provenance": [
+        {
+          "file": "team_data/",
+          "line": 1,
+          "evidence": "File-based JSON storage without transaction support"
+        }
+      ]
+    },
+    {
+      "scope": "service:web-server",
+      "reason": "No explicit authentication or rate limiting patterns detected in FastAPI endpoints",
+      "severity": "high",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI endpoints without visible security middleware"
         }
       ]
     }
   ],
   "risks": [
     {
-      "title": "Missing VB6 Source Code Integration",
-      "description": "Platform cannot analyze or modernize VB6 applications without source code parsing capabilities",
-      "severity": "critical",
-      "confidence": 0.95
+      "title": "Agent Orchestration Scalability",
+      "description": "Current agent architecture may not scale effectively under high concurrent modernization workloads due to potential resource contention and synchronization issues",
+      "severity": "high",
+      "confidence": 0.8
     },
     {
-      "title": "Unsecured API Endpoints",
-      "description": "FastAPI services lack authentication, authorization, and input validation security measures",
-      "severity": "high",
-      "confidence": 0.9
-    },
-    {
-      "title": "No Database Migration Strategy",
-      "description": "Missing Access to PostgreSQL migration tools and data transformation capabilities",
-      "severity": "high",
+      "title": "Data Persistence Reliability",
+      "description": "JSON file-based storage for team data lacks transactional integrity and may result in data corruption during concurrent operations",
+      "severity": "medium",
       "confidence": 0.85
     },
     {
-      "title": "Incomplete Testing Framework",
-      "description": "No evidence of unit tests, integration tests, or agent contract validation",
+      "title": "Security Exposure",
+      "description": "FastAPI services lack visible authentication, authorization, and input validation mechanisms, creating potential security vulnerabilities",
+      "severity": "critical",
+      "confidence": 0.75
+    },
+    {
+      "title": "Testing Coverage Gap",
+      "description": "No visible test files or testing infrastructure despite having a dedicated tester agent, indicating potential quality assurance gaps",
       "severity": "medium",
-      "confidence": 0.8
+      "confidence": 0.9
     }
   ]
 }
