@@ -1,0 +1,90 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Legacy VB6 application with critical modernization needs. High security and maintainability risks due to outdated technology stack and lack of modern safeguards.",
+  "scores": {
+    "maintainability": 2,
+    "security": 1,
+    "reliability": 3,
+    "testability": 1
+  },
+  "hotspots": [
+    {
+      "scope": "VB6 ADO Database Access",
+      "reason": "Direct database access without parameterized queries creates SQL injection vulnerability",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 6,
+          "evidence": "Microsoft ActiveX Data Objects 2.0 Library"
+        }
+      ]
+    },
+    {
+      "scope": "Authentication System",
+      "reason": "No visible modern authentication patterns, likely storing credentials insecurely",
+      "severity": "critical",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 18,
+          "evidence": "Form=frmLogin.frm"
+        }
+      ]
+    },
+    {
+      "scope": "Transaction Processing",
+      "reason": "Financial transactions without visible audit trails or validation frameworks",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 15,
+          "evidence": "Form=frmdeposit.frm"
+        }
+      ]
+    },
+    {
+      "scope": "Legacy Technology Stack",
+      "reason": "VB6 runtime no longer supported, creates deployment and security risks",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "BankApp1/BANK.vbp",
+          "line": 1,
+          "evidence": "Type=Exe"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Vulnerability",
+      "description": "ADO-based database access likely uses string concatenation for SQL queries, creating injection attack vectors",
+      "severity": "critical",
+      "confidence": 0.85
+    },
+    {
+      "title": "Unsupported Runtime Environment",
+      "description": "VB6 runtime is deprecated and no longer receives security updates from Microsoft",
+      "severity": "high",
+      "confidence": 0.95
+    },
+    {
+      "title": "No Modern Authentication",
+      "description": "Banking application lacks modern authentication mechanisms like MFA, OAuth, or secure session management",
+      "severity": "critical",
+      "confidence": 0.8
+    },
+    {
+      "title": "Lack of Audit Trails",
+      "description": "Financial transactions appear to lack comprehensive logging and audit capabilities",
+      "severity": "high",
+      "confidence": 0.75
+    }
+  ]
+}
