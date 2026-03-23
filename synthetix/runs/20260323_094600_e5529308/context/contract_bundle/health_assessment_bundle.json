@@ -1,0 +1,554 @@
+{
+  "header": {
+    "artifact_id": "292defa6b56c4a859bc31afb5f1559bc",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-23T09:47:03.501126+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260323_094600_e5529308",
+      "stage_id": "context_layer",
+      "task_id": "de228d16703d4575af9d08174b59cafb"
+    },
+    "parents": [],
+    "digest": "sha256:fd9cf2e357754478da52887eeae91fba466b7bf901470f7d10509a93403fa638",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260323_094600_e5529308",
+      "bundle_version": "20260323T094703Z_20260323_094600_e5529308"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "System shows strong architectural patterns but contains critical security vulnerabilities in legacy VB6 code requiring immediate remediation before modernization."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 7,
+      "security": 3,
+      "reliability": 6,
+      "testability": 8
+    },
+    "finding_count": 7,
+    "backlog_count": 4
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Legacy VB6 SQL Operations",
+      "description": "SQL injection vulnerabilities in both balance check and deposit operations using string concatenation",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Legacy VB6 SQL Operations"
+        ],
+        "paths": [
+          "Legacy VB6 SQL Operations"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code_sample"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Banking Transaction Logic",
+      "description": "No input validation or error handling for financial amounts in deposit operation",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Banking Transaction Logic"
+        ],
+        "paths": [
+          "Banking Transaction Logic"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code_sample"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: Agent Module Dependencies",
+      "description": "High import coupling in analyst agent (25 imports) may indicate architectural complexity",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Agent Module Dependencies"
+        ],
+        "paths": [
+          "Agent Module Dependencies"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/analyst.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "SQL Injection in Banking Operations",
+      "description": "Legacy VB6 code constructs SQL queries through string concatenation, allowing potential account number and amount manipulation",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "No Transaction Atomicity",
+      "description": "Deposit operation lacks transaction boundaries, risking data inconsistency in concurrent scenarios",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Missing Authentication Context",
+      "description": "No authentication or authorization mechanisms visible in legacy banking operations",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-004",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Unvalidated Financial Inputs",
+      "description": "Amount inputs not validated for type, range, or format before database operations",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001",
+      "title": "Implement Parameterized Queries for Banking Operations",
+      "priority": "P0",
+      "business_value": "Account takeover, unauthorized balance access, fraudulent deposits, data corruption",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Database connection modernization",
+        "Input validation framework"
+      ],
+      "plan": [
+        "Replace string concatenation with parameterized queries using SqlCommand",
+        "Parameters in C# modernization"
+      ],
+      "acceptance_criteria": [
+        "All SQL queries use parameterized inputs",
+        "Static analysis confirms no string concatenation in SQL",
+        "Penetration testing validates injection prevention"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-002",
+      "title": "Add Input Validation for Financial Operations",
+      "priority": "P1",
+      "business_value": "Invalid transactions, negative deposits, account number format attacks, system crashes",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Input validation library selection",
+        "Error handling framework"
+      ],
+      "plan": [
+        "Implement decimal validation for amounts, account number format validation, and range checks before database operations"
+      ],
+      "acceptance_criteria": [
+        "All financial inputs validated before processing",
+        "Proper error messages for invalid inputs",
+        "Unit tests cover validation edge cases"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003",
+      "title": "Implement Transaction Boundaries for Banking Operations",
+      "priority": "P1",
+      "business_value": "Race conditions, partial updates, balance corruption, audit trail gaps",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Database transaction framework",
+        "Concurrency handling strategy"
+      ],
+      "plan": [
+        "Wrap deposit operations in database transactions with proper rollback handling and optimistic locking"
+      ],
+      "acceptance_criteria": [
+        "All deposit operations are atomic",
+        "Concurrent access handled safely",
+        "Transaction logs maintained for audit"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-004",
+      "title": "Design Authentication and Authorization Framework",
+      "priority": "P0",
+      "business_value": "Unauthorized account access, regulatory compliance violations, fraud exposure",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Identity provider selection",
+        "Authorization policy design",
+        "Session management framework"
+      ],
+      "plan": [
+        "Implement OAuth2/JWT authentication with role-based authorization for banking operations"
+      ],
+      "acceptance_criteria": [
+        "All operations require valid authentication",
+        "Account access restricted to authorized users",
+        "Audit logs track all access attempts"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004"
+    ],
+    "stabilization": [
+      "rb-002",
+      "rb-003"
+    ],
+    "modernization": [
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004"
+    ]
+  }
+}
