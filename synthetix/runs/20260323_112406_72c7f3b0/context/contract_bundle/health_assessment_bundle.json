@@ -1,0 +1,614 @@
+{
+  "header": {
+    "artifact_id": "55b2b093f4454ada9cc6bae18b7fda78",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-23T11:25:19.803637+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260323_112406_72c7f3b0",
+      "stage_id": "context_layer",
+      "task_id": "4729b89ee5214e8b92036c6169f19379"
+    },
+    "parents": [],
+    "digest": "sha256:6cf30a14261b35faec5f828fc943b812f2d012c137cb6a2a168d82b24cc6f97f",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260323_112406_72c7f3b0",
+      "bundle_version": "20260323T112519Z_20260323_112406_72c7f3b0"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Modernization platform shows strong architectural patterns but faces critical security risks from legacy VB6 SQL injection vulnerabilities. High complexity with 304 files requires careful dependency management during C# migration."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 7,
+      "security": 3,
+      "reliability": 6,
+      "testability": 7
+    },
+    "finding_count": 7,
+    "backlog_count": 5
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: legacy:vb6-banking",
+      "description": "Direct SQL string concatenation creates critical SQL injection vulnerability in banking operations",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "legacy:vb6-banking"
+        ],
+        "paths": [
+          "legacy:vb6-banking"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code_sample"
+        },
+        {
+          "kind": "file_span",
+          "file": "legacy_code_sample"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: agents/",
+      "description": "High module complexity with 180 Python files and 1092 import edges creates maintenance overhead",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "agents/"
+        ],
+        "paths": [
+          "agents/"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "repository_stats"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: database:tenant-memory",
+      "description": "File-based JSON storage may not scale for enterprise banking workloads",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "database:tenant-memory"
+        ],
+        "paths": [
+          "database:tenant-memory"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "team_data/tenant_memory/"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "SQL Injection in Legacy Banking Operations",
+      "description": "VB6 code uses direct string concatenation for SQL queries in balance check and deposit operations, creating critical security vulnerability that must be addressed in C# migration",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Missing Data Validation",
+      "description": "Legacy code lacks input validation for account numbers and amounts, allowing potential data corruption or unauthorized access",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "No Transaction Management",
+      "description": "Deposit operation lacks transaction boundaries, creating risk of partial updates and data inconsistency",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-004",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Complex Agent Dependencies",
+      "description": "1092 import relationships across 180 Python modules creates high coupling and potential circular dependency risks",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001",
+      "title": "Implement Parameterized Queries for C# Migration",
+      "priority": "P0",
+      "business_value": "Critical SQL injection vulnerability allowing unauthorized account access and balance manipulation",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "legacy:vb6-banking",
+          "database:legacy-customers"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Database schema analysis",
+        "C# data access layer design"
+      ],
+      "plan": [
+        "Replace direct SQL concatenation with Entity Framework or ADO",
+        "NET parameterized queries, implement input validation, add SQL injection testing"
+      ],
+      "acceptance_criteria": [
+        "All SQL queries use parameterized statements",
+        "Input validation prevents malicious account numbers",
+        "Security testing confirms SQL injection prevention",
+        "Functional parity with legacy balance/deposit operations"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-002",
+      "title": "Add Transaction Management to Deposit Operations",
+      "priority": "P1",
+      "business_value": "Data corruption during concurrent deposits or system failures, potential financial discrepancies",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "legacy:vb6-banking"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "rb-001"
+      ],
+      "plan": [
+        "Implement database transactions with proper rollback handling, add concurrency control for balance updates"
+      ],
+      "acceptance_criteria": [
+        "All deposit operations wrapped in transactions",
+        "Proper rollback on failure conditions",
+        "Concurrent deposit handling without race conditions",
+        "Audit trail for all balance changes"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003",
+      "title": "Implement Input Validation Framework",
+      "priority": "P1",
+      "business_value": "Invalid data entry causing application errors, potential security bypass, poor user experience",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "legacy:vb6-banking"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "rb-001"
+      ],
+      "plan": [
+        "Implement comprehensive input validation with regex patterns for account numbers, numeric validation for amounts, business rule validation"
+      ],
+      "acceptance_criteria": [
+        "Account number format validation",
+        "Amount range and format validation",
+        "Proper error messages for invalid inputs",
+        "Client and server-side validation"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-004",
+      "title": "Reduce Agent Module Complexity",
+      "priority": "P2",
+      "business_value": "Difficult maintenance, potential circular dependencies, slow build times, testing complexity",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Implement dependency injection, create clear module boundaries, reduce cross-module dependencies, implement interface abstractions"
+      ],
+      "acceptance_criteria": [
+        "Reduce import count by 30%",
+        "Eliminate circular dependencies",
+        "Clear module responsibility boundaries",
+        "Improved test isolation"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-005",
+      "title": "Design Scalable Data Storage Architecture",
+      "priority": "P2",
+      "business_value": "Performance bottlenecks, data consistency issues, backup/recovery challenges, concurrent access problems",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "XL",
+        "hours_range": [
+          80,
+          160
+        ],
+        "confidence": {
+          "score": 0.6,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "database:tenant-memory"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Database technology selection",
+        "Migration planning"
+      ],
+      "plan": [
+        "Evaluate enterprise database options (SQL Server, PostgreSQL), design data migration strategy, implement proper backup/recovery"
+      ],
+      "acceptance_criteria": [
+        "Database technology selection documented",
+        "Migration plan with rollback strategy",
+        "Performance benchmarks meet requirements",
+        "High availability configuration"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001",
+      "rb-002",
+      "rb-003"
+    ],
+    "stabilization": [
+      "rb-002",
+      "rb-003",
+      "rb-004",
+      "rb-005"
+    ],
+    "modernization": [
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004",
+      "rb-005"
+    ]
+  }
+}
