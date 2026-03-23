@@ -1,0 +1,344 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Multi-agent software modernization platform with Python-based agent orchestration, FastAPI web services, and Docker containerization. Repository contains 304 files with 180 Python modules implementing specialized agents for code analysis, architecture planning, and deployment automation.",
+  "nodes": [
+    {
+      "id": "service:web-server",
+      "type": "Service",
+      "name": "Web Server",
+      "metadata": {
+        "framework": "FastAPI",
+        "language": "python",
+        "port": "unknown"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get( endpoint detected"
+        }
+      ]
+    },
+    {
+      "id": "service:context-vault",
+      "type": "Service",
+      "name": "Context Vault Service",
+      "metadata": {
+        "framework": "FastAPI",
+        "language": "python",
+        "purpose": "context_management"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get( and @app.post( endpoints detected"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-analyst",
+      "type": "Module",
+      "name": "Analyst Agent",
+      "metadata": {
+        "language": "python",
+        "import_count": 25,
+        "specialization": "code_analysis"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "python_ast analysis with 25 imports"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-architect",
+      "type": "Module",
+      "name": "Architect Agent",
+      "metadata": {
+        "language": "python",
+        "import_count": 9,
+        "specialization": "system_design"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "python_ast analysis with 9 imports"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-developer",
+      "type": "Module",
+      "name": "Developer Agent",
+      "metadata": {
+        "language": "python",
+        "import_count": 14,
+        "specialization": "code_generation"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "python_ast analysis with 14 imports"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-security-engineer",
+      "type": "Module",
+      "name": "Security Engineer Agent",
+      "metadata": {
+        "language": "python",
+        "import_count": 4,
+        "specialization": "security_analysis"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "python_ast analysis with 4 imports"
+        }
+      ]
+    },
+    {
+      "id": "container:docker-app",
+      "type": "Container",
+      "name": "Application Container",
+      "metadata": {
+        "technology": "docker",
+        "base_image": "unknown"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Dockerfile present in repository root"
+        }
+      ]
+    },
+    {
+      "id": "config:docker-compose",
+      "type": "InfraResource",
+      "name": "Docker Compose Configuration",
+      "metadata": {
+        "type": "orchestration",
+        "format": "yaml"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "docker-compose.yml file detected"
+        }
+      ]
+    },
+    {
+      "id": "database:tenant-memory",
+      "type": "Database",
+      "name": "Tenant Memory Store",
+      "metadata": {
+        "type": "file_based",
+        "format": "json",
+        "scope": "tenant_isolation"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "team_data/tenant_memory/default-workspace/default-client/discover/memory.json",
+          "line": 1,
+          "evidence": "Hierarchical tenant memory structure detected"
+        }
+      ]
+    },
+    {
+      "id": "legacy:vb6-banking",
+      "type": "ExternalDependency",
+      "name": "VB6 Banking Application",
+      "metadata": {
+        "language": "vb6",
+        "domain": "banking",
+        "operations": [
+          "check_balance",
+          "deposit"
+        ],
+        "sql_injection_risk": "high"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 1,
+          "evidence": "cmdCheckBalance_Click() and cmdDeposit_Click() with direct SQL concatenation"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-base",
+      "type": "Component",
+      "name": "agents-base",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "inferred node from edge endpoint `module:agents-base`"
+        }
+      ]
+    },
+    {
+      "id": "database:legacy-customers",
+      "type": "Component",
+      "name": "legacy-customers",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "inferred node from edge endpoint `database:legacy-customers`"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "module:agents-analyst",
+      "to": "module:agents-base",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative",
+        "target": ".base"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Import relationship detected via python_ast"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "module:agents-architect",
+      "to": "module:agents-base",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "relative",
+        "target": ".base"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Import relationship detected via python_ast"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "service:web-server",
+      "to": "service:context-vault",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "method": "GET/POST",
+        "framework": "FastAPI"
+      },
+      "confidence": 0.7,
+      "evidence": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "HTTP endpoints detected in both services"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:web-server",
+      "to": "container:docker-app",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "deployment_type": "containerized"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Docker containerization detected"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "legacy:vb6-banking",
+      "to": "database:legacy-customers",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "table": "tblCustomers",
+        "columns": [
+          "Balance",
+          "AccountNo"
+        ],
+        "sql_injection_risk": "high"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "SELECT Balance FROM tblCustomers WHERE AccountNo="
+        }
+      ]
+    },
+    {
+      "type": "WRITES_TABLE",
+      "from": "legacy:vb6-banking",
+      "to": "database:legacy-customers",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "table": "tblCustomers",
+        "operation": "UPDATE",
+        "sql_injection_risk": "high"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "legacy_code_sample",
+          "line": 6,
+          "evidence": "UPDATE tblCustomers SET Balance = Balance + "
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database connection details for target C# application",
+    "Authentication/authorization mechanisms",
+    "API contract specifications for modernized endpoints",
+    "Data validation rules for account numbers and amounts",
+    "Transaction isolation requirements",
+    "Error handling patterns for database failures"
+  ]
+}
