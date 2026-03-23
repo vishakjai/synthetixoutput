@@ -1,0 +1,612 @@
+{
+  "header": {
+    "artifact_id": "71db064310cc4b48a422afe51d749e9d",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-23T10:03:44.363825+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260323_100237_e617b112",
+      "stage_id": "context_layer",
+      "task_id": "a696ab5b75ac4821b49418e0087b456e"
+    },
+    "parents": [],
+    "digest": "sha256:9d2e3575f0b6e4e90d7b87ef31f07c63b59f6f3c0299910e1de9ef1aa930f9aa",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260323_100237_e617b112",
+      "bundle_version": "20260323T100344Z_20260323_100237_e617b112"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Platform shows strong architectural patterns but legacy VB6 code presents critical security and reliability risks requiring immediate remediation."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 7,
+      "security": 3,
+      "reliability": 4,
+      "testability": 6
+    },
+    "finding_count": 7,
+    "backlog_count": 5
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: legacy_code:sql_injection",
+      "description": "Direct string concatenation in SQL queries creates SQL injection vulnerability",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "legacy_code:sql_injection"
+        ],
+        "paths": [
+          "legacy_code:sql_injection"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code"
+        },
+        {
+          "kind": "file_span",
+          "file": "legacy_code"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: legacy_code:input_validation",
+      "description": "No input validation on user-provided account numbers and amounts",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "legacy_code:input_validation"
+        ],
+        "paths": [
+          "legacy_code:input_validation"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code"
+        },
+        {
+          "kind": "file_span",
+          "file": "legacy_code"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: legacy_code:error_handling",
+      "description": "No error handling for database connection failures or invalid operations",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "legacy_code:error_handling"
+        ],
+        "paths": [
+          "legacy_code:error_handling"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code"
+        },
+        {
+          "kind": "file_span",
+          "file": "legacy_code"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "Critical SQL Injection Vulnerability",
+      "description": "Legacy VB6 code uses direct string concatenation for SQL queries, allowing potential attackers to manipulate database operations through user input fields",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Data Integrity Risk",
+      "description": "Lack of input validation and transaction management could lead to invalid account balances or failed operations without proper rollback",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Schema Migration Complexity",
+      "description": "Unknown target database schema and migration path from legacy VB6 data structures to modern C# entities",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-004",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Authentication Gap",
+      "description": "No visible authentication or authorization mechanisms in legacy code for banking operations",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001",
+      "title": "Eliminate SQL Injection Vulnerabilities",
+      "priority": "P0",
+      "business_value": "Potential data breach, unauthorized account access, financial fraud",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.95,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "rb-003"
+      ],
+      "plan": [
+        "Replace concatenated SQL with parameterized queries using SqlCommand",
+        "Parameters in C# implementation"
+      ],
+      "acceptance_criteria": [
+        "All SQL queries use parameterized statements",
+        "Static analysis confirms no string concatenation in database operations",
+        "Penetration testing validates SQL injection protection"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-002",
+      "title": "Implement Input Validation and Sanitization",
+      "priority": "P1",
+      "business_value": "Invalid data processing, application crashes, potential security exploits",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Implement server-side validation with data annotations and client-side validation in C# web application"
+      ],
+      "acceptance_criteria": [
+        "Account numbers validated as numeric and within valid range",
+        "Deposit amounts validated as positive decimal values",
+        "Comprehensive error messages for invalid inputs",
+        "Unit tests cover all validation scenarios"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003",
+      "title": "Define Target Database Schema and Migration Strategy",
+      "priority": "P1",
+      "business_value": "Data loss during migration, incompatible schema design, extended downtime",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "database:legacy-vb6-data",
+          "table:tblCustomers"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Design Entity Framework models, create migration scripts, implement rollback procedures"
+      ],
+      "acceptance_criteria": [
+        "Complete schema mapping from VB6 to C# entities",
+        "Tested migration scripts with rollback capability",
+        "Data integrity validation post-migration",
+        "Performance benchmarks meet or exceed legacy system"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-004",
+      "title": "Implement Authentication and Authorization",
+      "priority": "P1",
+      "business_value": "Unauthorized access to banking functions, regulatory compliance violations",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "rb-003"
+      ],
+      "plan": [
+        "Implement JWT-based authentication with role-based authorization for banking operations"
+      ],
+      "acceptance_criteria": [
+        "User authentication required for all banking operations",
+        "Role-based access control implemented",
+        "Session management and timeout policies",
+        "Audit logging for all authenticated operations"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-005",
+      "title": "Add Comprehensive Error Handling and Transaction Management",
+      "priority": "P2",
+      "business_value": "Data corruption, partial updates, poor user experience during failures",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "rb-003"
+      ],
+      "plan": [
+        "Implement try-catch blocks, database transactions, and user-friendly error messages"
+      ],
+      "acceptance_criteria": [
+        "All database operations wrapped in transactions",
+        "Comprehensive exception handling with logging",
+        "User-friendly error messages",
+        "Automatic rollback on operation failures"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004"
+    ],
+    "stabilization": [
+      "rb-002",
+      "rb-003",
+      "rb-004",
+      "rb-005"
+    ],
+    "modernization": [
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004",
+      "rb-005"
+    ]
+  }
+}
