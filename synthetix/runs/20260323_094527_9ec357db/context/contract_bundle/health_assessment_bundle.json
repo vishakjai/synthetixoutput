@@ -1,0 +1,559 @@
+{
+  "header": {
+    "artifact_id": "ffd05a293a7e46dba70af07431aaa41c",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-23T09:46:32.331402+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260323_094527_9ec357db",
+      "stage_id": "context_layer",
+      "task_id": "fab99e577006480390707e5281298fad"
+    },
+    "parents": [],
+    "digest": "sha256:c2f542c7b5eb79bdde99771d6064bac2fc95012272b3eae4b97e1f7f965e6525",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260323_094527_9ec357db",
+      "bundle_version": "20260323T094632Z_20260323_094527_9ec357db"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "Modernization platform shows good architectural separation but faces critical security risks from legacy VB6 SQL injection patterns. High complexity with 1088 import edges requires careful dependency management during modernization."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 7,
+      "security": 3,
+      "reliability": 6,
+      "testability": 8
+    },
+    "finding_count": 7,
+    "backlog_count": 4
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "high",
+      "title": "Hotspot: Legacy VB6 SQL Operations",
+      "description": "Direct SQL concatenation with user input creates SQL injection vulnerabilities",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Legacy VB6 SQL Operations"
+        ],
+        "paths": [
+          "Legacy VB6 SQL Operations"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code_sample"
+        },
+        {
+          "kind": "file_span",
+          "file": "legacy_code_sample"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 1.0,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 1.0,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-002",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: Import Dependency Complexity",
+      "description": "1088 import edges across 197 modules creates high coupling and potential circular dependencies",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Import Dependency Complexity"
+        ],
+        "paths": [
+          "Import Dependency Complexity"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "static_analysis"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-HOT-003",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: Agent Module Coupling",
+      "description": "High import count in analyst agent (25 imports) suggests potential over-coupling",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "Agent Module Coupling"
+        ],
+        "paths": [
+          "Agent Module Coupling"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/analyst.py"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "critical",
+      "title": "SQL Injection in Legacy VB6 Code",
+      "description": "Legacy VB6 code uses direct string concatenation for SQL queries, creating critical injection vulnerabilities that must be addressed in C# modernization",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 1.0,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 1.0,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-002",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Undefined Database Migration Strategy",
+      "description": "No clear database conversion context specified, creating risk of data loss or corruption during modernization",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-003",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Missing Authentication Framework",
+      "description": "No authentication or authorization patterns detected in current system, critical for banking application security",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-004",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Complex Module Dependencies",
+      "description": "High import coupling (1088 edges) may create deployment and testing challenges during modernization",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001",
+      "title": "Implement Parameterized Queries for VB6 to C# Migration",
+      "priority": "P0",
+      "business_value": "Critical security vulnerability allowing unauthorized database access and data manipulation in banking system",
+      "risk": {
+        "likelihood": 5,
+        "impact": 5,
+        "score": 25,
+        "tier": "critical",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 1.0,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Database schema analysis",
+        "C# ORM selection"
+      ],
+      "plan": [
+        "Replace concatenated SQL with parameterized queries using Entity Framework or Dapper in C# implementation"
+      ],
+      "acceptance_criteria": [
+        "All SQL operations use parameterized queries",
+        "Static analysis confirms no string concatenation in SQL",
+        "Security testing validates injection prevention"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-002",
+      "title": "Define Database Migration Strategy",
+      "priority": "P1",
+      "business_value": "Data loss, system downtime, and failed modernization due to incompatible database structures",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-002"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Legacy database schema analysis",
+        "Target database platform selection"
+      ],
+      "plan": [
+        "Conduct database discovery, create migration scripts, and establish rollback procedures"
+      ],
+      "acceptance_criteria": [
+        "Complete database schema documentation",
+        "Validated migration scripts with rollback capability",
+        "Data integrity verification procedures"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-003",
+      "title": "Implement Banking-Grade Authentication",
+      "priority": "P1",
+      "business_value": "Unauthorized access to banking functions, regulatory compliance violations, data breaches",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-003"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Security requirements analysis",
+        "Compliance framework selection"
+      ],
+      "plan": [
+        "Implement OAuth 2",
+        "0/OpenID Connect with multi-factor authentication and role-based access control"
+      ],
+      "acceptance_criteria": [
+        "Multi-factor authentication implemented",
+        "Role-based access control enforced",
+        "Session management with timeout controls",
+        "Audit logging for all authentication events"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    },
+    {
+      "id": "rb-004",
+      "title": "Reduce Module Coupling Complexity",
+      "priority": "P2",
+      "business_value": "Difficult maintenance, circular dependencies, deployment complexity, testing challenges",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-RSK-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "Dependency analysis",
+        "Architecture refactoring plan"
+      ],
+      "plan": [
+        "Implement dependency injection, create interface abstractions, and establish clear module boundaries"
+      ],
+      "acceptance_criteria": [
+        "Reduce import coupling by 30%",
+        "Eliminate circular dependencies",
+        "Implement dependency injection framework",
+        "Clear module interface definitions"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001",
+      "rb-002",
+      "rb-003"
+    ],
+    "stabilization": [
+      "rb-002",
+      "rb-003",
+      "rb-004"
+    ],
+    "modernization": [
+      "rb-001",
+      "rb-002",
+      "rb-003",
+      "rb-004"
+    ]
+  }
+}
