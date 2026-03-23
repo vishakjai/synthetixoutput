@@ -1,0 +1,92 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Platform shows strong architectural patterns but legacy VB6 code presents critical security and reliability risks requiring immediate remediation.",
+  "scores": {
+    "maintainability": 7,
+    "security": 3,
+    "reliability": 4,
+    "testability": 6
+  },
+  "hotspots": [
+    {
+      "scope": "legacy_code:sql_injection",
+      "reason": "Direct string concatenation in SQL queries creates SQL injection vulnerability",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 2,
+          "evidence": "WHERE AccountNo=\" & txtAccountNo.Text & \""
+        },
+        {
+          "file": "legacy_code",
+          "line": 6,
+          "evidence": "Balance + \" & txtAmount.Text & \""
+        }
+      ]
+    },
+    {
+      "scope": "legacy_code:input_validation",
+      "reason": "No input validation on user-provided account numbers and amounts",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 2,
+          "evidence": "txtAccountNo.Text used directly without validation"
+        },
+        {
+          "file": "legacy_code",
+          "line": 6,
+          "evidence": "txtAmount.Text used directly without validation"
+        }
+      ]
+    },
+    {
+      "scope": "legacy_code:error_handling",
+      "reason": "No error handling for database connection failures or invalid operations",
+      "severity": "medium",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 2,
+          "evidence": "rs.Open without try-catch or error checking"
+        },
+        {
+          "file": "legacy_code",
+          "line": 6,
+          "evidence": "conn.Execute without error handling"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Critical SQL Injection Vulnerability",
+      "description": "Legacy VB6 code uses direct string concatenation for SQL queries, allowing potential attackers to manipulate database operations through user input fields",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "Data Integrity Risk",
+      "description": "Lack of input validation and transaction management could lead to invalid account balances or failed operations without proper rollback",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Schema Migration Complexity",
+      "description": "Unknown target database schema and migration path from legacy VB6 data structures to modern C# entities",
+      "severity": "medium",
+      "confidence": 0.7
+    },
+    {
+      "title": "Authentication Gap",
+      "description": "No visible authentication or authorization mechanisms in legacy code for banking operations",
+      "severity": "high",
+      "confidence": 0.8
+    }
+  ]
+}
