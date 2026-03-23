@@ -1,0 +1,121 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Parameterized Queries for Banking Operations",
+    "problem_statement": "Legacy VB6 banking operations use string concatenation for SQL queries, creating critical SQL injection vulnerabilities that must be eliminated in C# modernization",
+    "scope": [
+      "endpoint:check-balance",
+      "endpoint:deposit",
+      "table:tblCustomers"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to customer accounts, potential data theft, and regulatory compliance violations",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema design",
+      "Entity Framework setup"
+    ],
+    "suggested_approach": "Replace direct SQL with Entity Framework LINQ queries or stored procedures with parameterized inputs in C# implementation",
+    "success_criteria": [
+      "All database queries use parameterized inputs",
+      "SQL injection vulnerability tests pass",
+      "Banking operations maintain functional parity with legacy system"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 2,
+        "evidence": "WHERE AccountNo=\" & txtAccountNo.Text & \"\" - direct concatenation vulnerability"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Implement Transaction Management for Deposit Operations",
+    "problem_statement": "Legacy deposit operation lacks transaction management, risking data inconsistency during failures",
+    "scope": [
+      "endpoint:deposit",
+      "table:tblCustomers"
+    ],
+    "risk_if_unaddressed": "Account balance corruption during system failures, potential financial losses",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "Wrap deposit operations in database transactions with proper rollback mechanisms using Entity Framework transaction scope",
+    "success_criteria": [
+      "Deposit operations are atomic",
+      "Failed deposits do not corrupt account balances",
+      "Transaction rollback testing passes"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "conn.Execute UPDATE without transaction context"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Add Input Validation and Error Handling",
+    "problem_statement": "Legacy banking operations lack input validation and error handling, allowing invalid data processing",
+    "scope": [
+      "endpoint:check-balance",
+      "endpoint:deposit"
+    ],
+    "risk_if_unaddressed": "Invalid account access, negative deposits, system crashes from malformed input",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Implement C# data annotations, custom validators, and comprehensive exception handling with appropriate HTTP status codes",
+    "success_criteria": [
+      "Invalid account numbers are rejected",
+      "Negative or zero deposits are prevented",
+      "All exceptions return appropriate error responses",
+      "Input validation covers all banking operation parameters"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "No validation or error handling in VB6 button click handlers"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Implement Banking Operations Audit Trail",
+    "problem_statement": "No audit logging exists for banking operations, preventing compliance with financial regulations",
+    "scope": [
+      "endpoint:check-balance",
+      "endpoint:deposit"
+    ],
+    "risk_if_unaddressed": "Regulatory compliance violations, inability to track unauthorized access or fraudulent transactions",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb-001",
+      "rb-003"
+    ],
+    "suggested_approach": "Implement structured logging with correlation IDs, capturing all banking operations with timestamps, user context, and operation results",
+    "success_criteria": [
+      "All balance checks are logged with account and timestamp",
+      "All deposits are logged with amount, account, and result",
+      "Audit logs are tamper-evident and searchable",
+      "Log retention meets regulatory requirements"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "No logging statements in legacy banking operations"
+      }
+    ]
+  }
+]
