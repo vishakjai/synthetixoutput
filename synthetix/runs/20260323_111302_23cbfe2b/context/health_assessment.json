@@ -1,0 +1,77 @@
+{
+  "version": "ha-v1.0",
+  "summary": "System shows strong architectural patterns for modernization platform but legacy VB6 banking code presents critical security vulnerabilities requiring immediate remediation during modernization.",
+  "scores": {
+    "maintainability": 75,
+    "security": 25,
+    "reliability": 60,
+    "testability": 70
+  },
+  "hotspots": [
+    {
+      "scope": "legacy_banking_operations",
+      "reason": "SQL injection vulnerabilities in both check balance and deposit operations",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "Unparameterized SQL: WHERE AccountNo=\" & txtAccountNo.Text"
+        }
+      ]
+    },
+    {
+      "scope": "legacy_error_handling",
+      "reason": "No error handling or validation in banking operations",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 1,
+          "evidence": "No try-catch blocks or input validation in VB6 code"
+        }
+      ]
+    },
+    {
+      "scope": "data_consistency",
+      "reason": "Deposit operation lacks transaction management and rollback capability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 6,
+          "evidence": "Direct UPDATE without transaction context"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Critical SQL Injection Vulnerability",
+      "description": "Legacy VB6 banking operations use direct string concatenation for SQL queries, allowing potential unauthorized access to customer account data and balance manipulation",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "Data Integrity Risk",
+      "description": "Deposit operations lack proper transaction management, potentially leading to inconsistent account balances during system failures",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Audit Trail Gap",
+      "description": "No logging or audit mechanisms for banking operations, preventing compliance with financial regulations",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Input Validation Missing",
+      "description": "No validation of account numbers or deposit amounts, allowing invalid or malicious data entry",
+      "severity": "medium",
+      "confidence": 0.9
+    }
+  ]
+}
