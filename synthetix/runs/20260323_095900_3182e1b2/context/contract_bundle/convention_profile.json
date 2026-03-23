@@ -1,9 +1,9 @@
 {
   "header": {
-    "artifact_id": "33465ecc0a054b0980a0c740ed438440",
+    "artifact_id": "81054fa73041475fb1c8a9baa4ef3d59",
     "artifact_type": "convention_profile",
     "schema_version": "1.0.0",
-    "created_at": "2026-03-23T10:00:01.393461+00:00",
+    "created_at": "2026-03-23T10:00:14.235441+00:00",
     "repo_ref": {
       "provider": "other",
       "repo_url": "app",
@@ -23,36 +23,77 @@
       ],
       "run_id": "20260323_095900_3182e1b2",
       "stage_id": "context_layer",
-      "task_id": "62181f2914a44124a07668a85b472528"
+      "task_id": "c5564ca0548049c2892935cbf7e40c57"
     },
     "parents": [],
-    "digest": "sha256:e91e974060b7d36171e1566bb2428367ed0a24a3e752fb441efa53e095b4d1a0",
+    "digest": "sha256:e8b5273140ee732c2005d22ee455300c70769a3532bed63688d9b31afae87dba",
     "labels": {
       "pipeline": "synthetix",
       "run_id": "20260323_095900_3182e1b2",
-      "bundle_version": "20260323T100001Z_20260323_095900_3182e1b2"
+      "bundle_version": "20260323T100014Z_20260323_095900_3182e1b2"
     }
   },
   "rules": [
     {
-      "id": "rule:agent-import-structure",
+      "id": "rule:python-import-organization",
       "category": "naming",
-      "title": "Agent modules follow pattern: from .{agent_name} import {AgentName}Agent",
+      "title": "Standard library imports before third-party imports, relative imports last",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "Agent modules follow pattern: from .{agent_name} import {AgentName}Agent",
+      "statement": "Standard library imports before third-party imports, relative imports last",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": "from .analyst import AnalystAgent"
+          "file": "from __future__ import annotations"
         },
         {
-          "file": "from .architect import ArchitectAgent"
+          "file": "import json"
+        },
+        {
+          "file": "import os"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/analyst.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "rule:agent-module-structure",
+      "category": "naming",
+      "title": "Agent modules follow pattern: agents/{role}.py with consistent naming",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent modules follow pattern: agents/{role}.py with consistent naming",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/analyst.py"
+        },
+        {
+          "file": "agents/architect.py"
+        },
+        {
+          "file": "agents/developer.py"
         }
       ],
       "counterexamples": [],
@@ -70,59 +111,24 @@
       "exceptions": []
     },
     {
-      "id": "rule:fastapi-endpoint-decoration",
+      "id": "rule:json-schema-validation",
       "category": "api_design",
-      "title": "API endpoints use FastAPI decorators @app.get() and @app.post()",
+      "title": "Extensive use of JSON schemas for data validation and contract enforcement",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "API endpoints use FastAPI decorators @app.get() and @app.post()",
+      "statement": "Extensive use of JSON schemas for data validation and contract enforcement",
       "detection": {},
       "enforcement": {},
       "examples": [
         {
-          "file": "@app.get(\"/endpoint\")"
+          "file": ".deliveryos/schemas/agent_result.schema.json"
         },
         {
-          "file": "@app.post(\"/endpoint\")"
-        }
-      ],
-      "counterexamples": [],
-      "evidence": [
-        {
-          "kind": "file_span",
-          "file": "utils/context_vault.py"
-        }
-      ],
-      "confidence": {
-        "score": 0.9,
-        "rationale": "from convention extraction",
-        "signals": []
-      },
-      "exceptions": []
-    },
-    {
-      "id": "rule:schema-validation-required",
-      "category": "api_design",
-      "title": "All agent communications must follow JSON schema validation patterns",
-      "scope": {
-        "languages": [],
-        "file_globs": [],
-        "scm_node_ids": [],
-        "applies_to": "all"
-      },
-      "statement": "All agent communications must follow JSON schema validation patterns",
-      "detection": {},
-      "enforcement": {},
-      "examples": [
-        {
-          "file": "agent_result.schema.json"
-        },
-        {
-          "file": "analyst_report_v2.schema.json"
+          "file": ".deliveryos/schemas/context_bundle.schema.json"
         }
       ],
       "counterexamples": [],
@@ -133,6 +139,48 @@
         }
       ],
       "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "rule:legacy-sql-injection-vulnerability",
+      "category": "authn_authz",
+      "title": "VB6 legacy code uses string concatenation for SQL queries creating injection vulnerabilities",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "VB6 legacy code uses string concatenation for SQL queries creating injection vulnerabilities",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "WHERE AccountNo=\" & txtAccountNo.Text & \""
+        },
+        {
+          "file": "Balance + \" & txtAmount.Text & \""
+        }
+      ],
+      "counterexamples": [
+        {
+          "file": "Parameterized queries"
+        },
+        {
+          "file": "Prepared statements"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code_sample"
+        }
+      ],
+      "confidence": {
         "score": 0.95,
         "rationale": "from convention extraction",
         "signals": []
@@ -140,39 +188,35 @@
       "exceptions": []
     },
     {
-      "id": "rule:legacy-sql-injection-antipattern",
-      "category": "authn_authz",
-      "title": "NEVER concatenate user input directly into SQL strings - use parameterized queries",
+      "id": "rule:containerized-deployment",
+      "category": "naming",
+      "title": "Application uses Docker containerization with docker-compose orchestration",
       "scope": {
         "languages": [],
         "file_globs": [],
         "scm_node_ids": [],
         "applies_to": "all"
       },
-      "statement": "NEVER concatenate user input directly into SQL strings - use parameterized queries",
+      "statement": "Application uses Docker containerization with docker-compose orchestration",
       "detection": {},
       "enforcement": {},
-      "examples": [],
-      "counterexamples": [
+      "examples": [
         {
-          "file": "\"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text & \"\""
+          "file": "Dockerfile"
         },
         {
-          "file": "\"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text & \" WHERE AccountNo=\" & txtAccountNo.Text & \"\""
+          "file": "docker-compose.yml"
         }
       ],
+      "counterexamples": [],
       "evidence": [
         {
           "kind": "file_span",
-          "file": "legacy_code"
-        },
-        {
-          "kind": "file_span",
-          "file": "legacy_code"
+          "file": "Dockerfile"
         }
       ],
       "confidence": {
-        "score": 1.0,
+        "score": 0.9,
         "rationale": "from convention extraction",
         "signals": []
       },
@@ -192,7 +236,7 @@
     {
       "id": "TPL-002",
       "language": "generic",
-      "name": "Entity Framework model template for customer accounts",
+      "name": "Entity Framework model for Customer table",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -201,7 +245,7 @@
     {
       "id": "TPL-003",
       "language": "generic",
-      "name": "Input validation attribute templates",
+      "name": "Input validation middleware template",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
@@ -210,7 +254,16 @@
     {
       "id": "TPL-004",
       "language": "generic",
-      "name": "Parameterized SQL query templates",
+      "name": "Audit logging service template",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-005",
+      "language": "generic",
+      "name": "Unit test templates for banking operations",
       "description": "generated scaffold template",
       "file_path_template": "",
       "parameters": [],
