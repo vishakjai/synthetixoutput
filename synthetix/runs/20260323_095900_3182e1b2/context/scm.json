@@ -1,0 +1,261 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Multi-agent enterprise software modernization platform with VB6 banking workflow modernization context. Core system consists of specialized agents (analyst, architect, developer, etc.) with FastAPI web interfaces and context management capabilities.",
+  "nodes": [
+    {
+      "id": "service:modernization-platform",
+      "type": "Service",
+      "name": "Enterprise Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "framework": "fastapi",
+        "agent_count": 14
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import AnalystAgent"
+        },
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI application server"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-analyst",
+      "type": "Component",
+      "name": "Analyst Agent",
+      "metadata": {
+        "specialization": "vb6_modernization",
+        "imports": 25
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "AnalystAgent class definition"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-architect",
+      "type": "Component",
+      "name": "Architect Agent",
+      "metadata": {
+        "imports": 9
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "ArchitectAgent class definition"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-developer",
+      "type": "Component",
+      "name": "Developer Agent",
+      "metadata": {
+        "imports": 14
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "DeveloperAgent class definition"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-database-engineer",
+      "type": "Component",
+      "name": "Database Engineer Agent",
+      "metadata": {
+        "imports": 4
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "DatabaseEngineerAgent class definition"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-security-engineer",
+      "type": "Component",
+      "name": "Security Engineer Agent",
+      "metadata": {
+        "imports": 4
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "SecurityEngineerAgent class definition"
+        }
+      ]
+    },
+    {
+      "id": "component:context-vault",
+      "type": "Component",
+      "name": "Context Vault",
+      "metadata": {
+        "purpose": "context_management",
+        "endpoints": [
+          "@app.get",
+          "@app.post"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI endpoints for context management"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:legacy-vb6-balance-check",
+      "type": "Endpoint",
+      "name": "VB6 Balance Check",
+      "metadata": {
+        "sql_injection_risk": true,
+        "legacy_pattern": "cmdCheckBalance_Click"
+      },
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 1,
+          "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text & \"\", conn"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:legacy-vb6-deposit",
+      "type": "Endpoint",
+      "name": "VB6 Deposit",
+      "metadata": {
+        "sql_injection_risk": true,
+        "legacy_pattern": "cmdDeposit_Click"
+      },
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 5,
+          "evidence": "conn.Execute \"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text & \" WHERE AccountNo=\" & txtAccountNo.Text & \"\""
+        }
+      ]
+    },
+    {
+      "id": "database:legacy-customers",
+      "type": "Database",
+      "name": "Legacy Customer Database",
+      "metadata": {
+        "table": "tblCustomers",
+        "columns": [
+          "AccountNo",
+          "Balance"
+        ]
+      },
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 1,
+          "evidence": "SELECT Balance FROM tblCustomers WHERE AccountNo"
+        }
+      ]
+    },
+    {
+      "id": "pkg:json",
+      "type": "Component",
+      "name": "json",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "inferred node from edge endpoint `pkg:json`"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "component:agent-analyst",
+      "to": "pkg:json",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "import json"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "endpoint:legacy-vb6-balance-check",
+      "to": "database:legacy-customers",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "sql_pattern": "SELECT",
+        "injection_vulnerable": true
+      },
+      "confidence": 1.0,
+      "evidence": [
+        {
+          "file": "legacy_code",
+          "line": 1,
+          "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text & \"\", conn"
+        }
+      ]
+    },
+    {
+      "type": "WRITES_TABLE",
+      "from": "endpoint:legacy-vb6-deposit",
+      "to": "database:legacy-customers",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "sql_pattern": "UPDATE",
+        "injection_vulnerable": true
+      },
+      "confidence": 1.0,
+      "evidence": [
+        {
+          "file": "legacy_code",
+          "line": 5,
+          "evidence": "conn.Execute \"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text & \" WHERE AccountNo=\" & txtAccountNo.Text & \"\""
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Target database schema and connection details",
+    "Authentication/authorization requirements for modernized system",
+    "Data migration strategy from legacy database",
+    "Performance requirements for modernized banking operations",
+    "Compliance requirements (PCI DSS, banking regulations)"
+  ]
+}
