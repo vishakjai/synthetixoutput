@@ -1,0 +1,86 @@
+@page "/ui/frmsplash"
+@model ExperienceShell.Pages.FrmSplash.IndexModel
+@{
+    ViewData["Title"] = "Application startup and splash workflow";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Application startup and splash workflow">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmSplash</p>
+        <h1>Application startup and splash workflow</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmSplash</code>.</p>
+    </header>
+    
+    <form method="post">
+        <div class="ui-scaffold-field" data-field-id="progressbar">
+        <label for="progressbar">Progress Bar</label>
+        <input type="text" id="progressbar" name="progressbar" placeholder="Optional progress bar" value="@Model.State.GetValueOrDefault("progressbar", string.Empty)" />
+            @if (Model.Errors.ContainsKey("progressbar"))
+            {
+                <span data-error-for="progressbar">@Model.Errors["progressbar"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="progressbar1">
+        <label for="progressbar1">Progress Bar1</label>
+        <input type="text" id="progressbar1" name="progressbar1" placeholder="Optional progress bar1" value="@Model.State.GetValueOrDefault("progressbar1", string.Empty)" />
+            @if (Model.Errors.ContainsKey("progressbar1"))
+            {
+                <span data-error-for="progressbar1">@Model.Errors["progressbar1"]</span>
+            }
+            
+        </div>
+        <fieldset class="ui-scaffold-group" data-field-id="frasplash">
+            <legend>Spl Ash</legend>
+        </fieldset>
+        <div class="ui-scaffold-field" data-field-id="image1">
+        <label for="image1">Image1</label>
+        <input type="text" id="image1" name="image1" placeholder="Optional image1" value="@Model.State.GetValueOrDefault("image1", string.Empty)" />
+            @if (Model.Errors.ContainsKey("image1"))
+            {
+                <span data-error-for="image1">@Model.Errors["image1"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcompany">
+            <label for="lblcompany">Company</label>
+            <output id="lblcompany" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcompany", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcompanyproduct">
+            <label for="lblcompanyproduct">Company Product</label>
+            <output id="lblcompanyproduct" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcompanyproduct", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcopyright">
+            <label for="lblcopyright">Copyright</label>
+            <output id="lblcopyright" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcopyright", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbllicenseto">
+            <label for="lbllicenseto">License To</label>
+            <output id="lbllicenseto" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbllicenseto", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblwarning">
+            <label for="lblwarning">Warning</label>
+            <output id="lblwarning" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblwarning", "—")</output>
+        </div>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbldisplay">
+            <label for="lbldisplay">Dis P Lay</label>
+            <output id="lbldisplay" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbldisplay", "—")</output>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="timer1">
+        <label for="timer1">Timer1</label>
+        <input type="text" id="timer1" name="timer1" placeholder="Optional timer1" value="@Model.State.GetValueOrDefault("timer1", string.Empty)" />
+            @if (Model.Errors.ContainsKey("timer1"))
+            {
+                <span data-error-for="timer1">@Model.Errors["timer1"]</span>
+            }
+            
+        </div>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtSearch"><span>Search</span><small>GET /experienceshell/splash</small></button>
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
+    </form>
+</main>
