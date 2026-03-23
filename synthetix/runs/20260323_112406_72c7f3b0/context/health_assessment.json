@@ -1,0 +1,82 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Modernization platform shows strong architectural patterns but faces critical security risks from legacy VB6 SQL injection vulnerabilities. High complexity with 304 files requires careful dependency management during C# migration.",
+  "scores": {
+    "maintainability": 7,
+    "security": 3,
+    "reliability": 6,
+    "testability": 7
+  },
+  "hotspots": [
+    {
+      "scope": "legacy:vb6-banking",
+      "reason": "Direct SQL string concatenation creates critical SQL injection vulnerability in banking operations",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text & \"\""
+        },
+        {
+          "file": "legacy_code_sample",
+          "line": 6,
+          "evidence": "UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text & \""
+        }
+      ]
+    },
+    {
+      "scope": "agents/",
+      "reason": "High module complexity with 180 Python files and 1092 import edges creates maintenance overhead",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "repository_stats",
+          "line": 1,
+          "evidence": "180 Python modules with 1092 import relationships"
+        }
+      ]
+    },
+    {
+      "scope": "database:tenant-memory",
+      "reason": "File-based JSON storage may not scale for enterprise banking workloads",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "team_data/tenant_memory/",
+          "line": 1,
+          "evidence": "JSON file-based tenant memory storage structure"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection in Legacy Banking Operations",
+      "description": "VB6 code uses direct string concatenation for SQL queries in balance check and deposit operations, creating critical security vulnerability that must be addressed in C# migration",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "Missing Data Validation",
+      "description": "Legacy code lacks input validation for account numbers and amounts, allowing potential data corruption or unauthorized access",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "No Transaction Management",
+      "description": "Deposit operation lacks transaction boundaries, creating risk of partial updates and data inconsistency",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Complex Agent Dependencies",
+      "description": "1092 import relationships across 180 Python modules creates high coupling and potential circular dependency risks",
+      "severity": "medium",
+      "confidence": 0.8
+    }
+  ]
+}
