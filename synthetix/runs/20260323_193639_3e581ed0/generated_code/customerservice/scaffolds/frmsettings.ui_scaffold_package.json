@@ -1,0 +1,123 @@
+{
+  "artifact_type": "ui_scaffold_package_v1",
+  "artifact_version": "1.0",
+  "screen_id": "frmsettings",
+  "screen_name": "Account type maintenance and account setup workflow",
+  "source_screen_contract_id": "frmsettings",
+  "contract_version": "1.0.0",
+  "framework_target": "ASP.NET Core Razor Pages",
+  "route": "/ui/frmsettings",
+  "target_view_path": "Pages/Frmsettings/Index.cshtml",
+  "state_model": {
+    "screen_state_type": "FrmsettingsState",
+    "field_ids": [
+      "frasettings",
+      "label1",
+      "lblfieldlabel",
+      "lblaccountid",
+      "txtaccountid",
+      "txtaccounttype",
+      "txtcheque",
+      "txtinterestrate",
+      "txtnocheque"
+    ],
+    "action_ids": [
+      "action_cancel",
+      "action_save"
+    ]
+  },
+  "validation_map": [
+    {
+      "field_id": "txtaccountid",
+      "rule_ids": [
+        "VR-txtaccountid-REQUIRED",
+        "VR-txtaccountid-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtaccounttype",
+      "rule_ids": [
+        "VR-txtaccounttype-REQUIRED",
+        "VR-txtaccounttype-NUMERIC"
+      ]
+    },
+    {
+      "field_id": "txtinterestrate",
+      "rule_ids": [
+        "VR-txtinterestrate-NUMERIC"
+      ]
+    }
+  ],
+  "event_wiring": [
+    {
+      "event_id": "evt_save",
+      "trigger": "action_save:on_click",
+      "step_count": 3
+    },
+    {
+      "event_id": "evt_cancel",
+      "trigger": "action_cancel:on_click",
+      "step_count": 1
+    }
+  ],
+  "navigation_map": {
+    "default_route": "/ui/frmsettings",
+    "opens": [
+      {
+        "screen_id": "previous",
+        "route": "",
+        "trigger_event_id": "evt_cancel",
+        "mode": "same_tab"
+      },
+      {
+        "screen_id": "ui_frmsettings_list",
+        "route": "/ui/frmsettings",
+        "trigger_event_id": "evt_save",
+        "mode": "same_tab"
+      }
+    ]
+  },
+  "api_binding_map": [
+    {
+      "event_id": "evt_save",
+      "targets": [
+        "PUT /customer/closeacount"
+      ]
+    },
+    {
+      "event_id": "evt_cancel",
+      "targets": []
+    }
+  ],
+  "accessibility_hooks": {
+    "keyboard_navigation": true,
+    "label_association": true,
+    "tab_order_defined": true
+  },
+  "annotations": [
+    "UI_SCAFFOLD",
+    "VISUAL_DESIGN_OUT_OF_SCOPE"
+  ],
+  "files": [
+    {
+      "path": "Pages/Frmsettings/Index.cshtml",
+      "kind": "view",
+      "purpose": "Screen view scaffold"
+    },
+    {
+      "path": "Pages/Frmsettings/Index.cshtml.cs",
+      "kind": "page_model",
+      "purpose": "Screen state and event wiring"
+    },
+    {
+      "path": "Scaffolds/frmsettings.ui_scaffold_package.json",
+      "kind": "artifact",
+      "purpose": "Serialized scaffold package for conformance checks"
+    },
+    {
+      "path": "Models/frmsettingsActions.json",
+      "kind": "metadata",
+      "purpose": "Action metadata derived from the Screen Contract"
+    }
+  ]
+}
