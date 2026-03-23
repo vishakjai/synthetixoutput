@@ -1,0 +1,105 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Python-based enterprise modernization platform following FastAPI patterns with agent-based architecture. Strong emphasis on JSON schema validation and structured configuration management.",
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "rule": "Agent modules use descriptive names with underscore separation (e.g., database_engineer.py, security_engineer.py)",
+      "confidence": 0.95,
+      "examples": [
+        "database_engineer.py",
+        "security_engineer.py",
+        "system_intelligence.py"
+      ],
+      "counterexamples": [
+        "dbeng.py",
+        "seceng.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Consistent underscore naming pattern across agent modules"
+        }
+      ]
+    },
+    {
+      "id": "api-001",
+      "category": "api",
+      "rule": "FastAPI decorators used for HTTP endpoint definition with explicit HTTP methods",
+      "confidence": 0.9,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [
+        "@route(",
+        "@endpoint("
+      ],
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI decorator patterns detected in endpoint hints"
+        }
+      ]
+    },
+    {
+      "id": "config-001",
+      "category": "naming",
+      "rule": "JSON schema files use descriptive names with version suffixes (e.g., _v1.schema.json, _v2.schema.json)",
+      "confidence": 0.95,
+      "examples": [
+        "analyst_report_v2.schema.json",
+        "artifact_index_v1.schema.json"
+      ],
+      "counterexamples": [
+        "schema.json",
+        "config.json"
+      ],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/analyst_report_v2.schema.json",
+          "line": 1,
+          "evidence": "Versioned schema naming convention"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "Legacy VB6 code contains SQL injection vulnerabilities through string concatenation",
+      "confidence": 0.95,
+      "examples": [
+        "WHERE AccountNo=\" & txtAccountNo.Text",
+        "Balance + \" & txtAmount.Text"
+      ],
+      "counterexamples": [
+        "WHERE AccountNo=@accountNo",
+        "Balance + @amount"
+      ],
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "Direct string concatenation in SQL queries without parameterization"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement parameterized queries to prevent SQL injection in modernized C# code",
+    "Add input validation for account numbers and amounts",
+    "Implement proper error handling for database operations",
+    "Add logging for audit trail of banking operations",
+    "Implement transaction management for deposit operations"
+  ],
+  "scaffold_templates": [
+    "C# Web API controller template for banking operations",
+    "Entity Framework model template for customer accounts",
+    "Input validation attribute templates for banking data",
+    "Unit test templates for banking operation validation",
+    "Integration test templates for database operations"
+  ]
+}
