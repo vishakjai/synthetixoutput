@@ -1,0 +1,225 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Multi-agent enterprise software modernization platform with Python-based agents, FastAPI web services, and Docker containerization. System includes specialized agents for VB6-to-C# modernization workflows with banking domain focus.",
+  "nodes": [
+    {
+      "id": "service:modernization-platform",
+      "type": "Service",
+      "name": "Enterprise Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "framework": "fastapi",
+        "containerized": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI application with modernization endpoints"
+        },
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Container configuration present"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-analyst",
+      "type": "Component",
+      "name": "VB6 Analysis Agent",
+      "metadata": {
+        "specialization": "vb6_modernization",
+        "banking_domain": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Analyst agent implementation with VB6 specialization"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-architect",
+      "type": "Component",
+      "name": "System Architecture Agent",
+      "metadata": {
+        "role": "architecture_design"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Architecture agent for system design"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-developer",
+      "type": "Component",
+      "name": "Code Generation Agent",
+      "metadata": {
+        "target_language": "csharp"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "Developer agent for code generation"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-database-engineer",
+      "type": "Component",
+      "name": "Database Migration Agent",
+      "metadata": {
+        "specialization": "sql_migration"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Database engineering agent"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-security-engineer",
+      "type": "Component",
+      "name": "Security Assessment Agent",
+      "metadata": {
+        "focus": "sql_injection_prevention"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Security engineering agent"
+        }
+      ]
+    },
+    {
+      "id": "component:context-vault",
+      "type": "Component",
+      "name": "Context Management Service",
+      "metadata": {
+        "storage": "file_based",
+        "tenant_aware": true
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "Context vault with tenant memory management"
+        }
+      ]
+    },
+    {
+      "id": "database:tenant-memory",
+      "type": "Database",
+      "name": "Tenant Memory Store",
+      "metadata": {
+        "type": "json_files",
+        "path": "team_data/tenant_memory"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "team_data/tenant_memory/default-workspace/default-client/discover/memory.json",
+          "line": 1,
+          "evidence": "Tenant memory storage structure"
+        }
+      ]
+    },
+    {
+      "id": "external:vb6-legacy-system",
+      "type": "ExternalDependency",
+      "name": "VB6 Banking System",
+      "metadata": {
+        "domain": "banking",
+        "operations": [
+          "check_balance",
+          "deposit"
+        ],
+        "sql_injection_risk": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 1,
+          "evidence": "VB6 code with SQL concatenation vulnerabilities"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "component:agent-analyst",
+      "to": "component:context-vault",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 25,
+          "evidence": "Import relationship to context management"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "service:modernization-platform",
+      "to": "database:tenant-memory",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "access_pattern": "read_write"
+      },
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "team_data/tenant_memory",
+          "line": 1,
+          "evidence": "File-based tenant memory dependency"
+        }
+      ]
+    },
+    {
+      "type": "CALLS_HTTP",
+      "from": "component:context-vault",
+      "to": "service:modernization-platform",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "endpoints": [
+          "@app.get",
+          "@app.post"
+        ]
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI endpoint decorators"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Target database schema for C# modernization",
+    "Authentication/authorization mechanism for banking compliance",
+    "Data migration strategy from VB6 to C# system",
+    "Production deployment infrastructure requirements"
+  ]
+}
