@@ -1,182 +1,195 @@
 {
-  "version": "scm-v1.0",
-  "summary": "Multi-agent enterprise software modernization platform with VB6 banking workflow modernization context. Core system consists of specialized agents (analyst, architect, developer, etc.) with FastAPI web interfaces and context management capabilities.",
+  "version": "scm-v1.0-20241201",
+  "summary": "Multi-agent software modernization platform with Python-based agents, FastAPI web services, and Docker containerization. System designed for VB6-to-C# banking workflow modernization with emphasis on preserving legacy behavior.",
   "nodes": [
     {
-      "id": "service:modernization-platform",
+      "id": "service:web-server",
       "type": "Service",
-      "name": "Enterprise Modernization Platform",
+      "name": "Web Server",
       "metadata": {
+        "framework": "FastAPI",
         "language": "python",
-        "framework": "fastapi",
-        "agent_count": 14
+        "port": "inferred"
       },
-      "confidence": 0.95,
+      "confidence": 0.9,
       "provenance": [
-        {
-          "file": "agents/__init__.py",
-          "line": 1,
-          "evidence": "from .analyst import AnalystAgent"
-        },
         {
           "file": "web/server.py",
           "line": 1,
-          "evidence": "FastAPI application server"
+          "evidence": "FastAPI endpoint hints detected"
         }
       ]
     },
     {
-      "id": "component:agent-analyst",
-      "type": "Component",
-      "name": "Analyst Agent",
+      "id": "service:context-vault",
+      "type": "Service",
+      "name": "Context Vault Service",
       "metadata": {
-        "specialization": "vb6_modernization",
-        "imports": 25
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/analyst.py",
-          "line": 1,
-          "evidence": "AnalystAgent class definition"
-        }
-      ]
-    },
-    {
-      "id": "component:agent-architect",
-      "type": "Component",
-      "name": "Architect Agent",
-      "metadata": {
-        "imports": 9
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/architect.py",
-          "line": 1,
-          "evidence": "ArchitectAgent class definition"
-        }
-      ]
-    },
-    {
-      "id": "component:agent-developer",
-      "type": "Component",
-      "name": "Developer Agent",
-      "metadata": {
-        "imports": 14
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/developer.py",
-          "line": 1,
-          "evidence": "DeveloperAgent class definition"
-        }
-      ]
-    },
-    {
-      "id": "component:agent-database-engineer",
-      "type": "Component",
-      "name": "Database Engineer Agent",
-      "metadata": {
-        "imports": 4
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/database_engineer.py",
-          "line": 1,
-          "evidence": "DatabaseEngineerAgent class definition"
-        }
-      ]
-    },
-    {
-      "id": "component:agent-security-engineer",
-      "type": "Component",
-      "name": "Security Engineer Agent",
-      "metadata": {
-        "imports": 4
-      },
-      "confidence": 0.95,
-      "provenance": [
-        {
-          "file": "agents/security_engineer.py",
-          "line": 1,
-          "evidence": "SecurityEngineerAgent class definition"
-        }
-      ]
-    },
-    {
-      "id": "component:context-vault",
-      "type": "Component",
-      "name": "Context Vault",
-      "metadata": {
-        "purpose": "context_management",
-        "endpoints": [
-          "@app.get",
-          "@app.post"
-        ]
+        "framework": "FastAPI",
+        "language": "python",
+        "purpose": "context_management"
       },
       "confidence": 0.9,
       "provenance": [
         {
           "file": "utils/context_vault.py",
           "line": 1,
-          "evidence": "FastAPI endpoints for context management"
+          "evidence": "FastAPI router and endpoint patterns"
         }
       ]
     },
     {
-      "id": "endpoint:legacy-vb6-balance-check",
-      "type": "Endpoint",
-      "name": "VB6 Balance Check",
+      "id": "module:agents-analyst",
+      "type": "Module",
+      "name": "Analyst Agent",
       "metadata": {
-        "sql_injection_risk": true,
-        "legacy_pattern": "cmdCheckBalance_Click"
+        "language": "python",
+        "agent_type": "analyst",
+        "import_count": 25
       },
-      "confidence": 1.0,
+      "confidence": 0.95,
       "provenance": [
         {
-          "file": "legacy_code",
+          "file": "agents/analyst.py",
           "line": 1,
-          "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text & \"\", conn"
+          "evidence": "Python AST analysis detected 25 imports"
         }
       ]
     },
     {
-      "id": "endpoint:legacy-vb6-deposit",
-      "type": "Endpoint",
-      "name": "VB6 Deposit",
+      "id": "module:agents-architect",
+      "type": "Module",
+      "name": "Architect Agent",
       "metadata": {
-        "sql_injection_risk": true,
-        "legacy_pattern": "cmdDeposit_Click"
+        "language": "python",
+        "agent_type": "architect",
+        "import_count": 9
       },
-      "confidence": 1.0,
+      "confidence": 0.95,
       "provenance": [
         {
-          "file": "legacy_code",
-          "line": 5,
-          "evidence": "conn.Execute \"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text & \" WHERE AccountNo=\" & txtAccountNo.Text & \"\""
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Python AST analysis detected 9 imports"
         }
       ]
     },
     {
-      "id": "database:legacy-customers",
-      "type": "Database",
-      "name": "Legacy Customer Database",
+      "id": "module:agents-developer",
+      "type": "Module",
+      "name": "Developer Agent",
       "metadata": {
-        "table": "tblCustomers",
+        "language": "python",
+        "agent_type": "developer",
+        "import_count": 14
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "Python AST analysis detected 14 imports"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-database-engineer",
+      "type": "Module",
+      "name": "Database Engineer Agent",
+      "metadata": {
+        "language": "python",
+        "agent_type": "database_engineer",
+        "import_count": 4
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Python AST analysis detected 4 imports"
+        }
+      ]
+    },
+    {
+      "id": "module:agents-security-engineer",
+      "type": "Module",
+      "name": "Security Engineer Agent",
+      "metadata": {
+        "language": "python",
+        "agent_type": "security_engineer",
+        "import_count": 4
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Python AST analysis detected 4 imports"
+        }
+      ]
+    },
+    {
+      "id": "container:docker-app",
+      "type": "Container",
+      "name": "Application Container",
+      "metadata": {
+        "containerization": "docker",
+        "orchestration": "docker-compose"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Dockerfile present in repository root"
+        },
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker Compose configuration detected"
+        }
+      ]
+    },
+    {
+      "id": "database:legacy-vb6-data",
+      "type": "Database",
+      "name": "Legacy VB6 Database",
+      "metadata": {
+        "source_system": "vb6",
+        "table_references": [
+          "tblCustomers"
+        ],
+        "sql_injection_risk": "high"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "SELECT Balance FROM tblCustomers WHERE AccountNo="
+        }
+      ]
+    },
+    {
+      "id": "table:tblCustomers",
+      "type": "Table",
+      "name": "Customer Table",
+      "metadata": {
         "columns": [
           "AccountNo",
           "Balance"
+        ],
+        "operations": [
+          "SELECT",
+          "UPDATE"
         ]
       },
-      "confidence": 1.0,
+      "confidence": 0.9,
       "provenance": [
         {
-          "file": "legacy_code",
-          "line": 1,
-          "evidence": "SELECT Balance FROM tblCustomers WHERE AccountNo"
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "tblCustomers table referenced in SQL queries"
         }
       ]
     },
@@ -196,15 +209,34 @@
           "evidence": "inferred node from edge endpoint `pkg:json`"
         }
       ]
+    },
+    {
+      "id": "pkg:os",
+      "type": "Component",
+      "name": "os",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 13,
+          "evidence": "inferred node from edge endpoint `pkg:os`"
+        }
+      ]
     }
   ],
   "edges": [
     {
       "type": "IMPORTS",
-      "from": "component:agent-analyst",
+      "from": "module:agents-analyst",
       "to": "pkg:json",
       "directionality": "directed",
-      "protocol_metadata": {},
+      "protocol_metadata": {
+        "import_type": "standard_library"
+      },
       "confidence": 0.95,
       "evidence": [
         {
@@ -215,47 +247,81 @@
       ]
     },
     {
-      "type": "CALLS_HTTP",
-      "from": "endpoint:legacy-vb6-balance-check",
-      "to": "database:legacy-customers",
+      "type": "IMPORTS",
+      "from": "module:agents-analyst",
+      "to": "pkg:os",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "standard_library"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 13,
+          "evidence": "import os"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "database:legacy-vb6-data",
+      "to": "table:tblCustomers",
       "directionality": "directed",
       "protocol_metadata": {
         "sql_pattern": "SELECT",
         "injection_vulnerable": true
       },
-      "confidence": 1.0,
+      "confidence": 0.9,
       "evidence": [
         {
-          "file": "legacy_code",
-          "line": 1,
-          "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text & \"\", conn"
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text"
         }
       ]
     },
     {
       "type": "WRITES_TABLE",
-      "from": "endpoint:legacy-vb6-deposit",
-      "to": "database:legacy-customers",
+      "from": "database:legacy-vb6-data",
+      "to": "table:tblCustomers",
       "directionality": "directed",
       "protocol_metadata": {
         "sql_pattern": "UPDATE",
         "injection_vulnerable": true
       },
-      "confidence": 1.0,
+      "confidence": 0.9,
       "evidence": [
         {
-          "file": "legacy_code",
-          "line": 5,
-          "evidence": "conn.Execute \"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text & \" WHERE AccountNo=\" & txtAccountNo.Text & \"\""
+          "file": "legacy_code_sample",
+          "line": 6,
+          "evidence": "conn.Execute \"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:web-server",
+      "to": "container:docker-app",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "deployment_method": "containerized"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Service containerization configuration"
         }
       ]
     }
   ],
   "unknowns": [
-    "Target database schema and connection details",
-    "Authentication/authorization requirements for modernized system",
-    "Data migration strategy from legacy database",
-    "Performance requirements for modernized banking operations",
-    "Compliance requirements (PCI DSS, banking regulations)"
+    "Target database schema for C# modernization",
+    "Authentication/authorization patterns in current system",
+    "Data migration strategy from VB6 to C#",
+    "Performance requirements for banking operations",
+    "Compliance requirements (PCI DSS, SOX, etc.)"
   ]
 }
