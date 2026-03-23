@@ -1,0 +1,311 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Enterprise software modernization platform with agent-based architecture for VB6 to C# banking workflow conversion. System consists of specialized agents, web interfaces, and context management utilities with FastAPI-based service layer.",
+  "nodes": [
+    {
+      "id": "service:web-server",
+      "type": "Service",
+      "name": "Web Server",
+      "metadata": {
+        "framework": "FastAPI",
+        "port": "unknown",
+        "language": "python"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI endpoint hints detected"
+        }
+      ]
+    },
+    {
+      "id": "service:context-vault",
+      "type": "Service",
+      "name": "Context Vault API",
+      "metadata": {
+        "framework": "FastAPI",
+        "purpose": "context_management",
+        "language": "python"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI router and endpoint decorators detected"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-analyst",
+      "type": "Component",
+      "name": "Analyst Agent",
+      "metadata": {
+        "role": "modernization_analysis",
+        "language": "python"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Module with 25 imports for analysis functionality"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-architect",
+      "type": "Component",
+      "name": "Architect Agent",
+      "metadata": {
+        "role": "system_design",
+        "language": "python"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Module with 9 imports for architecture functionality"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-developer",
+      "type": "Component",
+      "name": "Developer Agent",
+      "metadata": {
+        "role": "code_generation",
+        "language": "python"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "Module with 14 imports for development functionality"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-database-engineer",
+      "type": "Component",
+      "name": "Database Engineer Agent",
+      "metadata": {
+        "role": "database_modernization",
+        "language": "python"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Module with 4 imports for database engineering"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-security-engineer",
+      "type": "Component",
+      "name": "Security Engineer Agent",
+      "metadata": {
+        "role": "security_analysis",
+        "language": "python"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Module with 4 imports for security engineering"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-system-intelligence",
+      "type": "Component",
+      "name": "System Intelligence Agent",
+      "metadata": {
+        "role": "system_analysis",
+        "language": "python"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "Module with 5 imports for system intelligence"
+        }
+      ]
+    },
+    {
+      "id": "database:legacy-vb6-banking",
+      "type": "Database",
+      "name": "Legacy VB6 Banking Database",
+      "metadata": {
+        "table_count": 1,
+        "known_tables": [
+          "tblCustomers"
+        ],
+        "access_pattern": "ADO_recordset"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "SELECT Balance FROM tblCustomers WHERE AccountNo="
+        }
+      ]
+    },
+    {
+      "id": "table:tblCustomers",
+      "type": "Table",
+      "name": "tblCustomers",
+      "metadata": {
+        "known_columns": [
+          "AccountNo",
+          "Balance"
+        ],
+        "primary_key": "AccountNo"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "tblCustomers table referenced in SQL queries"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:check-balance",
+      "type": "Endpoint",
+      "name": "Check Balance Operation",
+      "metadata": {
+        "operation": "read",
+        "legacy_implementation": "VB6_button_click"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 1,
+          "evidence": "cmdCheckBalance_Click() subroutine"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:deposit",
+      "type": "Endpoint",
+      "name": "Deposit Operation",
+      "metadata": {
+        "operation": "write",
+        "legacy_implementation": "VB6_button_click"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 5,
+          "evidence": "cmdDeposit_Click() subroutine"
+        }
+      ]
+    },
+    {
+      "id": "pkg:json",
+      "type": "Component",
+      "name": "json",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "inferred node from edge endpoint `pkg:json`"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "component:agent-analyst",
+      "to": "pkg:json",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/analyst.py",
+          "line": 12,
+          "evidence": "import json"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "endpoint:check-balance",
+      "to": "table:tblCustomers",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "sql_pattern": "SELECT",
+        "vulnerability": "sql_injection_risk"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text"
+        }
+      ]
+    },
+    {
+      "type": "WRITES_TABLE",
+      "from": "endpoint:deposit",
+      "to": "table:tblCustomers",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "sql_pattern": "UPDATE",
+        "vulnerability": "sql_injection_risk"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "legacy_code_sample",
+          "line": 6,
+          "evidence": "conn.Execute \"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "service:web-server",
+      "to": "component:agent-analyst",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Agent modules imported in package init"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Target database schema and connection details",
+    "Authentication and authorization mechanisms",
+    "Data migration strategy from legacy to modern database",
+    "API versioning and backward compatibility requirements",
+    "Performance and scalability requirements",
+    "Deployment infrastructure and containerization strategy"
+  ]
+}
