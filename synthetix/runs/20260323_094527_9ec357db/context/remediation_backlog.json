@@ -1,0 +1,137 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Parameterized Queries for VB6 to C# Migration",
+    "problem_statement": "Legacy VB6 code uses string concatenation for SQL queries, creating SQL injection vulnerabilities that must be eliminated in C# modernization",
+    "scope": [
+      "Legacy VB6 SQL operations",
+      "C# data access layer"
+    ],
+    "risk_if_unaddressed": "Critical security vulnerability allowing unauthorized database access and data manipulation in banking system",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema analysis",
+      "C# ORM selection"
+    ],
+    "suggested_approach": "Replace concatenated SQL with parameterized queries using Entity Framework or Dapper in C# implementation",
+    "success_criteria": [
+      "All SQL operations use parameterized queries",
+      "Static analysis confirms no string concatenation in SQL",
+      "Security testing validates injection prevention"
+    ],
+    "confidence": 1.0,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "Direct SQL concatenation: WHERE AccountNo='\" & txtAccountNo.Text & \"'"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 4,
+        "evidence": "Direct SQL concatenation in UPDATE statement"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Define Database Migration Strategy",
+    "problem_statement": "Database conversion context is unspecified, creating risk of data loss and system incompatibility during modernization",
+    "scope": [
+      "Database schema",
+      "Data migration",
+      "Connection management"
+    ],
+    "risk_if_unaddressed": "Data loss, system downtime, and failed modernization due to incompatible database structures",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "Legacy database schema analysis",
+      "Target database platform selection"
+    ],
+    "suggested_approach": "Conduct database discovery, create migration scripts, and establish rollback procedures",
+    "success_criteria": [
+      "Complete database schema documentation",
+      "Validated migration scripts with rollback capability",
+      "Data integrity verification procedures"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "context",
+        "line": 1,
+        "evidence": "DATABASE CONVERSION CONTEXT: source: not specified, target: not specified"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement Banking-Grade Authentication",
+    "problem_statement": "No authentication or authorization framework detected in current system, critical security gap for banking application",
+    "scope": [
+      "Authentication service",
+      "Authorization middleware",
+      "Session management"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to banking functions, regulatory compliance violations, data breaches",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "Security requirements analysis",
+      "Compliance framework selection"
+    ],
+    "suggested_approach": "Implement OAuth 2.0/OpenID Connect with multi-factor authentication and role-based access control",
+    "success_criteria": [
+      "Multi-factor authentication implemented",
+      "Role-based access control enforced",
+      "Session management with timeout controls",
+      "Audit logging for all authentication events"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "No authentication patterns detected in endpoint analysis"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Reduce Module Coupling Complexity",
+    "problem_statement": "High import coupling (1088 edges across 197 modules) creates maintenance and testing challenges",
+    "scope": [
+      "Agent modules",
+      "Import dependencies",
+      "Module architecture"
+    ],
+    "risk_if_unaddressed": "Difficult maintenance, circular dependencies, deployment complexity, testing challenges",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "Dependency analysis",
+      "Architecture refactoring plan"
+    ],
+    "suggested_approach": "Implement dependency injection, create interface abstractions, and establish clear module boundaries",
+    "success_criteria": [
+      "Reduce import coupling by 30%",
+      "Eliminate circular dependencies",
+      "Implement dependency injection framework",
+      "Clear module interface definitions"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "static_analysis",
+        "line": 1,
+        "evidence": "import_edges=1088 across modules_analyzed=197"
+      },
+      {
+        "file": "agents/analyst.py",
+        "line": 1,
+        "evidence": "import_count=25 indicates high coupling"
+      }
+    ]
+  }
+]
