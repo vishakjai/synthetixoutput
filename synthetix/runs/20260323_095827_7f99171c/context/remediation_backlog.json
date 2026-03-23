@@ -1,0 +1,137 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Parameterized SQL Queries",
+    "problem_statement": "Legacy VB6 code uses string concatenation for SQL queries, creating SQL injection vulnerabilities in banking operations",
+    "scope": [
+      "VB6 Legacy Integration",
+      "Database Layer"
+    ],
+    "risk_if_unaddressed": "Critical security breach allowing unauthorized access to customer financial data and account manipulation",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema analysis",
+      "C# ORM selection"
+    ],
+    "suggested_approach": "Replace concatenated SQL with parameterized queries using Entity Framework or Dapper in C# modernization",
+    "success_criteria": [
+      "All SQL queries use parameterized statements",
+      "Static analysis confirms no string concatenation in database operations",
+      "Penetration testing validates SQL injection prevention"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "Concatenated SQL in balance check operation"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 4,
+        "evidence": "Concatenated SQL in deposit operation"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Add Input Validation for Financial Operations",
+    "problem_statement": "Banking operations accept raw text input without validation, risking invalid monetary transactions",
+    "scope": [
+      "Banking Domain Logic",
+      "Input Validation"
+    ],
+    "risk_if_unaddressed": "Invalid financial transactions, potential data corruption, regulatory compliance violations",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [
+      "Business rule catalog",
+      "Validation framework selection"
+    ],
+    "suggested_approach": "Implement comprehensive input validation with decimal precision, range checks, and business rule enforcement",
+    "success_criteria": [
+      "All monetary inputs validated for format and range",
+      "Account number validation with checksum verification",
+      "Business rules enforced (minimum balance, transaction limits)"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "Direct txtAccountNo.Text usage without validation"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 4,
+        "evidence": "Direct txtAmount.Text usage in financial calculation"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement Transaction Integrity Controls",
+    "problem_statement": "Banking operations lack ACID transaction controls, risking data consistency in concurrent access scenarios",
+    "scope": [
+      "Database Layer",
+      "Concurrency Control"
+    ],
+    "risk_if_unaddressed": "Data inconsistency, race conditions in financial operations, potential financial losses",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Database platform selection",
+      "Concurrency strategy design"
+    ],
+    "suggested_approach": "Implement database transactions with proper isolation levels and optimistic/pessimistic locking strategies",
+    "success_criteria": [
+      "All financial operations wrapped in database transactions",
+      "Concurrent access testing validates data consistency",
+      "Rollback mechanisms tested and verified"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 4,
+        "evidence": "Single UPDATE statement without transaction context"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Design Authentication and Authorization Layer",
+    "problem_statement": "No visible authentication mechanism for banking operations, failing compliance requirements",
+    "scope": [
+      "Security Layer",
+      "Compliance"
+    ],
+    "risk_if_unaddressed": "Regulatory violations, unauthorized access to financial systems, audit failures",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "Compliance requirements analysis",
+      "Identity provider selection"
+    ],
+    "suggested_approach": "Implement OAuth2/OIDC with role-based access control and audit logging for banking compliance",
+    "success_criteria": [
+      "Multi-factor authentication for financial operations",
+      "Role-based permissions with least privilege principle",
+      "Complete audit trail for all banking transactions"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "No authentication checks in balance retrieval"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 4,
+        "evidence": "No authorization validation in deposit operation"
+      }
+    ]
+  }
+]
