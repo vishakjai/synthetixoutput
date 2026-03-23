@@ -1,0 +1,77 @@
+{
+  "version": "ha-v1.0",
+  "summary": "System shows strong architectural patterns but contains critical security vulnerabilities in legacy VB6 code requiring immediate remediation before modernization.",
+  "scores": {
+    "maintainability": 7,
+    "security": 3,
+    "reliability": 6,
+    "testability": 8
+  },
+  "hotspots": [
+    {
+      "scope": "Legacy VB6 SQL Operations",
+      "reason": "SQL injection vulnerabilities in both balance check and deposit operations using string concatenation",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "WHERE AccountNo='\" & txtAccountNo.Text & \"'\""
+        }
+      ]
+    },
+    {
+      "scope": "Banking Transaction Logic",
+      "reason": "No input validation or error handling for financial amounts in deposit operation",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 6,
+          "evidence": "Balance + \" & txtAmount.Text & \" with no validation"
+        }
+      ]
+    },
+    {
+      "scope": "Agent Module Dependencies",
+      "reason": "High import coupling in analyst agent (25 imports) may indicate architectural complexity",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "25 import statements detected"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection in Banking Operations",
+      "description": "Legacy VB6 code constructs SQL queries through string concatenation, allowing potential account number and amount manipulation",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "No Transaction Atomicity",
+      "description": "Deposit operation lacks transaction boundaries, risking data inconsistency in concurrent scenarios",
+      "severity": "high",
+      "confidence": 0.85
+    },
+    {
+      "title": "Missing Authentication Context",
+      "description": "No authentication or authorization mechanisms visible in legacy banking operations",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Unvalidated Financial Inputs",
+      "description": "Amount inputs not validated for type, range, or format before database operations",
+      "severity": "high",
+      "confidence": 0.9
+    }
+  ]
+}
