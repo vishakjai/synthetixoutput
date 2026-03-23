@@ -1,0 +1,148 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Parameterized Queries for C# Migration",
+    "problem_statement": "Legacy VB6 banking code uses dangerous SQL string concatenation that must be replaced with parameterized queries in C# implementation",
+    "scope": [
+      "legacy:vb6-banking",
+      "database:legacy-customers"
+    ],
+    "risk_if_unaddressed": "Critical SQL injection vulnerability allowing unauthorized account access and balance manipulation",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema analysis",
+      "C# data access layer design"
+    ],
+    "suggested_approach": "Replace direct SQL concatenation with Entity Framework or ADO.NET parameterized queries, implement input validation, add SQL injection testing",
+    "success_criteria": [
+      "All SQL queries use parameterized statements",
+      "Input validation prevents malicious account numbers",
+      "Security testing confirms SQL injection prevention",
+      "Functional parity with legacy balance/deposit operations"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 2,
+        "evidence": "WHERE AccountNo=\" & txtAccountNo.Text & \""
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Add Transaction Management to Deposit Operations",
+    "problem_statement": "Legacy deposit operation lacks transaction boundaries, creating risk of partial updates and data inconsistency",
+    "scope": [
+      "legacy:vb6-banking"
+    ],
+    "risk_if_unaddressed": "Data corruption during concurrent deposits or system failures, potential financial discrepancies",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "Implement database transactions with proper rollback handling, add concurrency control for balance updates",
+    "success_criteria": [
+      "All deposit operations wrapped in transactions",
+      "Proper rollback on failure conditions",
+      "Concurrent deposit handling without race conditions",
+      "Audit trail for all balance changes"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "conn.Execute without transaction management"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement Input Validation Framework",
+    "problem_statement": "Legacy code lacks validation for account numbers and amounts, allowing potential data corruption",
+    "scope": [
+      "legacy:vb6-banking"
+    ],
+    "risk_if_unaddressed": "Invalid data entry causing application errors, potential security bypass, poor user experience",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "Implement comprehensive input validation with regex patterns for account numbers, numeric validation for amounts, business rule validation",
+    "success_criteria": [
+      "Account number format validation",
+      "Amount range and format validation",
+      "Proper error messages for invalid inputs",
+      "Client and server-side validation"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 2,
+        "evidence": "txtAccountNo.Text used directly without validation"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Reduce Agent Module Complexity",
+    "problem_statement": "1092 import relationships across 180 Python modules creates high coupling and maintenance overhead",
+    "scope": [
+      "agents/"
+    ],
+    "risk_if_unaddressed": "Difficult maintenance, potential circular dependencies, slow build times, testing complexity",
+    "effort": "L",
+    "severity": "medium",
+    "dependencies": [],
+    "suggested_approach": "Implement dependency injection, create clear module boundaries, reduce cross-module dependencies, implement interface abstractions",
+    "success_criteria": [
+      "Reduce import count by 30%",
+      "Eliminate circular dependencies",
+      "Clear module responsibility boundaries",
+      "Improved test isolation"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "repository_stats",
+        "line": 1,
+        "evidence": "1092 import edges across 180 Python modules"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Design Scalable Data Storage Architecture",
+    "problem_statement": "File-based JSON storage may not scale for enterprise banking workloads requiring high availability and consistency",
+    "scope": [
+      "database:tenant-memory"
+    ],
+    "risk_if_unaddressed": "Performance bottlenecks, data consistency issues, backup/recovery challenges, concurrent access problems",
+    "effort": "XL",
+    "severity": "medium",
+    "dependencies": [
+      "Database technology selection",
+      "Migration planning"
+    ],
+    "suggested_approach": "Evaluate enterprise database options (SQL Server, PostgreSQL), design data migration strategy, implement proper backup/recovery",
+    "success_criteria": [
+      "Database technology selection documented",
+      "Migration plan with rollback strategy",
+      "Performance benchmarks meet requirements",
+      "High availability configuration"
+    ],
+    "confidence": 0.6,
+    "provenance": [
+      {
+        "file": "team_data/tenant_memory/",
+        "line": 1,
+        "evidence": "JSON file-based storage structure detected"
+      }
+    ]
+  }
+]
