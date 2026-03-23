@@ -1,0 +1,114 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Python-based multi-agent system following modular architecture with FastAPI web services, Docker containerization, and JSON schema validation. Strong emphasis on agent specialization and structured data contracts.",
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "rule": "Agent modules follow snake_case naming with descriptive specialization suffixes (analyst.py, architect.py, security_engineer.py)",
+      "confidence": 0.95,
+      "examples": [
+        "agents/analyst.py",
+        "agents/security_engineer.py",
+        "agents/database_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/",
+          "line": 1,
+          "evidence": "Consistent snake_case naming across all agent modules"
+        }
+      ]
+    },
+    {
+      "id": "api-001",
+      "category": "api",
+      "rule": "FastAPI decorators used for HTTP endpoint definition (@app.get, @app.post)",
+      "confidence": 0.9,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI decorator patterns detected"
+        },
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "FastAPI decorator patterns detected"
+        }
+      ]
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "rule": "Dedicated tester agent module suggests automated testing integration",
+      "confidence": 0.8,
+      "examples": [
+        "agents/tester.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Specialized tester agent module with 7 imports"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "Dedicated security engineer agent for security analysis and validation",
+      "confidence": 0.9,
+      "examples": [
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Specialized security engineer agent module"
+        }
+      ]
+    },
+    {
+      "id": "error_handling-001",
+      "category": "error_handling",
+      "rule": "JSON schema validation enforced through .deliveryos/schemas/ directory structure",
+      "confidence": 0.85,
+      "examples": [
+        ".deliveryos/schemas/agent_result.schema.json",
+        ".deliveryos/schemas/common.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive JSON schema validation structure"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement consistent import ordering across all Python modules",
+    "Add type hints to all function signatures for better IDE support",
+    "Standardize docstring format across agent modules",
+    "Implement consistent error handling patterns across FastAPI endpoints",
+    "Add input validation decorators for API endpoints"
+  ],
+  "scaffold_templates": [
+    "FastAPI service template with standard endpoint patterns",
+    "Agent module template with base class inheritance",
+    "Docker containerization template with multi-stage builds",
+    "JSON schema template for data contract validation",
+    "Agent orchestration template with dependency injection"
+  ]
+}
