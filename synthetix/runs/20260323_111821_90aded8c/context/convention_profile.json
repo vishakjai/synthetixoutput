@@ -1,0 +1,96 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Python-centric development with FastAPI web framework, extensive JSON schema validation, and multi-agent architecture patterns. Strong emphasis on type safety, configuration-driven behavior, and modular agent specialization.",
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "rule": "Use snake_case for Python module and function names",
+      "confidence": 0.95,
+      "examples": [
+        "agents/system_intelligence.py",
+        "agents/database_engineer.py",
+        "utils/context_vault.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/system_intelligence.py",
+          "line": 1,
+          "evidence": "Consistent snake_case naming across all Python modules"
+        }
+      ]
+    },
+    {
+      "id": "api-001",
+      "category": "api",
+      "rule": "Use FastAPI decorators for HTTP endpoint definition",
+      "confidence": 0.9,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get( endpoint pattern detected"
+        },
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get( and @app.post( patterns detected"
+        }
+      ]
+    },
+    {
+      "id": "config-001",
+      "category": "api",
+      "rule": "Use JSON Schema for data validation and API contracts",
+      "confidence": 0.95,
+      "examples": [
+        ".deliveryos/schemas/agent_result.schema.json",
+        ".deliveryos/schemas/context_bundle.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "75+ JSON schema files for comprehensive data validation"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "Avoid string concatenation in SQL queries",
+      "confidence": 0.9,
+      "examples": [],
+      "counterexamples": [
+        "\"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text",
+        "\"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text"
+      ],
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "SQL injection vulnerability in legacy VB6 code"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement pylint or flake8 for Python code quality",
+    "Add mypy for static type checking",
+    "Use black for consistent code formatting",
+    "Implement pre-commit hooks for code quality gates"
+  ],
+  "scaffold_templates": [
+    "FastAPI service template with JSON schema validation",
+    "Agent base class template with standardized interfaces",
+    "Docker containerization template for Python services",
+    "JSON schema template for API contract definition"
+  ]
+}
