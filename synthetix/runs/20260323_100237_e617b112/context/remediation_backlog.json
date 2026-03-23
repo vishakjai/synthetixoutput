@@ -1,0 +1,171 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Eliminate SQL Injection Vulnerabilities",
+    "problem_statement": "Legacy VB6 code uses direct string concatenation for SQL queries, creating critical security vulnerabilities",
+    "scope": [
+      "legacy_code:cmdCheckBalance_Click",
+      "legacy_code:cmdDeposit_Click"
+    ],
+    "risk_if_unaddressed": "Potential data breach, unauthorized account access, financial fraud",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "rb-003"
+    ],
+    "suggested_approach": "Replace concatenated SQL with parameterized queries using SqlCommand.Parameters in C# implementation",
+    "success_criteria": [
+      "All SQL queries use parameterized statements",
+      "Static analysis confirms no string concatenation in database operations",
+      "Penetration testing validates SQL injection protection"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "legacy_code",
+        "line": 2,
+        "evidence": "WHERE AccountNo=\" & txtAccountNo.Text & \""
+      },
+      {
+        "file": "legacy_code",
+        "line": 6,
+        "evidence": "Balance + \" & txtAmount.Text & \""
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Implement Input Validation and Sanitization",
+    "problem_statement": "User inputs are used directly without validation, type checking, or sanitization",
+    "scope": [
+      "legacy_code:txtAccountNo",
+      "legacy_code:txtAmount"
+    ],
+    "risk_if_unaddressed": "Invalid data processing, application crashes, potential security exploits",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Implement server-side validation with data annotations and client-side validation in C# web application",
+    "success_criteria": [
+      "Account numbers validated as numeric and within valid range",
+      "Deposit amounts validated as positive decimal values",
+      "Comprehensive error messages for invalid inputs",
+      "Unit tests cover all validation scenarios"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "legacy_code",
+        "line": 2,
+        "evidence": "txtAccountNo.Text used without validation"
+      },
+      {
+        "file": "legacy_code",
+        "line": 6,
+        "evidence": "txtAmount.Text used without validation"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Define Target Database Schema and Migration Strategy",
+    "problem_statement": "Target database schema and migration path from legacy VB6 structures are undefined",
+    "scope": [
+      "database:legacy-vb6-data",
+      "table:tblCustomers"
+    ],
+    "risk_if_unaddressed": "Data loss during migration, incompatible schema design, extended downtime",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Design Entity Framework models, create migration scripts, implement rollback procedures",
+    "success_criteria": [
+      "Complete schema mapping from VB6 to C# entities",
+      "Tested migration scripts with rollback capability",
+      "Data integrity validation post-migration",
+      "Performance benchmarks meet or exceed legacy system"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "legacy_code",
+        "line": 2,
+        "evidence": "tblCustomers table structure referenced"
+      },
+      {
+        "file": "legacy_code",
+        "line": 6,
+        "evidence": "Balance column update operation"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Implement Authentication and Authorization",
+    "problem_statement": "No authentication or authorization mechanisms visible in legacy banking operations",
+    "scope": [
+      "legacy_code:cmdCheckBalance_Click",
+      "legacy_code:cmdDeposit_Click"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to banking functions, regulatory compliance violations",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "rb-003"
+    ],
+    "suggested_approach": "Implement JWT-based authentication with role-based authorization for banking operations",
+    "success_criteria": [
+      "User authentication required for all banking operations",
+      "Role-based access control implemented",
+      "Session management and timeout policies",
+      "Audit logging for all authenticated operations"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "legacy_code",
+        "line": 1,
+        "evidence": "No authentication checks in cmdCheckBalance_Click"
+      },
+      {
+        "file": "legacy_code",
+        "line": 5,
+        "evidence": "No authorization validation in cmdDeposit_Click"
+      }
+    ]
+  },
+  {
+    "id": "rb-005",
+    "title": "Add Comprehensive Error Handling and Transaction Management",
+    "problem_statement": "Legacy code lacks error handling and transaction management for database operations",
+    "scope": [
+      "legacy_code:database_operations"
+    ],
+    "risk_if_unaddressed": "Data corruption, partial updates, poor user experience during failures",
+    "effort": "M",
+    "severity": "medium",
+    "dependencies": [
+      "rb-003"
+    ],
+    "suggested_approach": "Implement try-catch blocks, database transactions, and user-friendly error messages",
+    "success_criteria": [
+      "All database operations wrapped in transactions",
+      "Comprehensive exception handling with logging",
+      "User-friendly error messages",
+      "Automatic rollback on operation failures"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "legacy_code",
+        "line": 2,
+        "evidence": "rs.Open without error handling"
+      },
+      {
+        "file": "legacy_code",
+        "line": 6,
+        "evidence": "conn.Execute without transaction management"
+      }
+    ]
+  }
+]
