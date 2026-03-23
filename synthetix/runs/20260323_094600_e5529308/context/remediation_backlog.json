@@ -1,0 +1,122 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Implement Parameterized Queries for Banking Operations",
+    "problem_statement": "Legacy VB6 code uses string concatenation for SQL construction, creating critical SQL injection vulnerabilities in balance check and deposit operations",
+    "scope": [
+      "cmdCheckBalance_Click",
+      "cmdDeposit_Click"
+    ],
+    "risk_if_unaddressed": "Account takeover, unauthorized balance access, fraudulent deposits, data corruption",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Database connection modernization",
+      "Input validation framework"
+    ],
+    "suggested_approach": "Replace string concatenation with parameterized queries using SqlCommand.Parameters in C# modernization",
+    "success_criteria": [
+      "All SQL queries use parameterized inputs",
+      "Static analysis confirms no string concatenation in SQL",
+      "Penetration testing validates injection prevention"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 2,
+        "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo='\" & txtAccountNo.Text & \"'\""
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Add Input Validation for Financial Operations",
+    "problem_statement": "Banking operations accept raw text input without validation for amount format, range, or type safety",
+    "scope": [
+      "txtAmount.Text",
+      "txtAccountNo.Text"
+    ],
+    "risk_if_unaddressed": "Invalid transactions, negative deposits, account number format attacks, system crashes",
+    "effort": "S",
+    "severity": "high",
+    "dependencies": [
+      "Input validation library selection",
+      "Error handling framework"
+    ],
+    "suggested_approach": "Implement decimal validation for amounts, account number format validation, and range checks before database operations",
+    "success_criteria": [
+      "All financial inputs validated before processing",
+      "Proper error messages for invalid inputs",
+      "Unit tests cover validation edge cases"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "txtAmount.Text used directly in SQL without validation"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Implement Transaction Boundaries for Banking Operations",
+    "problem_statement": "Deposit operations lack atomic transaction handling, risking data inconsistency in concurrent access scenarios",
+    "scope": [
+      "cmdDeposit_Click"
+    ],
+    "risk_if_unaddressed": "Race conditions, partial updates, balance corruption, audit trail gaps",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Database transaction framework",
+      "Concurrency handling strategy"
+    ],
+    "suggested_approach": "Wrap deposit operations in database transactions with proper rollback handling and optimistic locking",
+    "success_criteria": [
+      "All deposit operations are atomic",
+      "Concurrent access handled safely",
+      "Transaction logs maintained for audit"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "Single UPDATE statement without transaction context"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Design Authentication and Authorization Framework",
+    "problem_statement": "Banking operations lack any visible authentication or authorization mechanisms, allowing unrestricted access",
+    "scope": [
+      "All banking operations",
+      "Account access controls"
+    ],
+    "risk_if_unaddressed": "Unauthorized account access, regulatory compliance violations, fraud exposure",
+    "effort": "L",
+    "severity": "critical",
+    "dependencies": [
+      "Identity provider selection",
+      "Authorization policy design",
+      "Session management framework"
+    ],
+    "suggested_approach": "Implement OAuth2/JWT authentication with role-based authorization for banking operations",
+    "success_criteria": [
+      "All operations require valid authentication",
+      "Account access restricted to authorized users",
+      "Audit logs track all access attempts"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "No authentication checks visible in banking operations"
+      }
+    ]
+  }
+]
