@@ -1,0 +1,224 @@
+{
+  "header": {
+    "artifact_id": "5b2f1f40c83d4792af5bff56f06385aa",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-23T11:19:27.857593+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260323_111821_90aded8c",
+      "stage_id": "context_layer",
+      "task_id": "0814aebf5e21464b88f450c69dd9742f"
+    },
+    "parents": [],
+    "digest": "sha256:357c2551c8fa5e6945652d768b2df3033f8a5c9f3cba8368446a9303672730de",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260323_111821_90aded8c",
+      "bundle_version": "20260323T111927Z_20260323_111821_90aded8c"
+    }
+  },
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "title": "Use snake_case for Python module and function names",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Use snake_case for Python module and function names",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/system_intelligence.py"
+        },
+        {
+          "file": "agents/database_engineer.py"
+        },
+        {
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/system_intelligence.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "api-001",
+      "category": "api_design",
+      "title": "Use FastAPI decorators for HTTP endpoint definition",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Use FastAPI decorators for HTTP endpoint definition",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get("
+        },
+        {
+          "file": "@app.post("
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "web/server.py"
+        },
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "config-001",
+      "category": "api_design",
+      "title": "Use JSON Schema for data validation and API contracts",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Use JSON Schema for data validation and API contracts",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json"
+        },
+        {
+          "file": ".deliveryos/schemas/context_bundle.schema.json"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "security-001",
+      "category": "authn_authz",
+      "title": "Avoid string concatenation in SQL queries",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Avoid string concatenation in SQL queries",
+      "detection": {},
+      "enforcement": {},
+      "examples": [],
+      "counterexamples": [
+        {
+          "file": "\"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text"
+        },
+        {
+          "file": "\"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code_sample"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "FastAPI service template with JSON schema validation",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "Agent base class template with standardized interfaces",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "Docker containerization template for Python services",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "JSON schema template for API contract definition",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
