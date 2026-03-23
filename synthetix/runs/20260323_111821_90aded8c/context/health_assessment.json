@@ -1,0 +1,82 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Modernization platform shows good architectural patterns but faces critical security risks from legacy VB6 code patterns. Strong foundation with comprehensive schemas and modular design, but requires immediate attention to SQL injection vulnerabilities and data migration strategy.",
+  "scores": {
+    "maintainability": 75,
+    "security": 25,
+    "reliability": 60,
+    "testability": 70
+  },
+  "hotspots": [
+    {
+      "scope": "legacy_vb6_database_access",
+      "reason": "SQL injection vulnerabilities in string concatenated queries",
+      "severity": "high",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "WHERE AccountNo=\" & txtAccountNo.Text - direct user input concatenation"
+        },
+        {
+          "file": "legacy_code_sample",
+          "line": 6,
+          "evidence": "Balance + \" & txtAmount.Text - unvalidated numeric input"
+        }
+      ]
+    },
+    {
+      "scope": "data_migration_strategy",
+      "reason": "No clear migration path from VB6 ADO to modern database access",
+      "severity": "high",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 1,
+          "evidence": "VB6 Recordset pattern requires complete rewrite for C# modernization"
+        }
+      ]
+    },
+    {
+      "scope": "authentication_authorization",
+      "reason": "No visible authentication or authorization mechanisms",
+      "severity": "medium",
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "repository_scan",
+          "line": 1,
+          "evidence": "No auth-related modules or configurations detected in 304 scanned files"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Critical SQL Injection Vulnerability",
+      "description": "Legacy VB6 code uses direct string concatenation for SQL queries, allowing arbitrary SQL execution through user input fields",
+      "severity": "critical",
+      "confidence": 0.95
+    },
+    {
+      "title": "Data Contract Preservation Risk",
+      "description": "Migration from VB6 ADO Recordset to C# may introduce behavioral changes in balance calculations and transaction handling",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Banking Compliance Gap",
+      "description": "No visible audit trails, transaction logging, or compliance controls for financial operations",
+      "severity": "high",
+      "confidence": 0.7
+    },
+    {
+      "title": "Concurrent Access Control",
+      "description": "Legacy code shows no concurrency control for balance updates, risking race conditions in multi-user scenarios",
+      "severity": "medium",
+      "confidence": 0.8
+    }
+  ]
+}
