@@ -1,0 +1,182 @@
+[
+  {
+    "id": "rb-001-sql-injection-fix",
+    "title": "Eliminate SQL Injection Vulnerabilities",
+    "problem_statement": "Legacy VB6 code uses string concatenation for SQL queries, creating critical security vulnerabilities that allow database manipulation attacks",
+    "scope": [
+      "Legacy VB6 Database Operations",
+      "C# Data Access Layer"
+    ],
+    "risk_if_unaddressed": "Data breach, unauthorized access to customer accounts, regulatory violations, potential financial losses",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [
+      "Database schema analysis",
+      "C# ORM selection"
+    ],
+    "suggested_approach": "Implement parameterized queries using Entity Framework or similar ORM, add input validation layer, implement prepared statements for all database operations",
+    "success_criteria": [
+      "All SQL queries use parameterized inputs",
+      "Static analysis shows no string concatenation in SQL",
+      "Penetration testing confirms no SQL injection vulnerabilities",
+      "Code review approval from security team"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 2,
+        "evidence": "String concatenation in SELECT query"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "String concatenation in UPDATE query"
+      }
+    ]
+  },
+  {
+    "id": "rb-002-input-validation",
+    "title": "Implement Comprehensive Input Validation",
+    "problem_statement": "No input validation exists for account numbers, amounts, or other user inputs in banking operations",
+    "scope": [
+      "User Input Processing",
+      "Business Logic Layer"
+    ],
+    "risk_if_unaddressed": "Invalid data processing, potential system crashes, business logic bypass, data corruption",
+    "effort": "M",
+    "severity": "high",
+    "dependencies": [
+      "Business rules documentation",
+      "Data type specifications"
+    ],
+    "suggested_approach": "Implement validation attributes in C# models, add server-side validation middleware, create validation rules for account numbers and monetary amounts",
+    "success_criteria": [
+      "All inputs validated before processing",
+      "Proper error messages for invalid inputs",
+      "Unit tests cover all validation scenarios",
+      "No unvalidated data reaches database layer"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 2,
+        "evidence": "Direct use of txtAccountNo.Text without validation"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "Direct use of txtAmount.Text without validation"
+      }
+    ]
+  },
+  {
+    "id": "rb-003-transaction-audit",
+    "title": "Implement Transaction Auditing and Logging",
+    "problem_statement": "No audit trail or logging exists for banking transactions, violating compliance requirements and preventing fraud detection",
+    "scope": [
+      "Transaction Processing",
+      "Audit System"
+    ],
+    "risk_if_unaddressed": "Regulatory compliance violations, inability to detect fraud, no transaction history for disputes",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "Audit log schema design",
+      "Compliance requirements review"
+    ],
+    "suggested_approach": "Implement structured logging with transaction IDs, create audit tables for all financial operations, add correlation IDs for request tracking",
+    "success_criteria": [
+      "All transactions logged with timestamps and user context",
+      "Audit logs are tamper-evident and immutable",
+      "Compliance team approves audit trail completeness",
+      "Log retention meets regulatory requirements"
+    ],
+    "confidence": 0.85,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 5,
+        "evidence": "No logging in cmdDeposit_Click operation"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "No logging in cmdCheckBalance_Click operation"
+      }
+    ]
+  },
+  {
+    "id": "rb-004-error-handling",
+    "title": "Implement Robust Error Handling",
+    "problem_statement": "No error handling exists for database operations, potentially causing application crashes and poor user experience",
+    "scope": [
+      "Database Operations",
+      "User Interface"
+    ],
+    "risk_if_unaddressed": "Application instability, poor user experience, potential data inconsistency, debugging difficulties",
+    "effort": "S",
+    "severity": "medium",
+    "dependencies": [
+      "Error handling standards",
+      "User experience guidelines"
+    ],
+    "suggested_approach": "Implement try-catch blocks around database operations, add proper exception logging, create user-friendly error messages, implement retry logic for transient failures",
+    "success_criteria": [
+      "All database operations have error handling",
+      "Users receive meaningful error messages",
+      "Errors are logged with sufficient detail for debugging",
+      "Application remains stable during error conditions"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 2,
+        "evidence": "No error handling around rs.Open operation"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "No error handling around conn.Execute operation"
+      }
+    ]
+  },
+  {
+    "id": "rb-005-authentication-authorization",
+    "title": "Implement Authentication and Authorization",
+    "problem_statement": "No authentication or authorization mechanisms exist for accessing sensitive banking operations",
+    "scope": [
+      "Security Layer",
+      "User Management"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to customer accounts, data breaches, regulatory violations, identity theft",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "Identity provider selection",
+      "Role-based access control design"
+    ],
+    "suggested_approach": "Implement JWT-based authentication, add role-based authorization, integrate with enterprise identity provider, add session management",
+    "success_criteria": [
+      "All banking operations require authentication",
+      "Role-based access controls implemented",
+      "Session management prevents unauthorized access",
+      "Security audit confirms proper access controls"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "No authentication check in balance inquiry"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 5,
+        "evidence": "No authorization check for deposit operation"
+      }
+    ]
+  }
+]
