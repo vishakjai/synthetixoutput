@@ -1,0 +1,261 @@
+{
+  "header": {
+    "artifact_id": "18fb119cf8e54205ad35021538bc51b8",
+    "artifact_type": "convention_profile",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-23T10:03:44.363552+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "claude-sonnet-4-20250514",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260323_100237_e617b112",
+      "stage_id": "context_layer",
+      "task_id": "a696ab5b75ac4821b49418e0087b456e"
+    },
+    "parents": [],
+    "digest": "sha256:253517ba9fe976d37024a41fcbaa1f790b98e854481f2e8edf453f786f272c31",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260323_100237_e617b112",
+      "bundle_version": "20260323T100344Z_20260323_100237_e617b112"
+    }
+  },
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "title": "Agent modules use descriptive names with underscores (analyst.py, database_engineer.py)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Agent modules use descriptive names with underscores (analyst.py, database_engineer.py)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/analyst.py"
+        },
+        {
+          "file": "agents/database_engineer.py"
+        },
+        {
+          "file": "agents/security_engineer.py"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/__init__.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "api-001",
+      "category": "api_design",
+      "title": "FastAPI decorators used for HTTP endpoint definition (@app.get, @app.post)",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "FastAPI decorators used for HTTP endpoint definition (@app.get, @app.post)",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "@app.get("
+        },
+        {
+          "file": "@app.post("
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "utils/context_vault.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "security-001",
+      "category": "authn_authz",
+      "title": "JSON schema validation enforced for agent contracts and API responses",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "JSON schema validation enforced for agent contracts and API responses",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json"
+        },
+        {
+          "file": ".deliveryos/schemas/context_bundle.schema.json"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": ".deliveryos/schemas/"
+        }
+      ],
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "error_handling-001",
+      "category": "error_handling",
+      "title": "Legacy VB6 code lacks proper error handling and input validation",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Legacy VB6 code lacks proper error handling and input validation",
+      "detection": {},
+      "enforcement": {},
+      "examples": [],
+      "counterexamples": [
+        {
+          "file": "txtAccountNo.Text direct concatenation"
+        },
+        {
+          "file": "txtAmount.Text direct concatenation"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "legacy_code"
+        }
+      ],
+      "confidence": {
+        "score": 0.95,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "title": "Dedicated tester agent module suggests automated testing integration",
+      "scope": {
+        "languages": [],
+        "file_globs": [],
+        "scm_node_ids": [],
+        "applies_to": "all"
+      },
+      "statement": "Dedicated tester agent module suggests automated testing integration",
+      "detection": {},
+      "enforcement": {},
+      "examples": [
+        {
+          "file": "agents/tester.py"
+        }
+      ],
+      "counterexamples": [],
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "agents/tester.py"
+        }
+      ],
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from convention extraction",
+        "signals": []
+      },
+      "exceptions": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "language": "generic",
+      "name": "C# Web API controller template for banking operations",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-002",
+      "language": "generic",
+      "name": "Entity Framework model template for Customer/Account entities",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-003",
+      "language": "generic",
+      "name": "React/Angular component template for balance check UI",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-004",
+      "language": "generic",
+      "name": "SQL migration scripts for VB6-to-modern schema conversion",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    },
+    {
+      "id": "TPL-005",
+      "language": "generic",
+      "name": "Docker compose template for multi-service deployment",
+      "description": "generated scaffold template",
+      "file_path_template": "",
+      "parameters": [],
+      "content_snippet": ""
+    }
+  ],
+  "overrides": []
+}
