@@ -1,0 +1,126 @@
+[
+  {
+    "id": "rb-001",
+    "title": "Eliminate SQL Injection Vulnerabilities",
+    "problem_statement": "Legacy VB6 code uses string concatenation for SQL queries, creating critical security vulnerabilities that must be resolved before modernization",
+    "scope": [
+      "legacy_vb6_database_access",
+      "cmdCheckBalance_Click",
+      "cmdDeposit_Click"
+    ],
+    "risk_if_unaddressed": "Complete database compromise, unauthorized balance modifications, regulatory violations, potential financial fraud",
+    "effort": "M",
+    "severity": "critical",
+    "dependencies": [],
+    "suggested_approach": "Replace string concatenation with parameterized queries using Entity Framework or Dapper in C# implementation. Implement input validation and sanitization.",
+    "success_criteria": [
+      "All SQL queries use parameterized statements",
+      "Static analysis confirms no string concatenation in database queries",
+      "Penetration testing validates SQL injection prevention"
+    ],
+    "confidence": 0.95,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 2,
+        "evidence": "txtAccountNo.Text directly concatenated into SQL WHERE clause"
+      },
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "txtAmount.Text directly concatenated into SQL UPDATE statement"
+      }
+    ]
+  },
+  {
+    "id": "rb-002",
+    "title": "Implement Banking Transaction Controls",
+    "problem_statement": "Legacy code lacks transaction boundaries, concurrency control, and audit trails required for banking operations",
+    "scope": [
+      "balance_operations",
+      "deposit_workflow",
+      "data_integrity"
+    ],
+    "risk_if_unaddressed": "Race conditions in balance updates, lost transactions, regulatory compliance failures, inability to audit financial operations",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "Implement database transactions with proper isolation levels, add optimistic concurrency control, create comprehensive audit logging for all balance changes",
+    "success_criteria": [
+      "All balance operations wrapped in database transactions",
+      "Concurrent deposit/withdrawal operations handled correctly",
+      "Complete audit trail for all financial operations",
+      "Compliance with banking regulatory requirements"
+    ],
+    "confidence": 0.9,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 6,
+        "evidence": "UPDATE statement lacks transaction boundaries and concurrency control"
+      }
+    ]
+  },
+  {
+    "id": "rb-003",
+    "title": "Design Data Migration Strategy",
+    "problem_statement": "No clear path defined for migrating from VB6 ADO Recordset patterns to modern C# data access while preserving exact behavioral compatibility",
+    "scope": [
+      "data_access_layer",
+      "vb6_to_csharp_migration",
+      "behavior_preservation"
+    ],
+    "risk_if_unaddressed": "Data loss during migration, behavioral regressions, extended downtime, inability to rollback if issues occur",
+    "effort": "XL",
+    "severity": "high",
+    "dependencies": [
+      "rb-001"
+    ],
+    "suggested_approach": "Create comprehensive mapping between VB6 ADO patterns and C# Entity Framework, implement side-by-side testing, develop rollback procedures",
+    "success_criteria": [
+      "100% functional parity between VB6 and C# implementations",
+      "Zero data loss during migration",
+      "Rollback capability within 4 hours",
+      "Performance benchmarks meet or exceed legacy system"
+    ],
+    "confidence": 0.8,
+    "provenance": [
+      {
+        "file": "legacy_code_sample",
+        "line": 1,
+        "evidence": "VB6 Recordset.Open pattern requires complete architectural change"
+      }
+    ]
+  },
+  {
+    "id": "rb-004",
+    "title": "Implement Authentication and Authorization",
+    "problem_statement": "No authentication or authorization mechanisms visible in current system, critical for banking application security",
+    "scope": [
+      "security_layer",
+      "user_management",
+      "access_control"
+    ],
+    "risk_if_unaddressed": "Unauthorized access to banking functions, regulatory compliance violations, potential financial fraud",
+    "effort": "L",
+    "severity": "high",
+    "dependencies": [],
+    "suggested_approach": "Implement OAuth2/OpenID Connect with role-based access control, integrate with existing bank identity systems, add session management",
+    "success_criteria": [
+      "Multi-factor authentication for all users",
+      "Role-based access control for banking operations",
+      "Session timeout and security controls",
+      "Integration with bank's identity management system"
+    ],
+    "confidence": 0.7,
+    "provenance": [
+      {
+        "file": "repository_scan",
+        "line": 1,
+        "evidence": "No authentication modules detected in 304 scanned files"
+      }
+    ]
+  }
+]
