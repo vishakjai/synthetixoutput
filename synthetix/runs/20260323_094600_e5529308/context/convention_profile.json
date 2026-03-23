@@ -1,0 +1,99 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Python-based multi-agent system following modular architecture with FastAPI services, JSON schema validation, and Docker containerization patterns.",
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "rule": "Agent modules use snake_case naming with descriptive suffixes (e.g., _agent, _engineer)",
+      "confidence": 0.9,
+      "examples": [
+        "analyst.py",
+        "database_engineer.py",
+        "security_engineer.py"
+      ],
+      "counterexamples": [
+        "AnalystAgent.py",
+        "dbEngineer.py"
+      ],
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Consistent snake_case naming across agent modules"
+        }
+      ]
+    },
+    {
+      "id": "api-001",
+      "category": "api",
+      "rule": "FastAPI decorators used for HTTP endpoint definition with explicit HTTP methods",
+      "confidence": 0.85,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [
+        "app.route("
+      ],
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get( endpoint pattern"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "Legacy VB6 code uses string concatenation for SQL queries creating injection vulnerabilities",
+      "confidence": 0.95,
+      "examples": [
+        "\"SELECT Balance FROM tblCustomers WHERE AccountNo='\" & txtAccountNo.Text & \"'\""
+      ],
+      "counterexamples": [
+        "Parameterized queries",
+        "Prepared statements"
+      ],
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 2,
+          "evidence": "String concatenation in SQL query construction"
+        }
+      ]
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "rule": "JSON schema validation used for data contract enforcement",
+      "confidence": 0.8,
+      "examples": [
+        ".deliveryos/schemas/*.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/agent_result.schema.json",
+          "line": 1,
+          "evidence": "Comprehensive JSON schema definitions for validation"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement parameterized queries to prevent SQL injection in legacy code modernization",
+    "Add type hints to Python modules for better maintainability",
+    "Implement comprehensive error handling for banking operations",
+    "Add input validation for financial transaction amounts",
+    "Implement logging for audit trails in banking operations"
+  ],
+  "scaffold_templates": [
+    "FastAPI service template with security middleware",
+    "Agent base class template with standardized interfaces",
+    "Database connection template with parameterized queries",
+    "Docker containerization template for microservices",
+    "JSON schema template for API contract validation"
+  ]
+}
