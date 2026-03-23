@@ -1,0 +1,113 @@
+@page "/ui/frmreport"
+@model ReportingService.Pages.Frmreport.IndexModel
+@{
+    ViewData["Title"] = "Operational reporting and statement generation workflow";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Operational reporting and statement generation workflow">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmreport</p>
+        <h1>Operational reporting and statement generation workflow</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmreport</code>.</p>
+    </header>
+    
+    <form method="post">
+        <div class="ui-scaffold-field" data-field-id="dtpfromdate">
+        <label for="dtpfromdate">From Date</label>
+        <input type="date" id="dtpfromdate" name="dtpfromdate" placeholder="Optional from date" value="@Model.State.GetValueOrDefault("dtpfromdate", string.Empty)" />
+            @if (Model.Errors.ContainsKey("dtpfromdate"))
+            {
+                <span data-error-for="dtpfromdate">@Model.Errors["dtpfromdate"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="dtptodate">
+        <label for="dtptodate">To Date</label>
+        <input type="date" id="dtptodate" name="dtptodate" placeholder="Optional to date" value="@Model.State.GetValueOrDefault("dtptodate", string.Empty)" />
+            @if (Model.Errors.ContainsKey("dtptodate"))
+            {
+                <span data-error-for="dtptodate">@Model.Errors["dtptodate"]</span>
+            }
+            
+        </div>
+        <fieldset class="ui-scaffold-group" data-field-id="frareport">
+            <legend>Rep Ort</legend>
+        </fieldset>
+        <fieldset class="ui-scaffold-group" data-field-id="frasearch">
+            <legend>Search</legend>
+        </fieldset>
+        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcustomerid">
+            <label for="lblcustomerid">Customer ID</label>
+            <output id="lblcustomerid" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcustomerid", "—")</output>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtbalance">
+        <label for="txtbalance">Balance</label>
+        <input type="number" id="txtbalance" name="txtbalance" placeholder="Optional balance" value="@Model.State.GetValueOrDefault("txtbalance", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtbalance"))
+            {
+                <span data-error-for="txtbalance">@Model.Errors["txtbalance"]</span>
+            }
+            <p class="ui-scaffold-hint">Enter digits only.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtfirstname">
+        <label for="txtfirstname">First Name</label>
+        <input type="text" id="txtfirstname" name="txtfirstname" placeholder="Enter first name" value="@Model.State.GetValueOrDefault("txtfirstname", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtfirstname"))
+            {
+                <span data-error-for="txtfirstname">@Model.Errors["txtfirstname"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtlastname">
+        <label for="txtlastname">Last Name</label>
+        <input type="text" id="txtlastname" name="txtlastname" placeholder="Enter last name" value="@Model.State.GetValueOrDefault("txtlastname", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtlastname"))
+            {
+                <span data-error-for="txtlastname">@Model.Errors["txtlastname"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtaccount">
+        <label for="txtaccount">Account</label>
+        <input type="number" id="txtaccount" name="txtaccount" placeholder="Enter account" value="@Model.State.GetValueOrDefault("txtaccount", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtaccount"))
+            {
+                <span data-error-for="txtaccount">@Model.Errors["txtaccount"]</span>
+            }
+            <p class="ui-scaffold-hint">Enter digits only.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtaccountno">
+        <label for="txtaccountno">Account No</label>
+        <input type="number" id="txtaccountno" name="txtaccountno" placeholder="Enter account no" value="@Model.State.GetValueOrDefault("txtaccountno", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtaccountno"))
+            {
+                <span data-error-for="txtaccountno">@Model.Errors["txtaccountno"]</span>
+            }
+            <p class="ui-scaffold-hint">Enter digits only.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txtcustomerid">
+        <label for="txtcustomerid">Customer ID</label>
+        <input type="number" id="txtcustomerid" name="txtcustomerid" placeholder="Enter customer id" value="@Model.State.GetValueOrDefault("txtcustomerid", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txtcustomerid"))
+            {
+                <span data-error-for="txtcustomerid">@Model.Errors["txtcustomerid"]</span>
+            }
+            <p class="ui-scaffold-hint">Enter digits only.</p>
+        </div>
+        <div class="ui-scaffold-field" data-field-id="txttypeofaccount">
+        <label for="txttypeofaccount">Type Of Account</label>
+        <input type="number" id="txttypeofaccount" name="txttypeofaccount" placeholder="Enter type of account" value="@Model.State.GetValueOrDefault("txttypeofaccount", string.Empty)" />
+            @if (Model.Errors.ContainsKey("txttypeofaccount"))
+            {
+                <span data-error-for="txttypeofaccount">@Model.Errors["txttypeofaccount"]</span>
+            }
+            <p class="ui-scaffold-hint">Enter digits only.</p>
+        </div>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
+    </form>
+</main>
