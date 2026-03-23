@@ -1,0 +1,43 @@
+@page "/ui/frmwithindate"
+@model ReportingService.Pages.FrmWithinDate.IndexModel
+@{
+    ViewData["Title"] = "Business workflow executed through event-driven UI controls";
+}
+<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell" aria-label="Business workflow executed through event-driven UI controls">
+    <header class="screen-header">
+        <p class="meta-chip">Contract: frmWithinDate</p>
+        <h1>Business workflow executed through event-driven UI controls</h1>
+        <p>Behavioral scaffold derived from Screen Contract <code>frmWithinDate</code>.</p>
+    </header>
+    
+    <form method="post">
+        <div class="ui-scaffold-field" data-field-id="dtfrom">
+        <label for="dtfrom">Dtfrom</label>
+        <input type="text" id="dtfrom" name="dtfrom" placeholder="Optional dtfrom" value="@Model.State.GetValueOrDefault("dtfrom", string.Empty)" />
+            @if (Model.Errors.ContainsKey("dtfrom"))
+            {
+                <span data-error-for="dtfrom">@Model.Errors["dtfrom"]</span>
+            }
+            
+        </div>
+        <div class="ui-scaffold-field" data-field-id="dtto">
+        <label for="dtto">Dtto</label>
+        <input type="text" id="dtto" name="dtto" placeholder="Optional dtto" value="@Model.State.GetValueOrDefault("dtto", string.Empty)" />
+            @if (Model.Errors.ContainsKey("dtto"))
+            {
+                <span data-error-for="dtto">@Model.Errors["dtto"]</span>
+            }
+            
+        </div>
+        <fieldset class="ui-scaffold-group" data-field-id="frawithindate">
+            <legend>Wit Hin Date</legend>
+        </fieldset>
+        <nav class="action-bar" aria-label="Screen actions">
+        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        </nav>
+    </form>
+</main>
