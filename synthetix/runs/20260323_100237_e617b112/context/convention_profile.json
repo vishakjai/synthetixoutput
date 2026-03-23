@@ -1,0 +1,110 @@
+{
+  "version": "cp-v1.0",
+  "summary": "Python-based enterprise platform following FastAPI patterns with agent-based architecture. Strong emphasis on schema validation, JSON contracts, and Docker containerization.",
+  "rules": [
+    {
+      "id": "naming-001",
+      "category": "naming",
+      "rule": "Agent modules use descriptive names with underscores (analyst.py, database_engineer.py)",
+      "confidence": 0.9,
+      "examples": [
+        "agents/analyst.py",
+        "agents/database_engineer.py",
+        "agents/security_engineer.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Consistent agent module naming pattern"
+        }
+      ]
+    },
+    {
+      "id": "api-001",
+      "category": "api",
+      "rule": "FastAPI decorators used for HTTP endpoint definition (@app.get, @app.post)",
+      "confidence": 0.85,
+      "examples": [
+        "@app.get(",
+        "@app.post("
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get and @app.post decorators detected"
+        }
+      ]
+    },
+    {
+      "id": "security-001",
+      "category": "security",
+      "rule": "JSON schema validation enforced for agent contracts and API responses",
+      "confidence": 0.8,
+      "examples": [
+        ".deliveryos/schemas/agent_result.schema.json",
+        ".deliveryos/schemas/context_bundle.schema.json"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": ".deliveryos/schemas/",
+          "line": 1,
+          "evidence": "Comprehensive JSON schema definitions for validation"
+        }
+      ]
+    },
+    {
+      "id": "error_handling-001",
+      "category": "error_handling",
+      "rule": "Legacy VB6 code lacks proper error handling and input validation",
+      "confidence": 0.95,
+      "examples": [],
+      "counterexamples": [
+        "txtAccountNo.Text direct concatenation",
+        "txtAmount.Text direct concatenation"
+      ],
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 2,
+          "evidence": "Direct string concatenation without validation or parameterization"
+        }
+      ]
+    },
+    {
+      "id": "testing-001",
+      "category": "testing",
+      "rule": "Dedicated tester agent module suggests automated testing integration",
+      "confidence": 0.7,
+      "examples": [
+        "agents/tester.py"
+      ],
+      "counterexamples": [],
+      "provenance": [
+        {
+          "file": "agents/tester.py",
+          "line": 1,
+          "evidence": "Specialized testing agent module present"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Implement SQL parameterization for legacy VB6 database queries",
+    "Add input validation for txtAccountNo and txtAmount fields",
+    "Enforce JSON schema validation in all agent communication",
+    "Add comprehensive error handling for database connection failures",
+    "Implement logging standards across all agent modules"
+  ],
+  "scaffold_templates": [
+    "C# Web API controller template for banking operations",
+    "Entity Framework model template for Customer/Account entities",
+    "React/Angular component template for balance check UI",
+    "SQL migration scripts for VB6-to-modern schema conversion",
+    "Docker compose template for multi-service deployment"
+  ]
+}
