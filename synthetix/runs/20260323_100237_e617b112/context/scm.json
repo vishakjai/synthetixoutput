@@ -1,0 +1,235 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Multi-agent enterprise modernization platform with Python-based agent orchestration, FastAPI web services, and Docker containerization. System includes specialized agents for VB6-to-C# modernization workflows with banking domain focus.",
+  "nodes": [
+    {
+      "id": "service:modernization-platform",
+      "type": "Service",
+      "name": "Enterprise Modernization Platform",
+      "metadata": {
+        "language": "python",
+        "framework": "fastapi",
+        "containerized": true
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "FastAPI application with agent orchestration"
+        },
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Container configuration present"
+        }
+      ]
+    },
+    {
+      "id": "component:agent-orchestrator",
+      "type": "Component",
+      "name": "Agent Orchestration Layer",
+      "metadata": {
+        "agent_count": 14,
+        "specializations": [
+          "analyst",
+          "architect",
+          "developer",
+          "security",
+          "database"
+        ]
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Agent module imports and orchestration"
+        }
+      ]
+    },
+    {
+      "id": "module:vb6-modernization-agent",
+      "type": "Module",
+      "name": "VB6 Modernization Specialist",
+      "metadata": {
+        "target_language": "csharp",
+        "domain": "banking",
+        "legacy_patterns": [
+          "forms",
+          "controls",
+          "ado_recordsets"
+        ]
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "VB6 UI/Forms specialist routing configuration"
+        }
+      ]
+    },
+    {
+      "id": "endpoint:context-vault",
+      "type": "Endpoint",
+      "name": "Context Vault API",
+      "metadata": {
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "purpose": "artifact_storage"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get and @app.post decorators detected"
+        }
+      ]
+    },
+    {
+      "id": "database:legacy-vb6-data",
+      "type": "Database",
+      "name": "Legacy VB6 Banking Database",
+      "metadata": {
+        "tables": [
+          "tblCustomers"
+        ],
+        "access_pattern": "ado_recordset",
+        "sql_injection_risk": true
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 2,
+          "evidence": "SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text"
+        }
+      ]
+    },
+    {
+      "id": "table:tblCustomers",
+      "type": "Table",
+      "name": "Customer Account Table",
+      "metadata": {
+        "columns": [
+          "AccountNo",
+          "Balance"
+        ],
+        "operations": [
+          "SELECT",
+          "UPDATE"
+        ]
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "legacy_code",
+          "line": 2,
+          "evidence": "SELECT Balance FROM tblCustomers"
+        },
+        {
+          "file": "legacy_code",
+          "line": 6,
+          "evidence": "UPDATE tblCustomers SET Balance"
+        }
+      ]
+    },
+    {
+      "id": "external:docker-registry",
+      "type": "ExternalDependency",
+      "name": "Docker Container Registry",
+      "metadata": {
+        "deployment_target": true
+      },
+      "confidence": 0.7,
+      "provenance": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker compose configuration present"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "component:agent-orchestrator",
+      "to": "module:vb6-modernization-agent",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "import_type": "python_module"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "from .analyst import *"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "database:legacy-vb6-data",
+      "to": "table:tblCustomers",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "sql_pattern": "SELECT Balance FROM tblCustomers WHERE AccountNo"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "legacy_code",
+          "line": 2,
+          "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo=\" & txtAccountNo.Text"
+        }
+      ]
+    },
+    {
+      "type": "WRITES_TABLE",
+      "from": "database:legacy-vb6-data",
+      "to": "table:tblCustomers",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "sql_pattern": "UPDATE tblCustomers SET Balance = Balance +"
+      },
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "legacy_code",
+          "line": 6,
+          "evidence": "conn.Execute \"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:modernization-platform",
+      "to": "external:docker-registry",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "container_runtime": "docker"
+      },
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "FROM python:3.11-slim"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Target database schema for C# modernization",
+    "Authentication/authorization patterns in legacy VB6 code",
+    "Complete VB6 form structure and event handlers",
+    "Production deployment infrastructure requirements",
+    "Data migration strategy from legacy to modern schema"
+  ]
+}
