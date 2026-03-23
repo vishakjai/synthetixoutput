@@ -1,0 +1,82 @@
+{
+  "version": "ha-v1.0",
+  "summary": "Modernization platform shows good architectural separation but faces critical security risks from legacy VB6 SQL injection patterns. High complexity with 1088 import edges requires careful dependency management during modernization.",
+  "scores": {
+    "maintainability": 7,
+    "security": 3,
+    "reliability": 6,
+    "testability": 8
+  },
+  "hotspots": [
+    {
+      "scope": "Legacy VB6 SQL Operations",
+      "reason": "Direct SQL concatenation with user input creates SQL injection vulnerabilities",
+      "severity": "high",
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 1,
+          "evidence": "rs.Open \"SELECT Balance FROM tblCustomers WHERE AccountNo='\" & txtAccountNo.Text & \"'\""
+        },
+        {
+          "file": "legacy_code_sample",
+          "line": 4,
+          "evidence": "conn.Execute \"UPDATE tblCustomers SET Balance = Balance + \" & txtAmount.Text & \" WHERE AccountNo='\" & txtAccountNo.Text & \"'\""
+        }
+      ]
+    },
+    {
+      "scope": "Import Dependency Complexity",
+      "reason": "1088 import edges across 197 modules creates high coupling and potential circular dependencies",
+      "severity": "medium",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "static_analysis",
+          "line": 1,
+          "evidence": "import_edges=1088 across modules_analyzed=197"
+        }
+      ]
+    },
+    {
+      "scope": "Agent Module Coupling",
+      "reason": "High import count in analyst agent (25 imports) suggests potential over-coupling",
+      "severity": "medium",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "import_count=25 significantly higher than other agents"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection in Legacy VB6 Code",
+      "description": "Legacy VB6 code uses direct string concatenation for SQL queries, creating critical injection vulnerabilities that must be addressed in C# modernization",
+      "severity": "critical",
+      "confidence": 1.0
+    },
+    {
+      "title": "Undefined Database Migration Strategy",
+      "description": "No clear database conversion context specified, creating risk of data loss or corruption during modernization",
+      "severity": "high",
+      "confidence": 0.9
+    },
+    {
+      "title": "Missing Authentication Framework",
+      "description": "No authentication or authorization patterns detected in current system, critical for banking application security",
+      "severity": "high",
+      "confidence": 0.8
+    },
+    {
+      "title": "Complex Module Dependencies",
+      "description": "High import coupling (1088 edges) may create deployment and testing challenges during modernization",
+      "severity": "medium",
+      "confidence": 0.9
+    }
+  ]
+}
