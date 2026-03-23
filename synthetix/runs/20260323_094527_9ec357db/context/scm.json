@@ -1,0 +1,272 @@
+{
+  "version": "scm-v1.0",
+  "summary": "Multi-agent software modernization platform with Python-based agent orchestration, FastAPI web services, and Docker containerization. Repository contains 304 files with 180 Python modules implementing specialized agents for code analysis, architecture planning, and deployment automation.",
+  "nodes": [
+    {
+      "id": "service:web-server",
+      "type": "Service",
+      "name": "Web Server",
+      "metadata": {
+        "framework": "FastAPI",
+        "port": "unknown",
+        "language": "python"
+      },
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get( endpoint pattern detected"
+        }
+      ]
+    },
+    {
+      "id": "service:context-vault",
+      "type": "Service",
+      "name": "Context Vault API",
+      "metadata": {
+        "framework": "FastAPI",
+        "purpose": "context_storage",
+        "language": "python"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get( and @app.post( endpoints detected"
+        }
+      ]
+    },
+    {
+      "id": "module:analyst-agent",
+      "type": "Module",
+      "name": "Analyst Agent",
+      "metadata": {
+        "agent_type": "analyst",
+        "imports": 25,
+        "specialization": "code_analysis"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/analyst.py",
+          "line": 1,
+          "evidence": "Module with 25 imports for code analysis functionality"
+        }
+      ]
+    },
+    {
+      "id": "module:architect-agent",
+      "type": "Module",
+      "name": "Architect Agent",
+      "metadata": {
+        "agent_type": "architect",
+        "imports": 9,
+        "specialization": "system_design"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/architect.py",
+          "line": 1,
+          "evidence": "Module with 9 imports for system architecture"
+        }
+      ]
+    },
+    {
+      "id": "module:developer-agent",
+      "type": "Module",
+      "name": "Developer Agent",
+      "metadata": {
+        "agent_type": "developer",
+        "imports": 14,
+        "specialization": "code_generation"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/developer.py",
+          "line": 1,
+          "evidence": "Module with 14 imports for code development"
+        }
+      ]
+    },
+    {
+      "id": "module:security-engineer",
+      "type": "Module",
+      "name": "Security Engineer Agent",
+      "metadata": {
+        "agent_type": "security",
+        "imports": 4,
+        "specialization": "security_analysis"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/security_engineer.py",
+          "line": 1,
+          "evidence": "Module with 4 imports for security engineering"
+        }
+      ]
+    },
+    {
+      "id": "module:database-engineer",
+      "type": "Module",
+      "name": "Database Engineer Agent",
+      "metadata": {
+        "agent_type": "database",
+        "imports": 4,
+        "specialization": "database_design"
+      },
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "agents/database_engineer.py",
+          "line": 1,
+          "evidence": "Module with 4 imports for database engineering"
+        }
+      ]
+    },
+    {
+      "id": "container:app",
+      "type": "Container",
+      "name": "Application Container",
+      "metadata": {
+        "containerization": "docker",
+        "base_image": "unknown"
+      },
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "Dockerfile",
+          "line": 1,
+          "evidence": "Dockerfile present in repository root"
+        }
+      ]
+    },
+    {
+      "id": "database:team-data",
+      "type": "Database",
+      "name": "Team Data Storage",
+      "metadata": {
+        "type": "json_files",
+        "location": "team_data/"
+      },
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "team_data/work_items.json",
+          "line": 1,
+          "evidence": "JSON data files for team configuration"
+        }
+      ]
+    },
+    {
+      "id": "external:vb6-legacy",
+      "type": "ExternalDependency",
+      "name": "VB6 Legacy System",
+      "metadata": {
+        "language": "vb6",
+        "modernization_target": "csharp",
+        "sql_injection_risk": "high"
+      },
+      "confidence": 1.0,
+      "provenance": [
+        {
+          "file": "legacy_code_sample",
+          "line": 1,
+          "evidence": "VB6 code with SQL injection vulnerabilities provided"
+        }
+      ]
+    },
+    {
+      "id": "module:base",
+      "type": "Component",
+      "name": "base",
+      "metadata": {
+        "inferred": true,
+        "inferred_from_edge": true
+      },
+      "confidence": 0.45,
+      "provenance": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "inferred node from edge endpoint `module:base`"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "module:analyst-agent",
+      "to": "module:base",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 1,
+          "evidence": "Import relationship from agents init"
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "module:architect-agent",
+      "to": "module:base",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "file": "agents/__init__.py",
+          "line": 3,
+          "evidence": "Import relationship from agents init"
+        }
+      ]
+    },
+    {
+      "type": "RUNS_ON",
+      "from": "service:web-server",
+      "to": "container:app",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "docker-compose.yml",
+          "line": 1,
+          "evidence": "Docker compose configuration present"
+        }
+      ]
+    },
+    {
+      "type": "DEPENDS_ON",
+      "from": "module:analyst-agent",
+      "to": "external:vb6-legacy",
+      "directionality": "directed",
+      "protocol_metadata": {
+        "modernization_context": "vb6_to_csharp"
+      },
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "constitution",
+          "line": 1,
+          "evidence": "VB6 UI/Forms specialist routing configured"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database connection strings and credentials storage mechanism",
+    "Authentication and authorization implementation",
+    "Production deployment configuration",
+    "VB6 legacy system integration points",
+    "Data migration strategy from legacy to modern system"
+  ]
+}
