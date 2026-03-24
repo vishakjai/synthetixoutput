@@ -1,31 +1,20 @@
 # ReportingService
 
-Deterministic UI scaffold slice generated from Screen Contracts.
+UI Developer output generated from Screen Contracts and prebuilt UI scaffolds.
 
-## Scope
-- Structural UI scaffolds only
-- Validation wiring
-- Event wiring
-- Navigation wiring
-- Accessibility baseline
-- Contract-conformance test hooks
+## Included behavior
+- screen state and event handlers
+- richer validation and status messaging
+- event target registry and navigation outcomes
+- section-aware page composition
+- contract-backed UI tests
 
 ## Out of scope
-- Client-specific visual design decisions
-- Brand customization beyond the shared Synthetix stylesheet
-- Pixel-perfect layout work or wireframes
+- visual design system decisions
+- final styling and branding
 
-## Included screens
-- Business workflow executed through event-driven UI controls (/ui/frmwithindate)
-- Business workflow executed through event-driven UI controls (/ui/frmdaily)
-- Operational reporting and statement generation workflow (/ui/frmmonthlyreport)
-- Operational reporting and statement generation workflow (/ui/frmstatement)
-- Business workflow executed through event-driven UI controls (/ui/form1)
-- Business workflow executed through event-driven UI controls (/ui/frmexpireitemswithindate)
-- Operational reporting and statement generation workflow (/ui/frmmonthly)
-- Operational reporting and statement generation workflow (/ui/frmreport)
-- Transaction ledger management and adjustment workflow (/ui/frmtransaction)
-- Transaction ledger management and adjustment workflow (/ui/frmwith)
+## Prebuilt scaffold inputs
+- files inherited from UI Scaffold Agent: 44
 
 ## Run
 ```bash
