@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "The codebase follows basic PHP conventions but lacks modern practices such as dependency injection and error handling.",
+  "rules": [
+    {
+      "id": "rule-1",
+      "category": "naming",
+      "rule": "Use camelCase for variable names.",
+      "confidence": 0.8,
+      "examples": [
+        "$dbConnection"
+      ],
+      "counterexamples": [
+        "$db_connection"
+      ],
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 3,
+          "evidence": "global $db_connection;"
+        }
+      ]
+    },
+    {
+      "id": "rule-2",
+      "category": "error_handling",
+      "rule": "Use try-catch blocks for error handling.",
+      "confidence": 0.7,
+      "examples": [
+        "try { ... } catch (Exception $e) { ... }"
+      ],
+      "counterexamples": [
+        "die();"
+      ],
+      "provenance": [
+        {
+          "file": "Classes/attrs.php",
+          "line": 1,
+          "evidence": "die(); //Ensure no more processing is done"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor to use dependency injection.",
+    "Implement error handling using try-catch blocks."
+  ],
+  "scaffold_templates": [
+    "Node.js Express service template",
+    "Dockerfile for Node.js application"
+  ]
+}
