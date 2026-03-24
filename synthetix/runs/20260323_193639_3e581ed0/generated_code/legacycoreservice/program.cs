@@ -4,6 +4,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
+builder.Services.AddHttpClient();
+builder.Services.AddSingleton<ScreenValidationService>();
+builder.Services.AddSingleton<UiEventExecutionService>();
+builder.Services.AddSingleton<UiEventRegistry>();
+builder.Services.AddSingleton<UiScreenRegistry>();
 
 var app = builder.Build();
 
