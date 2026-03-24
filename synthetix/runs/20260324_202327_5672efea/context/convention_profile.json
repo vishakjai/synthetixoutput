@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "summary": "Conventions for PHP codebase with focus on naming and security.",
+  "rules": [
+    {
+      "id": "rule-1",
+      "category": "naming",
+      "rule": "Use camelCase for variable names.",
+      "confidence": 0.8,
+      "examples": [
+        "$camelCase"
+      ],
+      "counterexamples": [
+        "$snake_case"
+      ],
+      "provenance": [
+        {
+          "file": "Classes/attrs.php",
+          "line": 10,
+          "evidence": "$doc = array();"
+        }
+      ]
+    },
+    {
+      "id": "rule-2",
+      "category": "security",
+      "rule": "Avoid using global variables for database connections.",
+      "confidence": 0.9,
+      "examples": [
+        "use dependency injection"
+      ],
+      "counterexamples": [
+        "global $db_connection"
+      ],
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 2,
+          "evidence": "global $db_connection;"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor global database connections to use dependency injection."
+  ],
+  "scaffold_templates": [
+    "PHP class template with dependency injection."
+  ]
+}
