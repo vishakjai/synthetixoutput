@@ -1,86 +1,162 @@
 @page "/ui/frmsplash"
 @model ExperienceShell.Pages.FrmSplash.IndexModel
 @{
-    ViewData["Title"] = "Application startup and splash workflow";
+    var descriptor = Model.Descriptor;
 }
-<!-- UI_SCAFFOLD: Visual design intentionally out of scope. -->
+<!-- UI_SCAFFOLD -->
 <head>
     <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
 </head>
-<main class="screen-shell" aria-label="Application startup and splash workflow">
+<main class="screen-shell" aria-label="@descriptor.ScreenName">
     <header class="screen-header">
-        <p class="meta-chip">Contract: frmSplash</p>
-        <h1>Application startup and splash workflow</h1>
-        <p>Behavioral scaffold derived from Screen Contract <code>frmSplash</code>.</p>
+        <p class="meta-chip">Contract: @descriptor.ScreenId</p>
+        <h1>@descriptor.ScreenName</h1>
+        <p>@descriptor.Description</p>
+        <div class="screen-meta">
+            <span class="meta-chip">Route @descriptor.DefaultRoute</span>
+            <span class="meta-chip">Fidelity @descriptor.FidelityLevel (@descriptor.FidelityScore.ToString("0.00"))</span>
+            <span class="meta-chip">@descriptor.Actions.Count action(s)</span>
+        </div>
     </header>
-    
+    @if (Model.Errors.Count > 0)
+    {
+        <section class="validation-summary" aria-live="polite">
+            <strong>Validation summary</strong>
+            <ul>
+            @foreach (var error in Model.Errors)
+            {
+                <li><strong>@error.Key</strong>: @error.Value</li>
+            }
+            </ul>
+        </section>
+    }
+    @if (!string.IsNullOrWhiteSpace(Model.FormMessage))
+    {
+        <section class="status-panel @(Model.FormStatus == "success" ? "status-panel-success" : "status-panel-error")" aria-live="polite">
+            <strong>@Model.FormMessage</strong>
+            @if (Model.ExecutedTargets.Count > 0)
+            {
+                <ul class="executed-targets">
+                @foreach (var target in Model.ExecutedTargets)
+                {
+                    <li>@target</li>
+                }
+                </ul>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.NavigationTarget))
+            {
+                <p>Navigation target: <code>@Model.NavigationTarget</code></p>
+            }
+        </section>
+    }
+    @if (descriptor.Fields.Values.Any(field => field.RenderKind == "nav"))
+    {
+        <nav class="ui-scaffold-navigation" aria-label="Legacy navigation menu">
+        @foreach (var navField in descriptor.Fields.Values.Where(field => field.RenderKind == "nav").OrderBy(field => field.TabOrder))
+        {
+            <a class="ui-scaffold-nav-link" href="@navField.NavigationTarget">@navField.Label</a>
+        }
+        </nav>
+    }
+    @if (descriptor.Sections.Any(section => section.FieldIds.Any(fieldId => descriptor.Fields[fieldId].RenderKind != "nav")) || descriptor.Actions.Count > 0)
+    {
     <form method="post">
-        <div class="ui-scaffold-field" data-field-id="progressbar">
-        <label for="progressbar">Progress Bar</label>
-        <input type="text" id="progressbar" name="progressbar" placeholder="Optional progress bar" value="@Model.State.GetValueOrDefault("progressbar", string.Empty)" />
-            @if (Model.Errors.ContainsKey("progressbar"))
-            {
-                <span data-error-for="progressbar">@Model.Errors["progressbar"]</span>
-            }
-            
-        </div>
-        <div class="ui-scaffold-field" data-field-id="progressbar1">
-        <label for="progressbar1">Progress Bar1</label>
-        <input type="text" id="progressbar1" name="progressbar1" placeholder="Optional progress bar1" value="@Model.State.GetValueOrDefault("progressbar1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("progressbar1"))
-            {
-                <span data-error-for="progressbar1">@Model.Errors["progressbar1"]</span>
-            }
-            
-        </div>
-        <fieldset class="ui-scaffold-group" data-field-id="frasplash">
-            <legend>Spl Ash</legend>
-        </fieldset>
-        <div class="ui-scaffold-field" data-field-id="image1">
-        <label for="image1">Image1</label>
-        <input type="text" id="image1" name="image1" placeholder="Optional image1" value="@Model.State.GetValueOrDefault("image1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("image1"))
-            {
-                <span data-error-for="image1">@Model.Errors["image1"]</span>
-            }
-            
-        </div>
-        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcompany">
-            <label for="lblcompany">Company</label>
-            <output id="lblcompany" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcompany", "—")</output>
-        </div>
-        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcompanyproduct">
-            <label for="lblcompanyproduct">Company Product</label>
-            <output id="lblcompanyproduct" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcompanyproduct", "—")</output>
-        </div>
-        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblcopyright">
-            <label for="lblcopyright">Copyright</label>
-            <output id="lblcopyright" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblcopyright", "—")</output>
-        </div>
-        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbllicenseto">
-            <label for="lbllicenseto">License To</label>
-            <output id="lbllicenseto" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbllicenseto", "—")</output>
-        </div>
-        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lblwarning">
-            <label for="lblwarning">Warning</label>
-            <output id="lblwarning" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lblwarning", "—")</output>
-        </div>
-        <div class="ui-scaffold-field ui-scaffold-display" data-field-id="lbldisplay">
-            <label for="lbldisplay">Dis P Lay</label>
-            <output id="lbldisplay" aria-live="polite">@Model.DisplayValues.GetValueOrDefault("lbldisplay", "—")</output>
-        </div>
-        <div class="ui-scaffold-field" data-field-id="timer1">
-        <label for="timer1">Timer1</label>
-        <input type="text" id="timer1" name="timer1" placeholder="Optional timer1" value="@Model.State.GetValueOrDefault("timer1", string.Empty)" />
-            @if (Model.Errors.ContainsKey("timer1"))
-            {
-                <span data-error-for="timer1">@Model.Errors["timer1"]</span>
-            }
-            
-        </div>
+        @foreach (var sectionItem in descriptor.Sections)
+        {
+            var renderedRadioGroups = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            <section class="screen-section" aria-labelledby="@(sectionItem.Id + "_heading")">
+                <h2 id="@(sectionItem.Id + "_heading")">@sectionItem.Label</h2>
+                <div class="field-grid">
+                @foreach (var fieldId in sectionItem.FieldIds)
+                {
+                    var field = descriptor.Fields[fieldId];
+                    if (field.RenderKind == "nav")
+                    {
+                        continue;
+                    }
+                    if (field.RenderKind == "radio" && !renderedRadioGroups.Add(field.RadioGroupName))
+                    {
+                        continue;
+                    }
+                    <div class="field-card @(field.RenderKind == "display" ? "field-card-display" : field.RenderKind == "fieldset" ? "field-card-annotation" : string.Empty)" data-field-id="@field.FieldId">
+                        @if (field.RenderKind == "fieldset")
+                        {
+                            <fieldset class="ui-scaffold-group">
+                                <legend>@field.Label</legend>
+                            </fieldset>
+                        }
+                        else if (field.RenderKind == "display")
+                        {
+                            <label for="@field.FieldId">@field.Label</label>
+                            <output id="@field.FieldId" aria-live="polite">@Model.GetDisplayValue(field.FieldId)</output>
+                        }
+                        else if (field.RenderKind == "textarea")
+                        {
+                            <label for="@field.FieldId">@field.Label @if (field.Required) { <span aria-hidden="true">*</span> }</label>
+                            <textarea id="@field.FieldId" name="@field.BindingName" rows="4" placeholder="@field.Placeholder" aria-describedby="@(field.FieldId + "_help")">@Model.GetValue(field.BindingName)</textarea>
+                        }
+                        else if (field.RenderKind == "select")
+                        {
+                            <label for="@field.FieldId">@field.Label @if (field.Required) { <span aria-hidden="true">*</span> }</label>
+                            <select id="@field.FieldId" name="@field.BindingName" aria-describedby="@(field.FieldId + "_help")">
+                                @foreach (var option in field.Options)
+                                {
+                                    <option value="@option" selected="@(string.Equals(Model.GetValue(field.BindingName), option, StringComparison.OrdinalIgnoreCase) ? "selected" : null)">@option</option>
+                                }
+                            </select>
+                        }
+                        else if (field.RenderKind == "radio")
+                        {
+                            var groupedFields = sectionItem.FieldIds
+                                .Select(candidateId => descriptor.Fields[candidateId])
+                                .Where(candidate => candidate.RenderKind == "radio" && string.Equals(candidate.RadioGroupName, field.RadioGroupName, StringComparison.OrdinalIgnoreCase))
+                                .OrderBy(candidate => candidate.TabOrder)
+                                .ToList();
+                            <fieldset class="ui-scaffold-choice">
+                                <legend>@field.RadioGroupLabel</legend>
+                                @foreach (var optionField in groupedFields)
+                                {
+                                    <label class="ui-scaffold-choice-option">
+                                        <input type="radio" id="@(optionField.FieldId + "_" + optionField.OptionValue)" name="@field.BindingName" value="@optionField.OptionValue" checked="@(string.Equals(Model.GetValue(field.BindingName), optionField.OptionValue, StringComparison.OrdinalIgnoreCase) ? "checked" : null)" />
+                                        <span>@optionField.OptionValue</span>
+                                    </label>
+                                }
+                            </fieldset>
+                        }
+                        else if (field.RenderKind == "checkbox")
+                        {
+                            <label>
+                                <input type="checkbox" id="@field.FieldId" name="@field.FieldId" value="true" checked="@(string.Equals(Model.GetValue(field.FieldId), "true", StringComparison.OrdinalIgnoreCase) ? "checked" : null)" />
+                                <span>@field.Label</span>
+                            </label>
+                        }
+                        else
+                        {
+                            <label for="@field.FieldId">@field.Label @if (field.Required) { <span aria-hidden="true">*</span> }</label>
+                            <input type="@field.InputType" inputmode="@field.InputMode" maxlength="@(field.MaxLength?.ToString() ?? string.Empty)" id="@field.FieldId" name="@field.BindingName" value="@Model.GetValue(field.BindingName)" placeholder="@field.Placeholder" aria-describedby="@(field.FieldId + "_help")" />
+                        }
+                        @if (!string.IsNullOrWhiteSpace(field.HelpText) && field.RenderKind != "display" && field.RenderKind != "fieldset" && field.RenderKind != "nav")
+                        {
+                            <p class="field-help" id="@(field.FieldId + "_help")">@field.HelpText</p>
+                        }
+                        @if (Model.Errors.ContainsKey(field.FieldId))
+                        {
+                            <p class="field-error" data-error-for="@field.FieldId">@Model.Errors[field.FieldId]</p>
+                        }
+                    </div>
+                }
+                </div>
+            </section>
+        }
         <nav class="action-bar" aria-label="Screen actions">
-        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtSearch"><span>Search</span><small>GET /experienceshell/splash</small></button>
-        <button class="action-button action-button-secondary" type="submit" formaction="?handler=EvtCancel"><span>Cancel</span><small>previous</small></button>
+        @foreach (var action in descriptor.Actions)
+        {
+            <button class="action-button action-button-@action.Kind" type="submit" formaction="?handler=@Model.HandlerName(action.EventId)">
+                <span>@action.Label</span>
+                <small>@action.TargetHint</small>
+            </button>
+        }
         </nav>
     </form>
+    }
 </main>
