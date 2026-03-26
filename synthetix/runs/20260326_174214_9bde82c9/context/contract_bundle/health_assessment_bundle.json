@@ -1,0 +1,204 @@
+{
+  "header": {
+    "artifact_id": "06ce46c965c44c29a12cbbb920e4c0ac",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-26T17:42:35.899933+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260326_174214_9bde82c9",
+      "stage_id": "context_layer",
+      "task_id": "6d357d1331284468982e4295a7f4d05b"
+    },
+    "parents": [],
+    "digest": "sha256:46139059d133abd46d08ad08f2c1a6f4a83eb859e4a5d937fee6566022a676e0",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260326_174214_9bde82c9",
+      "bundle_version": "20260326T174235Z_20260326_174214_9bde82c9"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 5,
+      "impact": 5,
+      "score": 25,
+      "tier": "critical",
+      "rationale": "critical risk posture"
+    },
+    "key_themes": [
+      "The legacy application has maintainability and security concerns due to outdated dependencies and lack of modern practices."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 3,
+      "security": 2,
+      "reliability": 4,
+      "testability": 2
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: component:frmcheckbalance",
+      "description": "Outdated control usage and potential for inconsistent behavior.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "component:frmcheckbalance"
+        ],
+        "paths": [
+          "component:frmcheckbalance"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "BankApp1/close account.frm"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Dependency on outdated libraries",
+      "description": "The application relies on outdated VB6 libraries and ActiveX components, which may pose security and compatibility risks.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001",
+      "title": "Modernize Data Access Layer",
+      "priority": "P1",
+      "business_value": "Continued use of outdated data access methods may lead to security vulnerabilities and maintenance challenges.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "L",
+        "hours_range": [
+          40,
+          80
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "service:bank_system"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "external_dependency:msado"
+      ],
+      "plan": [
+        "Refactor data access to use a modern ORM or direct database connections suitable for microservices"
+      ],
+      "acceptance_criteria": [
+        "Data access layer uses modern libraries.",
+        "No security vulnerabilities in data access."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-001"
+    ],
+    "stabilization": [
+      "rb-001"
+    ],
+    "modernization": [
+      "rb-001"
+    ]
+  }
+}
