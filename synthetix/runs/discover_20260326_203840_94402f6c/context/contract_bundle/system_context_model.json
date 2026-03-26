@@ -1,0 +1,182 @@
+{
+  "header": {
+    "artifact_id": "73321cc9c5004d1991c78064d800b014",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-26T20:41:59.903533+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "discover_20260326_203840_94402f6c",
+      "stage_id": "context_layer",
+      "task_id": "f3258ea4f76f464eb59d2591fcd8ed39"
+    },
+    "parents": [],
+    "digest": "sha256:04f8c99458e6c6cf3d5de9204ab4cbad4c3c38a0791a9162070f951ebd537e22",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "discover_20260326_203840_94402f6c",
+      "bundle_version": "20260326T204159Z_discover_20260326_203840_94402f6c"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "service:bank_system",
+        "type": "service",
+        "name": "Bank System",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BankApp1/BANK.vbp"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BankApp1/BANK.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "form:frmcustomer",
+        "type": "component",
+        "name": "Customer Form",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BankApp1/frmcustomer.frm"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BankApp1/frmcustomer.frm"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "form:frmcheckbalance",
+        "type": "component",
+        "name": "Check Balance Form",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "BankApp1/close account.frm"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BankApp1/close account.frm"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "depends_on",
+        "from": "service:bank_system",
+        "to": "form:frmcustomer",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BankApp1/BANK.vbp"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "depends_on",
+        "from": "service:bank_system",
+        "to": "form:frmcheckbalance",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "BankApp1/close account.frm"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 3,
+      "edge_count": 2,
+      "languages": []
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": []
+}
