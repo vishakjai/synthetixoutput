@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "summary": "The system consists of multiple PHP components interacting with a database and external scripts. The main focus is on modernizing the PHP scripts and ensuring database interactions are secure and efficient.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Component",
+      "name": "Support and Domain Services",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 1,
+          "evidence": "PHP script for analyzing slow queries."
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Component",
+      "name": "Release Info",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "branchinfo/release_info.php",
+          "line": 1,
+          "evidence": "Cron job setup for release info."
+        }
+      ]
+    },
+    {
+      "id": "node-3",
+      "type": "Component",
+      "name": "HTML Attributes",
+      "metadata": {},
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "Classes/attrs.php",
+          "line": 1,
+          "evidence": "PHP script for generating HTML tags."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "CALLS_HTTP",
+      "from": "node-1",
+      "to": "node-2",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.7,
+      "evidence": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 10,
+          "evidence": "Include statement for init.php."
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "Database schema details"
+  ]
+}
