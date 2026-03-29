@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "summary": "This profile outlines the coding conventions and potential improvements for the legacy codebase.",
+  "rules": [
+    {
+      "id": "rule-1",
+      "category": "naming",
+      "rule": "Use camelCase for variable names.",
+      "confidence": 0.8,
+      "examples": [
+        "$maxTime"
+      ],
+      "counterexamples": [
+        "$max_time"
+      ],
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 10,
+          "evidence": "$maxTime = 199;"
+        }
+      ]
+    },
+    {
+      "id": "rule-2",
+      "category": "error_handling",
+      "rule": "Avoid using die() for error handling.",
+      "confidence": 0.9,
+      "examples": [
+        "throw new Exception()"
+      ],
+      "counterexamples": [
+        "die()"
+      ],
+      "provenance": [
+        {
+          "file": "Classes/attrs.php",
+          "line": 50,
+          "evidence": "die(); //Ensure no more processing is done"
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor PHP scripts to use modern error handling practices.",
+    "Adopt consistent naming conventions across the codebase."
+  ],
+  "scaffold_templates": [
+    "PHP class template with namespace and autoloading."
+  ]
+}
