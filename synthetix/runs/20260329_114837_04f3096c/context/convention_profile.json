@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "summary": "The codebase follows a mix of procedural and object-oriented PHP conventions with inconsistent naming and error handling practices.",
+  "rules": [
+    {
+      "id": "rule-1",
+      "category": "naming",
+      "rule": "Use camelCase for variable names.",
+      "confidence": 0.8,
+      "examples": [
+        "$dbConnection"
+      ],
+      "counterexamples": [
+        "$db_connection"
+      ],
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 2,
+          "evidence": "Variable naming style."
+        }
+      ]
+    },
+    {
+      "id": "rule-2",
+      "category": "error_handling",
+      "rule": "Use try-catch blocks for error handling.",
+      "confidence": 0.7,
+      "examples": [
+        "try { ... } catch (Exception $e) { ... }"
+      ],
+      "counterexamples": [
+        "die();"
+      ],
+      "provenance": [
+        {
+          "file": "Classes/attrs.php",
+          "line": 100,
+          "evidence": "Use of die() for error handling."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor variable names to camelCase.",
+    "Replace die() with exception handling."
+  ],
+  "scaffold_templates": [
+    "PHP class template with constructor and methods."
+  ]
+}
