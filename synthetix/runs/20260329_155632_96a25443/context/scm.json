@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "The system context model represents the structure and interactions of the legacy codebase, focusing on PHP support and domain services.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Component",
+      "name": "Support and Domain Services",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 1,
+          "evidence": "include('/data/app/src/init.php');"
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Database",
+      "name": "headcount_summary",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "branchinfo/release_info.php",
+          "line": 2,
+          "evidence": "create table headcount_summary"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-1",
+      "to": "node-2",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "file": "branchinfo/release_info.php",
+          "line": 2,
+          "evidence": "create table headcount_summary"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
