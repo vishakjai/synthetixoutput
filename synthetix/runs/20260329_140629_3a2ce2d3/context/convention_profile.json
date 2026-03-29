@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "The convention profile outlines coding standards and practices observed in the legacy codebase.",
+  "rules": [
+    {
+      "id": "rule-1",
+      "category": "naming",
+      "rule": "Use camelCase for variable names.",
+      "confidence": 0.7,
+      "examples": [
+        "$dbConnection"
+      ],
+      "counterexamples": [
+        "$db_connection"
+      ],
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 1,
+          "evidence": "Global variable naming convention."
+        }
+      ]
+    },
+    {
+      "id": "rule-2",
+      "category": "error_handling",
+      "rule": "Avoid using die() for error handling.",
+      "confidence": 0.8,
+      "examples": [
+        "throw new Exception()"
+      ],
+      "counterexamples": [
+        "die()"
+      ],
+      "provenance": [
+        {
+          "file": "Classes/attrs.php",
+          "line": 1,
+          "evidence": "Use of die() in control flow."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor variable names to camelCase.",
+    "Replace die() with structured exception handling."
+  ],
+  "scaffold_templates": [
+    "PHP service layer template",
+    "HTML generation template"
+  ]
+}
