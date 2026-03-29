@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "summary": "The health assessment identifies the maintainability, security, reliability, and testability of the legacy codebase.",
+  "scores": {
+    "maintainability": 60,
+    "security": 50,
+    "reliability": 55,
+    "testability": 40
+  },
+  "hotspots": [
+    {
+      "scope": "bin/slowquery.php",
+      "reason": "Use of global variables and lack of error handling.",
+      "severity": "medium",
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 3,
+          "evidence": "global $db_connection;"
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Security Risk: SQL Injection",
+      "description": "The code may be vulnerable to SQL injection due to direct use of SQL queries without parameterization.",
+      "severity": "high",
+      "confidence": 0.9
+    }
+  ]
+}
