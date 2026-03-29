@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "summary": "The system comprises various PHP components interacting with a database and external resources. The primary focus is on modernizing legacy PHP scripts and ensuring compatibility with Docker deployments.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Component",
+      "name": "Support and Domain Services",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 1,
+          "evidence": "PHP script for processing slow query logs."
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Component",
+      "name": "Release Info",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "branchinfo/release_info.php",
+          "line": 1,
+          "evidence": "Cron job setup for release information."
+        }
+      ]
+    },
+    {
+      "id": "node-3",
+      "type": "Component",
+      "name": "HTML Attributes",
+      "metadata": {},
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "Classes/attrs.php",
+          "line": 1,
+          "evidence": "PHP script generating HTML tags."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "IMPORTS",
+      "from": "node-1",
+      "to": "node-2",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 1,
+          "evidence": "Includes init.php for database connection."
+        }
+      ]
+    },
+    {
+      "type": "IMPORTS",
+      "from": "node-3",
+      "to": "node-1",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "Classes/attrs.php",
+          "line": 1,
+          "evidence": "Includes init.php for HTML generation."
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
