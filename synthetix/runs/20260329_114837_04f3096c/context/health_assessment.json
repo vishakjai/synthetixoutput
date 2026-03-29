@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "summary": "The codebase has moderate maintainability and reliability but lacks in security and testability due to direct database interactions and minimal error handling.",
+  "scores": {
+    "maintainability": 60,
+    "security": 40,
+    "reliability": 50,
+    "testability": 30
+  },
+  "hotspots": [
+    {
+      "scope": "bin/slowquery.php",
+      "reason": "Direct file access and lack of input validation.",
+      "severity": "high",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 10,
+          "evidence": "fopen without validation."
+        }
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "SQL Injection Risk",
+      "description": "Direct database queries without parameterized inputs.",
+      "severity": "critical",
+      "confidence": 0.95
+    }
+  ]
+}
