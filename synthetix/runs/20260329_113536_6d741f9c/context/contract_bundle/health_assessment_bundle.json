@@ -1,0 +1,202 @@
+{
+  "header": {
+    "artifact_id": "e5cc0a1056d54e43bbec7e2abafcafdc",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-03-29T06:05:58.113891+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "synthetix",
+      "default_branch": "feature-analyst_US00",
+      "branch": "feature-analyst_US00",
+      "commit_sha": "6814b96573add05aea359db72c5c9378300a2e26",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260329_113536_6d741f9c",
+      "stage_id": "context_layer",
+      "task_id": "8f6452663a6244d98bc0fe5f3f46bda8"
+    },
+    "parents": [],
+    "digest": "sha256:687b28a694efe13edee02b8769d3a6b9ad74b26ed330b1d5f6cf9827231f2e1c",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260329_113536_6d741f9c",
+      "bundle_version": "20260329T060558Z_20260329_113536_6d741f9c"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "tier": "high",
+      "rationale": "elevated risk posture"
+    },
+    "key_themes": [
+      "The health assessment identifies the maintainability, security, reliability, and testability of the legacy codebase."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 60,
+      "security": 50,
+      "reliability": 55,
+      "testability": 40
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: bin/slowquery.php",
+      "description": "Use of global variables and lack of error handling.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "bin/slowquery.php"
+        ],
+        "paths": [
+          "bin/slowquery.php"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "bin/slowquery.php"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Security Risk: SQL Injection",
+      "description": "The code may be vulnerable to SQL injection due to direct use of SQL queries without parameterization.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.9,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-1",
+      "title": "Refactor Slow Query Script",
+      "priority": "P1",
+      "business_value": "Potential for security vulnerabilities and maintenance challenges.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "node-1"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Refactor the script to use dependency injection and modern error handling techniques"
+      ],
+      "acceptance_criteria": [
+        "Eliminate global variable usage.",
+        "Implement try-catch blocks for error handling."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [
+      "rb-1"
+    ],
+    "stabilization": [
+      "rb-1"
+    ],
+    "modernization": [
+      "rb-1"
+    ]
+  }
+}
