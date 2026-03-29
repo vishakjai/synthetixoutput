@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "summary": "The codebase follows a mix of procedural and object-oriented PHP conventions with inconsistent naming and error handling practices.",
+  "rules": [
+    {
+      "id": "rule-1",
+      "category": "naming",
+      "rule": "Use camelCase for variable names.",
+      "confidence": 0.8,
+      "examples": [
+        "$dbConnection"
+      ],
+      "counterexamples": [
+        "$db_connection"
+      ],
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 3,
+          "evidence": "Variable naming convention."
+        }
+      ]
+    },
+    {
+      "id": "rule-2",
+      "category": "error_handling",
+      "rule": "Use try-catch blocks for error handling.",
+      "confidence": 0.7,
+      "examples": [
+        "try { ... } catch (Exception $e) { ... }"
+      ],
+      "counterexamples": [
+        "if (feof($fptr)) { return false; }"
+      ],
+      "provenance": [
+        {
+          "file": "bin/slowquery.php",
+          "line": 5,
+          "evidence": "Error handling without exceptions."
+        }
+      ]
+    }
+  ],
+  "lint_recommendations": [
+    "Refactor variable names to camelCase.",
+    "Implement try-catch for error handling."
+  ],
+  "scaffold_templates": [
+    "PHP service template with Docker support."
+  ]
+}
