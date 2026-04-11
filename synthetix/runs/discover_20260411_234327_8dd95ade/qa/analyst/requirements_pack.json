@@ -1,0 +1,817 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-DISCOVER_20260411_234327_8DD95ADE",
+  "generated_at": "2026-04-11T23:55:41.678327+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "banking-core-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "BIAN"
+      ],
+      "standards": [
+        "iso20022-core",
+        "fix-protocol"
+      ],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "Sweet Bank Kotlin Modernization",
+    "work_item_id": "discover_20260411_234327_8dd95ade",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "banking-core-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "BIAN"
+      ],
+      "standards": [
+        "iso20022-core",
+        "fix-protocol"
+      ],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Analyze the Sweet Bank Kotlin banking application for modernization. Utilize the Kotlin skill pack for deep analysis of Kotlin-specific patterns.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Mobile"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "The current application is fully functional and stable.",
+      "All necessary documentation for the existing system is available."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Audit logging is required for privileged and financial state changes."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Idempotency is required for externally retriable financial write operations."
+      },
+      {
+        "id": "INV-003",
+        "statement": "PII and regulated payment fields must be masked in logs."
+      },
+      {
+        "id": "INV-004",
+        "statement": "Ledger-impacting operations must define consistency and reversal behavior."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Modernize Payment Processing Module",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Implement Idempotency in API Endpoints",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Enhance Audit Logging",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-002",
+          "scenarios": [
+            "BDD-002-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Refactor User Authentication Module",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-004",
+          "scenarios": [
+            "BDD-004-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Update Data Access Layer",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-005",
+          "scenarios": [
+            "BDD-005-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "Improve Error Handling Mechanism",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-007",
+        "title": "Enhance User Interface with Kotlin DSL",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-008",
+        "title": "Implement PII Redaction in Logs",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "10,000 transactions/minute",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "100% compliance with security standards",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "scalability",
+        "metric": "Horizontal scaling capability",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "usability",
+        "metric": "User satisfaction score of 4.5/5",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "reliability",
+        "metric": "99.9% uptime",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Payment Idempotency",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Create payment with Idempotency-Key",
+            "gherkin": [
+              "Given a valid Idempotency-Key",
+              "When a payment is created",
+              "Then the payment is processed once and returns the same response for duplicate requests"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Audit Logging",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Log financial transaction",
+            "gherkin": [
+              "Given a financial transaction occurs",
+              "When the transaction is processed",
+              "Then an audit log entry is created with correlation_id, trace_id, and actor_id"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "PII Redaction",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Log entry creation",
+            "gherkin": [
+              "Given a log entry is created",
+              "When the entry contains PII",
+              "Then the PII is redacted according to policy"
+            ],
+            "maps_to": [
+              "FR-008"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "User Authentication",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "User login",
+            "gherkin": [
+              "Given a user provides valid credentials",
+              "When the user attempts to log in",
+              "Then access is granted and logged securely"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-005",
+        "title": "Data Access Layer",
+        "scenarios": [
+          {
+            "id": "BDD-005-SC-001",
+            "name": "Retrieve account data",
+            "gherkin": [
+              "Given a request for account data",
+              "When the data is retrieved",
+              "Then the response is optimized and accurate"
+            ],
+            "maps_to": [
+              "FR-005"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential downtime during modernization.",
+      "impact": "high",
+      "mitigation": "Implement phased deployment and rollback strategies."
+    },
+    {
+      "description": "Compliance issues due to outdated security practices.",
+      "impact": "medium",
+      "mitigation": "Conduct thorough security audits and apply necessary patches."
+    }
+  ],
+  "out_of_scope": [
+    "Development of new features unrelated to modernization.",
+    "Changes to business logic unless required for compliance."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-002",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-002",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "BDD-004",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-005",
+        "to": "BDD-005",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-008",
+        "to": "BDD-003",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-discover_20260411_234327_8dd95ade",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260411T235523Z_discover_20260411_234327_8dd95ade",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "1.0",
+    "cp_version": "1.0",
+    "ha_version": "1.0",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-693f39aa1367f03c",
+    "run_context_bundle_id": "runctx-e078bf59a947e342",
+    "source_version_ids": [],
+    "run_id": "discover_20260411_234327_8dd95ade",
+    "repo_url": "https://github.com/vishakjai/sweet-bank"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "banking-core-v1",
+    "name": "Banking Core Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=3, standards=2"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=5"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=2"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Analyze the Sweet Bank Kotlin banking application for modernization. Utilize the Kotlin skill pack for deep analysis of Kotlin-specific patterns.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "BIAN",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [
+    {
+      "id": "iso20022-core",
+      "name": "ISO 20022 Core Messages",
+      "engineering_actions": [
+        "Validate payment payload structure against canonical message schema.",
+        "Use deterministic field mapping and explicit validation errors.",
+        "Retain original inbound/outbound message payloads for audit evidence."
+      ]
+    },
+    {
+      "id": "fix-protocol",
+      "name": "FIX Protocol Baseline",
+      "engineering_actions": [
+        "Enforce message sequencing and replay protection.",
+        "Capture deterministic routing/acknowledgement states in logs."
+      ]
+    }
+  ],
+  "gold_patterns": [
+    {
+      "id": "idempotent-payments-api",
+      "title": "Idempotent Payments Endpoint",
+      "guidance": [
+        "Require Idempotency-Key header for payment creation.",
+        "Persist key + payload hash + response tuple with TTL.",
+        "Return 409 for same key with divergent payload."
+      ]
+    },
+    {
+      "id": "audit-evidence-spine",
+      "title": "Audit Evidence Spine",
+      "guidance": [
+        "Attach stable requirement IDs to audit events and tests.",
+        "Emit correlation_id, trace_id, actor_id on all state changes.",
+        "Persist tamper-evident release evidence pack manifests."
+      ]
+    },
+    {
+      "id": "pii-redaction-policy",
+      "title": "PII Redaction and Access Policy",
+      "guidance": [
+        "Centralize redaction middleware for logs and errors.",
+        "Define allowlist fields for support and analytics views.",
+        "Block production debug endpoints exposing raw payloads."
+      ]
+    }
+  ],
+  "non_negotiables": [
+    "Audit logging is required for privileged and financial state changes.",
+    "Idempotency is required for externally retriable financial write operations.",
+    "PII and regulated payment fields must be masked in logs.",
+    "Ledger-impacting operations must define consistency and reversal behavior."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Payment Idempotency",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Payment Idempotency\nScenario: Create payment with Idempotency-Key\nGiven a valid Idempotency-Key\nWhen a payment is created\nThen the payment is processed once and returns the same response for duplicate requests"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Audit Logging",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Audit Logging\nScenario: Log financial transaction\nGiven a financial transaction occurs\nWhen the transaction is processed\nThen an audit log entry is created with correlation_id, trace_id, and actor_id"
+      },
+      {
+        "id": "BDD-003",
+        "title": "PII Redaction",
+        "source_requirement_ids": [
+          "FR-008"
+        ],
+        "gherkin": "Feature: PII Redaction\nScenario: Log entry creation\nGiven a log entry is created\nWhen the entry contains PII\nThen the PII is redacted according to policy"
+      },
+      {
+        "id": "BDD-004",
+        "title": "User Authentication",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: User Authentication\nScenario: User login\nGiven a user provides valid credentials\nWhen the user attempts to log in\nThen access is granted and logged securely"
+      },
+      {
+        "id": "BDD-005",
+        "title": "Data Access Layer",
+        "source_requirement_ids": [
+          "FR-005"
+        ],
+        "gherkin": "Feature: Data Access Layer\nScenario: Retrieve account data\nGiven a request for account data\nWhen the data is retrieved\nThen the response is optimized and accurate"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 5
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security Compliance",
+        "description": "Ensure all modules comply with security standards and regulations.",
+        "category": "security",
+        "metric": "100% compliance with security standards",
+        "acceptance_criteria": [
+          "Security audits confirm compliance with standards.",
+          "No critical vulnerabilities found in penetration tests.",
+          "Security patches are applied within 48 hours of release."
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "title": "Reliability",
+        "description": "Ensure the system has 99.9% uptime and is resilient to failures.",
+        "category": "reliability",
+        "metric": "99.9% uptime",
+        "acceptance_criteria": [
+          "System monitoring shows 99.9% uptime over a month.",
+          "Automatic failover is tested and verified.",
+          "Disaster recovery procedures are documented and tested."
+        ]
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "System Performance",
+        "description": "The system should handle 10,000 transactions per minute with less than 1% error rate.",
+        "category": "performance",
+        "metric": "10,000 transactions/minute",
+        "acceptance_criteria": [
+          "Performance tests confirm the system can handle the load.",
+          "Error rate remains below 1% during peak load.",
+          "System response time is under 200ms for 95% of transactions."
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "title": "Scalability",
+        "description": "The application should scale horizontally to support increased load.",
+        "category": "scalability",
+        "metric": "Horizontal scaling capability",
+        "acceptance_criteria": [
+          "System can scale to double the initial load without performance degradation.",
+          "Load tests confirm scalability requirements are met.",
+          "Infrastructure supports automated scaling."
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "title": "Usability",
+        "description": "The application should have an intuitive user interface that enhances user experience.",
+        "category": "usability",
+        "metric": "User satisfaction score of 4.5/5",
+        "acceptance_criteria": [
+          "User testing results in a satisfaction score of 4.5 or higher.",
+          "UI components are accessible and follow design guidelines.",
+          "Feedback from usability tests is incorporated into the design."
+        ]
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-005"
+      ]
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-007",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-008",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 5,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 8,
+        "non_functional_count": 5,
+        "min_functional": 8,
+        "min_non_functional": 5,
+        "scenario_count": 5,
+        "min_scenarios": 5,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "FAIL",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-693f39aa1367f03c",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The project aims to modernize the Sweet Bank Kotlin application by leveraging Kotlin-specific patterns and ensuring compliance with banking standards."
+}
