@@ -1,14 +1,14 @@
 # Delivery Constitution
 
-- Constitution ID: const-76a514521fe4
+- Constitution ID: const-7e075838ab2f
 - Run ID: discover_20260410_143422_c3a6a6b1
 - Workspace/Project: default-workspace / default-project
 - Use Case: code_modernization
-- Snapshot ID: kctx-bd9c0dfc77f506e2
+- Snapshot ID: kctx-dadd5810e15757ce
 
 ## Objective
 
-Analyze MagicBox for BRD
+Build from Discover baseline
 
 ## Non-Negotiables
 
