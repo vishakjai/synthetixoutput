@@ -1,0 +1,203 @@
+{
+  "header": {
+    "artifact_id": "ca8ca1951a434f0cbff600495a5390c5",
+    "artifact_type": "system_context_model",
+    "schema_version": "1.0.0",
+    "created_at": "2026-04-11T23:54:33.537613+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260411_235413_0ae8c362",
+      "stage_id": "context_layer",
+      "task_id": "cec6105698ef49d8b57d78e58b541f41"
+    },
+    "parents": [],
+    "digest": "sha256:b107301478941df00155b282d81419f1da97bdcb588d83bb10ba3c9099ce2159",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260411_235413_0ae8c362",
+      "bundle_version": "20260411T235433Z_20260411_235413_0ae8c362"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "service:banking_core",
+        "type": "service",
+        "name": "Banking Core Service",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "src/main/kotlin/com/sweetbank/core/BankingService.kt"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "src/main/kotlin/com/sweetbank/core/BankingService.kt"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "module:transaction_module",
+        "type": "module",
+        "name": "Transaction Module",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "src/main/kotlin/com/sweetbank/transaction/TransactionModule.kt"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "src/main/kotlin/com/sweetbank/transaction/TransactionModule.kt"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "database:customer_db",
+        "type": "database",
+        "name": "Customer Database",
+        "description": "",
+        "labels": {
+          "source": "sil"
+        },
+        "language": "",
+        "repo_paths": [
+          "src/main/resources/db/customer.sql"
+        ],
+        "runtime": {},
+        "interfaces": [],
+        "data": {},
+        "attributes": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "src/main/resources/db/customer.sql"
+          }
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "from SIL node extraction",
+          "signals": []
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge:1",
+        "type": "calls_http",
+        "from": "service:banking_core",
+        "to": "module:transaction_module",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "src/main/kotlin/com/sweetbank/core/BankingService.kt"
+          }
+        ],
+        "confidence": {
+          "score": 0.9,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      },
+      {
+        "id": "edge:2",
+        "type": "reads",
+        "from": "module:transaction_module",
+        "to": "database:customer_db",
+        "labels": {
+          "source": "sil"
+        },
+        "protocol": {},
+        "evidence": [
+          {
+            "kind": "file_span",
+            "file": "src/main/kotlin/com/sweetbank/transaction/TransactionModule.kt"
+          }
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "from SIL edge extraction",
+          "signals": []
+        }
+      }
+    ],
+    "statistics": {
+      "node_count": 3,
+      "edge_count": 2,
+      "languages": []
+    }
+  },
+  "views": {
+    "c4": {
+      "context": [],
+      "container": [],
+      "component": [],
+      "code": []
+    }
+  },
+  "unknowns": [
+    {
+      "question": "utils/context_vault.py::@app.get(",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    },
+    {
+      "question": "utils/context_vault.py::@app.post(",
+      "scope": "system",
+      "suggested_validation": "Trace and verify in staging",
+      "confidence": {
+        "score": 0.4,
+        "rationale": "unknown from SIL",
+        "signals": []
+      }
+    }
+  ]
+}
