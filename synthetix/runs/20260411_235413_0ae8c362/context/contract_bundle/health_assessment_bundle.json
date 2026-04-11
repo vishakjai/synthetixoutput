@@ -1,0 +1,200 @@
+{
+  "header": {
+    "artifact_id": "91cd18ec305647c89d4866c55f229cd8",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-04-11T23:54:33.537994+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "app",
+      "default_branch": "detached",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260411_235413_0ae8c362",
+      "stage_id": "context_layer",
+      "task_id": "cec6105698ef49d8b57d78e58b541f41"
+    },
+    "parents": [],
+    "digest": "sha256:5b8760517c6616bce20ebb2c80137ee5664a6fbeee7cb608b3f6de734428c7ad",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260411_235413_0ae8c362",
+      "bundle_version": "20260411T235433Z_20260411_235413_0ae8c362"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 3,
+      "impact": 3,
+      "score": 9,
+      "tier": "medium",
+      "rationale": "moderate risk posture"
+    },
+    "key_themes": [
+      "Overall health assessment of the Sweet Bank Kotlin application."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 75,
+      "security": 80,
+      "reliability": 70,
+      "testability": 65
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: module:transaction_module",
+      "description": "Complex transaction processing logic.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "module:transaction_module"
+        ],
+        "paths": [
+          "module:transaction_module"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "src/main/kotlin/com/sweetbank/transaction/TransactionModule.kt"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.8,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "high",
+      "title": "Security Risk in Customer Data Access",
+      "description": "Potential SQL injection risk in customer data access.",
+      "risk": {
+        "likelihood": 4,
+        "impact": 4,
+        "score": 16,
+        "tier": "high",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.85,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.85,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-001",
+      "title": "Refactor Transaction Module",
+      "priority": "P2",
+      "business_value": "Increased difficulty in maintaining and extending the module.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [
+          "module:transaction_module"
+        ],
+        "expected_edges_touched": []
+      },
+      "dependencies": [],
+      "plan": [
+        "Refactor the module to simplify logic and improve readability"
+      ],
+      "acceptance_criteria": [
+        "Reduced cyclomatic complexity",
+        "Improved code readability"
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [],
+    "stabilization": [
+      "rb-001"
+    ],
+    "modernization": [
+      "rb-001"
+    ]
+  }
+}
