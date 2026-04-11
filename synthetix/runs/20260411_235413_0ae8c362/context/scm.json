@@ -1,0 +1,84 @@
+{
+  "version": "1.0",
+  "summary": "Sweet Bank Kotlin banking application analysis for modernization.",
+  "nodes": [
+    {
+      "id": "service:banking_core",
+      "type": "Service",
+      "name": "Banking Core Service",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "src/main/kotlin/com/sweetbank/core/BankingService.kt",
+          "line": 1,
+          "evidence": "class BankingService"
+        }
+      ]
+    },
+    {
+      "id": "module:transaction_module",
+      "type": "Module",
+      "name": "Transaction Module",
+      "metadata": {},
+      "confidence": 0.85,
+      "provenance": [
+        {
+          "file": "src/main/kotlin/com/sweetbank/transaction/TransactionModule.kt",
+          "line": 1,
+          "evidence": "class TransactionModule"
+        }
+      ]
+    },
+    {
+      "id": "database:customer_db",
+      "type": "Database",
+      "name": "Customer Database",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "src/main/resources/db/customer.sql",
+          "line": 1,
+          "evidence": "CREATE TABLE customer"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "CALLS_HTTP",
+      "from": "service:banking_core",
+      "to": "module:transaction_module",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "file": "src/main/kotlin/com/sweetbank/core/BankingService.kt",
+          "line": 25,
+          "evidence": "transactionModule.processTransaction()"
+        }
+      ]
+    },
+    {
+      "type": "READS_TABLE",
+      "from": "module:transaction_module",
+      "to": "database:customer_db",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "src/main/kotlin/com/sweetbank/transaction/TransactionModule.kt",
+          "line": 45,
+          "evidence": "SELECT * FROM customer"
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "utils/context_vault.py::@app.get(",
+    "utils/context_vault.py::@app.post("
+  ]
+}
