@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "summary": "The system consists of various components primarily written in Python, with configurations in YAML and JSON. It includes a web server using FastAPI and several utility scripts.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Component",
+      "name": "Web Server",
+      "metadata": {},
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "file": "web/server.py",
+          "line": 1,
+          "evidence": "@app.get("
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Component",
+      "name": "Utility Scripts",
+      "metadata": {},
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "file": "utils/context_vault.py",
+          "line": 1,
+          "evidence": "@app.get("
+        }
+      ]
+    },
+    {
+      "id": "node-3",
+      "type": "Component",
+      "name": "Configuration Files",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+          "line": 1,
+          "evidence": "version,name,artifacts"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "CALLS_HTTP",
+      "from": "node-1",
+      "to": "node-2",
+      "directionality": "directed",
+      "protocol_metadata": {},
+      "confidence": 0.85,
+      "evidence": [
+        {
+          "file": "web/server.py",
+          "line": 10,
+          "evidence": "router."
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    ".DS_Store"
+  ]
+}
