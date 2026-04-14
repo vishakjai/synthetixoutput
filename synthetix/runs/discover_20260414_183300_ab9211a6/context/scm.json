@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "summary": "This model represents the discovered components and their interactions within the Synthetix project.",
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "Component",
+      "name": "AuthController",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "controllers/AuthController.php",
+          "line": 1,
+          "evidence": "Candidate domain 'Authentication and Access' identified."
+        }
+      ]
+    },
+    {
+      "id": "node-2",
+      "type": "Service",
+      "name": "AuthenticationService",
+      "metadata": {},
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "file": "controllers/AuthController.php",
+          "line": 1,
+          "evidence": "Bounded context 'Authentication and Access' \u2192 service: AuthenticationService."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "DEPENDS_ON",
+      "from": "node-1",
+      "to": "node-2",
+      "directionality": "directed",
+      "confidence": 0.55,
+      "protocol_metadata": {},
+      "evidence": [
+        {
+          "file": "repo-scan",
+          "line": 1,
+          "evidence": "inferred adjacency"
+        }
+      ]
+    }
+  ],
+  "unknowns": []
+}
