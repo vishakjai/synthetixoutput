@@ -1,0 +1,786 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260414_191041_DC0D2181",
+  "generated_at": "2026-04-14T23:11:16.101922+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Strategic Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "mobile-apps-kotlin-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Mobile Capability Taxonomy"
+      ],
+      "standards": [
+        "android-architecture-mvvm",
+        "android-compose-first",
+        "android-offline-first",
+        "android-security-baseline"
+      ],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "Mobile App Modernization",
+    "work_item_id": "20260414_191041_dc0d2181",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "mobile-apps-kotlin-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Mobile Capability Taxonomy"
+      ],
+      "standards": [
+        "android-architecture-mvvm",
+        "android-compose-first",
+        "android-offline-first",
+        "android-security-baseline"
+      ],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Build from Discover baseline",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "Existing codebase is primarily in Java and needs conversion to Kotlin.",
+      "Legacy components are compatible with phased modernization."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "All user-visible strings must be in string resources for localization."
+      },
+      {
+        "id": "INV-002",
+        "statement": "No network calls on the main thread \u2014 use coroutines with Dispatchers.IO."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Every screen has at least one Compose preview and one instrumented test."
+      },
+      {
+        "id": "INV-004",
+        "statement": "Release builds must pass lint with `-Werror` for critical severity rules."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Implement MVVM Architecture",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Adopt Jetpack Compose for UI",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-002",
+          "scenarios": [
+            "BDD-002-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Implement Offline-First Data Handling",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Secure API Communication",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-004",
+          "scenarios": [
+            "BDD-004-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Localization of User-Visible Strings",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "Implement Repository Pattern",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-007",
+        "title": "Instrumented Testing for Screens",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-008",
+        "title": "Implement Secure Data Storage",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "App response time < 200ms under typical load",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "Pass security audits with no critical findings",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "scalability",
+        "metric": "Support 10,000 concurrent users",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "usability",
+        "metric": "User satisfaction score > 85%",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "reliability",
+        "metric": "Uptime > 99.9%",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "MVVM Architecture Implementation",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Refactor to MVVM",
+            "gherkin": [
+              "Given the existing codebase",
+              "When refactored to MVVM",
+              "Then all screen-level state is managed in ViewModel"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Jetpack Compose Adoption",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Implement new screens",
+            "gherkin": [
+              "Given a new screen requirement",
+              "When developed using Jetpack Compose",
+              "Then it should have @Preview variants"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Offline-First Data Handling",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Data read",
+            "gherkin": [
+              "Given a data request",
+              "When processed",
+              "Then it resolves from local cache first"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Secure API Communication",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "API call",
+            "gherkin": [
+              "Given a private API call",
+              "When executed",
+              "Then it uses certificate pinning"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential data loss during migration to new architecture.",
+      "impact": "high",
+      "mitigation": "Implement thorough testing and backup strategies."
+    },
+    {
+      "description": "Compatibility issues with legacy components.",
+      "impact": "medium",
+      "mitigation": "Use interoperability features and phased migration."
+    }
+  ],
+  "out_of_scope": [
+    "Complete redesign of the app's user interface.",
+    "Migration of backend services."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-002",
+        "to": "BDD-002",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-003",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "BDD-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260414_191041_dc0d2181",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260414T231052Z_20260414_191041_dc0d2181",
+    "repo": "Synthetix",
+    "branch": "codex-synthetix-ui-v2-claude",
+    "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+    "scm_version": "1.0",
+    "cp_version": "1.0",
+    "ha_version": "1.0",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+    "run_context_bundle_id": "runctx-41d7b4c770d70d29",
+    "source_version_ids": [],
+    "run_id": "20260414_191041_dc0d2181",
+    "repo_url": "https://github.com/vishakjai/sweet-bank"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "mobile-apps-kotlin-v1",
+    "name": "Mobile Apps (Kotlin) Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=2, standards=4"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Build from Discover baseline",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Mobile Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [
+    {
+      "id": "android-architecture-mvvm",
+      "name": "Android Architecture: MVVM + Unidirectional State Flow",
+      "engineering_actions": [
+        "Keep UI state in a ViewModel exposed as StateFlow or Compose State.",
+        "Treat ViewModel as the single source of truth for screen-level state.",
+        "Emit one-shot side effects via a Channel / SharedFlow, not LiveData."
+      ]
+    },
+    {
+      "id": "android-compose-first",
+      "name": "Jetpack Compose-First UI",
+      "engineering_actions": [
+        "New screens must be Composable functions; legacy XML layouts are interop bridges only.",
+        "Preview every screen with `@Preview` variants for light / dark / RTL.",
+        "Use Material 3 components unless an explicit design-system override exists."
+      ]
+    },
+    {
+      "id": "android-offline-first",
+      "name": "Offline-First Data Policy",
+      "engineering_actions": [
+        "Reads must resolve from local cache first; network refresh is async.",
+        "Mutations enqueue to WorkManager or an equivalent persistent queue.",
+        "Conflict resolution is explicit (last-writer-wins or merge), never silent."
+      ]
+    },
+    {
+      "id": "android-security-baseline",
+      "name": "Mobile Security Baseline",
+      "engineering_actions": [
+        "Secrets at rest go through Android Keystore, never SharedPreferences.",
+        "Network calls to private APIs must use certificate pinning.",
+        "Release builds must enable R8 / ProGuard with keep rules for reflection points."
+      ]
+    }
+  ],
+  "gold_patterns": [
+    {
+      "id": "compose_state_hoisting",
+      "title": "",
+      "guidance": []
+    },
+    {
+      "id": "repository_pattern",
+      "title": "",
+      "guidance": []
+    }
+  ],
+  "non_negotiables": [
+    "All user-visible strings must be in string resources for localization.",
+    "No network calls on the main thread \u2014 use coroutines with Dispatchers.IO.",
+    "Every screen has at least one Compose preview and one instrumented test.",
+    "Release builds must pass lint with `-Werror` for critical severity rules."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "MVVM Architecture Implementation",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: MVVM Architecture\nScenario: Refactor to MVVM\nGiven the existing codebase\nWhen refactored to MVVM\nThen all screen-level state is managed in ViewModel"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Jetpack Compose Adoption",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Jetpack Compose\nScenario: Implement new screens\nGiven a new screen requirement\nWhen developed using Jetpack Compose\nThen it should have @Preview variants"
+      },
+      {
+        "id": "BDD-003",
+        "title": "Offline-First Data Handling",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Offline-First Data\nScenario: Data read\nGiven a data request\nWhen processed\nThen it resolves from local cache first"
+      },
+      {
+        "id": "BDD-004",
+        "title": "Secure API Communication",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Secure API\nScenario: API call\nGiven a private API call\nWhen executed\nThen it uses certificate pinning"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security Compliance",
+        "description": "Ensure compliance with mobile security baseline.",
+        "category": "security",
+        "metric": "Pass security audits with no critical findings",
+        "acceptance_criteria": [
+          "Security audits report no critical vulnerabilities.",
+          "Certificate pinning is verified for all network calls.",
+          "R8/ProGuard is configured with appropriate rules."
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "title": "Reliability",
+        "description": "Ensure the app is reliable and available 99.9% of the time.",
+        "category": "reliability",
+        "metric": "Uptime > 99.9%",
+        "acceptance_criteria": [
+          "Uptime logs confirm availability above 99.9%.",
+          "Incident response times are within defined SLAs.",
+          "System monitoring alerts for downtime events."
+        ]
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance Optimization",
+        "description": "Ensure app performance meets defined standards under load.",
+        "category": "performance",
+        "metric": "App response time < 200ms under typical load",
+        "acceptance_criteria": [
+          "App response time is consistently below 200ms.",
+          "Performance tests simulate typical user load.",
+          "Performance metrics are logged and monitored."
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "title": "Scalability",
+        "description": "Ensure the app can scale to support increased user load.",
+        "category": "scalability",
+        "metric": "Support 10,000 concurrent users",
+        "acceptance_criteria": [
+          "Load tests confirm support for 10,000 concurrent users.",
+          "No degradation in performance under increased load.",
+          "Scalability metrics are tracked and reported."
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "title": "Usability",
+        "description": "Ensure the app is user-friendly and accessible.",
+        "category": "usability",
+        "metric": "User satisfaction score > 85%",
+        "acceptance_criteria": [
+          "User satisfaction surveys score above 85%.",
+          "Accessibility tests confirm compliance with standards.",
+          "Usability testing identifies no major issues."
+        ]
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-007",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-008",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 8,
+        "non_functional_count": 5,
+        "min_functional": 8,
+        "min_non_functional": 5,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-dff0dd8350cd555c",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The project aims to modernize the mobile app codebase using Kotlin, adhering to Discover baseline and Android standards."
+}
