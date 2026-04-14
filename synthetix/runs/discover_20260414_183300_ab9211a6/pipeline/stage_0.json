@@ -1,0 +1,5052 @@
+{
+  "run_id": "discover_20260414_183300_ab9211a6",
+  "stage": 0,
+  "result": {
+    "agent_name": "System Intelligence Layer",
+    "stage": 0,
+    "status": "success",
+    "summary": "SIL ready: 2 nodes, 1 edges, 1 conventions, 1 remediation items",
+    "output": {
+      "context_reference": {
+        "version_id": "20260414T183613Z_discover_20260414_183300_ab9211a6",
+        "repo": "Synthetix",
+        "branch": "codex-synthetix-ui-v2-claude",
+        "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c"
+      },
+      "context_bundle": {
+        "bundle_id": "11b6c51b551242eb818ad1d9d12ef86d",
+        "created_at": "2026-04-14T18:36:13.925254+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "codex-synthetix-ui-v2-claude",
+          "branch": "codex-synthetix-ui-v2-claude",
+          "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "2941a7aa0b0a4d86b83352c6f3af7ca0",
+            "digest": "sha256:ab9abe04a9c97c8997a7971c0bfd0164dce7f401394685667a8be06564adc1cf",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "e251d72c0ddd4c7895a76548f7a16b18",
+            "digest": "sha256:c91986b1cc600f20acf5437666c327be9a249457fedd39f1241d6f289b3a4763",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "1467181d242b470ca6aeb7ce225044c0",
+            "digest": "sha256:0dacee57ddc2523ea2a3d56bdaa68b82f57d35b0e80158ddfd1043fd4e31a388",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-119e54a4e2f1b272",
+          "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+          "delivery_constitution_id": "const-f31ebbcc1bb1",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      },
+      "contract_validation": {
+        "generated_at": "2026-04-14T18:36:13.928992+00:00",
+        "schema_issues": [],
+        "semantic_issues": [],
+        "is_valid": true,
+        "severity": "ok"
+      },
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the discovered components and their interactions within the Synthetix project.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "AuthController",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "controllers/AuthController.php",
+                "line": 1,
+                "evidence": "Candidate domain 'Authentication and Access' identified."
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Service",
+            "name": "AuthenticationService",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "controllers/AuthController.php",
+                "line": 1,
+                "evidence": "Bounded context 'Authentication and Access' \u2192 service: AuthenticationService."
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-2",
+            "directionality": "directed",
+            "confidence": 0.55,
+            "protocol_metadata": {},
+            "evidence": [
+              {
+                "file": "repo-scan",
+                "line": 1,
+                "evidence": "inferred adjacency"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Convention profile based on discovered coding patterns and practices.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "security",
+            "rule": "Avoid using session_start/$_SESSION directly for session management.",
+            "confidence": 0.6,
+            "examples": [],
+            "counterexamples": [],
+            "provenance": [
+              {
+                "file": "controllers/AuthController.php",
+                "line": 1,
+                "evidence": "PHP-STATE-002: session_start/$_SESSION usage detected."
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Consider using a more secure session management mechanism."
+        ],
+        "scaffold_templates": []
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "Health assessment of the Synthetix project based on maintainability, security, reliability, and testability.",
+        "scores": {
+          "maintainability": 70,
+          "security": 60,
+          "reliability": 75,
+          "testability": 65
+        },
+        "hotspots": [
+          {
+            "scope": "session_migration_strategy",
+            "reason": "Session-coupled workflow state may hide business invariants.",
+            "severity": "medium",
+            "confidence": 0.6,
+            "provenance": [
+              {
+                "file": "controllers/AuthController.php",
+                "line": 1,
+                "evidence": "Session-coupled workflow state may hide business invariants."
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Session Management Risk",
+            "description": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+            "severity": "high",
+            "confidence": 0.6
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "rb-1",
+          "title": "Improve Session Management",
+          "problem_statement": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+          "scope": [
+            "controllers/AuthController.php"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities due to improper session handling.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [],
+          "suggested_approach": "Implement a secure session management library or framework.",
+          "success_criteria": [
+            "All session management is handled through a secure library.",
+            "No direct use of session_start/$_SESSION."
+          ],
+          "confidence": 0.6,
+          "provenance": [
+            {
+              "file": "controllers/AuthController.php",
+              "line": 1,
+              "evidence": "PHP-STATE-002: session_start/$_SESSION usage detected."
+            }
+          ]
+        }
+      ]
+    },
+    "tokens_used": 3806,
+    "latency_ms": 8197.390079498291,
+    "logs": [
+      "[System Intelligence Layer] Starting SIL generation...",
+      "[System Intelligence Layer] SIL artifacts generated from structured LLM response"
+    ]
+  },
+  "pipeline_state": {
+    "business_objectives": "Build from Discover baseline",
+    "legacy_code": "",
+    "modernization_language": "",
+    "database_source": "",
+    "database_target": "",
+    "database_schema": "",
+    "use_case": "code_modernization",
+    "deployment_target": "local",
+    "cloud_config": {},
+    "human_approval": true,
+    "strict_security_mode": false,
+    "sil_ready": true,
+    "sil_output": {
+      "system_context_model": {
+        "version": "1.0",
+        "summary": "This model represents the discovered components and their interactions within the Synthetix project.",
+        "nodes": [
+          {
+            "id": "node-1",
+            "type": "Component",
+            "name": "AuthController",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "controllers/AuthController.php",
+                "line": 1,
+                "evidence": "Candidate domain 'Authentication and Access' identified."
+              }
+            ]
+          },
+          {
+            "id": "node-2",
+            "type": "Service",
+            "name": "AuthenticationService",
+            "metadata": {},
+            "confidence": 0.95,
+            "provenance": [
+              {
+                "file": "controllers/AuthController.php",
+                "line": 1,
+                "evidence": "Bounded context 'Authentication and Access' \u2192 service: AuthenticationService."
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "type": "DEPENDS_ON",
+            "from": "node-1",
+            "to": "node-2",
+            "directionality": "directed",
+            "confidence": 0.55,
+            "protocol_metadata": {},
+            "evidence": [
+              {
+                "file": "repo-scan",
+                "line": 1,
+                "evidence": "inferred adjacency"
+              }
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "convention_profile": {
+        "version": "1.0",
+        "summary": "Convention profile based on discovered coding patterns and practices.",
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "security",
+            "rule": "Avoid using session_start/$_SESSION directly for session management.",
+            "confidence": 0.6,
+            "examples": [],
+            "counterexamples": [],
+            "provenance": [
+              {
+                "file": "controllers/AuthController.php",
+                "line": 1,
+                "evidence": "PHP-STATE-002: session_start/$_SESSION usage detected."
+              }
+            ]
+          }
+        ],
+        "lint_recommendations": [
+          "Consider using a more secure session management mechanism."
+        ],
+        "scaffold_templates": []
+      },
+      "health_assessment": {
+        "version": "1.0",
+        "summary": "Health assessment of the Synthetix project based on maintainability, security, reliability, and testability.",
+        "scores": {
+          "maintainability": 70,
+          "security": 60,
+          "reliability": 75,
+          "testability": 65
+        },
+        "hotspots": [
+          {
+            "scope": "session_migration_strategy",
+            "reason": "Session-coupled workflow state may hide business invariants.",
+            "severity": "medium",
+            "confidence": 0.6,
+            "provenance": [
+              {
+                "file": "controllers/AuthController.php",
+                "line": 1,
+                "evidence": "Session-coupled workflow state may hide business invariants."
+              }
+            ]
+          }
+        ],
+        "risks": [
+          {
+            "title": "Session Management Risk",
+            "description": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+            "severity": "high",
+            "confidence": 0.6
+          }
+        ]
+      },
+      "remediation_backlog": [
+        {
+          "id": "rb-1",
+          "title": "Improve Session Management",
+          "problem_statement": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+          "scope": [
+            "controllers/AuthController.php"
+          ],
+          "risk_if_unaddressed": "Potential security vulnerabilities due to improper session handling.",
+          "effort": "M",
+          "severity": "high",
+          "dependencies": [],
+          "suggested_approach": "Implement a secure session management library or framework.",
+          "success_criteria": [
+            "All session management is handled through a secure library.",
+            "No direct use of session_start/$_SESSION."
+          ],
+          "confidence": 0.6,
+          "provenance": [
+            {
+              "file": "controllers/AuthController.php",
+              "line": 1,
+              "evidence": "PHP-STATE-002: session_start/$_SESSION usage detected."
+            }
+          ]
+        }
+      ]
+    },
+    "system_context_model": {
+      "version": "1.0",
+      "summary": "This model represents the discovered components and their interactions within the Synthetix project.",
+      "nodes": [
+        {
+          "id": "node-1",
+          "type": "Component",
+          "name": "AuthController",
+          "metadata": {},
+          "confidence": 0.95,
+          "provenance": [
+            {
+              "file": "controllers/AuthController.php",
+              "line": 1,
+              "evidence": "Candidate domain 'Authentication and Access' identified."
+            }
+          ]
+        },
+        {
+          "id": "node-2",
+          "type": "Service",
+          "name": "AuthenticationService",
+          "metadata": {},
+          "confidence": 0.95,
+          "provenance": [
+            {
+              "file": "controllers/AuthController.php",
+              "line": 1,
+              "evidence": "Bounded context 'Authentication and Access' \u2192 service: AuthenticationService."
+            }
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "type": "DEPENDS_ON",
+          "from": "node-1",
+          "to": "node-2",
+          "directionality": "directed",
+          "confidence": 0.55,
+          "protocol_metadata": {},
+          "evidence": [
+            {
+              "file": "repo-scan",
+              "line": 1,
+              "evidence": "inferred adjacency"
+            }
+          ]
+        }
+      ],
+      "unknowns": []
+    },
+    "convention_profile": {
+      "version": "1.0",
+      "summary": "Convention profile based on discovered coding patterns and practices.",
+      "rules": [
+        {
+          "id": "rule-1",
+          "category": "security",
+          "rule": "Avoid using session_start/$_SESSION directly for session management.",
+          "confidence": 0.6,
+          "examples": [],
+          "counterexamples": [],
+          "provenance": [
+            {
+              "file": "controllers/AuthController.php",
+              "line": 1,
+              "evidence": "PHP-STATE-002: session_start/$_SESSION usage detected."
+            }
+          ]
+        }
+      ],
+      "lint_recommendations": [
+        "Consider using a more secure session management mechanism."
+      ],
+      "scaffold_templates": []
+    },
+    "health_assessment": {
+      "version": "1.0",
+      "summary": "Health assessment of the Synthetix project based on maintainability, security, reliability, and testability.",
+      "scores": {
+        "maintainability": 70,
+        "security": 60,
+        "reliability": 75,
+        "testability": 65
+      },
+      "hotspots": [
+        {
+          "scope": "session_migration_strategy",
+          "reason": "Session-coupled workflow state may hide business invariants.",
+          "severity": "medium",
+          "confidence": 0.6,
+          "provenance": [
+            {
+              "file": "controllers/AuthController.php",
+              "line": 1,
+              "evidence": "Session-coupled workflow state may hide business invariants."
+            }
+          ]
+        }
+      ],
+      "risks": [
+        {
+          "title": "Session Management Risk",
+          "description": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+          "severity": "high",
+          "confidence": 0.6
+        }
+      ]
+    },
+    "remediation_backlog": [
+      {
+        "id": "rb-1",
+        "title": "Improve Session Management",
+        "problem_statement": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+        "scope": [
+          "controllers/AuthController.php"
+        ],
+        "risk_if_unaddressed": "Potential security vulnerabilities due to improper session handling.",
+        "effort": "M",
+        "severity": "high",
+        "dependencies": [],
+        "suggested_approach": "Implement a secure session management library or framework.",
+        "success_criteria": [
+          "All session management is handled through a secure library.",
+          "No direct use of session_start/$_SESSION."
+        ],
+        "confidence": 0.6,
+        "provenance": [
+          {
+            "file": "controllers/AuthController.php",
+            "line": 1,
+            "evidence": "PHP-STATE-002: session_start/$_SESSION usage detected."
+          }
+        ]
+      }
+    ],
+    "context_vault_ref": {
+      "vault_path": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/Synthetix/codex-synthetix-ui-v2-claude/2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c/20260414T183613Z_discover_20260414_183300_ab9211a6",
+      "repo": "Synthetix",
+      "branch": "codex-synthetix-ui-v2-claude",
+      "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+      "version_id": "20260414T183613Z_discover_20260414_183300_ab9211a6",
+      "manifest_path": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/Synthetix/codex-synthetix-ui-v2-claude/2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c/20260414T183613Z_discover_20260414_183300_ab9211a6/manifest.json",
+      "delta": {
+        "status": "updated",
+        "node_delta": 2,
+        "edge_delta": 1,
+        "rule_delta": 1,
+        "backlog_delta": 1
+      },
+      "graph_summary": {
+        "version_id": "20260414T183613Z_discover_20260414_183300_ab9211a6",
+        "repo": "Synthetix",
+        "branch": "codex-synthetix-ui-v2-claude",
+        "static_nodes": 2,
+        "static_edges": 1,
+        "db_path": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/context_graph.db"
+      },
+      "graph_db_path": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/context_graph.db",
+      "contract_bundle_path": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/Synthetix/codex-synthetix-ui-v2-claude/2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c/20260414T183613Z_discover_20260414_183300_ab9211a6/contract_bundle",
+      "contract_paths": {
+        "system_context_model": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/Synthetix/codex-synthetix-ui-v2-claude/2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c/20260414T183613Z_discover_20260414_183300_ab9211a6/contract_bundle/system_context_model.json",
+        "convention_profile": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/Synthetix/codex-synthetix-ui-v2-claude/2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c/20260414T183613Z_discover_20260414_183300_ab9211a6/contract_bundle/convention_profile.json",
+        "health_assessment_bundle": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/Synthetix/codex-synthetix-ui-v2-claude/2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c/20260414T183613Z_discover_20260414_183300_ab9211a6/contract_bundle/health_assessment_bundle.json",
+        "context_bundle": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/Synthetix/codex-synthetix-ui-v2-claude/2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c/20260414T183613Z_discover_20260414_183300_ab9211a6/contract_bundle/context_bundle.json",
+        "validation_report": "/Users/vishak/Projects/Codex Projects/Synthetix/context_vault/Synthetix/codex-synthetix-ui-v2-claude/2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c/20260414T183613Z_discover_20260414_183300_ab9211a6/contract_bundle/validation_report.json"
+      }
+    },
+    "agent_results": [
+      {
+        "agent_name": "System Intelligence Layer",
+        "stage": 0,
+        "status": "success",
+        "summary": "SIL ready: 2 nodes, 1 edges, 1 conventions, 1 remediation items",
+        "output": {
+          "context_reference": {
+            "version_id": "20260414T183613Z_discover_20260414_183300_ab9211a6",
+            "repo": "Synthetix",
+            "branch": "codex-synthetix-ui-v2-claude",
+            "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c"
+          },
+          "context_bundle": {
+            "bundle_id": "11b6c51b551242eb818ad1d9d12ef86d",
+            "created_at": "2026-04-14T18:36:13.925254+00:00",
+            "repo_ref": {
+              "provider": "other",
+              "repo_url": "Synthetix",
+              "default_branch": "codex-synthetix-ui-v2-claude",
+              "branch": "codex-synthetix-ui-v2-claude",
+              "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+              "subpath": ""
+            },
+            "artifacts": [
+              {
+                "artifact_type": "system_context_model",
+                "artifact_id": "2941a7aa0b0a4d86b83352c6f3af7ca0",
+                "digest": "sha256:ab9abe04a9c97c8997a7971c0bfd0164dce7f401394685667a8be06564adc1cf",
+                "uri": "system_context_model.json"
+              },
+              {
+                "artifact_type": "convention_profile",
+                "artifact_id": "e251d72c0ddd4c7895a76548f7a16b18",
+                "digest": "sha256:c91986b1cc600f20acf5437666c327be9a249457fedd39f1241d6f289b3a4763",
+                "uri": "convention_profile.json"
+              },
+              {
+                "artifact_type": "health_assessment_bundle",
+                "artifact_id": "1467181d242b470ca6aeb7ce225044c0",
+                "digest": "sha256:0dacee57ddc2523ea2a3d56bdaa68b82f57d35b0e80158ddfd1043fd4e31a388",
+                "uri": "health_assessment_bundle.json"
+              }
+            ],
+            "policy_pack": {
+              "id": "brownfield-context-first",
+              "version": "1.0",
+              "labels": {
+                "governance": "enabled",
+                "hard_gates": "true"
+              }
+            },
+            "constraints": {
+              "require_context_bundle_for_downstream": true,
+              "immutable_artifacts": true,
+              "no_inplace_mutation": true
+            },
+            "run_context_bundle_ref": {
+              "bundle_id": "runctx-119e54a4e2f1b272",
+              "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+              "delivery_constitution_id": "const-f31ebbcc1bb1",
+              "workspace": "default-workspace",
+              "project": "default-project"
+            },
+            "knowledge_snapshot": {
+              "source_version_ids": [],
+              "source_count": 0
+            }
+          },
+          "contract_validation": {
+            "generated_at": "2026-04-14T18:36:13.928992+00:00",
+            "schema_issues": [],
+            "semantic_issues": [],
+            "is_valid": true,
+            "severity": "ok"
+          },
+          "system_context_model": {
+            "version": "1.0",
+            "summary": "This model represents the discovered components and their interactions within the Synthetix project.",
+            "nodes": [
+              {
+                "id": "node-1",
+                "type": "Component",
+                "name": "AuthController",
+                "metadata": {},
+                "confidence": 0.95,
+                "provenance": [
+                  {
+                    "file": "controllers/AuthController.php",
+                    "line": 1,
+                    "evidence": "Candidate domain 'Authentication and Access' identified."
+                  }
+                ]
+              },
+              {
+                "id": "node-2",
+                "type": "Service",
+                "name": "AuthenticationService",
+                "metadata": {},
+                "confidence": 0.95,
+                "provenance": [
+                  {
+                    "file": "controllers/AuthController.php",
+                    "line": 1,
+                    "evidence": "Bounded context 'Authentication and Access' \u2192 service: AuthenticationService."
+                  }
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "type": "DEPENDS_ON",
+                "from": "node-1",
+                "to": "node-2",
+                "directionality": "directed",
+                "confidence": 0.55,
+                "protocol_metadata": {},
+                "evidence": [
+                  {
+                    "file": "repo-scan",
+                    "line": 1,
+                    "evidence": "inferred adjacency"
+                  }
+                ]
+              }
+            ],
+            "unknowns": []
+          },
+          "convention_profile": {
+            "version": "1.0",
+            "summary": "Convention profile based on discovered coding patterns and practices.",
+            "rules": [
+              {
+                "id": "rule-1",
+                "category": "security",
+                "rule": "Avoid using session_start/$_SESSION directly for session management.",
+                "confidence": 0.6,
+                "examples": [],
+                "counterexamples": [],
+                "provenance": [
+                  {
+                    "file": "controllers/AuthController.php",
+                    "line": 1,
+                    "evidence": "PHP-STATE-002: session_start/$_SESSION usage detected."
+                  }
+                ]
+              }
+            ],
+            "lint_recommendations": [
+              "Consider using a more secure session management mechanism."
+            ],
+            "scaffold_templates": []
+          },
+          "health_assessment": {
+            "version": "1.0",
+            "summary": "Health assessment of the Synthetix project based on maintainability, security, reliability, and testability.",
+            "scores": {
+              "maintainability": 70,
+              "security": 60,
+              "reliability": 75,
+              "testability": 65
+            },
+            "hotspots": [
+              {
+                "scope": "session_migration_strategy",
+                "reason": "Session-coupled workflow state may hide business invariants.",
+                "severity": "medium",
+                "confidence": 0.6,
+                "provenance": [
+                  {
+                    "file": "controllers/AuthController.php",
+                    "line": 1,
+                    "evidence": "Session-coupled workflow state may hide business invariants."
+                  }
+                ]
+              }
+            ],
+            "risks": [
+              {
+                "title": "Session Management Risk",
+                "description": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+                "severity": "high",
+                "confidence": 0.6
+              }
+            ]
+          },
+          "remediation_backlog": [
+            {
+              "id": "rb-1",
+              "title": "Improve Session Management",
+              "problem_statement": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+              "scope": [
+                "controllers/AuthController.php"
+              ],
+              "risk_if_unaddressed": "Potential security vulnerabilities due to improper session handling.",
+              "effort": "M",
+              "severity": "high",
+              "dependencies": [],
+              "suggested_approach": "Implement a secure session management library or framework.",
+              "success_criteria": [
+                "All session management is handled through a secure library.",
+                "No direct use of session_start/$_SESSION."
+              ],
+              "confidence": 0.6,
+              "provenance": [
+                {
+                  "file": "controllers/AuthController.php",
+                  "line": 1,
+                  "evidence": "PHP-STATE-002: session_start/$_SESSION usage detected."
+                }
+              ]
+            }
+          ]
+        },
+        "tokens_used": 3806,
+        "latency_ms": 8197.390079498291,
+        "logs": [
+          "[System Intelligence Layer] Starting SIL generation...",
+          "[System Intelligence Layer] SIL artifacts generated from structured LLM response"
+        ]
+      }
+    ],
+    "current_stage": 0,
+    "pipeline_status": "running",
+    "total_tokens": 3806,
+    "total_latency_ms": 8197.390079498291,
+    "logs": [],
+    "run_id": "discover_20260414_183300_ab9211a6",
+    "integration_context": {
+      "database_context": {
+        "source_db": "",
+        "target_db": "",
+        "input_mode": "paste",
+        "schema_text": "",
+        "source_url": "",
+        "uploaded_asset": {},
+        "ingest_status": "pending",
+        "artifact_refs": []
+      },
+      "architecture_intent": {
+        "runtime_preference": "",
+        "deployment_preference": "",
+        "decomposition_preference": "",
+        "data_constraints": "",
+        "integration_constraints": "",
+        "nfr_priorities": "",
+        "ui_preference": ""
+      },
+      "run_context_snapshot": {
+        "bundle_id": "runctx-119e54a4e2f1b272",
+        "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+        "delivery_constitution_id": "const-f31ebbcc1bb1",
+        "selected_specialist_ids": []
+      }
+    },
+    "project_state_mode": "auto",
+    "project_state_detected": "",
+    "research_stage": {
+      "enabled": false,
+      "mode": "FULL_PACKAGE",
+      "execution_mode": "auto",
+      "selected_modules": [
+        "SYN-ART-RA-01",
+        "SYN-ART-RA-02",
+        "SYN-ART-RA-03",
+        "SYN-ART-RA-04",
+        "SYN-ART-RA-05",
+        "SYN-ART-RA-06"
+      ],
+      "require_approval": false,
+      "status": "disabled",
+      "llm": {
+        "available": true,
+        "provider": "openai",
+        "model": "gpt-4o",
+        "warning": ""
+      },
+      "run_id": "",
+      "package_id": "",
+      "generated_at": "",
+      "review_status": "pending",
+      "warning": ""
+    },
+    "team": {
+      "id": "custom-team-0f38161164",
+      "name": "Kotlin Modernization Team",
+      "description": "Reading Kotlin Code",
+      "stage_agent_ids": {
+        "1": "analyst-strategist"
+      },
+      "pipeline_steps": [
+        {
+          "step_id": "step-analyst",
+          "position": 1,
+          "role_key": "analyst",
+          "stage": 1,
+          "agent_id": "analyst-strategist",
+          "enabled": true
+        }
+      ],
+      "is_custom": true,
+      "team_order_analysis": {
+        "warnings": [],
+        "counts": {
+          "definite_issue": 0,
+          "likely_issue": 0,
+          "advisory": 0
+        },
+        "ordered_role_keys": [
+          "analyst"
+        ],
+        "ordered_stage_numbers": [
+          1
+        ],
+        "requested_pipeline_steps": [
+          {
+            "step_id": "step-analyst",
+            "position": 1,
+            "role_key": "analyst",
+            "stage": 1,
+            "agent_id": "analyst-strategist",
+            "enabled": true
+          }
+        ],
+        "effective_pipeline_steps": [
+          {
+            "step_id": "step-analyst",
+            "position": 1,
+            "role_key": "analyst",
+            "stage": 1,
+            "agent_id": "analyst-strategist",
+            "enabled": true
+          }
+        ],
+        "trimmed_pipeline_steps": [],
+        "trimmed_step_reasons": [],
+        "team_launch_source": "saved_team"
+      }
+    },
+    "team_id": "custom-team-0f38161164",
+    "team_name": "Kotlin Modernization Team",
+    "team_launch_source": "saved_team",
+    "stage_agent_ids": {
+      "1": "analyst-strategist"
+    },
+    "pipeline_steps": [
+      {
+        "step_id": "step-analyst",
+        "position": 1,
+        "role_key": "analyst",
+        "stage": 1,
+        "agent_id": "analyst-strategist",
+        "enabled": true
+      }
+    ],
+    "effective_pipeline_steps": [
+      {
+        "step_id": "step-analyst",
+        "position": 1,
+        "role_key": "analyst",
+        "stage": 1,
+        "agent_id": "analyst-strategist",
+        "enabled": true
+      }
+    ],
+    "trimmed_pipeline_steps": [],
+    "trimmed_step_reasons": [],
+    "team_order_analysis": {
+      "warnings": [],
+      "counts": {
+        "definite_issue": 0,
+        "likely_issue": 0,
+        "advisory": 0
+      },
+      "ordered_role_keys": [
+        "analyst"
+      ],
+      "ordered_stage_numbers": [
+        1
+      ],
+      "requested_pipeline_steps": [
+        {
+          "step_id": "step-analyst",
+          "position": 1,
+          "role_key": "analyst",
+          "stage": 1,
+          "agent_id": "analyst-strategist",
+          "enabled": true
+        }
+      ],
+      "effective_pipeline_steps": [
+        {
+          "step_id": "step-analyst",
+          "position": 1,
+          "role_key": "analyst",
+          "stage": 1,
+          "agent_id": "analyst-strategist",
+          "enabled": true
+        }
+      ],
+      "trimmed_pipeline_steps": [],
+      "trimmed_step_reasons": [],
+      "team_launch_source": "saved_team"
+    },
+    "pipeline_contract_status": {
+      "status": "ready",
+      "warnings": []
+    },
+    "agent_personas": {
+      "1": {
+        "agent_id": "analyst-strategist",
+        "display_name": "Strategic Analyst",
+        "persona": "Translate business ambiguity into structured, testable requirements with explicit acceptance criteria.",
+        "requirements_pack_profile": "requirements-pack-v2-general",
+        "requirements_pack_template": {}
+      }
+    },
+    "active_stage_numbers": [
+      1
+    ],
+    "current_step_index": 0,
+    "stop_after_stage": 0,
+    "released_stage_history": [],
+    "selected_architecture_option_id": "",
+    "architect_option_feedback_history": [],
+    "context_layer_status": "ready",
+    "sil_discovery": {
+      "repo_root": "/Users/vishak/Projects/Codex Projects/Synthetix",
+      "scanned_files": 450,
+      "content_fingerprint": "dfd25bfbd5230a31",
+      "language_counts": {
+        "other": 44,
+        "python": 230,
+        "markdown": 97,
+        "yaml": 3,
+        "json": 64,
+        "javascript": 12
+      },
+      "file_samples": [
+        "review-share.env.example",
+        "review-share.env",
+        ".DS_Store",
+        "config.py",
+        "requirements.txt",
+        "Dockerfile",
+        "README.md",
+        ".dockerignore",
+        ".gitignore",
+        ".python-version",
+        "docker-compose.yml",
+        "discover_run_JavaBankApp_2026-04-03.json",
+        "agent_personas/software-analyst.v1.0.0.json",
+        "agent_personas/runtime-intelligence-agent.v1.0.0.json",
+        "agent_personas/senior-banking-analyst.v1.2.0.json",
+        "web/server.py",
+        "web/.DS_Store",
+        "providers/base_provider.py",
+        "providers/registry.py",
+        "providers/__init__.py",
+        "providers/types.py",
+        "estimations/intake.py",
+        "estimations/service.py",
+        "estimations/kernel.py",
+        "estimations/__init__.py",
+        "estimations/types.py",
+        "estimations/storage.py",
+        "estimations/agent.py",
+        "estimations/calibration.py",
+        "tests/test_preview_deployer.py",
+        "tests/test_php_landscape.py",
+        "tests/test_magicbox_onboarding_demo.py",
+        "tests/test_render_profiles.py",
+        "tests/test_feedback_store_sqlite.py",
+        "tests/test_knowledge_proposals.py",
+        "tests/test_llm_openai_content.py",
+        "tests/test_architect_hld.py",
+        "tests/test_local_preview_runtime.py",
+        "tests/test_module_scope.py",
+        "tests/test_skill_feedback.py",
+        "tests/test_demo_namespace.py",
+        "tests/test_live_review_api.py",
+        "tests/run_stage_controls.test.mjs",
+        "tests/test_static_asset_cache_headers.py",
+        "tests/test_php_framework_detection.py",
+        "tests/test_large_repo_routing.py",
+        "tests/live_review_ui.test.mjs",
+        "tests/test_php_selector.py",
+        "tests/test_code_intelligence_live.py",
+        "tests/test_brd_test_automation_service.py",
+        "tests/module_scope_workbench.test.mjs",
+        "tests/test_export_architect_artifacts.py",
+        "tests/test_code_intelligence_integrations.py",
+        "tests/test_ui_scaffold_agent.py",
+        "tests/test_landscape_rules.py",
+        "tests/test_php_extractors.py",
+        "tests/test_schema_violation_detection.py",
+        "tests/test_brief_narrative_persistence.py",
+        "tests/test_propose.py",
+        "tests/test_estimation_service.py",
+        "tests/test_repo_scan_bundle.py",
+        "tests/test_estimation_types.py",
+        "tests/test_planning_agent.py",
+        "tests/test_developer_prereqs.py",
+        "tests/test_brief_narrative.py",
+        "tests/test_critique_taxonomy.py",
+        "tests/test_run_store.py",
+        "tests/discover_connect_ui.test.mjs",
+        "tests/test_team_store.py",
+        "tests/test_runtime_intelligence_service.py",
+        "tests/__init__.py",
+        "tests/docgen_scope_projection.test.mjs",
+        "tests/test_discover_connect_api.py",
+        "tests/test_php_hotspot_analysis.py",
+        "tests/test_repo_snapshot_artifacts.py",
+        "tests/test_php_ast_provider.py",
+        "tests/brd_test_automation_ui.test.mjs",
+        "tests/test_developer_plan.py",
+        "tests/test_screen_contracts.py",
+        "tests/docgen_php_brd.test.mjs",
+        "tests/test_analyst_coverage.py",
+        "tests/test_run_worker_flow.py",
+        "tests/test_estimation_api.py",
+        "tests/test_provenance_api.py",
+        "tests/test_developer_dispatch.py",
+        "tests/test_dependency_buckets.py",
+        "tests/test_estimation_agent.py",
+        "tests/docgen_java_brd.test.mjs",
+        "tests/test_interaction_agent.py",
+        "tests/test_wbs_generation_v1.py",
+        "tests/test_stage_critic.py",
+        "tests/test_database_engineer.py",
+        "tests/test_ui_scaffold.py",
+        "tests/test_system_intelligence.py",
+        "tests/test_benchmark.py",
+        "tests/test_architect_package.py",
+        "tests/test_file_chunk_manifest.py",
+        "tests/test_estimation_intake.py",
+        "tests/test_browser_harness.py",
+        "tests/test_scoring_v1.py",
+        "tests/test_legacy_skill_migration.py",
+        "tests/test_brd_test_automation_api.py",
+        "tests/test_php_raw_artifacts.py",
+        "tests/test_brief_narrative_endpoint.py",
+        "tests/test_php_parser.py",
+        "tests/test_knowledge_projection.py",
+        "tests/test_llm_fallback.py",
+        "tests/test_skill_forge.py",
+        "tests/test_php_markdown_summary.py",
+        "tests/test_llm_openai_responses.py",
+        "tests/test_java_landscape.py",
+        "tests/test_estimation_smoke.py",
+        "tests/test_php_docgen_smoke.py",
+        "tests/test_analysis_estimator.py",
+        "tests/research_agent_ui.test.mjs",
+        "tests/test_chunk_merge_coverage.py",
+        "tests/test_architect_handoff.py",
+        "tests/team_pipeline_ui_fallback.test.mjs",
+        "tests/test_research_agent_api.py",
+        "tests/test_php_summary_path.py",
+        "tests/test_chunk_manifest_vb6.py",
+        "tests/test_estimation_storage.py",
+        "tests/test_php_semantic_analysis.py",
+        "tests/test_eval_cache.py",
+        "tests/test_provenance_churn_metrics.py",
+        "tests/test_analyst_resilience.py",
+        "tests/test_research_agent_service.py",
+        "tests/test_code_intelligence_classifier.py",
+        ".review-share/ngrok.yml",
+        ".review-share/Caddyfile",
+        ".demo/.DS_Store",
+        ".demo/magicbox_onboarding_demo.sqlite3",
+        "skill_packs/publish_wave2.sh",
+        "skill_packs/publish_wave3.sh",
+        "skill_packs/publish_wave1.sh",
+        ".claude/settings.local.json",
+        "agents/validator.py",
+        "agents/interaction_agent.py",
+        "agents/database_engineer.py",
+        "agents/tester.py",
+        "agents/deployer.py",
+        "agents/__init__.py",
+        "agents/architect.py",
+        "agents/analyst.py",
+        "agents/planning.py",
+        "agents/system_intelligence.py",
+        "agents/ui_scaffold.py",
+        "agents/developer.py",
+        "agents/module_scope_selection.py",
+        "agents/base.py",
+        "agents/security_engineer.py",
+        "utils/analysis_estimator.py",
+        "utils/analyst_qa.py",
+        "utils/architect_hld_docx.py",
+        "utils/analyst_docx.py",
+        "utils/domain_packs.py",
+        "utils/browser_harness.py",
+        "utils/knowledge_store.py",
+        "utils/analyst_report.py",
+        "utils/php_routes.py",
+        "utils/knowledge_store_sqlite.py",
+        "utils/dag_synthesis.py",
+        "utils/cloud_deployer.py",
+        "utils/knowledge_projection.py",
+        "utils/php_validation.py",
+        "utils/architect_hld.py",
+        "utils/php_semantic_analysis.py",
+        "utils/research_agent_store.py",
+        "utils/analyst_aas.py",
+        "utils/php_controllers.py",
+        "utils/php_landscape.py",
+        "utils/runtime_intelligence_store.py",
+        "utils/work_item_store.py",
+        "utils/runtime_browser_harness_runner.mjs",
+        "utils/php_jobs.py",
+        "utils/delivery_constitution.py",
+        "utils/repo_componentizer.py",
+        "utils/markdown_common.py",
+        "utils/code_intelligence_classifier.py",
+        "utils/engagement_vault.py",
+        "utils/planning_artifact.py",
+        "utils/settings_store.py",
+        "utils/context_vault.py",
+        "utils/research_agent_service.py",
+        "utils/discovery_writeback.py",
+        "utils/stage_critic.py",
+        "utils/php_framework_detection.py",
+        "utils/knowledge_proposals.py",
+        "utils/developer_dispatch.py",
+        "utils/persona_registry.py",
+        "utils/repo_dependency_graph.py",
+        "utils/php_templates.py",
+        "utils/evidence_mode.py",
+        "utils/__init__.py",
+        "utils/llm.py",
+        "utils/php_parser.py",
+        "utils/architect_handoff.py",
+        "utils/brd_test_automation_service.py",
+        "utils/knowledge_gateway.py",
+        "utils/pipeline_steps.py",
+        "utils/code_intelligence_live.py",
+        "utils/context_graph.py",
+        "utils/research_agent_documents.py",
+        "utils/vb6_analysis.py",
+        "utils/interaction_intents.py",
+        "utils/java_modernization.py",
+        "utils/resource_library.py",
+        "utils/runtime_intelligence_service.py",
+        "utils/extractor_registry.py",
+        "utils/render_profiles.py",
+        "utils/knowledge_context_assembly.py",
+        "utils/php_ast_provider.py",
+        "utils/team_store.py",
+        "utils/php_auth.py",
+        "utils/php_sql.py",
+        "utils/screen_contracts.py",
+        "utils/php_sessions.py",
+        "utils/developer_templates.py",
+        "utils/artifacts.py",
+        "utils/preview_deployer.py"
+      ],
+      "endpoint_hints": [
+        "web/server.py::@app.get(",
+        "web/server.py::router.",
+        "web/server.py::Route(",
+        "web/server.py::FastAPI(",
+        "web/server.py::express(",
+        "tests/test_landscape_rules.py::router.",
+        "utils/context_vault.py::@app.get(",
+        "utils/context_vault.py::@app.post(",
+        "utils/context_vault.py::router.",
+        "utils/context_vault.py::Route(",
+        "utils/context_vault.py::FastAPI(",
+        "utils/context_vault.py::express(",
+        "utils/context_vault.py::HandleFunc(",
+        "utils/landscape_router.py::router.",
+        "assets/demo/magicbox_onboarding_demo/app.py::Route("
+      ],
+      "static_analysis": {
+        "version": "sa-v1",
+        "adapters": [
+          "python_ast",
+          "js_ts_parser",
+          "go_parser",
+          "config_parser"
+        ],
+        "stats": {
+          "files_scanned": 450,
+          "python_ast_files": 0,
+          "js_ts_files": 1,
+          "go_files": 0,
+          "config_files": 173,
+          "modules_analyzed": 1,
+          "import_edges": 0,
+          "routes": 0,
+          "infra_resources": 0,
+          "parse_errors": 0
+        },
+        "modules": [
+          {
+            "id": "module:playwright_browsers_chromium_headless_shell_1181_chrome_mac_resources_inspector_overlay_main_js",
+            "path": ".playwright-browsers/chromium_headless_shell-1181/chrome-mac/resources/inspector_overlay/main.js",
+            "language": "javascript",
+            "adapter": "js_ts_parser",
+            "import_count": 0,
+            "route_count": 0
+          }
+        ],
+        "import_graph": {
+          "edges": []
+        },
+        "route_surface": [],
+        "config_artifacts": [
+          {
+            "file": ".claude/settings.local.json",
+            "format": "json",
+            "top_level_keys": [
+              "permissions"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/pipeline/pipeline_spec.yaml",
+            "format": "yaml",
+            "top_level_keys": [
+              "version",
+              "name",
+              "artifacts",
+              "principles",
+              "stages"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "file": ".deliveryos/schemas/agent_result.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties",
+              "$defs"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/agent_task.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/analyst_report_v2.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties",
+              "$defs"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/artifact_index_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/business_rule_catalog_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/common.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "$defs"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/common_evidence_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/context_bundle.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties",
+              "$defs"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/convention_profile.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties",
+              "$defs"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/delivery_constitution_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/dependency_inventory_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/detector_findings_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/event_map_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/feedback_event.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/health_assessment_bundle.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties",
+              "$defs"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/legacy_inventory_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/sql_catalog_v1.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/schemas/system_context_model.schema.json",
+            "format": "json",
+            "top_level_keys": [
+              "$schema",
+              "$id",
+              "title",
+              "type",
+              "additionalProperties",
+              "required",
+              "properties",
+              "$defs"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".deliveryos/settings.json/settings_state.json",
+            "format": "json",
+            "top_level_keys": [
+              "version",
+              "updated_at",
+              "integrations",
+              "llm",
+              "policies",
+              "exceptions",
+              "rbac",
+              "audit_log"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/main/resources/application.yml",
+            "format": "yaml",
+            "top_level_keys": [
+              "server.port",
+              "server.servlet.context-path",
+              "spring.security.user.name",
+              "spring.security.user.password",
+              "spring"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/AddCustomer_1000.json",
+            "format": "json",
+            "top_level_keys": [
+              "contactDetails",
+              "customerAddress",
+              "customerNumber",
+              "firstName",
+              "lastName",
+              "middleName",
+              "status"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/AddCustomer_1001.json",
+            "format": "json",
+            "top_level_keys": [
+              "contactDetails",
+              "customerAddress",
+              "customerNumber",
+              "firstName",
+              "lastName",
+              "middleName",
+              "status"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/AddCustomer_1002.json",
+            "format": "json",
+            "top_level_keys": [
+              "contactDetails",
+              "customerAddress",
+              "customerNumber",
+              "firstName",
+              "lastName",
+              "middleName",
+              "status"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/addAccountInformation3000_Customer1001.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/addAccountInformation3001_Customer1001.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/addAccountInformation4000_Customer1002.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/addAccountInformation4001_Customer1002.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/addAccountInformation5000_Customer1000.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/src/test/resources/addAccountInformation5001_Customer1000.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/classes/application.yml",
+            "format": "yaml",
+            "top_level_keys": [
+              "server.port",
+              "server.servlet.context-path",
+              "spring.security.user.name",
+              "spring.security.user.password",
+              "spring"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/AddCustomer_1000.json",
+            "format": "json",
+            "top_level_keys": [
+              "contactDetails",
+              "customerAddress",
+              "customerNumber",
+              "firstName",
+              "lastName",
+              "middleName",
+              "status"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/AddCustomer_1001.json",
+            "format": "json",
+            "top_level_keys": [
+              "contactDetails",
+              "customerAddress",
+              "customerNumber",
+              "firstName",
+              "lastName",
+              "middleName",
+              "status"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/AddCustomer_1002.json",
+            "format": "json",
+            "top_level_keys": [
+              "contactDetails",
+              "customerAddress",
+              "customerNumber",
+              "firstName",
+              "lastName",
+              "middleName",
+              "status"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/addAccountInformation3000_Customer1001.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/addAccountInformation3001_Customer1001.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/addAccountInformation4000_Customer1002.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/addAccountInformation4001_Customer1002.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/addAccountInformation5000_Customer1000.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/JavaBankApp/target/test-classes/addAccountInformation5001_Customer1000.json",
+            "format": "json",
+            "top_level_keys": [
+              "accountBalance",
+              "accountCreated",
+              "accountNumber",
+              "accountStatus",
+              "accountType",
+              "bankInformation"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/JavaBankApp-brd_package_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "project_meta_ref",
+              "version_history_ref",
+              "context_ref",
+              "general_requirements_ref",
+              "module_registry_ref",
+              "module_dossier_refs",
+              "appendices_ref",
+              "ordered_sections",
+              "module_ordering",
+              "numbering_policy",
+              "render_policy",
+              "export_policy"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/JavaBankApp-brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/JavaBankApp-brd_render_manifest_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "template_ref",
+              "template_anchor_map_id",
+              "rendered_sections",
+              "table_counts",
+              "image_refs",
+              "placeholder_fill_status",
+              "docx_ref",
+              "pdf_ref",
+              "checksum",
+              "render_error"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_appendices_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "dependencies_and_integrations",
+              "issue_log",
+              "process_map_inventory",
+              "data_entities",
+              "data_entities_note"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_context_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "purpose",
+              "intended_audience",
+              "scope_in",
+              "scope_out",
+              "scope_note",
+              "assumptions",
+              "constraints",
+              "stakeholders",
+              "scope_validation",
+              "compliance_security_summary",
+              "dependencies",
+              "current_state_summary",
+              "target_state_summary",
+              "project_background",
+              "business_goals",
+              "definitions_and_acronyms"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_general_requirements_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "functional_requirements",
+              "non_functional_requirements",
+              "compliance_requirements",
+              "business_rules",
+              "display_requirements",
+              "validations",
+              "notifications",
+              "navigation_rules",
+              "shared_integrations",
+              "common_nonfunctional_notes"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_module_dossier_v1.json",
+            "format": "json",
+            "top_level_keys": [],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_module_registry_v1.json",
+            "format": "json",
+            "top_level_keys": [],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_package_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "project_meta_ref",
+              "version_history_ref",
+              "context_ref",
+              "general_requirements_ref",
+              "module_registry_ref",
+              "module_dossier_refs",
+              "appendices_ref",
+              "ordered_sections",
+              "module_ordering",
+              "numbering_policy",
+              "render_policy",
+              "export_policy"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_process_map_v1.json",
+            "format": "json",
+            "top_level_keys": [],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_project_meta_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "document_id",
+              "classification",
+              "version",
+              "version_date",
+              "client_name",
+              "project_name",
+              "program_name",
+              "owner_name",
+              "owner_role",
+              "reviewer_names",
+              "approver_names",
+              "template_family",
+              "generated_from_run_id",
+              "source_mode"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_render_manifest_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "template_ref",
+              "template_anchor_map_id",
+              "rendered_sections",
+              "table_counts",
+              "image_refs",
+              "placeholder_fill_status",
+              "docx_ref",
+              "pdf_ref",
+              "checksum",
+              "render_error"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_template_anchor_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "id",
+              "family",
+              "section_titles",
+              "table_headers"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/brd_version_history_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "rows"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/code_literal_scan.json",
+            "format": "json",
+            "top_level_keys": [
+              "status",
+              "total_fields",
+              "findings_count",
+              "by_severity",
+              "findings"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/data.json",
+            "format": "json",
+            "top_level_keys": [
+              "meta",
+              "qa",
+              "appendix_counts",
+              "decision_brief",
+              "decisions",
+              "backlog",
+              "projects",
+              "dependencies",
+              "events",
+              "sql_entries",
+              "rules",
+              "rule_consolidation",
+              "findings",
+              "sql_map_rows",
+              "procedure_summaries",
+              "mapped_forms",
+              "orphan_forms",
+              "excluded_forms",
+              "excluded_unique",
+              "excluded_or_unresolved_unique",
+              "active_form_profile",
+              "orphan_form_profile",
+              "active_form_keys",
+              "orphan_form_keys",
+              "risks",
+              "dep_map",
+              "form_traces",
+              "traceability",
+              "active_q",
+              "sprints",
+              "active_sprints",
+              "mdb_inventory",
+              "form_loc_profile",
+              "designer_loc_profile",
+              "connection_string_variants",
+              "module_global_inventory",
+              "module_inventory",
+              "dead_form_refs",
+              "dataenvironment_report_mapping",
+              "static_risk_detectors"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/domain_dossiers_v1.json",
+            "format": "json",
+            "top_level_keys": [],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/executive_brief_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "client_name",
+              "project_name",
+              "generated_at",
+              "scope_summary",
+              "current_state_summary",
+              "target_state_summary",
+              "readiness",
+              "counts",
+              "scope_filter_applied",
+              "later_phase_summary",
+              "blocking_decisions",
+              "top_risks",
+              "recommended_phasing"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T2/module_cards_v1.json",
+            "format": "json",
+            "top_level_keys": [],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_appendices_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "dependencies_and_integrations",
+              "issue_log",
+              "process_map_inventory",
+              "data_entities",
+              "data_entities_note"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_context_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "purpose",
+              "intended_audience",
+              "scope_in",
+              "scope_out",
+              "scope_note",
+              "assumptions",
+              "constraints",
+              "stakeholders",
+              "scope_validation",
+              "compliance_security_summary",
+              "dependencies",
+              "current_state_summary",
+              "target_state_summary",
+              "project_background",
+              "business_goals",
+              "definitions_and_acronyms"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_general_requirements_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "functional_requirements",
+              "non_functional_requirements",
+              "compliance_requirements",
+              "business_rules",
+              "display_requirements",
+              "validations",
+              "notifications",
+              "navigation_rules",
+              "shared_integrations",
+              "common_nonfunctional_notes"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_module_dossier_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "assumptions",
+              "blockers",
+              "business_purpose",
+              "business_rules",
+              "dependencies",
+              "display_requirements",
+              "evidence_refs",
+              "features",
+              "field_definitions",
+              "heading_title",
+              "interactions_with_module_ids",
+              "interactions_with_other_modules",
+              "module_id",
+              "narrative_overview",
+              "open_questions",
+              "postconditions",
+              "preconditions",
+              "primary_users",
+              "process_map_level_1_ref",
+              "process_map_level_2_ref",
+              "process_map_refs",
+              "user_stories"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_module_registry_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "business_name",
+              "business_purpose",
+              "confidence",
+              "dependencies",
+              "include_in_brd",
+              "module_id",
+              "module_kind",
+              "module_name_from_code",
+              "module_risks",
+              "narrative_overview",
+              "open_questions",
+              "primary_users",
+              "short_description",
+              "source_forms",
+              "source_refs",
+              "source_routes",
+              "state_key_name"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_package_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "project_meta_ref",
+              "version_history_ref",
+              "context_ref",
+              "general_requirements_ref",
+              "module_registry_ref",
+              "module_dossier_refs",
+              "appendices_ref",
+              "ordered_sections",
+              "module_ordering",
+              "numbering_policy",
+              "render_policy",
+              "export_policy"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_process_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "diagram_source",
+              "diagram_source_type",
+              "flow_steps",
+              "flow_summary",
+              "generated_at",
+              "image_ref",
+              "module_id",
+              "ref"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_project_meta_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "document_id",
+              "classification",
+              "version",
+              "version_date",
+              "client_name",
+              "project_name",
+              "program_name",
+              "owner_name",
+              "owner_role",
+              "reviewer_names",
+              "approver_names",
+              "template_family",
+              "generated_from_run_id",
+              "source_mode"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_render_manifest_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "template_ref",
+              "template_anchor_map_id",
+              "rendered_sections",
+              "table_counts",
+              "image_refs",
+              "placeholder_fill_status",
+              "docx_ref",
+              "pdf_ref",
+              "checksum"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_template_anchor_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "id",
+              "family",
+              "section_titles",
+              "table_headers"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/brd_version_history_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "rows"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/code_literal_scan.json",
+            "format": "json",
+            "top_level_keys": [
+              "status",
+              "total_fields",
+              "findings_count",
+              "by_severity",
+              "findings"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/data.json",
+            "format": "json",
+            "top_level_keys": [
+              "meta",
+              "qa",
+              "appendix_counts",
+              "decision_brief",
+              "decisions",
+              "backlog",
+              "projects",
+              "dependencies",
+              "events",
+              "sql_entries",
+              "rules",
+              "rule_consolidation",
+              "findings",
+              "sql_map_rows",
+              "procedure_summaries",
+              "mapped_forms",
+              "orphan_forms",
+              "excluded_forms",
+              "excluded_unique",
+              "excluded_or_unresolved_unique",
+              "active_form_profile",
+              "orphan_form_profile",
+              "active_form_keys",
+              "orphan_form_keys",
+              "risks",
+              "dep_map",
+              "form_traces",
+              "traceability",
+              "active_q",
+              "sprints",
+              "active_sprints",
+              "mdb_inventory",
+              "form_loc_profile",
+              "designer_loc_profile",
+              "connection_string_variants",
+              "module_global_inventory",
+              "module_inventory",
+              "dead_form_refs",
+              "dataenvironment_report_mapping",
+              "static_risk_detectors"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/domain_dossiers_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "dependencies",
+              "domain_name",
+              "dossier_id",
+              "key_risks",
+              "module_count",
+              "roles",
+              "route_count",
+              "scope_summary",
+              "sequencing_notes",
+              "session_keys",
+              "top_modules"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/executive_brief_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "client_name",
+              "project_name",
+              "generated_at",
+              "scope_summary",
+              "current_state_summary",
+              "target_state_summary",
+              "readiness",
+              "counts",
+              "scope_filter_applied",
+              "later_phase_summary",
+              "blocking_decisions",
+              "top_risks",
+              "recommended_phasing"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T3/module_cards_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "auth_signals",
+              "blockers",
+              "card_id",
+              "controller_name",
+              "domain_name",
+              "open_questions",
+              "process_flow",
+              "purpose",
+              "routes",
+              "scope_status",
+              "source_path",
+              "sql_touchpoints",
+              "title",
+              "top_features"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_appendices_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "dependencies_and_integrations",
+              "issue_log",
+              "process_map_inventory",
+              "data_entities",
+              "data_entities_note"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_context_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "purpose",
+              "intended_audience",
+              "scope_in",
+              "scope_out",
+              "scope_note",
+              "assumptions",
+              "constraints",
+              "stakeholders",
+              "scope_validation",
+              "compliance_security_summary",
+              "dependencies",
+              "current_state_summary",
+              "target_state_summary",
+              "project_background",
+              "business_goals",
+              "definitions_and_acronyms"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_general_requirements_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "functional_requirements",
+              "non_functional_requirements",
+              "compliance_requirements",
+              "business_rules",
+              "display_requirements",
+              "validations",
+              "notifications",
+              "navigation_rules",
+              "shared_integrations",
+              "common_nonfunctional_notes"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_module_dossier_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "assumptions",
+              "blockers",
+              "business_purpose",
+              "business_rules",
+              "dependencies",
+              "display_requirements",
+              "evidence_refs",
+              "features",
+              "field_definitions",
+              "heading_title",
+              "interactions_with_module_ids",
+              "interactions_with_other_modules",
+              "module_id",
+              "narrative_overview",
+              "open_questions",
+              "postconditions",
+              "preconditions",
+              "primary_users",
+              "process_map_level_1_ref",
+              "process_map_level_2_ref",
+              "process_map_refs",
+              "user_stories"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_module_registry_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "business_name",
+              "business_purpose",
+              "confidence",
+              "dependencies",
+              "include_in_brd",
+              "module_id",
+              "module_kind",
+              "module_name_from_code",
+              "module_risks",
+              "narrative_overview",
+              "open_questions",
+              "primary_users",
+              "short_description",
+              "source_forms",
+              "source_refs",
+              "source_routes",
+              "state_key_name"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_package_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "project_meta_ref",
+              "version_history_ref",
+              "context_ref",
+              "general_requirements_ref",
+              "module_registry_ref",
+              "module_dossier_refs",
+              "appendices_ref",
+              "ordered_sections",
+              "module_ordering",
+              "numbering_policy",
+              "render_policy",
+              "export_policy"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_process_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "diagram_source",
+              "diagram_source_type",
+              "flow_steps",
+              "flow_summary",
+              "generated_at",
+              "image_ref",
+              "module_id",
+              "ref"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_project_meta_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "document_id",
+              "classification",
+              "version",
+              "version_date",
+              "client_name",
+              "project_name",
+              "program_name",
+              "owner_name",
+              "owner_role",
+              "reviewer_names",
+              "approver_names",
+              "template_family",
+              "generated_from_run_id",
+              "source_mode"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_render_manifest_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "template_ref",
+              "template_anchor_map_id",
+              "rendered_sections",
+              "table_counts",
+              "image_refs",
+              "placeholder_fill_status",
+              "docx_ref",
+              "pdf_ref",
+              "checksum"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_template_anchor_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "id",
+              "family",
+              "section_titles",
+              "table_headers"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/brd_version_history_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "rows"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/code_literal_scan.json",
+            "format": "json",
+            "top_level_keys": [
+              "status",
+              "total_fields",
+              "findings_count",
+              "by_severity",
+              "findings"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/data.json",
+            "format": "json",
+            "top_level_keys": [
+              "meta",
+              "qa",
+              "appendix_counts",
+              "decision_brief",
+              "decisions",
+              "backlog",
+              "projects",
+              "dependencies",
+              "events",
+              "sql_entries",
+              "rules",
+              "rule_consolidation",
+              "findings",
+              "sql_map_rows",
+              "procedure_summaries",
+              "mapped_forms",
+              "orphan_forms",
+              "excluded_forms",
+              "excluded_unique",
+              "excluded_or_unresolved_unique",
+              "active_form_profile",
+              "orphan_form_profile",
+              "active_form_keys",
+              "orphan_form_keys",
+              "risks",
+              "dep_map",
+              "form_traces",
+              "traceability",
+              "active_q",
+              "sprints",
+              "active_sprints",
+              "mdb_inventory",
+              "form_loc_profile",
+              "designer_loc_profile",
+              "connection_string_variants",
+              "module_global_inventory",
+              "module_inventory",
+              "dead_form_refs",
+              "dataenvironment_report_mapping",
+              "static_risk_detectors"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/domain_dossiers_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "dependencies",
+              "domain_name",
+              "dossier_id",
+              "key_risks",
+              "module_count",
+              "roles",
+              "route_count",
+              "scope_summary",
+              "sequencing_notes",
+              "session_keys",
+              "top_modules"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/executive_brief_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "client_name",
+              "project_name",
+              "generated_at",
+              "scope_summary",
+              "current_state_summary",
+              "target_state_summary",
+              "readiness",
+              "counts",
+              "scope_filter_applied",
+              "later_phase_summary",
+              "blocking_decisions",
+              "top_risks",
+              "recommended_phasing"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T4/module_cards_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "auth_signals",
+              "blockers",
+              "card_id",
+              "controller_name",
+              "domain_name",
+              "open_questions",
+              "process_flow",
+              "purpose",
+              "routes",
+              "scope_status",
+              "source_path",
+              "sql_touchpoints",
+              "title",
+              "top_features"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_appendices_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "dependencies_and_integrations",
+              "issue_log",
+              "process_map_inventory",
+              "data_entities",
+              "data_entities_note"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_context_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "purpose",
+              "intended_audience",
+              "scope_in",
+              "scope_out",
+              "scope_note",
+              "assumptions",
+              "constraints",
+              "stakeholders",
+              "scope_validation",
+              "compliance_security_summary",
+              "dependencies",
+              "current_state_summary",
+              "target_state_summary",
+              "project_background",
+              "business_goals",
+              "definitions_and_acronyms"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_general_requirements_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "functional_requirements",
+              "non_functional_requirements",
+              "compliance_requirements",
+              "business_rules",
+              "display_requirements",
+              "validations",
+              "notifications",
+              "navigation_rules",
+              "shared_integrations",
+              "common_nonfunctional_notes"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_module_dossier_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "assumptions",
+              "blockers",
+              "business_purpose",
+              "business_rules",
+              "dependencies",
+              "display_requirements",
+              "evidence_refs",
+              "features",
+              "field_definitions",
+              "heading_title",
+              "interactions_with_module_ids",
+              "interactions_with_other_modules",
+              "module_id",
+              "narrative_overview",
+              "open_questions",
+              "postconditions",
+              "preconditions",
+              "primary_users",
+              "process_map_level_1_ref",
+              "process_map_level_2_ref",
+              "process_map_refs",
+              "user_stories"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_module_registry_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "business_name",
+              "business_purpose",
+              "confidence",
+              "dependencies",
+              "include_in_brd",
+              "module_id",
+              "module_kind",
+              "module_name_from_code",
+              "module_risks",
+              "narrative_overview",
+              "open_questions",
+              "primary_users",
+              "short_description",
+              "source_forms",
+              "source_refs",
+              "source_routes",
+              "state_key_name"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_package_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "project_meta_ref",
+              "version_history_ref",
+              "context_ref",
+              "general_requirements_ref",
+              "module_registry_ref",
+              "module_dossier_refs",
+              "appendices_ref",
+              "ordered_sections",
+              "module_ordering",
+              "numbering_policy",
+              "render_policy",
+              "export_policy"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_process_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "diagram_source",
+              "diagram_source_type",
+              "flow_steps",
+              "flow_summary",
+              "generated_at",
+              "image_ref",
+              "module_id",
+              "ref"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_project_meta_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "document_id",
+              "classification",
+              "version",
+              "version_date",
+              "client_name",
+              "project_name",
+              "program_name",
+              "owner_name",
+              "owner_role",
+              "reviewer_names",
+              "approver_names",
+              "template_family",
+              "generated_from_run_id",
+              "source_mode"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_render_manifest_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "template_ref",
+              "template_anchor_map_id",
+              "rendered_sections",
+              "table_counts",
+              "image_refs",
+              "placeholder_fill_status",
+              "docx_ref",
+              "pdf_ref",
+              "checksum"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_template_anchor_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "id",
+              "family",
+              "section_titles",
+              "table_headers"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/brd_version_history_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "rows"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/code_literal_scan.json",
+            "format": "json",
+            "top_level_keys": [
+              "status",
+              "total_fields",
+              "findings_count",
+              "by_severity",
+              "findings"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/data.json",
+            "format": "json",
+            "top_level_keys": [
+              "meta",
+              "qa",
+              "appendix_counts",
+              "decision_brief",
+              "decisions",
+              "backlog",
+              "projects",
+              "dependencies",
+              "events",
+              "sql_entries",
+              "rules",
+              "rule_consolidation",
+              "findings",
+              "sql_map_rows",
+              "procedure_summaries",
+              "mapped_forms",
+              "orphan_forms",
+              "excluded_forms",
+              "excluded_unique",
+              "excluded_or_unresolved_unique",
+              "active_form_profile",
+              "orphan_form_profile",
+              "active_form_keys",
+              "orphan_form_keys",
+              "risks",
+              "dep_map",
+              "form_traces",
+              "traceability",
+              "active_q",
+              "sprints",
+              "active_sprints",
+              "mdb_inventory",
+              "form_loc_profile",
+              "designer_loc_profile",
+              "connection_string_variants",
+              "module_global_inventory",
+              "module_inventory",
+              "dead_form_refs",
+              "dataenvironment_report_mapping",
+              "static_risk_detectors"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/domain_dossiers_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "dependencies",
+              "domain_name",
+              "dossier_id",
+              "key_risks",
+              "module_count",
+              "roles",
+              "route_count",
+              "scope_summary",
+              "sequencing_notes",
+              "session_keys",
+              "top_modules"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/executive_brief_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "client_name",
+              "project_name",
+              "generated_at",
+              "scope_summary",
+              "current_state_summary",
+              "target_state_summary",
+              "readiness",
+              "counts",
+              "scope_filter_applied",
+              "later_phase_summary",
+              "blocking_decisions",
+              "top_risks",
+              "recommended_phasing"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_fix_20260404T5/module_cards_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "auth_signals",
+              "blockers",
+              "card_id",
+              "controller_name",
+              "domain_name",
+              "open_questions",
+              "process_flow",
+              "purpose",
+              "routes",
+              "scope_status",
+              "source_path",
+              "sql_touchpoints",
+              "title",
+              "top_features"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_appendices_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "dependencies_and_integrations",
+              "issue_log",
+              "process_map_inventory",
+              "data_entities",
+              "data_entities_note"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_context_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "purpose",
+              "intended_audience",
+              "scope_in",
+              "scope_out",
+              "scope_note",
+              "assumptions",
+              "constraints",
+              "stakeholders",
+              "scope_validation",
+              "compliance_security_summary",
+              "dependencies",
+              "current_state_summary",
+              "target_state_summary",
+              "project_background",
+              "business_goals",
+              "definitions_and_acronyms"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_general_requirements_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "functional_requirements",
+              "non_functional_requirements",
+              "compliance_requirements",
+              "business_rules",
+              "display_requirements",
+              "validations",
+              "notifications",
+              "navigation_rules",
+              "shared_integrations",
+              "common_nonfunctional_notes"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_module_dossier_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "assumptions",
+              "blockers",
+              "business_purpose",
+              "business_rules",
+              "dependencies",
+              "display_requirements",
+              "evidence_refs",
+              "features",
+              "field_definitions",
+              "heading_title",
+              "interactions_with_module_ids",
+              "interactions_with_other_modules",
+              "module_id",
+              "narrative_overview",
+              "open_questions",
+              "postconditions",
+              "preconditions",
+              "primary_users",
+              "process_map_level_1_ref",
+              "process_map_level_2_ref",
+              "process_map_refs",
+              "user_stories"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_module_registry_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "business_name",
+              "business_purpose",
+              "confidence",
+              "dependencies",
+              "include_in_brd",
+              "module_id",
+              "module_kind",
+              "module_name_from_code",
+              "module_risks",
+              "narrative_overview",
+              "open_questions",
+              "primary_users",
+              "short_description",
+              "source_forms",
+              "source_refs",
+              "source_routes",
+              "state_key_name"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_package_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "project_meta_ref",
+              "version_history_ref",
+              "context_ref",
+              "general_requirements_ref",
+              "module_registry_ref",
+              "module_dossier_refs",
+              "appendices_ref",
+              "ordered_sections",
+              "module_ordering",
+              "numbering_policy",
+              "render_policy",
+              "export_policy"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_process_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "diagram_source",
+              "diagram_source_type",
+              "flow_steps",
+              "flow_summary",
+              "generated_at",
+              "image_ref",
+              "module_id",
+              "ref"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_project_meta_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "document_id",
+              "classification",
+              "version",
+              "version_date",
+              "client_name",
+              "project_name",
+              "program_name",
+              "owner_name",
+              "owner_role",
+              "reviewer_names",
+              "approver_names",
+              "template_family",
+              "generated_from_run_id",
+              "source_mode"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_render_manifest_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "template_ref",
+              "template_anchor_map_id",
+              "rendered_sections",
+              "table_counts",
+              "image_refs",
+              "placeholder_fill_status",
+              "docx_ref",
+              "pdf_ref",
+              "checksum"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_template_anchor_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "id",
+              "family",
+              "section_titles",
+              "table_headers"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/brd_version_history_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "rows"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/code_literal_scan.json",
+            "format": "json",
+            "top_level_keys": [
+              "status",
+              "total_fields",
+              "findings_count",
+              "by_severity",
+              "findings"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/data.json",
+            "format": "json",
+            "top_level_keys": [
+              "meta",
+              "qa",
+              "appendix_counts",
+              "decision_brief",
+              "decisions",
+              "backlog",
+              "projects",
+              "dependencies",
+              "events",
+              "sql_entries",
+              "rules",
+              "rule_consolidation",
+              "findings",
+              "sql_map_rows",
+              "procedure_summaries",
+              "mapped_forms",
+              "orphan_forms",
+              "excluded_forms",
+              "excluded_unique",
+              "excluded_or_unresolved_unique",
+              "active_form_profile",
+              "orphan_form_profile",
+              "active_form_keys",
+              "orphan_form_keys",
+              "risks",
+              "dep_map",
+              "form_traces",
+              "traceability",
+              "active_q",
+              "sprints",
+              "active_sprints",
+              "mdb_inventory",
+              "form_loc_profile",
+              "designer_loc_profile",
+              "connection_string_variants",
+              "module_global_inventory",
+              "module_inventory",
+              "dead_form_refs",
+              "dataenvironment_report_mapping",
+              "static_risk_detectors"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/domain_dossiers_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "dependencies",
+              "domain_name",
+              "dossier_id",
+              "key_risks",
+              "module_count",
+              "roles",
+              "route_count",
+              "scope_summary",
+              "sequencing_notes",
+              "session_keys",
+              "top_modules"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/executive_brief_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "client_name",
+              "project_name",
+              "generated_at",
+              "scope_summary",
+              "current_state_summary",
+              "target_state_summary",
+              "readiness",
+              "counts",
+              "scope_filter_applied",
+              "later_phase_summary",
+              "blocking_decisions",
+              "top_risks",
+              "recommended_phasing"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_issue_log_fix_20260404T1/module_cards_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "auth_signals",
+              "blockers",
+              "card_id",
+              "controller_name",
+              "domain_name",
+              "open_questions",
+              "process_flow",
+              "purpose",
+              "routes",
+              "scope_status",
+              "source_path",
+              "sql_touchpoints",
+              "title",
+              "top_features"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_appendices_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "dependencies_and_integrations",
+              "issue_log",
+              "process_map_inventory",
+              "data_entities",
+              "data_entities_note"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_context_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "purpose",
+              "intended_audience",
+              "scope_in",
+              "scope_out",
+              "scope_note",
+              "assumptions",
+              "constraints",
+              "stakeholders",
+              "scope_validation",
+              "compliance_security_summary",
+              "dependencies",
+              "current_state_summary",
+              "target_state_summary",
+              "project_background",
+              "business_goals",
+              "definitions_and_acronyms"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_general_requirements_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "functional_requirements",
+              "non_functional_requirements",
+              "compliance_requirements",
+              "business_rules",
+              "display_requirements",
+              "validations",
+              "notifications",
+              "navigation_rules",
+              "shared_integrations",
+              "common_nonfunctional_notes"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_module_dossier_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "assumptions",
+              "blockers",
+              "business_purpose",
+              "business_rules",
+              "dependencies",
+              "display_requirements",
+              "evidence_refs",
+              "features",
+              "field_definitions",
+              "heading_title",
+              "interactions_with_module_ids",
+              "interactions_with_other_modules",
+              "module_id",
+              "narrative_overview",
+              "open_questions",
+              "postconditions",
+              "preconditions",
+              "primary_users",
+              "process_map_level_1_ref",
+              "process_map_level_2_ref",
+              "process_map_refs",
+              "user_stories"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_module_registry_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "business_name",
+              "business_purpose",
+              "confidence",
+              "dependencies",
+              "include_in_brd",
+              "module_id",
+              "module_kind",
+              "module_name_from_code",
+              "module_risks",
+              "narrative_overview",
+              "open_questions",
+              "primary_users",
+              "short_description",
+              "source_forms",
+              "source_refs",
+              "source_routes",
+              "state_key_name"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_package_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "project_meta_ref",
+              "version_history_ref",
+              "context_ref",
+              "general_requirements_ref",
+              "module_registry_ref",
+              "module_dossier_refs",
+              "appendices_ref",
+              "ordered_sections",
+              "module_ordering",
+              "numbering_policy",
+              "render_policy",
+              "export_policy"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_process_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "diagram_source",
+              "diagram_source_type",
+              "flow_steps",
+              "flow_summary",
+              "generated_at",
+              "image_ref",
+              "module_id",
+              "ref"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_project_meta_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "document_id",
+              "classification",
+              "version",
+              "version_date",
+              "client_name",
+              "project_name",
+              "program_name",
+              "owner_name",
+              "owner_role",
+              "reviewer_names",
+              "approver_names",
+              "template_family",
+              "generated_from_run_id",
+              "source_mode"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_render_manifest_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "template_ref",
+              "template_anchor_map_id",
+              "rendered_sections",
+              "table_counts",
+              "image_refs",
+              "placeholder_fill_status",
+              "docx_ref",
+              "pdf_ref",
+              "checksum"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_template_anchor_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "id",
+              "family",
+              "section_titles",
+              "table_headers"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/brd_version_history_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "rows"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/code_literal_scan.json",
+            "format": "json",
+            "top_level_keys": [
+              "status",
+              "total_fields",
+              "findings_count",
+              "by_severity",
+              "findings"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/data.json",
+            "format": "json",
+            "top_level_keys": [
+              "meta",
+              "qa",
+              "appendix_counts",
+              "decision_brief",
+              "decisions",
+              "backlog",
+              "projects",
+              "dependencies",
+              "events",
+              "sql_entries",
+              "rules",
+              "rule_consolidation",
+              "findings",
+              "sql_map_rows",
+              "procedure_summaries",
+              "mapped_forms",
+              "orphan_forms",
+              "excluded_forms",
+              "excluded_unique",
+              "excluded_or_unresolved_unique",
+              "active_form_profile",
+              "orphan_form_profile",
+              "active_form_keys",
+              "orphan_form_keys",
+              "risks",
+              "dep_map",
+              "form_traces",
+              "traceability",
+              "active_q",
+              "sprints",
+              "active_sprints",
+              "mdb_inventory",
+              "form_loc_profile",
+              "designer_loc_profile",
+              "connection_string_variants",
+              "module_global_inventory",
+              "module_inventory",
+              "dead_form_refs",
+              "dataenvironment_report_mapping",
+              "static_risk_detectors"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/domain_dossiers_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "dependencies",
+              "domain_name",
+              "dossier_id",
+              "key_risks",
+              "module_count",
+              "roles",
+              "route_count",
+              "scope_summary",
+              "sequencing_notes",
+              "session_keys",
+              "top_modules"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/executive_brief_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "client_name",
+              "project_name",
+              "generated_at",
+              "scope_summary",
+              "current_state_summary",
+              "target_state_summary",
+              "readiness",
+              "counts",
+              "scope_filter_applied",
+              "later_phase_summary",
+              "blocking_decisions",
+              "top_risks",
+              "recommended_phasing"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/java_brd_polish_20260404T1/module_cards_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "auth_signals",
+              "blockers",
+              "card_id",
+              "controller_name",
+              "domain_name",
+              "open_questions",
+              "process_flow",
+              "purpose",
+              "routes",
+              "scope_status",
+              "source_path",
+              "sql_touchpoints",
+              "title",
+              "top_features"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/magicbox_brd_v4_appendices_20260407.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "dependencies_and_integrations",
+              "issue_log",
+              "process_map_inventory",
+              "data_entities",
+              "data_entities_note",
+              "inferred_roles",
+              "glossary"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/magicbox_brd_v4_general_requirements_20260407.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "functional_requirements",
+              "non_functional_requirements",
+              "compliance_requirements",
+              "business_rules",
+              "display_requirements",
+              "validations",
+              "notifications",
+              "shared_integrations"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/magicbox_brd_v4_qa_report_20260407.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/magicbox_onboarding_hotspot_brd_final_qa_20260407.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/magicbox_onboarding_hotspot_brd_qa_20260407.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/magicbox_onboarding_hotspot_brd_vnext_qa_20260407.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_20260409_bundle/brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_appendices_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "dependencies_and_integrations",
+              "issue_log",
+              "process_map_inventory",
+              "data_entities",
+              "data_entities_note",
+              "model_inventory",
+              "model_inventory_note",
+              "view_inventory",
+              "view_inventory_note",
+              "controller_model_mappings",
+              "controller_view_mappings",
+              "analysis_coverage",
+              "inferred_roles",
+              "glossary"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_context_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "purpose",
+              "intended_audience",
+              "scope_in",
+              "scope_out",
+              "scope_note",
+              "assumptions",
+              "constraints",
+              "stakeholders",
+              "scope_validation",
+              "compliance_security_summary",
+              "dependencies",
+              "current_state_summary",
+              "target_state_summary",
+              "project_background",
+              "business_goals",
+              "definitions_and_acronyms"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_general_requirements_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "functional_requirements",
+              "non_functional_requirements",
+              "compliance_requirements",
+              "business_rules",
+              "display_requirements",
+              "validations",
+              "notifications",
+              "shared_integrations"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_module_registry_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "business_name",
+              "confidence",
+              "hotspot_workflow_spec_id",
+              "include_in_brd",
+              "module_id",
+              "module_kind",
+              "module_name_from_code",
+              "short_description",
+              "source_forms",
+              "source_path",
+              "state_key_name"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_package_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "project_meta_ref",
+              "version_history_ref",
+              "context_ref",
+              "general_requirements_ref",
+              "module_registry_ref",
+              "module_dossier_refs",
+              "appendices_ref",
+              "ordered_sections",
+              "module_ordering",
+              "numbering_policy",
+              "render_policy",
+              "export_policy"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_process_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "diagram_source",
+              "diagram_source_type",
+              "flow_steps",
+              "flow_summary",
+              "generated_at",
+              "image_ref",
+              "module_id",
+              "ref"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_project_meta_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "document_id",
+              "classification",
+              "version",
+              "version_date",
+              "client_name",
+              "project_name",
+              "program_name",
+              "owner_name",
+              "owner_role",
+              "reviewer_names",
+              "approver_names",
+              "approval_signoff_rows",
+              "template_family",
+              "generated_from_run_id",
+              "source_mode"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_qa_report_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "status",
+              "blocking_errors",
+              "warnings",
+              "auto_fixes_applied",
+              "module_completeness_scores",
+              "render_checks",
+              "approval_readiness"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_render_manifest_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "template_ref",
+              "template_anchor_map_id",
+              "rendered_sections",
+              "table_counts",
+              "image_refs",
+              "placeholder_fill_status",
+              "docx_ref",
+              "pdf_ref",
+              "checksum"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_template_anchor_map_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "id",
+              "family",
+              "section_titles",
+              "table_headers"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/brd_version_history_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "rows"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/code_literal_scan.json",
+            "format": "json",
+            "top_level_keys": [
+              "status",
+              "total_fields",
+              "findings_count",
+              "by_severity",
+              "findings"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/domain_dossiers_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "dependencies",
+              "domain_name",
+              "dossier_id",
+              "key_risks",
+              "module_count",
+              "roles",
+              "route_count",
+              "scope_summary",
+              "sequencing_notes",
+              "session_keys",
+              "top_modules"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/executive_brief_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "artifact",
+              "document_title",
+              "client_name",
+              "project_name",
+              "generated_at",
+              "scope_summary",
+              "current_state_summary",
+              "target_state_summary",
+              "readiness",
+              "counts",
+              "scope_filter_applied",
+              "later_phase_summary",
+              "blocking_decisions",
+              "top_risks",
+              "recommended_phasing"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".demo/output/php_brd_pipeline_fix_20260409_work/out/module_cards_v1.json",
+            "format": "json",
+            "top_level_keys": [
+              "acceptance_criteria",
+              "auth_signals",
+              "blockers",
+              "card_id",
+              "controller_name",
+              "domain_name",
+              "open_questions",
+              "process_flow",
+              "purpose",
+              "routes",
+              "scope_status",
+              "source_path",
+              "sql_touchpoints",
+              "title",
+              "top_features"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".github/workflows/playwright-e2e.yml",
+            "format": "yaml",
+            "top_level_keys": [
+              "name",
+              "True",
+              "jobs"
+            ],
+            "confidence": 0.9
+          },
+          {
+            "file": ".playwright-browsers/chromium-1181/chrome-mac/Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/139.0.7258.5/Libraries/IwaKeyDistribution/manifest.json",
+            "format": "json",
+            "top_level_keys": [
+              "manifest_version",
+              "name",
+              "version",
+              "is_preloaded"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".playwright-browsers/chromium-1181/chrome-mac/Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/139.0.7258.5/Libraries/MEIPreload/manifest.json",
+            "format": "json",
+            "top_level_keys": [
+              "name",
+              "icons",
+              "version",
+              "manifest_version",
+              "update_url",
+              "description"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".playwright-browsers/chromium-1181/chrome-mac/Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/139.0.7258.5/Libraries/PrivacySandboxAttestationsPreloaded/manifest.json",
+            "format": "json",
+            "top_level_keys": [
+              "manifest_version",
+              "name",
+              "version",
+              "pre_installed"
+            ],
+            "confidence": 0.95
+          },
+          {
+            "file": ".playwright-browsers/chromium-1181/chrome-mac/Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/139.0.7258.5/Libraries/vk_swiftshader_icd.json",
+            "format": "json",
+            "top_level_keys": [
+              "file_format_version",
+              "ICD"
+            ],
+            "confidence": 0.95
+          }
+        ],
+        "infra_resources": [],
+        "parse_errors": []
+      }
+    },
+    "run_context_bundle": {
+      "bundle_id": "runctx-119e54a4e2f1b272",
+      "created_at": "2026-04-14T18:36:01.927913+00:00",
+      "run_id": "discover_20260414_183300_ab9211a6",
+      "workspace": "default-workspace",
+      "project": "default-project",
+      "actor": {
+        "email": "",
+        "role": "",
+        "display_name": ""
+      },
+      "stage_agent_ids": {
+        "1": "analyst-strategist"
+      },
+      "knowledge_context": {
+        "snapshot_id": "kctx-dff0dd8350cd555c",
+        "captured_at": "2026-04-14T18:36:01.925930+00:00",
+        "workspace": "default-workspace",
+        "project": "default-project",
+        "binding": {
+          "binding_id": "",
+          "policy_mode": "balanced",
+          "knowledge_set_ids": []
+        },
+        "stage_agent_keys": [
+          "analyst-strategist"
+        ],
+        "agent_policies": [
+          {
+            "agent_key": "analyst-strategist",
+            "brain_id": "",
+            "knowledge_set_ids": [],
+            "top_k": 8,
+            "citation_required": true,
+            "fallback_behavior": "ask_clarification",
+            "memory_scope": "project"
+          }
+        ],
+        "required_citation_agents": [
+          "analyst-strategist"
+        ],
+        "sets": [],
+        "sources": [],
+        "integrity": {
+          "snapshot_hash": "dff0dd8350cd555c6c6bbdc605e69ecdf157261528f903b0e8f81ca698b84d43",
+          "set_count": 0,
+          "source_count": 0,
+          "source_version_ids": []
+        }
+      },
+      "specialist_routing": {
+        "evaluated_at": "2026-04-14T18:36:01.927729+00:00",
+        "input_summary": {
+          "candidate_count": 3,
+          "artifact_signals": [],
+          "stage_agent_count": 1
+        },
+        "selected": [],
+        "selected_specialist_ids": [],
+        "selected_count": 0,
+        "dispatchable_count": 0,
+        "candidates": [
+          {
+            "specialist_id": "spec-e931bded99",
+            "name": "VB6 Data/ADO Specialist",
+            "domain": "vb6-data",
+            "linked_agent_key": "",
+            "route_target_agent_key": "analyst-strategist",
+            "tool_mode": "read_only",
+            "depth_tier": "deep",
+            "threshold": 2,
+            "score": 0,
+            "selected": false,
+            "dispatchable": true,
+            "matched_intents": [],
+            "matched_files": [],
+            "matched_artifacts": []
+          },
+          {
+            "specialist_id": "spec-40a77e35c4",
+            "name": "VB6 UI/Forms Specialist",
+            "domain": "vb6-ui",
+            "linked_agent_key": "",
+            "route_target_agent_key": "analyst-strategist",
+            "tool_mode": "read_only",
+            "depth_tier": "deep",
+            "threshold": 2,
+            "score": 0,
+            "selected": false,
+            "dispatchable": true,
+            "matched_intents": [],
+            "matched_files": [],
+            "matched_artifacts": []
+          },
+          {
+            "specialist_id": "spec-bb34581838",
+            "name": "VB6 UI Forms",
+            "domain": "vb6-ui",
+            "linked_agent_key": "",
+            "route_target_agent_key": "",
+            "tool_mode": "read_only",
+            "depth_tier": "standard",
+            "threshold": 1,
+            "score": 0,
+            "selected": false,
+            "dispatchable": false,
+            "matched_intents": [],
+            "matched_files": [],
+            "matched_artifacts": []
+          }
+        ]
+      },
+      "runtime_intelligence": {},
+      "delivery_constitution": {
+        "artifact_type": "delivery_constitution_v1",
+        "artifact_version": "1.0",
+        "created_at": "2026-04-14T18:36:01.927845+00:00",
+        "project_identity": {
+          "run_id": "discover_20260414_183300_ab9211a6",
+          "workspace": "default-workspace",
+          "project": "default-project",
+          "project_state": "unknown",
+          "use_case": "code_modernization",
+          "repo_ref": "",
+          "domain_pack_id": ""
+        },
+        "modernization_objective": "Build from Discover baseline",
+        "non_negotiables": [
+          "Preserve legacy behavior first; any deviation requires explicit approval and tests.",
+          "Every major requirement/risk must be traceable to extracted evidence artifacts.",
+          "Do not change data contracts without migration and rollback plans.",
+          "Block planning when unresolved blockers exist (scope, IAM, schema-key, compliance)."
+        ],
+        "orchestration_hints": [
+          {
+            "when": "VB6 form/control/event patterns detected (.frm/.frx/.bas/.cls)",
+            "route_to": "VB6 UI/Forms specialist",
+            "reason": "Preserve event behavior and control wiring parity."
+          },
+          {
+            "when": "SQL or ADO patterns detected (Recordset, Open, Execute, concatenated SQL)",
+            "route_to": "Data/SQL specialist",
+            "reason": "Prevent injection and data-contract regressions."
+          },
+          {
+            "when": "Security/compliance risk detected (credentials, auth gaps, missing constraints)",
+            "route_to": "Security/Compliance specialist",
+            "reason": "Force citation-backed remediation and blocking decisions."
+          }
+        ],
+        "checklists": {
+          "pre_change": [
+            "Confirm scope variant/project decision is recorded.",
+            "Verify source snapshot and context bundle IDs are pinned.",
+            "Review top blocking risks and required decisions before planning."
+          ],
+          "post_change": [
+            "Re-run QA structural and semantic gates.",
+            "Re-validate traceability links (event/sql/rule/risk).",
+            "Update delivery docs/artifacts for any changed behavior assumptions."
+          ]
+        },
+        "known_failure_modes": [
+          {
+            "id": "GEN-001",
+            "label": "Behavioral parity drift",
+            "pattern": "Modernized implementation diverges from legacy runtime behavior.",
+            "mitigation": "Use evidence-linked acceptance + regression parity checks."
+          },
+          {
+            "id": "GEN-002",
+            "label": "Data contract breakage",
+            "pattern": "Schema/API assumptions changed without migration controls.",
+            "mitigation": "Require approved migration plan and rollback evidence."
+          }
+        ],
+        "linked_artifacts": [
+          {
+            "name": "system_context_model",
+            "ref": "artifact://context/system_context_model"
+          },
+          {
+            "name": "convention_profile",
+            "ref": "artifact://context/convention_profile"
+          },
+          {
+            "name": "health_assessment",
+            "ref": "artifact://context/health_assessment_bundle"
+          },
+          {
+            "name": "analyst_report",
+            "ref": "artifact://analyst/report_v2"
+          }
+        ],
+        "agent_scope": {
+          "stage_agent_ids": {
+            "1": "analyst-strategist"
+          }
+        },
+        "knowledge_snapshot": {
+          "snapshot_id": "kctx-dff0dd8350cd555c",
+          "source_version_ids": [],
+          "source_count": 0,
+          "set_count": 0
+        },
+        "constitution_id": "const-f31ebbcc1bb1",
+        "integrity": {
+          "constitution_hash": "f31ebbcc1bb112ecda9f58843c44bdb60b51a739b8535798a5eab6f63f5f41c4",
+          "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+          "source_version_ids": []
+        }
+      },
+      "constraints": {
+        "snapshot_pinned": true,
+        "immutable_snapshot": true,
+        "disallow_latest_drift": true
+      },
+      "integrity": {
+        "bundle_hash": "119e54a4e2f1b272d77c4ebac60684f2fd2181a716f8c426172abcfe3c69d7b6",
+        "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+        "source_version_ids": [],
+        "delivery_constitution_id": "const-f31ebbcc1bb1",
+        "selected_specialist_ids": [],
+        "live_review_run_id": ""
+      },
+      "artifact_paths": {
+        "delivery_constitution_json": "run_artifacts/discover_20260414_183300_ab9211a6/context/delivery_constitution_v1.json",
+        "delivery_constitution_md": "run_artifacts/discover_20260414_183300_ab9211a6/context/delivery_constitution_v1.md"
+      }
+    },
+    "workflow_state": "DISCOVERING",
+    "discover_review": {
+      "overall_status": "PENDING",
+      "checks": [],
+      "blocking": [],
+      "unresolved_blocking": [],
+      "resolved_ids": [],
+      "waived_ids": [],
+      "updated_at": "2026-04-14T18:36:04.645961+00:00"
+    },
+    "pending_approval": null,
+    "next_stage_idx": 0,
+    "context_contracts": {
+      "system_context_model": {
+        "header": {
+          "artifact_id": "2941a7aa0b0a4d86b83352c6f3af7ca0",
+          "artifact_type": "system_context_model",
+          "schema_version": "1.0.0",
+          "created_at": "2026-04-14T18:36:13.924730+00:00",
+          "repo_ref": {
+            "provider": "other",
+            "repo_url": "Synthetix",
+            "default_branch": "codex-synthetix-ui-v2-claude",
+            "branch": "codex-synthetix-ui-v2-claude",
+            "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+            "subpath": ""
+          },
+          "generated_by": {
+            "agent_name": "System Intelligence Layer",
+            "agent_version": "1.0.0",
+            "model": "gpt-4o",
+            "tooling": [
+              "repo_scan",
+              "context_vault",
+              "context_graph"
+            ],
+            "run_id": "discover_20260414_183300_ab9211a6",
+            "stage_id": "context_layer",
+            "task_id": "ffd37f40397040b98289fad5c3622e92"
+          },
+          "parents": [],
+          "digest": "sha256:ab9abe04a9c97c8997a7971c0bfd0164dce7f401394685667a8be06564adc1cf",
+          "labels": {
+            "pipeline": "synthetix",
+            "run_id": "discover_20260414_183300_ab9211a6",
+            "bundle_version": "20260414T183613Z_discover_20260414_183300_ab9211a6"
+          }
+        },
+        "graph": {
+          "nodes": [
+            {
+              "id": "node-1",
+              "type": "component",
+              "name": "AuthController",
+              "description": "",
+              "labels": {
+                "source": "sil"
+              },
+              "language": "",
+              "repo_paths": [
+                "controllers/AuthController.php"
+              ],
+              "runtime": {},
+              "interfaces": [],
+              "data": {},
+              "attributes": {},
+              "evidence": [
+                {
+                  "kind": "file_span",
+                  "file": "controllers/AuthController.php"
+                }
+              ],
+              "confidence": {
+                "score": 0.95,
+                "rationale": "from SIL node extraction",
+                "signals": []
+              }
+            },
+            {
+              "id": "node-2",
+              "type": "service",
+              "name": "AuthenticationService",
+              "description": "",
+              "labels": {
+                "source": "sil"
+              },
+              "language": "",
+              "repo_paths": [
+                "controllers/AuthController.php"
+              ],
+              "runtime": {},
+              "interfaces": [],
+              "data": {},
+              "attributes": {},
+              "evidence": [
+                {
+                  "kind": "file_span",
+                  "file": "controllers/AuthController.php"
+                }
+              ],
+              "confidence": {
+                "score": 0.95,
+                "rationale": "from SIL node extraction",
+                "signals": []
+              }
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge:1",
+              "type": "depends_on",
+              "from": "node-1",
+              "to": "node-2",
+              "labels": {
+                "source": "sil"
+              },
+              "protocol": {},
+              "evidence": [
+                {
+                  "kind": "file_span",
+                  "file": "repo-scan"
+                }
+              ],
+              "confidence": {
+                "score": 0.55,
+                "rationale": "from SIL edge extraction",
+                "signals": []
+              }
+            }
+          ],
+          "statistics": {
+            "node_count": 2,
+            "edge_count": 1,
+            "languages": []
+          }
+        },
+        "views": {
+          "c4": {
+            "context": [],
+            "container": [],
+            "component": [],
+            "code": []
+          }
+        },
+        "unknowns": []
+      },
+      "convention_profile": {
+        "header": {
+          "artifact_id": "e251d72c0ddd4c7895a76548f7a16b18",
+          "artifact_type": "convention_profile",
+          "schema_version": "1.0.0",
+          "created_at": "2026-04-14T18:36:13.924899+00:00",
+          "repo_ref": {
+            "provider": "other",
+            "repo_url": "Synthetix",
+            "default_branch": "codex-synthetix-ui-v2-claude",
+            "branch": "codex-synthetix-ui-v2-claude",
+            "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+            "subpath": ""
+          },
+          "generated_by": {
+            "agent_name": "System Intelligence Layer",
+            "agent_version": "1.0.0",
+            "model": "gpt-4o",
+            "tooling": [
+              "repo_scan",
+              "context_vault",
+              "context_graph"
+            ],
+            "run_id": "discover_20260414_183300_ab9211a6",
+            "stage_id": "context_layer",
+            "task_id": "ffd37f40397040b98289fad5c3622e92"
+          },
+          "parents": [],
+          "digest": "sha256:c91986b1cc600f20acf5437666c327be9a249457fedd39f1241d6f289b3a4763",
+          "labels": {
+            "pipeline": "synthetix",
+            "run_id": "discover_20260414_183300_ab9211a6",
+            "bundle_version": "20260414T183613Z_discover_20260414_183300_ab9211a6"
+          }
+        },
+        "rules": [
+          {
+            "id": "rule-1",
+            "category": "authn_authz",
+            "title": "Avoid using session_start/$_SESSION directly for session management.",
+            "scope": {
+              "languages": [],
+              "file_globs": [],
+              "scm_node_ids": [],
+              "applies_to": "all"
+            },
+            "statement": "Avoid using session_start/$_SESSION directly for session management.",
+            "detection": {},
+            "enforcement": {},
+            "examples": [],
+            "counterexamples": [],
+            "evidence": [
+              {
+                "kind": "file_span",
+                "file": "controllers/AuthController.php"
+              }
+            ],
+            "confidence": {
+              "score": 0.6,
+              "rationale": "from convention extraction",
+              "signals": []
+            },
+            "exceptions": []
+          }
+        ],
+        "templates": [],
+        "overrides": []
+      },
+      "health_assessment_bundle": {
+        "header": {
+          "artifact_id": "1467181d242b470ca6aeb7ce225044c0",
+          "artifact_type": "health_assessment_bundle",
+          "schema_version": "1.0.0",
+          "created_at": "2026-04-14T18:36:13.925107+00:00",
+          "repo_ref": {
+            "provider": "other",
+            "repo_url": "Synthetix",
+            "default_branch": "codex-synthetix-ui-v2-claude",
+            "branch": "codex-synthetix-ui-v2-claude",
+            "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+            "subpath": ""
+          },
+          "generated_by": {
+            "agent_name": "System Intelligence Layer",
+            "agent_version": "1.0.0",
+            "model": "gpt-4o",
+            "tooling": [
+              "repo_scan",
+              "context_vault",
+              "context_graph"
+            ],
+            "run_id": "discover_20260414_183300_ab9211a6",
+            "stage_id": "context_layer",
+            "task_id": "ffd37f40397040b98289fad5c3622e92"
+          },
+          "parents": [],
+          "digest": "sha256:0dacee57ddc2523ea2a3d56bdaa68b82f57d35b0e80158ddfd1043fd4e31a388",
+          "labels": {
+            "pipeline": "synthetix",
+            "run_id": "discover_20260414_183300_ab9211a6",
+            "bundle_version": "20260414T183613Z_discover_20260414_183300_ab9211a6"
+          }
+        },
+        "summary": {
+          "overall_risk": {
+            "likelihood": 3,
+            "impact": 3,
+            "score": 9,
+            "tier": "medium",
+            "rationale": "moderate risk posture"
+          },
+          "key_themes": [
+            "Health assessment of the Synthetix project based on maintainability, security, reliability, and testability."
+          ],
+          "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+          "notes": "Generated from SIL health assessment and remediation backlog"
+        },
+        "signals": {
+          "scores": {
+            "maintainability": 70,
+            "security": 60,
+            "reliability": 75,
+            "testability": 65
+          },
+          "finding_count": 2,
+          "backlog_count": 1
+        },
+        "findings": [
+          {
+            "id": "F-HOT-001",
+            "type": "hotspot",
+            "severity": "medium",
+            "title": "Hotspot: session_migration_strategy",
+            "description": "Session-coupled workflow state may hide business invariants.",
+            "risk": {
+              "likelihood": 3,
+              "impact": 3,
+              "score": 9,
+              "tier": "medium",
+              "rationale": "hotspot severity"
+            },
+            "affected": {
+              "scm_node_ids": [
+                "session_migration_strategy"
+              ],
+              "paths": [
+                "session_migration_strategy"
+              ]
+            },
+            "evidence": [
+              {
+                "kind": "file_span",
+                "file": "controllers/AuthController.php"
+              }
+            ],
+            "suggested_remediation": "Prioritize stabilization and targeted tests",
+            "effort": {
+              "tshirt": "M",
+              "hours_range": [
+                16,
+                40
+              ],
+              "confidence": {
+                "score": 0.6,
+                "rationale": "estimated from artifact metadata",
+                "signals": []
+              }
+            },
+            "confidence": {
+              "score": 0.6,
+              "rationale": "from hotspot analysis",
+              "signals": []
+            }
+          },
+          {
+            "id": "F-RSK-001",
+            "type": "operational_risk",
+            "severity": "high",
+            "title": "Session Management Risk",
+            "description": "Direct use of session_start/$_SESSION can lead to security vulnerabilities.",
+            "risk": {
+              "likelihood": 4,
+              "impact": 4,
+              "score": 16,
+              "tier": "high",
+              "rationale": "risk item severity"
+            },
+            "affected": {
+              "scm_node_ids": [],
+              "paths": []
+            },
+            "evidence": [],
+            "suggested_remediation": "Mitigate through targeted remediation plan",
+            "effort": {
+              "tshirt": "S",
+              "hours_range": [
+                6,
+                16
+              ],
+              "confidence": {
+                "score": 0.6,
+                "rationale": "estimated from artifact metadata",
+                "signals": []
+              }
+            },
+            "confidence": {
+              "score": 0.6,
+              "rationale": "from risk analysis",
+              "signals": []
+            }
+          }
+        ],
+        "backlog": [
+          {
+            "id": "rb-1",
+            "title": "Improve Session Management",
+            "priority": "P1",
+            "business_value": "Potential security vulnerabilities due to improper session handling.",
+            "risk": {
+              "likelihood": 4,
+              "impact": 4,
+              "score": 16,
+              "tier": "high",
+              "rationale": "derived from backlog severity"
+            },
+            "effort": {
+              "tshirt": "M",
+              "hours_range": [
+                16,
+                40
+              ],
+              "confidence": {
+                "score": 0.6,
+                "rationale": "estimated from artifact metadata",
+                "signals": []
+              }
+            },
+            "linked_findings": [
+              "F-HOT-001"
+            ],
+            "scm_impact": {
+              "scm_node_ids": [
+                "node-1",
+                "node-2"
+              ],
+              "expected_edges_touched": []
+            },
+            "dependencies": [],
+            "plan": [
+              "Implement a secure session management library or framework"
+            ],
+            "acceptance_criteria": [
+              "All session management is handled through a secure library.",
+              "No direct use of session_start/$_SESSION."
+            ],
+            "owner_role": "Tech Lead",
+            "suggested_agent_roles": []
+          }
+        ],
+        "roadmap_options": {
+          "quick_wins": [
+            "rb-1"
+          ],
+          "stabilization": [
+            "rb-1"
+          ],
+          "modernization": [
+            "rb-1"
+          ]
+        }
+      },
+      "context_bundle": {
+        "bundle_id": "11b6c51b551242eb818ad1d9d12ef86d",
+        "created_at": "2026-04-14T18:36:13.925254+00:00",
+        "repo_ref": {
+          "provider": "other",
+          "repo_url": "Synthetix",
+          "default_branch": "codex-synthetix-ui-v2-claude",
+          "branch": "codex-synthetix-ui-v2-claude",
+          "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+          "subpath": ""
+        },
+        "artifacts": [
+          {
+            "artifact_type": "system_context_model",
+            "artifact_id": "2941a7aa0b0a4d86b83352c6f3af7ca0",
+            "digest": "sha256:ab9abe04a9c97c8997a7971c0bfd0164dce7f401394685667a8be06564adc1cf",
+            "uri": "system_context_model.json"
+          },
+          {
+            "artifact_type": "convention_profile",
+            "artifact_id": "e251d72c0ddd4c7895a76548f7a16b18",
+            "digest": "sha256:c91986b1cc600f20acf5437666c327be9a249457fedd39f1241d6f289b3a4763",
+            "uri": "convention_profile.json"
+          },
+          {
+            "artifact_type": "health_assessment_bundle",
+            "artifact_id": "1467181d242b470ca6aeb7ce225044c0",
+            "digest": "sha256:0dacee57ddc2523ea2a3d56bdaa68b82f57d35b0e80158ddfd1043fd4e31a388",
+            "uri": "health_assessment_bundle.json"
+          }
+        ],
+        "policy_pack": {
+          "id": "brownfield-context-first",
+          "version": "1.0",
+          "labels": {
+            "governance": "enabled",
+            "hard_gates": "true"
+          }
+        },
+        "constraints": {
+          "require_context_bundle_for_downstream": true,
+          "immutable_artifacts": true,
+          "no_inplace_mutation": true
+        },
+        "run_context_bundle_ref": {
+          "bundle_id": "runctx-119e54a4e2f1b272",
+          "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+          "delivery_constitution_id": "const-f31ebbcc1bb1",
+          "workspace": "default-workspace",
+          "project": "default-project"
+        },
+        "knowledge_snapshot": {
+          "source_version_ids": [],
+          "source_count": 0
+        }
+      }
+    },
+    "context_bundle": {
+      "bundle_id": "11b6c51b551242eb818ad1d9d12ef86d",
+      "created_at": "2026-04-14T18:36:13.925254+00:00",
+      "repo_ref": {
+        "provider": "other",
+        "repo_url": "Synthetix",
+        "default_branch": "codex-synthetix-ui-v2-claude",
+        "branch": "codex-synthetix-ui-v2-claude",
+        "commit_sha": "2d0cca7a54df64d1c73f40b2c8ddb9fe0a44fe2c",
+        "subpath": ""
+      },
+      "artifacts": [
+        {
+          "artifact_type": "system_context_model",
+          "artifact_id": "2941a7aa0b0a4d86b83352c6f3af7ca0",
+          "digest": "sha256:ab9abe04a9c97c8997a7971c0bfd0164dce7f401394685667a8be06564adc1cf",
+          "uri": "system_context_model.json"
+        },
+        {
+          "artifact_type": "convention_profile",
+          "artifact_id": "e251d72c0ddd4c7895a76548f7a16b18",
+          "digest": "sha256:c91986b1cc600f20acf5437666c327be9a249457fedd39f1241d6f289b3a4763",
+          "uri": "convention_profile.json"
+        },
+        {
+          "artifact_type": "health_assessment_bundle",
+          "artifact_id": "1467181d242b470ca6aeb7ce225044c0",
+          "digest": "sha256:0dacee57ddc2523ea2a3d56bdaa68b82f57d35b0e80158ddfd1043fd4e31a388",
+          "uri": "health_assessment_bundle.json"
+        }
+      ],
+      "policy_pack": {
+        "id": "brownfield-context-first",
+        "version": "1.0",
+        "labels": {
+          "governance": "enabled",
+          "hard_gates": "true"
+        }
+      },
+      "constraints": {
+        "require_context_bundle_for_downstream": true,
+        "immutable_artifacts": true,
+        "no_inplace_mutation": true
+      },
+      "run_context_bundle_ref": {
+        "bundle_id": "runctx-119e54a4e2f1b272",
+        "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+        "delivery_constitution_id": "const-f31ebbcc1bb1",
+        "workspace": "default-workspace",
+        "project": "default-project"
+      },
+      "knowledge_snapshot": {
+        "source_version_ids": [],
+        "source_count": 0
+      }
+    },
+    "context_contract_validation": {
+      "generated_at": "2026-04-14T18:36:13.928992+00:00",
+      "schema_issues": [],
+      "semantic_issues": [],
+      "is_valid": true,
+      "severity": "ok"
+    }
+  },
+  "stage_status": {
+    "1": "pending",
+    "2": "skipped_team",
+    "3": "skipped_team",
+    "4": "skipped_team",
+    "5": "skipped_team",
+    "6": "skipped_team",
+    "7": "skipped_team",
+    "8": "skipped_team",
+    "9": "skipped_team",
+    "10": "skipped_team",
+    "11": "skipped_team"
+  },
+  "progress_logs": [
+    "[14:36:04] \u25b6 Pipeline started (run_id=discover_20260414_183300_ab9211a6)",
+    "[14:36:04] \ud83d\udc65 Team selected: Kotlin Modernization Team",
+    "[14:36:04] \ud83e\udde9 Active build stages: 1",
+    "[14:36:04] \ud83e\udde0 System Intelligence Layer scheduled (SCM / CP / HA-RB)",
+    "[14:36:04] \ud83e\udded Specialist routing selected 0 profiles for current run context.",
+    "[14:36:04] \ud83d\udcac Stage collaboration enabled (chat, directives, proposals, decisions)",
+    "[14:36:04] \u23f3 Context Layer started: System Intelligence Layer (SIL)",
+    "[System Intelligence Layer] Starting SIL generation...",
+    "[System Intelligence Layer] SIL artifacts generated from structured LLM response",
+    "[14:36:13] \u2705 Context Layer ready: 20260414T183613Z_discover_20260414_183300_ab9211a6 (Synthetix@codex-synthetix-ui-v2-claude)"
+  ],
+  "progress_log_count": 10,
+  "saved_at": "2026-04-14T18:36:13.931501+00:00"
+}
