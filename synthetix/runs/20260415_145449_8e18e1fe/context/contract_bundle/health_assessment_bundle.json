@@ -1,0 +1,200 @@
+{
+  "header": {
+    "artifact_id": "bf011a758b3a4149b0c4c424043715eb",
+    "artifact_type": "health_assessment_bundle",
+    "schema_version": "1.0.0",
+    "created_at": "2026-04-15T18:55:17.566120+00:00",
+    "repo_ref": {
+      "provider": "other",
+      "repo_url": "Synthetix",
+      "default_branch": "codex-synthetix-ui-v2-claude",
+      "branch": "codex-synthetix-ui-v2-claude",
+      "commit_sha": "bacf6787913f33832c8306fb991ca21cd57d2746",
+      "subpath": ""
+    },
+    "generated_by": {
+      "agent_name": "System Intelligence Layer",
+      "agent_version": "1.0.0",
+      "model": "gpt-4o",
+      "tooling": [
+        "repo_scan",
+        "context_vault",
+        "context_graph"
+      ],
+      "run_id": "20260415_145449_8e18e1fe",
+      "stage_id": "context_layer",
+      "task_id": "74372d9fd06c42eb96f6c2441c59cdc1"
+    },
+    "parents": [],
+    "digest": "sha256:6e2508ca947b5579af1ec40376f5efd0113c91fdef501af3a550636b79b434fc",
+    "labels": {
+      "pipeline": "synthetix",
+      "run_id": "20260415_145449_8e18e1fe",
+      "bundle_version": "20260415T185516Z_20260415_145449_8e18e1fe"
+    }
+  },
+  "summary": {
+    "overall_risk": {
+      "likelihood": 3,
+      "impact": 3,
+      "score": 9,
+      "tier": "medium",
+      "rationale": "moderate risk posture"
+    },
+    "key_themes": [
+      "The health assessment provides an overview of the maintainability, security, reliability, and testability of the Synthetix project."
+    ],
+    "recommendation": "Prioritize P0/P1 remediation items and enforce convention gates in CI",
+    "notes": "Generated from SIL health assessment and remediation backlog"
+  },
+  "signals": {
+    "scores": {
+      "maintainability": 75,
+      "security": 70,
+      "reliability": 65,
+      "testability": 60
+    },
+    "finding_count": 2,
+    "backlog_count": 1
+  },
+  "findings": [
+    {
+      "id": "F-HOT-001",
+      "type": "hotspot",
+      "severity": "medium",
+      "title": "Hotspot: session_migration_strategy",
+      "description": "Session-coupled workflow state may hide business invariants.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "hotspot severity"
+      },
+      "affected": {
+        "scm_node_ids": [
+          "session_migration_strategy"
+        ],
+        "paths": [
+          "session_migration_strategy"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "file_span",
+          "file": "discovered-unknown"
+        }
+      ],
+      "suggested_remediation": "Prioritize stabilization and targeted tests",
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.6,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.6,
+        "rationale": "from hotspot analysis",
+        "signals": []
+      }
+    },
+    {
+      "id": "F-RSK-001",
+      "type": "operational_risk",
+      "severity": "medium",
+      "title": "Session Management Risk",
+      "description": "Session-coupled workflow state may hide business invariants, leading to potential security issues.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "risk item severity"
+      },
+      "affected": {
+        "scm_node_ids": [],
+        "paths": []
+      },
+      "evidence": [],
+      "suggested_remediation": "Mitigate through targeted remediation plan",
+      "effort": {
+        "tshirt": "S",
+        "hours_range": [
+          6,
+          16
+        ],
+        "confidence": {
+          "score": 0.7,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "confidence": {
+        "score": 0.7,
+        "rationale": "from risk analysis",
+        "signals": []
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "rb-1",
+      "title": "Refactor Session Management",
+      "priority": "P2",
+      "business_value": "Potential security vulnerabilities due to hidden business invariants.",
+      "risk": {
+        "likelihood": 3,
+        "impact": 3,
+        "score": 9,
+        "tier": "medium",
+        "rationale": "derived from backlog severity"
+      },
+      "effort": {
+        "tshirt": "M",
+        "hours_range": [
+          16,
+          40
+        ],
+        "confidence": {
+          "score": 0.8,
+          "rationale": "estimated from artifact metadata",
+          "signals": []
+        }
+      },
+      "linked_findings": [
+        "F-HOT-001"
+      ],
+      "scm_impact": {
+        "scm_node_ids": [],
+        "expected_edges_touched": []
+      },
+      "dependencies": [
+        "session_start/$_SESSION"
+      ],
+      "plan": [
+        "Decouple session management from business logic and use a secure session handling library"
+      ],
+      "acceptance_criteria": [
+        "Session management is independent of business logic.",
+        "No direct session variable manipulations."
+      ],
+      "owner_role": "Tech Lead",
+      "suggested_agent_roles": []
+    }
+  ],
+  "roadmap_options": {
+    "quick_wins": [],
+    "stabilization": [
+      "rb-1"
+    ],
+    "modernization": [
+      "rb-1"
+    ]
+  }
+}
