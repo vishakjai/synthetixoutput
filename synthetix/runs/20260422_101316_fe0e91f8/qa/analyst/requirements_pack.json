@@ -2,7 +2,7 @@
   "artifact_type": "requirements_pack",
   "artifact_version": "2.0",
   "artifact_id": "REQPACK-20260422_101316_FE0E91F8",
-  "generated_at": "2026-04-22T16:08:26.459136+00:00",
+  "generated_at": "2026-04-22T17:52:11.118325+00:00",
   "generated_by": {
     "agent_name": "Analyst Agent",
     "persona": "Strategic Analyst",
@@ -62,7 +62,7 @@
     "constraints_from_user": [],
     "assumptions": [
       "The existing Kotlin codebase is stable and well-documented.",
-      "There are no major architectural changes required during migration."
+      "There is access to domain experts for clarifying business logic."
     ]
   },
   "domain_mapping": {
@@ -120,7 +120,7 @@
     "functional": [
       {
         "id": "FR-001",
-        "title": "Translate Kotlin Coroutines to Go",
+        "title": "Translate Kotlin Classes to Go Structures",
         "priority": "P0",
         "acceptance": {
           "gherkin_feature_id": "BDD-001",
@@ -131,7 +131,7 @@
       },
       {
         "id": "FR-002",
-        "title": "Preserve Data Contracts",
+        "title": "Implement Go Modules for MVVM Architecture",
         "priority": "P0",
         "acceptance": {
           "gherkin_feature_id": "BDD-002",
@@ -142,8 +142,8 @@
       },
       {
         "id": "FR-003",
-        "title": "Implement MVVM Architecture in Go",
-        "priority": "P1",
+        "title": "Adhere to Android Security Standards",
+        "priority": "P0",
         "acceptance": {
           "gherkin_feature_id": "BDD-003",
           "scenarios": [
@@ -153,7 +153,7 @@
       },
       {
         "id": "FR-004",
-        "title": "Maintain Offline-First Data Policy",
+        "title": "Implement Offline-First Data Policy",
         "priority": "P1",
         "acceptance": {
           "gherkin_feature_id": "BDD-004",
@@ -164,8 +164,8 @@
       },
       {
         "id": "FR-005",
-        "title": "Security Compliance",
-        "priority": "P0",
+        "title": "Translate UI Components to Go Backend",
+        "priority": "P1",
         "acceptance": {
           "gherkin_feature_id": "",
           "scenarios": []
@@ -173,7 +173,7 @@
       },
       {
         "id": "FR-006",
-        "title": "Localization Support",
+        "title": "Maintain Localization Support",
         "priority": "P2",
         "acceptance": {
           "gherkin_feature_id": "",
@@ -182,8 +182,8 @@
       },
       {
         "id": "FR-007",
-        "title": "Performance Optimization",
-        "priority": "P1",
+        "title": "Optimize Performance with Go",
+        "priority": "P2",
         "acceptance": {
           "gherkin_feature_id": "",
           "scenarios": []
@@ -191,8 +191,8 @@
       },
       {
         "id": "FR-008",
-        "title": "Testing and Validation",
-        "priority": "P0",
+        "title": "Ensure Code Quality and Maintainability",
+        "priority": "P2",
         "acceptance": {
           "gherkin_feature_id": "",
           "scenarios": []
@@ -203,37 +203,41 @@
       {
         "id": "NFR-001",
         "category": "performance",
-        "metric": "Response time < 200ms for 95% of requests",
+        "metric": "Response time under 200ms for 95% of requests",
         "verification_method": [
           "unit",
-          "integration"
+          "integration",
+          "e2e"
         ]
       },
       {
         "id": "NFR-002",
         "category": "security",
-        "metric": "Zero critical vulnerabilities in security scans",
+        "metric": "Pass all security audits and penetration tests",
         "verification_method": [
           "unit",
-          "integration"
+          "integration",
+          "e2e"
         ]
       },
       {
         "id": "NFR-003",
         "category": "scalability",
-        "metric": "Support 10,000 concurrent users",
+        "metric": "Support 1000 concurrent users without degradation",
         "verification_method": [
           "unit",
-          "integration"
+          "integration",
+          "e2e"
         ]
       },
       {
         "id": "NFR-004",
         "category": "usability",
-        "metric": "User satisfaction score > 85%",
+        "metric": "User satisfaction score above 80%",
         "verification_method": [
           "unit",
-          "integration"
+          "integration",
+          "e2e"
         ]
       },
       {
@@ -242,7 +246,8 @@
         "metric": "99.9% uptime",
         "verification_method": [
           "unit",
-          "integration"
+          "integration",
+          "e2e"
         ]
       }
     ]
@@ -251,15 +256,15 @@
     "features": [
       {
         "id": "BDD-001",
-        "title": "Translate Kotlin Coroutines to Go",
+        "title": "Account Retrieval",
         "scenarios": [
           {
             "id": "BDD-001-SC-001",
-            "name": "Migrate coroutine-based concurrency",
+            "name": "Retrieve user accounts",
             "gherkin": [
-              "Given a Kotlin application using coroutines",
-              "When the application is migrated to Go",
-              "Then all asynchronous operations use goroutines"
+              "Given a valid API token",
+              "When the accounts endpoint is called",
+              "Then a list of user accounts is returned"
             ],
             "maps_to": [
               "FR-001"
@@ -269,15 +274,15 @@
       },
       {
         "id": "BDD-002",
-        "title": "Preserve Data Contracts",
+        "title": "Account Balance Retrieval",
         "scenarios": [
           {
             "id": "BDD-002-SC-001",
-            "name": "Ensure data consistency",
+            "name": "Retrieve account balance",
             "gherkin": [
-              "Given a data contract in Kotlin",
-              "When the application is migrated to Go",
-              "Then the data contract remains consistent"
+              "Given a valid account ID",
+              "When the balance endpoint is called",
+              "Then the account balance is returned"
             ],
             "maps_to": [
               "FR-002"
@@ -287,15 +292,15 @@
       },
       {
         "id": "BDD-003",
-        "title": "Implement MVVM Architecture in Go",
+        "title": "Security Compliance",
         "scenarios": [
           {
             "id": "BDD-003-SC-001",
-            "name": "Adopt MVVM patterns",
+            "name": "Ensure secure data storage",
             "gherkin": [
-              "Given a Kotlin application using MVVM",
-              "When the application is migrated to Go",
-              "Then MVVM architecture is implemented using Go patterns"
+              "Given sensitive data",
+              "When stored",
+              "Then it is encrypted using secure methods"
             ],
             "maps_to": [
               "FR-003"
@@ -305,15 +310,15 @@
       },
       {
         "id": "BDD-004",
-        "title": "Maintain Offline-First Data Policy",
+        "title": "Offline Data Access",
         "scenarios": [
           {
             "id": "BDD-004-SC-001",
-            "name": "Preserve offline data handling",
+            "name": "Access data offline",
             "gherkin": [
-              "Given an offline-first policy in Kotlin",
-              "When the application is migrated to Go",
-              "Then offline data handling is preserved"
+              "Given no network connection",
+              "When accessing data",
+              "Then data is retrieved from local cache"
             ],
             "maps_to": [
               "FR-004"
@@ -345,17 +350,17 @@
     {
       "description": "Potential loss of functionality during migration.",
       "impact": "high",
-      "mitigation": "Implement comprehensive testing to ensure functionality is preserved."
+      "mitigation": "Thorough testing and validation of translated components."
     },
     {
-      "description": "Performance degradation in Go environment.",
+      "description": "Performance issues due to differences in language efficiency.",
       "impact": "medium",
-      "mitigation": "Conduct performance benchmarks and optimize Go code."
+      "mitigation": "Optimize Go code for performance and conduct load testing."
     }
   ],
   "out_of_scope": [
-    "Development of new features not present in the Kotlin codebase.",
-    "Major architectural redesigns beyond necessary migration adjustments."
+    "Migration of mobile UI components to Go.",
+    "Changes to existing business logic unless necessary for compatibility."
   ],
   "traceability": {
     "links": [
@@ -532,35 +537,35 @@
     "features": [
       {
         "id": "BDD-001",
-        "title": "Translate Kotlin Coroutines to Go",
+        "title": "Account Retrieval",
         "source_requirement_ids": [
           "FR-001"
         ],
-        "gherkin": "Feature: Translate Kotlin Coroutines to Go\nScenario: Migrate coroutine-based concurrency\nGiven a Kotlin application using coroutines\nWhen the application is migrated to Go\nThen all asynchronous operations use goroutines"
+        "gherkin": "Feature: Account Retrieval\nScenario: Retrieve user accounts\nGiven a valid API token\nWhen the accounts endpoint is called\nThen a list of user accounts is returned"
       },
       {
         "id": "BDD-002",
-        "title": "Preserve Data Contracts",
+        "title": "Account Balance Retrieval",
         "source_requirement_ids": [
           "FR-002"
         ],
-        "gherkin": "Feature: Preserve Data Contracts\nScenario: Ensure data consistency\nGiven a data contract in Kotlin\nWhen the application is migrated to Go\nThen the data contract remains consistent"
+        "gherkin": "Feature: Account Balance Retrieval\nScenario: Retrieve account balance\nGiven a valid account ID\nWhen the balance endpoint is called\nThen the account balance is returned"
       },
       {
         "id": "BDD-003",
-        "title": "Implement MVVM Architecture in Go",
+        "title": "Security Compliance",
         "source_requirement_ids": [
           "FR-003"
         ],
-        "gherkin": "Feature: Implement MVVM Architecture in Go\nScenario: Adopt MVVM patterns\nGiven a Kotlin application using MVVM\nWhen the application is migrated to Go\nThen MVVM architecture is implemented using Go patterns"
+        "gherkin": "Feature: Security Compliance\nScenario: Ensure secure data storage\nGiven sensitive data\nWhen stored\nThen it is encrypted using secure methods"
       },
       {
         "id": "BDD-004",
-        "title": "Maintain Offline-First Data Policy",
+        "title": "Offline Data Access",
         "source_requirement_ids": [
           "FR-004"
         ],
-        "gherkin": "Feature: Maintain Offline-First Data Policy\nScenario: Preserve offline data handling\nGiven an offline-first policy in Kotlin\nWhen the application is migrated to Go\nThen offline data handling is preserved"
+        "gherkin": "Feature: Offline Data Access\nScenario: Access data offline\nGiven no network connection\nWhen accessing data\nThen data is retrieved from local cache"
       }
     ],
     "lint": {
@@ -573,14 +578,14 @@
     "must": [
       {
         "id": "NFR-002",
-        "title": "Security",
-        "description": "The system must adhere to security best practices.",
+        "title": "Security Compliance",
+        "description": "The application must comply with security standards.",
         "category": "security",
-        "metric": "Zero critical vulnerabilities in security scans",
+        "metric": "Pass all security audits and penetration tests",
         "acceptance_criteria": [
-          "Security scans show no critical vulnerabilities.",
-          "Penetration tests confirm system resilience.",
-          "NFR-002 criterion 3 is measurable and testable."
+          "Security audits show no critical vulnerabilities.",
+          "Penetration tests confirm application resilience.",
+          "Security patches are applied promptly."
         ],
         "verification": "SAST + pre-prod pen test",
         "verification_source": "llm"
@@ -588,13 +593,13 @@
       {
         "id": "NFR-005",
         "title": "Reliability",
-        "description": "The system must be reliable and available.",
+        "description": "The application must be reliable with minimal downtime.",
         "category": "reliability",
         "metric": "99.9% uptime",
         "acceptance_criteria": [
-          "Monitoring shows uptime meets target.",
-          "No critical outages in production environment.",
-          "NFR-005 criterion 3 is measurable and testable."
+          "Monitoring confirms 99.9% uptime over a 30-day period.",
+          "Incident response procedures are in place.",
+          "Downtime incidents are documented and resolved."
         ],
         "verification": "SLO monitoring over rolling 30-day window",
         "verification_source": "llm"
@@ -603,14 +608,14 @@
     "should": [
       {
         "id": "NFR-001",
-        "title": "Performance",
-        "description": "The system must perform efficiently under load.",
+        "title": "Performance Optimization",
+        "description": "The Go application must perform efficiently under load.",
         "category": "performance",
-        "metric": "Response time < 200ms for 95% of requests",
+        "metric": "Response time under 200ms for 95% of requests",
         "acceptance_criteria": [
-          "Load tests confirm response times under specified limits.",
-          "Performance monitoring is in place for production.",
-          "NFR-001 criterion 3 is measurable and testable."
+          "Load testing confirms response times under 200ms.",
+          "Performance metrics are collected and analyzed.",
+          "Optimizations are applied based on test results."
         ],
         "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
         "verification_source": "llm"
@@ -618,27 +623,27 @@
       {
         "id": "NFR-003",
         "title": "Scalability",
-        "description": "The system must scale to handle increased load.",
+        "description": "The application must scale to handle increased load.",
         "category": "scalability",
-        "metric": "Support 10,000 concurrent users",
+        "metric": "Support 1000 concurrent users without degradation",
         "acceptance_criteria": [
-          "Scalability tests confirm system can handle target load.",
-          "No degradation in performance with increased users.",
-          "NFR-003 criterion 3 is measurable and testable."
+          "Scalability tests confirm support for 1000 concurrent users.",
+          "No performance degradation under load.",
+          "Infrastructure supports horizontal scaling."
         ],
-        "verification": "Scalability testing with simulated user load",
+        "verification": "Scalability test with simulated user load",
         "verification_source": "llm"
       },
       {
         "id": "NFR-004",
         "title": "Usability",
-        "description": "The system must be user-friendly and intuitive.",
+        "description": "The application must be user-friendly and intuitive.",
         "category": "usability",
-        "metric": "User satisfaction score > 85%",
+        "metric": "User satisfaction score above 80%",
         "acceptance_criteria": [
-          "User feedback confirms ease of use.",
-          "Usability tests show high user satisfaction.",
-          "NFR-004 criterion 3 is measurable and testable."
+          "Usability tests confirm user satisfaction score above 80%.",
+          "User feedback is collected and analyzed.",
+          "Improvements are made based on user feedback."
         ],
         "verification": "User testing and feedback analysis",
         "verification_source": "llm"
@@ -649,6 +654,7 @@
     {
       "requirement_id": "FR-001",
       "test_types": [
+        "e2e",
         "integration",
         "unit"
       ],
@@ -659,7 +665,6 @@
     {
       "requirement_id": "FR-002",
       "test_types": [
-        "contract",
         "integration",
         "unit"
       ],
@@ -671,6 +676,7 @@
       "requirement_id": "FR-003",
       "test_types": [
         "integration",
+        "security",
         "unit"
       ],
       "bdd_scenarios": [
@@ -681,6 +687,7 @@
       "requirement_id": "FR-004",
       "test_types": [
         "integration",
+        "security",
         "unit"
       ],
       "bdd_scenarios": [
@@ -690,8 +697,8 @@
     {
       "requirement_id": "FR-005",
       "test_types": [
+        "e2e",
         "integration",
-        "security",
         "unit"
       ],
       "bdd_scenarios": []
@@ -792,5 +799,5 @@
       }
     }
   ],
-  "executive_summary": "This project aims to migrate a Kotlin codebase to Go, maintaining existing functionality and ensuring compliance with mobile app standards."
+  "executive_summary": "This project involves migrating a Kotlin codebase to Go, ensuring all existing functionalities are preserved and optimized for performance and security."
 }
