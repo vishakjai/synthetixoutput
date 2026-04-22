@@ -1,0 +1,4367 @@
+{
+  "artifact_type": "capability_brd_v1",
+  "artifact_version": "1.0",
+  "artifact_id": "art_capbrd_8a6486c1a125",
+  "run_id": "20260422_101316_fe0e91f8",
+  "generated_at": "2026-04-22T17:41:21Z",
+  "repo": "https://github.com/vishakjai/sweet-bank",
+  "engagement_id": "20260422_101316_fe0e91f8",
+  "completeness": {
+    "modules_total": 9,
+    "modules_with_full_coverage": 3,
+    "modules_with_partial_coverage": 4,
+    "modules_with_no_coverage": 2,
+    "symbol_index_coverage": {
+      "root": "none",
+      "account": "full",
+      "app": "partial",
+      "balance": "partial",
+      "dashboard": "full",
+      "network": "partial",
+      "payees": "full",
+      "resources": "partial",
+      "Support Artifacts": "none"
+    },
+    "blocking_gaps": []
+  },
+  "modules": [
+    {
+      "module_id": "Support Artifacts",
+      "component_id": "other::support",
+      "dimensions": {
+        "FR24": {
+          "status": "deferred",
+          "items": []
+        },
+        "FR25": {
+          "status": "deferred",
+          "items": []
+        },
+        "FR26": {
+          "status": "empty",
+          "domain_entities": [],
+          "ui_models": []
+        },
+        "FR27": {
+          "status": "empty",
+          "endpoints": []
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "None detected",
+          "auth_implementation": "",
+          "headers": [],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-SUPPORT ARTIFACTS-000",
+              "description": "No gaps detected by the static-analysis rule set.",
+              "risk_level": "LOW",
+              "evidence": "static-analysis rules T13 returned zero matches",
+              "recommendation": "Re-run with manual review when the rule set is extended."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "None detected",
+            "auth_implementation": "",
+            "headers": [],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-SUPPORT ARTIFACTS-000",
+                "description": "No gaps detected by the static-analysis rule set.",
+                "risk_level": "LOW",
+                "evidence": "static-analysis rules T13 returned zero matches",
+                "recommendation": "Re-run with manual review when the rule set is extended."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "deferred",
+          "entries": []
+        },
+        "FR30": {
+          "status": "deferred",
+          "items": []
+        },
+        "FR31": {
+          "status": "deferred",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "excluded",
+      "excluded_reason": "Media artifacts only \u2014 no code",
+      "component_type": "support",
+      "file_count": 73
+    },
+    {
+      "module_id": "account",
+      "component_id": "kotlin::account",
+      "dimensions": {
+        "FR24": {
+          "status": "complete",
+          "items": [
+            {
+              "feature_name": "Retrieve Accounts",
+              "description": "Fetches user's bank accounts with caching mechanism",
+              "preconditions": [
+                "Valid API authentication",
+                "Network connectivity"
+              ],
+              "postconditions": [
+                "Account list cached locally",
+                "Account data available for other operations"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "AccountRepository.retrieveAccounts() -> AccountApi.getAccounts() -> Accounts entity",
+              "source_method": "AccountRepository.retrieveAccounts",
+              "business_logic_steps": [
+                "1. Check if accounts are already cached in accountCachedData",
+                "2. If cached data exists, return it immediately",
+                "3. If no cached data, call AccountApi.getAccounts() to fetch from API",
+                "4. Extract accounts list from Accounts wrapper entity",
+                "5. Check if result is null or empty, return empty list if so",
+                "6. Otherwise return the fetched account list"
+              ],
+              "fr_id": "FR-ACC-001",
+              "source_module": "account",
+              "traceability": [
+                {
+                  "layer": "ViewModel",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "retrieveAccounts"
+                },
+                {
+                  "layer": "Repository",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                  "class_name": "AccountRepository",
+                  "method_name": "retrieveAccounts"
+                },
+                {
+                  "layer": "API",
+                  "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                  "class_name": "AccountApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                  "class_name": "accountRepositoryModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Retrieve Account Balance",
+              "description": "Fetches balance information for a specific account",
+              "preconditions": [
+                "Valid account ID",
+                "API authentication"
+              ],
+              "postconditions": [
+                "Account balance data returned with all balance types"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "AccountRepository.retrieveAccountBalance() -> AccountApi.getAccountBalance() -> AccountBalance entity",
+              "source_method": "AccountRepository.retrieveAccountBalance",
+              "business_logic_steps": [
+                "1. Switch to IO dispatcher for network operation",
+                "2. Call AccountApi.getAccountBalance with provided accountId",
+                "3. API returns AccountBalance with all balance components",
+                "4. Return complete balance object to caller",
+                "5. No caching or transformation applied",
+                "6. Direct pass-through of API response"
+              ],
+              "fr_id": "FR-ACC-002",
+              "source_module": "account",
+              "traceability": [
+                {
+                  "layer": "ViewModel",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "retrieveAccountBalance"
+                },
+                {
+                  "layer": "Repository",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                  "class_name": "AccountRepository",
+                  "method_name": "retrieveAccountBalance"
+                },
+                {
+                  "layer": "API",
+                  "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                  "class_name": "AccountApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                  "class_name": "accountRepositoryModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Retrieve User Profile",
+              "description": "Fetches user's personal information and profile data",
+              "preconditions": [
+                "Valid API authentication",
+                "User exists in system"
+              ],
+              "postconditions": [
+                "User profile data available"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "UserRepository.retrieveUser() -> UserApi.getUser() -> User entity",
+              "source_method": "UserRepository.retrieveUser",
+              "business_logic_steps": [
+                "1. Switch to IO dispatcher for network call",
+                "2. Call UserApi.getUser() with authentication headers",
+                "3. API returns User entity with personal details",
+                "4. Return user data directly to caller",
+                "5. No caching or validation applied",
+                "6. Direct API response pass-through"
+              ],
+              "fr_id": "FR-ACC-003",
+              "source_module": "account",
+              "traceability": [
+                {
+                  "layer": "ViewModel",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "retrieveUser"
+                },
+                {
+                  "layer": "Repository",
+                  "file": "account/src/main/java/com/davidm/account/repository/UserRepository.kt",
+                  "class_name": "UserRepository",
+                  "method_name": "retrieveUser"
+                },
+                {
+                  "layer": "API",
+                  "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                  "class_name": "AccountApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                  "class_name": "accountRepositoryModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Retrieve Profile Picture",
+              "description": "Downloads user's profile picture as base64 encoded string",
+              "preconditions": [
+                "Valid account holder ID",
+                "Profile picture exists"
+              ],
+              "postconditions": [
+                "Base64 encoded image string returned"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "AccountRepository.retrieveProfilePicture() -> AccountApi.getAccountPicture() -> String",
+              "source_method": "AccountRepository.retrieveProfilePicture",
+              "business_logic_steps": [
+                "1. Switch to IO dispatcher for network operation",
+                "2. Call AccountApi.getAccountPicture with accountHolderId",
+                "3. API returns base64 encoded image string",
+                "4. Return encoded string directly to caller",
+                "5. No decoding or validation performed at repository level",
+                "6. Caller responsible for image processing"
+              ],
+              "fr_id": "FR-ACC-004",
+              "source_module": "account",
+              "traceability": [
+                {
+                  "layer": "ViewModel",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "retrieveProfilePicture"
+                },
+                {
+                  "layer": "Repository",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                  "class_name": "AccountRepository",
+                  "method_name": "retrieveProfilePicture"
+                },
+                {
+                  "layer": "API",
+                  "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                  "class_name": "AccountApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                  "class_name": "accountRepositoryModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Upload Profile Picture",
+              "description": "Uploads a new profile picture for the user account",
+              "preconditions": [
+                "Valid account holder ID",
+                "Valid image file",
+                "Proper file permissions"
+              ],
+              "postconditions": [
+                "Profile picture updated on server",
+                "Upload confirmation returned"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "AccountRepository.uploadProfilePicture() -> AccountApi.uploadAccountPicture() -> Array<String>?",
+              "source_method": "AccountRepository.uploadProfilePicture",
+              "business_logic_steps": [
+                "1. Switch to IO dispatcher for file upload operation",
+                "2. Convert File to RequestBody with image/* media type",
+                "3. Call AccountApi.uploadAccountPicture with account holder ID and file body",
+                "4. API processes upload and returns string array response",
+                "5. Return nullable array result to caller",
+                "6. Caller handles success/failure based on null check"
+              ],
+              "fr_id": "FR-ACC-005",
+              "source_module": "account",
+              "traceability": [
+                {
+                  "layer": "ViewModel",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "uploadProfilePicture"
+                },
+                {
+                  "layer": "Repository",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                  "class_name": "AccountRepository",
+                  "method_name": "uploadProfilePicture"
+                },
+                {
+                  "layer": "API",
+                  "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                  "class_name": "AccountApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                  "class_name": "accountRepositoryModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Retrieve Account Holder",
+              "description": "Retrieves the account holder through the repository layer (AccountRepository.retrieveAccountHolder). Returns AccountHolder.",
+              "preconditions": [],
+              "postconditions": [
+                "Returns AccountHolder"
+              ],
+              "actors": [
+                "User"
+              ],
+              "data_flow": "AccountRepository.retrieveAccountHolder",
+              "source_method": "AccountRepository.retrieveAccountHolder",
+              "business_logic_steps": [
+                "1. Caller invokes AccountRepository.retrieveAccountHolder().",
+                "2. Repository dispatches work on Dispatchers.IO.",
+                "3. Network / cache interaction runs to completion.",
+                "4. Result (AccountHolder) is returned to the caller."
+              ],
+              "source_module": "account",
+              "augmented_deterministic": true,
+              "fr_id": "FR-ACC-006",
+              "traceability": [
+                {
+                  "layer": "ViewModel",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "retrieveAccountHolder"
+                },
+                {
+                  "layer": "Repository",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                  "class_name": "AccountRepository",
+                  "method_name": "retrieveAccountHolder"
+                },
+                {
+                  "layer": "API",
+                  "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                  "class_name": "AccountApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                  "class_name": "accountRepositoryModule",
+                  "method_name": ""
+                }
+              ]
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR25": {
+          "status": "complete",
+          "items": [
+            {
+              "rule_name": "Image Orientation Fix (EXIF)",
+              "description": "Before upload the bitmap is re-oriented from its EXIF metadata so the server-side copy matches the device's capture orientation.",
+              "source_evidence": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:180",
+              "rule_category": "transformation",
+              "enforced_in_layer": "ViewModel",
+              "source_module": "account",
+              "rule_id": "BR-ACC-001"
+            },
+            {
+              "rule_name": "IO Dispatcher for Repository Work",
+              "description": "Network / disk work is hopped off the main thread via Dispatchers.IO to keep the UI responsive.",
+              "source_evidence": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt:36; account/src/main/java/com/davidm/account/repository/UserRepository.kt:13; dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:47; dashboard/src/main/java/com/davidm/repository/TransactionsRepository.kt:22",
+              "rule_category": "threading",
+              "enforced_in_layer": "Repository",
+              "source_module": "account",
+              "rule_id": "BR-ACC-002"
+            },
+            {
+              "rule_name": "Empty Collection Fallback",
+              "description": "Null / missing collections are defaulted to an empty list so downstream UI code never has to null-check.",
+              "source_evidence": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt:27; dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:97",
+              "rule_category": "fallback",
+              "enforced_in_layer": "Repository",
+              "source_module": "account",
+              "rule_id": "BR-ACC-003"
+            },
+            {
+              "rule_name": "Content-Type Conversion for Upload",
+              "description": "Image uploads build a MediaType tagged with an image/* content type so the multipart body is typed correctly for the server.",
+              "source_evidence": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt:61",
+              "rule_category": "transformation",
+              "enforced_in_layer": "ViewModel",
+              "source_module": "account",
+              "rule_id": "BR-ACC-004"
+            },
+            {
+              "rule_name": "LiveData Post-to-Main",
+              "description": "Background-thread results are delivered to observers via postValue so the emit lands on the main thread.",
+              "source_evidence": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:59",
+              "rule_category": "threading",
+              "enforced_in_layer": "ViewModel",
+              "source_module": "account",
+              "rule_id": "BR-ACC-005"
+            },
+            {
+              "rule_name": "Account Caching",
+              "description": "Accounts are cached locally to avoid repeated API calls",
+              "source_evidence": "AccountRepository.kt:getAccountCachedData() \u2014 returns cached list if present, otherwise fetches from API",
+              "rule_category": "caching",
+              "enforced_in_layer": "Repository",
+              "rule_id": "BR-ACC-006",
+              "source_module": "account"
+            },
+            {
+              "rule_name": "Authentication Header Defaults",
+              "description": "API calls include default Bearer token and Accept headers",
+              "source_evidence": "AccountApi.kt and UserApi.kt \u2014 all endpoints have default Authorization and Accept headers",
+              "rule_category": "validation",
+              "enforced_in_layer": "API",
+              "rule_id": "BR-ACC-007",
+              "source_module": "account"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR26": {
+          "status": "complete",
+          "domain_entities": [
+            {
+              "entity_name": "AcceptedOverdraft",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/AcceptedOverdraft.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "currency",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "minorUnits",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "Account",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/Account.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "accountUid",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "defaultCategory",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "currency",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "createdAt",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "AccountBalance",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/AccountBalance.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "acceptedOverdraft",
+                  "field_type": "AcceptedOverdraft",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "amount",
+                  "field_type": "Amount",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "clearedBalance",
+                  "field_type": "ClearedBalance",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "effectiveBalance",
+                  "field_type": "EffectiveBalance",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "pendingTransactions",
+                  "field_type": "PendingTransactions",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "AccountHolder",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/AccountHolder.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "accountHolderType",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "accountHolderUid",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "Accounts",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/Accounts.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "accounts",
+                  "field_type": "List<Account>",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "Amount",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/Amount.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "currency",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "minorUnits",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "ClearedBalance",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/ClearedBalance.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "currency",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "minorUnits",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "EffectiveBalance",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/EffectiveBalance.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "currency",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "minorUnits",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "PendingTransactions",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/PendingTransactions.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "currency",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "minorUnits",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "User",
+              "entity_kind": "data_class",
+              "source_file": "account/src/main/java/com/davidm/account/entities/User.kt",
+              "source_module": "account",
+              "fields": [
+                {
+                  "field_name": "dateOfBirth",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "email",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "firstName",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "lastName",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "phone",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "title",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            }
+          ],
+          "ui_models": []
+        },
+        "FR27": {
+          "status": "complete",
+          "endpoints": [
+            {
+              "method": "GET",
+              "path": "api/$API_VERSION/account-holder",
+              "interface_name": "account",
+              "method_name": "getAccountHolder",
+              "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+              "source_module": "account",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Accept",
+                  "default": "application/json"
+                }
+              ],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "AccountHolder",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "api/$API_VERSION/account-holder/{accountHolder}/profile-image",
+              "interface_name": "account",
+              "method_name": "getAccountPicture",
+              "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+              "source_module": "account",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Accept",
+                  "default": "application/json"
+                }
+              ],
+              "path_params": [
+                {
+                  "name": "accountHolder",
+                  "type": "String"
+                }
+              ],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "String",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "api/$API_VERSION/accounts",
+              "interface_name": "account",
+              "method_name": "getAccounts",
+              "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+              "source_module": "account",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Accept",
+                  "default": "application/json"
+                }
+              ],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "Accounts",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "api/$API_VERSION/accounts/{accountId}/balance",
+              "interface_name": "account",
+              "method_name": "getAccountBalance",
+              "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+              "source_module": "account",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Accept",
+                  "default": "application/json"
+                }
+              ],
+              "path_params": [
+                {
+                  "name": "accountId",
+                  "type": "String"
+                }
+              ],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "AccountBalance",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "api/$API_VERSION/identity/individual",
+              "interface_name": "account",
+              "method_name": "getUser",
+              "source_file": "account/src/main/java/com/davidm/account/network/UserApi.kt",
+              "source_module": "account",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Accept",
+                  "default": "application/json"
+                }
+              ],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "User",
+              "content_type": ""
+            },
+            {
+              "method": "PUT",
+              "path": "api/$API_VERSION/account-holder/{accountHolder}/profile-image",
+              "interface_name": "account",
+              "method_name": "uploadAccountPicture",
+              "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+              "source_module": "account",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Content-type",
+                  "default": "image/jpeg"
+                }
+              ],
+              "path_params": [
+                {
+                  "name": "accountHolder",
+                  "type": "String"
+                }
+              ],
+              "query_params": [],
+              "request_body": "RequestBody",
+              "response_type": "Array<String>?",
+              "content_type": ""
+            }
+          ]
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "Bearer Token",
+          "auth_implementation": "@Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+          "headers": [
+            {
+              "name": "Accept",
+              "default": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "default": "Bearer $API_KEY"
+            },
+            {
+              "name": "Content-type",
+              "default": "image/jpeg"
+            }
+          ],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-ACCOUNT-001",
+              "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+              "risk_level": "HIGH",
+              "evidence": "account/src/main/java/com/davidm/account/network/UserApi.kt: Bearer $API_KEY default argument",
+              "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+            },
+            {
+              "gap_id": "SEC-GAP-ACCOUNT-002",
+              "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+              "risk_level": "HIGH",
+              "evidence": "account/src/main/java/com/davidm/account/network/AccountApi.kt: Bearer $API_KEY default argument",
+              "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "Bearer Token",
+            "auth_implementation": "@Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+            "headers": [
+              {
+                "name": "Accept",
+                "default": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "default": "Bearer $API_KEY"
+              },
+              {
+                "name": "Content-type",
+                "default": "image/jpeg"
+              }
+            ],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-ACCOUNT-001",
+                "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+                "risk_level": "HIGH",
+                "evidence": "account/src/main/java/com/davidm/account/network/UserApi.kt: Bearer $API_KEY default argument",
+                "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+              },
+              {
+                "gap_id": "SEC-GAP-ACCOUNT-002",
+                "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+                "risk_level": "HIGH",
+                "evidence": "account/src/main/java/com/davidm/account/network/AccountApi.kt: Bearer $API_KEY default argument",
+                "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "complete",
+          "entries": [
+            {
+              "location": "DashboardViewModel.getPurchases",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "line": 62,
+              "error_type": "Exception",
+              "handling_strategy": "log; postValue to LiveData",
+              "log_tag": "network_error",
+              "user_visible": true,
+              "recovery_possible": true,
+              "source_module": "account",
+              "eh_id": "EH-ACC-001"
+            },
+            {
+              "location": "DashboardViewModel.getUserInfo",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "line": 75,
+              "error_type": "Exception",
+              "handling_strategy": "log",
+              "log_tag": "user_retrieve_error",
+              "user_visible": false,
+              "recovery_possible": true,
+              "source_module": "account",
+              "eh_id": "EH-ACC-002"
+            },
+            {
+              "location": "DashboardViewModel.getAccountBalance",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "line": 104,
+              "error_type": "Exception",
+              "handling_strategy": "log",
+              "log_tag": "account_retrieve_error",
+              "user_visible": false,
+              "recovery_possible": true,
+              "source_module": "account",
+              "eh_id": "EH-ACC-003"
+            },
+            {
+              "location": "DashboardViewModel.getAccountHolderID",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "line": 127,
+              "error_type": "Exception",
+              "handling_strategy": "log",
+              "log_tag": "user_retrieve_error",
+              "user_visible": false,
+              "recovery_possible": true,
+              "source_module": "account",
+              "eh_id": "EH-ACC-004"
+            },
+            {
+              "location": "DashboardViewModel.getProfilePicture",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "line": 145,
+              "error_type": "Exception",
+              "handling_strategy": "log",
+              "log_tag": "user_retrieve_error",
+              "user_visible": false,
+              "recovery_possible": true,
+              "source_module": "account",
+              "eh_id": "EH-ACC-005"
+            },
+            {
+              "location": "DashboardViewModel.uploadProfilePicture",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "line": 172,
+              "error_type": "Exception",
+              "handling_strategy": "log",
+              "log_tag": "user_retrieve_error",
+              "user_visible": false,
+              "recovery_possible": true,
+              "source_module": "account",
+              "eh_id": "EH-ACC-006"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR30": {
+          "status": "complete",
+          "items": [
+            {
+              "ec_type": "null_handling",
+              "scenario": "AccountRepository.getAccountCachedData() uses null check with force unwrap",
+              "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+              "line": 18,
+              "is_defect": true,
+              "risk_level": "HIGH",
+              "remediation": "Replace !! with safe call or proper null handling",
+              "ec_id": "EC-ACC-001",
+              "source_module": "account",
+              "risk": "HIGH"
+            },
+            {
+              "ec_type": "fallback_value",
+              "scenario": "retrieveAccounts returns empty list when cached data is null or empty",
+              "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+              "line": 23,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "Consider logging when fallback occurs",
+              "ec_id": "EC-ACC-002",
+              "source_module": "account",
+              "risk": "LOW"
+            },
+            {
+              "ec_type": "null_handling",
+              "scenario": "uploadProfilePicture returns nullable Array<String>? but no null handling in repository",
+              "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+              "line": 55,
+              "is_defect": false,
+              "risk_level": "MEDIUM",
+              "remediation": "Add null check and appropriate error handling",
+              "ec_id": "EC-ACC-003",
+              "source_module": "account",
+              "risk": "MEDIUM"
+            },
+            {
+              "ec_type": "boundary_condition",
+              "scenario": "getAccountCachedData calls API when cache is null but doesn't update cache",
+              "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+              "line": 18,
+              "is_defect": true,
+              "risk_level": "HIGH",
+              "remediation": "Update accountCachedData after successful API call",
+              "ec_id": "EC-ACC-004",
+              "source_module": "account",
+              "risk": "HIGH"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR31": {
+          "status": "empty",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "kotlin_android_module",
+      "file_count": 20
+    },
+    {
+      "module_id": "app",
+      "component_id": "kotlin::app",
+      "dimensions": {
+        "FR24": {
+          "status": "complete",
+          "items": [
+            {
+              "feature_name": "Initialize Application",
+              "description": "Sets up dependency injection container with all required modules for the banking application",
+              "preconditions": [
+                "Application is starting up",
+                "Android context is available"
+              ],
+              "postconditions": [
+                "Koin DI container is configured",
+                "All modules are registered",
+                "Application is ready for use"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "SweetBank.onCreate() -> startKoin() -> modules registration",
+              "source_method": "SweetBank.onCreate",
+              "business_logic_steps": [
+                "1. Call super.onCreate() to initialize base Application",
+                "2. Start Koin dependency injection framework",
+                "3. Set Android context for Koin container",
+                "4. Register all feature modules (dashboard, viewModel, user, network, account, transactions)",
+                "5. Complete application initialization"
+              ],
+              "fr_id": "FR-APP-001",
+              "source_module": "app",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "app/src/main/java/com/davidm/sweetbankapp/SweetBank.kt",
+                  "class_name": "SweetBank",
+                  "method_name": "onCreate"
+                },
+                {
+                  "layer": "DI",
+                  "file": "app/src/main/java/com/davidm/sweetbankapp/di/ViewmodelModuleX.kt",
+                  "class_name": "viewModelModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Configure ViewModel Dependencies",
+              "description": "Registers DashboardViewModel with its required dependencies in the DI container",
+              "preconditions": [
+                "Koin module system is active",
+                "Required repositories are available"
+              ],
+              "postconditions": [
+                "DashboardViewModel is available for injection",
+                "Dependencies are properly wired"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "viewModelModule -> viewModel factory -> DashboardViewModel(get(), get(), get())",
+              "source_method": "viewModelModule",
+              "business_logic_steps": [
+                "1. Define Koin module for ViewModels",
+                "2. Register DashboardViewModel as a viewModel factory",
+                "3. Inject three dependencies using get() calls",
+                "4. Make ViewModel available for Android lifecycle-aware injection"
+              ],
+              "fr_id": "FR-APP-002",
+              "source_module": "app",
+              "traceability": []
+            },
+            {
+              "feature_name": "Execute UI Test",
+              "description": "Performs automated UI testing by navigating to payees section and creating a new payee",
+              "preconditions": [
+                "Test activity is launched",
+                "UI elements are available"
+              ],
+              "postconditions": [
+                "Navigation completed",
+                "Payee creation form is filled",
+                "Test assertions pass"
+              ],
+              "actors": [
+                "Test System"
+              ],
+              "data_flow": "HomepageActivityTest -> Espresso actions -> UI interactions -> PayeesViewModel",
+              "source_method": "HomepageActivityTest.launchAndCreateAPayee",
+              "business_logic_steps": [
+                "1. Click on navigation_payees to switch tabs",
+                "2. Create Retrofit API instance for PayeesApi",
+                "3. Initialize PayeesViewModel with repository and call getPayees()",
+                "4. Click FAB button to start payee creation",
+                "5. Fill payee name and business name fields",
+                "6. Submit the form by clicking create button"
+              ],
+              "fr_id": "FR-APP-003",
+              "source_module": "app",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "app/src/androidTest/java/com/davidm/sweetbankapp/HomepageActivityTest.kt",
+                  "class_name": "HomepageActivityTest",
+                  "method_name": "launchAndCreateAPayee"
+                },
+                {
+                  "layer": "DI",
+                  "file": "app/src/main/java/com/davidm/sweetbankapp/di/ViewmodelModuleX.kt",
+                  "class_name": "viewModelModule",
+                  "method_name": ""
+                }
+              ]
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR25": {
+          "status": "complete",
+          "items": [
+            {
+              "rule_name": "Module Registration Order",
+              "description": "All feature modules must be registered in specific order during application startup",
+              "source_evidence": "SweetBank.kt:onCreate() \u2014 modules registered in sequence: dashboard, viewModel, user, network, account, transactions",
+              "rule_category": "initialization",
+              "enforced_in_layer": "Application",
+              "rule_id": "BR-APP-001",
+              "source_module": "app"
+            },
+            {
+              "rule_name": "ViewModel Dependency Injection",
+              "description": "ViewModels must be registered with viewModel DSL and receive dependencies via get() calls",
+              "source_evidence": "ViewmodelModuleX.kt:viewModelModule \u2014 DashboardViewModel registered with three injected dependencies",
+              "rule_category": "dependency_injection",
+              "enforced_in_layer": "DI Module",
+              "rule_id": "BR-APP-002",
+              "source_module": "app"
+            },
+            {
+              "rule_name": "Test Application Context",
+              "description": "Test runner must use actual application class for proper dependency injection during testing",
+              "source_evidence": "CustomRunner.kt:newApplication() \u2014 returns SweetBank class name instead of default test application",
+              "rule_category": "testing",
+              "enforced_in_layer": "Test Runner",
+              "rule_id": "BR-APP-003",
+              "source_module": "app"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR26": {
+          "status": "empty",
+          "domain_entities": [],
+          "ui_models": []
+        },
+        "FR27": {
+          "status": "empty",
+          "endpoints": []
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "None detected",
+          "auth_implementation": "",
+          "headers": [],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-APP-000",
+              "description": "No gaps detected by the static-analysis rule set.",
+              "risk_level": "LOW",
+              "evidence": "static-analysis rules T13 returned zero matches",
+              "recommendation": "Re-run with manual review when the rule set is extended."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "None detected",
+            "auth_implementation": "",
+            "headers": [],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-APP-000",
+                "description": "No gaps detected by the static-analysis rule set.",
+                "risk_level": "LOW",
+                "evidence": "static-analysis rules T13 returned zero matches",
+                "recommendation": "Re-run with manual review when the rule set is extended."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "complete",
+          "entries": [
+            {
+              "location": "CustomRunner.newApplication",
+              "source_file": "app/src/androidTest/java/com/davidm/sweetbankapp/CustomRunner.kt",
+              "error_type": "Exception",
+              "handling_strategy": "throws annotation declares exception propagation",
+              "log_tag": "",
+              "user_visible": false,
+              "recovery_possible": false,
+              "eh_id": "EH-APP-001",
+              "source_module": "app"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR30": {
+          "status": "complete",
+          "items": [
+            {
+              "ec_type": "code_bug",
+              "scenario": "HomepageActivityTest creates PayeesViewModel but doesn't use dependency injection",
+              "source_file": "app/src/androidTest/java/com/davidm/sweetbankapp/HomepageActivityTest.kt",
+              "line": 45,
+              "is_defect": true,
+              "risk_level": "MEDIUM",
+              "remediation": "Use injected ViewModel instead of manual instantiation",
+              "ec_id": "EC-APP-001",
+              "source_module": "app",
+              "risk": "MEDIUM"
+            },
+            {
+              "ec_type": "code_bug",
+              "scenario": "Test method creates Retrofit instance manually instead of using injected dependencies",
+              "source_file": "app/src/androidTest/java/com/davidm/sweetbankapp/HomepageActivityTest.kt",
+              "line": 42,
+              "is_defect": true,
+              "risk_level": "MEDIUM",
+              "remediation": "Use dependency injection for consistent API instance",
+              "ec_id": "EC-APP-002",
+              "source_module": "app",
+              "risk": "MEDIUM"
+            },
+            {
+              "ec_type": "boundary_condition",
+              "scenario": "ExampleUnitTest only tests basic arithmetic without banking domain logic",
+              "source_file": "app/src/test/java/com/davidm/sweetbankapp/ExampleUnitTest.kt",
+              "line": 15,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "Replace with actual business logic tests",
+              "ec_id": "EC-APP-003",
+              "source_module": "app",
+              "risk": "LOW"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR31": {
+          "status": "empty",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "kotlin_android_module",
+      "file_count": 7
+    },
+    {
+      "module_id": "balance",
+      "component_id": "kotlin::balance",
+      "dimensions": {
+        "FR24": {
+          "status": "empty",
+          "items": [],
+          "fallback_banner": "\u26a0 FR24 PARTIAL \u2014 LLM extraction returned no capability items for this module. Method signatures shown as stubs; human review recommended."
+        },
+        "FR25": {
+          "status": "empty",
+          "items": [],
+          "fallback_banner": "\u26a0 FR25 EMPTY \u2014 LLM extraction returned no business rules for this module. Deterministic patterns shown where detected; human review recommended."
+        },
+        "FR26": {
+          "status": "empty",
+          "domain_entities": [],
+          "ui_models": []
+        },
+        "FR27": {
+          "status": "empty",
+          "endpoints": []
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "None detected",
+          "auth_implementation": "",
+          "headers": [],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-BALANCE-000",
+              "description": "No gaps detected by the static-analysis rule set.",
+              "risk_level": "LOW",
+              "evidence": "static-analysis rules T13 returned zero matches",
+              "recommendation": "Re-run with manual review when the rule set is extended."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "None detected",
+            "auth_implementation": "",
+            "headers": [],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-BALANCE-000",
+                "description": "No gaps detected by the static-analysis rule set.",
+                "risk_level": "LOW",
+                "evidence": "static-analysis rules T13 returned zero matches",
+                "recommendation": "Re-run with manual review when the rule set is extended."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "empty",
+          "entries": [],
+          "fallback_banner": "\u26a0 FR29 PARTIAL \u2014 LLM extraction returned no error-handling entries. Locations shown from try/catch markers where detected; human review recommended."
+        },
+        "FR30": {
+          "status": "empty",
+          "items": [],
+          "fallback_banner": "\u26a0 FR30 EMPTY \u2014 LLM extraction returned no edge cases for this module. Human review recommended."
+        },
+        "FR31": {
+          "status": "empty",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "kotlin_android_module",
+      "file_count": 4
+    },
+    {
+      "module_id": "dashboard",
+      "component_id": "kotlin::dashboard",
+      "dimensions": {
+        "FR24": {
+          "status": "complete",
+          "items": [
+            {
+              "feature_name": "Retrieve Purchases",
+              "description": "Fetches and displays transaction data for a specific date interval",
+              "preconditions": [
+                "User has valid account",
+                "Date interval is provided"
+              ],
+              "postconditions": [
+                "Transaction list is displayed",
+                "Loading state is updated"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "DashboardViewModel.getPurchases() -> TransactionsRepository.retrievePurchases() -> TransactionsApi.getPurchasesInAWeek()",
+              "source_method": "DashboardViewModel.getPurchases",
+              "business_logic_steps": [
+                "1. Launch coroutine in IO dispatcher context",
+                "2. Retrieve account list from account repository",
+                "3. Call transactions repository with first account and date range",
+                "4. If successful, clear error state and update view with results",
+                "5. If exception occurs, log error and post error message to LiveData",
+                "6. Return mapped transaction list to UI layer"
+              ],
+              "fr_id": "FR-DAS-001",
+              "source_module": "dashboard",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "getPurchases"
+                },
+                {
+                  "layer": "API",
+                  "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                  "class_name": "TransactionsApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                  "class_name": "dashboardModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Display Dashboard",
+              "description": "Shows monthly transaction data with navigation and refresh capabilities",
+              "preconditions": [
+                "Fragment is created",
+                "ViewModel is injected"
+              ],
+              "postconditions": [
+                "UI displays current month transactions",
+                "Navigation controls are active"
+              ],
+              "actors": [
+                "User"
+              ],
+              "data_flow": "DashboardFragment.onViewCreated() -> DashboardViewModel.getPurchases() -> UI updates",
+              "source_method": "DashboardFragment.onViewCreated",
+              "business_logic_steps": [
+                "1. Initialize calendar and adapters",
+                "2. Set up ViewPager with current month as starting position",
+                "3. Observe LiveData for purchases, balance, and user info",
+                "4. Configure month navigation buttons and swipe refresh",
+                "5. Handle page changes to fetch data for selected month",
+                "6. Update adapter loading states and notify data changes"
+              ],
+              "fr_id": "FR-DAS-002",
+              "source_module": "dashboard",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardFragment.kt",
+                  "class_name": "DashboardFragment",
+                  "method_name": "onViewCreated"
+                },
+                {
+                  "layer": "API",
+                  "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                  "class_name": "TransactionsApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                  "class_name": "dashboardModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Capture Profile Picture",
+              "description": "Allows user to take and upload a profile picture using camera",
+              "preconditions": [
+                "Camera and storage permissions granted"
+              ],
+              "postconditions": [
+                "Profile picture is updated in UI"
+              ],
+              "actors": [
+                "User"
+              ],
+              "data_flow": "DashboardFragment.takePicture -> DashboardViewModel.uploadProfilePicture() -> UI update",
+              "source_method": "DashboardFragment.takePicture",
+              "business_logic_steps": [
+                "1. Request camera and storage permissions from user",
+                "2. Launch camera activity result launcher",
+                "3. Convert captured bitmap to file path",
+                "4. Call ViewModel to upload profile picture with bitmap and file",
+                "5. Observe profile picture LiveData for updates",
+                "6. Update ImageView with new bitmap and remove tint"
+              ],
+              "fr_id": "FR-DAS-003",
+              "source_module": "dashboard",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardFragment.kt",
+                  "class_name": "DashboardFragment",
+                  "method_name": "takePicture"
+                },
+                {
+                  "layer": "API",
+                  "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                  "class_name": "TransactionsApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                  "class_name": "dashboardModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Get User Info",
+              "description": "Retrieves the user info and publishes the result to the UI via LiveData (DashboardViewModel.getUserInfo).",
+              "preconditions": [],
+              "postconditions": [],
+              "actors": [
+                "User"
+              ],
+              "data_flow": "DashboardViewModel.getUserInfo",
+              "source_method": "DashboardViewModel.getUserInfo",
+              "business_logic_steps": [
+                "1. UI invokes DashboardViewModel.getUserInfo().",
+                "2. viewModelScope.launch dispatches the repository call on Dispatchers.IO.",
+                "3. Result is collected and posted to the matching LiveData.",
+                "4. Observers receive the update on the main thread."
+              ],
+              "source_module": "dashboard",
+              "augmented_deterministic": true,
+              "fr_id": "FR-DAS-004",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "getUserInfo"
+                },
+                {
+                  "layer": "API",
+                  "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                  "class_name": "TransactionsApi",
+                  "method_name": ""
+                },
+                {
+                  "layer": "DI",
+                  "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                  "class_name": "dashboardModule",
+                  "method_name": ""
+                }
+              ]
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR25": {
+          "status": "complete",
+          "items": [
+            {
+              "rule_name": "IO Dispatcher for Repository Work",
+              "description": "Network / disk work is hopped off the main thread via Dispatchers.IO to keep the UI responsive.",
+              "source_evidence": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:47",
+              "rule_category": "threading",
+              "enforced_in_layer": "Repository",
+              "source_module": "dashboard",
+              "rule_id": "BR-DAS-001"
+            },
+            {
+              "rule_name": "LiveData Post-to-Main",
+              "description": "Background-thread results are delivered to observers via postValue so the emit lands on the main thread.",
+              "source_evidence": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:59",
+              "rule_category": "threading",
+              "enforced_in_layer": "ViewModel",
+              "source_module": "dashboard",
+              "rule_id": "BR-DAS-002"
+            },
+            {
+              "rule_name": "Current Month Default",
+              "description": "Dashboard always starts with current month selected",
+              "source_evidence": "DashboardFragment.kt:onViewCreated() \u2014 currentItem = calendar.get(Calendar.MONTH) + 1",
+              "rule_category": "fallback",
+              "enforced_in_layer": "ViewModel",
+              "rule_id": "BR-DAS-003",
+              "source_module": "dashboard"
+            },
+            {
+              "rule_name": "First Account Selection",
+              "description": "Always uses first account from accounts list for transactions",
+              "source_evidence": "DashboardViewModel.kt:getPurchases() \u2014 accounts.first()",
+              "rule_category": "fallback",
+              "enforced_in_layer": "ViewModel",
+              "rule_id": "BR-DAS-004",
+              "source_module": "dashboard"
+            },
+            {
+              "rule_name": "Loading State Management",
+              "description": "Adapter shows loading shimmer during data fetch operations",
+              "source_evidence": "DashboardParentListAdapter.kt:getItemViewType() \u2014 returns 0 when loading is true",
+              "rule_category": "threading",
+              "enforced_in_layer": "ViewModel",
+              "rule_id": "BR-DAS-005",
+              "source_module": "dashboard"
+            },
+            {
+              "rule_name": "Permission Gating",
+              "description": "Camera functionality requires both camera and storage permissions",
+              "source_evidence": "DashboardFragment.kt:profilePicture.setOnClickListener \u2014 request(Permission.Camera, Permission.Storage)",
+              "rule_category": "validation",
+              "enforced_in_layer": "ViewModel",
+              "rule_id": "BR-DAS-006",
+              "source_module": "dashboard"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR26": {
+          "status": "complete",
+          "domain_entities": [
+            {
+              "entity_name": "Camera",
+              "entity_kind": "object",
+              "source_file": "dashboard/src/main/java/com/davidm/utils/Permissions.kt",
+              "source_module": "dashboard",
+              "fields": [],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "DateInterval",
+              "entity_kind": "data_class",
+              "source_file": "dashboard/src/main/java/com/davidm/entities/DateInterval.kt",
+              "source_module": "dashboard",
+              "fields": [
+                {
+                  "field_name": "startDate",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "endDate",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "month",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "Permission",
+              "entity_kind": "sealed_class",
+              "source_file": "dashboard/src/main/java/com/davidm/utils/Permissions.kt",
+              "source_module": "dashboard",
+              "fields": [],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "Purchases",
+              "entity_kind": "data_class",
+              "source_file": "dashboard/src/main/java/com/davidm/entities/StarlingTransaction.kt",
+              "source_module": "dashboard",
+              "fields": [
+                {
+                  "field_name": "feedItems",
+                  "field_type": "List<StarlingTransaction>",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "SpendingCategory",
+              "entity_kind": "enum",
+              "source_file": "dashboard/src/main/java/com/davidm/entities/StarlingTransaction.kt",
+              "source_module": "dashboard",
+              "fields": [],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "StarlingTransaction",
+              "entity_kind": "data_class",
+              "source_file": "dashboard/src/main/java/com/davidm/entities/StarlingTransaction.kt",
+              "source_module": "dashboard",
+              "fields": [
+                {
+                  "field_name": "feedItemUid",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "categoryUid",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "amount",
+                  "field_type": "Amount",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "transactionTime",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "counterPartyName",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "spendingCategory",
+                  "field_type": "SpendingCategory",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "Storage",
+              "entity_kind": "object",
+              "source_file": "dashboard/src/main/java/com/davidm/utils/Permissions.kt",
+              "source_module": "dashboard",
+              "fields": [],
+              "orm_annotations": [],
+              "note": ""
+            }
+          ],
+          "ui_models": [
+            {
+              "entity_name": "LocalAccountBalance",
+              "entity_kind": "data_class",
+              "source_file": "dashboard/src/main/java/com/davidm/utils/DashboardLocalMapper.kt",
+              "source_module": "dashboard",
+              "fields": [
+                {
+                  "field_name": "amount",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "amountCents",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "currency",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "LocalPurchase",
+              "entity_kind": "data_class",
+              "source_file": "dashboard/src/main/java/com/davidm/utils/DashboardLocalMapper.kt",
+              "source_module": "dashboard",
+              "fields": [
+                {
+                  "field_name": "counterPartyName",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "amount",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "amountColor",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "spendingCategoryColor",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "spendingCategoryDrawable",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "date",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "ParentListItem",
+              "entity_kind": "data_class",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardParentListAdapter.kt",
+              "source_module": "dashboard",
+              "fields": [
+                {
+                  "field_name": "month",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "listAdapter",
+                  "field_type": "DashboardNestedListAdapter",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            }
+          ]
+        },
+        "FR27": {
+          "status": "complete",
+          "endpoints": [
+            {
+              "method": "GET",
+              "path": "api/$API_VERSION/feed/account/{account}/category/{category}/transactions-between",
+              "interface_name": "dashboard",
+              "method_name": "getPurchasesInAWeek",
+              "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+              "source_module": "dashboard",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Accept",
+                  "default": "application/json"
+                }
+              ],
+              "path_params": [
+                {
+                  "name": "account",
+                  "type": "String"
+                },
+                {
+                  "name": "category",
+                  "type": "String"
+                }
+              ],
+              "query_params": [
+                {
+                  "name": "minTime",
+                  "type": "String"
+                },
+                {
+                  "name": "maxTime",
+                  "type": "String"
+                }
+              ],
+              "request_body": "",
+              "response_type": "Purchases",
+              "content_type": ""
+            }
+          ]
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "Bearer Token",
+          "auth_implementation": "@Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+          "headers": [
+            {
+              "name": "Accept",
+              "default": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "default": "Bearer $API_KEY"
+            }
+          ],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-DASHBOARD-001",
+              "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+              "risk_level": "HIGH",
+              "evidence": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt: Bearer $API_KEY default argument",
+              "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "Bearer Token",
+            "auth_implementation": "@Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+            "headers": [
+              {
+                "name": "Accept",
+                "default": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "default": "Bearer $API_KEY"
+              }
+            ],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-DASHBOARD-001",
+                "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+                "risk_level": "HIGH",
+                "evidence": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt: Bearer $API_KEY default argument",
+                "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "complete",
+          "entries": [
+            {
+              "location": "DashboardViewModel.getPurchases",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "error_type": "Exception",
+              "handling_strategy": "log error and post message to LiveData",
+              "log_tag": "network_error",
+              "user_visible": true,
+              "recovery_possible": true,
+              "eh_id": "EH-DAS-001",
+              "source_module": "dashboard"
+            },
+            {
+              "location": "DashboardViewModel.getUserInfo",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "error_type": "Exception",
+              "handling_strategy": "log error and return null",
+              "log_tag": "user_retrieve_error",
+              "user_visible": false,
+              "recovery_possible": false,
+              "eh_id": "EH-DAS-002",
+              "source_module": "dashboard"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR30": {
+          "status": "complete",
+          "items": [
+            {
+              "ec_type": "null_handling",
+              "scenario": "DashboardViewModel.getUserInfo \u2014 null result from repository is checked before posting to LiveData",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "line": 95,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "proper null check implemented",
+              "ec_id": "EC-DAS-001",
+              "source_module": "dashboard",
+              "risk": "LOW"
+            },
+            {
+              "ec_type": "boundary_condition",
+              "scenario": "DashboardParentListAdapter.getItemViewType \u2014 empty data list shows empty state instead of crashing",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardParentListAdapter.kt",
+              "line": 75,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "proper empty state handling",
+              "ec_id": "EC-DAS-002",
+              "source_module": "dashboard",
+              "risk": "LOW"
+            },
+            {
+              "ec_type": "code_bug",
+              "scenario": "DashboardViewModel.getPurchases \u2014 accounts.first() will crash if accounts list is empty",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+              "line": 55,
+              "is_defect": true,
+              "risk_level": "HIGH",
+              "remediation": "add null/empty check before calling first()",
+              "ec_id": "EC-DAS-003",
+              "source_module": "dashboard",
+              "risk": "HIGH"
+            },
+            {
+              "ec_type": "null_handling",
+              "scenario": "DashboardFragment._binding \u2014 nullable binding with safe access pattern",
+              "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardFragment.kt",
+              "line": 25,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "proper nullable binding pattern implemented",
+              "ec_id": "EC-DAS-004",
+              "source_module": "dashboard",
+              "risk": "LOW"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR31": {
+          "status": "complete",
+          "workflows": [
+            {
+              "workflow_id": "WF-DASHBOARD-001",
+              "name": "DashboardViewModel.getPurchases",
+              "entry_class": "DashboardViewModel",
+              "entry_method": "getPurchases",
+              "steps": [
+                {
+                  "layer": "ViewModel",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "getPurchases",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 1,
+                  "component": "DashboardViewModel",
+                  "method": "getPurchases",
+                  "output": "state updated on the ViewModel"
+                },
+                {
+                  "layer": "thread-hop",
+                  "class_name": "Dispatchers",
+                  "method_name": "IO",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 2,
+                  "component": "Dispatchers",
+                  "method": "IO",
+                  "output": "coroutine switches to the named dispatcher"
+                },
+                {
+                  "layer": "Repository",
+                  "class_name": "AccountRepository",
+                  "method_name": "retrieveAccounts",
+                  "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                  "step_number": 3,
+                  "component": "AccountRepository",
+                  "method": "retrieveAccounts",
+                  "output": "repository method result returned to caller"
+                },
+                {
+                  "layer": "Repository",
+                  "class_name": "TransactionsRepository",
+                  "method_name": "retrievePurchases",
+                  "source_file": "dashboard/src/main/java/com/davidm/repository/TransactionsRepository.kt",
+                  "step_number": 4,
+                  "component": "TransactionsRepository",
+                  "method": "retrievePurchases",
+                  "output": "repository method result returned to caller"
+                },
+                {
+                  "layer": "Support",
+                  "class_name": "Accounts",
+                  "method_name": "first",
+                  "source_file": "account/src/main/java/com/davidm/account/entities/Accounts.kt",
+                  "step_number": 5,
+                  "component": "Accounts",
+                  "method": "first",
+                  "output": ""
+                },
+                {
+                  "layer": "ViewModel",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "fetchErrorLiveData.postValue",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 6,
+                  "component": "DashboardViewModel",
+                  "method": "fetchErrorLiveData.postValue",
+                  "output": "value posted to fetchErrorLiveData (main-thread emit)"
+                }
+              ],
+              "linked_fr": "FR-DAS-001"
+            },
+            {
+              "workflow_id": "WF-DASHBOARD-002",
+              "name": "DashboardViewModel.getUserInfo",
+              "entry_class": "DashboardViewModel",
+              "entry_method": "getUserInfo",
+              "steps": [
+                {
+                  "layer": "ViewModel",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "getUserInfo",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 1,
+                  "component": "DashboardViewModel",
+                  "method": "getUserInfo",
+                  "output": "state updated on the ViewModel"
+                },
+                {
+                  "layer": "thread-hop",
+                  "class_name": "Dispatchers",
+                  "method_name": "IO",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 2,
+                  "component": "Dispatchers",
+                  "method": "IO",
+                  "output": "coroutine switches to the named dispatcher"
+                },
+                {
+                  "layer": "Repository",
+                  "class_name": "UserRepository",
+                  "method_name": "retrieveUser",
+                  "source_file": "account/src/main/java/com/davidm/account/repository/UserRepository.kt",
+                  "step_number": 3,
+                  "component": "UserRepository",
+                  "method": "retrieveUser",
+                  "output": "repository method result returned to caller"
+                },
+                {
+                  "layer": "ViewModel",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "userLiveData.postValue",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 4,
+                  "component": "DashboardViewModel",
+                  "method": "userLiveData.postValue",
+                  "output": "value posted to userLiveData (main-thread emit)"
+                }
+              ],
+              "linked_fr": "FR-DAS-004"
+            },
+            {
+              "workflow_id": "WF-DASHBOARD-003",
+              "name": "DashboardViewModel.uploadProfilePicture",
+              "entry_class": "DashboardViewModel",
+              "entry_method": "uploadProfilePicture",
+              "steps": [
+                {
+                  "layer": "ViewModel",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "uploadProfilePicture",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 1,
+                  "component": "DashboardViewModel",
+                  "method": "uploadProfilePicture",
+                  "output": "state updated on the ViewModel"
+                },
+                {
+                  "layer": "thread-hop",
+                  "class_name": "Dispatchers",
+                  "method_name": "IO",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 2,
+                  "component": "Dispatchers",
+                  "method": "IO",
+                  "output": "coroutine switches to the named dispatcher"
+                },
+                {
+                  "layer": "Repository",
+                  "class_name": "AccountRepository",
+                  "method_name": "retrieveAccountHolder",
+                  "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                  "step_number": 3,
+                  "component": "AccountRepository",
+                  "method": "retrieveAccountHolder",
+                  "output": "repository method result returned to caller"
+                },
+                {
+                  "layer": "Repository",
+                  "class_name": "AccountRepository",
+                  "method_name": "uploadProfilePicture",
+                  "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                  "step_number": 4,
+                  "component": "AccountRepository",
+                  "method": "uploadProfilePicture",
+                  "output": "repository method result returned to caller"
+                },
+                {
+                  "layer": "Support",
+                  "class_name": "ImageUtils",
+                  "method_name": "checkAndFixPhotoOrientation",
+                  "source_file": "dashboard/src/main/java/com/davidm/utils/ImageUtils.kt",
+                  "step_number": 5,
+                  "component": "ImageUtils",
+                  "method": "checkAndFixPhotoOrientation",
+                  "output": ""
+                },
+                {
+                  "layer": "ViewModel",
+                  "class_name": "DashboardViewModel",
+                  "method_name": "profilePictureLiveData.postValue",
+                  "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                  "step_number": 6,
+                  "component": "DashboardViewModel",
+                  "method": "profilePictureLiveData.postValue",
+                  "output": "value posted to profilePictureLiveData (main-thread emit)"
+                }
+              ],
+              "linked_fr": null
+            }
+          ]
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "kotlin_android_module",
+      "file_count": 21
+    },
+    {
+      "module_id": "network",
+      "component_id": "kotlin::network",
+      "dimensions": {
+        "FR24": {
+          "status": "complete",
+          "items": [
+            {
+              "feature_name": "Retrieve User",
+              "description": "Fetches individual user identity information from the API",
+              "preconditions": [
+                "Valid API key available",
+                "Network connectivity"
+              ],
+              "postconditions": [
+                "User object returned with identity data"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "UserApi.getUser() -> API endpoint",
+              "source_method": "UserApi.getUser",
+              "business_logic_steps": [
+                "1. Set Authorization header with Bearer token using API_KEY",
+                "2. Set Accept header to application/json",
+                "3. Make GET request to api/{version}/identity/individual",
+                "4. Return User object from API response",
+                "5. Handle any network exceptions at caller level"
+              ],
+              "fr_id": "FR-NET-001",
+              "source_module": "network",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "account/src/main/java/com/davidm/account/network/UserApi.kt",
+                  "class_name": "UserApi",
+                  "method_name": "getUser"
+                },
+                {
+                  "layer": "DI",
+                  "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                  "class_name": "baseNetworkModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Retrieve Accounts",
+              "description": "Fetches all user accounts from the API",
+              "preconditions": [
+                "Valid API key available",
+                "Network connectivity"
+              ],
+              "postconditions": [
+                "Accounts object returned with account list"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "AccountApi.getAccounts() -> API endpoint",
+              "source_method": "AccountApi.getAccounts",
+              "business_logic_steps": [
+                "1. Set Authorization header with Bearer token using API_KEY",
+                "2. Set Accept header to application/json",
+                "3. Make GET request to api/{version}/accounts",
+                "4. Return Accounts object from API response",
+                "5. Handle any network exceptions at caller level"
+              ],
+              "fr_id": "FR-NET-002",
+              "source_module": "network",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                  "class_name": "AccountApi",
+                  "method_name": "getAccounts"
+                },
+                {
+                  "layer": "DI",
+                  "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                  "class_name": "baseNetworkModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Retrieve Account Balance",
+              "description": "Fetches balance information for a specific account",
+              "preconditions": [
+                "Valid account ID",
+                "Valid API key",
+                "Network connectivity"
+              ],
+              "postconditions": [
+                "AccountBalance object returned"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "AccountApi.getAccountBalance() -> API endpoint",
+              "source_method": "AccountApi.getAccountBalance",
+              "business_logic_steps": [
+                "1. Validate accountId parameter is provided",
+                "2. Set Authorization header with Bearer token using API_KEY",
+                "3. Set Accept header to application/json",
+                "4. Make GET request to api/{version}/accounts/{accountId}/balance",
+                "5. Return AccountBalance object from API response"
+              ],
+              "fr_id": "FR-NET-003",
+              "source_module": "network",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                  "class_name": "AccountApi",
+                  "method_name": "getAccountBalance"
+                },
+                {
+                  "layer": "DI",
+                  "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                  "class_name": "baseNetworkModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Retrieve Purchases",
+              "description": "Fetches purchase transactions within a date range for specific account and category",
+              "preconditions": [
+                "Valid account ID",
+                "Valid category",
+                "Valid time range",
+                "Network connectivity"
+              ],
+              "postconditions": [
+                "Purchases object returned with transaction data"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "TransactionsApi.getPurchasesInAWeek() -> API endpoint",
+              "source_method": "TransactionsApi.getPurchasesInAWeek",
+              "business_logic_steps": [
+                "1. Validate account, category, and time parameters",
+                "2. Set Authorization header with Bearer token using API_KEY",
+                "3. Set Accept header to application/json",
+                "4. Make GET request with path and query parameters",
+                "5. Return Purchases object from API response"
+              ],
+              "fr_id": "FR-NET-004",
+              "source_module": "network",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                  "class_name": "TransactionsApi",
+                  "method_name": "getPurchasesInAWeek"
+                },
+                {
+                  "layer": "DI",
+                  "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                  "class_name": "baseNetworkModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Retrieve Payees",
+              "description": "Fetches all payees from the API",
+              "preconditions": [
+                "Valid API key",
+                "Network connectivity"
+              ],
+              "postconditions": [
+                "Payees object returned with payee list"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "PayeesApi.getPayees() -> API endpoint",
+              "source_method": "PayeesApi.getPayees",
+              "business_logic_steps": [
+                "1. Set Authorization header with Bearer token using API_KEY",
+                "2. Set Accept header to application/json",
+                "3. Make GET request to api/{version}/payees",
+                "4. Return Payees object from API response",
+                "5. Handle any network exceptions at caller level"
+              ],
+              "fr_id": "FR-NET-005",
+              "source_module": "network",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                  "class_name": "PayeesApi",
+                  "method_name": "getPayees"
+                },
+                {
+                  "layer": "DI",
+                  "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                  "class_name": "baseNetworkModule",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Create Payee",
+              "description": "Creates a new payee via API call",
+              "preconditions": [
+                "Valid Payee object",
+                "Valid API key",
+                "Network connectivity"
+              ],
+              "postconditions": [
+                "Response object returned with creation status"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "PayeesApi.createPayee() -> API endpoint",
+              "source_method": "PayeesApi.createPayee",
+              "business_logic_steps": [
+                "1. Validate Payee object in request body",
+                "2. Set Authorization header with Bearer token using API_KEY",
+                "3. Set Accept header to application/json",
+                "4. Make PUT request to api/{version}/payees with Payee body",
+                "5. Return Response<PayeeCreationResponse> with creation result"
+              ],
+              "fr_id": "FR-NET-006",
+              "source_module": "network",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                  "class_name": "PayeesApi",
+                  "method_name": "createPayee"
+                },
+                {
+                  "layer": "DI",
+                  "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                  "class_name": "baseNetworkModule",
+                  "method_name": ""
+                }
+              ]
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR25": {
+          "status": "complete",
+          "items": [
+            {
+              "rule_name": "API Authentication",
+              "description": "All API calls must include Bearer token authorization using API_KEY constant",
+              "source_evidence": "All API interfaces use @Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+              "rule_category": "validation",
+              "enforced_in_layer": "API",
+              "rule_id": "BR-NET-001",
+              "source_module": "network"
+            },
+            {
+              "rule_name": "JSON Content Type",
+              "description": "All API calls must specify application/json as Accept header",
+              "source_evidence": "All API methods use @Header(\"Accept\") value: String = \"application/json\"",
+              "rule_category": "validation",
+              "enforced_in_layer": "API",
+              "rule_id": "BR-NET-002",
+              "source_module": "network"
+            },
+            {
+              "rule_name": "HTTP Logging",
+              "description": "All network requests must be logged at BODY level for debugging",
+              "source_evidence": "BaseNetworkModuleX.kt configures HttpLoggingInterceptor with Level.BODY",
+              "rule_category": "validation",
+              "enforced_in_layer": "API",
+              "rule_id": "BR-NET-003",
+              "source_module": "network"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR26": {
+          "status": "empty",
+          "domain_entities": [],
+          "ui_models": []
+        },
+        "FR27": {
+          "status": "empty",
+          "endpoints": []
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "Bearer Token",
+          "auth_implementation": "@Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+          "headers": [
+            {
+              "name": "Accept",
+              "default": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "default": "Bearer $API_KEY"
+            },
+            {
+              "name": "Content-type",
+              "default": "image/jpeg"
+            }
+          ],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-NETWORK-001",
+              "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+              "risk_level": "HIGH",
+              "evidence": "account/src/main/java/com/davidm/account/network/UserApi.kt: Bearer $API_KEY default argument",
+              "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+            },
+            {
+              "gap_id": "SEC-GAP-NETWORK-002",
+              "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+              "risk_level": "HIGH",
+              "evidence": "account/src/main/java/com/davidm/account/network/AccountApi.kt: Bearer $API_KEY default argument",
+              "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+            },
+            {
+              "gap_id": "SEC-GAP-NETWORK-003",
+              "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+              "risk_level": "HIGH",
+              "evidence": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt: Bearer $API_KEY default argument",
+              "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+            },
+            {
+              "gap_id": "SEC-GAP-NETWORK-004",
+              "description": "HttpLoggingInterceptor is set to BODY level, which serialises every request and response body to the log pipeline.",
+              "risk_level": "MEDIUM",
+              "evidence": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt: HttpLoggingInterceptor.Level.BODY",
+              "recommendation": "Gate BODY-level logging behind a debug build flag so production builds never persist authenticated payloads to logs."
+            },
+            {
+              "gap_id": "SEC-GAP-NETWORK-005",
+              "description": "OkHttpClient is constructed without a CertificatePinner.",
+              "risk_level": "MEDIUM",
+              "evidence": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt: OkHttpClient.Builder() without .certificatePinner(...)",
+              "recommendation": "Pin the service's public keys to mitigate man-in-the-middle risks."
+            },
+            {
+              "gap_id": "SEC-GAP-NETWORK-006",
+              "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+              "risk_level": "HIGH",
+              "evidence": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt: Bearer $API_KEY default argument",
+              "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "Bearer Token",
+            "auth_implementation": "@Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+            "headers": [
+              {
+                "name": "Accept",
+                "default": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "default": "Bearer $API_KEY"
+              },
+              {
+                "name": "Content-type",
+                "default": "image/jpeg"
+              }
+            ],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-NETWORK-001",
+                "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+                "risk_level": "HIGH",
+                "evidence": "account/src/main/java/com/davidm/account/network/UserApi.kt: Bearer $API_KEY default argument",
+                "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+              },
+              {
+                "gap_id": "SEC-GAP-NETWORK-002",
+                "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+                "risk_level": "HIGH",
+                "evidence": "account/src/main/java/com/davidm/account/network/AccountApi.kt: Bearer $API_KEY default argument",
+                "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+              },
+              {
+                "gap_id": "SEC-GAP-NETWORK-003",
+                "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+                "risk_level": "HIGH",
+                "evidence": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt: Bearer $API_KEY default argument",
+                "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+              },
+              {
+                "gap_id": "SEC-GAP-NETWORK-004",
+                "description": "HttpLoggingInterceptor is set to BODY level, which serialises every request and response body to the log pipeline.",
+                "risk_level": "MEDIUM",
+                "evidence": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt: HttpLoggingInterceptor.Level.BODY",
+                "recommendation": "Gate BODY-level logging behind a debug build flag so production builds never persist authenticated payloads to logs."
+              },
+              {
+                "gap_id": "SEC-GAP-NETWORK-005",
+                "description": "OkHttpClient is constructed without a CertificatePinner.",
+                "risk_level": "MEDIUM",
+                "evidence": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt: OkHttpClient.Builder() without .certificatePinner(...)",
+                "recommendation": "Pin the service's public keys to mitigate man-in-the-middle risks."
+              },
+              {
+                "gap_id": "SEC-GAP-NETWORK-006",
+                "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+                "risk_level": "HIGH",
+                "evidence": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt: Bearer $API_KEY default argument",
+                "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "empty",
+          "entries": [],
+          "fallback_banner": "\u26a0 FR29 PARTIAL \u2014 LLM extraction returned no error-handling entries. Locations shown from try/catch markers where detected; human review recommended."
+        },
+        "FR30": {
+          "status": "complete",
+          "items": [
+            {
+              "ec_type": "null_handling",
+              "scenario": "AccountApi.uploadAccountPicture returns nullable Array<String>? which could be null",
+              "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+              "line": 45,
+              "is_defect": false,
+              "risk_level": "MEDIUM",
+              "remediation": "Callers must handle null return value appropriately",
+              "ec_id": "EC-NET-001",
+              "source_module": "network",
+              "risk": "MEDIUM"
+            },
+            {
+              "ec_type": "boundary_condition",
+              "scenario": "No validation on accountId parameter in getAccountBalance - could be empty or invalid",
+              "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+              "line": 20,
+              "is_defect": true,
+              "risk_level": "MEDIUM",
+              "remediation": "Add parameter validation before API call",
+              "ec_id": "EC-NET-002",
+              "source_module": "network",
+              "risk": "MEDIUM"
+            },
+            {
+              "ec_type": "boundary_condition",
+              "scenario": "Time parameters in getPurchasesInAWeek are String type without validation",
+              "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+              "line": 10,
+              "is_defect": true,
+              "risk_level": "MEDIUM",
+              "remediation": "Use proper date/time types or add format validation",
+              "ec_id": "EC-NET-003",
+              "source_module": "network",
+              "risk": "MEDIUM"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR31": {
+          "status": "empty",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "kotlin_android_module",
+      "file_count": 5
+    },
+    {
+      "module_id": "payees",
+      "component_id": "kotlin::payees",
+      "dimensions": {
+        "FR24": {
+          "status": "complete",
+          "items": [
+            {
+              "feature_name": "Retrieve Payees",
+              "description": "Fetches the list of payees for the current account from the API",
+              "preconditions": [
+                "User is authenticated",
+                "Network connectivity available"
+              ],
+              "postconditions": [
+                "Payees list is displayed in UI",
+                "Local payee data is mapped for display"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "PayeesViewModel.getPayees() -> PayeesRepository.retrievePayees() -> PayeesApi.getPayees()",
+              "source_method": "PayeesRepository.retrievePayees",
+              "business_logic_steps": [
+                "1. ViewModel initiates payee retrieval on coroutine scope",
+                "2. Repository calls API with authentication headers",
+                "3. If API call fails, catch exception and return empty list",
+                "4. Map API response payees to LocalPayee objects",
+                "5. Post mapped payee list to LiveData for UI consumption",
+                "6. UI adapter displays payee list with click navigation"
+              ],
+              "fr_id": "FR-PAY-001",
+              "source_module": "payees",
+              "traceability": [
+                {
+                  "layer": "Repository",
+                  "file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+                  "class_name": "PayeesRepository",
+                  "method_name": "retrievePayees"
+                },
+                {
+                  "layer": "API",
+                  "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                  "class_name": "PayeesApi",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Create Payee",
+              "description": "Creates a new payee with form data and handles success/error responses",
+              "preconditions": [
+                "User has filled payee creation form",
+                "Valid payee data provided"
+              ],
+              "postconditions": [
+                "Payee is created successfully or error is shown",
+                "Payee list is refreshed on success"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "PayeeCreationFragment -> PayeesViewModel.createPayee() -> PayeesRepository.createPayee() -> PayeesApi.createPayee()",
+              "source_method": "PayeesRepository.createPayee",
+              "business_logic_steps": [
+                "1. Collect form data and create Payee object with defaults",
+                "2. Call repository createPayee method with payee data",
+                "3. If API response is successful, return response body",
+                "4. If API fails, convert error body to ErrorMessage",
+                "5. If exception occurs, return default error response",
+                "6. Show success snackbar and refresh list or display error message"
+              ],
+              "fr_id": "FR-PAY-002",
+              "source_module": "payees",
+              "traceability": [
+                {
+                  "layer": "Repository",
+                  "file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+                  "class_name": "PayeesRepository",
+                  "method_name": "createPayee"
+                },
+                {
+                  "layer": "API",
+                  "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                  "class_name": "PayeesApi",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Display Payee Profile",
+              "description": "Shows detailed payee information including accounts and profile data",
+              "preconditions": [
+                "Payee selected from list",
+                "Payee data available"
+              ],
+              "postconditions": [
+                "Profile screen displays payee details",
+                "Account list shows payee accounts"
+              ],
+              "actors": [
+                "User"
+              ],
+              "data_flow": "PayeeListAdapter.onBindViewHolder() -> PayeeProfileActivity -> PayeeProfileInfoAdapter + PayeeProfileAccountAdapter",
+              "source_method": "PayeeProfileActivity.onCreate",
+              "business_logic_steps": [
+                "1. Receive LocalPayee object from intent extras",
+                "2. Set up collapsing toolbar with payee name",
+                "3. Convert payee data to profile info list using converter",
+                "4. Initialize info adapter with converted profile data",
+                "5. Initialize account adapter with payee accounts list",
+                "6. Display both adapters in respective RecyclerViews"
+              ],
+              "fr_id": "FR-PAY-003",
+              "source_module": "payees",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "payees/src/main/java/com/davidm/payees/ui/PayeeProfileActivity.kt",
+                  "class_name": "PayeeProfileActivity",
+                  "method_name": "onCreate"
+                },
+                {
+                  "layer": "API",
+                  "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                  "class_name": "PayeesApi",
+                  "method_name": ""
+                }
+              ]
+            },
+            {
+              "feature_name": "Provides Payees Api",
+              "description": "Repository capability exposed by PayeesRepositoryModule.providesPayeesApi(). Returns PayeesApi.",
+              "preconditions": [],
+              "postconditions": [
+                "Returns PayeesApi"
+              ],
+              "actors": [
+                "User"
+              ],
+              "data_flow": "PayeesRepositoryModule.providesPayeesApi",
+              "source_method": "PayeesRepositoryModule.providesPayeesApi",
+              "business_logic_steps": [
+                "1. Caller invokes PayeesRepositoryModule.providesPayeesApi().",
+                "2. Repository dispatches work on Dispatchers.IO.",
+                "3. Network / cache interaction runs to completion.",
+                "4. Result (PayeesApi) is returned to the caller."
+              ],
+              "source_module": "payees",
+              "augmented_deterministic": true,
+              "fr_id": "FR-PAY-004",
+              "traceability": [
+                {
+                  "layer": "Repository",
+                  "file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepositoryModule.kt",
+                  "class_name": "PayeesRepositoryModule",
+                  "method_name": "providesPayeesApi"
+                },
+                {
+                  "layer": "API",
+                  "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                  "class_name": "PayeesApi",
+                  "method_name": ""
+                }
+              ]
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR25": {
+          "status": "complete",
+          "items": [
+            {
+              "rule_name": "IO Dispatcher for Repository Work",
+              "description": "Network / disk work is hopped off the main thread via Dispatchers.IO to keep the UI responsive.",
+              "source_evidence": "payees/src/main/java/com/davidm/payees/ui/PayeesViewModel.kt:38; payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt:24",
+              "rule_category": "threading",
+              "enforced_in_layer": "Repository",
+              "source_module": "payees",
+              "rule_id": "BR-PAY-001"
+            },
+            {
+              "rule_name": "Empty Collection Fallback",
+              "description": "Null / missing collections are defaulted to an empty list so downstream UI code never has to null-check.",
+              "source_evidence": "payees/src/main/java/com/davidm/payees/ui/PayeeCreationFragment.kt:90",
+              "rule_category": "fallback",
+              "enforced_in_layer": "Repository",
+              "source_module": "payees",
+              "rule_id": "BR-PAY-002"
+            },
+            {
+              "rule_name": "LiveData Post-to-Main",
+              "description": "Background-thread results are delivered to observers via postValue so the emit lands on the main thread.",
+              "source_evidence": "payees/src/main/java/com/davidm/payees/ui/PayeesViewModel.kt:48",
+              "rule_category": "threading",
+              "enforced_in_layer": "ViewModel",
+              "source_module": "payees",
+              "rule_id": "BR-PAY-003"
+            },
+            {
+              "rule_name": "Null-Bang (!!) Operator",
+              "description": "Code uses the force-unwrap (!!) operator, which throws NullPointerException when the left-hand side is null \u2014 a latent defect surface worth auditing.",
+              "source_evidence": "payees/src/main/java/com/davidm/payees/ui/PayeeCreationFragment.kt:49",
+              "rule_category": "validation",
+              "enforced_in_layer": "ViewModel",
+              "source_module": "payees",
+              "rule_id": "BR-PAY-004"
+            },
+            {
+              "rule_name": "Default Account Badge Display",
+              "description": "Shows default badge only when account is explicitly marked as default",
+              "source_evidence": "PayeeProfileAccountAdapter.kt:onBindViewHolder() \u2014 checks item.defaultAccount !== null && item.defaultAccount",
+              "rule_category": "validation",
+              "enforced_in_layer": "UI",
+              "rule_id": "BR-PAY-005",
+              "source_module": "payees"
+            },
+            {
+              "rule_name": "Error Response Fallback",
+              "description": "Returns default error when API error body cannot be parsed",
+              "source_evidence": "PayeesRepository.kt:convertErrorBody() \u2014 catches exception and returns defaultError",
+              "rule_category": "fallback",
+              "enforced_in_layer": "Repository",
+              "rule_id": "BR-PAY-006",
+              "source_module": "payees"
+            },
+            {
+              "rule_name": "Empty List on Network Failure",
+              "description": "Returns empty payee list when network call fails rather than crashing",
+              "source_evidence": "PayeesViewModel.kt:getPayees() \u2014 catches Exception and returns emptyList<Payee>()",
+              "rule_category": "fallback",
+              "enforced_in_layer": "ViewModel",
+              "rule_id": "BR-PAY-007",
+              "source_module": "payees"
+            },
+            {
+              "rule_name": "Authentication Header Required",
+              "description": "All API calls must include Bearer token authorization header",
+              "source_evidence": "PayeesApi.kt \u2014 @Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+              "rule_category": "validation",
+              "enforced_in_layer": "API",
+              "rule_id": "BR-PAY-008",
+              "source_module": "payees"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR26": {
+          "status": "complete",
+          "domain_entities": [
+            {
+              "entity_name": "ConsentInformation",
+              "entity_kind": "data_class",
+              "source_file": "payees/src/main/java/com/davidm/payees/entities/PayeeCreationResponse.kt",
+              "source_module": "payees",
+              "fields": [
+                {
+                  "field_name": "approvalType",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "ErrorMessage",
+              "entity_kind": "data_class",
+              "source_file": "payees/src/main/java/com/davidm/payees/entities/PayeeCreationResponse.kt",
+              "source_module": "payees",
+              "fields": [
+                {
+                  "field_name": "size",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "error",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "error_description",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "EspressoIdlingResource",
+              "entity_kind": "object",
+              "source_file": "payees/src/main/java/com/davidm/payees/utils/EspressoIdlingResource.kt",
+              "source_module": "payees",
+              "fields": [],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "Payee",
+              "entity_kind": "data_class",
+              "source_file": "payees/src/main/java/com/davidm/payees/entities/Payee.kt",
+              "source_module": "payees",
+              "fields": [
+                {
+                  "field_name": "accounts",
+                  "field_type": "List<PayeeAccount>",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "businessName",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "dateOfBirth",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "firstName",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "lastName",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "middleName",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "payeeName",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "payeeType",
+                  "field_type": "PayeeType",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "payeeUid",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "phoneNumber",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "PayeeAccount",
+              "entity_kind": "data_class",
+              "source_file": "payees/src/main/java/com/davidm/payees/entities/PayeeAccount.kt",
+              "source_module": "payees",
+              "fields": [
+                {
+                  "field_name": "accountIdentifier",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "bankIdentifier",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "bankIdentifierType",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "countryCode",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "defaultAccount",
+                  "field_type": "Boolean",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "description",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "payeeAccountUid",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "PayeeCreationResponse",
+              "entity_kind": "data_class",
+              "source_file": "payees/src/main/java/com/davidm/payees/entities/PayeeCreationResponse.kt",
+              "source_module": "payees",
+              "fields": [
+                {
+                  "field_name": "consentInformation",
+                  "field_type": "ConsentInformation",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "errors",
+                  "field_type": "List<ErrorMessage>",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "payeeUid",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "success",
+                  "field_type": "Boolean",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "PayeeType",
+              "entity_kind": "enum",
+              "source_file": "payees/src/main/java/com/davidm/payees/entities/Payee.kt",
+              "source_module": "payees",
+              "fields": [],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "Payees",
+              "entity_kind": "data_class",
+              "source_file": "payees/src/main/java/com/davidm/payees/entities/Payee.kt",
+              "source_module": "payees",
+              "fields": [
+                {
+                  "field_name": "payees",
+                  "field_type": "List<Payee>",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "State",
+              "entity_kind": "enum",
+              "source_file": "payees/src/main/java/com/davidm/payees/utils/CollapsingBarListener.kt",
+              "source_module": "payees",
+              "fields": [],
+              "orm_annotations": [],
+              "note": ""
+            }
+          ],
+          "ui_models": [
+            {
+              "entity_name": "LocalPayee",
+              "entity_kind": "data_class",
+              "source_file": "payees/src/main/java/com/davidm/payees/utils/PayeesLocalMapper.kt",
+              "source_module": "payees",
+              "fields": [
+                {
+                  "field_name": "payeeName",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "firstAndLastName",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "numberOfAccounts",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "accounts",
+                  "field_type": "List<PayeeAccount>",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "accountTypeIcon",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "initials",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "businessName",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "phoneNumber",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "dateOfBirth",
+                  "field_type": "String",
+                  "nullable": true,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            },
+            {
+              "entity_name": "PayeeProfileInfo",
+              "entity_kind": "data_class",
+              "source_file": "payees/src/main/java/com/davidm/payees/utils/PayeeProfileInfoConverter.kt",
+              "source_module": "payees",
+              "fields": [
+                {
+                  "field_name": "text",
+                  "field_type": "String",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "icon",
+                  "field_type": "Int",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": ""
+            }
+          ]
+        },
+        "FR27": {
+          "status": "complete",
+          "endpoints": [
+            {
+              "method": "GET",
+              "path": "api/$API_VERSION/payees",
+              "interface_name": "payees",
+              "method_name": "getPayees",
+              "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+              "source_module": "payees",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Accept",
+                  "default": "application/json"
+                }
+              ],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "Payees",
+              "content_type": ""
+            },
+            {
+              "method": "PUT",
+              "path": "api/${API_VERSION}/payees",
+              "interface_name": "payees",
+              "method_name": "createPayee",
+              "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+              "source_module": "payees",
+              "headers": [
+                {
+                  "name": "Authorization",
+                  "default": "Bearer $API_KEY"
+                },
+                {
+                  "name": "Accept",
+                  "default": "application/json"
+                }
+              ],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "Payee",
+              "response_type": "Response<PayeeCreationResponse>",
+              "content_type": ""
+            }
+          ]
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "Bearer Token",
+          "auth_implementation": "@Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+          "headers": [
+            {
+              "name": "Accept",
+              "default": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "default": "Bearer $API_KEY"
+            }
+          ],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-PAYEES-001",
+              "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+              "risk_level": "HIGH",
+              "evidence": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt: Bearer $API_KEY default argument",
+              "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "Bearer Token",
+            "auth_implementation": "@Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+            "headers": [
+              {
+                "name": "Accept",
+                "default": "application/json"
+              },
+              {
+                "name": "Authorization",
+                "default": "Bearer $API_KEY"
+              }
+            ],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-PAYEES-001",
+                "description": "Authorization header default contains a hardcoded API-key literal (Bearer $API_KEY). Every Retrofit call will send the compiled-in token unless a caller overrides it.",
+                "risk_level": "HIGH",
+                "evidence": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt: Bearer $API_KEY default argument",
+                "recommendation": "Inject the token from a secure source (keystore / runtime config) and remove the default value so callers must supply it explicitly."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "complete",
+          "entries": [
+            {
+              "location": "PayeesViewModel.getPayees",
+              "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeesViewModel.kt",
+              "error_type": "Exception",
+              "handling_strategy": "log error + return empty list",
+              "log_tag": "network_error",
+              "user_visible": false,
+              "recovery_possible": true,
+              "eh_id": "EH-PAY-001",
+              "source_module": "payees"
+            },
+            {
+              "location": "PayeesViewModel.createPayee",
+              "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeesViewModel.kt",
+              "error_type": "Exception",
+              "handling_strategy": "log error + return default error response",
+              "log_tag": "network_error",
+              "user_visible": true,
+              "recovery_possible": true,
+              "eh_id": "EH-PAY-002",
+              "source_module": "payees"
+            },
+            {
+              "location": "PayeesRepository.convertErrorBody",
+              "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+              "error_type": "JSON parsing exception",
+              "handling_strategy": "return default error message",
+              "log_tag": "",
+              "user_visible": false,
+              "recovery_possible": false,
+              "eh_id": "EH-PAY-003",
+              "source_module": "payees"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR30": {
+          "status": "complete",
+          "items": [
+            {
+              "ec_type": "null_handling",
+              "scenario": "PayeeProfileAccountAdapter checks defaultAccount for null before boolean evaluation",
+              "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeeProfileAccountAdapter.kt",
+              "line": 25,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "proper null safety implemented",
+              "ec_id": "EC-PAY-001",
+              "source_module": "payees",
+              "risk": "LOW"
+            },
+            {
+              "ec_type": "null_handling",
+              "scenario": "PayeeProfileActivity checks payee for null before processing",
+              "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeeProfileActivity.kt",
+              "line": 45,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "proper null check implemented",
+              "ec_id": "EC-PAY-002",
+              "source_module": "payees",
+              "risk": "LOW"
+            },
+            {
+              "ec_type": "null_handling",
+              "scenario": "PayeesRepository checks response.body() for null before returning",
+              "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+              "line": 35,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "proper null safety with fallback error response",
+              "ec_id": "EC-PAY-003",
+              "source_module": "payees",
+              "risk": "LOW"
+            },
+            {
+              "ec_type": "fallback_value",
+              "scenario": "convertErrorBody returns defaultError when throwable is null or parsing fails",
+              "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+              "line": 47,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "appropriate fallback handling",
+              "ec_id": "EC-PAY-004",
+              "source_module": "payees",
+              "risk": "LOW"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR31": {
+          "status": "empty",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "kotlin_android_module",
+      "file_count": 29
+    },
+    {
+      "module_id": "resources",
+      "component_id": "kotlin::resources",
+      "dimensions": {
+        "FR24": {
+          "status": "complete",
+          "items": [
+            {
+              "feature_name": "Create Custom Button",
+              "description": "Provides a custom button component that extends AppCompatButton functionality",
+              "preconditions": [
+                "Valid Android context provided"
+              ],
+              "postconditions": [
+                "SweetButton instance created and ready for use"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "Constructor -> super(AppCompatButton) -> SweetButton instance",
+              "source_method": "SweetButton constructors",
+              "business_logic_steps": [
+                "1. Accept context parameter from caller",
+                "2. Optionally accept AttributeSet for XML attributes",
+                "3. Call parent AppCompatButton constructor",
+                "4. Initialize SweetButton instance",
+                "5. Return ready-to-use custom button component"
+              ],
+              "fr_id": "FR-RES-001",
+              "source_module": "resources",
+              "traceability": []
+            },
+            {
+              "feature_name": "Handle Click Events",
+              "description": "Overrides click listener functionality while maintaining parent behavior",
+              "preconditions": [
+                "SweetButton instance exists"
+              ],
+              "postconditions": [
+                "Click listener is set and parent behavior preserved"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "setOnClickListener() -> super.setOnClickListener() -> listener registered",
+              "source_method": "SweetButton.setOnClickListener",
+              "business_logic_steps": [
+                "1. Receive OnClickListener parameter from caller",
+                "2. Call parent AppCompatButton setOnClickListener method",
+                "3. Preserve all existing AppCompatButton click handling",
+                "4. Complete listener registration process"
+              ],
+              "fr_id": "FR-RES-002",
+              "source_module": "resources",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "resources/src/main/java/components/SweetButton.kt",
+                  "class_name": "SweetButton",
+                  "method_name": "setOnClickListener"
+                }
+              ]
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR25": {
+          "status": "complete",
+          "items": [
+            {
+              "rule_name": "Parent Behavior Preservation",
+              "description": "All parent AppCompatButton functionality must be maintained when overriding methods",
+              "source_evidence": "SweetButton.kt:setOnClickListener() \u2014 calls super.setOnClickListener(l) to preserve parent behavior",
+              "rule_category": "inheritance",
+              "enforced_in_layer": "Component",
+              "rule_id": "BR-RES-001",
+              "source_module": "resources"
+            },
+            {
+              "rule_name": "Constructor Delegation",
+              "description": "All constructor variants must delegate to parent AppCompatButton constructors",
+              "source_evidence": "SweetButton.kt:constructors \u2014 both constructor variants call super() with appropriate parameters",
+              "rule_category": "initialization",
+              "enforced_in_layer": "Component",
+              "rule_id": "BR-RES-002",
+              "source_module": "resources"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR26": {
+          "status": "empty",
+          "domain_entities": [],
+          "ui_models": []
+        },
+        "FR27": {
+          "status": "empty",
+          "endpoints": []
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "None detected",
+          "auth_implementation": "",
+          "headers": [],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-RESOURCES-000",
+              "description": "No gaps detected by the static-analysis rule set.",
+              "risk_level": "LOW",
+              "evidence": "static-analysis rules T13 returned zero matches",
+              "recommendation": "Re-run with manual review when the rule set is extended."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "None detected",
+            "auth_implementation": "",
+            "headers": [],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-RESOURCES-000",
+                "description": "No gaps detected by the static-analysis rule set.",
+                "risk_level": "LOW",
+                "evidence": "static-analysis rules T13 returned zero matches",
+                "recommendation": "Re-run with manual review when the rule set is extended."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "empty",
+          "entries": [],
+          "fallback_banner": "\u26a0 FR29 PARTIAL \u2014 LLM extraction returned no error-handling entries. Locations shown from try/catch markers where detected; human review recommended."
+        },
+        "FR30": {
+          "status": "complete",
+          "items": [
+            {
+              "ec_type": "null_handling",
+              "scenario": "setOnClickListener accepts null OnClickListener parameter without validation",
+              "source_file": "resources/src/main/java/components/SweetButton.kt",
+              "line": 12,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "Current null handling is appropriate as parent AppCompatButton handles null listeners correctly",
+              "ec_id": "EC-RES-001",
+              "source_module": "resources",
+              "risk": "LOW"
+            },
+            {
+              "ec_type": "code_bug",
+              "scenario": "Empty method body in setOnClickListener override provides no additional functionality",
+              "source_file": "resources/src/main/java/components/SweetButton.kt",
+              "line": 14,
+              "is_defect": true,
+              "risk_level": "LOW",
+              "remediation": "Either add custom functionality or remove unnecessary override",
+              "ec_id": "EC-RES-002",
+              "source_module": "resources",
+              "risk": "LOW"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR31": {
+          "status": "empty",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "kotlin_android_module",
+      "file_count": 3
+    },
+    {
+      "module_id": "root",
+      "component_id": "kotlin::root",
+      "dimensions": {
+        "FR24": {
+          "status": "deferred",
+          "items": []
+        },
+        "FR25": {
+          "status": "deferred",
+          "items": []
+        },
+        "FR26": {
+          "status": "empty",
+          "domain_entities": [],
+          "ui_models": []
+        },
+        "FR27": {
+          "status": "empty",
+          "endpoints": []
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "None detected",
+          "auth_implementation": "",
+          "headers": [],
+          "gaps": [
+            {
+              "gap_id": "SEC-GAP-ROOT-000",
+              "description": "No gaps detected by the static-analysis rule set.",
+              "risk_level": "LOW",
+              "evidence": "static-analysis rules T13 returned zero matches",
+              "recommendation": "Re-run with manual review when the rule set is extended."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "None detected",
+            "auth_implementation": "",
+            "headers": [],
+            "gaps": [
+              {
+                "gap_id": "SEC-GAP-ROOT-000",
+                "description": "No gaps detected by the static-analysis rule set.",
+                "risk_level": "LOW",
+                "evidence": "static-analysis rules T13 returned zero matches",
+                "recommendation": "Re-run with manual review when the rule set is extended."
+              }
+            ],
+            "missing_files": []
+          }
+        },
+        "FR29": {
+          "status": "deferred",
+          "entries": []
+        },
+        "FR30": {
+          "status": "deferred",
+          "items": []
+        },
+        "FR31": {
+          "status": "deferred",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "excluded",
+      "excluded_reason": "Gradle configuration only \u2014 no Kotlin classes",
+      "component_type": "kotlin_module",
+      "file_count": 1
+    }
+  ],
+  "architecture": {
+    "pattern": "layered_mvvm_with_di",
+    "module_count": 9,
+    "layers": [
+      "di",
+      "fragment",
+      "network",
+      "repository",
+      "viewmodel"
+    ],
+    "di_framework": "koin"
+  },
+  "technology_stack": [
+    {
+      "display_name": "androidx.navigation:navigation-fragment-ktx",
+      "group_id": "androidx.navigation",
+      "artifact_id": "navigation-fragment-ktx",
+      "version": "2.3.2",
+      "scope": "implementation",
+      "bucket": "navigation"
+    },
+    {
+      "display_name": "androidx.navigation:navigation-ui-ktx",
+      "group_id": "androidx.navigation",
+      "artifact_id": "navigation-ui-ktx",
+      "version": "2.3.2",
+      "scope": "implementation",
+      "bucket": "navigation"
+    },
+    {
+      "display_name": "android.arch.core:core-testing",
+      "group_id": "android.arch.core",
+      "artifact_id": "core-testing",
+      "version": "1.1.1",
+      "scope": "testImplementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.activity:activity-ktx",
+      "group_id": "androidx.activity",
+      "artifact_id": "activity-ktx",
+      "version": "1.2.0-rc01",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.appcompat:appcompat",
+      "group_id": "androidx.appcompat",
+      "artifact_id": "appcompat",
+      "version": "1.2.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.cardview:cardview",
+      "group_id": "androidx.cardview",
+      "artifact_id": "cardview",
+      "version": "1.0.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.constraintlayout:constraintlayout",
+      "group_id": "androidx.constraintlayout",
+      "artifact_id": "constraintlayout",
+      "version": "2.0.4",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.core:core-ktx",
+      "group_id": "androidx.core",
+      "artifact_id": "core-ktx",
+      "version": "1.3.2",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.exifinterface:exifinterface",
+      "group_id": "androidx.exifinterface",
+      "artifact_id": "exifinterface",
+      "version": "1.3.2",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.fragment:fragment-ktx",
+      "group_id": "androidx.fragment",
+      "artifact_id": "fragment-ktx",
+      "version": "1.3.0-rc01",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.lifecycle:lifecycle-extensions",
+      "group_id": "androidx.lifecycle",
+      "artifact_id": "lifecycle-extensions",
+      "version": "2.2.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.lifecycle:lifecycle-viewmodel-ktx",
+      "group_id": "androidx.lifecycle",
+      "artifact_id": "lifecycle-viewmodel-ktx",
+      "version": "2.2.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.recyclerview:recyclerview",
+      "group_id": "androidx.recyclerview",
+      "artifact_id": "recyclerview",
+      "version": "1.1.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.swiperefreshlayout:swiperefreshlayout",
+      "group_id": "androidx.swiperefreshlayout",
+      "artifact_id": "swiperefreshlayout",
+      "version": "1.1.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.test.espresso:espresso-contrib",
+      "group_id": "androidx.test.espresso",
+      "artifact_id": "espresso-contrib",
+      "version": "3.3.0",
+      "scope": "androidTestImplementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.test.espresso:espresso-core",
+      "group_id": "androidx.test.espresso",
+      "artifact_id": "espresso-core",
+      "version": "3.3.0",
+      "scope": "androidTestImplementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.test.espresso:espresso-idling-resource",
+      "group_id": "androidx.test.espresso",
+      "artifact_id": "espresso-idling-resource",
+      "version": "3.3.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.test.ext:junit",
+      "group_id": "androidx.test.ext",
+      "artifact_id": "junit",
+      "version": "1.1.2",
+      "scope": "androidTestImplementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.test:rules",
+      "group_id": "androidx.test",
+      "artifact_id": "rules",
+      "version": "1.3.0",
+      "scope": "androidTestImplementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "androidx.viewpager2:viewpager2",
+      "group_id": "androidx.viewpager2",
+      "artifact_id": "viewpager2",
+      "version": "1.0.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "com.facebook.shimmer:shimmer",
+      "group_id": "com.facebook.shimmer",
+      "artifact_id": "shimmer",
+      "version": "0.5.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "com.google.android.material:material",
+      "group_id": "com.google.android.material",
+      "artifact_id": "material",
+      "version": "1.3.0-beta01",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "com.squareup.moshi:moshi",
+      "group_id": "com.squareup.moshi",
+      "artifact_id": "moshi",
+      "version": "1.11.0",
+      "scope": "api",
+      "bucket": "other"
+    },
+    {
+      "display_name": "com.squareup.moshi:moshi-kotlin",
+      "group_id": "com.squareup.moshi",
+      "artifact_id": "moshi-kotlin",
+      "version": "1.11.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "com.squareup.retrofit2:converter-moshi",
+      "group_id": "com.squareup.retrofit2",
+      "artifact_id": "converter-moshi",
+      "version": "2.9.0",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "io.mockk:mockk",
+      "group_id": "io.mockk",
+      "artifact_id": "mockk",
+      "version": "1.10.2",
+      "scope": "testImplementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "junit:junit",
+      "group_id": "junit",
+      "artifact_id": "junit",
+      "version": "4.13.1",
+      "scope": "testImplementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.jetbrains.kotlin:kotlin-stdlib-jdk7",
+      "group_id": "org.jetbrains.kotlin",
+      "artifact_id": "kotlin-stdlib-jdk7",
+      "version": "1.4.20",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.jetbrains.kotlinx:kotlinx-coroutines-android",
+      "group_id": "org.jetbrains.kotlinx",
+      "artifact_id": "kotlinx-coroutines-android",
+      "version": "1.4.2",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+      "group_id": "org.jetbrains.kotlinx",
+      "artifact_id": "kotlinx-coroutines-core",
+      "version": "1.4.2",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+      "group_id": "org.jetbrains.kotlinx",
+      "artifact_id": "kotlinx-coroutines-test",
+      "version": "1.4.2",
+      "scope": "testImplementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.koin:koin-android",
+      "group_id": "org.koin",
+      "artifact_id": "koin-android",
+      "version": "2.2.1",
+      "scope": "implementation",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.koin:koin-android-viewmodel",
+      "group_id": "org.koin",
+      "artifact_id": "koin-android-viewmodel",
+      "version": "2.2.1",
+      "scope": "implementation",
+      "bucket": "other"
+    }
+  ],
+  "global_gap_register": [
+    {
+      "gap_id": "MISSING-API_KEY",
+      "scope": "global",
+      "kind": "missing_file",
+      "description": "Import references com.davidm.network.API_KEY but no source file declaring API_KEY was found in the repo bundle.",
+      "evidence": "account/src/main/java/com/davidm/account/network/UserApi.kt: import com.davidm.network.API_KEY",
+      "recommendation": "Add the missing file, declare the symbol, or remove the import if the reference was stale.",
+      "risk_level": "MEDIUM"
+    },
+    {
+      "gap_id": "MISSING-API_VERSION",
+      "scope": "global",
+      "kind": "missing_file",
+      "description": "Import references com.davidm.network.API_VERSION but no source file declaring API_VERSION was found in the repo bundle.",
+      "evidence": "account/src/main/java/com/davidm/account/network/UserApi.kt: import com.davidm.network.API_VERSION",
+      "recommendation": "Add the missing file, declare the symbol, or remove the import if the reference was stale.",
+      "risk_level": "MEDIUM"
+    },
+    {
+      "gap_id": "MISSING-BASE_URL",
+      "scope": "global",
+      "kind": "missing_file",
+      "description": "Import references com.davidm.network.BASE_URL but no source file declaring BASE_URL was found in the repo bundle.",
+      "evidence": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt: import com.davidm.network.BASE_URL",
+      "recommendation": "Add the missing file, declare the symbol, or remove the import if the reference was stale.",
+      "risk_level": "MEDIUM"
+    },
+    {
+      "gap_id": "DI-UNBOUND-PAYEESREPOSITORYMODULE",
+      "scope": "global",
+      "kind": "di_wiring_drift",
+      "description": "`class PayeesRepositoryModule` exposes provides* methods but no corresponding Koin `val` binding exists. The classes it would provide are not injectable via the Koin container.",
+      "evidence": "payees/src/main/java/com/davidm/payees/repository/PayeesRepositoryModule.kt",
+      "recommendation": "Either delete the class or wire it via `val payeesRepositoryModule = module { single { PayeesRepositoryModule().providesX(get()) } }` and add the val to SweetBank's startKoin modules list.",
+      "risk_level": "HIGH"
+    },
+    {
+      "gap_id": "DI-TOKEN-REFRESH",
+      "scope": "global",
+      "kind": "missing_token_refresh",
+      "description": "OkHttpClient is constructed without a 401/403 Authenticator. When the Bearer token expires, every in-flight request will fail with an unauthenticated response instead of refreshing.",
+      "evidence": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt: OkHttpClient.Builder() without .authenticator(...)",
+      "recommendation": "Attach an Authenticator that refreshes the token and retries the original request, or document the absence of a refresh flow as an intentional policy.",
+      "risk_level": "MEDIUM"
+    }
+  ],
+  "dimension_summary": {
+    "by_module": {
+      "Support Artifacts": {
+        "FR24": "n/a",
+        "FR25": "n/a",
+        "FR26": "n/a",
+        "FR27": "n/a",
+        "FR28": "n/a",
+        "FR29": "n/a",
+        "FR30": "n/a",
+        "FR31": "n/a"
+      },
+      "account": {
+        "FR24": "complete",
+        "FR25": "complete",
+        "FR26": "complete",
+        "FR27": "complete",
+        "FR28": "complete",
+        "FR29": "complete",
+        "FR30": "complete",
+        "FR31": "empty"
+      },
+      "app": {
+        "FR24": "complete",
+        "FR25": "complete",
+        "FR26": "empty",
+        "FR27": "empty",
+        "FR28": "complete",
+        "FR29": "complete",
+        "FR30": "complete",
+        "FR31": "empty"
+      },
+      "balance": {
+        "FR24": "empty",
+        "FR25": "empty",
+        "FR26": "empty",
+        "FR27": "empty",
+        "FR28": "complete",
+        "FR29": "empty",
+        "FR30": "empty",
+        "FR31": "empty"
+      },
+      "dashboard": {
+        "FR24": "complete",
+        "FR25": "complete",
+        "FR26": "complete",
+        "FR27": "complete",
+        "FR28": "complete",
+        "FR29": "complete",
+        "FR30": "complete",
+        "FR31": "complete"
+      },
+      "network": {
+        "FR24": "complete",
+        "FR25": "complete",
+        "FR26": "empty",
+        "FR27": "empty",
+        "FR28": "complete",
+        "FR29": "empty",
+        "FR30": "complete",
+        "FR31": "empty"
+      },
+      "payees": {
+        "FR24": "complete",
+        "FR25": "complete",
+        "FR26": "complete",
+        "FR27": "complete",
+        "FR28": "complete",
+        "FR29": "complete",
+        "FR30": "complete",
+        "FR31": "empty"
+      },
+      "resources": {
+        "FR24": "complete",
+        "FR25": "complete",
+        "FR26": "empty",
+        "FR27": "empty",
+        "FR28": "complete",
+        "FR29": "empty",
+        "FR30": "complete",
+        "FR31": "empty"
+      },
+      "root": {
+        "FR24": "n/a",
+        "FR25": "n/a",
+        "FR26": "n/a",
+        "FR27": "n/a",
+        "FR28": "n/a",
+        "FR29": "n/a",
+        "FR30": "n/a",
+        "FR31": "n/a"
+      }
+    },
+    "dimensions": [
+      "FR24",
+      "FR25",
+      "FR26",
+      "FR27",
+      "FR28",
+      "FR29",
+      "FR30",
+      "FR31"
+    ]
+  },
+  "generator_warnings": [
+    "W-002 partial coverage: module 'root' has no production symbols in symbol_index_v1.",
+    "W-002 partial coverage: module 'Support Artifacts' has no production symbols in symbol_index_v1.",
+    "QG-CAP-001 FAIL: FR26 Data Model empty for modules ['app', 'balance', 'network', 'resources']",
+    "QG-CAP-006 FAIL: endpoint paths contain unresolved $API_VERSION \u2014 ['account::api/$API_VERSION/account-holder', 'account::api/$API_VERSION/account-holder/{accountHolder}/profile-image', 'account::api/$API_VERSION/account-holder/{accountHolder}/profile-image', 'account::api/$API_VERSION/accounts', 'account::api/$API_VERSION/accounts/{accountId}/balance']"
+  ]
+}
