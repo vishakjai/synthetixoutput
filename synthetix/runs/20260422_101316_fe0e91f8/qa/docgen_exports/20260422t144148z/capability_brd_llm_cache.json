@@ -1,0 +1,1905 @@
+{
+  "_schema": "capability-llm-extract-v1",
+  "modules": {
+    "account": {
+      "symbol_hash": "1f2b6b809e7d849e",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Retrieve Accounts",
+            "description": "Fetches user's bank accounts with caching mechanism",
+            "preconditions": [
+              "Valid API authentication token"
+            ],
+            "postconditions": [
+              "Account list cached locally",
+              "Account data available for other operations"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AccountRepository.retrieveAccounts() -> AccountApi.getAccounts() -> Accounts entity",
+            "source_method": "AccountRepository.retrieveAccounts",
+            "business_logic_steps": [
+              "1. Check if accountCachedData is not null",
+              "2. If cached data exists, return cached accounts",
+              "3. If no cache, call AccountApi.getAccounts() to fetch from API",
+              "4. Extract accounts list from Accounts wrapper entity",
+              "5. Check if result is null or empty, return empty list if so",
+              "6. Otherwise return the fetched account list"
+            ],
+            "fr_id": "FR-ACC-001",
+            "source_module": "account",
+            "traceability": [
+              {
+                "layer": "ViewModel",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "retrieveAccounts"
+              },
+              {
+                "layer": "Repository",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                "class_name": "AccountRepository",
+                "method_name": "retrieveAccounts"
+              },
+              {
+                "layer": "API",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                "class_name": "accountRepositoryModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Retrieve Account Balance",
+            "description": "Fetches detailed balance information for a specific account",
+            "preconditions": [
+              "Valid account ID",
+              "API authentication"
+            ],
+            "postconditions": [
+              "Account balance data returned with all balance types"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AccountRepository.retrieveAccountBalance() -> AccountApi.getAccountBalance() -> AccountBalance entity",
+            "source_method": "AccountRepository.retrieveAccountBalance",
+            "business_logic_steps": [
+              "1. Switch to IO dispatcher for network operation",
+              "2. Call AccountApi.getAccountBalance with provided accountId",
+              "3. API returns AccountBalance with nested balance objects",
+              "4. Return complete balance structure to caller",
+              "5. No caching or transformation applied",
+              "6. Direct pass-through of API response"
+            ],
+            "fr_id": "FR-ACC-002",
+            "source_module": "account",
+            "traceability": [
+              {
+                "layer": "ViewModel",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "retrieveAccountBalance"
+              },
+              {
+                "layer": "Repository",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                "class_name": "AccountRepository",
+                "method_name": "retrieveAccountBalance"
+              },
+              {
+                "layer": "API",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                "class_name": "accountRepositoryModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Retrieve User Profile",
+            "description": "Fetches user's personal information from identity service",
+            "preconditions": [
+              "Valid API authentication token"
+            ],
+            "postconditions": [
+              "User profile data available"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "UserRepository.retrieveUser() -> UserApi.getUser() -> User entity",
+            "source_method": "UserRepository.retrieveUser",
+            "business_logic_steps": [
+              "1. Switch to IO dispatcher for network call",
+              "2. Call UserApi.getUser() with authentication headers",
+              "3. API returns User entity with personal details",
+              "4. Return user data directly to caller",
+              "5. No caching or validation applied",
+              "6. Direct API response pass-through"
+            ],
+            "fr_id": "FR-ACC-003",
+            "source_module": "account",
+            "traceability": [
+              {
+                "layer": "ViewModel",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "retrieveUser"
+              },
+              {
+                "layer": "Repository",
+                "file": "account/src/main/java/com/davidm/account/repository/UserRepository.kt",
+                "class_name": "UserRepository",
+                "method_name": "retrieveUser"
+              },
+              {
+                "layer": "API",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                "class_name": "accountRepositoryModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Retrieve Profile Picture",
+            "description": "Downloads user's profile picture as base64 encoded string",
+            "preconditions": [
+              "Valid account holder ID",
+              "API authentication"
+            ],
+            "postconditions": [
+              "Profile picture data returned as string"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AccountRepository.retrieveProfilePicture() -> AccountApi.getAccountPicture() -> String",
+            "source_method": "AccountRepository.retrieveProfilePicture",
+            "business_logic_steps": [
+              "1. Switch to IO dispatcher for network operation",
+              "2. Call AccountApi.getAccountPicture with accountHolderId",
+              "3. API returns base64 encoded image string",
+              "4. Return string directly to caller",
+              "5. No image processing or validation",
+              "6. Raw API response returned"
+            ],
+            "fr_id": "FR-ACC-004",
+            "source_module": "account",
+            "traceability": [
+              {
+                "layer": "ViewModel",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "retrieveProfilePicture"
+              },
+              {
+                "layer": "Repository",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                "class_name": "AccountRepository",
+                "method_name": "retrieveProfilePicture"
+              },
+              {
+                "layer": "API",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                "class_name": "accountRepositoryModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Upload Profile Picture",
+            "description": "Uploads a new profile picture file for the user",
+            "preconditions": [
+              "Valid account holder ID",
+              "Valid image file",
+              "API authentication"
+            ],
+            "postconditions": [
+              "Profile picture updated on server"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AccountRepository.uploadProfilePicture() -> AccountApi.uploadAccountPicture() -> Array<String>?",
+            "source_method": "AccountRepository.uploadProfilePicture",
+            "business_logic_steps": [
+              "1. Switch to IO dispatcher for file upload",
+              "2. Convert File to RequestBody with image/* media type",
+              "3. Call AccountApi.uploadAccountPicture with file data",
+              "4. API processes upload and returns response array",
+              "5. Return API response (nullable array) to caller",
+              "6. No local file validation or error handling"
+            ],
+            "fr_id": "FR-ACC-005",
+            "source_module": "account",
+            "traceability": [
+              {
+                "layer": "ViewModel",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "uploadProfilePicture"
+              },
+              {
+                "layer": "Repository",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                "class_name": "AccountRepository",
+                "method_name": "uploadProfilePicture"
+              },
+              {
+                "layer": "API",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                "class_name": "accountRepositoryModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Retrieve Account Holder",
+            "description": "Retrieves the account holder through the repository layer (AccountRepository.retrieveAccountHolder). Returns AccountHolder.",
+            "preconditions": [],
+            "postconditions": [
+              "Returns AccountHolder"
+            ],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "AccountRepository.retrieveAccountHolder",
+            "source_method": "AccountRepository.retrieveAccountHolder",
+            "business_logic_steps": [
+              "1. Caller invokes AccountRepository.retrieveAccountHolder().",
+              "2. Repository dispatches work on Dispatchers.IO.",
+              "3. Network / cache interaction runs to completion.",
+              "4. Result (AccountHolder) is returned to the caller."
+            ],
+            "source_module": "account",
+            "augmented_deterministic": true,
+            "fr_id": "FR-ACC-006",
+            "traceability": [
+              {
+                "layer": "ViewModel",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "retrieveAccountHolder"
+              },
+              {
+                "layer": "Repository",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+                "class_name": "AccountRepository",
+                "method_name": "retrieveAccountHolder"
+              },
+              {
+                "layer": "API",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+                "class_name": "accountRepositoryModule",
+                "method_name": ""
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Image Orientation Fix (EXIF)",
+            "description": "Before upload the bitmap is re-oriented from its EXIF metadata so the server-side copy matches the device's capture orientation.",
+            "source_evidence": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:180",
+            "rule_category": "transformation",
+            "enforced_in_layer": "ViewModel",
+            "source_module": "account",
+            "rule_id": "BR-ACC-001"
+          },
+          {
+            "rule_name": "IO Dispatcher for Repository Work",
+            "description": "Network / disk work is hopped off the main thread via Dispatchers.IO to keep the UI responsive.",
+            "source_evidence": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt:36; account/src/main/java/com/davidm/account/repository/UserRepository.kt:13; dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:47; dashboard/src/main/java/com/davidm/repository/TransactionsRepository.kt:22",
+            "rule_category": "threading",
+            "enforced_in_layer": "Repository",
+            "source_module": "account",
+            "rule_id": "BR-ACC-002"
+          },
+          {
+            "rule_name": "Empty Collection Fallback",
+            "description": "Null / missing collections are defaulted to an empty list so downstream UI code never has to null-check.",
+            "source_evidence": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt:27; dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:97",
+            "rule_category": "fallback",
+            "enforced_in_layer": "Repository",
+            "source_module": "account",
+            "rule_id": "BR-ACC-003"
+          },
+          {
+            "rule_name": "Content-Type Conversion for Upload",
+            "description": "Image uploads build a MediaType tagged with an image/* content type so the multipart body is typed correctly for the server.",
+            "source_evidence": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt:61",
+            "rule_category": "transformation",
+            "enforced_in_layer": "ViewModel",
+            "source_module": "account",
+            "rule_id": "BR-ACC-004"
+          },
+          {
+            "rule_name": "LiveData Post-to-Main",
+            "description": "Background-thread results are delivered to observers via postValue so the emit lands on the main thread.",
+            "source_evidence": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:59",
+            "rule_category": "threading",
+            "enforced_in_layer": "ViewModel",
+            "source_module": "account",
+            "rule_id": "BR-ACC-005"
+          },
+          {
+            "rule_name": "Account Data Caching",
+            "description": "Account list is cached locally to avoid repeated API calls",
+            "source_evidence": "AccountRepository.kt:getAccountCachedData() \u2014 checks accountCachedData field before API call",
+            "rule_category": "caching",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-ACC-006",
+            "source_module": "account"
+          },
+          {
+            "rule_name": "File Upload Media Type",
+            "description": "Profile picture uploads must use image/* media type",
+            "source_evidence": "AccountRepository.kt:uploadProfilePicture() \u2014 file.asRequestBody(\"image/*\".toMediaTypeOrNull())",
+            "rule_category": "validation",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-ACC-007",
+            "source_module": "account"
+          }
+        ],
+        "fr29_error_handling": [
+          {
+            "location": "DashboardViewModel.getPurchases",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 62,
+            "error_type": "Exception",
+            "handling_strategy": "log; postValue to LiveData",
+            "log_tag": "network_error",
+            "user_visible": true,
+            "recovery_possible": true,
+            "source_module": "account",
+            "eh_id": "EH-ACC-001"
+          },
+          {
+            "location": "DashboardViewModel.getUserInfo",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 75,
+            "error_type": "Exception",
+            "handling_strategy": "log",
+            "log_tag": "user_retrieve_error",
+            "user_visible": false,
+            "recovery_possible": true,
+            "source_module": "account",
+            "eh_id": "EH-ACC-002"
+          },
+          {
+            "location": "DashboardViewModel.getAccountBalance",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 104,
+            "error_type": "Exception",
+            "handling_strategy": "log",
+            "log_tag": "account_retrieve_error",
+            "user_visible": false,
+            "recovery_possible": true,
+            "source_module": "account",
+            "eh_id": "EH-ACC-003"
+          },
+          {
+            "location": "DashboardViewModel.getAccountHolderID",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 127,
+            "error_type": "Exception",
+            "handling_strategy": "log",
+            "log_tag": "user_retrieve_error",
+            "user_visible": false,
+            "recovery_possible": true,
+            "source_module": "account",
+            "eh_id": "EH-ACC-004"
+          },
+          {
+            "location": "DashboardViewModel.getProfilePicture",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 145,
+            "error_type": "Exception",
+            "handling_strategy": "log",
+            "log_tag": "user_retrieve_error",
+            "user_visible": false,
+            "recovery_possible": true,
+            "source_module": "account",
+            "eh_id": "EH-ACC-005"
+          },
+          {
+            "location": "DashboardViewModel.uploadProfilePicture",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 172,
+            "error_type": "Exception",
+            "handling_strategy": "log",
+            "log_tag": "user_retrieve_error",
+            "user_visible": false,
+            "recovery_possible": true,
+            "source_module": "account",
+            "eh_id": "EH-ACC-006"
+          }
+        ],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "AccountRepository.getAccountCachedData() assumes non-null accountCachedData when not null",
+            "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+            "line": 18,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Use safe call operator or proper null check instead of force unwrap",
+            "ec_id": "EC-ACC-001",
+            "source_module": "account",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "retrieveAccounts() calls getAccountCachedData() twice when cache is null",
+            "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+            "line": 22,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Store result of getAccountCachedData() in variable to avoid duplicate API calls",
+            "ec_id": "EC-ACC-002",
+            "source_module": "account",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "null_handling",
+            "scenario": "retrieveAccountBalance assumes accounts.firstOrNull() is not null",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Add null check before calling .accountUid on firstOrNull() result",
+            "ec_id": "EC-ACC-003",
+            "source_module": "account",
+            "risk": "HIGH"
+          },
+          {
+            "ec_type": "code_bug",
+            "scenario": "getAccountHolderID() returns null instead of AccountHolder due to coroutine scope issue",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Fix coroutine return type or use suspend function properly",
+            "ec_id": "EC-ACC-004",
+            "source_module": "account",
+            "risk": "HIGH"
+          }
+        ]
+      }
+    },
+    "app": {
+      "symbol_hash": "49bc4ff9229e1cbf",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Initialize Application",
+            "description": "Sets up dependency injection container with all required modules for the banking application",
+            "preconditions": [
+              "Application is starting up",
+              "Android context is available"
+            ],
+            "postconditions": [
+              "Koin DI container is configured",
+              "All modules are registered",
+              "Application is ready for use"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "SweetBank.onCreate() -> startKoin() -> modules registration",
+            "source_method": "SweetBank.onCreate",
+            "business_logic_steps": [
+              "1. Call super.onCreate() to initialize base Application",
+              "2. Start Koin dependency injection framework",
+              "3. Set Android context for Koin container",
+              "4. Register all feature modules (dashboard, viewModel, user, network, account, transactions)",
+              "5. Complete application initialization"
+            ],
+            "fr_id": "FR-APP-001",
+            "source_module": "app",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "app/src/main/java/com/davidm/sweetbankapp/SweetBank.kt",
+                "class_name": "SweetBank",
+                "method_name": "onCreate"
+              },
+              {
+                "layer": "DI",
+                "file": "app/src/main/java/com/davidm/sweetbankapp/di/ViewmodelModuleX.kt",
+                "class_name": "viewModelModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Configure ViewModel Dependencies",
+            "description": "Registers DashboardViewModel with its required dependencies in the DI container",
+            "preconditions": [
+              "Koin module system is active",
+              "Required dependencies are available"
+            ],
+            "postconditions": [
+              "DashboardViewModel is available for injection",
+              "Dependencies are properly wired"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "viewModelModule -> viewModel factory -> DashboardViewModel(get(), get(), get())",
+            "source_method": "viewModelModule",
+            "business_logic_steps": [
+              "1. Define viewModel module using Koin DSL",
+              "2. Register DashboardViewModel as a viewModel factory",
+              "3. Inject three dependencies using get() calls",
+              "4. Make ViewModel available for Android lifecycle-aware injection"
+            ],
+            "fr_id": "FR-APP-002",
+            "source_module": "app",
+            "traceability": []
+          },
+          {
+            "feature_name": "Execute UI Test",
+            "description": "Performs automated UI testing by navigating to payees section and creating a new payee",
+            "preconditions": [
+              "Test activity is launched",
+              "UI elements are available"
+            ],
+            "postconditions": [
+              "Payee creation flow is tested",
+              "UI interactions are verified"
+            ],
+            "actors": [
+              "Test System"
+            ],
+            "data_flow": "HomepageActivityTest -> UI interactions -> PayeesViewModel -> PayeesRepository",
+            "source_method": "HomepageActivityTest.launchAndCreateAPayee",
+            "business_logic_steps": [
+              "1. Click on navigation_payees to switch to payees section",
+              "2. Create PayeesApi instance with Retrofit builder",
+              "3. Initialize PayeesViewModel with repository dependency",
+              "4. Click FAB button to start payee creation",
+              "5. Fill payee name and business name fields",
+              "6. Submit the form to complete payee creation"
+            ],
+            "fr_id": "FR-APP-003",
+            "source_module": "app",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "app/src/androidTest/java/com/davidm/sweetbankapp/HomepageActivityTest.kt",
+                "class_name": "HomepageActivityTest",
+                "method_name": "launchAndCreateAPayee"
+              },
+              {
+                "layer": "DI",
+                "file": "app/src/main/java/com/davidm/sweetbankapp/di/ViewmodelModuleX.kt",
+                "class_name": "viewModelModule",
+                "method_name": ""
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Module Registration Order",
+            "description": "All required modules must be registered in specific order during application initialization",
+            "source_evidence": "SweetBank.kt:onCreate() \u2014 modules registered in sequence: dashboard, viewModel, user, network, account, transactions",
+            "rule_category": "initialization",
+            "enforced_in_layer": "Application",
+            "rule_id": "BR-APP-001",
+            "source_module": "app"
+          },
+          {
+            "rule_name": "ViewModel Dependency Injection",
+            "description": "ViewModels must be registered with proper dependency resolution using Koin get() calls",
+            "source_evidence": "ViewmodelModuleX.kt:viewModelModule \u2014 DashboardViewModel requires exactly three dependencies",
+            "rule_category": "dependency_injection",
+            "enforced_in_layer": "DI Module",
+            "rule_id": "BR-APP-002",
+            "source_module": "app"
+          },
+          {
+            "rule_name": "Test Application Context",
+            "description": "Test runner must use actual application class for proper dependency injection during testing",
+            "source_evidence": "CustomRunner.kt:newApplication() \u2014 returns SweetBank class name instead of default",
+            "rule_category": "testing",
+            "enforced_in_layer": "Test Runner",
+            "rule_id": "BR-APP-003",
+            "source_module": "app"
+          }
+        ],
+        "fr29_error_handling": [
+          {
+            "location": "CustomRunner.newApplication",
+            "source_file": "app/src/androidTest/java/com/davidm/sweetbankapp/CustomRunner.kt",
+            "error_type": "Exception",
+            "handling_strategy": "throws annotation declares exception propagation",
+            "log_tag": "",
+            "user_visible": false,
+            "recovery_possible": false,
+            "eh_id": "EH-APP-001",
+            "source_module": "app"
+          }
+        ],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "code_bug",
+            "scenario": "HomepageActivityTest creates PayeesApi instance manually instead of using DI",
+            "source_file": "app/src/androidTest/java/com/davidm/sweetbankapp/HomepageActivityTest.kt",
+            "line": 42,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Use injected dependencies instead of manual Retrofit creation",
+            "ec_id": "EC-APP-001",
+            "source_module": "app",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "code_bug",
+            "scenario": "Test method calls getPayees() but doesn't handle the result or verify behavior",
+            "source_file": "app/src/androidTest/java/com/davidm/sweetbankapp/HomepageActivityTest.kt",
+            "line": 46,
+            "is_defect": true,
+            "risk_level": "LOW",
+            "remediation": "Add proper assertions or remove unused call",
+            "ec_id": "EC-APP-002",
+            "source_module": "app",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "ExampleUnitTest only tests basic arithmetic without banking domain logic",
+            "source_file": "app/src/test/java/com/davidm/sweetbankapp/ExampleUnitTest.kt",
+            "line": 15,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Replace with actual business logic tests",
+            "ec_id": "EC-APP-003",
+            "source_module": "app",
+            "risk": "LOW"
+          }
+        ]
+      }
+    },
+    "balance": {
+      "symbol_hash": "e409a9247dc8074c",
+      "payload": {
+        "fr24_capabilities": [],
+        "fr25_business_rules": [],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": []
+      }
+    },
+    "dashboard": {
+      "symbol_hash": "e2c8d0a05fe919c5",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Retrieve Purchases",
+            "description": "Fetches and displays user's transaction history for a specific date interval",
+            "preconditions": [
+              "User has valid account",
+              "Date interval is provided"
+            ],
+            "postconditions": [
+              "Purchases are displayed in UI",
+              "Loading state is updated"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "DashboardViewModel.getPurchases() -> TransactionsRepository.retrievePurchases() -> TransactionsApi.getPurchasesInAWeek()",
+            "source_method": "DashboardViewModel.getPurchases",
+            "business_logic_steps": [
+              "1. Receive date interval parameter from UI",
+              "2. Retrieve user accounts from account repository",
+              "3. Call transactions repository with first account and date range",
+              "4. Transform API response using DashboardLocalMapper",
+              "5. Post mapped results to purchasesLiveData for UI consumption",
+              "6. Handle errors by posting to fetchErrorLiveData"
+            ],
+            "fr_id": "FR-DAS-001",
+            "source_module": "dashboard",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "getPurchases"
+              },
+              {
+                "layer": "API",
+                "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                "class_name": "TransactionsApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                "class_name": "dashboardModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Display Account Balance",
+            "description": "Shows user's current account balance with formatted amount and cents",
+            "preconditions": [
+              "User has valid account"
+            ],
+            "postconditions": [
+              "Balance is displayed in main and cents format"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "DashboardViewModel.getAccountBalance() -> AccountRepository -> UI binding",
+            "source_method": "DashboardViewModel.getAccountBalance",
+            "business_logic_steps": [
+              "1. Initialize ViewModel and trigger balance retrieval",
+              "2. Call account repository to get balance data",
+              "3. Transform balance using AmountConverter",
+              "4. Map to LocalAccountBalance with amount and cents",
+              "5. Post to accountBalanceLiveData",
+              "6. UI observes and updates balance display fields"
+            ],
+            "fr_id": "FR-DAS-002",
+            "source_module": "dashboard",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "getAccountBalance"
+              },
+              {
+                "layer": "API",
+                "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                "class_name": "TransactionsApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                "class_name": "dashboardModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Navigate Monthly Transactions",
+            "description": "Allows user to browse transactions by month using ViewPager navigation",
+            "preconditions": [
+              "Dashboard is loaded",
+              "Date intervals are generated"
+            ],
+            "postconditions": [
+              "Month title is updated",
+              "Transactions for selected month are loaded"
+            ],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "ViewPager2.onPageSelected() -> DashboardViewModel.getPurchases() -> UI update",
+            "source_method": "DashboardFragment.onPageSelected",
+            "business_logic_steps": [
+              "1. User swipes or clicks navigation buttons",
+              "2. ViewPager2 triggers onPageSelected callback",
+              "3. Update month title using DateFormatSymbols",
+              "4. Generate date interval for selected position",
+              "5. Call getPurchases with new date interval",
+              "6. Set loading state and refresh adapter"
+            ],
+            "fr_id": "FR-DAS-003",
+            "source_module": "dashboard",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardFragment.kt",
+                "class_name": "DashboardFragment",
+                "method_name": "onPageSelected"
+              },
+              {
+                "layer": "API",
+                "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                "class_name": "TransactionsApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                "class_name": "dashboardModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Upload Profile Picture",
+            "description": "Captures photo using camera and uploads as user profile picture",
+            "preconditions": [
+              "Camera and storage permissions granted"
+            ],
+            "postconditions": [
+              "Profile picture is updated in UI"
+            ],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "Camera capture -> DashboardViewModel.uploadProfilePicture() -> profilePictureLiveData",
+            "source_method": "DashboardViewModel.uploadProfilePicture",
+            "business_logic_steps": [
+              "1. Request camera and storage permissions",
+              "2. Launch camera activity result launcher",
+              "3. Receive bitmap from camera capture",
+              "4. Convert bitmap to file using ImageUtils",
+              "5. Call uploadProfilePicture with bitmap and file",
+              "6. Update UI with new profile picture bitmap"
+            ],
+            "fr_id": "FR-DAS-004",
+            "source_module": "dashboard",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "uploadProfilePicture"
+              },
+              {
+                "layer": "API",
+                "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                "class_name": "TransactionsApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                "class_name": "dashboardModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Get User Info",
+            "description": "Retrieves the user info and publishes the result to the UI via LiveData (DashboardViewModel.getUserInfo).",
+            "preconditions": [],
+            "postconditions": [],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "DashboardViewModel.getUserInfo",
+            "source_method": "DashboardViewModel.getUserInfo",
+            "business_logic_steps": [
+              "1. UI invokes DashboardViewModel.getUserInfo().",
+              "2. viewModelScope.launch dispatches the repository call on Dispatchers.IO.",
+              "3. Result is collected and posted to the matching LiveData.",
+              "4. Observers receive the update on the main thread."
+            ],
+            "source_module": "dashboard",
+            "augmented_deterministic": true,
+            "fr_id": "FR-DAS-005",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+                "class_name": "DashboardViewModel",
+                "method_name": "getUserInfo"
+              },
+              {
+                "layer": "API",
+                "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                "class_name": "TransactionsApi",
+                "method_name": ""
+              },
+              {
+                "layer": "DI",
+                "file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+                "class_name": "dashboardModule",
+                "method_name": ""
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "IO Dispatcher for Repository Work",
+            "description": "Network / disk work is hopped off the main thread via Dispatchers.IO to keep the UI responsive.",
+            "source_evidence": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:47",
+            "rule_category": "threading",
+            "enforced_in_layer": "Repository",
+            "source_module": "dashboard",
+            "rule_id": "BR-DAS-001"
+          },
+          {
+            "rule_name": "LiveData Post-to-Main",
+            "description": "Background-thread results are delivered to observers via postValue so the emit lands on the main thread.",
+            "source_evidence": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt:59",
+            "rule_category": "threading",
+            "enforced_in_layer": "ViewModel",
+            "source_module": "dashboard",
+            "rule_id": "BR-DAS-002"
+          },
+          {
+            "rule_name": "Account Selection Priority",
+            "description": "Always uses the first account from retrieved accounts list for transactions",
+            "source_evidence": "DashboardViewModel.kt:getPurchases() \u2014 accounts.first() used for transaction retrieval",
+            "rule_category": "fallback",
+            "enforced_in_layer": "ViewModel",
+            "rule_id": "BR-DAS-003",
+            "source_module": "dashboard"
+          },
+          {
+            "rule_name": "Current Month Default",
+            "description": "ViewPager starts at current calendar month plus one",
+            "source_evidence": "DashboardFragment.kt:onViewCreated() \u2014 currentItem = calendar.get(Calendar.MONTH) + 1",
+            "rule_category": "fallback",
+            "enforced_in_layer": "ViewModel",
+            "rule_id": "BR-DAS-004",
+            "source_module": "dashboard"
+          },
+          {
+            "rule_name": "Loading State Management",
+            "description": "Loading state is set to true when fetching new month data",
+            "source_evidence": "DashboardFragment.kt:onPageSelected() \u2014 parentListAdapter.loading = true",
+            "rule_category": "threading",
+            "enforced_in_layer": "ViewModel",
+            "rule_id": "BR-DAS-005",
+            "source_module": "dashboard"
+          },
+          {
+            "rule_name": "Error State Display",
+            "description": "Errors are displayed in place of empty list with custom message",
+            "source_evidence": "DashboardParentListAdapter.kt:onBindViewHolder() \u2014 error message shown when error != null",
+            "rule_category": "fallback",
+            "enforced_in_layer": "ViewModel",
+            "rule_id": "BR-DAS-006",
+            "source_module": "dashboard"
+          },
+          {
+            "rule_name": "Permission Gating",
+            "description": "Camera and storage permissions required before profile picture capture",
+            "source_evidence": "DashboardFragment.kt:profilePicture.setOnClickListener() \u2014 permission check before camera launch",
+            "rule_category": "validation",
+            "enforced_in_layer": "ViewModel",
+            "rule_id": "BR-DAS-007",
+            "source_module": "dashboard"
+          }
+        ],
+        "fr29_error_handling": [
+          {
+            "location": "DashboardViewModel.getPurchases",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "error_type": "Exception",
+            "handling_strategy": "log error message and post to fetchErrorLiveData",
+            "log_tag": "network_error",
+            "user_visible": true,
+            "recovery_possible": true,
+            "eh_id": "EH-DAS-001",
+            "source_module": "dashboard"
+          },
+          {
+            "location": "DashboardViewModel.getUserInfo",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "error_type": "Exception",
+            "handling_strategy": "log error and return null",
+            "log_tag": "user_retrieve_error",
+            "user_visible": false,
+            "recovery_possible": false,
+            "eh_id": "EH-DAS-002",
+            "source_module": "dashboard"
+          },
+          {
+            "location": "DashboardParentListAdapter.getItemViewType",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardParentListAdapter.kt",
+            "error_type": "Error state",
+            "handling_strategy": "return empty list view type when error is not null",
+            "log_tag": "",
+            "user_visible": true,
+            "recovery_possible": true,
+            "eh_id": "EH-DAS-003",
+            "source_module": "dashboard"
+          }
+        ],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "DashboardFragment.kt \u2014 binding is nullable and checked with !! operator",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardFragment.kt",
+            "line": 35,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Add null safety checks or use safe call operator",
+            "ec_id": "EC-DAS-001",
+            "source_module": "dashboard",
+            "risk": "HIGH"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "DashboardFragment.kt \u2014 ViewPager currentItem set to calendar.month + 1 without bounds checking",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardFragment.kt",
+            "line": 75,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Validate month index is within data array bounds",
+            "ec_id": "EC-DAS-002",
+            "source_module": "dashboard",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "null_handling",
+            "scenario": "DashboardViewModel.kt \u2014 accounts.first() called without checking if accounts list is empty",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+            "line": 65,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Check accounts.isNotEmpty() before calling first()",
+            "ec_id": "EC-DAS-003",
+            "source_module": "dashboard",
+            "risk": "HIGH"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "DashboardParentListAdapter.kt \u2014 error message fallback when error is null but list is empty",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardParentListAdapter.kt",
+            "line": 70,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Current implementation is appropriate",
+            "ec_id": "EC-DAS-004",
+            "source_module": "dashboard",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "code_bug",
+            "scenario": "DashboardFragment.kt \u2014 shimmer.stopShimmer() called in loading state instead of startShimmer()",
+            "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardParentListAdapter.kt",
+            "line": 78,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Change to startShimmer() for loading state",
+            "ec_id": "EC-DAS-005",
+            "source_module": "dashboard",
+            "risk": "MEDIUM"
+          }
+        ]
+      }
+    },
+    "network": {
+      "symbol_hash": "6dcfabdaf1ea8a5b",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Retrieve User",
+            "description": "Fetches individual user identity information from the API",
+            "preconditions": [
+              "Valid API token available",
+              "Network connectivity"
+            ],
+            "postconditions": [
+              "User object returned",
+              "Authorization headers set"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "UserApi.getUser() -> API endpoint",
+            "source_method": "UserApi.getUser",
+            "business_logic_steps": [
+              "1. Set Bearer token authorization header with API_KEY",
+              "2. Set Accept header to application/json",
+              "3. Make GET request to identity/individual endpoint",
+              "4. Return User object from API response"
+            ],
+            "fr_id": "FR-NET-001",
+            "source_module": "network",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "account/src/main/java/com/davidm/account/network/UserApi.kt",
+                "class_name": "UserApi",
+                "method_name": "getUser"
+              },
+              {
+                "layer": "DI",
+                "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                "class_name": "baseNetworkModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Retrieve Accounts",
+            "description": "Fetches all user accounts from the API",
+            "preconditions": [
+              "Valid API token available",
+              "Network connectivity"
+            ],
+            "postconditions": [
+              "Accounts object returned",
+              "Authorization headers set"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "AccountApi.getAccounts() -> API endpoint",
+            "source_method": "AccountApi.getAccounts",
+            "business_logic_steps": [
+              "1. Set Bearer token authorization header with API_KEY",
+              "2. Set Accept header to application/json",
+              "3. Make GET request to accounts endpoint",
+              "4. Return Accounts object from API response"
+            ],
+            "fr_id": "FR-NET-002",
+            "source_module": "network",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": "getAccounts"
+              },
+              {
+                "layer": "DI",
+                "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                "class_name": "baseNetworkModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Retrieve Account Balance",
+            "description": "Fetches balance for a specific account by ID",
+            "preconditions": [
+              "Valid account ID",
+              "Valid API token",
+              "Network connectivity"
+            ],
+            "postconditions": [
+              "AccountBalance object returned"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "AccountApi.getAccountBalance() -> API endpoint",
+            "source_method": "AccountApi.getAccountBalance",
+            "business_logic_steps": [
+              "1. Validate accountId path parameter",
+              "2. Set Bearer token authorization header with API_KEY",
+              "3. Set Accept header to application/json",
+              "4. Make GET request to accounts/{accountId}/balance endpoint",
+              "5. Return AccountBalance object from API response"
+            ],
+            "fr_id": "FR-NET-003",
+            "source_module": "network",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": "getAccountBalance"
+              },
+              {
+                "layer": "DI",
+                "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                "class_name": "baseNetworkModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Upload Account Picture",
+            "description": "Uploads profile image for account holder",
+            "preconditions": [
+              "Valid account holder ID",
+              "Valid image data",
+              "Valid API token"
+            ],
+            "postconditions": [
+              "Array of strings returned or null"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AccountApi.uploadAccountPicture() -> API endpoint",
+            "source_method": "AccountApi.uploadAccountPicture",
+            "business_logic_steps": [
+              "1. Validate accountHolder path parameter",
+              "2. Set Bearer token authorization header with API_KEY",
+              "3. Set Content-type header to image/jpeg",
+              "4. Make PUT request with RequestBody to profile-image endpoint",
+              "5. Return Array<String> or null from API response"
+            ],
+            "fr_id": "FR-NET-004",
+            "source_module": "network",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+                "class_name": "AccountApi",
+                "method_name": "uploadAccountPicture"
+              },
+              {
+                "layer": "DI",
+                "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                "class_name": "baseNetworkModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Retrieve Purchases",
+            "description": "Fetches transactions within a date range for specific account and category",
+            "preconditions": [
+              "Valid account ID",
+              "Valid category",
+              "Valid time range",
+              "Network connectivity"
+            ],
+            "postconditions": [
+              "Purchases object returned"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "TransactionsApi.getPurchasesInAWeek() -> API endpoint",
+            "source_method": "TransactionsApi.getPurchasesInAWeek",
+            "business_logic_steps": [
+              "1. Validate account and category path parameters",
+              "2. Set minTransactionTimestamp and maxTransactionTimestamp query parameters",
+              "3. Set Bearer token authorization header with API_KEY",
+              "4. Set Accept header to application/json",
+              "5. Make GET request to feed/account/{account}/category/{category}/transactions-between endpoint",
+              "6. Return Purchases object from API response"
+            ],
+            "fr_id": "FR-NET-005",
+            "source_module": "network",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+                "class_name": "TransactionsApi",
+                "method_name": "getPurchasesInAWeek"
+              },
+              {
+                "layer": "DI",
+                "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                "class_name": "baseNetworkModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Retrieve Payees",
+            "description": "Fetches all payees from the API",
+            "preconditions": [
+              "Valid API token",
+              "Network connectivity"
+            ],
+            "postconditions": [
+              "Payees object returned"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "PayeesApi.getPayees() -> API endpoint",
+            "source_method": "PayeesApi.getPayees",
+            "business_logic_steps": [
+              "1. Set Bearer token authorization header with API_KEY",
+              "2. Set Accept header to application/json",
+              "3. Make GET request to payees endpoint",
+              "4. Return Payees object from API response"
+            ],
+            "fr_id": "FR-NET-006",
+            "source_module": "network",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                "class_name": "PayeesApi",
+                "method_name": "getPayees"
+              },
+              {
+                "layer": "DI",
+                "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                "class_name": "baseNetworkModule",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Create Payee",
+            "description": "Creates a new payee via API",
+            "preconditions": [
+              "Valid Payee object",
+              "Valid API token",
+              "Network connectivity"
+            ],
+            "postconditions": [
+              "Response<PayeeCreationResponse> returned"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "PayeesApi.createPayee() -> API endpoint",
+            "source_method": "PayeesApi.createPayee",
+            "business_logic_steps": [
+              "1. Validate Payee object in request body",
+              "2. Set Bearer token authorization header with API_KEY",
+              "3. Set Accept header to application/json",
+              "4. Make PUT request with Payee body to payees endpoint",
+              "5. Return Response<PayeeCreationResponse> from API"
+            ],
+            "fr_id": "FR-NET-007",
+            "source_module": "network",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                "class_name": "PayeesApi",
+                "method_name": "createPayee"
+              },
+              {
+                "layer": "DI",
+                "file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+                "class_name": "baseNetworkModule",
+                "method_name": ""
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "API Authentication",
+            "description": "All API calls must include Bearer token authorization using API_KEY",
+            "source_evidence": "All API interfaces use @Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+            "rule_category": "validation",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-NET-001",
+            "source_module": "network"
+          },
+          {
+            "rule_name": "Content Type Standardization",
+            "description": "All API calls must accept application/json except image uploads which use image/jpeg",
+            "source_evidence": "AccountApi.uploadAccountPicture uses Content-type: image/jpeg, all others use Accept: application/json",
+            "rule_category": "transformation",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-NET-002",
+            "source_module": "network"
+          },
+          {
+            "rule_name": "Network Logging",
+            "description": "All HTTP requests and responses must be logged at BODY level",
+            "source_evidence": "BaseNetworkModuleX.kt \u2014 HttpLoggingInterceptor.Level.BODY",
+            "rule_category": "caching",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-NET-003",
+            "source_module": "network"
+          }
+        ],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "AccountApi.uploadAccountPicture returns nullable Array<String>",
+            "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+            "line": 45,
+            "is_defect": false,
+            "risk_level": "MEDIUM",
+            "remediation": "Callers must handle null return value appropriately",
+            "ec_id": "EC-NET-001",
+            "source_module": "network",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "TransactionsApi.getPurchasesInAWeek requires string timestamps but uses Instant import",
+            "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+            "line": 8,
+            "is_defect": true,
+            "risk_level": "LOW",
+            "remediation": "Remove unused Instant import or convert to proper timestamp format",
+            "ec_id": "EC-NET-002",
+            "source_module": "network",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "PayeesApi.createPayee uses PUT instead of POST for creation",
+            "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+            "line": 19,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Verify API contract expects PUT for payee creation",
+            "ec_id": "EC-NET-003",
+            "source_module": "network",
+            "risk": "LOW"
+          }
+        ]
+      }
+    },
+    "payees": {
+      "symbol_hash": "7b50e4e1339c73e4",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Retrieve Payees",
+            "description": "Fetches the list of payees for the current account from the API",
+            "preconditions": [
+              "User is authenticated",
+              "Network connection available"
+            ],
+            "postconditions": [
+              "Payees list is displayed in UI",
+              "Local payee data is mapped for display"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "PayeesViewModel.getPayees() -> PayeesRepository.retrievePayees() -> PayeesApi.getPayees()",
+            "source_method": "PayeesRepository.retrievePayees",
+            "business_logic_steps": [
+              "1. ViewModel initiates payee retrieval on coroutine scope with IO dispatcher",
+              "2. Repository calls PayeesApi.getPayees() with authorization headers",
+              "3. API returns Payees wrapper containing list of Payee entities",
+              "4. If network error occurs, catch exception and return empty list",
+              "5. Map API Payee entities to LocalPayee using PayeesLocalMapper",
+              "6. Post mapped results to payeesLiveData for UI consumption"
+            ],
+            "fr_id": "FR-PAY-001",
+            "source_module": "payees",
+            "traceability": [
+              {
+                "layer": "Repository",
+                "file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+                "class_name": "PayeesRepository",
+                "method_name": "retrievePayees"
+              },
+              {
+                "layer": "API",
+                "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                "class_name": "PayeesApi",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Create Payee",
+            "description": "Creates a new payee record via API call with form validation",
+            "preconditions": [
+              "User has filled payee creation form",
+              "Valid payee data provided"
+            ],
+            "postconditions": [
+              "New payee is created",
+              "Success/error message shown to user"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "PayeesViewModel.createPayee() -> PayeesRepository.createPayee() -> PayeesApi.createPayee()",
+            "source_method": "PayeesRepository.createPayee",
+            "business_logic_steps": [
+              "1. ViewModel receives Payee object from UI form",
+              "2. Repository calls PayeesApi.createPayee() with payee body and headers",
+              "3. Check if API response is successful and body is not null",
+              "4. If successful, return the PayeeCreationResponse body",
+              "5. If error, convert error body to ErrorMessage using Moshi",
+              "6. Post creation response to creationResponseLiveData for UI feedback"
+            ],
+            "fr_id": "FR-PAY-002",
+            "source_module": "payees",
+            "traceability": [
+              {
+                "layer": "Repository",
+                "file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+                "class_name": "PayeesRepository",
+                "method_name": "createPayee"
+              },
+              {
+                "layer": "API",
+                "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                "class_name": "PayeesApi",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Display Payee Profile",
+            "description": "Shows detailed payee information including accounts in profile activity",
+            "preconditions": [
+              "Payee selected from list",
+              "LocalPayee data available"
+            ],
+            "postconditions": [
+              "Payee profile displayed with info and accounts",
+              "Navigation enabled"
+            ],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "PayeeListAdapter.onBindViewHolder() -> PayeeProfileActivity.onCreate()",
+            "source_method": "PayeeProfileActivity.onCreate",
+            "business_logic_steps": [
+              "1. Receive LocalPayee parcelable from intent extras",
+              "2. Set up collapsing toolbar with payee name",
+              "3. Convert payee data to profile info list using PayeeProfileInfoConverter",
+              "4. Initialize PayeeProfileInfoAdapter with converted info",
+              "5. Initialize PayeeProfileAccountAdapter with payee accounts",
+              "6. Set adapters to respective RecyclerViews with divider decorations"
+            ],
+            "fr_id": "FR-PAY-003",
+            "source_module": "payees",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "payees/src/main/java/com/davidm/payees/ui/PayeeProfileActivity.kt",
+                "class_name": "PayeeProfileActivity",
+                "method_name": "onCreate"
+              },
+              {
+                "layer": "API",
+                "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                "class_name": "PayeesApi",
+                "method_name": ""
+              }
+            ]
+          },
+          {
+            "feature_name": "Provides Payees Api",
+            "description": "Repository capability exposed by PayeesRepositoryModule.providesPayeesApi(). Returns PayeesApi.",
+            "preconditions": [],
+            "postconditions": [
+              "Returns PayeesApi"
+            ],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "PayeesRepositoryModule.providesPayeesApi",
+            "source_method": "PayeesRepositoryModule.providesPayeesApi",
+            "business_logic_steps": [
+              "1. Caller invokes PayeesRepositoryModule.providesPayeesApi().",
+              "2. Repository dispatches work on Dispatchers.IO.",
+              "3. Network / cache interaction runs to completion.",
+              "4. Result (PayeesApi) is returned to the caller."
+            ],
+            "source_module": "payees",
+            "augmented_deterministic": true,
+            "fr_id": "FR-PAY-004",
+            "traceability": [
+              {
+                "layer": "Repository",
+                "file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepositoryModule.kt",
+                "class_name": "PayeesRepositoryModule",
+                "method_name": "providesPayeesApi"
+              },
+              {
+                "layer": "API",
+                "file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+                "class_name": "PayeesApi",
+                "method_name": ""
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "IO Dispatcher for Repository Work",
+            "description": "Network / disk work is hopped off the main thread via Dispatchers.IO to keep the UI responsive.",
+            "source_evidence": "payees/src/main/java/com/davidm/payees/ui/PayeesViewModel.kt:38; payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt:24",
+            "rule_category": "threading",
+            "enforced_in_layer": "Repository",
+            "source_module": "payees",
+            "rule_id": "BR-PAY-001"
+          },
+          {
+            "rule_name": "Empty Collection Fallback",
+            "description": "Null / missing collections are defaulted to an empty list so downstream UI code never has to null-check.",
+            "source_evidence": "payees/src/main/java/com/davidm/payees/ui/PayeeCreationFragment.kt:90",
+            "rule_category": "fallback",
+            "enforced_in_layer": "Repository",
+            "source_module": "payees",
+            "rule_id": "BR-PAY-002"
+          },
+          {
+            "rule_name": "LiveData Post-to-Main",
+            "description": "Background-thread results are delivered to observers via postValue so the emit lands on the main thread.",
+            "source_evidence": "payees/src/main/java/com/davidm/payees/ui/PayeesViewModel.kt:48",
+            "rule_category": "threading",
+            "enforced_in_layer": "ViewModel",
+            "source_module": "payees",
+            "rule_id": "BR-PAY-003"
+          },
+          {
+            "rule_name": "Null-Bang (!!) Operator",
+            "description": "Code uses the force-unwrap (!!) operator, which throws NullPointerException when the left-hand side is null \u2014 a latent defect surface worth auditing.",
+            "source_evidence": "payees/src/main/java/com/davidm/payees/ui/PayeeCreationFragment.kt:49",
+            "rule_category": "validation",
+            "enforced_in_layer": "ViewModel",
+            "source_module": "payees",
+            "rule_id": "BR-PAY-004"
+          },
+          {
+            "rule_name": "Default Account Badge Display",
+            "description": "Shows default badge only when account has defaultAccount flag set to true",
+            "source_evidence": "PayeeProfileAccountAdapter.kt:onBindViewHolder() \u2014 checks item.defaultAccount !== null && item.defaultAccount",
+            "rule_category": "validation",
+            "enforced_in_layer": "UI",
+            "rule_id": "BR-PAY-005",
+            "source_module": "payees"
+          },
+          {
+            "rule_name": "Error Response Fallback",
+            "description": "Returns default error when API error body cannot be parsed",
+            "source_evidence": "PayeesRepository.kt:convertErrorBody() \u2014 catches exception and returns defaultError",
+            "rule_category": "fallback",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-PAY-006",
+            "source_module": "payees"
+          },
+          {
+            "rule_name": "Network Error Handling",
+            "description": "Returns empty list when network call fails during payee retrieval",
+            "source_evidence": "PayeesViewModel.kt:getPayees() \u2014 catches Exception and returns emptyList<Payee>()",
+            "rule_category": "fallback",
+            "enforced_in_layer": "ViewModel",
+            "rule_id": "BR-PAY-007",
+            "source_module": "payees"
+          },
+          {
+            "rule_name": "Authorization Header Requirement",
+            "description": "All API calls must include Bearer token authorization header",
+            "source_evidence": "PayeesApi.kt \u2014 @Header(\"Authorization\") token: String = \"Bearer $API_KEY\"",
+            "rule_category": "validation",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-PAY-008",
+            "source_module": "payees"
+          }
+        ],
+        "fr29_error_handling": [
+          {
+            "location": "PayeesViewModel.getPayees",
+            "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeesViewModel.kt",
+            "error_type": "Network Exception",
+            "handling_strategy": "log error message and return empty list",
+            "log_tag": "network_error",
+            "user_visible": false,
+            "recovery_possible": true,
+            "eh_id": "EH-PAY-001",
+            "source_module": "payees"
+          },
+          {
+            "location": "PayeesViewModel.createPayee",
+            "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeesViewModel.kt",
+            "error_type": "Network Exception",
+            "handling_strategy": "log error and return PayeeCreationResponse with default error",
+            "log_tag": "network_error",
+            "user_visible": true,
+            "recovery_possible": true,
+            "eh_id": "EH-PAY-002",
+            "source_module": "payees"
+          },
+          {
+            "location": "PayeesRepository.convertErrorBody",
+            "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+            "error_type": "JSON Parsing Exception",
+            "handling_strategy": "return defaultError when Moshi parsing fails",
+            "log_tag": "",
+            "user_visible": false,
+            "recovery_possible": false,
+            "eh_id": "EH-PAY-003",
+            "source_module": "payees"
+          }
+        ],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "PayeeProfileAccountAdapter checks defaultAccount for null before boolean evaluation",
+            "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeeProfileAccountAdapter.kt",
+            "line": 26,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "proper null check implemented",
+            "ec_id": "EC-PAY-001",
+            "source_module": "payees",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "null_handling",
+            "scenario": "PayeeProfileActivity checks if payee from intent extras is not null before processing",
+            "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeeProfileActivity.kt",
+            "line": 47,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "proper null check implemented",
+            "ec_id": "EC-PAY-002",
+            "source_module": "payees",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "null_handling",
+            "scenario": "PayeesRepository checks response.body() !== null before accessing body",
+            "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+            "line": 35,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "proper null check implemented",
+            "ec_id": "EC-PAY-003",
+            "source_module": "payees",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "convertErrorBody returns defaultError when throwable is null or parsing fails",
+            "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+            "line": 50,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "appropriate fallback handling",
+            "ec_id": "EC-PAY-004",
+            "source_module": "payees",
+            "risk": "LOW"
+          }
+        ]
+      }
+    },
+    "resources": {
+      "symbol_hash": "fa3ee80fc6e33a12",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Create Custom Button",
+            "description": "Provides a custom button component that extends AppCompatButton functionality",
+            "preconditions": [
+              "Valid Android Context provided"
+            ],
+            "postconditions": [
+              "SweetButton instance created and ready for use"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "Constructor -> AppCompatButton initialization -> SweetButton instance",
+            "source_method": "SweetButton constructors",
+            "business_logic_steps": [
+              "1. Accept Context or Context with AttributeSet parameters",
+              "2. Call parent AppCompatButton constructor with provided parameters",
+              "3. Initialize SweetButton instance",
+              "4. Return ready-to-use custom button component"
+            ],
+            "fr_id": "FR-RES-001",
+            "source_module": "resources",
+            "traceability": []
+          },
+          {
+            "feature_name": "Handle Click Events",
+            "description": "Overrides click listener functionality while maintaining parent behavior",
+            "preconditions": [
+              "SweetButton instance exists"
+            ],
+            "postconditions": [
+              "Click listener is set and parent behavior preserved"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "setOnClickListener() -> super.setOnClickListener() -> click handling",
+            "source_method": "SweetButton.setOnClickListener",
+            "business_logic_steps": [
+              "1. Accept OnClickListener parameter (nullable)",
+              "2. Call parent AppCompatButton setOnClickListener method",
+              "3. Preserve all existing click handling behavior",
+              "4. Complete click listener setup"
+            ],
+            "fr_id": "FR-RES-002",
+            "source_module": "resources",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "resources/src/main/java/components/SweetButton.kt",
+                "class_name": "SweetButton",
+                "method_name": "setOnClickListener"
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Parent Behavior Preservation",
+            "description": "All parent AppCompatButton functionality must be preserved when overriding methods",
+            "source_evidence": "SweetButton.kt:setOnClickListener() \u2014 calls super.setOnClickListener(l)",
+            "rule_category": "inheritance",
+            "enforced_in_layer": "Component",
+            "rule_id": "BR-RES-001",
+            "source_module": "resources"
+          },
+          {
+            "rule_name": "Constructor Delegation",
+            "description": "All constructor variants must delegate to parent AppCompatButton constructors",
+            "source_evidence": "SweetButton.kt:constructors \u2014 both delegate to super(context) and super(context, attrs)",
+            "rule_category": "initialization",
+            "enforced_in_layer": "Component",
+            "rule_id": "BR-RES-002",
+            "source_module": "resources"
+          }
+        ],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "setOnClickListener accepts null OnClickListener parameter without additional validation",
+            "source_file": "resources/src/main/java/components/SweetButton.kt",
+            "line": 12,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Current null handling is appropriate as parent handles null listeners",
+            "ec_id": "EC-RES-001",
+            "source_module": "resources",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "code_bug",
+            "scenario": "Empty method body in setOnClickListener override provides no additional functionality",
+            "source_file": "resources/src/main/java/components/SweetButton.kt",
+            "line": 13,
+            "is_defect": true,
+            "risk_level": "LOW",
+            "remediation": "Either add custom functionality or remove unnecessary override",
+            "ec_id": "EC-RES-002",
+            "source_module": "resources",
+            "risk": "LOW"
+          }
+        ]
+      }
+    }
+  }
+}
