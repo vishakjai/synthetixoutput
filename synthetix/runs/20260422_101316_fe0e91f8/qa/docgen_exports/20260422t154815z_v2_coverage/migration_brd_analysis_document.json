@@ -1,0 +1,3158 @@
+{
+  "artifact_type": "migration_brd_v2",
+  "artifact_version": "1.0",
+  "engagement_id": "20260422_101316_fe0e91f8",
+  "run_id": "20260422_101316_fe0e91f8",
+  "repo": "https://github.com/vishakjai/sweet-bank",
+  "generated_at": "2026-04-22T15:48:15Z",
+  "profile": {},
+  "sections": [
+    {
+      "section_id": "mbv2::1::intent_and_scope",
+      "title": "1. Migration Intent and Scope",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "**Product classification:** `portfolio`.\n\n**Commercial readiness:** no.\n\nMigration intent: modernise the codebase while preserving parity with the capabilities catalogued in the Capability BRD.\n\nOut of scope by default: 1 orphan folder(s) \u2014 balance",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::2::capability_linkage",
+      "title": "2. Capability BRD Linkage",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "Capability BRD back-references detected: **0**.\n\nThe Capability BRD is the parity contract; every migration requirement with 'preserve existing' acceptance criteria must cite a capability_brd_v2 claim via a brd_claim_ref anchor.",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::3::current_state_constraints",
+      "title": "3. Current-State Constraints",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [
+        {
+          "claim_id": "mbv2::3::current_state_constraints::CON-001",
+          "text": "Kotlin 1.4.20 (deprecated) \u2014 Kotlin 1.4.20 predates K2 / coroutines 1.7; migration must uplift first. Detected in: build.gradle",
+          "claim_class": "direct",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::3::current_state_constraints",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "source_verified",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::3::current_state_constraints::CON-002",
+          "text": "Kotlin 1.4.20 (deprecated) \u2014 Kotlin 1.4.20 predates K2 / coroutines 1.7; migration must uplift first. Detected in: build.gradle",
+          "claim_class": "direct",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::3::current_state_constraints",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "source_verified",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::3::current_state_constraints::CON-003",
+          "text": "AGP 4.1.1 (end of life) \u2014 Android Gradle Plugin 4.1.1 is EOL; blocks Gradle 8.x adoption. Detected in: build.gradle",
+          "claim_class": "direct",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::3::current_state_constraints",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "source_verified",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::3::current_state_constraints::CON-004",
+          "text": "Gradle 6.5 (legacy) \u2014 Gradle 6.5 is pre-Gradle 7; blocks AGP 8.x. Detected in: gradle/wrapper/gradle-wrapper.properties",
+          "claim_class": "direct",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::3::current_state_constraints",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "source_verified",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::3::current_state_constraints::CON-005",
+          "text": "kotlin-android-extensions plugin \u2014 `kotlin-android-extensions` is deprecated; must be replaced with ViewBinding/DataBinding during UI uplift. Detected in: app/build.gradle, payees/build.gradle, resources/build.gradle, network/build.gradle, balance/build.gradle",
+          "claim_class": "direct",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::3::current_state_constraints",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "source_verified",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::3::current_state_constraints::CON-006",
+          "text": "jcenter repository \u2014 jcenter is sunset; must be removed from every build.gradle. Detected in: build.gradle",
+          "claim_class": "direct",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::3::current_state_constraints",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "source_verified",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::3::current_state_constraints::CON-007",
+          "text": "HTTP body logging in release \u2014 HttpLoggingInterceptor at BODY level leaks bearer tokens into logcat. Detected in: network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+          "claim_class": "direct",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::3::current_state_constraints",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "source_verified",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        }
+      ],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "7 current-state constraint(s) detected. These must be resolved before the target-state phases can begin.",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::4::target_architecture",
+      "title": "4. Target-State Architecture",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "Target-state architecture promoted from 1 flat section(s).",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::5::adrs",
+      "title": "5. ADRs",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "No ADRs were emitted by the Node docgen bundle.",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::6::migration_requirements",
+      "title": "6. Migration Requirements",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "0 requirement / content section(s) rolled up under this chapter.",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::7::parity_mapping",
+      "title": "7. Parity Mapping Table",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "0 parity row(s). Each row links a migration requirement to the capability it preserves.",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::8::module_sequencing",
+      "title": "8. Module Sequencing (Phase 0-5)",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [
+        {
+          "claim_id": "mbv2::8::module_sequencing::Phase_0",
+          "text": "Phase 0 \u2014 Build/toolchain uplift: Kotlin uplift, AGP uplift, Gradle 8, jcenter removal, targetSdk to 34.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::8::module_sequencing",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::8::module_sequencing::Phase_1",
+          "text": "Phase 1 \u2014 Config/secrets/logging: $API_VERSION resolver, release-logging posture fix, secret rotation / keystore setup.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::8::module_sequencing",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::8::module_sequencing::Phase_2",
+          "text": "Phase 2 \u2014 DI modernization: Koin 2.2 \u2192 Koin 3 or Hilt migration. Decision recorded as ADR.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::8::module_sequencing",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::8::module_sequencing::Phase_3",
+          "text": "Phase 3 \u2014 Repository / ViewModel uplift: StateFlow over LiveData, coroutine-first repositories, structured concurrency.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::8::module_sequencing",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::8::module_sequencing::Phase_4",
+          "text": "Phase 4 \u2014 UI migration: XML \u2192 Compose screen-by-screen; kotlin-android-extensions removal; DayNight theme preserved.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::8::module_sequencing",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::8::module_sequencing::Phase_5",
+          "text": "Phase 5 \u2014 Regression + cleanup: Screenshot parity suite, accessibility scanner baseline, golden-feature matrix, dead-code sweep.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::8::module_sequencing",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        }
+      ],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "Module sequencing is filtered by runtime reachability \u2014 active + dormant modules progress through Phase 0-5; broken modules require an explicit preserve/fix/drop decision; orphaned + test-only modules are excluded by default.",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::9::technical_enablement",
+      "title": "9. Technical Enablement Phase",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "Technical enablement concentrates on removing the constraints captured in \u00a73 before any behaviour change lands. Scope:\n- CI/CD pipeline introduction (the non-applicability register   records its current absence).\n- Build matrix: API 21, 30, 34 \u2014 Firebase Test Lab slots.\n- Linter + formatter baseline committed to repo (ktlint + detekt).\n- Screenshot-test harness bootstrapped (Paparazzi or Shot).",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::10::testing_harness",
+      "title": "10. Testing / Equivalence Harness",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [
+        {
+          "claim_id": "mbv2::10::testing_harness::performance::Cold_start_budget",
+          "text": "Cold start budget: Cold-start time \u2264 2s on a mid-tier device (Pixel 6a class). \u2014 Mobile users abandon apps that take longer than 3s to reach a first interactive frame; 2s leaves headroom for flaky networks. Verification: Run `am start -W` against a signed release build 10\u00d7 per commit on a Firebase Test Lab mid-tier device; p95 must stay under 2s.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::performance::Scroll_frame_timing",
+          "text": "Scroll frame timing: Frame time p99 \u2264 16ms during RecyclerView scroll. \u2014 Sub-16ms frames correspond to smooth 60Hz rendering; exceeding it produces visible jank. Verification: FrameMetrics + PerfettoTrace on dashboard + transaction list scroll scenarios.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::performance::Image_decode_memory",
+          "text": "Image decode memory: Peak memory during profile-picture decode \u2264 50MB. \u2014 EXIF-oriented bitmaps can spike memory; exceeding the budget risks OOM on low-end devices. Verification: Android Profiler memory snapshot during the upload workflow; fail if heap grows >50MB over baseline.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::resilience::Config-change_restoration",
+          "text": "Config-change restoration: Every screen restores scroll state + form fields across a rotation without data loss. \u2014 Config changes destroy/recreate Activities; unsaved state is a class of defect the v2 app must not inherit. Verification: Espresso tests that rotate the device at each visible screen and assert state equivalence.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::resilience::Offline_UX",
+          "text": "Offline UX: Network failure surfaces a readable error state without crashing. \u2014 Sandbox / demo users often hit flaky Wi-Fi; a crash on offline undermines parity evidence. Verification: Android UI tests with airplane-mode toggled on every ViewModel-backed screen.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::accessibility::Contrast_baseline",
+          "text": "Contrast baseline: All interactive elements meet WCAG 2.1 AA contrast on the DayNight theme. \u2014 Baseline accessibility is a hard requirement for app-store submission and inclusive UX. Verification: Accessibility Scanner run on every screen; no CRITICAL contrast failures.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::accessibility::Accessible_names",
+          "text": "Accessible names: Every clickable element has a non-empty contentDescription or text. \u2014 TalkBack users cannot navigate unlabelled buttons. Verification: Android Accessibility Test Framework (AATF) rule `CLICKABLE_ITEM_NEEDS_LABEL`.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::compatibility::API_level_matrix",
+          "text": "API level matrix: API 21 \u2192 API 34 supported; CI runs instrumentation tests on API 21, API 30, API 34. \u2014 Current Sweet Bank targets API 21-30; the migration must at least hold that floor and add API 34 for Play Store compliance. Verification: Firebase Test Lab test matrix covering the three API levels.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::regression::Screenshot_parity",
+          "text": "Screenshot parity: Golden screenshot per primary screen; CI fails on pixel-diff >1%. \u2014 Preserves visual parity during the Compose migration \u2014 tests catch subtle Material theme drift. Verification: Shot or Paparazzi test suite, one per Fragment / composable screen.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::security::Release_logging_posture",
+          "text": "Release logging posture: HttpLoggingInterceptor level must be NONE on release; BODY only on debug. \u2014 The current app logs request bodies at BODY level regardless of build type, exposing bearer tokens in logcat. Verification: Gradle lint rule + build-type conditional in NetworkModule.kt; CI gate reads the generated APK manifest.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::10::testing_harness::security::Bearer_token_storage",
+          "text": "Bearer token storage: API bearer must come from a secure source (BuildConfig backed by keystore, EncryptedSharedPreferences, or server-issued token), never hardcoded. \u2014 The current `Bearer $API_KEY` default in network module is a credential leak. Verification: Static-analysis rule on AccountApi / PayeesApi; gate fails when a hardcoded bearer is present in source.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::10::testing_harness",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        }
+      ],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "11 Android-appropriate NFR(s) applied. 0 backend-style NFR(s) rejected by the Phase C gate (mobile-client classification).",
+      "figures": [
+        {
+          "figure_id": "fig::test_execution_flow",
+          "caption": "Test Execution Flow \u2014 Android multi-module build",
+          "source": "flowchart LR\n    dev[Developer commit] --> ci[CI runner]\n    ci --> unit[Unit tests<br/>JUnit + Robolectric]\n    unit --> lint[Lint + detekt]\n    lint --> instr[Instrumentation tests<br/>AndroidJUnitRunner]\n    instr --> snap[Screenshot tests<br/>Paparazzi / Shot]\n    snap --> artefact[APK + reports]\n    artefact --> publish[Firebase App Distribution]\n",
+          "kind": "mermaid"
+        },
+        {
+          "figure_id": "fig::test_env_architecture",
+          "caption": "Test Environment Architecture",
+          "source": "flowchart TB\n    dev[Developer workstation] --> ci[CI environment]\n    ci --> staging[Staging environment]\n    staging --> uat[UAT environment]\n",
+          "kind": "mermaid"
+        },
+        {
+          "figure_id": "fig::test_data_flow",
+          "caption": "Test Data Flow \u2014 fixtures, mocks, and snapshots",
+          "source": "flowchart LR\n    fixtures[Fixture JSON<br/>src/test/resources] --> mock[MockWebServer]\n    mock --> retrofit[Retrofit client under test]\n    retrofit --> repo[Repository layer]\n    repo --> vm[ViewModel]\n    vm --> assertion[JUnit assertion]\n    fixtures --> snapshot[Screenshot baseline<br/>reference PNGs]\n    snapshot --> compare[Diff against render]\n",
+          "kind": "mermaid"
+        }
+      ]
+    },
+    {
+      "section_id": "mbv2::11::security_hardening",
+      "title": "11. Security & Config Hardening",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [
+        {
+          "claim_id": "mbv2::11::security_hardening::Release_logging_posture",
+          "text": "Release logging posture: HttpLoggingInterceptor level must be NONE on release; BODY only on debug. \u2014 The current app logs request bodies at BODY level regardless of build type, exposing bearer tokens in logcat.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::11::security_hardening",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        },
+        {
+          "claim_id": "mbv2::11::security_hardening::Bearer_token_storage",
+          "text": "Bearer token storage: API bearer must come from a secure source (BuildConfig backed by keystore, EncryptedSharedPreferences, or server-issued token), never hardcoded. \u2014 The current `Bearer $API_KEY` default in network module is a credential leak.",
+          "claim_class": "aggregate",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::11::security_hardening",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "inferred",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        }
+      ],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "2 hardening requirement(s) in scope.",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::12::risks_decisions",
+      "title": "12. Risks, Decisions, Open Questions",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [
+        {
+          "claim_id": "mbv2::12::risks_decisions::orphan::balance",
+          "text": "Orphan folder `balance` (excluded) is excluded from the build graph. Confirm with the client whether to re-scope, remove, or preserve as-is.",
+          "claim_class": "direct",
+          "evidence": [],
+          "confidence": 0.95,
+          "confidence_method": "deterministic",
+          "section_id": "mbv2::12::risks_decisions",
+          "applicability": "applicable",
+          "canonical_fact_id": "",
+          "entities": [],
+          "provenance": "",
+          "evidence_type": "source_verified",
+          "implementation_status": "unclassified",
+          "runtime_reachability": "unclassified",
+          "feature_id": ""
+        }
+      ],
+      "subsections": [
+        {
+          "section_id": "mbv2::12::1::mbv2::12::risks_decisions",
+          "title": "12.1 12. Risks, Decisions, Open Questions",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "0 synthetic risk item(s) + 1 docgen-emitted risk section(s).",
+          "figures": []
+        }
+      ],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "1 synthetic risk item(s) + 1 docgen-emitted risk section(s).",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::13::execution_pack",
+      "title": "13. Downstream Execution Pack",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "**Artifact status:** BLOCKED.\n\nThis chapter lists the machine contract each downstream agent relies on:\n\n- Agent Handoff JSON (`agent_handoff_v1.json`) \u2014 canonical source of truth.\n\n- Capability BRD v2 back-references \u2014 source for parity claims.\n\n- Workflow graphs \u2014 source for test and regression harness scaffolding.\n\n**Disallowed consumers:** migration_brd, parity_linker, test_generator, code_mod_agent, obs_agent, persistence_agent",
+      "figures": []
+    },
+    {
+      "section_id": "mbv2::14::runtime_operations",
+      "title": "14. Runtime Operations & Infrastructure",
+      "applicability": "applicable",
+      "applicability_trace": [],
+      "na_rationale": "",
+      "claims": [],
+      "subsections": [
+        {
+          "section_id": "mbv2::14::runtime_operations::1",
+          "title": "14.1 Monitoring & Observability",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [
+            {
+              "claim_id": "mbv2::14::runtime_operations::1::otel",
+              "text": "OpenTelemetry instrumentation \u2014 emit spans for every HTTP entry point; use W3C trace-context propagation.",
+              "claim_class": "aggregate",
+              "evidence": [],
+              "confidence": 0.95,
+              "confidence_method": "deterministic",
+              "section_id": "mbv2::14::runtime_operations::1",
+              "applicability": "applicable",
+              "canonical_fact_id": "",
+              "entities": [],
+              "provenance": "",
+              "evidence_type": "inferred",
+              "implementation_status": "unclassified",
+              "runtime_reachability": "unclassified",
+              "feature_id": ""
+            },
+            {
+              "claim_id": "mbv2::14::runtime_operations::1::metrics",
+              "text": "Prometheus metrics \u2014 expose /metrics with RED signals (rate, errors, duration) per endpoint.",
+              "claim_class": "aggregate",
+              "evidence": [],
+              "confidence": 0.95,
+              "confidence_method": "deterministic",
+              "section_id": "mbv2::14::runtime_operations::1",
+              "applicability": "applicable",
+              "canonical_fact_id": "",
+              "entities": [],
+              "provenance": "",
+              "evidence_type": "inferred",
+              "implementation_status": "unclassified",
+              "runtime_reachability": "unclassified",
+              "feature_id": ""
+            }
+          ],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Backend services require an observability stack. Default to OpenTelemetry traces, Prometheus metrics, structured JSON logs with request IDs.",
+          "figures": []
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::2",
+          "title": "14.2 Network Architecture",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Network topology: public ingress via load balancer \u2192 WAF \u2192 service mesh \u2192 internal services. Private DB subnet.",
+          "figures": []
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::3",
+          "title": "14.3 Maintenance Procedures",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Maintenance cadence: weekly patch scan, monthly minor version bump window, quarterly major version review.",
+          "figures": []
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::4",
+          "title": "14.4 Infrastructure Cost Estimates",
+          "applicability": "partial",
+          "applicability_trace": [],
+          "na_rationale": "Estimates pending pricing review.",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Cost estimate pending cloud-provider selection and load model.",
+          "figures": []
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::5",
+          "title": "14.5 Cloud Services",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Cloud services pending infrastructure assessment.",
+          "figures": []
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::6",
+          "title": "14.6 Containerization",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Container strategy pending.",
+          "figures": []
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::7",
+          "title": "14.7 Orchestration",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Orchestration strategy pending.",
+          "figures": []
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::8",
+          "title": "14.8 Infrastructure Architecture Diagram",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "High-level runtime topology:",
+          "figures": [
+            {
+              "figure_id": "fig::infra_architecture",
+              "caption": "Infrastructure Architecture",
+              "source": "flowchart LR\n    client[Client] --> cdn[CDN]\n    cdn --> lb[Load balancer]\n    lb --> app[Application servers]\n    app --> cache[Cache layer]\n    app --> db[Database]\n    app --> external[Third-party APIs]\n",
+              "kind": "mermaid"
+            }
+          ]
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::9",
+          "title": "14.9 Deployment Workflow Diagram",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Pipeline from merged commit to production:",
+          "figures": [
+            {
+              "figure_id": "fig::deployment_workflow",
+              "caption": "Deployment Workflow",
+              "source": "flowchart LR\n    commit[Merge to main] --> ci[CI build]\n    ci --> image[Build artifact]\n    image --> staging[Staging deploy]\n    staging --> uat[UAT verification]\n    uat --> prod[Production deploy]\n",
+              "kind": "mermaid"
+            }
+          ]
+        },
+        {
+          "section_id": "mbv2::14::runtime_operations::10",
+          "title": "14.10 Environment Promotion Flow",
+          "applicability": "applicable",
+          "applicability_trace": [],
+          "na_rationale": "",
+          "claims": [],
+          "subsections": [],
+          "ieee_clause": "",
+          "ieee_clause_title": "",
+          "narrative": "Release-train progression across environments:",
+          "figures": [
+            {
+              "figure_id": "fig::env_promotion",
+              "caption": "Environment Promotion Flow",
+              "source": "flowchart LR\n    dev[Development] --> qa[QA]\n    qa --> staging[Staging]\n    staging --> uat[UAT]\n    uat --> prod[Production]\n",
+              "kind": "mermaid"
+            }
+          ]
+        }
+      ],
+      "ieee_clause": "",
+      "ieee_clause_title": "",
+      "narrative": "Runtime operations for the migrated system. Observability, network topology, maintenance cadence, cost profile, and the infrastructure diagrams required for deployment sign-off. Profile-aware: classification=`portfolio`.",
+      "figures": []
+    }
+  ],
+  "features": [
+    {
+      "feature_id": "F-D7A1",
+      "name": "Configure ViewModel Dependencies",
+      "description": "Registers DashboardViewModel with its required dependencies in the DI container",
+      "module_id": "app",
+      "flow": [],
+      "claims": [
+        "FR-APP-002"
+      ],
+      "target_state": "",
+      "family": "App Module",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Registers DashboardViewModel with its required dependencies in the DI container",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-C721",
+      "name": "Retrieve Account Balance",
+      "description": "Fetches detailed balance information for a specific account",
+      "module_id": "account",
+      "flow": [],
+      "claims": [
+        "FR-ACC-002",
+        "FR-NET-003"
+      ],
+      "target_state": "",
+      "family": "Dashboard & Balance",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [
+        "network"
+      ],
+      "primary_workflow_id": "",
+      "overview": "Fetches detailed balance information for a specific account",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-4559",
+      "name": "Retrieve Purchases",
+      "description": "Fetches transactions within a date range for specific account and category",
+      "module_id": "network",
+      "flow": [],
+      "claims": [
+        "FR-NET-005"
+      ],
+      "target_state": "",
+      "family": "Dashboard & Balance",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Fetches transactions within a date range for specific account and category",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-0B18",
+      "name": "Display Account Balance",
+      "description": "Shows user's current account balance with formatted amount and cents",
+      "module_id": "dashboard",
+      "flow": [],
+      "claims": [
+        "FR-DAS-002"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Shows user's current account balance with formatted amount and cents",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-D4A2",
+      "name": "Display Payee Profile",
+      "description": "Shows detailed payee information including accounts in profile activity",
+      "module_id": "payees",
+      "flow": [],
+      "claims": [
+        "FR-PAY-003"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Shows detailed payee information including accounts in profile activity",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-5109",
+      "name": "Get User Info",
+      "description": "Retrieves the user info and publishes the result to the UI via LiveData (DashboardViewModel.getUserInfo).",
+      "module_id": "dashboard",
+      "flow": [],
+      "claims": [
+        "FR-DAS-005"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Retrieves the user info and publishes the result to the UI via LiveData (DashboardViewModel.getUserInfo).",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-E9E0",
+      "name": "Navigate Monthly Transactions",
+      "description": "Allows user to browse transactions by month using ViewPager navigation",
+      "module_id": "dashboard",
+      "flow": [],
+      "claims": [
+        "FR-DAS-003"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Allows user to browse transactions by month using ViewPager navigation",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-27AB",
+      "name": "Retrieve Account Holder",
+      "description": "Retrieves the account holder through the repository layer (AccountRepository.retrieveAccountHolder). Returns AccountHolder.",
+      "module_id": "account",
+      "flow": [],
+      "claims": [
+        "FR-ACC-006"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Retrieves the account holder through the repository layer (AccountRepository.retrieveAccountHolder). Returns AccountHolder.",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-3598",
+      "name": "Retrieve Accounts",
+      "description": "Fetches user's bank accounts with caching mechanism",
+      "module_id": "account",
+      "flow": [],
+      "claims": [
+        "FR-ACC-001",
+        "FR-NET-002"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [
+        "network"
+      ],
+      "primary_workflow_id": "",
+      "overview": "Fetches user's bank accounts with caching mechanism",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-E6A1",
+      "name": "Retrieve Profile Picture",
+      "description": "Downloads user's profile picture as base64 encoded string",
+      "module_id": "account",
+      "flow": [],
+      "claims": [
+        "FR-ACC-004"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Downloads user's profile picture as base64 encoded string",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-D361",
+      "name": "Retrieve Purchases",
+      "description": "Fetches and displays user's transaction history for a specific date interval",
+      "module_id": "dashboard",
+      "flow": [],
+      "claims": [
+        "FR-DAS-001"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Fetches and displays user's transaction history for a specific date interval",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-B147",
+      "name": "Retrieve User",
+      "description": "Fetches individual user identity information from the API",
+      "module_id": "network",
+      "flow": [],
+      "claims": [
+        "FR-NET-001"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Fetches individual user identity information from the API",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-FF4A",
+      "name": "Retrieve User Profile",
+      "description": "Fetches user's personal information from identity service",
+      "module_id": "account",
+      "flow": [],
+      "claims": [
+        "FR-ACC-003"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Fetches user's personal information from identity service",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-D47B",
+      "name": "Upload Account Picture",
+      "description": "Uploads profile image for account holder",
+      "module_id": "network",
+      "flow": [],
+      "claims": [
+        "FR-NET-004"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Uploads profile image for account holder",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-1076",
+      "name": "Upload Profile Picture",
+      "description": "Captures photo using camera and uploads as user profile picture",
+      "module_id": "account",
+      "flow": [],
+      "claims": [
+        "FR-ACC-005",
+        "FR-DAS-004"
+      ],
+      "target_state": "",
+      "family": "Identity & Profile",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [
+        "dashboard"
+      ],
+      "primary_workflow_id": "",
+      "overview": "Captures photo using camera and uploads as user profile picture",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-A449",
+      "name": "Initialize Application",
+      "description": "Sets up dependency injection container with all required modules for the banking application",
+      "module_id": "app",
+      "flow": [],
+      "claims": [
+        "FR-APP-001"
+      ],
+      "target_state": "",
+      "family": "Infrastructure & Wiring",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Sets up dependency injection container with all required modules for the banking application",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-80D4",
+      "name": "Create Payee",
+      "description": "Creates a new payee record via API call with form validation",
+      "module_id": "network",
+      "flow": [],
+      "claims": [
+        "FR-NET-007",
+        "FR-PAY-002"
+      ],
+      "target_state": "",
+      "family": "Payee Management",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [
+        "payees"
+      ],
+      "primary_workflow_id": "",
+      "overview": "Creates a new payee record via API call with form validation",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-1E05",
+      "name": "Execute UI Test",
+      "description": "Performs automated UI testing by navigating to payees section and creating a new payee",
+      "module_id": "app",
+      "flow": [],
+      "claims": [
+        "FR-APP-003"
+      ],
+      "target_state": "",
+      "family": "Payee Management",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Performs automated UI testing by navigating to payees section and creating a new payee",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-404D",
+      "name": "Provides Payees Api",
+      "description": "Repository capability exposed by PayeesRepositoryModule.providesPayeesApi(). Returns PayeesApi.",
+      "module_id": "payees",
+      "flow": [],
+      "claims": [
+        "FR-PAY-004"
+      ],
+      "target_state": "",
+      "family": "Payee Management",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Repository capability exposed by PayeesRepositoryModule.providesPayeesApi(). Returns PayeesApi.",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-6D53",
+      "name": "Retrieve Payees",
+      "description": "Fetches the list of payees for the current account from the API",
+      "module_id": "network",
+      "flow": [],
+      "claims": [
+        "FR-NET-006",
+        "FR-PAY-001"
+      ],
+      "target_state": "",
+      "family": "Payee Management",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [
+        "payees"
+      ],
+      "primary_workflow_id": "",
+      "overview": "Fetches the list of payees for the current account from the API",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-248E",
+      "name": "Create Custom Button",
+      "description": "Provides a custom button component that extends AppCompatButton functionality",
+      "module_id": "resources",
+      "flow": [],
+      "claims": [
+        "FR-RES-001"
+      ],
+      "target_state": "",
+      "family": "Resources Module",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Provides a custom button component that extends AppCompatButton functionality",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    },
+    {
+      "feature_id": "F-2191",
+      "name": "Handle Click Events",
+      "description": "Overrides click listener functionality while maintaining parent behavior",
+      "module_id": "resources",
+      "flow": [],
+      "claims": [
+        "FR-RES-002"
+      ],
+      "target_state": "",
+      "family": "Resources Module",
+      "implementation_status": "implemented",
+      "runtime_reachability": "unclassified",
+      "dependencies": [],
+      "primary_workflow_id": "",
+      "overview": "Overrides click listener functionality while maintaining parent behavior",
+      "business_value": "",
+      "business_value_evidence_type": "unsupported"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "Support Artifacts",
+      "name": "Support Artifacts",
+      "component_type": "support",
+      "file_count": 73,
+      "applicability": "na",
+      "claims": []
+    },
+    {
+      "module_id": "account",
+      "name": "account",
+      "component_type": "kotlin_android_module",
+      "file_count": 20,
+      "applicability": "applicable",
+      "claims": []
+    },
+    {
+      "module_id": "app",
+      "name": "app",
+      "component_type": "kotlin_android_module",
+      "file_count": 7,
+      "applicability": "applicable",
+      "claims": []
+    },
+    {
+      "module_id": "balance",
+      "name": "balance",
+      "component_type": "kotlin_android_module",
+      "file_count": 4,
+      "applicability": "applicable",
+      "claims": []
+    },
+    {
+      "module_id": "dashboard",
+      "name": "dashboard",
+      "component_type": "kotlin_android_module",
+      "file_count": 21,
+      "applicability": "applicable",
+      "claims": []
+    },
+    {
+      "module_id": "network",
+      "name": "network",
+      "component_type": "kotlin_android_module",
+      "file_count": 5,
+      "applicability": "applicable",
+      "claims": []
+    },
+    {
+      "module_id": "payees",
+      "name": "payees",
+      "component_type": "kotlin_android_module",
+      "file_count": 29,
+      "applicability": "applicable",
+      "claims": []
+    },
+    {
+      "module_id": "resources",
+      "name": "resources",
+      "component_type": "kotlin_android_module",
+      "file_count": 3,
+      "applicability": "applicable",
+      "claims": []
+    },
+    {
+      "module_id": "root",
+      "name": "root",
+      "component_type": "kotlin_module",
+      "file_count": 1,
+      "applicability": "na",
+      "claims": []
+    }
+  ],
+  "tech_debt": [],
+  "facts": [],
+  "health": {
+    "evidence_coverage": {
+      "aggregate": 0.4737,
+      "per_class": {
+        "inferred_from_absence": {
+          "count": 0,
+          "covered": 0,
+          "coverage": 1.0
+        },
+        "external": {
+          "count": 0,
+          "covered": 0,
+          "coverage": 1.0
+        },
+        "aggregate": {
+          "count": 0,
+          "covered": 0,
+          "coverage": 1.0
+        },
+        "direct": {
+          "count": 9,
+          "covered": 0,
+          "coverage": 0.0
+        },
+        "interpretation": {
+          "count": 0,
+          "covered": 0,
+          "coverage": 1.0
+        }
+      },
+      "per_section": [
+        {
+          "section_id": "executive_summary",
+          "claim_count": 0,
+          "coverage": 1.0
+        },
+        {
+          "section_id": "architecture_overview",
+          "claim_count": 0,
+          "coverage": 1.0
+        },
+        {
+          "section_id": "technology_stack",
+          "claim_count": 0,
+          "coverage": 1.0
+        },
+        {
+          "section_id": "module_migration_scope",
+          "claim_count": 9,
+          "coverage": 0.0
+        },
+        {
+          "section_id": "functional_requirements",
+          "claim_count": 0,
+          "coverage": 1.0
+        },
+        {
+          "section_id": "non_functional_requirements",
+          "claim_count": 0,
+          "coverage": 1.0
+        },
+        {
+          "section_id": "business_rules",
+          "claim_count": 0,
+          "coverage": 1.0
+        },
+        {
+          "section_id": "risk_register",
+          "claim_count": 0,
+          "coverage": 1.0
+        }
+      ],
+      "uncovered_claims": [
+        {
+          "claim_id": "MOD-001",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "Support Artifacts \u2014 support \u00b7 73 files",
+          "provenance": "module_registry"
+        },
+        {
+          "claim_id": "MOD-002",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "account \u2014 kotlin_android_module \u00b7 20 files",
+          "provenance": "module_registry"
+        },
+        {
+          "claim_id": "MOD-003",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "app \u2014 kotlin_android_module \u00b7 7 files",
+          "provenance": "module_registry"
+        },
+        {
+          "claim_id": "MOD-004",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "balance \u2014 kotlin_android_module \u00b7 4 files",
+          "provenance": "module_registry"
+        },
+        {
+          "claim_id": "MOD-005",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "dashboard \u2014 kotlin_android_module \u00b7 21 files",
+          "provenance": "module_registry"
+        },
+        {
+          "claim_id": "MOD-006",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "network \u2014 kotlin_android_module \u00b7 5 files",
+          "provenance": "module_registry"
+        },
+        {
+          "claim_id": "MOD-007",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "payees \u2014 kotlin_android_module \u00b7 29 files",
+          "provenance": "module_registry"
+        },
+        {
+          "claim_id": "MOD-008",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "resources \u2014 kotlin_android_module \u00b7 3 files",
+          "provenance": "module_registry"
+        },
+        {
+          "claim_id": "MOD-009",
+          "section_id": "module_migration_scope",
+          "claim_class": "direct",
+          "text": "root \u2014 kotlin_module \u00b7 1 files",
+          "provenance": "module_registry"
+        }
+      ],
+      "stale_anchors": {
+        "total_file_spans": 0,
+        "missing_sha": 0,
+        "missing_sha_rate": 0.0
+      },
+      "gate_decision": "fail",
+      "total_claims": 9,
+      "phase": "metric_only"
+    },
+    "applicability_counts": {
+      "applicable": 3,
+      "partial": 5,
+      "na": 0
+    },
+    "dedup_savings": {
+      "claims_before": 9,
+      "claims_after": 9,
+      "claims_collapsed": 0,
+      "savings_pct": 0.0,
+      "canonical_fact_count": 0
+    },
+    "mean_confidence": 0.9499999999999998,
+    "tech_debt_counts": {},
+    "ieee_coverage": {
+      "sections_total": 8,
+      "sections_mapped": 8,
+      "standards": [
+        "IEEE 29148:2018"
+      ]
+    },
+    "remediation_queue": [
+      {
+        "claim_id": "MOD-001",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "Support Artifacts \u2014 support \u00b7 73 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      },
+      {
+        "claim_id": "MOD-002",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "account \u2014 kotlin_android_module \u00b7 20 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      },
+      {
+        "claim_id": "MOD-003",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "app \u2014 kotlin_android_module \u00b7 7 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      },
+      {
+        "claim_id": "MOD-004",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "balance \u2014 kotlin_android_module \u00b7 4 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      },
+      {
+        "claim_id": "MOD-005",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "dashboard \u2014 kotlin_android_module \u00b7 21 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      },
+      {
+        "claim_id": "MOD-006",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "network \u2014 kotlin_android_module \u00b7 5 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      },
+      {
+        "claim_id": "MOD-007",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "payees \u2014 kotlin_android_module \u00b7 29 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      },
+      {
+        "claim_id": "MOD-008",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "resources \u2014 kotlin_android_module \u00b7 3 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      },
+      {
+        "claim_id": "MOD-009",
+        "section_id": "module_migration_scope",
+        "section_title": "Module Migration Scope",
+        "claim_class": "direct",
+        "text": "root \u2014 kotlin_module \u00b7 1 files",
+        "reason": "Direct claim without a file_span anchor. Add evidence pointing at the source.",
+        "status": "open"
+      }
+    ]
+  },
+  "generator_warnings": [
+    "Evidence Coverage gate: fail. Aggregate coverage 0.47, direct-claim coverage 0.00. 9 claims total, 9 uncovered. HITL remediation queue: 9 claim(s)."
+  ],
+  "ieee_standards": [
+    "IEEE 29148:2018"
+  ],
+  "classification": {
+    "product_classification": "portfolio",
+    "commercial_readiness": false,
+    "classification_evidence": [
+      "demo+0.60: README: 'sandbox'",
+      "portfolio+0.80: file: 'com/davidm/'"
+    ],
+    "classification_confidence": 0.5714,
+    "repo_baseline": {
+      "repo_url": "https://github.com/vishakjai/sweet-bank",
+      "branch": "",
+      "commit_sha": "",
+      "source_bundle_hash": "b14661156ea948d5",
+      "active_modules": [
+        "app",
+        "network",
+        "dashboard",
+        "account",
+        "payees",
+        "resources"
+      ],
+      "orphan_folders": [
+        {
+          "path": "balance",
+          "kind": "excluded"
+        }
+      ]
+    }
+  },
+  "trust_envelope": {
+    "status": "blocked",
+    "blocking_gates": [],
+    "warning_gates": [],
+    "allowed_consumers": [],
+    "disallowed_consumers": [
+      "migration_brd",
+      "parity_linker",
+      "test_generator",
+      "code_mod_agent",
+      "obs_agent",
+      "persistence_agent"
+    ],
+    "source_baseline": {
+      "repo_url": "https://github.com/vishakjai/sweet-bank",
+      "branch": "",
+      "commit_sha": "",
+      "source_bundle_hash": "",
+      "active_modules": [],
+      "orphan_folders": []
+    },
+    "generated_at": "2026-04-22T15:48:15Z",
+    "summary": "DOWNSTREAM AUTOMATION STATUS: BLOCKED \u2014 missing_commit_sha"
+  },
+  "non_applicability": [],
+  "workflows": [
+    {
+      "id": "WF-ACCT-5A26",
+      "name": "Retrieve Account Balance",
+      "module_id": "account",
+      "feature_id": "F-C721",
+      "fr_id": "FR-ACC-002",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "retrieveAccountBalance",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "retrieveAccountBalance",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 2,
+          "layer": "Repository",
+          "class_name": "AccountRepository",
+          "method": "retrieveAccountBalance",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 3,
+          "layer": "API",
+          "class_name": "AccountApi",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 4,
+          "layer": "DI",
+          "class_name": "accountRepositoryModule",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "account"
+        }
+      ],
+      "terminal_state": "accountRepositoryModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-ACC-002"
+      ]
+    },
+    {
+      "id": "WF-ACCT-4C55",
+      "name": "Retrieve Account Holder",
+      "module_id": "account",
+      "feature_id": "F-27AB",
+      "fr_id": "FR-ACC-006",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "retrieveAccountHolder",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "retrieveAccountHolder",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 2,
+          "layer": "Repository",
+          "class_name": "AccountRepository",
+          "method": "retrieveAccountHolder",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 3,
+          "layer": "API",
+          "class_name": "AccountApi",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 4,
+          "layer": "DI",
+          "class_name": "accountRepositoryModule",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "account"
+        }
+      ],
+      "terminal_state": "accountRepositoryModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-ACC-006"
+      ]
+    },
+    {
+      "id": "WF-ACCT-B034",
+      "name": "Retrieve Accounts",
+      "module_id": "account",
+      "feature_id": "F-3598",
+      "fr_id": "FR-ACC-001",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "retrieveAccounts",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "retrieveAccounts",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 2,
+          "layer": "Repository",
+          "class_name": "AccountRepository",
+          "method": "retrieveAccounts",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 3,
+          "layer": "API",
+          "class_name": "AccountApi",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 4,
+          "layer": "DI",
+          "class_name": "accountRepositoryModule",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "account"
+        }
+      ],
+      "terminal_state": "accountRepositoryModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-ACC-001"
+      ]
+    },
+    {
+      "id": "WF-ACCT-1A74",
+      "name": "Retrieve Profile Picture",
+      "module_id": "account",
+      "feature_id": "F-E6A1",
+      "fr_id": "FR-ACC-004",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "retrieveProfilePicture",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "retrieveProfilePicture",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 2,
+          "layer": "Repository",
+          "class_name": "AccountRepository",
+          "method": "retrieveProfilePicture",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 3,
+          "layer": "API",
+          "class_name": "AccountApi",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 4,
+          "layer": "DI",
+          "class_name": "accountRepositoryModule",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "account"
+        }
+      ],
+      "terminal_state": "accountRepositoryModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-ACC-004"
+      ]
+    },
+    {
+      "id": "WF-ACCT-68EB",
+      "name": "Retrieve User Profile",
+      "module_id": "account",
+      "feature_id": "F-FF4A",
+      "fr_id": "FR-ACC-003",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "retrieveUser",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "retrieveUser",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 2,
+          "layer": "Repository",
+          "class_name": "UserRepository",
+          "method": "retrieveUser",
+          "source_file": "account/src/main/java/com/davidm/account/repository/UserRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 3,
+          "layer": "API",
+          "class_name": "AccountApi",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 4,
+          "layer": "DI",
+          "class_name": "accountRepositoryModule",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "account"
+        }
+      ],
+      "terminal_state": "accountRepositoryModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-ACC-003"
+      ]
+    },
+    {
+      "id": "WF-ACCT-8CB3",
+      "name": "Upload Profile Picture",
+      "module_id": "account",
+      "feature_id": "F-1076",
+      "fr_id": "FR-ACC-005",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "uploadProfilePicture",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "uploadProfilePicture",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 2,
+          "layer": "Repository",
+          "class_name": "AccountRepository",
+          "method": "uploadProfilePicture",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 3,
+          "layer": "API",
+          "class_name": "AccountApi",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "account"
+        },
+        {
+          "idx": 4,
+          "layer": "DI",
+          "class_name": "accountRepositoryModule",
+          "method": "",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepositoryModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "account"
+        }
+      ],
+      "terminal_state": "accountRepositoryModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-ACC-005"
+      ]
+    },
+    {
+      "id": "WF-APP-6455",
+      "name": "Execute UI Test",
+      "module_id": "app",
+      "feature_id": "F-1E05",
+      "fr_id": "FR-APP-003",
+      "entry_point": {
+        "class": "HomepageActivityTest",
+        "method": "launchAndCreateAPayee",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "HomepageActivityTest",
+          "method": "launchAndCreateAPayee",
+          "source_file": "app/src/androidTest/java/com/davidm/sweetbankapp/HomepageActivityTest.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "app"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "viewModelModule",
+          "method": "",
+          "source_file": "app/src/main/java/com/davidm/sweetbankapp/di/ViewmodelModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "app"
+        }
+      ],
+      "terminal_state": "viewModelModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-APP-003"
+      ]
+    },
+    {
+      "id": "WF-APP-C427",
+      "name": "Initialize Application",
+      "module_id": "app",
+      "feature_id": "F-A449",
+      "fr_id": "FR-APP-001",
+      "entry_point": {
+        "class": "SweetBank",
+        "method": "onCreate",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "SweetBank",
+          "method": "onCreate",
+          "source_file": "app/src/main/java/com/davidm/sweetbankapp/SweetBank.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "app"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "viewModelModule",
+          "method": "",
+          "source_file": "app/src/main/java/com/davidm/sweetbankapp/di/ViewmodelModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "app"
+        }
+      ],
+      "terminal_state": "viewModelModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-APP-001"
+      ]
+    },
+    {
+      "id": "WF-DASHBOARD-001",
+      "name": "DashboardViewModel.getPurchases",
+      "module_id": "dashboard",
+      "feature_id": "",
+      "fr_id": "",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "getPurchases",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "getPurchases",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 2,
+          "layer": "thread-hop",
+          "class_name": "Dispatchers",
+          "method": "IO",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 3,
+          "layer": "Repository",
+          "class_name": "AccountRepository",
+          "method": "retrieveAccounts",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 4,
+          "layer": "Repository",
+          "class_name": "TransactionsRepository",
+          "method": "retrievePurchases",
+          "source_file": "dashboard/src/main/java/com/davidm/repository/TransactionsRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 5,
+          "layer": "Support",
+          "class_name": "Accounts",
+          "method": "first",
+          "source_file": "account/src/main/java/com/davidm/account/entities/Accounts.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 6,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "fetchErrorLiveData.postValue",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        }
+      ],
+      "terminal_state": "DashboardViewModel.fetchErrorLiveData.postValue completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": []
+    },
+    {
+      "id": "WF-DASHBOARD-002",
+      "name": "DashboardViewModel.getUserInfo",
+      "module_id": "dashboard",
+      "feature_id": "",
+      "fr_id": "",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "getUserInfo",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "getUserInfo",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 2,
+          "layer": "thread-hop",
+          "class_name": "Dispatchers",
+          "method": "IO",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 3,
+          "layer": "Repository",
+          "class_name": "UserRepository",
+          "method": "retrieveUser",
+          "source_file": "account/src/main/java/com/davidm/account/repository/UserRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 4,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "userLiveData.postValue",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        }
+      ],
+      "terminal_state": "DashboardViewModel.userLiveData.postValue completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": []
+    },
+    {
+      "id": "WF-DASHBOARD-003",
+      "name": "DashboardViewModel.uploadProfilePicture",
+      "module_id": "dashboard",
+      "feature_id": "",
+      "fr_id": "",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "uploadProfilePicture",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "uploadProfilePicture",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 2,
+          "layer": "thread-hop",
+          "class_name": "Dispatchers",
+          "method": "IO",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 3,
+          "layer": "Repository",
+          "class_name": "AccountRepository",
+          "method": "retrieveAccountHolder",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 4,
+          "layer": "Repository",
+          "class_name": "AccountRepository",
+          "method": "uploadProfilePicture",
+          "source_file": "account/src/main/java/com/davidm/account/repository/AccountRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 5,
+          "layer": "Support",
+          "class_name": "ImageUtils",
+          "method": "checkAndFixPhotoOrientation",
+          "source_file": "dashboard/src/main/java/com/davidm/utils/ImageUtils.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 6,
+          "layer": "ViewModel",
+          "class_name": "DashboardViewModel",
+          "method": "profilePictureLiveData.postValue",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        }
+      ],
+      "terminal_state": "DashboardViewModel.profilePictureLiveData.postValue completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": []
+    },
+    {
+      "id": "WF-DASH-2C9E",
+      "name": "Display Account Balance",
+      "module_id": "dashboard",
+      "feature_id": "F-0B18",
+      "fr_id": "FR-DAS-002",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "getAccountBalance",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "DashboardViewModel",
+          "method": "getAccountBalance",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "TransactionsApi",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 3,
+          "layer": "DI",
+          "class_name": "dashboardModule",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        }
+      ],
+      "terminal_state": "dashboardModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-DAS-002"
+      ]
+    },
+    {
+      "id": "WF-DASH-1538",
+      "name": "Get User Info",
+      "module_id": "dashboard",
+      "feature_id": "F-5109",
+      "fr_id": "FR-DAS-005",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "getUserInfo",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "DashboardViewModel",
+          "method": "getUserInfo",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "TransactionsApi",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 3,
+          "layer": "DI",
+          "class_name": "dashboardModule",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        }
+      ],
+      "terminal_state": "dashboardModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-DAS-005"
+      ]
+    },
+    {
+      "id": "WF-DASH-9F6D",
+      "name": "Navigate Monthly Transactions",
+      "module_id": "dashboard",
+      "feature_id": "F-E9E0",
+      "fr_id": "FR-DAS-003",
+      "entry_point": {
+        "class": "DashboardFragment",
+        "method": "onPageSelected",
+        "kind": "ui_action"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "DashboardFragment",
+          "method": "onPageSelected",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardFragment.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "TransactionsApi",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 3,
+          "layer": "DI",
+          "class_name": "dashboardModule",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        }
+      ],
+      "terminal_state": "dashboardModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-DAS-003"
+      ]
+    },
+    {
+      "id": "WF-DASH-70A0",
+      "name": "Retrieve Purchases",
+      "module_id": "dashboard",
+      "feature_id": "F-4559",
+      "fr_id": "FR-DAS-001",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "getPurchases",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "DashboardViewModel",
+          "method": "getPurchases",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "TransactionsApi",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 3,
+          "layer": "DI",
+          "class_name": "dashboardModule",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        }
+      ],
+      "terminal_state": "dashboardModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-DAS-001"
+      ]
+    },
+    {
+      "id": "WF-DASH-0D27",
+      "name": "Upload Profile Picture",
+      "module_id": "dashboard",
+      "feature_id": "F-1076",
+      "fr_id": "FR-DAS-004",
+      "entry_point": {
+        "class": "DashboardViewModel",
+        "method": "uploadProfilePicture",
+        "kind": "viewmodel_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "DashboardViewModel",
+          "method": "uploadProfilePicture",
+          "source_file": "dashboard/src/main/java/com/davidm/ui/DashboardViewModel.kt",
+          "line": 0,
+          "threading": "Main",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "TransactionsApi",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        },
+        {
+          "idx": 3,
+          "layer": "DI",
+          "class_name": "dashboardModule",
+          "method": "",
+          "source_file": "dashboard/src/main/java/com/davidm/DashboardModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "dashboard"
+        }
+      ],
+      "terminal_state": "dashboardModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-DAS-004"
+      ]
+    },
+    {
+      "id": "WF-NET-2AB8",
+      "name": "Create Payee",
+      "module_id": "network",
+      "feature_id": "F-80D4",
+      "fr_id": "FR-NET-007",
+      "entry_point": {
+        "class": "PayeesApi",
+        "method": "createPayee",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "PayeesApi",
+          "method": "createPayee",
+          "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "baseNetworkModule",
+          "method": "",
+          "source_file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        }
+      ],
+      "terminal_state": "baseNetworkModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-NET-007"
+      ]
+    },
+    {
+      "id": "WF-NET-FE30",
+      "name": "Retrieve Account Balance",
+      "module_id": "network",
+      "feature_id": "F-C721",
+      "fr_id": "FR-NET-003",
+      "entry_point": {
+        "class": "AccountApi",
+        "method": "getAccountBalance",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "AccountApi",
+          "method": "getAccountBalance",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "baseNetworkModule",
+          "method": "",
+          "source_file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        }
+      ],
+      "terminal_state": "baseNetworkModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-NET-003"
+      ]
+    },
+    {
+      "id": "WF-NET-1010",
+      "name": "Retrieve Accounts",
+      "module_id": "network",
+      "feature_id": "F-3598",
+      "fr_id": "FR-NET-002",
+      "entry_point": {
+        "class": "AccountApi",
+        "method": "getAccounts",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "AccountApi",
+          "method": "getAccounts",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "baseNetworkModule",
+          "method": "",
+          "source_file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        }
+      ],
+      "terminal_state": "baseNetworkModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-NET-002"
+      ]
+    },
+    {
+      "id": "WF-NET-D317",
+      "name": "Retrieve Payees",
+      "module_id": "network",
+      "feature_id": "F-6D53",
+      "fr_id": "FR-NET-006",
+      "entry_point": {
+        "class": "PayeesApi",
+        "method": "getPayees",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "PayeesApi",
+          "method": "getPayees",
+          "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "baseNetworkModule",
+          "method": "",
+          "source_file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        }
+      ],
+      "terminal_state": "baseNetworkModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-NET-006"
+      ]
+    },
+    {
+      "id": "WF-NET-2340",
+      "name": "Retrieve Purchases",
+      "module_id": "network",
+      "feature_id": "F-4559",
+      "fr_id": "FR-NET-005",
+      "entry_point": {
+        "class": "TransactionsApi",
+        "method": "getPurchasesInAWeek",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "TransactionsApi",
+          "method": "getPurchasesInAWeek",
+          "source_file": "dashboard/src/main/java/com/davidm/network/TransactionsApi.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "baseNetworkModule",
+          "method": "",
+          "source_file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        }
+      ],
+      "terminal_state": "baseNetworkModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-NET-005"
+      ]
+    },
+    {
+      "id": "WF-NET-80C7",
+      "name": "Retrieve User",
+      "module_id": "network",
+      "feature_id": "F-B147",
+      "fr_id": "FR-NET-001",
+      "entry_point": {
+        "class": "UserApi",
+        "method": "getUser",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "UserApi",
+          "method": "getUser",
+          "source_file": "account/src/main/java/com/davidm/account/network/UserApi.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "baseNetworkModule",
+          "method": "",
+          "source_file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        }
+      ],
+      "terminal_state": "baseNetworkModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-NET-001"
+      ]
+    },
+    {
+      "id": "WF-NET-AA0C",
+      "name": "Upload Account Picture",
+      "module_id": "network",
+      "feature_id": "F-D47B",
+      "fr_id": "FR-NET-004",
+      "entry_point": {
+        "class": "AccountApi",
+        "method": "uploadAccountPicture",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "AccountApi",
+          "method": "uploadAccountPicture",
+          "source_file": "account/src/main/java/com/davidm/account/network/AccountApi.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        },
+        {
+          "idx": 2,
+          "layer": "DI",
+          "class_name": "baseNetworkModule",
+          "method": "",
+          "source_file": "network/src/main/java/com/davidm/network/di/BaseNetworkModuleX.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "network"
+        }
+      ],
+      "terminal_state": "baseNetworkModule. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-NET-004"
+      ]
+    },
+    {
+      "id": "WF-PAYE-7525",
+      "name": "Create Payee",
+      "module_id": "payees",
+      "feature_id": "F-80D4",
+      "fr_id": "FR-PAY-002",
+      "entry_point": {
+        "class": "PayeesRepository",
+        "method": "createPayee",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Repository",
+          "class_name": "PayeesRepository",
+          "method": "createPayee",
+          "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "payees"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "PayeesApi",
+          "method": "",
+          "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "payees"
+        }
+      ],
+      "terminal_state": "PayeesApi. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-PAY-002"
+      ]
+    },
+    {
+      "id": "WF-PAYE-540A",
+      "name": "Display Payee Profile",
+      "module_id": "payees",
+      "feature_id": "F-D4A2",
+      "fr_id": "FR-PAY-003",
+      "entry_point": {
+        "class": "PayeeProfileActivity",
+        "method": "onCreate",
+        "kind": "ui_action"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "PayeeProfileActivity",
+          "method": "onCreate",
+          "source_file": "payees/src/main/java/com/davidm/payees/ui/PayeeProfileActivity.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "payees"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "PayeesApi",
+          "method": "",
+          "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "payees"
+        }
+      ],
+      "terminal_state": "PayeesApi. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-PAY-003"
+      ]
+    },
+    {
+      "id": "WF-PAYE-9BBA",
+      "name": "Provides Payees Api",
+      "module_id": "payees",
+      "feature_id": "F-404D",
+      "fr_id": "FR-PAY-004",
+      "entry_point": {
+        "class": "PayeesRepositoryModule",
+        "method": "providesPayeesApi",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Repository",
+          "class_name": "PayeesRepositoryModule",
+          "method": "providesPayeesApi",
+          "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepositoryModule.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "payees"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "PayeesApi",
+          "method": "",
+          "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "payees"
+        }
+      ],
+      "terminal_state": "PayeesApi. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-PAY-004"
+      ]
+    },
+    {
+      "id": "WF-PAYE-A7BF",
+      "name": "Retrieve Payees",
+      "module_id": "payees",
+      "feature_id": "F-6D53",
+      "fr_id": "FR-PAY-001",
+      "entry_point": {
+        "class": "PayeesRepository",
+        "method": "retrievePayees",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Repository",
+          "class_name": "PayeesRepository",
+          "method": "retrievePayees",
+          "source_file": "payees/src/main/java/com/davidm/payees/repository/PayeesRepository.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "payees"
+        },
+        {
+          "idx": 2,
+          "layer": "API",
+          "class_name": "PayeesApi",
+          "method": "",
+          "source_file": "payees/src/main/java/com/davidm/payees/network/PayeesApi.kt",
+          "line": 0,
+          "threading": "Dispatchers.IO",
+          "canonical_symbol_id": "",
+          "module": "payees"
+        }
+      ],
+      "terminal_state": "PayeesApi. completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-PAY-001"
+      ]
+    },
+    {
+      "id": "WF-RES-3F7A",
+      "name": "Handle Click Events",
+      "module_id": "resources",
+      "feature_id": "F-2191",
+      "fr_id": "FR-RES-002",
+      "entry_point": {
+        "class": "SweetButton",
+        "method": "setOnClickListener",
+        "kind": "service_method"
+      },
+      "steps": [
+        {
+          "idx": 1,
+          "layer": "Other",
+          "class_name": "SweetButton",
+          "method": "setOnClickListener",
+          "source_file": "resources/src/main/java/components/SweetButton.kt",
+          "line": 0,
+          "threading": "unresolved",
+          "canonical_symbol_id": "",
+          "module": "resources"
+        }
+      ],
+      "terminal_state": "SweetButton.setOnClickListener completes; observer state emitted",
+      "error_path": "(inferred) errors logged via Log.e; no user-visible state change",
+      "status": "active",
+      "evidence_ids": [
+        "FR-RES-002"
+      ]
+    }
+  ],
+  "contradictions": []
+}
