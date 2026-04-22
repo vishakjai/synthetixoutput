@@ -1,9 +1,9 @@
 {
   "artifact_type": "analyst_report",
   "artifact_version": "2.0",
-  "artifact_id": "art_analyst_report_c2733a2815a74846",
-  "run_id": "run_f4e5f37eb17e",
-  "generated_at": "2026-04-22T14:14:16.787651+00:00",
+  "artifact_id": "art_analyst_report_ee9944bbc95f402b",
+  "run_id": "run_17db7e97619b",
+  "generated_at": "2026-04-22T14:25:53.836384+00:00",
   "producer": {
     "agent": "Analyst Agent",
     "skill_pack": "generic_legacy",
@@ -13,7 +13,7 @@
     "repo": "Synthetix",
     "branch": "codex-synthetix-ui-v2-claude",
     "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-    "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+    "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
     "canonical_project": "Project 1",
     "target_stack": {
       "language": "Unknown",
@@ -25,14 +25,14 @@
     "compiler_version": "2.7.2",
     "project": {
       "name": "Kotlin to Go Migration",
-      "objective": "Migrate an existing Kotlin codebase to Go.",
+      "objective": "Migrate an existing Kotlin codebase to Go while preserving functionality and adhering to domain-specific guidelines.",
       "domain": "software",
       "audience_modes": [
         "client",
         "engineering"
       ]
     },
-    "generated_at": "2026-04-22T14:14:16.787651+00:00",
+    "generated_at": "2026-04-22T14:25:53.836384+00:00",
     "skill_pack": {
       "id": "generic_legacy",
       "name": "Generic Legacy Skill",
@@ -86,11 +86,11 @@
         "event_handlers": 0,
         "tables_touched": []
       },
-      "headline": "Strangler Fig Pattern recommended."
+      "headline": "Full Upgrade Translation recommended."
     },
     "recommended_strategy": {
-      "name": "Strangler Fig Pattern",
-      "rationale": "Gradual migration to Go while maintaining existing Kotlin functionality.",
+      "name": "Full Upgrade Translation",
+      "rationale": "A full translation is necessary to leverage Go's performance and concurrency benefits.",
       "phases": [
         {
           "id": "PH0",
@@ -214,21 +214,21 @@
         "id": "RISK-1",
         "severity": "high",
         "description": "Potential loss of functionality during migration.",
-        "mitigation": "Implement thorough testing and validation processes.",
+        "mitigation": "Conduct thorough testing and validation at each phase.",
         "evidence_refs": []
       },
       {
         "id": "RISK-2",
         "severity": "medium",
-        "description": "Performance degradation in Go implementation.",
-        "mitigation": "Conduct performance benchmarking and optimization.",
+        "description": "Performance issues due to differences in language paradigms.",
+        "mitigation": "Optimize Go code for performance and conduct load testing.",
         "evidence_refs": []
       },
       {
         "id": "RISK-3",
         "severity": "high",
         "description": "Security vulnerabilities introduced during migration.",
-        "mitigation": "Perform security audits and apply best practices.",
+        "mitigation": "Perform security audits and implement best practices.",
         "evidence_refs": []
       }
     ],
@@ -261,8 +261,8 @@
         "Control dependency and data-side risks during migration"
       ],
       "out_of_scope": [
-        "UI redesign or enhancements not related to migration.",
-        "Introduction of new features beyond existing functionality."
+        "UI redesign or changes beyond necessary adaptations for Go.",
+        "Introduction of new features not present in the Kotlin codebase."
       ]
     },
     "constraints": {
@@ -305,12 +305,12 @@
         "id": "FR-001",
         "type": "functional",
         "priority": "P0",
-        "title": "Translate Kotlin Classes to Go Structs",
-        "outcome": "Convert all Kotlin classes to Go structs, maintaining data integrity and functionality.",
+        "title": "Data Persistence in Go",
+        "outcome": "Implement data persistence in Go using an offline-first approach.",
         "acceptance_criteria": [
-          "All Kotlin classes are represented as Go structs.",
-          "Data fields in Kotlin classes have equivalent fields in Go structs.",
-          "Unit tests confirm data integrity post-migration."
+          "Data is stored locally and synced asynchronously with the server.",
+          "Conflict resolution is explicit and handled correctly.",
+          "Data retrieval prioritizes local cache before network calls."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -325,13 +325,13 @@
       {
         "id": "FR-002",
         "type": "functional",
-        "priority": "P0",
-        "title": "Migrate Kotlin Coroutines to Go Goroutines",
-        "outcome": "Translate Kotlin coroutines to Go goroutines for concurrency management.",
+        "priority": "P1",
+        "title": "UI State Management",
+        "outcome": "Manage UI state using Go idioms while maintaining MVVM architecture.",
         "acceptance_criteria": [
-          "All coroutine-based functions are converted to use goroutines.",
-          "Concurrency behavior is preserved in Go.",
-          "Performance benchmarks match or exceed Kotlin implementation."
+          "UI state is managed in a single source of truth.",
+          "State updates are reflected in the UI without delay.",
+          "Side effects are emitted through appropriate channels."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -346,13 +346,13 @@
       {
         "id": "FR-003",
         "type": "functional",
-        "priority": "P1",
-        "title": "Replace Kotlin Collections with Go Slices and Maps",
-        "outcome": "Ensure all Kotlin collection types are replaced with Go slices and maps.",
+        "priority": "P0",
+        "title": "Security Compliance",
+        "outcome": "Ensure all security measures are implemented in Go.",
         "acceptance_criteria": [
-          "All Kotlin collections are converted to Go slices or maps.",
-          "Functional equivalence is maintained in Go.",
-          "Tests validate collection operations in Go."
+          "Secrets are stored securely using Go's equivalent of Android Keystore.",
+          "Network calls use certificate pinning.",
+          "Security measures pass all compliance checks."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -367,13 +367,13 @@
       {
         "id": "FR-004",
         "type": "functional",
-        "priority": "P0",
-        "title": "Implement Error Handling in Go",
-        "outcome": "Translate Kotlin exception handling to Go's error handling idioms.",
+        "priority": "P2",
+        "title": "Localization Support",
+        "outcome": "Implement localization support in Go.",
         "acceptance_criteria": [
-          "All Kotlin exceptions are handled using Go's error interface.",
-          "Error propagation follows Go best practices.",
-          "Error handling tests pass successfully."
+          "All user-visible strings are externalized for localization.",
+          "Localization files are correctly loaded and applied.",
+          "The application supports multiple languages as required."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -388,13 +388,13 @@
       {
         "id": "FR-005",
         "type": "functional",
-        "priority": "P0",
-        "title": "Maintain API Contracts",
-        "outcome": "Ensure that all API contracts remain consistent during migration.",
+        "priority": "P1",
+        "title": "Network Operations",
+        "outcome": "Implement network operations using Go's concurrency model.",
         "acceptance_criteria": [
-          "API endpoints in Go match those in Kotlin.",
-          "Data contracts are validated against existing specifications.",
-          "Integration tests confirm API consistency."
+          "No network operations block the main thread.",
+          "All network operations are handled using Go routines.",
+          "Network errors are handled gracefully."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -409,13 +409,13 @@
       {
         "id": "FR-006",
         "type": "functional",
-        "priority": "P1",
-        "title": "Preserve UI Logic with Go Backend",
-        "outcome": "Ensure that UI logic is preserved and compatible with the new Go backend.",
+        "priority": "P0",
+        "title": "Testing and Validation",
+        "outcome": "Ensure comprehensive testing is implemented for the Go codebase.",
         "acceptance_criteria": [
-          "UI functionality remains consistent with the Go backend.",
-          "UI tests confirm compatibility.",
-          "User experience is unchanged post-migration."
+          "All critical paths have unit tests with 90% coverage.",
+          "Integration tests cover all major workflows.",
+          "Automated tests are run in CI/CD pipeline."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -430,13 +430,13 @@
       {
         "id": "FR-007",
         "type": "functional",
-        "priority": "P1",
-        "title": "Implement Go Modules for Dependency Management",
-        "outcome": "Use Go modules to manage dependencies, replacing Kotlin's Gradle system.",
+        "priority": "P2",
+        "title": "Performance Optimization",
+        "outcome": "Optimize the Go codebase for performance.",
         "acceptance_criteria": [
-          "All dependencies are managed using Go modules.",
-          "Build process is streamlined with Go's toolchain.",
-          "Dependency conflicts are resolved in Go."
+          "Performance benchmarks are established and met.",
+          "Code is reviewed for potential bottlenecks.",
+          "Optimization does not compromise functionality."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -451,13 +451,13 @@
       {
         "id": "FR-008",
         "type": "functional",
-        "priority": "P2",
-        "title": "Optimize Go Code for Performance",
-        "outcome": "Ensure that the Go code is optimized for performance, matching or exceeding Kotlin benchmarks.",
+        "priority": "P1",
+        "title": "Error Handling",
+        "outcome": "Implement robust error handling in Go.",
         "acceptance_criteria": [
-          "Performance benchmarks are established for Go code.",
-          "Go code meets or exceeds Kotlin performance metrics.",
-          "Performance tests validate optimization efforts."
+          "All errors are logged with sufficient detail.",
+          "User-facing errors are presented clearly.",
+          "Error handling does not disrupt user experience."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -473,12 +473,12 @@
         "id": "NFR-001",
         "type": "non_functional",
         "priority": "P1",
-        "title": "Performance Optimization",
-        "outcome": "The Go application must perform at least as efficiently as the Kotlin version.",
+        "title": "Performance",
+        "outcome": "The application must perform efficiently under load.",
         "acceptance_criteria": [
-          "Performance tests show Go application meets response time targets.",
-          "Load tests confirm performance under expected load.",
-          "Performance metrics are documented and reviewed."
+          "Load tests show response times within acceptable limits.",
+          "Performance does not degrade with increased load.",
+          "System resources are utilized efficiently."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -494,12 +494,12 @@
         "id": "NFR-002",
         "type": "non_functional",
         "priority": "P1",
-        "title": "Security Compliance",
-        "outcome": "Ensure the Go application adheres to security best practices.",
+        "title": "Security",
+        "outcome": "Ensure the application meets security standards.",
         "acceptance_criteria": [
-          "Security audit identifies no critical vulnerabilities.",
-          "All sensitive data is encrypted at rest and in transit.",
-          "Security tests validate compliance with security policies."
+          "No critical vulnerabilities are found in security audits.",
+          "All data is encrypted in transit and at rest.",
+          "Security practices align with industry standards."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -516,11 +516,11 @@
         "type": "non_functional",
         "priority": "P1",
         "title": "Scalability",
-        "outcome": "The Go application must scale to meet increased user demand.",
+        "outcome": "The application must scale to handle increased load.",
         "acceptance_criteria": [
-          "Scalability tests confirm support for target user load.",
-          "System performance remains stable under load.",
-          "Scalability metrics are documented and reviewed."
+          "Scalability tests confirm system can handle increased load.",
+          "No downtime during scaling operations.",
+          "System resources are allocated dynamically."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -536,12 +536,12 @@
         "id": "NFR-004",
         "type": "non_functional",
         "priority": "P1",
-        "title": "Reliability",
-        "outcome": "Ensure the Go application maintains high availability and reliability.",
+        "title": "Usability",
+        "outcome": "The application must be user-friendly and intuitive.",
         "acceptance_criteria": [
-          "Uptime metrics confirm reliability targets are met.",
-          "Failover mechanisms are tested and validated.",
-          "Reliability metrics are documented and reviewed."
+          "User feedback is positive in usability tests.",
+          "Navigation is intuitive and consistent.",
+          "Help and documentation are accessible and clear."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -550,19 +550,19 @@
         ],
         "grounding": {
           "classification": "proposed_extension",
-          "reason": "template-style capability/scale target not grounded in legacy evidence"
+          "reason": "no direct evidence linkage found in extracted legacy artifacts"
         }
       },
       {
         "id": "NFR-005",
         "type": "non_functional",
         "priority": "P1",
-        "title": "Usability",
-        "outcome": "The Go application must maintain or improve the usability of the Kotlin version.",
+        "title": "Reliability",
+        "outcome": "The application must be reliable and available.",
         "acceptance_criteria": [
-          "User testing confirms usability targets are met.",
-          "Feedback sessions identify no major usability issues.",
-          "Usability metrics are documented and reviewed."
+          "System logs show no unplanned downtime.",
+          "Redundancy measures are in place and effective.",
+          "System recovers gracefully from failures."
         ],
         "depends_on": [],
         "evidence_expected": [
@@ -591,6 +591,7 @@
         {
           "requirement_id": "FR-002",
           "test_types": [
+            "e2e",
             "integration",
             "unit"
           ],
@@ -602,9 +603,12 @@
           "requirement_id": "FR-003",
           "test_types": [
             "integration",
+            "security",
             "unit"
           ],
-          "scenario_ids": []
+          "scenario_ids": [
+            "BDD-003"
+          ]
         },
         {
           "requirement_id": "FR-004",
@@ -617,18 +621,16 @@
         {
           "requirement_id": "FR-005",
           "test_types": [
-            "contract",
             "integration",
             "unit"
           ],
           "scenario_ids": [
-            "BDD-003"
+            "BDD-004"
           ]
         },
         {
           "requirement_id": "FR-006",
           "test_types": [
-            "e2e",
             "integration",
             "unit"
           ],
@@ -648,9 +650,7 @@
             "integration",
             "unit"
           ],
-          "scenario_ids": [
-            "BDD-004"
-          ]
+          "scenario_ids": []
         }
       ],
       "evidence_outputs": [
@@ -770,12 +770,12 @@
           "type": "verified_by"
         },
         {
-          "from": "FR-005",
+          "from": "FR-003",
           "to": "BDD-003",
           "type": "verified_by"
         },
         {
-          "from": "FR-008",
+          "from": "FR-005",
           "to": "BDD-004",
           "type": "verified_by"
         }
@@ -867,24 +867,24 @@
   },
   "appendix": {
     "artifact_refs": {
-      "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_bbcf969e1ea04428",
-      "repo_landscape_ref": "artifact://repo_landscape/1.0/art_repo_landscape_e20370d634c54a49",
-      "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
-      "variant_inventory_ref": "artifact://variant_inventory/1.0/art_variant_inventory_3586c6c49fe44c87",
-      "event_map_ref": "artifact://event_map/1.0/art_event_map_cb6e98261c1543db",
-      "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_d3652eddd10c4068",
-      "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_1790befd826548d9",
-      "data_access_map_ref": "artifact://data_access_map/1.0/art_data_access_map_097f2597710c43b6",
-      "recordset_ops_ref": "artifact://recordset_ops/1.0/art_recordset_ops_d2e2e4b5ed274a5b",
-      "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_66545d714f52440c",
-      "form_dossier_ref": "artifact://form_dossier/1.0/art_form_dossier_acc78da953d744ab",
-      "dependency_list_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_43173873f5404901",
-      "dependency_inventory_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_43173873f5404901",
-      "business_rules_ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_433eb8615bd147d3",
-      "detector_findings_ref": "artifact://detector_findings/1.0/art_detector_findings_2cb247053a5e41d9",
-      "risk_register_ref": "artifact://risk_register/1.0/art_risk_register_8090b38ae619412a",
-      "orphan_analysis_ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_7947630bfa2b491e",
-      "delivery_constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_4d572e2f5b444417",
+      "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_9551d12a681f49b5",
+      "repo_landscape_ref": "artifact://repo_landscape/1.0/art_repo_landscape_0ec347c576234167",
+      "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
+      "variant_inventory_ref": "artifact://variant_inventory/1.0/art_variant_inventory_4fe326c6585d4d60",
+      "event_map_ref": "artifact://event_map/1.0/art_event_map_9a156715d621427e",
+      "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_c0c5fa1478944fee",
+      "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_3225be31762a4720",
+      "data_access_map_ref": "artifact://data_access_map/1.0/art_data_access_map_6e2e2a4e8b46435a",
+      "recordset_ops_ref": "artifact://recordset_ops/1.0/art_recordset_ops_643e8ddbfb7540e0",
+      "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_297b7bae1be34313",
+      "form_dossier_ref": "artifact://form_dossier/1.0/art_form_dossier_d7c33438ce8d4c62",
+      "dependency_list_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_572a030a59af4acd",
+      "dependency_inventory_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_572a030a59af4acd",
+      "business_rules_ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_ce8a30c26bfa4e9d",
+      "detector_findings_ref": "artifact://detector_findings/1.0/art_detector_findings_1f479f40e3b04fa9",
+      "risk_register_ref": "artifact://risk_register/1.0/art_risk_register_18276db070bf4ba4",
+      "orphan_analysis_ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_314f1785fb0648b8",
+      "delivery_constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_75dfbadc203c417d",
       "source_db_profile_ref": "artifact://analyst/raw/source_db_profile/v1",
       "source_schema_model_ref": "artifact://analyst/raw/source_schema_model/v1",
       "source_query_catalog_ref": "artifact://analyst/raw/source_query_catalog/v1",
@@ -902,11 +902,11 @@
       "db_qa_report_ref": "artifact://analyst/raw/db_qa_report/v1",
       "schema_approval_record_ref": "artifact://analyst/raw/schema_approval_record/v1",
       "schema_drift_report_ref": "artifact://analyst/raw/schema_drift_report/v1",
-      "variant_diff_report_ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_443ae52466904eba",
-      "reporting_model_ref": "artifact://reporting_model/1.0/art_reporting_model_95e3caaca6264b87",
-      "identity_access_model_ref": "artifact://identity_access_model/1.0/art_identity_access_model_acf2b34f2a474260",
-      "discover_review_checklist_ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_5aa07aabe9ff42e5",
-      "artifact_index_ref": "artifact://artifact_index/1.0/art_artifact_index_bb549440d64049ab",
+      "variant_diff_report_ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_4ecb06bca56243ae",
+      "reporting_model_ref": "artifact://reporting_model/1.0/art_reporting_model_900f82140a2d4495",
+      "identity_access_model_ref": "artifact://identity_access_model/1.0/art_identity_access_model_c6b11172f3a34a66",
+      "discover_review_checklist_ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_1019eccf23c849c6",
+      "artifact_index_ref": "artifact://artifact_index/1.0/art_artifact_index_7aec2ef96d0f415b",
       "qa_report_ref": "embedded://analyst_report_v2/qa_report_v1",
       "knowledge_snapshot_ref": "runctx://runctx-aa80d929b17f856c/kctx-dff0dd8350cd555c",
       "run_delivery_constitution_ref": "runctx://runctx-aa80d929b17f856c/delivery_constitution/const-19e1d71cfc92"
@@ -918,7 +918,7 @@
     "artifact_version": "1.0",
     "discovery_spec": {
       "title": "Legacy discovery spec",
-      "objective": "Migrate an existing Kotlin codebase to Go.",
+      "objective": "Migrate an existing Kotlin codebase to Go while preserving functionality and adhering to domain-specific guidelines.",
       "inventory_counts": {
         "projects": 0,
         "forms": 0,
@@ -947,15 +947,15 @@
         }
       ],
       "evidence_refs": {
-        "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_bbcf969e1ea04428",
-        "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_66545d714f52440c",
-        "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_1790befd826548d9"
+        "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_9551d12a681f49b5",
+        "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_297b7bae1be34313",
+        "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_3225be31762a4720"
       }
     },
     "modernization_plan": {
       "title": "Modernization implementation plan",
-      "strategy": "Strangler Fig Pattern",
-      "rationale": "Gradual migration to Go while maintaining existing Kotlin functionality.",
+      "strategy": "Full Upgrade Translation",
+      "rationale": "A full translation is necessary to leverage Go's performance and concurrency benefits.",
       "phases": [
         {
           "id": "PH0",
@@ -977,7 +977,7 @@
       ],
       "backlog_items": 1,
       "blocking_decisions": 7,
-      "constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_4d572e2f5b444417"
+      "constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_75dfbadc203c417d"
     },
     "executable_contracts": {
       "title": "Executable contracts",
@@ -987,9 +987,9 @@
       "grounding_status": "grounded",
       "traceability_links": 4,
       "contract_refs": {
-        "event_map_ref": "artifact://event_map/1.0/art_event_map_cb6e98261c1543db",
-        "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_d3652eddd10c4068",
-        "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_1790befd826548d9"
+        "event_map_ref": "artifact://event_map/1.0/art_event_map_9a156715d621427e",
+        "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_c0c5fa1478944fee",
+        "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_3225be31762a4720"
       }
     },
     "constitution": {
@@ -998,13 +998,13 @@
         "Every modernization decision must map to explicit evidence (code, query, event, or rule).",
         "No breaking change to data contracts without approved migration path and rollback evidence."
       ],
-      "source_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_4d572e2f5b444417"
+      "source_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_75dfbadc203c417d"
     }
   },
   "qa_report_v1": {
     "artifact_type": "qa_report",
     "artifact_version": "1.0",
-    "generated_at": "2026-04-22T14:14:16.787651+00:00",
+    "generated_at": "2026-04-22T14:25:53.836384+00:00",
     "summary": {
       "status": "WARN",
       "pass_count": 12,
@@ -1218,8 +1218,8 @@
       "artifact_type": "legacy_inventory",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1265,20 +1265,20 @@
         "modernization_readiness": {
           "score": 0,
           "tier": "medium",
-          "recommended_strategy": "Strangler Fig Pattern",
+          "recommended_strategy": "Full Upgrade Translation",
           "required_actions": [
-            "Identify critical modules for initial migration.",
-            "Establish testing framework for Go code.",
-            "Develop rollback plan for migration phases."
+            "Conduct a detailed analysis of Kotlin codebase.",
+            "Identify and document all business rules and data contracts.",
+            "Develop a migration plan with phased execution."
           ]
         }
       },
       "projects": [],
       "form_coverage": [],
       "source_loc_by_file": [],
-      "artifact_id": "art_legacy_inventory_bbcf969e1ea04428",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_legacy_inventory_9551d12a681f49b5",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1288,7 +1288,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1301,8 +1301,8 @@
       "artifact_type": "repo_landscape",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1331,9 +1331,9 @@
         "shared_modules": [],
         "shared_dependencies": []
       },
-      "artifact_id": "art_repo_landscape_e20370d634c54a49",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_repo_landscape_0ec347c576234167",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1343,7 +1343,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1356,8 +1356,8 @@
       "artifact_type": "scope_lock",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1387,9 +1387,9 @@
       "status": "LOCKED",
       "resolved_blocking_decisions": [],
       "build_guardrails": [],
-      "artifact_id": "art_scope_lock_22147a08e56c48de",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_scope_lock_5b7fc4e1aeab4c3c",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1399,7 +1399,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1412,8 +1412,8 @@
       "artifact_type": "variant_inventory",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1437,9 +1437,9 @@
         }
       },
       "variants": [],
-      "artifact_id": "art_variant_inventory_3586c6c49fe44c87",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_variant_inventory_4fe326c6585d4d60",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1449,7 +1449,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1462,8 +1462,8 @@
       "artifact_type": "dependency_inventory",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1487,9 +1487,9 @@
         }
       },
       "dependencies": [],
-      "artifact_id": "art_dependency_inventory_43173873f5404901",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_dependency_inventory_572a030a59af4acd",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1499,7 +1499,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1512,8 +1512,8 @@
       "artifact_type": "event_map",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1537,9 +1537,9 @@
         }
       },
       "entries": [],
-      "artifact_id": "art_event_map_cb6e98261c1543db",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_event_map_9a156715d621427e",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1549,7 +1549,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1562,8 +1562,8 @@
       "artifact_type": "sql_catalog",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1587,9 +1587,9 @@
         }
       },
       "statements": [],
-      "artifact_id": "art_sql_catalog_d3652eddd10c4068",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_sql_catalog_c0c5fa1478944fee",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1599,7 +1599,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1612,8 +1612,8 @@
       "artifact_type": "sql_map",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1637,9 +1637,9 @@
         }
       },
       "entries": [],
-      "artifact_id": "art_sql_map_1790befd826548d9",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_sql_map_3225be31762a4720",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1649,7 +1649,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1662,8 +1662,8 @@
       "artifact_type": "data_access_map",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1689,9 +1689,9 @@
       "rows": [],
       "complete": false,
       "coverage_score": 0.0,
-      "artifact_id": "art_data_access_map_097f2597710c43b6",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_data_access_map_6e2e2a4e8b46435a",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1701,7 +1701,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1714,8 +1714,8 @@
       "artifact_type": "recordset_ops",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1739,9 +1739,9 @@
         }
       },
       "ops": [],
-      "artifact_id": "art_recordset_ops_d2e2e4b5ed274a5b",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_recordset_ops_643e8ddbfb7540e0",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1751,7 +1751,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1764,8 +1764,8 @@
       "artifact_type": "procedure_summary",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1789,9 +1789,9 @@
         }
       },
       "procedures": [],
-      "artifact_id": "art_procedure_summary_66545d714f52440c",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_procedure_summary_297b7bae1be34313",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1801,7 +1801,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1814,8 +1814,8 @@
       "artifact_type": "form_dossier",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1839,9 +1839,9 @@
         }
       },
       "dossiers": [],
-      "artifact_id": "art_form_dossier_acc78da953d744ab",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_form_dossier_d7c33438ce8d4c62",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1851,7 +1851,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1864,8 +1864,8 @@
       "artifact_type": "business_rule_catalog",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1889,9 +1889,9 @@
         }
       },
       "rules": [],
-      "artifact_id": "art_business_rule_catalog_433eb8615bd147d3",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_business_rule_catalog_ce8a30c26bfa4e9d",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1901,7 +1901,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1914,8 +1914,8 @@
       "artifact_type": "detector_findings",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1949,9 +1949,9 @@
           "win32_declares": 0
         }
       },
-      "artifact_id": "art_detector_findings_2cb247053a5e41d9",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_detector_findings_1f479f40e3b04fa9",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -1961,7 +1961,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -1974,8 +1974,8 @@
       "artifact_type": "risk_register",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -1999,9 +1999,9 @@
         }
       },
       "risks": [],
-      "artifact_id": "art_risk_register_8090b38ae619412a",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_risk_register_18276db070bf4ba4",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2011,7 +2011,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2024,8 +2024,8 @@
       "artifact_type": "orphan_analysis",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2054,9 +2054,9 @@
         "reachable_forms": [],
         "mapped_form_count": 0
       },
-      "artifact_id": "art_orphan_analysis_7947630bfa2b491e",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_orphan_analysis_314f1785fb0648b8",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2066,7 +2066,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2079,8 +2079,8 @@
       "artifact_type": "project_metrics",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2121,9 +2121,9 @@
           "third_party_dependency_count": 0
         }
       ],
-      "artifact_id": "art_project_metrics_4d210244738e4cd4",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_project_metrics_01379c8ed4a84a79",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2133,7 +2133,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2146,8 +2146,8 @@
       "artifact_type": "static_forensics_layer",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2227,9 +2227,9 @@
           "detail": "Snapshots=1 | LOC=0"
         }
       ],
-      "artifact_id": "art_static_forensics_layer_1ac22624f6154a36",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_static_forensics_layer_0e54b7c3e4dc4ac5",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2239,7 +2239,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2252,8 +2252,8 @@
       "artifact_type": "type_metrics",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2277,9 +2277,9 @@
         }
       },
       "rows": [],
-      "artifact_id": "art_type_metrics_8f41253d62ac4d77",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_type_metrics_61095ccff2ed4c04",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2289,7 +2289,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2302,8 +2302,8 @@
       "artifact_type": "type_dependency_matrix",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2327,9 +2327,9 @@
         }
       },
       "edges": [],
-      "artifact_id": "art_type_dependency_matrix_2f0588221f3d4a5a",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_type_dependency_matrix_e7de035f847b44ed",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2339,7 +2339,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2352,8 +2352,8 @@
       "artifact_type": "runtime_dependency_matrix",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2377,9 +2377,9 @@
         }
       },
       "edges": [],
-      "artifact_id": "art_runtime_dependency_matrix_31541e2ab0cb43cb",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_runtime_dependency_matrix_06e5c4014e63422c",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2389,7 +2389,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2402,8 +2402,8 @@
       "artifact_type": "dead_code_report",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2437,9 +2437,9 @@
       "verify_needed": [
         "VB6 event handlers are excluded from dead-method candidates unless corroborated by stronger evidence."
       ],
-      "artifact_id": "art_dead_code_report_67d01b42add14fd6",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_dead_code_report_4bb782deca3643a4",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2449,7 +2449,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2462,8 +2462,8 @@
       "artifact_type": "third_party_usage",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2487,9 +2487,9 @@
         }
       },
       "rows": [],
-      "artifact_id": "art_third_party_usage_44aa64d8b6e64731",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_third_party_usage_81780ebb97dd4f72",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2499,7 +2499,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2512,8 +2512,8 @@
       "artifact_type": "code_quality_rules",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2586,9 +2586,9 @@
           "threshold": "query contains MAX(id)+1 style pattern"
         }
       ],
-      "artifact_id": "art_code_quality_rules_c119a5a18bcd4e0e",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_code_quality_rules_a60e1b2a197546e0",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2598,7 +2598,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2611,8 +2611,8 @@
       "artifact_type": "quality_violation_report",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2640,9 +2640,9 @@
         "critical_violations": 0
       },
       "violations": [],
-      "artifact_id": "art_quality_violation_report_7b08457dd1f04915",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_quality_violation_report_a3d8fd1c727e406a",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2652,7 +2652,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2665,8 +2665,8 @@
       "artifact_type": "trend_snapshot",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2690,12 +2690,12 @@
         }
       },
       "snapshot": {
-        "snapshot_id": "trend:2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "snapshot_id": "trend:2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "captured_at": "2026-04-22T14:14:16.786444+00:00",
+        "captured_at": "2026-04-22T14:25:53.834829+00:00",
         "metrics": {
           "loc_total": 0,
           "max_complexity": 0,
@@ -2709,9 +2709,9 @@
           "hotspot_count": 0
         }
       },
-      "artifact_id": "art_trend_snapshot_eecc98811eb44138",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_trend_snapshot_b667cf2415a2446a",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2721,7 +2721,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2734,8 +2734,8 @@
       "artifact_type": "trend_series",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2760,12 +2760,12 @@
       },
       "series": [
         {
-          "snapshot_id": "trend:2026-04-22T14:14:16.786444+00:00",
-          "run_id": "run_2d56271585a8",
+          "snapshot_id": "trend:2026-04-22T14:25:53.834829+00:00",
+          "run_id": "run_75bc72f3fab3",
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-          "captured_at": "2026-04-22T14:14:16.786444+00:00",
+          "captured_at": "2026-04-22T14:25:53.834829+00:00",
           "metrics": {
             "loc_total": 0,
             "max_complexity": 0,
@@ -2780,9 +2780,9 @@
           }
         }
       ],
-      "artifact_id": "art_trend_series_f6d65e2239e84a5e",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_trend_series_8cc6a4a6a7b347ff",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2792,7 +2792,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2805,8 +2805,8 @@
       "artifact_type": "mdb_inventory",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2835,9 +2835,9 @@
         "module_refs": 0
       },
       "databases": [],
-      "artifact_id": "art_mdb_inventory_30c9578712f74ff6",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_mdb_inventory_6b72b08bb23742b7",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2847,7 +2847,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2860,8 +2860,8 @@
       "artifact_type": "form_loc_profile",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2896,9 +2896,9 @@
       },
       "forms": [],
       "designer_files": [],
-      "artifact_id": "art_form_loc_profile_039f5f3410024d97",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_form_loc_profile_76facd95065149ef",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2908,7 +2908,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2921,8 +2921,8 @@
       "artifact_type": "connection_string_variants",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -2951,9 +2951,9 @@
         "embedded_credential_risks": 0
       },
       "variants": [],
-      "artifact_id": "art_connection_string_variants_9354683abc98400f",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_connection_string_variants_513f73920fa74021",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -2963,7 +2963,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -2976,8 +2976,8 @@
       "artifact_type": "module_global_inventory",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3010,9 +3010,9 @@
       "notes": [
         "Global declarations are inferred from shared-module call sites because direct .bas declaration blocks are not yet emitted in legacy inventory payloads."
       ],
-      "artifact_id": "art_module_global_inventory_4b4b01a7309c4dcd",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_module_global_inventory_428573991b15482a",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3022,7 +3022,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3035,8 +3035,8 @@
       "artifact_type": "dead_form_refs",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3064,9 +3064,9 @@
         "callers_impacted": 0
       },
       "references": [],
-      "artifact_id": "art_dead_form_refs_d50cdae6f1e0452b",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_dead_form_refs_462bb215b68a4a90",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3076,7 +3076,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3089,8 +3089,8 @@
       "artifact_type": "dataenvironment_report_mapping",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3123,9 +3123,9 @@
         "reports": []
       },
       "mappings": [],
-      "artifact_id": "art_dataenvironment_report_mapping_d69cf9bbfaca40b2",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_dataenvironment_report_mapping_f1dd2e487c044e9b",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3135,7 +3135,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3148,8 +3148,8 @@
       "artifact_type": "static_risk_detectors",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3178,9 +3178,9 @@
         "high_findings": 0
       },
       "findings": [],
-      "artifact_id": "art_static_risk_detectors_c3fa6e7755d64d79",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_static_risk_detectors_b374b8685d9b4fcd",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3190,7 +3190,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3203,8 +3203,8 @@
       "artifact_type": "delivery_constitution",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3243,9 +3243,9 @@
         "domain_pack",
         "memory_constraints"
       ],
-      "artifact_id": "art_delivery_constitution_4d572e2f5b444417",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_delivery_constitution_75dfbadc203c417d",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3255,7 +3255,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3268,8 +3268,8 @@
       "artifact_type": "variant_diff_report",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3302,9 +3302,9 @@
         "pairs": [],
         "blocking_pairs": []
       },
-      "artifact_id": "art_variant_diff_report_443ae52466904eba",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_variant_diff_report_4ecb06bca56243ae",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3314,7 +3314,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3327,8 +3327,8 @@
       "artifact_type": "reporting_model",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3360,9 +3360,9 @@
       },
       "connection_path_mismatches": [],
       "status": "PASS",
-      "artifact_id": "art_reporting_model_95e3caaca6264b87",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_reporting_model_900f82140a2d4495",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3372,7 +3372,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3385,8 +3385,8 @@
       "artifact_type": "identity_access_model",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3424,9 +3424,9 @@
       ],
       "sensitive_query_samples": [],
       "status": "WARN",
-      "artifact_id": "art_identity_access_model_acf2b34f2a474260",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_identity_access_model_c6b11172f3a34a66",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3436,7 +3436,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3449,8 +3449,8 @@
       "artifact_type": "discover_review_checklist",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
-        "run_id": "run_2d56271585a8",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
+        "run_id": "run_75bc72f3fab3",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -3525,9 +3525,9 @@
         }
       ],
       "low_coverage_forms": [],
-      "artifact_id": "art_discover_review_checklist_5aa07aabe9ff42e5",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_discover_review_checklist_1019eccf23c849c6",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3537,7 +3537,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3550,7 +3550,7 @@
       "artifact_type": "artifact_index",
       "artifact_version": "1.0",
       "metadata": {
-        "generated_at": "2026-04-22T14:14:16.786444+00:00",
+        "generated_at": "2026-04-22T14:25:53.834829+00:00",
         "context_reference": {
           "repo": "Synthetix",
           "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5"
@@ -3559,164 +3559,164 @@
       "artifacts": [
         {
           "type": "legacy_inventory",
-          "ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_bbcf969e1ea04428"
+          "ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_9551d12a681f49b5"
         },
         {
           "type": "repo_landscape",
-          "ref": "artifact://repo_landscape/1.0/art_repo_landscape_e20370d634c54a49"
+          "ref": "artifact://repo_landscape/1.0/art_repo_landscape_0ec347c576234167"
         },
         {
           "type": "scope_lock",
-          "ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de"
+          "ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c"
         },
         {
           "type": "variant_inventory",
-          "ref": "artifact://variant_inventory/1.0/art_variant_inventory_3586c6c49fe44c87"
+          "ref": "artifact://variant_inventory/1.0/art_variant_inventory_4fe326c6585d4d60"
         },
         {
           "type": "dependency_inventory",
-          "ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_43173873f5404901"
+          "ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_572a030a59af4acd"
         },
         {
           "type": "event_map",
-          "ref": "artifact://event_map/1.0/art_event_map_cb6e98261c1543db"
+          "ref": "artifact://event_map/1.0/art_event_map_9a156715d621427e"
         },
         {
           "type": "sql_catalog",
-          "ref": "artifact://sql_catalog/1.0/art_sql_catalog_d3652eddd10c4068"
+          "ref": "artifact://sql_catalog/1.0/art_sql_catalog_c0c5fa1478944fee"
         },
         {
           "type": "sql_map",
-          "ref": "artifact://sql_map/1.0/art_sql_map_1790befd826548d9"
+          "ref": "artifact://sql_map/1.0/art_sql_map_3225be31762a4720"
         },
         {
           "type": "data_access_map",
-          "ref": "artifact://data_access_map/1.0/art_data_access_map_097f2597710c43b6"
+          "ref": "artifact://data_access_map/1.0/art_data_access_map_6e2e2a4e8b46435a"
         },
         {
           "type": "recordset_ops",
-          "ref": "artifact://recordset_ops/1.0/art_recordset_ops_d2e2e4b5ed274a5b"
+          "ref": "artifact://recordset_ops/1.0/art_recordset_ops_643e8ddbfb7540e0"
         },
         {
           "type": "procedure_summary",
-          "ref": "artifact://procedure_summary/1.0/art_procedure_summary_66545d714f52440c"
+          "ref": "artifact://procedure_summary/1.0/art_procedure_summary_297b7bae1be34313"
         },
         {
           "type": "form_dossier",
-          "ref": "artifact://form_dossier/1.0/art_form_dossier_acc78da953d744ab"
+          "ref": "artifact://form_dossier/1.0/art_form_dossier_d7c33438ce8d4c62"
         },
         {
           "type": "business_rule_catalog",
-          "ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_433eb8615bd147d3"
+          "ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_ce8a30c26bfa4e9d"
         },
         {
           "type": "detector_findings",
-          "ref": "artifact://detector_findings/1.0/art_detector_findings_2cb247053a5e41d9"
+          "ref": "artifact://detector_findings/1.0/art_detector_findings_1f479f40e3b04fa9"
         },
         {
           "type": "risk_register",
-          "ref": "artifact://risk_register/1.0/art_risk_register_8090b38ae619412a"
+          "ref": "artifact://risk_register/1.0/art_risk_register_18276db070bf4ba4"
         },
         {
           "type": "orphan_analysis",
-          "ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_7947630bfa2b491e"
+          "ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_314f1785fb0648b8"
         },
         {
           "type": "project_metrics",
-          "ref": "artifact://project_metrics/1.0/art_project_metrics_4d210244738e4cd4"
+          "ref": "artifact://project_metrics/1.0/art_project_metrics_01379c8ed4a84a79"
         },
         {
           "type": "static_forensics_layer",
-          "ref": "artifact://static_forensics_layer/1.0/art_static_forensics_layer_1ac22624f6154a36"
+          "ref": "artifact://static_forensics_layer/1.0/art_static_forensics_layer_0e54b7c3e4dc4ac5"
         },
         {
           "type": "type_metrics",
-          "ref": "artifact://type_metrics/1.0/art_type_metrics_8f41253d62ac4d77"
+          "ref": "artifact://type_metrics/1.0/art_type_metrics_61095ccff2ed4c04"
         },
         {
           "type": "type_dependency_matrix",
-          "ref": "artifact://type_dependency_matrix/1.0/art_type_dependency_matrix_2f0588221f3d4a5a"
+          "ref": "artifact://type_dependency_matrix/1.0/art_type_dependency_matrix_e7de035f847b44ed"
         },
         {
           "type": "runtime_dependency_matrix",
-          "ref": "artifact://runtime_dependency_matrix/1.0/art_runtime_dependency_matrix_31541e2ab0cb43cb"
+          "ref": "artifact://runtime_dependency_matrix/1.0/art_runtime_dependency_matrix_06e5c4014e63422c"
         },
         {
           "type": "dead_code_report",
-          "ref": "artifact://dead_code_report/1.0/art_dead_code_report_67d01b42add14fd6"
+          "ref": "artifact://dead_code_report/1.0/art_dead_code_report_4bb782deca3643a4"
         },
         {
           "type": "third_party_usage",
-          "ref": "artifact://third_party_usage/1.0/art_third_party_usage_44aa64d8b6e64731"
+          "ref": "artifact://third_party_usage/1.0/art_third_party_usage_81780ebb97dd4f72"
         },
         {
           "type": "code_quality_rules",
-          "ref": "artifact://code_quality_rules/1.0/art_code_quality_rules_c119a5a18bcd4e0e"
+          "ref": "artifact://code_quality_rules/1.0/art_code_quality_rules_a60e1b2a197546e0"
         },
         {
           "type": "quality_violation_report",
-          "ref": "artifact://quality_violation_report/1.0/art_quality_violation_report_7b08457dd1f04915"
+          "ref": "artifact://quality_violation_report/1.0/art_quality_violation_report_a3d8fd1c727e406a"
         },
         {
           "type": "trend_snapshot",
-          "ref": "artifact://trend_snapshot/1.0/art_trend_snapshot_eecc98811eb44138"
+          "ref": "artifact://trend_snapshot/1.0/art_trend_snapshot_b667cf2415a2446a"
         },
         {
           "type": "trend_series",
-          "ref": "artifact://trend_series/1.0/art_trend_series_f6d65e2239e84a5e"
+          "ref": "artifact://trend_series/1.0/art_trend_series_8cc6a4a6a7b347ff"
         },
         {
           "type": "mdb_inventory",
-          "ref": "artifact://mdb_inventory/1.0/art_mdb_inventory_30c9578712f74ff6"
+          "ref": "artifact://mdb_inventory/1.0/art_mdb_inventory_6b72b08bb23742b7"
         },
         {
           "type": "form_loc_profile",
-          "ref": "artifact://form_loc_profile/1.0/art_form_loc_profile_039f5f3410024d97"
+          "ref": "artifact://form_loc_profile/1.0/art_form_loc_profile_76facd95065149ef"
         },
         {
           "type": "connection_string_variants",
-          "ref": "artifact://connection_string_variants/1.0/art_connection_string_variants_9354683abc98400f"
+          "ref": "artifact://connection_string_variants/1.0/art_connection_string_variants_513f73920fa74021"
         },
         {
           "type": "module_global_inventory",
-          "ref": "artifact://module_global_inventory/1.0/art_module_global_inventory_4b4b01a7309c4dcd"
+          "ref": "artifact://module_global_inventory/1.0/art_module_global_inventory_428573991b15482a"
         },
         {
           "type": "dead_form_refs",
-          "ref": "artifact://dead_form_refs/1.0/art_dead_form_refs_d50cdae6f1e0452b"
+          "ref": "artifact://dead_form_refs/1.0/art_dead_form_refs_462bb215b68a4a90"
         },
         {
           "type": "dataenvironment_report_mapping",
-          "ref": "artifact://dataenvironment_report_mapping/1.0/art_dataenvironment_report_mapping_d69cf9bbfaca40b2"
+          "ref": "artifact://dataenvironment_report_mapping/1.0/art_dataenvironment_report_mapping_f1dd2e487c044e9b"
         },
         {
           "type": "static_risk_detectors",
-          "ref": "artifact://static_risk_detectors/1.0/art_static_risk_detectors_c3fa6e7755d64d79"
+          "ref": "artifact://static_risk_detectors/1.0/art_static_risk_detectors_b374b8685d9b4fcd"
         },
         {
           "type": "delivery_constitution",
-          "ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_4d572e2f5b444417"
+          "ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_75dfbadc203c417d"
         },
         {
           "type": "variant_diff_report",
-          "ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_443ae52466904eba"
+          "ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_4ecb06bca56243ae"
         },
         {
           "type": "reporting_model",
-          "ref": "artifact://reporting_model/1.0/art_reporting_model_95e3caaca6264b87"
+          "ref": "artifact://reporting_model/1.0/art_reporting_model_900f82140a2d4495"
         },
         {
           "type": "identity_access_model",
-          "ref": "artifact://identity_access_model/1.0/art_identity_access_model_acf2b34f2a474260"
+          "ref": "artifact://identity_access_model/1.0/art_identity_access_model_c6b11172f3a34a66"
         },
         {
           "type": "discover_review_checklist",
-          "ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_5aa07aabe9ff42e5"
+          "ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_1019eccf23c849c6"
         }
       ],
-      "artifact_id": "art_artifact_index_bb549440d64049ab",
-      "run_id": "run_2d56271585a8",
-      "generated_at": "2026-04-22T14:14:16.786444+00:00",
+      "artifact_id": "art_artifact_index_7aec2ef96d0f415b",
+      "run_id": "run_75bc72f3fab3",
+      "generated_at": "2026-04-22T14:25:53.834829+00:00",
       "producer": {
         "agent": "Analyst Agent",
         "skill_pack": "generic_legacy",
@@ -3726,7 +3726,7 @@
         "repo": "Synthetix",
         "branch": "codex-synthetix-ui-v2-claude",
         "commit_sha": "36526655edbf36ae2a3f2bc2e4929edd9a3838b5",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
         "canonical_project": "Project 1",
         "target_stack": {
           "language": "Unknown",
@@ -3736,46 +3736,46 @@
       }
     },
     "artifact_refs": {
-      "legacy_inventory": "artifact://legacy_inventory/1.0/art_legacy_inventory_bbcf969e1ea04428",
-      "repo_landscape": "artifact://repo_landscape/1.0/art_repo_landscape_e20370d634c54a49",
-      "scope_lock": "artifact://scope_lock/1.0/art_scope_lock_22147a08e56c48de",
-      "variant_inventory": "artifact://variant_inventory/1.0/art_variant_inventory_3586c6c49fe44c87",
-      "dependency_inventory": "artifact://dependency_inventory/1.0/art_dependency_inventory_43173873f5404901",
-      "event_map": "artifact://event_map/1.0/art_event_map_cb6e98261c1543db",
-      "sql_catalog": "artifact://sql_catalog/1.0/art_sql_catalog_d3652eddd10c4068",
-      "sql_map": "artifact://sql_map/1.0/art_sql_map_1790befd826548d9",
-      "data_access_map": "artifact://data_access_map/1.0/art_data_access_map_097f2597710c43b6",
-      "recordset_ops": "artifact://recordset_ops/1.0/art_recordset_ops_d2e2e4b5ed274a5b",
-      "procedure_summary": "artifact://procedure_summary/1.0/art_procedure_summary_66545d714f52440c",
-      "form_dossier": "artifact://form_dossier/1.0/art_form_dossier_acc78da953d744ab",
-      "business_rule_catalog": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_433eb8615bd147d3",
-      "detector_findings": "artifact://detector_findings/1.0/art_detector_findings_2cb247053a5e41d9",
-      "risk_register": "artifact://risk_register/1.0/art_risk_register_8090b38ae619412a",
-      "orphan_analysis": "artifact://orphan_analysis/1.0/art_orphan_analysis_7947630bfa2b491e",
-      "project_metrics": "artifact://project_metrics/1.0/art_project_metrics_4d210244738e4cd4",
-      "static_forensics_layer": "artifact://static_forensics_layer/1.0/art_static_forensics_layer_1ac22624f6154a36",
-      "type_metrics": "artifact://type_metrics/1.0/art_type_metrics_8f41253d62ac4d77",
-      "type_dependency_matrix": "artifact://type_dependency_matrix/1.0/art_type_dependency_matrix_2f0588221f3d4a5a",
-      "runtime_dependency_matrix": "artifact://runtime_dependency_matrix/1.0/art_runtime_dependency_matrix_31541e2ab0cb43cb",
-      "dead_code_report": "artifact://dead_code_report/1.0/art_dead_code_report_67d01b42add14fd6",
-      "third_party_usage": "artifact://third_party_usage/1.0/art_third_party_usage_44aa64d8b6e64731",
-      "code_quality_rules": "artifact://code_quality_rules/1.0/art_code_quality_rules_c119a5a18bcd4e0e",
-      "quality_violation_report": "artifact://quality_violation_report/1.0/art_quality_violation_report_7b08457dd1f04915",
-      "trend_snapshot": "artifact://trend_snapshot/1.0/art_trend_snapshot_eecc98811eb44138",
-      "trend_series": "artifact://trend_series/1.0/art_trend_series_f6d65e2239e84a5e",
-      "mdb_inventory": "artifact://mdb_inventory/1.0/art_mdb_inventory_30c9578712f74ff6",
-      "form_loc_profile": "artifact://form_loc_profile/1.0/art_form_loc_profile_039f5f3410024d97",
-      "connection_string_variants": "artifact://connection_string_variants/1.0/art_connection_string_variants_9354683abc98400f",
-      "module_global_inventory": "artifact://module_global_inventory/1.0/art_module_global_inventory_4b4b01a7309c4dcd",
-      "dead_form_refs": "artifact://dead_form_refs/1.0/art_dead_form_refs_d50cdae6f1e0452b",
-      "dataenvironment_report_mapping": "artifact://dataenvironment_report_mapping/1.0/art_dataenvironment_report_mapping_d69cf9bbfaca40b2",
-      "static_risk_detectors": "artifact://static_risk_detectors/1.0/art_static_risk_detectors_c3fa6e7755d64d79",
-      "delivery_constitution": "artifact://delivery_constitution/1.0/art_delivery_constitution_4d572e2f5b444417",
-      "variant_diff_report": "artifact://variant_diff_report/1.0/art_variant_diff_report_443ae52466904eba",
-      "reporting_model": "artifact://reporting_model/1.0/art_reporting_model_95e3caaca6264b87",
-      "identity_access_model": "artifact://identity_access_model/1.0/art_identity_access_model_acf2b34f2a474260",
-      "discover_review_checklist": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_5aa07aabe9ff42e5",
-      "artifact_index": "artifact://artifact_index/1.0/art_artifact_index_bb549440d64049ab"
+      "legacy_inventory": "artifact://legacy_inventory/1.0/art_legacy_inventory_9551d12a681f49b5",
+      "repo_landscape": "artifact://repo_landscape/1.0/art_repo_landscape_0ec347c576234167",
+      "scope_lock": "artifact://scope_lock/1.0/art_scope_lock_5b7fc4e1aeab4c3c",
+      "variant_inventory": "artifact://variant_inventory/1.0/art_variant_inventory_4fe326c6585d4d60",
+      "dependency_inventory": "artifact://dependency_inventory/1.0/art_dependency_inventory_572a030a59af4acd",
+      "event_map": "artifact://event_map/1.0/art_event_map_9a156715d621427e",
+      "sql_catalog": "artifact://sql_catalog/1.0/art_sql_catalog_c0c5fa1478944fee",
+      "sql_map": "artifact://sql_map/1.0/art_sql_map_3225be31762a4720",
+      "data_access_map": "artifact://data_access_map/1.0/art_data_access_map_6e2e2a4e8b46435a",
+      "recordset_ops": "artifact://recordset_ops/1.0/art_recordset_ops_643e8ddbfb7540e0",
+      "procedure_summary": "artifact://procedure_summary/1.0/art_procedure_summary_297b7bae1be34313",
+      "form_dossier": "artifact://form_dossier/1.0/art_form_dossier_d7c33438ce8d4c62",
+      "business_rule_catalog": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_ce8a30c26bfa4e9d",
+      "detector_findings": "artifact://detector_findings/1.0/art_detector_findings_1f479f40e3b04fa9",
+      "risk_register": "artifact://risk_register/1.0/art_risk_register_18276db070bf4ba4",
+      "orphan_analysis": "artifact://orphan_analysis/1.0/art_orphan_analysis_314f1785fb0648b8",
+      "project_metrics": "artifact://project_metrics/1.0/art_project_metrics_01379c8ed4a84a79",
+      "static_forensics_layer": "artifact://static_forensics_layer/1.0/art_static_forensics_layer_0e54b7c3e4dc4ac5",
+      "type_metrics": "artifact://type_metrics/1.0/art_type_metrics_61095ccff2ed4c04",
+      "type_dependency_matrix": "artifact://type_dependency_matrix/1.0/art_type_dependency_matrix_e7de035f847b44ed",
+      "runtime_dependency_matrix": "artifact://runtime_dependency_matrix/1.0/art_runtime_dependency_matrix_06e5c4014e63422c",
+      "dead_code_report": "artifact://dead_code_report/1.0/art_dead_code_report_4bb782deca3643a4",
+      "third_party_usage": "artifact://third_party_usage/1.0/art_third_party_usage_81780ebb97dd4f72",
+      "code_quality_rules": "artifact://code_quality_rules/1.0/art_code_quality_rules_a60e1b2a197546e0",
+      "quality_violation_report": "artifact://quality_violation_report/1.0/art_quality_violation_report_a3d8fd1c727e406a",
+      "trend_snapshot": "artifact://trend_snapshot/1.0/art_trend_snapshot_b667cf2415a2446a",
+      "trend_series": "artifact://trend_series/1.0/art_trend_series_8cc6a4a6a7b347ff",
+      "mdb_inventory": "artifact://mdb_inventory/1.0/art_mdb_inventory_6b72b08bb23742b7",
+      "form_loc_profile": "artifact://form_loc_profile/1.0/art_form_loc_profile_76facd95065149ef",
+      "connection_string_variants": "artifact://connection_string_variants/1.0/art_connection_string_variants_513f73920fa74021",
+      "module_global_inventory": "artifact://module_global_inventory/1.0/art_module_global_inventory_428573991b15482a",
+      "dead_form_refs": "artifact://dead_form_refs/1.0/art_dead_form_refs_462bb215b68a4a90",
+      "dataenvironment_report_mapping": "artifact://dataenvironment_report_mapping/1.0/art_dataenvironment_report_mapping_f1dd2e487c044e9b",
+      "static_risk_detectors": "artifact://static_risk_detectors/1.0/art_static_risk_detectors_b374b8685d9b4fcd",
+      "delivery_constitution": "artifact://delivery_constitution/1.0/art_delivery_constitution_75dfbadc203c417d",
+      "variant_diff_report": "artifact://variant_diff_report/1.0/art_variant_diff_report_4ecb06bca56243ae",
+      "reporting_model": "artifact://reporting_model/1.0/art_reporting_model_900f82140a2d4495",
+      "identity_access_model": "artifact://identity_access_model/1.0/art_identity_access_model_c6b11172f3a34a66",
+      "discover_review_checklist": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_1019eccf23c849c6",
+      "artifact_index": "artifact://artifact_index/1.0/art_artifact_index_7aec2ef96d0f415b"
     },
     "raw_compiler_version": "2.7.2",
     "repo_landscape_v1": {
