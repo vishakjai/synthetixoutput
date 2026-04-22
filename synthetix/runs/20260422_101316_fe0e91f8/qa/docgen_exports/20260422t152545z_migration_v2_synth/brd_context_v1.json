@@ -1,0 +1,6 @@
+{
+  "purpose": "Modernise the Sweet Bank Android client (mobile-client profile, portfolio classification) to Kotlin 1.9+, AGP 8.x, and the current AndroidX stack while preserving 1:1 parity with the capabilities catalogued in the Capability BRD.",
+  "current_state_summary": "Kotlin 1.4.20 (deprecated). AGP 4.1.1 (EOL). Koin 2.2.1 with legacy Dagger 2.29.1 remnants. jcenter() repository (sunset). Retrofit 2.9.0, OkHttp 4.9.0, Moshi 1.11.0 on a fixed $API_VERSION endpoint path.",
+  "target_state_summary": "Kotlin 1.9+, AGP 8.x, Koin 3.x, Retrofit 2.11+, Moshi 1.15+, MavenCentral. Multi-module Gradle structure is preserved; Koin DSL remains the DI framework. Add Crashlytics + baseline UI snapshot harness.",
+  "architecture_narrative": "Sweet Bank is a multi-module Android application: app + seven feature modules (account, dashboard, balance, network, payees, resources, support). Retrofit API surface spans 9 endpoints (identity, accounts, account-holder, feed, payees). Koin modules wire repositories per feature; ViewModels surface state via LiveData / StateFlow. MotionLayout drives screen transitions; ViewPager2 + fragments build the dashboard."
+}
