@@ -1,0 +1,814 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260423_081606_9F724E96",
+  "generated_at": "2026-04-23T12:16:49.239290+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Strategic Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "mobile-apps-kotlin-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Mobile Capability Taxonomy"
+      ],
+      "standards": [
+        "android-architecture-mvvm",
+        "android-compose-first",
+        "android-offline-first",
+        "android-security-baseline"
+      ],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "Kotlin to Go Migration",
+    "work_item_id": "20260423_081606_9f724e96",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "mobile-apps-kotlin-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Mobile Capability Taxonomy"
+      ],
+      "standards": [
+        "android-architecture-mvvm",
+        "android-compose-first",
+        "android-offline-first",
+        "android-security-baseline"
+      ],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Migrate Kotlin to GO",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "All existing functionalities in the Kotlin application must be preserved.",
+      "The Go application will be deployed in a similar environment as the Kotlin application."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "All user-visible strings must be in string resources for localization."
+      },
+      {
+        "id": "INV-002",
+        "statement": "No network calls on the main thread \u2014 use coroutines with Dispatchers.IO."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Every screen has at least one Compose preview and one instrumented test."
+      },
+      {
+        "id": "INV-004",
+        "statement": "Release builds must pass lint with `-Werror` for critical severity rules."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Preserve Existing Functionality",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Implement Concurrency",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-002",
+          "scenarios": [
+            "BDD-002-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Data Persistence Layer",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "API Layer Migration",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-004",
+          "scenarios": [
+            "BDD-004-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "UI Component Translation",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "Logging and Monitoring",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-007",
+        "title": "Configuration Management",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-008",
+        "title": "Security Compliance",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Response time under 200ms for 95% of requests",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "scalability",
+        "metric": "Support 2x current user load with no performance degradation",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "security",
+        "metric": "Pass all security audits with no critical findings",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "usability",
+        "metric": "User satisfaction score of 4.5/5 or higher",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "reliability",
+        "metric": "99.9% uptime over a rolling 30-day period",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Preserve Existing Functionality",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "User workflows",
+            "gherkin": [
+              "Given the application is migrated to Go",
+              "When a user performs a workflow",
+              "Then the outcome is identical to the Kotlin application"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Implement Concurrency",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Asynchronous operations",
+            "gherkin": [
+              "Given the application uses Go routines",
+              "When an asynchronous operation is performed",
+              "Then it completes successfully without issues"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Data Persistence Layer",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "CRUD operations",
+            "gherkin": [
+              "Given the data layer is migrated to Go",
+              "When a CRUD operation is performed",
+              "Then it behaves as expected with no data loss"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "API Layer Migration",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "API endpoint functionality",
+            "gherkin": [
+              "Given the API layer is migrated to Go",
+              "When an API request is made",
+              "Then the response is correct and secure"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential loss of functionality during migration.",
+      "impact": "high",
+      "mitigation": "Conduct thorough testing and validation post-migration."
+    },
+    {
+      "description": "Performance degradation in the Go application.",
+      "impact": "medium",
+      "mitigation": "Optimize Go code and conduct performance benchmarking."
+    },
+    {
+      "description": "Security vulnerabilities introduced during migration.",
+      "impact": "high",
+      "mitigation": "Perform security audits and apply best practices."
+    },
+    {
+      "description": "Data integrity issues during migration.",
+      "impact": "medium",
+      "mitigation": "Ensure comprehensive data validation and testing."
+    },
+    {
+      "description": "Incompatibility with existing infrastructure.",
+      "impact": "low",
+      "mitigation": "Verify infrastructure compatibility early in the project."
+    }
+  ],
+  "out_of_scope": [
+    "Development of new features not present in the Kotlin application.",
+    "Migration of non-Kotlin components or services."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-002",
+        "to": "BDD-002",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-003",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "BDD-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260423_081606_9f724e96",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260423T121608Z_20260423_081606_9f724e96",
+    "repo": "Synthetix",
+    "branch": "codex-synthetix-ui-v2-claude",
+    "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-dff0dd8350cd555c",
+    "run_context_bundle_id": "runctx-7e793ee87ce48d47",
+    "source_version_ids": [],
+    "run_id": "20260423_081606_9f724e96",
+    "repo_url": "https://github.com/vishakjai/kotlin-spring-vue"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "mobile-apps-kotlin-v1",
+    "name": "Mobile Apps (Kotlin) Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=1, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=2, standards=4"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Migrate Kotlin to GO",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Mobile Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [
+    {
+      "id": "android-architecture-mvvm",
+      "name": "Android Architecture: MVVM + Unidirectional State Flow",
+      "engineering_actions": [
+        "Keep UI state in a ViewModel exposed as StateFlow or Compose State.",
+        "Treat ViewModel as the single source of truth for screen-level state.",
+        "Emit one-shot side effects via a Channel / SharedFlow, not LiveData."
+      ]
+    },
+    {
+      "id": "android-compose-first",
+      "name": "Jetpack Compose-First UI",
+      "engineering_actions": [
+        "New screens must be Composable functions; legacy XML layouts are interop bridges only.",
+        "Preview every screen with `@Preview` variants for light / dark / RTL.",
+        "Use Material 3 components unless an explicit design-system override exists."
+      ]
+    },
+    {
+      "id": "android-offline-first",
+      "name": "Offline-First Data Policy",
+      "engineering_actions": [
+        "Reads must resolve from local cache first; network refresh is async.",
+        "Mutations enqueue to WorkManager or an equivalent persistent queue.",
+        "Conflict resolution is explicit (last-writer-wins or merge), never silent."
+      ]
+    },
+    {
+      "id": "android-security-baseline",
+      "name": "Mobile Security Baseline",
+      "engineering_actions": [
+        "Secrets at rest go through Android Keystore, never SharedPreferences.",
+        "Network calls to private APIs must use certificate pinning.",
+        "Release builds must enable R8 / ProGuard with keep rules for reflection points."
+      ]
+    }
+  ],
+  "gold_patterns": [
+    {
+      "id": "compose_state_hoisting",
+      "title": "",
+      "guidance": []
+    },
+    {
+      "id": "repository_pattern",
+      "title": "",
+      "guidance": []
+    }
+  ],
+  "non_negotiables": [
+    "All user-visible strings must be in string resources for localization.",
+    "No network calls on the main thread \u2014 use coroutines with Dispatchers.IO.",
+    "Every screen has at least one Compose preview and one instrumented test.",
+    "Release builds must pass lint with `-Werror` for critical severity rules."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Preserve Existing Functionality",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Preserve Existing Functionality\nScenario: User workflows\nGiven the application is migrated to Go\nWhen a user performs a workflow\nThen the outcome is identical to the Kotlin application"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Implement Concurrency",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Implement Concurrency\nScenario: Asynchronous operations\nGiven the application uses Go routines\nWhen an asynchronous operation is performed\nThen it completes successfully without issues"
+      },
+      {
+        "id": "BDD-003",
+        "title": "Data Persistence Layer",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Data Persistence Layer\nScenario: CRUD operations\nGiven the data layer is migrated to Go\nWhen a CRUD operation is performed\nThen it behaves as expected with no data loss"
+      },
+      {
+        "id": "BDD-004",
+        "title": "API Layer Migration",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: API Layer Migration\nScenario: API endpoint functionality\nGiven the API layer is migrated to Go\nWhen an API request is made\nThen the response is correct and secure"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-003",
+        "title": "Security",
+        "description": "The application must adhere to security best practices.",
+        "category": "security",
+        "metric": "Pass all security audits with no critical findings",
+        "acceptance_criteria": [
+          "Security audits show no critical vulnerabilities.",
+          "Data encryption is verified.",
+          "Secure coding practices are followed."
+        ],
+        "verification": "SAST + pre-prod pen test",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-005",
+        "title": "Reliability",
+        "description": "The application should be reliable and available.",
+        "category": "reliability",
+        "metric": "99.9% uptime over a rolling 30-day period",
+        "acceptance_criteria": [
+          "Uptime monitoring shows 99.9% availability.",
+          "No critical outages occur during testing.",
+          "Recovery procedures are tested and verified."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window",
+        "verification_source": "llm"
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance",
+        "description": "The Go application should perform at least as well as the Kotlin application.",
+        "category": "performance",
+        "metric": "Response time under 200ms for 95% of requests",
+        "acceptance_criteria": [
+          "Load tests show response times within acceptable limits.",
+          "Performance benchmarks are met or exceeded.",
+          "No significant performance regressions are detected."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-002",
+        "title": "Scalability",
+        "description": "The application should scale to handle increased load without degradation.",
+        "category": "scalability",
+        "metric": "Support 2x current user load with no performance degradation",
+        "acceptance_criteria": [
+          "Scalability tests confirm the application can handle increased load.",
+          "No bottlenecks are identified under stress testing.",
+          "Horizontal scaling is supported and tested."
+        ],
+        "verification": "Stress test with simulated user load; verify scaling behavior",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-004",
+        "title": "Usability",
+        "description": "The application should be user-friendly and intuitive.",
+        "category": "usability",
+        "metric": "User satisfaction score of 4.5/5 or higher",
+        "acceptance_criteria": [
+          "User feedback indicates high satisfaction.",
+          "Usability tests show no major issues.",
+          "UI/UX design is consistent and intuitive."
+        ],
+        "verification": "User testing sessions and feedback analysis",
+        "verification_source": "llm"
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-007",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-008",
+      "test_types": [
+        "e2e",
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 8,
+        "non_functional_count": 5,
+        "min_functional": 8,
+        "min_non_functional": 5,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-dff0dd8350cd555c",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "This project aims to migrate a Kotlin codebase to Go, ensuring all functionalities are preserved and the new implementation adheres to modern software standards."
+}
