@@ -1,84 +1,132 @@
 {
   "analysis_walkthrough": {
-    "business_objective_summary": "Migrate the existing Kotlin codebase to Go while preserving functionality and adhering to domain-specific standards.",
+    "business_objective_summary": "Migrate a Kotlin codebase to Go while preserving existing functionality and adhering to best practices.",
     "requirements_understanding": [
-      "The migration must maintain existing business logic and functionality.",
-      "The new Go codebase should follow idiomatic Go practices.",
-      "The migration should consider mobile-specific standards and guidelines."
+      "The migration involves translating Kotlin code to Go.",
+      "Preservation of existing functionality is crucial.",
+      "Adherence to mobile app development standards is required."
     ],
     "conversion_to_technical_requirements": [
-      "Use Go idioms for concurrency and error handling.",
-      "Implement Go modules to reflect existing Kotlin module structure.",
-      "Ensure compliance with mobile security and architecture guidelines."
+      "Translate Kotlin classes and functions to Go equivalents.",
+      "Ensure Go code adheres to idiomatic Go practices.",
+      "Implement necessary testing to validate functionality."
     ],
     "clarifications_requested": [
-      "Are there specific Kotlin libraries that need equivalent Go libraries?",
-      "What is the expected timeline for the migration?"
+      "Are there specific Go frameworks or libraries preferred for this migration?",
+      "Is there a timeline for the migration completion?"
     ]
   },
   "project_name": "Kotlin to Go Migration",
-  "executive_summary": "This project involves migrating a Kotlin codebase to Go, ensuring the preservation of existing functionality and adherence to mobile app standards.",
+  "executive_summary": "This project involves migrating a Kotlin codebase to Go, ensuring all existing functionalities are preserved and the code adheres to best practices.",
   "functional_requirements": [
     {
       "id": "FR-001",
-      "title": "Preserve Business Logic",
-      "description": "Ensure that all existing business logic in the Kotlin codebase is accurately translated to Go.",
+      "title": "Translate Kotlin Classes to Go",
+      "description": "All Kotlin classes must be translated to equivalent Go structures.",
       "priority": "P0",
       "acceptance_criteria": [
-        "All business logic functions in Go match the output of their Kotlin counterparts.",
-        "Unit tests for business logic pass in both Kotlin and Go environments.",
-        "Business rules are documented and verified post-migration."
+        "Each Kotlin class has a corresponding Go struct.",
+        "All methods in Kotlin classes are implemented in Go.",
+        "Translated code passes unit tests equivalent to original Kotlin tests."
       ],
-      "generation_source": "llm",
-      "grounding": {
-        "classification": "derived_from_legacy",
-        "reason": "matched 2 legacy terms"
-      }
+      "generation_source": "llm"
     },
     {
       "id": "FR-002",
-      "title": "Implement Go Modules",
-      "description": "Translate Kotlin modules into Go modules, maintaining the existing structure.",
+      "title": "Preserve Business Logic",
+      "description": "Ensure that the business logic in Kotlin is preserved in the Go translation.",
       "priority": "P0",
       "acceptance_criteria": [
-        "Each Kotlin module has a corresponding Go module.",
-        "Module boundaries and dependencies are preserved.",
-        "Go modules compile without errors."
+        "Business logic functions produce the same output in Go as they did in Kotlin.",
+        "All business rules are documented and verified post-migration.",
+        "Integration tests validate business logic consistency."
       ],
-      "generation_source": "llm",
-      "grounding": {
-        "classification": "derived_from_legacy",
-        "reason": "matched 1 legacy term"
-      }
+      "generation_source": "llm"
+    },
+    {
+      "id": "FR-003",
+      "title": "Implement Go Concurrency",
+      "description": "Replace Kotlin coroutines with Go concurrency patterns.",
+      "priority": "P1",
+      "acceptance_criteria": [
+        "All asynchronous operations use Go routines and channels.",
+        "Concurrency tests validate performance and correctness.",
+        "No deadlocks or race conditions are present in the Go code."
+      ],
+      "generation_source": "llm"
+    },
+    {
+      "id": "FR-004",
+      "title": "Data Persistence Layer",
+      "description": "Translate the data persistence layer from Kotlin to Go.",
+      "priority": "P1",
+      "acceptance_criteria": [
+        "Data models are correctly mapped to Go structs.",
+        "Database interactions are implemented using Go database libraries.",
+        "Data integrity is maintained post-migration."
+      ],
+      "generation_source": "llm"
     },
     {
       "id": "FR-005",
-      "title": "Data Persistence Translation",
-      "description": "Migrate data persistence logic from Kotlin to Go, ensuring data integrity.",
+      "title": "API Endpoint Translation",
+      "description": "Translate Kotlin API endpoints to Go.",
+      "priority": "P1",
+      "acceptance_criteria": [
+        "All API endpoints in Kotlin are available in Go.",
+        "Endpoints are tested with equivalent request and response handling.",
+        "API documentation is updated to reflect Go implementation."
+      ],
+      "generation_source": "llm"
+    },
+    {
+      "id": "FR-006",
+      "title": "Error Handling",
+      "description": "Implement Go-style error handling for all translated code.",
+      "priority": "P2",
+      "acceptance_criteria": [
+        "All errors are handled using Go's error interface.",
+        "Error handling logic is consistent with Go best practices.",
+        "Error scenarios are covered by unit tests."
+      ],
+      "generation_source": "llm"
+    },
+    {
+      "id": "FR-007",
+      "title": "Logging and Monitoring",
+      "description": "Implement logging and monitoring in Go.",
+      "priority": "P2",
+      "acceptance_criteria": [
+        "All critical operations are logged using a Go logging library.",
+        "Monitoring is set up to track application performance.",
+        "Logs are accessible and provide meaningful insights."
+      ],
+      "generation_source": "llm"
+    },
+    {
+      "id": "FR-008",
+      "title": "Security Compliance",
+      "description": "Ensure the Go application meets security standards.",
       "priority": "P0",
       "acceptance_criteria": [
-        "Data models are accurately translated to Go structs.",
-        "Database interactions are tested for consistency.",
-        "Data integrity is maintained post-migration."
+        "All sensitive data is encrypted using Go libraries.",
+        "Security tests validate compliance with security standards.",
+        "No critical vulnerabilities are present in the Go code."
       ],
-      "generation_source": "llm",
-      "grounding": {
-        "classification": "derived_from_legacy",
-        "reason": "matched 1 legacy term"
-      }
+      "generation_source": "llm"
     }
   ],
   "non_functional_requirements": [
     {
       "id": "NFR-001",
       "title": "Performance",
-      "description": "The Go application must perform at least as efficiently as the Kotlin version.",
+      "description": "The Go application must perform as efficiently as the Kotlin version.",
       "category": "performance",
-      "metric": "Response time under 200ms for key operations",
+      "metric": "Response time under 200ms for 95% of requests",
       "acceptance_criteria": [
-        "Performance benchmarks match or exceed Kotlin version.",
-        "Load tests show no degradation under expected load.",
-        "Performance metrics are documented and reviewed."
+        "Performance tests show equivalent or better performance than Kotlin.",
+        "Load tests validate application scalability.",
+        "Resource usage is optimized in Go."
       ],
       "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
       "verification_source": "llm"
@@ -86,13 +134,13 @@
     {
       "id": "NFR-002",
       "title": "Scalability",
-      "description": "The Go application should scale to handle increased load.",
+      "description": "The application must scale to handle increased load.",
       "category": "scalability",
-      "metric": "Support 2x current user base without performance loss",
+      "metric": "Support 10,000 concurrent users",
       "acceptance_criteria": [
-        "Scalability tests show linear performance under increased load.",
-        "No bottlenecks identified during scalability testing.",
-        "Scalability plans are documented."
+        "Scalability tests validate support for increased user load.",
+        "No degradation in performance with increased load.",
+        "Horizontal scaling is supported."
       ],
       "verification": "Scalability test with simulated user load",
       "verification_source": "llm"
@@ -100,13 +148,13 @@
     {
       "id": "NFR-003",
       "title": "Reliability",
-      "description": "Ensure the Go application is reliable and available.",
+      "description": "The application must be reliable and available.",
       "category": "reliability",
       "metric": "99.9% uptime",
       "acceptance_criteria": [
-        "Uptime metrics meet or exceed 99.9%.",
-        "Automated recovery processes are in place.",
-        "Reliability metrics are monitored continuously."
+        "Reliability tests confirm minimal downtime.",
+        "Failover mechanisms are implemented.",
+        "Monitoring alerts for downtime events."
       ],
       "verification": "SLO monitoring over rolling 30-day window",
       "verification_source": "llm"
@@ -114,27 +162,27 @@
     {
       "id": "NFR-004",
       "title": "Usability",
-      "description": "The Go application should be as user-friendly as the Kotlin version.",
+      "description": "The application must be user-friendly and intuitive.",
       "category": "usability",
       "metric": "User satisfaction score of 4.5/5",
       "acceptance_criteria": [
-        "User feedback indicates satisfaction with usability.",
-        "Usability tests show no significant issues.",
-        "Documentation is updated and user-friendly."
+        "User feedback confirms ease of use.",
+        "Usability tests validate user interface design.",
+        "Documentation is clear and comprehensive."
       ],
-      "verification": "User testing and feedback analysis",
+      "verification": "User surveys and usability testing",
       "verification_source": "llm"
     },
     {
       "id": "NFR-005",
       "title": "Security",
-      "description": "Ensure the Go application meets security standards.",
+      "description": "The application must be secure against common vulnerabilities.",
       "category": "security",
-      "metric": "Zero critical vulnerabilities",
+      "metric": "No critical security vulnerabilities",
       "acceptance_criteria": [
-        "Security audits reveal no critical vulnerabilities.",
-        "Security measures are documented and reviewed.",
-        "All security patches are applied promptly."
+        "Security tests identify no critical vulnerabilities.",
+        "Penetration testing confirms application security.",
+        "Security patches are applied promptly."
       ],
       "verification": "SAST + pre-prod pen test",
       "verification_source": "llm"
@@ -142,114 +190,105 @@
   ],
   "legacy_functional_contract": [],
   "legacy_code_inventory": {
-    "summary": "The Kotlin codebase is structured to support a mobile application with various modules handling business logic, data persistence, and network operations.",
+    "summary": "The codebase is a Kotlin application targeted for migration to Go, with a focus on preserving existing functionality and performance.",
     "primary_language": "kotlin",
     "modules": [
       {
-        "name": "Business Logic Module",
-        "role": "Handles core business operations and rules.",
-        "files_count": 50,
+        "name": "Authentication",
+        "role": "Handles user authentication and authorization.",
+        "files_count": 10,
         "notable_files": [
-          "BusinessLogic.kt",
-          "RulesEngine.kt"
+          "AuthController.kt",
+          "JwtProvider.kt"
         ],
         "business_capabilities": [
-          "Core operations",
-          "Rule processing"
+          "User login",
+          "Token generation"
         ],
         "primary_workflows": [
-          "Operation execution",
-          "Rule evaluation"
+          "Authenticate user",
+          "Generate JWT token"
         ]
       },
       {
-        "name": "Data Persistence Module",
-        "role": "Manages data storage and retrieval.",
-        "files_count": 30,
+        "name": "User Management",
+        "role": "Manages user registration and profile updates.",
+        "files_count": 8,
         "notable_files": [
-          "DataRepository.kt",
-          "DatabaseHelper.kt"
+          "UserController.kt",
+          "UserRepository.kt"
         ],
         "business_capabilities": [
-          "Data storage",
-          "Data retrieval"
+          "User registration",
+          "Profile management"
         ],
         "primary_workflows": [
-          "Data saving",
-          "Data fetching"
-        ]
-      },
-      {
-        "name": "Network Module",
-        "role": "Handles all network communications.",
-        "files_count": 20,
-        "notable_files": [
-          "NetworkClient.kt",
-          "ApiService.kt"
-        ],
-        "business_capabilities": [
-          "Network requests",
-          "API interaction"
-        ],
-        "primary_workflows": [
-          "Data fetching",
-          "Data posting"
+          "Register user",
+          "Update user profile"
         ]
       }
     ],
     "entry_points": [
       {
-        "name": "Main Activity",
-        "kind": "ui_form",
-        "path_or_selector": "com.example.app.MainActivity",
-        "target_module": "Business Logic Module"
+        "name": "User Login",
+        "kind": "api_endpoint",
+        "path_or_selector": "/api/auth/login",
+        "target_module": "Authentication"
       },
       {
-        "name": "Data Sync Service",
-        "kind": "scheduled_job",
-        "path_or_selector": "com.example.app.DataSyncService",
-        "target_module": "Network Module"
+        "name": "User Registration",
+        "kind": "api_endpoint",
+        "path_or_selector": "/api/auth/register",
+        "target_module": "User Management"
       }
     ],
     "data_touchpoints": {
       "tables": [
-        "User",
-        "Transaction"
+        "users",
+        "roles"
       ],
       "procedures": [
-        "FetchUserData",
-        "UpdateTransaction"
+        "createUser",
+        "authenticateUser"
       ],
       "external_services": [
-        "PaymentGateway"
+        "EmailService",
+        "SMSService"
       ],
       "message_topics": [
-        "UserUpdates",
-        "TransactionAlerts"
+        "user.notifications"
       ]
     },
     "external_dependencies": [
       {
-        "name": "Retrofit",
-        "kind": "library",
-        "version": "2.9.0",
-        "notes": "Used for network operations"
+        "name": "Spring Boot",
+        "kind": "framework",
+        "version": "2.5.4",
+        "notes": "Used for building the Kotlin application."
       },
       {
-        "name": "Room",
+        "name": "JWT",
         "kind": "library",
-        "version": "2.2.5",
-        "notes": "Used for data persistence"
+        "version": "0.9.1",
+        "notes": "Used for token generation and validation."
       }
     ],
     "business_rules_catalog": [
       {
         "id": "BR-001",
-        "rule_type": "calculation_logic",
-        "statement": "holder.number.text = (position + 1).toString()",
-        "scope": "Business Logic Module",
-        "evidence": "BusinessLogic.kt",
-        "confidence": 0.84
+        "rule_type": "input_validation",
+        "statement": "Usernames must be unique.",
+        "scope": "User Management",
+        "evidence": "UserController.kt",
+        "confidence": 0.9
+      },
+      {
+        "id": "BR-002",
+        "rule_type": "workflow_orchestration",
+        "statement": "User must be authenticated to access protected resources.",
+        "scope": "Authentication",
+        "evidence": "AuthController.kt",
+        "confidence": 0.95
       }
     ],
     "modernization_readiness": {
@@ -258,40 +297,45 @@
       "recommended_strategy": {
         "id": "strangler_wrap",
         "name": "Strangler Fig Pattern",
-        "rationale": "Allows gradual migration while maintaining existing functionality."
+        "rationale": "Allows incremental migration while maintaining existing functionality."
       },
       "required_actions": [
         "Identify critical modules for initial migration.",
-        "Establish Go equivalents for essential Kotlin libraries.",
-        "Conduct thorough testing post-migration."
+        "Implement Go equivalents for selected modules.",
+        "Test and validate Go modules before decommissioning Kotlin counterparts."
       ]
     }
   },
   "assumptions": [
-    "All existing business logic must be preserved in the migration.",
-    "The Go codebase will adhere to idiomatic Go practices."
+    "The existing Kotlin codebase is fully functional and tested.",
+    "There are no major architectural changes required during migration."
   ],
   "risks": [
     {
       "description": "Potential loss of functionality during migration.",
       "impact": "high",
-      "mitigation": "Conduct thorough testing and validation post-migration."
+      "mitigation": "Thorough testing and validation of Go code against existing Kotlin tests."
     },
     {
-      "description": "Incompatibility of Kotlin libraries with Go.",
+      "description": "Performance degradation in Go implementation.",
       "impact": "medium",
-      "mitigation": "Identify and establish Go equivalents for critical libraries."
+      "mitigation": "Optimize Go code and conduct performance benchmarking."
+    },
+    {
+      "description": "Security vulnerabilities introduced during migration.",
+      "impact": "high",
+      "mitigation": "Conduct security testing and apply best practices for Go security."
     }
   ],
   "out_of_scope": [
-    "UI redesign or changes beyond necessary adjustments for Go compatibility.",
-    "Introduction of new features not present in the Kotlin codebase."
+    "UI/UX redesign",
+    "New feature development"
   ],
   "requirements_pack": {
     "artifact_type": "requirements_pack",
     "artifact_version": "2.0",
     "artifact_id": "REQPACK-20260423_081606_9F724E96",
-    "generated_at": "2026-04-23T14:22:14.012294+00:00",
+    "generated_at": "2026-04-23T16:38:27.604723+00:00",
     "generated_by": {
       "agent_name": "Analyst Agent",
       "persona": "Strategic Analyst",
@@ -350,8 +394,8 @@
       ],
       "constraints_from_user": [],
       "assumptions": [
-        "All existing business logic must be preserved in the migration.",
-        "The Go codebase will adhere to idiomatic Go practices."
+        "The existing Kotlin codebase is fully functional and tested.",
+        "There are no major architectural changes required during migration."
       ]
     },
     "domain_mapping": {
@@ -409,7 +453,7 @@
       "functional": [
         {
           "id": "FR-001",
-          "title": "Preserve Business Logic",
+          "title": "Translate Kotlin Classes to Go",
           "priority": "P0",
           "acceptance": {
             "gherkin_feature_id": "BDD-001",
@@ -420,8 +464,39 @@
         },
         {
           "id": "FR-002",
-          "title": "Implement Go Modules",
+          "title": "Preserve Business Logic",
           "priority": "P0",
+          "acceptance": {
+            "gherkin_feature_id": "BDD-001",
+            "scenarios": [
+              "BDD-001-SC-001"
+            ]
+          }
+        },
+        {
+          "id": "FR-003",
+          "title": "Implement Go Concurrency",
+          "priority": "P1",
+          "acceptance": {
+            "gherkin_feature_id": "BDD-003",
+            "scenarios": [
+              "BDD-003-SC-001"
+            ]
+          }
+        },
+        {
+          "id": "FR-004",
+          "title": "Data Persistence Layer",
+          "priority": "P1",
+          "acceptance": {
+            "gherkin_feature_id": "",
+            "scenarios": []
+          }
+        },
+        {
+          "id": "FR-005",
+          "title": "API Endpoint Translation",
+          "priority": "P1",
           "acceptance": {
             "gherkin_feature_id": "BDD-002",
             "scenarios": [
@@ -430,8 +505,28 @@
           }
         },
         {
-          "id": "FR-005",
-          "title": "Data Persistence Translation",
+          "id": "FR-006",
+          "title": "Error Handling",
+          "priority": "P2",
+          "acceptance": {
+            "gherkin_feature_id": "BDD-004",
+            "scenarios": [
+              "BDD-004-SC-001"
+            ]
+          }
+        },
+        {
+          "id": "FR-007",
+          "title": "Logging and Monitoring",
+          "priority": "P2",
+          "acceptance": {
+            "gherkin_feature_id": "",
+            "scenarios": []
+          }
+        },
+        {
+          "id": "FR-008",
+          "title": "Security Compliance",
           "priority": "P0",
           "acceptance": {
             "gherkin_feature_id": "",
@@ -443,19 +538,21 @@
         {
           "id": "NFR-001",
           "category": "performance",
-          "metric": "Response time under 200ms for key operations",
+          "metric": "Response time under 200ms for 95% of requests",
           "verification_method": [
             "unit",
-            "integration"
+            "integration",
+            "e2e"
           ]
         },
         {
           "id": "NFR-002",
           "category": "scalability",
-          "metric": "Support 2x current user base without performance loss",
+          "metric": "Support 10,000 concurrent users",
           "verification_method": [
             "unit",
-            "integration"
+            "integration",
+            "e2e"
           ]
         },
         {
@@ -464,7 +561,8 @@
           "metric": "99.9% uptime",
           "verification_method": [
             "unit",
-            "integration"
+            "integration",
+            "e2e"
           ]
         },
         {
@@ -473,16 +571,18 @@
           "metric": "User satisfaction score of 4.5/5",
           "verification_method": [
             "unit",
-            "integration"
+            "integration",
+            "e2e"
           ]
         },
         {
           "id": "NFR-005",
           "category": "security",
-          "metric": "Zero critical vulnerabilities",
+          "metric": "No critical security vulnerabilities",
           "verification_method": [
             "unit",
-            "integration"
+            "integration",
+            "e2e"
           ]
         }
       ]
@@ -491,51 +591,52 @@
       "features": [
         {
           "id": "BDD-001",
-          "title": "Business Logic Preservation",
+          "title": "User Authentication",
           "scenarios": [
             {
               "id": "BDD-001-SC-001",
-              "name": "Verify business logic translation",
+              "name": "Successful Login",
               "gherkin": [
-                "Given the Kotlin business logic",
-                "When it is translated to Go",
-                "Then the output should match the original logic"
+                "Given a registered user",
+                "When the user provides valid credentials",
+                "Then the user is authenticated and receives a JWT token"
               ],
               "maps_to": [
-                "FR-001"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "BDD-002",
-          "title": "Go Module Structure",
-          "scenarios": [
-            {
-              "id": "BDD-002-SC-001",
-              "name": "Verify module structure",
-              "gherkin": [
-                "Given the Kotlin module structure",
-                "When translated to Go",
-                "Then the module boundaries should be preserved"
-              ],
-              "maps_to": [
+                "FR-001",
                 "FR-002"
               ]
             }
           ]
         },
         {
+          "id": "BDD-002",
+          "title": "User Registration",
+          "scenarios": [
+            {
+              "id": "BDD-002-SC-001",
+              "name": "Successful Registration",
+              "gherkin": [
+                "Given a new user",
+                "When the user provides valid registration details",
+                "Then a new user account is created"
+              ],
+              "maps_to": [
+                "FR-005"
+              ]
+            }
+          ]
+        },
+        {
           "id": "BDD-003",
-          "title": "Concurrency Model",
+          "title": "JWT Token Validation",
           "scenarios": [
             {
               "id": "BDD-003-SC-001",
-              "name": "Verify concurrency translation",
+              "name": "Valid Token",
               "gherkin": [
-                "Given Kotlin coroutines",
-                "When translated to Go",
-                "Then goroutines and channels should be used correctly"
+                "Given a valid JWT token",
+                "When the token is validated",
+                "Then the user context is established"
               ],
               "maps_to": [
                 "FR-003"
@@ -549,14 +650,14 @@
           "scenarios": [
             {
               "id": "BDD-004-SC-001",
-              "name": "Verify error handling translation",
+              "name": "Invalid Input",
               "gherkin": [
-                "Given Kotlin error handling",
-                "When translated to Go",
-                "Then Go's error handling should be implemented correctly"
+                "Given an invalid input",
+                "When the input is processed",
+                "Then an appropriate error message is returned"
               ],
               "maps_to": [
-                "FR-004"
+                "FR-006"
               ]
             }
           ]
@@ -585,17 +686,22 @@
       {
         "description": "Potential loss of functionality during migration.",
         "impact": "high",
-        "mitigation": "Conduct thorough testing and validation post-migration."
+        "mitigation": "Thorough testing and validation of Go code against existing Kotlin tests."
       },
       {
-        "description": "Incompatibility of Kotlin libraries with Go.",
+        "description": "Performance degradation in Go implementation.",
         "impact": "medium",
-        "mitigation": "Identify and establish Go equivalents for critical libraries."
+        "mitigation": "Optimize Go code and conduct performance benchmarking."
+      },
+      {
+        "description": "Security vulnerabilities introduced during migration.",
+        "impact": "high",
+        "mitigation": "Conduct security testing and apply best practices for Go security."
       }
     ],
     "out_of_scope": [
-      "UI redesign or changes beyond necessary adjustments for Go compatibility.",
-      "Introduction of new features not present in the Kotlin codebase."
+      "UI/UX redesign",
+      "New feature development"
     ],
     "traceability": {
       "links": [
@@ -606,7 +712,22 @@
         },
         {
           "from": "FR-002",
+          "to": "BDD-001",
+          "type": "verified_by"
+        },
+        {
+          "from": "FR-003",
+          "to": "BDD-003",
+          "type": "verified_by"
+        },
+        {
+          "from": "FR-005",
           "to": "BDD-002",
+          "type": "verified_by"
+        },
+        {
+          "from": "FR-006",
+          "to": "BDD-004",
           "type": "verified_by"
         }
       ]
@@ -762,35 +883,36 @@
       "features": [
         {
           "id": "BDD-001",
-          "title": "Business Logic Preservation",
+          "title": "User Authentication",
           "source_requirement_ids": [
-            "FR-001"
+            "FR-001",
+            "FR-002"
           ],
-          "gherkin": "Feature: Business Logic Preservation\nScenario: Verify business logic translation\nGiven the Kotlin business logic\nWhen it is translated to Go\nThen the output should match the original logic"
+          "gherkin": "Feature: User Authentication\nScenario: Successful Login\nGiven a registered user\nWhen the user provides valid credentials\nThen the user is authenticated and receives a JWT token"
         },
         {
           "id": "BDD-002",
-          "title": "Go Module Structure",
+          "title": "User Registration",
           "source_requirement_ids": [
-            "FR-002"
+            "FR-005"
           ],
-          "gherkin": "Feature: Go Module Structure\nScenario: Verify module structure\nGiven the Kotlin module structure\nWhen translated to Go\nThen the module boundaries should be preserved"
+          "gherkin": "Feature: User Registration\nScenario: Successful Registration\nGiven a new user\nWhen the user provides valid registration details\nThen a new user account is created"
         },
         {
           "id": "BDD-003",
-          "title": "Concurrency Model",
+          "title": "JWT Token Validation",
           "source_requirement_ids": [
             "FR-003"
           ],
-          "gherkin": "Feature: Concurrency Model\nScenario: Verify concurrency translation\nGiven Kotlin coroutines\nWhen translated to Go\nThen goroutines and channels should be used correctly"
+          "gherkin": "Feature: JWT Token Validation\nScenario: Valid Token\nGiven a valid JWT token\nWhen the token is validated\nThen the user context is established"
         },
         {
           "id": "BDD-004",
           "title": "Error Handling",
           "source_requirement_ids": [
-            "FR-004"
+            "FR-006"
           ],
-          "gherkin": "Feature: Error Handling\nScenario: Verify error handling translation\nGiven Kotlin error handling\nWhen translated to Go\nThen Go's error handling should be implemented correctly"
+          "gherkin": "Feature: Error Handling\nScenario: Invalid Input\nGiven an invalid input\nWhen the input is processed\nThen an appropriate error message is returned"
         }
       ],
       "lint": {
@@ -804,13 +926,13 @@
         {
           "id": "NFR-003",
           "title": "Reliability",
-          "description": "Ensure the Go application is reliable and available.",
+          "description": "The application must be reliable and available.",
           "category": "reliability",
           "metric": "99.9% uptime",
           "acceptance_criteria": [
-            "Uptime metrics meet or exceed 99.9%.",
-            "Automated recovery processes are in place.",
-            "Reliability metrics are monitored continuously."
+            "Reliability tests confirm minimal downtime.",
+            "Failover mechanisms are implemented.",
+            "Monitoring alerts for downtime events."
           ],
           "verification": "SLO monitoring over rolling 30-day window",
           "verification_source": "llm"
@@ -818,13 +940,13 @@
         {
           "id": "NFR-005",
           "title": "Security",
-          "description": "Ensure the Go application meets security standards.",
+          "description": "The application must be secure against common vulnerabilities.",
           "category": "security",
-          "metric": "Zero critical vulnerabilities",
+          "metric": "No critical security vulnerabilities",
           "acceptance_criteria": [
-            "Security audits reveal no critical vulnerabilities.",
-            "Security measures are documented and reviewed.",
-            "All security patches are applied promptly."
+            "Security tests identify no critical vulnerabilities.",
+            "Penetration testing confirms application security.",
+            "Security patches are applied promptly."
           ],
           "verification": "SAST + pre-prod pen test",
           "verification_source": "llm"
@@ -834,13 +956,13 @@
         {
           "id": "NFR-001",
           "title": "Performance",
-          "description": "The Go application must perform at least as efficiently as the Kotlin version.",
+          "description": "The Go application must perform as efficiently as the Kotlin version.",
           "category": "performance",
-          "metric": "Response time under 200ms for key operations",
+          "metric": "Response time under 200ms for 95% of requests",
           "acceptance_criteria": [
-            "Performance benchmarks match or exceed Kotlin version.",
-            "Load tests show no degradation under expected load.",
-            "Performance metrics are documented and reviewed."
+            "Performance tests show equivalent or better performance than Kotlin.",
+            "Load tests validate application scalability.",
+            "Resource usage is optimized in Go."
           ],
           "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
           "verification_source": "llm"
@@ -848,13 +970,13 @@
         {
           "id": "NFR-002",
           "title": "Scalability",
-          "description": "The Go application should scale to handle increased load.",
+          "description": "The application must scale to handle increased load.",
           "category": "scalability",
-          "metric": "Support 2x current user base without performance loss",
+          "metric": "Support 10,000 concurrent users",
           "acceptance_criteria": [
-            "Scalability tests show linear performance under increased load.",
-            "No bottlenecks identified during scalability testing.",
-            "Scalability plans are documented."
+            "Scalability tests validate support for increased user load.",
+            "No degradation in performance with increased load.",
+            "Horizontal scaling is supported."
           ],
           "verification": "Scalability test with simulated user load",
           "verification_source": "llm"
@@ -862,15 +984,15 @@
         {
           "id": "NFR-004",
           "title": "Usability",
-          "description": "The Go application should be as user-friendly as the Kotlin version.",
+          "description": "The application must be user-friendly and intuitive.",
           "category": "usability",
           "metric": "User satisfaction score of 4.5/5",
           "acceptance_criteria": [
-            "User feedback indicates satisfaction with usability.",
-            "Usability tests show no significant issues.",
-            "Documentation is updated and user-friendly."
+            "User feedback confirms ease of use.",
+            "Usability tests validate user interface design.",
+            "Documentation is clear and comprehensive."
           ],
-          "verification": "User testing and feedback analysis",
+          "verification": "User surveys and usability testing",
           "verification_source": "llm"
         }
       ]
@@ -879,6 +1001,7 @@
       {
         "requirement_id": "FR-001",
         "test_types": [
+          "e2e",
           "integration",
           "unit"
         ],
@@ -893,13 +1016,61 @@
           "unit"
         ],
         "bdd_scenarios": [
-          "BDD-002"
+          "BDD-001"
         ]
+      },
+      {
+        "requirement_id": "FR-003",
+        "test_types": [
+          "integration",
+          "unit"
+        ],
+        "bdd_scenarios": [
+          "BDD-003"
+        ]
+      },
+      {
+        "requirement_id": "FR-004",
+        "test_types": [
+          "integration",
+          "unit"
+        ],
+        "bdd_scenarios": []
       },
       {
         "requirement_id": "FR-005",
         "test_types": [
+          "contract",
           "integration",
+          "unit"
+        ],
+        "bdd_scenarios": [
+          "BDD-002"
+        ]
+      },
+      {
+        "requirement_id": "FR-006",
+        "test_types": [
+          "integration",
+          "unit"
+        ],
+        "bdd_scenarios": [
+          "BDD-004"
+        ]
+      },
+      {
+        "requirement_id": "FR-007",
+        "test_types": [
+          "integration",
+          "unit"
+        ],
+        "bdd_scenarios": []
+      },
+      {
+        "requirement_id": "FR-008",
+        "test_types": [
+          "integration",
+          "security",
           "unit"
         ],
         "bdd_scenarios": []
@@ -920,7 +1091,7 @@
         "status": "FAIL",
         "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
         "details": {
-          "functional_count": 3,
+          "functional_count": 8,
           "non_functional_count": 5,
           "min_functional": 8,
           "min_non_functional": 5,
@@ -976,20 +1147,52 @@
         }
       }
     ],
-    "executive_summary": "This project involves migrating a Kotlin codebase to Go, ensuring the preservation of existing functionality and adherence to mobile app standards."
+    "executive_summary": "This project involves migrating a Kotlin codebase to Go, ensuring all existing functionalities are preserved and the code adheres to best practices."
   },
   "vb6_analysis": {},
   "proposed_additions": {
     "functional": [
       {
+        "id": "FR-001",
+        "title": "Translate Kotlin Classes to Go",
+        "description": "All Kotlin classes must be translated to equivalent Go structures.",
+        "priority": "P0",
+        "acceptance_criteria": [
+          "Each Kotlin class has a corresponding Go struct.",
+          "All methods in Kotlin classes are implemented in Go.",
+          "Translated code passes unit tests equivalent to original Kotlin tests."
+        ],
+        "generation_source": "llm",
+        "grounding": {
+          "classification": "proposed_extension",
+          "reason": "no direct grounding evidence in extracted legacy artifacts"
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Preserve Business Logic",
+        "description": "Ensure that the business logic in Kotlin is preserved in the Go translation.",
+        "priority": "P0",
+        "acceptance_criteria": [
+          "Business logic functions produce the same output in Go as they did in Kotlin.",
+          "All business rules are documented and verified post-migration.",
+          "Integration tests validate business logic consistency."
+        ],
+        "generation_source": "llm",
+        "grounding": {
+          "classification": "proposed_extension",
+          "reason": "no direct grounding evidence in extracted legacy artifacts"
+        }
+      },
+      {
         "id": "FR-003",
-        "title": "Adopt Go Concurrency Model",
-        "description": "Replace Kotlin coroutines with Go's goroutines and channels.",
+        "title": "Implement Go Concurrency",
+        "description": "Replace Kotlin coroutines with Go concurrency patterns.",
         "priority": "P1",
         "acceptance_criteria": [
-          "All asynchronous operations use goroutines.",
-          "Channel usage is implemented where applicable.",
-          "Concurrency tests pass without deadlocks or race conditions."
+          "All asynchronous operations use Go routines and channels.",
+          "Concurrency tests validate performance and correctness.",
+          "No deadlocks or race conditions are present in the Go code."
         ],
         "generation_source": "llm",
         "grounding": {
@@ -999,13 +1202,29 @@
       },
       {
         "id": "FR-004",
-        "title": "Error Handling in Go",
-        "description": "Translate Kotlin's error handling to Go's idiomatic error handling.",
+        "title": "Data Persistence Layer",
+        "description": "Translate the data persistence layer from Kotlin to Go.",
         "priority": "P1",
         "acceptance_criteria": [
-          "All Kotlin exceptions are mapped to Go error handling.",
-          "Error handling follows Go best practices.",
-          "Error scenarios are tested and documented."
+          "Data models are correctly mapped to Go structs.",
+          "Database interactions are implemented using Go database libraries.",
+          "Data integrity is maintained post-migration."
+        ],
+        "generation_source": "llm",
+        "grounding": {
+          "classification": "proposed_extension",
+          "reason": "no direct grounding evidence in extracted legacy artifacts"
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "API Endpoint Translation",
+        "description": "Translate Kotlin API endpoints to Go.",
+        "priority": "P1",
+        "acceptance_criteria": [
+          "All API endpoints in Kotlin are available in Go.",
+          "Endpoints are tested with equivalent request and response handling.",
+          "API documentation is updated to reflect Go implementation."
         ],
         "generation_source": "llm",
         "grounding": {
@@ -1015,13 +1234,13 @@
       },
       {
         "id": "FR-006",
-        "title": "Network Operations",
-        "description": "Translate network operations to use Go's net/http package.",
-        "priority": "P1",
+        "title": "Error Handling",
+        "description": "Implement Go-style error handling for all translated code.",
+        "priority": "P2",
         "acceptance_criteria": [
-          "All network calls use Go's net/http package.",
-          "No network operations occur on the main thread.",
-          "Network operations are tested for reliability."
+          "All errors are handled using Go's error interface.",
+          "Error handling logic is consistent with Go best practices.",
+          "Error scenarios are covered by unit tests."
         ],
         "generation_source": "llm",
         "grounding": {
@@ -1031,13 +1250,13 @@
       },
       {
         "id": "FR-007",
-        "title": "Security Compliance",
-        "description": "Ensure the Go codebase adheres to mobile security standards.",
-        "priority": "P0",
+        "title": "Logging and Monitoring",
+        "description": "Implement logging and monitoring in Go.",
+        "priority": "P2",
         "acceptance_criteria": [
-          "Secrets are stored securely using Go's cryptography libraries.",
-          "Network calls use certificate pinning.",
-          "Security audits show no critical vulnerabilities."
+          "All critical operations are logged using a Go logging library.",
+          "Monitoring is set up to track application performance.",
+          "Logs are accessible and provide meaningful insights."
         ],
         "generation_source": "llm",
         "grounding": {
@@ -1047,13 +1266,13 @@
       },
       {
         "id": "FR-008",
-        "title": "Localization Support",
-        "description": "Ensure all user-visible strings are localizable in the Go codebase.",
-        "priority": "P2",
+        "title": "Security Compliance",
+        "description": "Ensure the Go application meets security standards.",
+        "priority": "P0",
         "acceptance_criteria": [
-          "All strings are externalized for localization.",
-          "Localization files are available for supported languages.",
-          "Localization tests confirm correct string rendering."
+          "All sensitive data is encrypted using Go libraries.",
+          "Security tests validate compliance with security standards.",
+          "No critical vulnerabilities are present in the Go code."
         ],
         "generation_source": "llm",
         "grounding": {
@@ -1066,13 +1285,13 @@
       {
         "id": "NFR-001",
         "title": "Performance",
-        "description": "The Go application must perform at least as efficiently as the Kotlin version.",
+        "description": "The Go application must perform as efficiently as the Kotlin version.",
         "category": "performance",
-        "metric": "Response time under 200ms for key operations",
+        "metric": "Response time under 200ms for 95% of requests",
         "acceptance_criteria": [
-          "Performance benchmarks match or exceed Kotlin version.",
-          "Load tests show no degradation under expected load.",
-          "Performance metrics are documented and reviewed."
+          "Performance tests show equivalent or better performance than Kotlin.",
+          "Load tests validate application scalability.",
+          "Resource usage is optimized in Go."
         ],
         "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
         "verification_source": "llm",
@@ -1084,33 +1303,15 @@
       {
         "id": "NFR-002",
         "title": "Scalability",
-        "description": "The Go application should scale to handle increased load.",
+        "description": "The application must scale to handle increased load.",
         "category": "scalability",
-        "metric": "Support 2x current user base without performance loss",
+        "metric": "Support 10,000 concurrent users",
         "acceptance_criteria": [
-          "Scalability tests show linear performance under increased load.",
-          "No bottlenecks identified during scalability testing.",
-          "Scalability plans are documented."
+          "Scalability tests validate support for increased user load.",
+          "No degradation in performance with increased load.",
+          "Horizontal scaling is supported."
         ],
         "verification": "Scalability test with simulated user load",
-        "verification_source": "llm",
-        "grounding": {
-          "classification": "proposed_extension",
-          "reason": "no direct grounding evidence in extracted legacy artifacts"
-        }
-      },
-      {
-        "id": "NFR-003",
-        "title": "Reliability",
-        "description": "Ensure the Go application is reliable and available.",
-        "category": "reliability",
-        "metric": "99.9% uptime",
-        "acceptance_criteria": [
-          "Uptime metrics meet or exceed 99.9%.",
-          "Automated recovery processes are in place.",
-          "Reliability metrics are monitored continuously."
-        ],
-        "verification": "SLO monitoring over rolling 30-day window",
         "verification_source": "llm",
         "grounding": {
           "classification": "proposed_extension",
@@ -1118,17 +1319,35 @@
         }
       },
       {
+        "id": "NFR-003",
+        "title": "Reliability",
+        "description": "The application must be reliable and available.",
+        "category": "reliability",
+        "metric": "99.9% uptime",
+        "acceptance_criteria": [
+          "Reliability tests confirm minimal downtime.",
+          "Failover mechanisms are implemented.",
+          "Monitoring alerts for downtime events."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "proposed_extension",
+          "reason": "non-functional target appears cloud-template based"
+        }
+      },
+      {
         "id": "NFR-004",
         "title": "Usability",
-        "description": "The Go application should be as user-friendly as the Kotlin version.",
+        "description": "The application must be user-friendly and intuitive.",
         "category": "usability",
         "metric": "User satisfaction score of 4.5/5",
         "acceptance_criteria": [
-          "User feedback indicates satisfaction with usability.",
-          "Usability tests show no significant issues.",
-          "Documentation is updated and user-friendly."
+          "User feedback confirms ease of use.",
+          "Usability tests validate user interface design.",
+          "Documentation is clear and comprehensive."
         ],
-        "verification": "User testing and feedback analysis",
+        "verification": "User surveys and usability testing",
         "verification_source": "llm",
         "grounding": {
           "classification": "proposed_extension",
@@ -1138,13 +1357,13 @@
       {
         "id": "NFR-005",
         "title": "Security",
-        "description": "Ensure the Go application meets security standards.",
+        "description": "The application must be secure against common vulnerabilities.",
         "category": "security",
-        "metric": "Zero critical vulnerabilities",
+        "metric": "No critical security vulnerabilities",
         "acceptance_criteria": [
-          "Security audits reveal no critical vulnerabilities.",
-          "Security measures are documented and reviewed.",
-          "All security patches are applied promptly."
+          "Security tests identify no critical vulnerabilities.",
+          "Penetration testing confirms application security.",
+          "Security patches are applied promptly."
         ],
         "verification": "SAST + pre-prod pen test",
         "verification_source": "llm",
@@ -1190,35 +1409,36 @@
     "features": [
       {
         "id": "BDD-001",
-        "title": "Business Logic Preservation",
+        "title": "User Authentication",
         "source_requirement_ids": [
-          "FR-001"
+          "FR-001",
+          "FR-002"
         ],
-        "gherkin": "Feature: Business Logic Preservation\nScenario: Verify business logic translation\nGiven the Kotlin business logic\nWhen it is translated to Go\nThen the output should match the original logic"
+        "gherkin": "Feature: User Authentication\nScenario: Successful Login\nGiven a registered user\nWhen the user provides valid credentials\nThen the user is authenticated and receives a JWT token"
       },
       {
         "id": "BDD-002",
-        "title": "Go Module Structure",
+        "title": "User Registration",
         "source_requirement_ids": [
-          "FR-002"
+          "FR-005"
         ],
-        "gherkin": "Feature: Go Module Structure\nScenario: Verify module structure\nGiven the Kotlin module structure\nWhen translated to Go\nThen the module boundaries should be preserved"
+        "gherkin": "Feature: User Registration\nScenario: Successful Registration\nGiven a new user\nWhen the user provides valid registration details\nThen a new user account is created"
       },
       {
         "id": "BDD-003",
-        "title": "Concurrency Model",
+        "title": "JWT Token Validation",
         "source_requirement_ids": [
           "FR-003"
         ],
-        "gherkin": "Feature: Concurrency Model\nScenario: Verify concurrency translation\nGiven Kotlin coroutines\nWhen translated to Go\nThen goroutines and channels should be used correctly"
+        "gherkin": "Feature: JWT Token Validation\nScenario: Valid Token\nGiven a valid JWT token\nWhen the token is validated\nThen the user context is established"
       },
       {
         "id": "BDD-004",
         "title": "Error Handling",
         "source_requirement_ids": [
-          "FR-004"
+          "FR-006"
         ],
-        "gherkin": "Feature: Error Handling\nScenario: Verify error handling translation\nGiven Kotlin error handling\nWhen translated to Go\nThen Go's error handling should be implemented correctly"
+        "gherkin": "Feature: Error Handling\nScenario: Invalid Input\nGiven an invalid input\nWhen the input is processed\nThen an appropriate error message is returned"
       }
     ],
     "lint": {
@@ -1242,7 +1462,7 @@
       "status": "FAIL",
       "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
       "details": {
-        "functional_count": 3,
+        "functional_count": 8,
         "non_functional_count": 5,
         "min_functional": 8,
         "min_non_functional": 5,
@@ -1302,6 +1522,7 @@
     {
       "requirement_id": "FR-001",
       "test_types": [
+        "e2e",
         "integration",
         "unit"
       ],
@@ -1316,13 +1537,61 @@
         "unit"
       ],
       "bdd_scenarios": [
-        "BDD-002"
+        "BDD-001"
       ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
     },
     {
       "requirement_id": "FR-005",
       "test_types": [
+        "contract",
         "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-007",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-008",
+      "test_types": [
+        "integration",
+        "security",
         "unit"
       ],
       "bdd_scenarios": []
@@ -1403,11 +1672,19 @@
   "business_rules_catalog": [
     {
       "id": "BR-001",
-      "rule_type": "calculation_logic",
-      "statement": "holder.number.text = (position + 1).toString()",
-      "scope": "Business Logic Module",
-      "evidence": "BusinessLogic.kt",
-      "confidence": 0.84
+      "rule_type": "input_validation",
+      "statement": "Usernames must be unique.",
+      "scope": "User Management",
+      "evidence": "UserController.kt",
+      "confidence": 0.9
+    },
+    {
+      "id": "BR-002",
+      "rule_type": "workflow_orchestration",
+      "statement": "User must be authenticated to access protected resources.",
+      "scope": "Authentication",
+      "evidence": "AuthController.kt",
+      "confidence": 0.95
     }
   ],
   "chunk_qa_report_v1": {},
@@ -11195,9 +11472,9 @@
   "analyst_report_v2": {
     "artifact_type": "analyst_report",
     "artifact_version": "2.0",
-    "artifact_id": "art_analyst_report_45b6575ac7744bfe",
-    "run_id": "run_affa41b9346f",
-    "generated_at": "2026-04-23T14:22:14.013044+00:00",
+    "artifact_id": "art_analyst_report_687f0361d6fa42ec",
+    "run_id": "run_2e538ee6f0bc",
+    "generated_at": "2026-04-23T16:38:27.606110+00:00",
     "producer": {
       "agent": "Analyst Agent",
       "skill_pack": "generic_legacy",
@@ -11207,7 +11484,7 @@
       "repo": "Synthetix",
       "branch": "codex-synthetix-ui-v2-claude",
       "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-      "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+      "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
       "canonical_project": "Project 1",
       "target_stack": {
         "language": "Unknown",
@@ -11219,14 +11496,14 @@
       "compiler_version": "2.7.2",
       "project": {
         "name": "Kotlin to Go Migration",
-        "objective": "Migrate the existing Kotlin codebase to Go while preserving functionality and adhering to domain-specific standards.",
+        "objective": "Migrate a Kotlin codebase to Go while preserving existing functionality and adhering to best practices.",
         "domain": "software",
         "audience_modes": [
           "client",
           "engineering"
         ]
       },
-      "generated_at": "2026-04-23T14:22:14.013044+00:00",
+      "generated_at": "2026-04-23T16:38:27.606110+00:00",
       "skill_pack": {
         "id": "generic_legacy",
         "name": "Generic Legacy Skill",
@@ -11284,7 +11561,7 @@
       },
       "recommended_strategy": {
         "name": "Strangler Fig Pattern",
-        "rationale": "Allows gradual migration while maintaining existing functionality.",
+        "rationale": "Allows incremental migration while maintaining existing functionality.",
         "phases": [
           {
             "id": "PH0",
@@ -11408,14 +11685,21 @@
           "id": "RISK-1",
           "severity": "high",
           "description": "Potential loss of functionality during migration.",
-          "mitigation": "Conduct thorough testing and validation post-migration.",
+          "mitigation": "Thorough testing and validation of Go code against existing Kotlin tests.",
           "evidence_refs": []
         },
         {
           "id": "RISK-2",
           "severity": "medium",
-          "description": "Incompatibility of Kotlin libraries with Go.",
-          "mitigation": "Identify and establish Go equivalents for critical libraries.",
+          "description": "Performance degradation in Go implementation.",
+          "mitigation": "Optimize Go code and conduct performance benchmarking.",
+          "evidence_refs": []
+        },
+        {
+          "id": "RISK-3",
+          "severity": "high",
+          "description": "Security vulnerabilities introduced during migration.",
+          "mitigation": "Conduct security testing and apply best practices for Go security.",
           "evidence_refs": []
         }
       ],
@@ -11448,8 +11732,8 @@
           "Control dependency and data-side risks during migration"
         ],
         "out_of_scope": [
-          "UI redesign or changes beyond necessary adjustments for Go compatibility.",
-          "Introduction of new features not present in the Kotlin codebase."
+          "UI/UX redesign",
+          "New feature development"
         ]
       },
       "constraints": {
@@ -11464,6 +11748,90 @@
       },
       "backlog": {
         "items": [
+          {
+            "id": "FR-001",
+            "type": "functional",
+            "priority": "P0",
+            "title": "Translate Kotlin Classes to Go",
+            "outcome": "All Kotlin classes must be translated to equivalent Go structures.",
+            "acceptance_criteria": [
+              "Each Kotlin class has a corresponding Go struct.",
+              "All methods in Kotlin classes are implemented in Go.",
+              "Translated code passes unit tests equivalent to original Kotlin tests."
+            ],
+            "depends_on": [],
+            "evidence_expected": [
+              "traceability_matrix",
+              "functional_test_report"
+            ],
+            "grounding": {
+              "classification": "derived_from_legacy",
+              "reason": "matched legacy evidence terms"
+            }
+          },
+          {
+            "id": "NFR-001",
+            "type": "non_functional",
+            "priority": "P1",
+            "title": "Performance",
+            "outcome": "The Go application must perform as efficiently as the Kotlin version.",
+            "acceptance_criteria": [
+              "Performance tests show equivalent or better performance than Kotlin.",
+              "Load tests validate application scalability.",
+              "Resource usage is optimized in Go."
+            ],
+            "depends_on": [],
+            "evidence_expected": [
+              "nfr_validation_report",
+              "quality_gate_report"
+            ],
+            "grounding": {
+              "classification": "derived_from_legacy",
+              "reason": "matched legacy evidence terms"
+            }
+          },
+          {
+            "id": "NFR-004",
+            "type": "non_functional",
+            "priority": "P1",
+            "title": "Usability",
+            "outcome": "The application must be user-friendly and intuitive.",
+            "acceptance_criteria": [
+              "User feedback confirms ease of use.",
+              "Usability tests validate user interface design.",
+              "Documentation is clear and comprehensive."
+            ],
+            "depends_on": [],
+            "evidence_expected": [
+              "nfr_validation_report",
+              "quality_gate_report"
+            ],
+            "grounding": {
+              "classification": "derived_from_legacy",
+              "reason": "matched 2 legacy evidence terms"
+            }
+          },
+          {
+            "id": "NFR-005",
+            "type": "non_functional",
+            "priority": "P1",
+            "title": "Security",
+            "outcome": "The application must be secure against common vulnerabilities.",
+            "acceptance_criteria": [
+              "Security tests identify no critical vulnerabilities.",
+              "Penetration testing confirms application security.",
+              "Security patches are applied promptly."
+            ],
+            "depends_on": [],
+            "evidence_expected": [
+              "nfr_validation_report",
+              "quality_gate_report"
+            ],
+            "grounding": {
+              "classification": "derived_from_legacy",
+              "reason": "matched legacy evidence terms"
+            }
+          },
           {
             "id": "RM-001",
             "type": "risk_remediation",
@@ -11489,15 +11857,15 @@
       },
       "proposed_extensions": [
         {
-          "id": "FR-001",
+          "id": "FR-002",
           "type": "functional",
           "priority": "P0",
           "title": "Preserve Business Logic",
-          "outcome": "Ensure that all existing business logic in the Kotlin codebase is accurately translated to Go.",
+          "outcome": "Ensure that the business logic in Kotlin is preserved in the Go translation.",
           "acceptance_criteria": [
-            "All business logic functions in Go match the output of their Kotlin counterparts.",
-            "Unit tests for business logic pass in both Kotlin and Go environments.",
-            "Business rules are documented and verified post-migration."
+            "Business logic functions produce the same output in Go as they did in Kotlin.",
+            "All business rules are documented and verified post-migration.",
+            "Integration tests validate business logic consistency."
           ],
           "depends_on": [],
           "evidence_expected": [
@@ -11510,15 +11878,36 @@
           }
         },
         {
-          "id": "FR-002",
+          "id": "FR-003",
           "type": "functional",
-          "priority": "P0",
-          "title": "Implement Go Modules",
-          "outcome": "Translate Kotlin modules into Go modules, maintaining the existing structure.",
+          "priority": "P1",
+          "title": "Implement Go Concurrency",
+          "outcome": "Replace Kotlin coroutines with Go concurrency patterns.",
           "acceptance_criteria": [
-            "Each Kotlin module has a corresponding Go module.",
-            "Module boundaries and dependencies are preserved.",
-            "Go modules compile without errors."
+            "All asynchronous operations use Go routines and channels.",
+            "Concurrency tests validate performance and correctness.",
+            "No deadlocks or race conditions are present in the Go code."
+          ],
+          "depends_on": [],
+          "evidence_expected": [
+            "traceability_matrix",
+            "functional_test_report"
+          ],
+          "grounding": {
+            "classification": "proposed_extension",
+            "reason": "no direct evidence linkage found in extracted legacy artifacts"
+          }
+        },
+        {
+          "id": "FR-004",
+          "type": "functional",
+          "priority": "P1",
+          "title": "Data Persistence Layer",
+          "outcome": "Translate the data persistence layer from Kotlin to Go.",
+          "acceptance_criteria": [
+            "Data models are correctly mapped to Go structs.",
+            "Database interactions are implemented using Go database libraries.",
+            "Data integrity is maintained post-migration."
           ],
           "depends_on": [],
           "evidence_expected": [
@@ -11533,13 +11922,13 @@
         {
           "id": "FR-005",
           "type": "functional",
-          "priority": "P0",
-          "title": "Data Persistence Translation",
-          "outcome": "Migrate data persistence logic from Kotlin to Go, ensuring data integrity.",
+          "priority": "P1",
+          "title": "API Endpoint Translation",
+          "outcome": "Translate Kotlin API endpoints to Go.",
           "acceptance_criteria": [
-            "Data models are accurately translated to Go structs.",
-            "Database interactions are tested for consistency.",
-            "Data integrity is maintained post-migration."
+            "All API endpoints in Kotlin are available in Go.",
+            "Endpoints are tested with equivalent request and response handling.",
+            "API documentation is updated to reflect Go implementation."
           ],
           "depends_on": [],
           "evidence_expected": [
@@ -11552,20 +11941,62 @@
           }
         },
         {
-          "id": "NFR-001",
-          "type": "non_functional",
-          "priority": "P1",
-          "title": "Performance",
-          "outcome": "The Go application must perform at least as efficiently as the Kotlin version.",
+          "id": "FR-006",
+          "type": "functional",
+          "priority": "P2",
+          "title": "Error Handling",
+          "outcome": "Implement Go-style error handling for all translated code.",
           "acceptance_criteria": [
-            "Performance benchmarks match or exceed Kotlin version.",
-            "Load tests show no degradation under expected load.",
-            "Performance metrics are documented and reviewed."
+            "All errors are handled using Go's error interface.",
+            "Error handling logic is consistent with Go best practices.",
+            "Error scenarios are covered by unit tests."
           ],
           "depends_on": [],
           "evidence_expected": [
-            "nfr_validation_report",
-            "quality_gate_report"
+            "traceability_matrix",
+            "functional_test_report"
+          ],
+          "grounding": {
+            "classification": "proposed_extension",
+            "reason": "no direct evidence linkage found in extracted legacy artifacts"
+          }
+        },
+        {
+          "id": "FR-007",
+          "type": "functional",
+          "priority": "P2",
+          "title": "Logging and Monitoring",
+          "outcome": "Implement logging and monitoring in Go.",
+          "acceptance_criteria": [
+            "All critical operations are logged using a Go logging library.",
+            "Monitoring is set up to track application performance.",
+            "Logs are accessible and provide meaningful insights."
+          ],
+          "depends_on": [],
+          "evidence_expected": [
+            "traceability_matrix",
+            "functional_test_report"
+          ],
+          "grounding": {
+            "classification": "proposed_extension",
+            "reason": "no direct evidence linkage found in extracted legacy artifacts"
+          }
+        },
+        {
+          "id": "FR-008",
+          "type": "functional",
+          "priority": "P0",
+          "title": "Security Compliance",
+          "outcome": "Ensure the Go application meets security standards.",
+          "acceptance_criteria": [
+            "All sensitive data is encrypted using Go libraries.",
+            "Security tests validate compliance with security standards.",
+            "No critical vulnerabilities are present in the Go code."
+          ],
+          "depends_on": [],
+          "evidence_expected": [
+            "traceability_matrix",
+            "functional_test_report"
           ],
           "grounding": {
             "classification": "proposed_extension",
@@ -11577,32 +12008,11 @@
           "type": "non_functional",
           "priority": "P1",
           "title": "Scalability",
-          "outcome": "The Go application should scale to handle increased load.",
+          "outcome": "The application must scale to handle increased load.",
           "acceptance_criteria": [
-            "Scalability tests show linear performance under increased load.",
-            "No bottlenecks identified during scalability testing.",
-            "Scalability plans are documented."
-          ],
-          "depends_on": [],
-          "evidence_expected": [
-            "nfr_validation_report",
-            "quality_gate_report"
-          ],
-          "grounding": {
-            "classification": "proposed_extension",
-            "reason": "no direct evidence linkage found in extracted legacy artifacts"
-          }
-        },
-        {
-          "id": "NFR-003",
-          "type": "non_functional",
-          "priority": "P1",
-          "title": "Reliability",
-          "outcome": "Ensure the Go application is reliable and available.",
-          "acceptance_criteria": [
-            "Uptime metrics meet or exceed 99.9%.",
-            "Automated recovery processes are in place.",
-            "Reliability metrics are monitored continuously."
+            "Scalability tests validate support for increased user load.",
+            "No degradation in performance with increased load.",
+            "Horizontal scaling is supported."
           ],
           "depends_on": [],
           "evidence_expected": [
@@ -11615,15 +12025,15 @@
           }
         },
         {
-          "id": "NFR-004",
+          "id": "NFR-003",
           "type": "non_functional",
           "priority": "P1",
-          "title": "Usability",
-          "outcome": "The Go application should be as user-friendly as the Kotlin version.",
+          "title": "Reliability",
+          "outcome": "The application must be reliable and available.",
           "acceptance_criteria": [
-            "User feedback indicates satisfaction with usability.",
-            "Usability tests show no significant issues.",
-            "Documentation is updated and user-friendly."
+            "Reliability tests confirm minimal downtime.",
+            "Failover mechanisms are implemented.",
+            "Monitoring alerts for downtime events."
           ],
           "depends_on": [],
           "evidence_expected": [
@@ -11632,28 +12042,7 @@
           ],
           "grounding": {
             "classification": "proposed_extension",
-            "reason": "no direct evidence linkage found in extracted legacy artifacts"
-          }
-        },
-        {
-          "id": "NFR-005",
-          "type": "non_functional",
-          "priority": "P1",
-          "title": "Security",
-          "outcome": "Ensure the Go application meets security standards.",
-          "acceptance_criteria": [
-            "Security audits reveal no critical vulnerabilities.",
-            "Security measures are documented and reviewed.",
-            "All security patches are applied promptly."
-          ],
-          "depends_on": [],
-          "evidence_expected": [
-            "nfr_validation_report",
-            "quality_gate_report"
-          ],
-          "grounding": {
-            "classification": "proposed_extension",
-            "reason": "no direct evidence linkage found in extracted legacy artifacts"
+            "reason": "template-style capability/scale target not grounded in legacy evidence"
           }
         }
       ],
@@ -11663,6 +12052,7 @@
           {
             "requirement_id": "FR-001",
             "test_types": [
+              "e2e",
               "integration",
               "unit"
             ],
@@ -11677,13 +12067,61 @@
               "unit"
             ],
             "scenario_ids": [
-              "BDD-002"
+              "BDD-001"
             ]
+          },
+          {
+            "requirement_id": "FR-003",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "scenario_ids": [
+              "BDD-003"
+            ]
+          },
+          {
+            "requirement_id": "FR-004",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "scenario_ids": []
           },
           {
             "requirement_id": "FR-005",
             "test_types": [
+              "contract",
               "integration",
+              "unit"
+            ],
+            "scenario_ids": [
+              "BDD-002"
+            ]
+          },
+          {
+            "requirement_id": "FR-006",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "scenario_ids": [
+              "BDD-004"
+            ]
+          },
+          {
+            "requirement_id": "FR-007",
+            "test_types": [
+              "integration",
+              "unit"
+            ],
+            "scenario_ids": []
+          },
+          {
+            "requirement_id": "FR-008",
+            "test_types": [
+              "integration",
+              "security",
               "unit"
             ],
             "scenario_ids": []
@@ -11715,9 +12153,9 @@
           },
           {
             "id": "requirements_completeness",
-            "result": "fail",
-            "description": "Derived backlog coverage below dynamic threshold (1/3) for discovered scope (0 forms).",
-            "remediation": "Add missing parity requirements from form dossiers, SQL map, and risk register."
+            "result": "pass",
+            "description": "Backlog grounded in discovered behavior (5 derived item(s), threshold 3).",
+            "remediation": ""
           },
           {
             "id": "compliance_constraints_applied",
@@ -11802,7 +12240,22 @@
           },
           {
             "from": "FR-002",
+            "to": "BDD-001",
+            "type": "verified_by"
+          },
+          {
+            "from": "FR-003",
+            "to": "BDD-003",
+            "type": "verified_by"
+          },
+          {
+            "from": "FR-005",
             "to": "BDD-002",
+            "type": "verified_by"
+          },
+          {
+            "from": "FR-006",
+            "to": "BDD-004",
             "type": "verified_by"
           }
         ]
@@ -11893,24 +12346,24 @@
     },
     "appendix": {
       "artifact_refs": {
-        "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_fa85c9bd2fe24f66",
-        "repo_landscape_ref": "artifact://repo_landscape/1.0/art_repo_landscape_53bb62f2cf8a4af4",
-        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
-        "variant_inventory_ref": "artifact://variant_inventory/1.0/art_variant_inventory_ef55bb0f808740e6",
-        "event_map_ref": "artifact://event_map/1.0/art_event_map_6f667dd904a84825",
-        "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_a7310d000bb74b4f",
-        "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_b62a11ccac4b40fe",
-        "data_access_map_ref": "artifact://data_access_map/1.0/art_data_access_map_d05f877683564e54",
-        "recordset_ops_ref": "artifact://recordset_ops/1.0/art_recordset_ops_fb384316e1aa432c",
-        "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_29b564021665475e",
-        "form_dossier_ref": "artifact://form_dossier/1.0/art_form_dossier_b1f31b6e0c2d44c7",
-        "dependency_list_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_332ae451bdd24c15",
-        "dependency_inventory_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_332ae451bdd24c15",
-        "business_rules_ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_bd1f00761de74c14",
-        "detector_findings_ref": "artifact://detector_findings/1.0/art_detector_findings_b8e33984cc5c4af4",
-        "risk_register_ref": "artifact://risk_register/1.0/art_risk_register_9999e85985764b45",
-        "orphan_analysis_ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_56feb6efc0a84a29",
-        "delivery_constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_397d40470edf41d4",
+        "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_30931c443cab4ef4",
+        "repo_landscape_ref": "artifact://repo_landscape/1.0/art_repo_landscape_7080a1bf4bee429e",
+        "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
+        "variant_inventory_ref": "artifact://variant_inventory/1.0/art_variant_inventory_2b9a1cbaf4d748ee",
+        "event_map_ref": "artifact://event_map/1.0/art_event_map_c5a7e31604e745f3",
+        "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_4d0b3fc196984a34",
+        "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_013726726b3e44af",
+        "data_access_map_ref": "artifact://data_access_map/1.0/art_data_access_map_9fc965b24e2c4cc2",
+        "recordset_ops_ref": "artifact://recordset_ops/1.0/art_recordset_ops_f3a95f75f83b49cb",
+        "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_772cd32d7298429f",
+        "form_dossier_ref": "artifact://form_dossier/1.0/art_form_dossier_c215bc73e4374962",
+        "dependency_list_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_028622b4d77f4b62",
+        "dependency_inventory_ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_028622b4d77f4b62",
+        "business_rules_ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_457a5e76c4334777",
+        "detector_findings_ref": "artifact://detector_findings/1.0/art_detector_findings_ed369acea436436f",
+        "risk_register_ref": "artifact://risk_register/1.0/art_risk_register_2d4d4a8e64bf4dc5",
+        "orphan_analysis_ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_a272f3ce621c4eed",
+        "delivery_constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_4a2db5ecb48a4c2b",
         "source_db_profile_ref": "artifact://analyst/raw/source_db_profile/v1",
         "source_schema_model_ref": "artifact://analyst/raw/source_schema_model/v1",
         "source_query_catalog_ref": "artifact://analyst/raw/source_query_catalog/v1",
@@ -11928,11 +12381,11 @@
         "db_qa_report_ref": "artifact://analyst/raw/db_qa_report/v1",
         "schema_approval_record_ref": "artifact://analyst/raw/schema_approval_record/v1",
         "schema_drift_report_ref": "artifact://analyst/raw/schema_drift_report/v1",
-        "variant_diff_report_ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_425d0a0f3aa9457e",
-        "reporting_model_ref": "artifact://reporting_model/1.0/art_reporting_model_d643c114c84a47fc",
-        "identity_access_model_ref": "artifact://identity_access_model/1.0/art_identity_access_model_c10d3747756c4379",
-        "discover_review_checklist_ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_04780a6f9e00459f",
-        "artifact_index_ref": "artifact://artifact_index/1.0/art_artifact_index_dd669b72a2884a51",
+        "variant_diff_report_ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_7aca59fb245e493f",
+        "reporting_model_ref": "artifact://reporting_model/1.0/art_reporting_model_72a41e30b5ea4160",
+        "identity_access_model_ref": "artifact://identity_access_model/1.0/art_identity_access_model_46097b4419aa4e98",
+        "discover_review_checklist_ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_ae6a0e56f4c04ec0",
+        "artifact_index_ref": "artifact://artifact_index/1.0/art_artifact_index_562b5fffbe714caa",
         "qa_report_ref": "embedded://analyst_report_v2/qa_report_v1",
         "knowledge_snapshot_ref": "runctx://runctx-7e793ee87ce48d47/kctx-dff0dd8350cd555c",
         "run_delivery_constitution_ref": "runctx://runctx-7e793ee87ce48d47/delivery_constitution/const-34dc56f5a0ec"
@@ -11944,7 +12397,7 @@
       "artifact_version": "1.0",
       "discovery_spec": {
         "title": "Legacy discovery spec",
-        "objective": "Migrate the existing Kotlin codebase to Go while preserving functionality and adhering to domain-specific standards.",
+        "objective": "Migrate a Kotlin codebase to Go while preserving existing functionality and adhering to best practices.",
         "inventory_counts": {
           "projects": 0,
           "forms": 0,
@@ -11973,15 +12426,15 @@
           }
         ],
         "evidence_refs": {
-          "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_fa85c9bd2fe24f66",
-          "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_29b564021665475e",
-          "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_b62a11ccac4b40fe"
+          "legacy_inventory_ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_30931c443cab4ef4",
+          "procedure_summary_ref": "artifact://procedure_summary/1.0/art_procedure_summary_772cd32d7298429f",
+          "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_013726726b3e44af"
         }
       },
       "modernization_plan": {
         "title": "Modernization implementation plan",
         "strategy": "Strangler Fig Pattern",
-        "rationale": "Allows gradual migration while maintaining existing functionality.",
+        "rationale": "Allows incremental migration while maintaining existing functionality.",
         "phases": [
           {
             "id": "PH0",
@@ -12001,21 +12454,21 @@
           "Phase 1: form/module migration with dependency replacement",
           "Phase 2: hardening, governance gates, and evidence publication"
         ],
-        "backlog_items": 1,
+        "backlog_items": 5,
         "blocking_decisions": 7,
-        "constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_397d40470edf41d4"
+        "constitution_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_4a2db5ecb48a4c2b"
       },
       "executable_contracts": {
         "title": "Executable contracts",
         "golden_flow_count": 0,
-        "test_matrix_rows": 3,
+        "test_matrix_rows": 8,
         "quality_gate_count": 12,
         "grounding_status": "grounded",
-        "traceability_links": 2,
+        "traceability_links": 5,
         "contract_refs": {
-          "event_map_ref": "artifact://event_map/1.0/art_event_map_6f667dd904a84825",
-          "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_a7310d000bb74b4f",
-          "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_b62a11ccac4b40fe"
+          "event_map_ref": "artifact://event_map/1.0/art_event_map_c5a7e31604e745f3",
+          "sql_catalog_ref": "artifact://sql_catalog/1.0/art_sql_catalog_4d0b3fc196984a34",
+          "sql_map_ref": "artifact://sql_map/1.0/art_sql_map_013726726b3e44af"
         }
       },
       "constitution": {
@@ -12024,13 +12477,13 @@
           "Every modernization decision must map to explicit evidence (code, query, event, or rule).",
           "No breaking change to data contracts without approved migration path and rollback evidence."
         ],
-        "source_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_397d40470edf41d4"
+        "source_ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_4a2db5ecb48a4c2b"
       }
     },
     "qa_report_v1": {
       "artifact_type": "qa_report",
       "artifact_version": "1.0",
-      "generated_at": "2026-04-23T14:22:14.013044+00:00",
+      "generated_at": "2026-04-23T16:38:27.606110+00:00",
       "summary": {
         "status": "WARN",
         "pass_count": 11,
@@ -12047,7 +12500,7 @@
             "id": "struct_rule_ids_unique",
             "title": "Business rule IDs are unique",
             "result": "pass",
-            "detail": "1 rule IDs validated.",
+            "detail": "2 rule IDs validated.",
             "blocking": false,
             "refs": [
               "raw_artifacts.business_rule_catalog.rules"
@@ -12078,7 +12531,7 @@
             "id": "struct_form_ref_integrity",
             "title": "Rule form references resolve",
             "result": "warn",
-            "detail": "Unresolved form references detected: Business Logic Module",
+            "detail": "Unresolved form references detected: Authentication, User Management",
             "blocking": false,
             "refs": [
               "raw_artifacts.business_rule_catalog.rules",
@@ -12244,8 +12697,8 @@
         "artifact_type": "legacy_inventory",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12294,17 +12747,17 @@
             "recommended_strategy": "Strangler Fig Pattern",
             "required_actions": [
               "Identify critical modules for initial migration.",
-              "Establish Go equivalents for essential Kotlin libraries.",
-              "Conduct thorough testing post-migration."
+              "Implement Go equivalents for selected modules.",
+              "Test and validate Go modules before decommissioning Kotlin counterparts."
             ]
           }
         },
         "projects": [],
         "form_coverage": [],
         "source_loc_by_file": [],
-        "artifact_id": "art_legacy_inventory_fa85c9bd2fe24f66",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_legacy_inventory_30931c443cab4ef4",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12314,7 +12767,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12327,8 +12780,8 @@
         "artifact_type": "repo_landscape",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12357,9 +12810,9 @@
           "shared_modules": [],
           "shared_dependencies": []
         },
-        "artifact_id": "art_repo_landscape_53bb62f2cf8a4af4",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_repo_landscape_7080a1bf4bee429e",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12369,7 +12822,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12382,8 +12835,8 @@
         "artifact_type": "scope_lock",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12413,9 +12866,9 @@
         "status": "LOCKED",
         "resolved_blocking_decisions": [],
         "build_guardrails": [],
-        "artifact_id": "art_scope_lock_2796cdb7abc1479b",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_scope_lock_6088e9ff772d4d76",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12425,7 +12878,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12438,8 +12891,8 @@
         "artifact_type": "variant_inventory",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12463,9 +12916,9 @@
           }
         },
         "variants": [],
-        "artifact_id": "art_variant_inventory_ef55bb0f808740e6",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_variant_inventory_2b9a1cbaf4d748ee",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12475,7 +12928,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12488,8 +12941,8 @@
         "artifact_type": "dependency_inventory",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12513,9 +12966,9 @@
           }
         },
         "dependencies": [],
-        "artifact_id": "art_dependency_inventory_332ae451bdd24c15",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_dependency_inventory_028622b4d77f4b62",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12525,7 +12978,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12538,8 +12991,8 @@
         "artifact_type": "event_map",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12563,9 +13016,9 @@
           }
         },
         "entries": [],
-        "artifact_id": "art_event_map_6f667dd904a84825",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_event_map_c5a7e31604e745f3",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12575,7 +13028,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12588,8 +13041,8 @@
         "artifact_type": "sql_catalog",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12613,9 +13066,9 @@
           }
         },
         "statements": [],
-        "artifact_id": "art_sql_catalog_a7310d000bb74b4f",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_sql_catalog_4d0b3fc196984a34",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12625,7 +13078,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12638,8 +13091,8 @@
         "artifact_type": "sql_map",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12663,9 +13116,9 @@
           }
         },
         "entries": [],
-        "artifact_id": "art_sql_map_b62a11ccac4b40fe",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_sql_map_013726726b3e44af",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12675,7 +13128,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12688,8 +13141,8 @@
         "artifact_type": "data_access_map",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12715,9 +13168,9 @@
         "rows": [],
         "complete": false,
         "coverage_score": 0.0,
-        "artifact_id": "art_data_access_map_d05f877683564e54",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_data_access_map_9fc965b24e2c4cc2",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12727,7 +13180,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12740,8 +13193,8 @@
         "artifact_type": "recordset_ops",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12765,9 +13218,9 @@
           }
         },
         "ops": [],
-        "artifact_id": "art_recordset_ops_fb384316e1aa432c",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_recordset_ops_f3a95f75f83b49cb",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12777,7 +13230,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12790,8 +13243,8 @@
         "artifact_type": "procedure_summary",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12815,9 +13268,9 @@
           }
         },
         "procedures": [],
-        "artifact_id": "art_procedure_summary_29b564021665475e",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_procedure_summary_772cd32d7298429f",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12827,7 +13280,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12840,8 +13293,8 @@
         "artifact_type": "form_dossier",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12865,9 +13318,9 @@
           }
         },
         "dossiers": [],
-        "artifact_id": "art_form_dossier_b1f31b6e0c2d44c7",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_form_dossier_c215bc73e4374962",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12877,7 +13330,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12890,8 +13343,8 @@
         "artifact_type": "business_rule_catalog",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12917,29 +13370,50 @@
         "rules": [
           {
             "rule_id": "BR-001",
-            "category": "calculation_logic",
-            "statement": "holder.number.text = (position + 1).toString()",
+            "category": "input_validation",
+            "statement": "Usernames must be unique.",
             "scope": {
               "project_id": "",
-              "component_id": "Business Logic Module"
+              "component_id": "User Management"
             },
             "evidence": [
               {
                 "type": "external_ref",
                 "external_ref": {
-                  "ref": "BusinessLogic.kt",
+                  "ref": "UserController.kt",
                   "description": "Legacy rule evidence"
                 },
-                "confidence": 0.84
+                "confidence": 0.9
               }
             ],
-            "confidence": 0.84,
+            "confidence": 0.9,
+            "tags": []
+          },
+          {
+            "rule_id": "BR-002",
+            "category": "workflow_orchestration",
+            "statement": "User must be authenticated to access protected resources.",
+            "scope": {
+              "project_id": "",
+              "component_id": "Authentication"
+            },
+            "evidence": [
+              {
+                "type": "external_ref",
+                "external_ref": {
+                  "ref": "AuthController.kt",
+                  "description": "Legacy rule evidence"
+                },
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95,
             "tags": []
           }
         ],
-        "artifact_id": "art_business_rule_catalog_bd1f00761de74c14",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_business_rule_catalog_457a5e76c4334777",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -12949,7 +13423,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -12962,8 +13436,8 @@
         "artifact_type": "detector_findings",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -12997,9 +13471,9 @@
             "win32_declares": 0
           }
         },
-        "artifact_id": "art_detector_findings_b8e33984cc5c4af4",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_detector_findings_ed369acea436436f",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13009,7 +13483,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13022,8 +13496,8 @@
         "artifact_type": "risk_register",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13047,9 +13521,9 @@
           }
         },
         "risks": [],
-        "artifact_id": "art_risk_register_9999e85985764b45",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_risk_register_2d4d4a8e64bf4dc5",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13059,7 +13533,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13072,8 +13546,8 @@
         "artifact_type": "orphan_analysis",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13102,9 +13576,9 @@
           "reachable_forms": [],
           "mapped_form_count": 0
         },
-        "artifact_id": "art_orphan_analysis_56feb6efc0a84a29",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_orphan_analysis_a272f3ce621c4eed",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13114,7 +13588,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13127,8 +13601,8 @@
         "artifact_type": "project_metrics",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13169,9 +13643,9 @@
             "third_party_dependency_count": 0
           }
         ],
-        "artifact_id": "art_project_metrics_f424d23134964200",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_project_metrics_36112b2713b9499d",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13181,7 +13655,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13194,8 +13668,8 @@
         "artifact_type": "static_forensics_layer",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13275,9 +13749,9 @@
             "detail": "Snapshots=1 | LOC=0"
           }
         ],
-        "artifact_id": "art_static_forensics_layer_12fc8e216a334967",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_static_forensics_layer_b6daae5ba81a4b8a",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13287,7 +13761,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13300,8 +13774,8 @@
         "artifact_type": "type_metrics",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13325,9 +13799,9 @@
           }
         },
         "rows": [],
-        "artifact_id": "art_type_metrics_5eb0b7a5c738436f",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_type_metrics_8dd4dc45631f45a8",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13337,7 +13811,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13350,8 +13824,8 @@
         "artifact_type": "type_dependency_matrix",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13375,9 +13849,9 @@
           }
         },
         "edges": [],
-        "artifact_id": "art_type_dependency_matrix_fcaf721db3294c62",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_type_dependency_matrix_64b36efcae5a4992",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13387,7 +13861,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13400,8 +13874,8 @@
         "artifact_type": "runtime_dependency_matrix",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13425,9 +13899,9 @@
           }
         },
         "edges": [],
-        "artifact_id": "art_runtime_dependency_matrix_6fcf9d7ad0f64cd9",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_runtime_dependency_matrix_6316dfff0adf4d1f",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13437,7 +13911,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13450,8 +13924,8 @@
         "artifact_type": "dead_code_report",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13485,9 +13959,9 @@
         "verify_needed": [
           "VB6 event handlers are excluded from dead-method candidates unless corroborated by stronger evidence."
         ],
-        "artifact_id": "art_dead_code_report_06e4f8428d744934",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_dead_code_report_cef928f26d1b4ae5",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13497,7 +13971,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13510,8 +13984,8 @@
         "artifact_type": "third_party_usage",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13535,9 +14009,9 @@
           }
         },
         "rows": [],
-        "artifact_id": "art_third_party_usage_d0c93b9d948a4cfd",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_third_party_usage_8def15bb6b76457c",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13547,7 +14021,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13560,8 +14034,8 @@
         "artifact_type": "code_quality_rules",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13634,9 +14108,9 @@
             "threshold": "query contains MAX(id)+1 style pattern"
           }
         ],
-        "artifact_id": "art_code_quality_rules_ac40ffc3595747a6",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_code_quality_rules_2f556482f2444146",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13646,7 +14120,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13659,8 +14133,8 @@
         "artifact_type": "quality_violation_report",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13688,9 +14162,9 @@
           "critical_violations": 0
         },
         "violations": [],
-        "artifact_id": "art_quality_violation_report_8b55a9e26359498b",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_quality_violation_report_6dd9f7cdd94745c9",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13700,7 +14174,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13713,8 +14187,8 @@
         "artifact_type": "trend_snapshot",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13738,12 +14212,12 @@
           }
         },
         "snapshot": {
-          "snapshot_id": "trend:2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "snapshot_id": "trend:2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "captured_at": "2026-04-23T14:22:14.012357+00:00",
+          "captured_at": "2026-04-23T16:38:27.604785+00:00",
           "metrics": {
             "loc_total": 0,
             "max_complexity": 0,
@@ -13757,9 +14231,9 @@
             "hotspot_count": 0
           }
         },
-        "artifact_id": "art_trend_snapshot_01d62972922b4239",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_trend_snapshot_f04acebaf6344856",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13769,7 +14243,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13782,8 +14256,8 @@
         "artifact_type": "trend_series",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13808,12 +14282,12 @@
         },
         "series": [
           {
-            "snapshot_id": "trend:2026-04-23T14:22:14.012357+00:00",
-            "run_id": "run_f9d53003cd3e",
+            "snapshot_id": "trend:2026-04-23T16:38:27.604785+00:00",
+            "run_id": "run_99bc0e1c113f",
             "repo": "Synthetix",
             "branch": "codex-synthetix-ui-v2-claude",
             "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-            "captured_at": "2026-04-23T14:22:14.012357+00:00",
+            "captured_at": "2026-04-23T16:38:27.604785+00:00",
             "metrics": {
               "loc_total": 0,
               "max_complexity": 0,
@@ -13828,9 +14302,9 @@
             }
           }
         ],
-        "artifact_id": "art_trend_series_d75f06f8e7ce4b29",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_trend_series_3530e49416a441b7",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13840,7 +14314,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13853,8 +14327,8 @@
         "artifact_type": "mdb_inventory",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13883,9 +14357,9 @@
           "module_refs": 0
         },
         "databases": [],
-        "artifact_id": "art_mdb_inventory_fe3394b3bbf04c21",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_mdb_inventory_7cf268dab09946db",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13895,7 +14369,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13908,8 +14382,8 @@
         "artifact_type": "form_loc_profile",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13944,9 +14418,9 @@
         },
         "forms": [],
         "designer_files": [],
-        "artifact_id": "art_form_loc_profile_6e7fbb75786e44f9",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_form_loc_profile_ebf90b654b81410a",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -13956,7 +14430,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -13969,8 +14443,8 @@
         "artifact_type": "connection_string_variants",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -13999,9 +14473,9 @@
           "embedded_credential_risks": 0
         },
         "variants": [],
-        "artifact_id": "art_connection_string_variants_bb98f8c97afa4fb7",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_connection_string_variants_a32adb9e99c547d3",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14011,7 +14485,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14024,8 +14498,8 @@
         "artifact_type": "module_global_inventory",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14058,9 +14532,9 @@
         "notes": [
           "Global declarations are inferred from shared-module call sites because direct .bas declaration blocks are not yet emitted in legacy inventory payloads."
         ],
-        "artifact_id": "art_module_global_inventory_8a6f66421a654b3d",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_module_global_inventory_8d5f16d1a25d4a74",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14070,7 +14544,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14083,8 +14557,8 @@
         "artifact_type": "dead_form_refs",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14112,9 +14586,9 @@
           "callers_impacted": 0
         },
         "references": [],
-        "artifact_id": "art_dead_form_refs_bedac813ada34bda",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_dead_form_refs_c99413260c4e4e1d",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14124,7 +14598,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14137,8 +14611,8 @@
         "artifact_type": "dataenvironment_report_mapping",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14171,9 +14645,9 @@
           "reports": []
         },
         "mappings": [],
-        "artifact_id": "art_dataenvironment_report_mapping_d79c794d6c31422b",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_dataenvironment_report_mapping_ce54f64090304c0e",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14183,7 +14657,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14196,8 +14670,8 @@
         "artifact_type": "static_risk_detectors",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14226,9 +14700,9 @@
           "high_findings": 0
         },
         "findings": [],
-        "artifact_id": "art_static_risk_detectors_ad87f606267c4eb6",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_static_risk_detectors_3f5ac9b6e9924902",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14238,7 +14712,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14251,8 +14725,8 @@
         "artifact_type": "delivery_constitution",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14291,9 +14765,9 @@
           "domain_pack",
           "memory_constraints"
         ],
-        "artifact_id": "art_delivery_constitution_397d40470edf41d4",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_delivery_constitution_4a2db5ecb48a4c2b",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14303,7 +14777,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14316,8 +14790,8 @@
         "artifact_type": "variant_diff_report",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14350,9 +14824,9 @@
           "pairs": [],
           "blocking_pairs": []
         },
-        "artifact_id": "art_variant_diff_report_425d0a0f3aa9457e",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_variant_diff_report_7aca59fb245e493f",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14362,7 +14836,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14375,8 +14849,8 @@
         "artifact_type": "reporting_model",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14408,9 +14882,9 @@
         },
         "connection_path_mismatches": [],
         "status": "PASS",
-        "artifact_id": "art_reporting_model_d643c114c84a47fc",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_reporting_model_72a41e30b5ea4160",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14420,7 +14894,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14433,8 +14907,8 @@
         "artifact_type": "identity_access_model",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14472,9 +14946,9 @@
         ],
         "sensitive_query_samples": [],
         "status": "WARN",
-        "artifact_id": "art_identity_access_model_c10d3747756c4379",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_identity_access_model_46097b4419aa4e98",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14484,7 +14958,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14497,8 +14971,8 @@
         "artifact_type": "discover_review_checklist",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
-          "run_id": "run_f9d53003cd3e",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
+          "run_id": "run_99bc0e1c113f",
           "producer": {
             "agent": "Analyst Agent",
             "skill_pack": "generic_legacy",
@@ -14573,9 +15047,9 @@
           }
         ],
         "low_coverage_forms": [],
-        "artifact_id": "art_discover_review_checklist_04780a6f9e00459f",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_discover_review_checklist_ae6a0e56f4c04ec0",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14585,7 +15059,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14598,7 +15072,7 @@
         "artifact_type": "artifact_index",
         "artifact_version": "1.0",
         "metadata": {
-          "generated_at": "2026-04-23T14:22:14.012357+00:00",
+          "generated_at": "2026-04-23T16:38:27.604785+00:00",
           "context_reference": {
             "repo": "Synthetix",
             "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40"
@@ -14607,164 +15081,164 @@
         "artifacts": [
           {
             "type": "legacy_inventory",
-            "ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_fa85c9bd2fe24f66"
+            "ref": "artifact://legacy_inventory/1.0/art_legacy_inventory_30931c443cab4ef4"
           },
           {
             "type": "repo_landscape",
-            "ref": "artifact://repo_landscape/1.0/art_repo_landscape_53bb62f2cf8a4af4"
+            "ref": "artifact://repo_landscape/1.0/art_repo_landscape_7080a1bf4bee429e"
           },
           {
             "type": "scope_lock",
-            "ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b"
+            "ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76"
           },
           {
             "type": "variant_inventory",
-            "ref": "artifact://variant_inventory/1.0/art_variant_inventory_ef55bb0f808740e6"
+            "ref": "artifact://variant_inventory/1.0/art_variant_inventory_2b9a1cbaf4d748ee"
           },
           {
             "type": "dependency_inventory",
-            "ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_332ae451bdd24c15"
+            "ref": "artifact://dependency_inventory/1.0/art_dependency_inventory_028622b4d77f4b62"
           },
           {
             "type": "event_map",
-            "ref": "artifact://event_map/1.0/art_event_map_6f667dd904a84825"
+            "ref": "artifact://event_map/1.0/art_event_map_c5a7e31604e745f3"
           },
           {
             "type": "sql_catalog",
-            "ref": "artifact://sql_catalog/1.0/art_sql_catalog_a7310d000bb74b4f"
+            "ref": "artifact://sql_catalog/1.0/art_sql_catalog_4d0b3fc196984a34"
           },
           {
             "type": "sql_map",
-            "ref": "artifact://sql_map/1.0/art_sql_map_b62a11ccac4b40fe"
+            "ref": "artifact://sql_map/1.0/art_sql_map_013726726b3e44af"
           },
           {
             "type": "data_access_map",
-            "ref": "artifact://data_access_map/1.0/art_data_access_map_d05f877683564e54"
+            "ref": "artifact://data_access_map/1.0/art_data_access_map_9fc965b24e2c4cc2"
           },
           {
             "type": "recordset_ops",
-            "ref": "artifact://recordset_ops/1.0/art_recordset_ops_fb384316e1aa432c"
+            "ref": "artifact://recordset_ops/1.0/art_recordset_ops_f3a95f75f83b49cb"
           },
           {
             "type": "procedure_summary",
-            "ref": "artifact://procedure_summary/1.0/art_procedure_summary_29b564021665475e"
+            "ref": "artifact://procedure_summary/1.0/art_procedure_summary_772cd32d7298429f"
           },
           {
             "type": "form_dossier",
-            "ref": "artifact://form_dossier/1.0/art_form_dossier_b1f31b6e0c2d44c7"
+            "ref": "artifact://form_dossier/1.0/art_form_dossier_c215bc73e4374962"
           },
           {
             "type": "business_rule_catalog",
-            "ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_bd1f00761de74c14"
+            "ref": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_457a5e76c4334777"
           },
           {
             "type": "detector_findings",
-            "ref": "artifact://detector_findings/1.0/art_detector_findings_b8e33984cc5c4af4"
+            "ref": "artifact://detector_findings/1.0/art_detector_findings_ed369acea436436f"
           },
           {
             "type": "risk_register",
-            "ref": "artifact://risk_register/1.0/art_risk_register_9999e85985764b45"
+            "ref": "artifact://risk_register/1.0/art_risk_register_2d4d4a8e64bf4dc5"
           },
           {
             "type": "orphan_analysis",
-            "ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_56feb6efc0a84a29"
+            "ref": "artifact://orphan_analysis/1.0/art_orphan_analysis_a272f3ce621c4eed"
           },
           {
             "type": "project_metrics",
-            "ref": "artifact://project_metrics/1.0/art_project_metrics_f424d23134964200"
+            "ref": "artifact://project_metrics/1.0/art_project_metrics_36112b2713b9499d"
           },
           {
             "type": "static_forensics_layer",
-            "ref": "artifact://static_forensics_layer/1.0/art_static_forensics_layer_12fc8e216a334967"
+            "ref": "artifact://static_forensics_layer/1.0/art_static_forensics_layer_b6daae5ba81a4b8a"
           },
           {
             "type": "type_metrics",
-            "ref": "artifact://type_metrics/1.0/art_type_metrics_5eb0b7a5c738436f"
+            "ref": "artifact://type_metrics/1.0/art_type_metrics_8dd4dc45631f45a8"
           },
           {
             "type": "type_dependency_matrix",
-            "ref": "artifact://type_dependency_matrix/1.0/art_type_dependency_matrix_fcaf721db3294c62"
+            "ref": "artifact://type_dependency_matrix/1.0/art_type_dependency_matrix_64b36efcae5a4992"
           },
           {
             "type": "runtime_dependency_matrix",
-            "ref": "artifact://runtime_dependency_matrix/1.0/art_runtime_dependency_matrix_6fcf9d7ad0f64cd9"
+            "ref": "artifact://runtime_dependency_matrix/1.0/art_runtime_dependency_matrix_6316dfff0adf4d1f"
           },
           {
             "type": "dead_code_report",
-            "ref": "artifact://dead_code_report/1.0/art_dead_code_report_06e4f8428d744934"
+            "ref": "artifact://dead_code_report/1.0/art_dead_code_report_cef928f26d1b4ae5"
           },
           {
             "type": "third_party_usage",
-            "ref": "artifact://third_party_usage/1.0/art_third_party_usage_d0c93b9d948a4cfd"
+            "ref": "artifact://third_party_usage/1.0/art_third_party_usage_8def15bb6b76457c"
           },
           {
             "type": "code_quality_rules",
-            "ref": "artifact://code_quality_rules/1.0/art_code_quality_rules_ac40ffc3595747a6"
+            "ref": "artifact://code_quality_rules/1.0/art_code_quality_rules_2f556482f2444146"
           },
           {
             "type": "quality_violation_report",
-            "ref": "artifact://quality_violation_report/1.0/art_quality_violation_report_8b55a9e26359498b"
+            "ref": "artifact://quality_violation_report/1.0/art_quality_violation_report_6dd9f7cdd94745c9"
           },
           {
             "type": "trend_snapshot",
-            "ref": "artifact://trend_snapshot/1.0/art_trend_snapshot_01d62972922b4239"
+            "ref": "artifact://trend_snapshot/1.0/art_trend_snapshot_f04acebaf6344856"
           },
           {
             "type": "trend_series",
-            "ref": "artifact://trend_series/1.0/art_trend_series_d75f06f8e7ce4b29"
+            "ref": "artifact://trend_series/1.0/art_trend_series_3530e49416a441b7"
           },
           {
             "type": "mdb_inventory",
-            "ref": "artifact://mdb_inventory/1.0/art_mdb_inventory_fe3394b3bbf04c21"
+            "ref": "artifact://mdb_inventory/1.0/art_mdb_inventory_7cf268dab09946db"
           },
           {
             "type": "form_loc_profile",
-            "ref": "artifact://form_loc_profile/1.0/art_form_loc_profile_6e7fbb75786e44f9"
+            "ref": "artifact://form_loc_profile/1.0/art_form_loc_profile_ebf90b654b81410a"
           },
           {
             "type": "connection_string_variants",
-            "ref": "artifact://connection_string_variants/1.0/art_connection_string_variants_bb98f8c97afa4fb7"
+            "ref": "artifact://connection_string_variants/1.0/art_connection_string_variants_a32adb9e99c547d3"
           },
           {
             "type": "module_global_inventory",
-            "ref": "artifact://module_global_inventory/1.0/art_module_global_inventory_8a6f66421a654b3d"
+            "ref": "artifact://module_global_inventory/1.0/art_module_global_inventory_8d5f16d1a25d4a74"
           },
           {
             "type": "dead_form_refs",
-            "ref": "artifact://dead_form_refs/1.0/art_dead_form_refs_bedac813ada34bda"
+            "ref": "artifact://dead_form_refs/1.0/art_dead_form_refs_c99413260c4e4e1d"
           },
           {
             "type": "dataenvironment_report_mapping",
-            "ref": "artifact://dataenvironment_report_mapping/1.0/art_dataenvironment_report_mapping_d79c794d6c31422b"
+            "ref": "artifact://dataenvironment_report_mapping/1.0/art_dataenvironment_report_mapping_ce54f64090304c0e"
           },
           {
             "type": "static_risk_detectors",
-            "ref": "artifact://static_risk_detectors/1.0/art_static_risk_detectors_ad87f606267c4eb6"
+            "ref": "artifact://static_risk_detectors/1.0/art_static_risk_detectors_3f5ac9b6e9924902"
           },
           {
             "type": "delivery_constitution",
-            "ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_397d40470edf41d4"
+            "ref": "artifact://delivery_constitution/1.0/art_delivery_constitution_4a2db5ecb48a4c2b"
           },
           {
             "type": "variant_diff_report",
-            "ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_425d0a0f3aa9457e"
+            "ref": "artifact://variant_diff_report/1.0/art_variant_diff_report_7aca59fb245e493f"
           },
           {
             "type": "reporting_model",
-            "ref": "artifact://reporting_model/1.0/art_reporting_model_d643c114c84a47fc"
+            "ref": "artifact://reporting_model/1.0/art_reporting_model_72a41e30b5ea4160"
           },
           {
             "type": "identity_access_model",
-            "ref": "artifact://identity_access_model/1.0/art_identity_access_model_c10d3747756c4379"
+            "ref": "artifact://identity_access_model/1.0/art_identity_access_model_46097b4419aa4e98"
           },
           {
             "type": "discover_review_checklist",
-            "ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_04780a6f9e00459f"
+            "ref": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_ae6a0e56f4c04ec0"
           }
         ],
-        "artifact_id": "art_artifact_index_dd669b72a2884a51",
-        "run_id": "run_f9d53003cd3e",
-        "generated_at": "2026-04-23T14:22:14.012357+00:00",
+        "artifact_id": "art_artifact_index_562b5fffbe714caa",
+        "run_id": "run_99bc0e1c113f",
+        "generated_at": "2026-04-23T16:38:27.604785+00:00",
         "producer": {
           "agent": "Analyst Agent",
           "skill_pack": "generic_legacy",
@@ -14774,7 +15248,7 @@
           "repo": "Synthetix",
           "branch": "codex-synthetix-ui-v2-claude",
           "commit_sha": "90f3b99349e516fa81ca79b1e4f33c37ef741d40",
-          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
+          "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
           "canonical_project": "Project 1",
           "target_stack": {
             "language": "Unknown",
@@ -14784,46 +15258,46 @@
         }
       },
       "artifact_refs": {
-        "legacy_inventory": "artifact://legacy_inventory/1.0/art_legacy_inventory_fa85c9bd2fe24f66",
-        "repo_landscape": "artifact://repo_landscape/1.0/art_repo_landscape_53bb62f2cf8a4af4",
-        "scope_lock": "artifact://scope_lock/1.0/art_scope_lock_2796cdb7abc1479b",
-        "variant_inventory": "artifact://variant_inventory/1.0/art_variant_inventory_ef55bb0f808740e6",
-        "dependency_inventory": "artifact://dependency_inventory/1.0/art_dependency_inventory_332ae451bdd24c15",
-        "event_map": "artifact://event_map/1.0/art_event_map_6f667dd904a84825",
-        "sql_catalog": "artifact://sql_catalog/1.0/art_sql_catalog_a7310d000bb74b4f",
-        "sql_map": "artifact://sql_map/1.0/art_sql_map_b62a11ccac4b40fe",
-        "data_access_map": "artifact://data_access_map/1.0/art_data_access_map_d05f877683564e54",
-        "recordset_ops": "artifact://recordset_ops/1.0/art_recordset_ops_fb384316e1aa432c",
-        "procedure_summary": "artifact://procedure_summary/1.0/art_procedure_summary_29b564021665475e",
-        "form_dossier": "artifact://form_dossier/1.0/art_form_dossier_b1f31b6e0c2d44c7",
-        "business_rule_catalog": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_bd1f00761de74c14",
-        "detector_findings": "artifact://detector_findings/1.0/art_detector_findings_b8e33984cc5c4af4",
-        "risk_register": "artifact://risk_register/1.0/art_risk_register_9999e85985764b45",
-        "orphan_analysis": "artifact://orphan_analysis/1.0/art_orphan_analysis_56feb6efc0a84a29",
-        "project_metrics": "artifact://project_metrics/1.0/art_project_metrics_f424d23134964200",
-        "static_forensics_layer": "artifact://static_forensics_layer/1.0/art_static_forensics_layer_12fc8e216a334967",
-        "type_metrics": "artifact://type_metrics/1.0/art_type_metrics_5eb0b7a5c738436f",
-        "type_dependency_matrix": "artifact://type_dependency_matrix/1.0/art_type_dependency_matrix_fcaf721db3294c62",
-        "runtime_dependency_matrix": "artifact://runtime_dependency_matrix/1.0/art_runtime_dependency_matrix_6fcf9d7ad0f64cd9",
-        "dead_code_report": "artifact://dead_code_report/1.0/art_dead_code_report_06e4f8428d744934",
-        "third_party_usage": "artifact://third_party_usage/1.0/art_third_party_usage_d0c93b9d948a4cfd",
-        "code_quality_rules": "artifact://code_quality_rules/1.0/art_code_quality_rules_ac40ffc3595747a6",
-        "quality_violation_report": "artifact://quality_violation_report/1.0/art_quality_violation_report_8b55a9e26359498b",
-        "trend_snapshot": "artifact://trend_snapshot/1.0/art_trend_snapshot_01d62972922b4239",
-        "trend_series": "artifact://trend_series/1.0/art_trend_series_d75f06f8e7ce4b29",
-        "mdb_inventory": "artifact://mdb_inventory/1.0/art_mdb_inventory_fe3394b3bbf04c21",
-        "form_loc_profile": "artifact://form_loc_profile/1.0/art_form_loc_profile_6e7fbb75786e44f9",
-        "connection_string_variants": "artifact://connection_string_variants/1.0/art_connection_string_variants_bb98f8c97afa4fb7",
-        "module_global_inventory": "artifact://module_global_inventory/1.0/art_module_global_inventory_8a6f66421a654b3d",
-        "dead_form_refs": "artifact://dead_form_refs/1.0/art_dead_form_refs_bedac813ada34bda",
-        "dataenvironment_report_mapping": "artifact://dataenvironment_report_mapping/1.0/art_dataenvironment_report_mapping_d79c794d6c31422b",
-        "static_risk_detectors": "artifact://static_risk_detectors/1.0/art_static_risk_detectors_ad87f606267c4eb6",
-        "delivery_constitution": "artifact://delivery_constitution/1.0/art_delivery_constitution_397d40470edf41d4",
-        "variant_diff_report": "artifact://variant_diff_report/1.0/art_variant_diff_report_425d0a0f3aa9457e",
-        "reporting_model": "artifact://reporting_model/1.0/art_reporting_model_d643c114c84a47fc",
-        "identity_access_model": "artifact://identity_access_model/1.0/art_identity_access_model_c10d3747756c4379",
-        "discover_review_checklist": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_04780a6f9e00459f",
-        "artifact_index": "artifact://artifact_index/1.0/art_artifact_index_dd669b72a2884a51"
+        "legacy_inventory": "artifact://legacy_inventory/1.0/art_legacy_inventory_30931c443cab4ef4",
+        "repo_landscape": "artifact://repo_landscape/1.0/art_repo_landscape_7080a1bf4bee429e",
+        "scope_lock": "artifact://scope_lock/1.0/art_scope_lock_6088e9ff772d4d76",
+        "variant_inventory": "artifact://variant_inventory/1.0/art_variant_inventory_2b9a1cbaf4d748ee",
+        "dependency_inventory": "artifact://dependency_inventory/1.0/art_dependency_inventory_028622b4d77f4b62",
+        "event_map": "artifact://event_map/1.0/art_event_map_c5a7e31604e745f3",
+        "sql_catalog": "artifact://sql_catalog/1.0/art_sql_catalog_4d0b3fc196984a34",
+        "sql_map": "artifact://sql_map/1.0/art_sql_map_013726726b3e44af",
+        "data_access_map": "artifact://data_access_map/1.0/art_data_access_map_9fc965b24e2c4cc2",
+        "recordset_ops": "artifact://recordset_ops/1.0/art_recordset_ops_f3a95f75f83b49cb",
+        "procedure_summary": "artifact://procedure_summary/1.0/art_procedure_summary_772cd32d7298429f",
+        "form_dossier": "artifact://form_dossier/1.0/art_form_dossier_c215bc73e4374962",
+        "business_rule_catalog": "artifact://business_rule_catalog/1.0/art_business_rule_catalog_457a5e76c4334777",
+        "detector_findings": "artifact://detector_findings/1.0/art_detector_findings_ed369acea436436f",
+        "risk_register": "artifact://risk_register/1.0/art_risk_register_2d4d4a8e64bf4dc5",
+        "orphan_analysis": "artifact://orphan_analysis/1.0/art_orphan_analysis_a272f3ce621c4eed",
+        "project_metrics": "artifact://project_metrics/1.0/art_project_metrics_36112b2713b9499d",
+        "static_forensics_layer": "artifact://static_forensics_layer/1.0/art_static_forensics_layer_b6daae5ba81a4b8a",
+        "type_metrics": "artifact://type_metrics/1.0/art_type_metrics_8dd4dc45631f45a8",
+        "type_dependency_matrix": "artifact://type_dependency_matrix/1.0/art_type_dependency_matrix_64b36efcae5a4992",
+        "runtime_dependency_matrix": "artifact://runtime_dependency_matrix/1.0/art_runtime_dependency_matrix_6316dfff0adf4d1f",
+        "dead_code_report": "artifact://dead_code_report/1.0/art_dead_code_report_cef928f26d1b4ae5",
+        "third_party_usage": "artifact://third_party_usage/1.0/art_third_party_usage_8def15bb6b76457c",
+        "code_quality_rules": "artifact://code_quality_rules/1.0/art_code_quality_rules_2f556482f2444146",
+        "quality_violation_report": "artifact://quality_violation_report/1.0/art_quality_violation_report_6dd9f7cdd94745c9",
+        "trend_snapshot": "artifact://trend_snapshot/1.0/art_trend_snapshot_f04acebaf6344856",
+        "trend_series": "artifact://trend_series/1.0/art_trend_series_3530e49416a441b7",
+        "mdb_inventory": "artifact://mdb_inventory/1.0/art_mdb_inventory_7cf268dab09946db",
+        "form_loc_profile": "artifact://form_loc_profile/1.0/art_form_loc_profile_ebf90b654b81410a",
+        "connection_string_variants": "artifact://connection_string_variants/1.0/art_connection_string_variants_a32adb9e99c547d3",
+        "module_global_inventory": "artifact://module_global_inventory/1.0/art_module_global_inventory_8d5f16d1a25d4a74",
+        "dead_form_refs": "artifact://dead_form_refs/1.0/art_dead_form_refs_c99413260c4e4e1d",
+        "dataenvironment_report_mapping": "artifact://dataenvironment_report_mapping/1.0/art_dataenvironment_report_mapping_ce54f64090304c0e",
+        "static_risk_detectors": "artifact://static_risk_detectors/1.0/art_static_risk_detectors_3f5ac9b6e9924902",
+        "delivery_constitution": "artifact://delivery_constitution/1.0/art_delivery_constitution_4a2db5ecb48a4c2b",
+        "variant_diff_report": "artifact://variant_diff_report/1.0/art_variant_diff_report_7aca59fb245e493f",
+        "reporting_model": "artifact://reporting_model/1.0/art_reporting_model_72a41e30b5ea4160",
+        "identity_access_model": "artifact://identity_access_model/1.0/art_identity_access_model_46097b4419aa4e98",
+        "discover_review_checklist": "artifact://discover_review_checklist/1.0/art_discover_review_checklist_ae6a0e56f4c04ec0",
+        "artifact_index": "artifact://artifact_index/1.0/art_artifact_index_562b5fffbe714caa"
       },
       "raw_compiler_version": "2.7.2",
       "repo_landscape_v1": {
@@ -17986,7 +18460,7 @@
   "qa_report_v1": {
     "artifact_type": "qa_report",
     "artifact_version": "1.0",
-    "generated_at": "2026-04-23T14:22:14.013044+00:00",
+    "generated_at": "2026-04-23T16:38:27.606110+00:00",
     "summary": {
       "status": "WARN",
       "pass_count": 11,
@@ -18003,7 +18477,7 @@
           "id": "struct_rule_ids_unique",
           "title": "Business rule IDs are unique",
           "result": "pass",
-          "detail": "1 rule IDs validated.",
+          "detail": "2 rule IDs validated.",
           "blocking": false,
           "refs": [
             "raw_artifacts.business_rule_catalog.rules"
@@ -18034,7 +18508,7 @@
           "id": "struct_form_ref_integrity",
           "title": "Rule form references resolve",
           "result": "warn",
-          "detail": "Unresolved form references detected: Business Logic Module",
+          "detail": "Unresolved form references detected: Authentication, User Management",
           "blocking": false,
           "refs": [
             "raw_artifacts.business_rule_catalog.rules",
@@ -18210,7 +18684,7 @@
     "run_id": "20260423_081606_9f724e96",
     "repo_url": "https://github.com/vishakjai/kotlin-spring-vue"
   },
-  "assistant_summary": "This project involves migrating a Kotlin codebase to Go, ensuring the preservation of existing functionality and adherence to mobile app standards.",
+  "assistant_summary": "This project involves migrating a Kotlin codebase to Go, ensuring all existing functionalities are preserved and the code adheres to best practices.",
   "repo": {
     "owner": "vishakjai",
     "repository": "kotlin-spring-vue",
@@ -18898,7 +19372,7 @@
       "source_influenced": false,
       "reason": "No active knowledge sources in run context snapshot."
     },
-    "evaluated_at": "2026-04-23T14:22:14.578507+00:00"
+    "evaluated_at": "2026-04-23T16:38:28.250944+00:00"
   },
   "run_id": "20260423_081606_9f724e96"
 }
