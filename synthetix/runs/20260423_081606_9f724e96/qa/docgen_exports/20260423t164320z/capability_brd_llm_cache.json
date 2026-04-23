@@ -1,0 +1,345 @@
+{
+  "_schema": "capability-llm-extract-v1",
+  "modules": {
+    "backend": {
+      "symbol_hash": "cbb4e92508193d3c",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Authenticate User",
+            "description": "Validates user credentials and returns JWT token for authenticated access",
+            "preconditions": [
+              "Valid username and password provided",
+              "ReCaptcha token validation passes"
+            ],
+            "postconditions": [
+              "JWT token generated and returned",
+              "User authentication context established"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AuthController.authenticateUser() -> UserRepository.findByUsername() -> JwtProvider.generateJwtToken()",
+            "source_method": "AuthController.authenticateUser",
+            "business_logic_steps": [
+              "1. Validate ReCaptcha token to prevent automated attacks.",
+              "2. Look up user by username in database.",
+              "3. If user exists, authenticate credentials using Spring Security.",
+              "4. Generate JWT token with user information and roles.",
+              "5. Return JWT response with token and user authorities.",
+              "6. Return error response if validation fails or user not found."
+            ],
+            "fr_id": "FR-BAC-001",
+            "source_module": "backend",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+                "class_name": "AuthController",
+                "method_name": "authenticateUser"
+              }
+            ]
+          },
+          {
+            "feature_name": "Register User",
+            "description": "Creates new user account with validation and role assignment",
+            "preconditions": [
+              "Valid user registration data",
+              "Username and email not already taken"
+            ],
+            "postconditions": [
+              "New user created in database",
+              "Default ROLE_USER assigned"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AuthController.registerUser() -> UserRepository.save() -> RoleRepository.findByName()",
+            "source_method": "AuthController.registerUser",
+            "business_logic_steps": [
+              "1. Validate ReCaptcha token for registration request.",
+              "2. Check if username already exists in database.",
+              "3. Check if email is already registered.",
+              "4. Encode password using BCrypt encryption.",
+              "5. Create User entity with default ROLE_USER role.",
+              "6. Save new user to database and return success response."
+            ],
+            "fr_id": "FR-BAC-002",
+            "source_module": "backend",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+                "class_name": "AuthController",
+                "method_name": "registerUser"
+              }
+            ]
+          },
+          {
+            "feature_name": "Validate JWT Token",
+            "description": "Verifies JWT token authenticity and extracts user information",
+            "preconditions": [
+              "JWT token provided in Authorization header"
+            ],
+            "postconditions": [
+              "Token validated and user context established",
+              "Security context updated"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "JwtAuthTokenFilter.doFilterInternal() -> JwtProvider.validateJwtToken() -> UserDetailsServiceImpl.loadUserByUsername()",
+            "source_method": "JwtAuthTokenFilter.doFilterInternal",
+            "business_logic_steps": [
+              "1. Extract JWT token from Authorization header.",
+              "2. Validate token signature and expiration using secret key.",
+              "3. Extract username from validated token claims.",
+              "4. Load user details from database using username.",
+              "5. Create authentication context with user authorities.",
+              "6. Set security context for current request thread."
+            ],
+            "fr_id": "FR-BAC-003",
+            "source_module": "backend",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthTokenFilter.kt",
+                "class_name": "JwtAuthTokenFilter",
+                "method_name": "doFilterInternal"
+              }
+            ]
+          },
+          {
+            "feature_name": "Generate JWT Token",
+            "description": "Creates signed JWT token with user claims and expiration",
+            "preconditions": [
+              "Valid username provided",
+              "JWT secret and expiration configured"
+            ],
+            "postconditions": [
+              "Signed JWT token returned with user claims"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "JwtProvider.generateJwtToken() -> Jwts.builder().signWith()",
+            "source_method": "JwtProvider.generateJwtToken",
+            "business_logic_steps": [
+              "1. Set username as token subject claim.",
+              "2. Set current timestamp as issued date.",
+              "3. Calculate expiration time using configured duration.",
+              "4. Sign token with HS512 algorithm and secret key.",
+              "5. Compact token to string format.",
+              "6. Return signed JWT token string."
+            ],
+            "fr_id": "FR-BAC-004",
+            "source_module": "backend",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtProvider.kt",
+                "class_name": "JwtProvider",
+                "method_name": "generateJwtToken"
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Null-Bang (!!) Operator",
+            "description": "Code uses the force-unwrap (!!) operator, which throws NullPointerException when the left-hand side is null \u2014 a latent defect surface worth auditing.",
+            "source_evidence": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthTokenFilter.kt:33; backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthEntryPoint.kt:23; backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt:73",
+            "rule_category": "validation",
+            "enforced_in_layer": "ViewModel",
+            "source_module": "backend",
+            "rule_id": "BR-BAC-001"
+          },
+          {
+            "rule_name": "ReCaptcha Validation Required",
+            "description": "All authentication and registration requests must pass ReCaptcha validation",
+            "source_evidence": "AuthController.kt:authenticateUser() and registerUser() \u2014 validates recaptchaToken before processing",
+            "rule_category": "validation",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-BAC-002",
+            "source_module": "backend"
+          },
+          {
+            "rule_name": "Unique Username Constraint",
+            "description": "Username must be unique across all user accounts",
+            "source_evidence": "AuthController.kt:registerUser() \u2014 checks usernameExists() before creating user",
+            "rule_category": "validation",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-BAC-003",
+            "source_module": "backend"
+          },
+          {
+            "rule_name": "Password Encryption",
+            "description": "All user passwords must be encrypted using BCrypt before storage",
+            "source_evidence": "AuthController.kt:registerUser() \u2014 encoder.encode(newUser.password) before saving",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-BAC-004",
+            "source_module": "backend"
+          },
+          {
+            "rule_name": "Default Role Assignment",
+            "description": "New users are automatically assigned ROLE_USER role",
+            "source_evidence": "AuthController.kt:registerUser() \u2014 user.roles = Arrays.asList(roleRepository.findByName(\"ROLE_USER\"))",
+            "rule_category": "fallback",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-BAC-005",
+            "source_module": "backend"
+          },
+          {
+            "rule_name": "JWT Token Expiration",
+            "description": "JWT tokens must have configurable expiration time",
+            "source_evidence": "JwtProvider.kt:generateJwtToken() \u2014 setExpiration(Date((Date()).getTime() + jwtExpiration!! * 1000))",
+            "rule_category": "validation",
+            "enforced_in_layer": "JWT",
+            "rule_id": "BR-BAC-006",
+            "source_module": "backend"
+          },
+          {
+            "rule_name": "Bearer Token Format",
+            "description": "Authorization header must use Bearer token format",
+            "source_evidence": "JwtAuthTokenFilter.kt:getJwt() \u2014 authHeader.startsWith(\"Bearer \")",
+            "rule_category": "validation",
+            "enforced_in_layer": "Filter",
+            "rule_id": "BR-BAC-007",
+            "source_module": "backend"
+          }
+        ],
+        "fr29_error_handling": [
+          {
+            "location": "JwtAuthTokenFilter.doFilterInternal",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthTokenFilter.kt",
+            "error_type": "Exception",
+            "handling_strategy": "log error and continue filter chain",
+            "log_tag": "authentication_error",
+            "user_visible": false,
+            "recovery_possible": true,
+            "eh_id": "EH-BAC-001",
+            "source_module": "backend"
+          },
+          {
+            "location": "JwtAuthEntryPoint.commence",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthEntryPoint.kt",
+            "error_type": "AuthenticationException",
+            "handling_strategy": "log error and return 401 Unauthorized",
+            "log_tag": "unauthorized_error",
+            "user_visible": true,
+            "recovery_possible": false,
+            "eh_id": "EH-BAC-002",
+            "source_module": "backend"
+          },
+          {
+            "location": "JwtProvider.validateJwtToken",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtProvider.kt",
+            "error_type": "JWT validation exceptions",
+            "handling_strategy": "log specific JWT error and return false",
+            "log_tag": "jwt_validation_error",
+            "user_visible": false,
+            "recovery_possible": false,
+            "eh_id": "EH-BAC-003",
+            "source_module": "backend"
+          },
+          {
+            "location": "AuthController.authenticateUser",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+            "error_type": "ReCaptcha validation failure",
+            "handling_strategy": "return BAD_REQUEST with validation message",
+            "log_tag": "",
+            "user_visible": true,
+            "recovery_possible": true,
+            "eh_id": "EH-BAC-004",
+            "source_module": "backend"
+          },
+          {
+            "location": "AuthController.registerUser",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+            "error_type": "Username/Email already exists",
+            "handling_strategy": "return BAD_REQUEST with specific error message",
+            "log_tag": "",
+            "user_visible": true,
+            "recovery_possible": true,
+            "eh_id": "EH-BAC-005",
+            "source_module": "backend"
+          }
+        ],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "AuthController.emailExists() uses findByUsername instead of findByEmail for email validation",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+            "line": 95,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Change to userRepository.findByEmail(email).isPresent",
+            "ec_id": "EC-BAC-001",
+            "source_module": "backend",
+            "risk": "HIGH"
+          },
+          {
+            "ec_type": "null_handling",
+            "scenario": "JwtProvider uses nullable jwtExpiration with force unwrap (!!)",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtProvider.kt",
+            "line": 30,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Add null check or provide default value",
+            "ec_id": "EC-BAC-002",
+            "source_module": "backend",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "User entity fields are nullable but no null checks in authentication flow",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jpa/User.kt",
+            "line": 15,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Add null validation in authentication methods",
+            "ec_id": "EC-BAC-003",
+            "source_module": "backend",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "WebSecurityConfig permits all requests with antMatchers(\"/**\").permitAll()",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/config/WebSecurityConfig.kt",
+            "line": 58,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Configure proper endpoint-specific security rules",
+            "ec_id": "EC-BAC-004",
+            "source_module": "backend",
+            "risk": "HIGH"
+          },
+          {
+            "ec_type": "null_handling",
+            "scenario": "JwtAuthTokenFilter uses nullable tokenProvider and userDetailsService with force unwrap",
+            "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthTokenFilter.kt",
+            "line": 28,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Add null checks or make fields non-nullable",
+            "ec_id": "EC-BAC-005",
+            "source_module": "backend",
+            "risk": "MEDIUM"
+          }
+        ]
+      }
+    },
+    "frontend": {
+      "symbol_hash": "97d170e1550eee4a",
+      "payload": {
+        "fr24_capabilities": [],
+        "fr25_business_rules": [],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": []
+      }
+    }
+  }
+}
