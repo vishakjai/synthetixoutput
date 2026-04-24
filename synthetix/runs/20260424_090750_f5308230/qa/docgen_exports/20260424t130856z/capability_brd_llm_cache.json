@@ -1,0 +1,1830 @@
+{
+  "_schema": "capability-llm-extract-v1",
+  "modules": {
+    "Classes": {
+      "symbol_hash": "81e02eaf81160a94",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Search Documents",
+            "description": "Execute document search queries using Sphinx search engine with boolean and main query support",
+            "preconditions": [
+              "Search query provided",
+              "Sphinx client configured"
+            ],
+            "postconditions": [
+              "Search results returned",
+              "Query executed successfully"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "DocumentSearch.run() -> runBooleanQuery() | runMainQuery() -> SphinxClient",
+            "source_method": "DocumentSearch.run",
+            "business_logic_steps": [
+              "1. Initialize DocumentSearch with configuration",
+              "2. Determine query type (boolean or main)",
+              "3. Execute appropriate query method",
+              "4. Process search results from Sphinx",
+              "5. Return formatted results to caller"
+            ],
+            "fr_id": "FR-CLA-001",
+            "source_module": "Classes",
+            "traceability": []
+          },
+          {
+            "feature_name": "Broker Messages",
+            "description": "Handle message brokering between services with validation and dispatch capabilities",
+            "preconditions": [
+              "Message broker initialized",
+              "Valid recipients configured"
+            ],
+            "postconditions": [
+              "Messages dispatched",
+              "Recipients validated"
+            ],
+            "actors": [
+              "System",
+              "Services"
+            ],
+            "data_flow": "MsgBroker.send() -> dispatch() -> isValidRecipient() -> handleUnsolicited()",
+            "source_method": "MsgBroker.send",
+            "business_logic_steps": [
+              "1. Receive message for brokering",
+              "2. Validate recipient and originator",
+              "3. Dispatch message to appropriate handler",
+              "4. Handle unsolicited messages if needed",
+              "5. Listen for incoming messages",
+              "6. Return dispatch status to caller"
+            ],
+            "fr_id": "FR-CLA-002",
+            "source_module": "Classes",
+            "traceability": []
+          },
+          {
+            "feature_name": "Locate Services",
+            "description": "Discover and connect to available services through message client interface",
+            "preconditions": [
+              "Message client initialized",
+              "Service registry available"
+            ],
+            "postconditions": [
+              "Service located",
+              "Connection established"
+            ],
+            "actors": [
+              "System",
+              "Services"
+            ],
+            "data_flow": "MsgClient.locateService() -> sendRequestForService() -> receiveAnswerToRequest()",
+            "source_method": "MsgClient.locateService",
+            "business_logic_steps": [
+              "1. Send service location request",
+              "2. Wait for service response",
+              "3. Validate service availability",
+              "4. Establish connection if valid",
+              "5. Return service endpoint to caller"
+            ],
+            "fr_id": "FR-CLA-003",
+            "source_module": "Classes",
+            "traceability": []
+          },
+          {
+            "feature_name": "Serialize Messages",
+            "description": "Convert message objects to/from JSON format for transmission",
+            "preconditions": [
+              "Message object exists",
+              "Valid data structure"
+            ],
+            "postconditions": [
+              "JSON serialized/deserialized",
+              "Data integrity maintained"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "MsgObj.toJSON() | fromJSON() -> setValid()",
+            "source_method": "MsgObj.toJSON",
+            "business_logic_steps": [
+              "1. Validate message object structure",
+              "2. Convert object properties to JSON",
+              "3. Set validation flag if successful",
+              "4. Handle serialization errors",
+              "5. Return JSON string or object"
+            ],
+            "fr_id": "FR-CLA-004",
+            "source_module": "Classes",
+            "traceability": []
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Message Validation",
+            "description": "All messages must have valid recipients and originators before dispatch",
+            "source_evidence": "MsgBroker.php:isValidRecipient() and isValidOriginator() methods validate before dispatch",
+            "rule_category": "validation",
+            "enforced_in_layer": "Broker",
+            "rule_id": "BR-CLA-001",
+            "source_module": "Classes"
+          },
+          {
+            "rule_name": "Configuration Dependency Injection",
+            "description": "System components are provided through IoC container for loose coupling",
+            "source_evidence": "ConfigIoC.php:getDatabase(), getBroker(), getClient() methods provide configured instances",
+            "rule_category": "dependency_injection",
+            "enforced_in_layer": "Configuration",
+            "rule_id": "BR-CLA-002",
+            "source_module": "Classes"
+          },
+          {
+            "rule_name": "Singleton Pattern",
+            "description": "Certain system components must maintain single instance throughout application lifecycle",
+            "source_evidence": "Singleton.php:__construct() enforces single instance creation pattern",
+            "rule_category": "instantiation",
+            "enforced_in_layer": "System",
+            "rule_id": "BR-CLA-003",
+            "source_module": "Classes"
+          }
+        ],
+        "fr29_error_handling": [
+          {
+            "location": "SphinxClient.GetLastError",
+            "source_file": "Classes/SphinxClient.php",
+            "error_type": "Connection Error",
+            "handling_strategy": "return error message string",
+            "log_tag": "",
+            "user_visible": true,
+            "recovery_possible": true,
+            "eh_id": "EH-CLA-001",
+            "source_module": "Classes"
+          },
+          {
+            "location": "SphinxClient.IsConnectError",
+            "source_file": "Classes/SphinxClient.php",
+            "error_type": "Connection Error",
+            "handling_strategy": "return boolean connection status",
+            "log_tag": "",
+            "user_visible": false,
+            "recovery_possible": true,
+            "eh_id": "EH-CLA-002",
+            "source_module": "Classes"
+          },
+          {
+            "location": "MsgBroker.handleUnsolicited",
+            "source_file": "Classes/MsgBroker.php",
+            "error_type": "Unsolicited Message",
+            "handling_strategy": "handle unexpected messages gracefully",
+            "log_tag": "",
+            "user_visible": false,
+            "recovery_possible": true,
+            "eh_id": "EH-CLA-003",
+            "source_module": "Classes"
+          }
+        ],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "SphinxClient connection methods may return null on failure",
+            "source_file": "Classes/SphinxClient.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "MEDIUM",
+            "remediation": "implement proper null checks and fallback handling",
+            "ec_id": "EC-CLA-001",
+            "source_module": "Classes",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Message validation may fail for edge cases in recipient/originator validation",
+            "source_file": "Classes/MsgBroker.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "MEDIUM",
+            "remediation": "add comprehensive validation rules and error handling",
+            "ec_id": "EC-CLA-002",
+            "source_module": "Classes",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "Configuration IoC may need default values when dependencies unavailable",
+            "source_file": "Classes/ConfigIoC.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "implement default configuration fallbacks",
+            "ec_id": "EC-CLA-003",
+            "source_module": "Classes",
+            "risk": "LOW"
+          }
+        ]
+      }
+    },
+    "Controller": {
+      "symbol_hash": "dc6303e60212676d",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Manage Academy Batches",
+            "description": "Create, validate, and manage academy batch entities with form handling and persistence",
+            "preconditions": [
+              "User has access to academy batch management",
+              "Valid form data provided"
+            ],
+            "postconditions": [
+              "Academy batch entity created or updated",
+              "Validation rules applied",
+              "Data persisted to storage"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "Academy_batchEntityController.create() -> validate() -> postSave()",
+            "source_method": "Academy_batchEntityController.create",
+            "business_logic_steps": [
+              "1. Initialize new academy batch entity through create() method",
+              "2. Apply form validation rules via validate() method",
+              "3. Execute onNew() or onExists() based on entity state",
+              "4. Perform pre-save operations and data transformation",
+              "5. Persist entity data through postSave() method",
+              "6. Return success status to caller"
+            ],
+            "fr_id": "FR-CON-001",
+            "source_module": "Controller",
+            "traceability": []
+          },
+          {
+            "feature_name": "Search Academy Batches",
+            "description": "Search and retrieve academy batch records with filtering and labeling capabilities",
+            "preconditions": [
+              "Search parameters provided",
+              "User has search permissions"
+            ],
+            "postconditions": [
+              "Filtered batch results returned",
+              "Search labels applied",
+              "Results formatted for display"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "Academy_batchSearchController.run() -> search() -> label()",
+            "source_method": "Academy_batchSearchController.search",
+            "business_logic_steps": [
+              "1. Execute search operation through run() method",
+              "2. Apply search filters and criteria via search() method",
+              "3. Generate appropriate labels for results using label() method",
+              "4. Format search results for presentation",
+              "5. Return paginated or filtered result set",
+              "6. Provide navigation links through links() method"
+            ],
+            "fr_id": "FR-CON-002",
+            "source_module": "Controller",
+            "traceability": []
+          },
+          {
+            "feature_name": "Manage Accounts",
+            "description": "Create, update, validate, and delete account entities with comprehensive form handling",
+            "preconditions": [
+              "Valid account data",
+              "User authorization",
+              "Form validation passed"
+            ],
+            "postconditions": [
+              "Account entity persisted",
+              "Validation applied",
+              "Deletion requests processed"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AccountEntityController.create() -> validate() -> preSave() -> submitDelRequest()",
+            "source_method": "AccountEntityController.create",
+            "business_logic_steps": [
+              "1. Create new account entity or load existing via create() method",
+              "2. Apply comprehensive validation rules through validate() method",
+              "3. Execute pre-save data preparation via preSave() method",
+              "4. Handle entity state with onNew() or existing entity logic",
+              "5. Process deletion requests through submitDelRequest() if applicable",
+              "6. Generate form labels and headlines for UI presentation"
+            ],
+            "fr_id": "FR-CON-003",
+            "source_module": "Controller",
+            "traceability": []
+          },
+          {
+            "feature_name": "Search Accounts",
+            "description": "Search and filter account records with labeling and link generation",
+            "preconditions": [
+              "Search criteria provided",
+              "User has search access"
+            ],
+            "postconditions": [
+              "Account search results returned",
+              "Navigation links generated",
+              "Labels applied"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AccountSearchController.search() -> label() -> links()",
+            "source_method": "AccountSearchController.search",
+            "business_logic_steps": [
+              "1. Execute account search with provided criteria",
+              "2. Apply search filters and sorting logic",
+              "3. Generate descriptive labels for search results",
+              "4. Create navigation and action links for results",
+              "5. Format results for display presentation",
+              "6. Return structured search response to caller"
+            ],
+            "fr_id": "FR-CON-004",
+            "source_module": "Controller",
+            "traceability": []
+          },
+          {
+            "feature_name": "Manage Action Items",
+            "description": "Create, validate, and manage action items with file download capabilities",
+            "preconditions": [
+              "Valid action item data",
+              "User permissions",
+              "File access if downloading"
+            ],
+            "postconditions": [
+              "Action items created or updated",
+              "Files downloaded if requested",
+              "Custom labels applied"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "Action_itemsEntityController.create() -> validate() -> postSave() -> getCustomLabel()",
+            "source_method": "Action_itemsEntityController.create",
+            "business_logic_steps": [
+              "1. Create new action item entity through create() method",
+              "2. Apply validation rules specific to action items",
+              "3. Execute post-save operations for data consistency",
+              "4. Generate custom labels via getCustomLabel() method",
+              "5. Handle file downloads through downloadFile() if requested",
+              "6. Provide navigation links and form labels for UI"
+            ],
+            "fr_id": "FR-CON-005",
+            "source_module": "Controller",
+            "traceability": []
+          },
+          {
+            "feature_name": "Manage Addresses",
+            "description": "Create, update, and validate address entities with comprehensive lifecycle management",
+            "preconditions": [
+              "Valid address data",
+              "User authorization",
+              "Geographic data available"
+            ],
+            "postconditions": [
+              "Address entity persisted",
+              "Validation completed",
+              "Pre and post-save operations executed"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "AddressEntityController.create() -> preSave() -> postSave() -> validate()",
+            "source_method": "AddressEntityController.create",
+            "business_logic_steps": [
+              "1. Initialize address entity through create() method",
+              "2. Execute pre-save data preparation and validation",
+              "3. Handle new vs existing entity logic via onNew()/onExists()",
+              "4. Apply address-specific validation rules",
+              "5. Perform post-save operations for data integrity",
+              "6. Generate form labels and headlines for presentation"
+            ],
+            "fr_id": "FR-CON-006",
+            "source_module": "Controller",
+            "traceability": []
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Entity Validation",
+            "description": "All entity controllers must implement validate() method to ensure data integrity",
+            "source_evidence": "Multiple controllers implement validate() method - AccountEntityController.validate(), AddressEntityController.validate()",
+            "rule_category": "validation",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-CON-001",
+            "source_module": "Controller"
+          },
+          {
+            "rule_name": "Entity Lifecycle Management",
+            "description": "Controllers must handle both new entity creation and existing entity updates through onNew() and onExists() methods",
+            "source_evidence": "Academy_batchEntityController.onNew(), Academy_batchEntityController.onExists(), AddressEntityController.onNew()",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-CON-002",
+            "source_module": "Controller"
+          },
+          {
+            "rule_name": "Pre and Post Save Operations",
+            "description": "Entity controllers implement preSave() and postSave() hooks for data preparation and cleanup",
+            "source_evidence": "AccountEntityController.preSave(), AddressEntityController.preSave(), AddressEntityController.postSave()",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-CON-003",
+            "source_module": "Controller"
+          },
+          {
+            "rule_name": "Search Controller Pattern",
+            "description": "Search controllers must implement search(), label(), and links() methods for consistent search functionality",
+            "source_evidence": "AccountSearchController.search(), AccountSearchController.label(), AccountSearchController.links()",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-CON-004",
+            "source_module": "Controller"
+          },
+          {
+            "rule_name": "Form Label Generation",
+            "description": "Entity controllers must provide getFormLabel() method for consistent UI labeling",
+            "source_evidence": "Academy_batchEntityController.getFormLabel(), AccountEntityController.getFormLabel(), AddressEntityController.getFormLabel()",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Controller",
+            "rule_id": "BR-CON-005",
+            "source_module": "Controller"
+          }
+        ],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "Controllers may not handle null entity states properly in onNew() and onExists() methods",
+            "source_file": "Controller/Academy_batchEntityController.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Add null checks in entity lifecycle methods",
+            "ec_id": "EC-CON-001",
+            "source_module": "Controller",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Search controllers may not handle empty search results or invalid search criteria",
+            "source_file": "Controller/AccountSearchController.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Implement proper validation for search parameters and empty result handling",
+            "ec_id": "EC-CON-002",
+            "source_module": "Controller",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "Custom label generation may fail if getCustomLabel() returns null or empty values",
+            "source_file": "Controller/Action_itemsEntityController.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "LOW",
+            "remediation": "Provide default label values when custom label generation fails",
+            "ec_id": "EC-CON-003",
+            "source_module": "Controller",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "File download functionality may not handle missing or inaccessible files properly",
+            "source_file": "Controller/Action_itemsSearchController.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Add file existence checks and proper error handling for download operations",
+            "ec_id": "EC-CON-004",
+            "source_module": "Controller",
+            "risk": "HIGH"
+          }
+        ]
+      }
+    },
+    "Includes": {
+      "symbol_hash": "439ef63648621fdc",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Process CDR Upload",
+            "description": "Handles call detail record file uploads and processing",
+            "preconditions": [
+              "CDR file is uploaded",
+              "User has upload permissions"
+            ],
+            "postconditions": [
+              "CDR data is processed and stored",
+              "Upload status is reported"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "cdrUpload() -> cdrProcessUpload() -> Database",
+            "source_method": "cdrProcessUpload",
+            "business_logic_steps": [
+              "1. Validate uploaded CDR file format and permissions",
+              "2. Parse CDR file contents and extract call records",
+              "3. Process each call record and validate data integrity",
+              "4. Store processed CDR data in database",
+              "5. Generate upload status report",
+              "6. Return processing results to caller"
+            ],
+            "fr_id": "FR-INC-001",
+            "source_module": "Includes",
+            "traceability": []
+          },
+          {
+            "feature_name": "Generate CDR Reports",
+            "description": "Creates call detail record reports with filtering options",
+            "preconditions": [
+              "CDR data exists in database",
+              "User has report access"
+            ],
+            "postconditions": [
+              "Report is generated with requested data",
+              "Report options are preserved"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "cdrReportOptionsBox() -> cdrReport() -> Database Query",
+            "source_method": "cdrReport",
+            "business_logic_steps": [
+              "1. Display report options and filters to user",
+              "2. Collect user-selected report parameters",
+              "3. Query CDR database with applied filters",
+              "4. Format query results into report structure",
+              "5. Generate output in requested format",
+              "6. Return formatted report to user"
+            ],
+            "fr_id": "FR-INC-002",
+            "source_module": "Includes",
+            "traceability": []
+          },
+          {
+            "feature_name": "Manage Delivery Teams",
+            "description": "Handles delivery team employee assignments and leadership",
+            "preconditions": [
+              "Employee data exists",
+              "User has team management rights"
+            ],
+            "postconditions": [
+              "Team assignments are updated",
+              "Leadership roles are assigned"
+            ],
+            "actors": [
+              "Manager",
+              "System"
+            ],
+            "data_flow": "employeeDeliveryTeam() -> deliveryteamLeader() -> Database Update",
+            "source_method": "employeeDeliveryTeam",
+            "business_logic_steps": [
+              "1. Retrieve current delivery team assignments",
+              "2. Validate employee eligibility for team assignment",
+              "3. Update team membership and leadership roles",
+              "4. Store team configuration changes",
+              "5. Notify affected employees of changes",
+              "6. Return updated team structure"
+            ],
+            "fr_id": "FR-INC-003",
+            "source_module": "Includes",
+            "traceability": []
+          },
+          {
+            "feature_name": "Generate HTML Output",
+            "description": "Creates dynamic HTML elements and forms for web interface",
+            "preconditions": [
+              "Template data is available",
+              "Output parameters are valid"
+            ],
+            "postconditions": [
+              "HTML elements are generated",
+              "Forms are properly structured"
+            ],
+            "actors": [
+              "System",
+              "User"
+            ],
+            "data_flow": "create_form() -> create_input_*() -> create_document()",
+            "source_method": "create_document",
+            "business_logic_steps": [
+              "1. Parse template requirements and data inputs",
+              "2. Generate individual HTML elements with attributes",
+              "3. Assemble form structures with validation",
+              "4. Apply styling and JavaScript integration",
+              "5. Validate HTML structure and accessibility",
+              "6. Return complete HTML document or fragment"
+            ],
+            "fr_id": "FR-INC-004",
+            "source_module": "Includes",
+            "traceability": []
+          },
+          {
+            "feature_name": "Generate Employee Reports",
+            "description": "Creates activity and attrition reports for employee analysis",
+            "preconditions": [
+              "Employee activity logs exist",
+              "Reporting period is defined"
+            ],
+            "postconditions": [
+              "Reports show employee metrics",
+              "Attrition percentages calculated"
+            ],
+            "actors": [
+              "Manager",
+              "HR",
+              "System"
+            ],
+            "data_flow": "logactivityReportOptionBox() -> logactivityReport() -> logfileGetStats()",
+            "source_method": "logactivityReport",
+            "business_logic_steps": [
+              "1. Collect report parameters and date ranges",
+              "2. Query employee activity logs and statistics",
+              "3. Calculate attrition percentages and trends",
+              "4. Format data into structured report layout",
+              "5. Apply filters and grouping as requested",
+              "6. Return formatted employee analysis report"
+            ],
+            "fr_id": "FR-INC-005",
+            "source_module": "Includes",
+            "traceability": []
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "CDR File Processing",
+            "description": "CDR files must be validated and processed in sequence",
+            "source_evidence": "cdr.php:cdrProcessUpload() \u2014 handles file validation before processing",
+            "rule_category": "validation",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-INC-001",
+            "source_module": "Includes"
+          },
+          {
+            "rule_name": "Delivery Team Leadership",
+            "description": "Each delivery team must have an assigned leader",
+            "source_evidence": "delivery_team.php:deliveryteamLeader() \u2014 manages team leadership assignments",
+            "rule_category": "validation",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-INC-002",
+            "source_module": "Includes"
+          },
+          {
+            "rule_name": "HTML Element Creation",
+            "description": "All HTML elements must be properly structured with attributes",
+            "source_evidence": "output.php:create_tag() \u2014 ensures proper HTML tag structure",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Mapper",
+            "rule_id": "BR-INC-003",
+            "source_module": "Includes"
+          },
+          {
+            "rule_name": "Employee Activity Tracking",
+            "description": "Employee activities must be logged with timestamps",
+            "source_evidence": "report_employee.php:logfileGetStats() \u2014 retrieves timestamped activity data",
+            "rule_category": "caching",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-INC-004",
+            "source_module": "Includes"
+          },
+          {
+            "rule_name": "User Type Validation",
+            "description": "User permissions must be validated against role types",
+            "source_evidence": "usertype.php:isUsertypeAreaMember() \u2014 validates user area membership",
+            "rule_category": "validation",
+            "enforced_in_layer": "Validator",
+            "rule_id": "BR-INC-005",
+            "source_module": "Includes"
+          }
+        ],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "CDR upload functions may not handle empty or malformed files",
+            "source_file": "Includes/cdr.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Add file validation and null checks before processing",
+            "ec_id": "EC-INC-001",
+            "source_module": "Includes",
+            "risk": "HIGH"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Delivery team purge operation may not handle teams with active assignments",
+            "source_file": "Includes/delivery_team.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Check for active assignments before allowing team deletion",
+            "ec_id": "EC-INC-002",
+            "source_module": "Includes",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "HTML creation functions may not provide default values for missing attributes",
+            "source_file": "Includes/output.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Implement default attribute handling for robustness",
+            "ec_id": "EC-INC-003",
+            "source_module": "Includes",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "null_handling",
+            "scenario": "Employee report functions may not handle missing log files gracefully",
+            "source_file": "Includes/report_employee.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Add checks for log file existence and provide fallback data",
+            "ec_id": "EC-INC-004",
+            "source_module": "Includes",
+            "risk": "MEDIUM"
+          }
+        ]
+      }
+    },
+    "Model": {
+      "symbol_hash": "95b8a0f725b45570",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Manage Accounts",
+            "description": "Create, save, and manage account records in the system",
+            "preconditions": [
+              "Account data is available",
+              "Database connection is established"
+            ],
+            "postconditions": [
+              "Account is persisted to database",
+              "Account state is updated"
+            ],
+            "actors": [
+              "System",
+              "User"
+            ],
+            "data_flow": "Account.save() -> Database",
+            "source_method": "Account.save",
+            "business_logic_steps": [
+              "1. Validate account data fields",
+              "2. Check for existing account conflicts",
+              "3. Prepare data for database insertion",
+              "4. Execute save operation to database",
+              "5. Update account state with saved data",
+              "6. Return success status to caller"
+            ],
+            "fr_id": "FR-MOD-001",
+            "source_module": "Model",
+            "traceability": []
+          },
+          {
+            "feature_name": "Iterate Account Lists",
+            "description": "Provide iterator functionality for account collections",
+            "preconditions": [
+              "Account list is populated",
+              "Iterator is initialized"
+            ],
+            "postconditions": [
+              "All accounts are accessible via iteration",
+              "Iterator state is maintained"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "Account_list.rewind() -> Account_list.current() -> Account_list.next()",
+            "source_method": "Account_list iterator methods",
+            "business_logic_steps": [
+              "1. Initialize iterator position to start",
+              "2. Check if current position is valid",
+              "3. Return current account object",
+              "4. Advance iterator to next position",
+              "5. Validate iterator bounds",
+              "6. Provide key access for current item"
+            ],
+            "fr_id": "FR-MOD-002",
+            "source_module": "Model",
+            "traceability": []
+          },
+          {
+            "feature_name": "Populate Account Lists",
+            "description": "Load and populate account lists from data sources",
+            "preconditions": [
+              "Data source is accessible",
+              "Account list object exists"
+            ],
+            "postconditions": [
+              "Account list contains loaded data",
+              "Population status is updated"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "Account_list.populate() -> Database -> Account_list",
+            "source_method": "Account_list.populate",
+            "business_logic_steps": [
+              "1. Check if list is already populated",
+              "2. Query data source for account records",
+              "3. Transform raw data into account objects",
+              "4. Add accounts to internal collection",
+              "5. Set population status flag",
+              "6. Return populated list to caller"
+            ],
+            "fr_id": "FR-MOD-003",
+            "source_module": "Model",
+            "traceability": []
+          },
+          {
+            "feature_name": "Delete Account Records",
+            "description": "Remove individual or all account records from the system",
+            "preconditions": [
+              "Account records exist",
+              "Delete permissions are granted"
+            ],
+            "postconditions": [
+              "Specified accounts are removed",
+              "Database is updated"
+            ],
+            "actors": [
+              "System",
+              "User"
+            ],
+            "data_flow": "Account_list.deleteRecord() -> Database",
+            "source_method": "Account_list.deleteRecord",
+            "business_logic_steps": [
+              "1. Identify target account for deletion",
+              "2. Validate delete permissions",
+              "3. Check for dependent records",
+              "4. Execute delete operation on database",
+              "5. Remove from local collection",
+              "6. Update list state and return status"
+            ],
+            "fr_id": "FR-MOD-004",
+            "source_module": "Model",
+            "traceability": []
+          },
+          {
+            "feature_name": "Manage Address Records",
+            "description": "Handle address master data and address mappings",
+            "preconditions": [
+              "Address data is valid",
+              "Address master exists"
+            ],
+            "postconditions": [
+              "Address is saved",
+              "Mappings are updated"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "Addrmaster.save() -> Database",
+            "source_method": "Addrmaster.save",
+            "business_logic_steps": [
+              "1. Validate address format and fields",
+              "2. Check for duplicate addresses",
+              "3. Normalize address data",
+              "4. Save to address master table",
+              "5. Update related address mappings",
+              "6. Return saved address record"
+            ],
+            "fr_id": "FR-MOD-005",
+            "source_module": "Model",
+            "traceability": []
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Account List Population Check",
+            "description": "Ensures account lists track their population status to avoid redundant loading",
+            "source_evidence": "Account_list.php:is_populated() \u2014 returns boolean flag indicating if list has been loaded",
+            "rule_category": "caching",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-MOD-001",
+            "source_module": "Model"
+          },
+          {
+            "rule_name": "Iterator State Management",
+            "description": "Account lists must implement proper iterator interface with position tracking",
+            "source_evidence": "Account_list.php:rewind(), current(), key(), valid(), next() \u2014 standard iterator methods",
+            "rule_category": "validation",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-MOD-002",
+            "source_module": "Model"
+          },
+          {
+            "rule_name": "Batch Assignment Validation",
+            "description": "Contractors can only be added to academy batches through validated mapping",
+            "source_evidence": "Archcontractor.php:add_to_batch() \u2014 validates contractor eligibility before batch assignment",
+            "rule_category": "validation",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-MOD-003",
+            "source_module": "Model"
+          },
+          {
+            "rule_name": "Skill Mapping Removal",
+            "description": "Academy batch skill mappings can be removed to maintain skill requirements",
+            "source_evidence": "Academy_batch_skill_map.php:remove() \u2014 handles skill mapping deletion",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-MOD-004",
+            "source_module": "Model"
+          },
+          {
+            "rule_name": "Record Update by ID",
+            "description": "Account lists support targeted updates using ID-based population",
+            "source_evidence": "Account_list.php:updatePopulateById() \u2014 updates specific records by identifier",
+            "rule_category": "caching",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-MOD-005",
+            "source_module": "Model"
+          }
+        ],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "Account_list iterator methods may not handle empty collections properly",
+            "source_file": "Model/Account_list.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Add null checks in iterator methods before accessing collection elements",
+            "ec_id": "EC-MOD-001",
+            "source_module": "Model",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Iterator valid() method needs to check bounds when collection is modified during iteration",
+            "source_file": "Model/Account_list.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Implement concurrent modification detection or collection locking",
+            "ec_id": "EC-MOD-002",
+            "source_module": "Model",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "Population status check may return inconsistent state if populate() fails partially",
+            "source_file": "Model/Account_list.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "LOW",
+            "remediation": "Reset population flag on populate() failure and provide error state",
+            "ec_id": "EC-MOD-003",
+            "source_module": "Model",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "code_bug",
+            "scenario": "deleteAll() method may not properly reset iterator state after clearing collection",
+            "source_file": "Model/Account_list.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Call rewind() after deleteAll() to reset iterator position",
+            "ec_id": "EC-MOD-004",
+            "source_module": "Model",
+            "risk": "MEDIUM"
+          }
+        ]
+      }
+    },
+    "View": {
+      "symbol_hash": "24e5c4eefbde0625",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Render Address View",
+            "description": "Renders address information in a structured view format",
+            "preconditions": [
+              "Address data is available",
+              "View object is constructed"
+            ],
+            "postconditions": [
+              "Address view is rendered",
+              "HTML/output is generated"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "ViewAddress.__construct() -> ViewAddress.render()",
+            "source_method": "ViewAddress.render",
+            "business_logic_steps": [
+              "1. Initialize view with address data via constructor",
+              "2. Process address fields and format for display",
+              "3. Generate HTML markup or output structure",
+              "4. Return rendered address view to caller"
+            ],
+            "fr_id": "FR-VIE-001",
+            "source_module": "View",
+            "traceability": []
+          },
+          {
+            "feature_name": "Render Booking Forecast Search",
+            "description": "Renders booking forecast search interface and results",
+            "preconditions": [
+              "Booking forecast data is available",
+              "Search parameters are set"
+            ],
+            "postconditions": [
+              "Search interface is rendered",
+              "Forecast results are displayed"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "ViewBooking_forcastSearch.__construct() -> ViewBooking_forcastSearch.render()",
+            "source_method": "ViewBooking_forcastSearch.render",
+            "business_logic_steps": [
+              "1. Initialize view with forecast search data",
+              "2. Process search criteria and results",
+              "3. Format booking forecast information for display",
+              "4. Generate search interface with results",
+              "5. Return rendered forecast search view"
+            ],
+            "fr_id": "FR-VIE-002",
+            "source_module": "View",
+            "traceability": []
+          },
+          {
+            "feature_name": "Render Performance Reports",
+            "description": "Renders various performance and audit reports including annual performance, approval exceptions, and automated processes",
+            "preconditions": [
+              "Report data is available",
+              "Report type is specified"
+            ],
+            "postconditions": [
+              "Report is rendered",
+              "Performance metrics are displayed"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "ViewReport*.construct() -> ViewReport*.render()",
+            "source_method": "ViewReportAnnualPerformance.render",
+            "business_logic_steps": [
+              "1. Initialize report view with performance data",
+              "2. Process report metrics and calculations",
+              "3. Format data according to report type requirements",
+              "4. Generate report layout with charts/tables",
+              "5. Apply styling and formatting rules",
+              "6. Return completed report view"
+            ],
+            "fr_id": "FR-VIE-003",
+            "source_module": "View",
+            "traceability": []
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "View Construction Pattern",
+            "description": "All view classes must implement constructor and render methods",
+            "source_evidence": "All View classes have __construct and render methods - consistent pattern across ViewAddress.php, ViewCheckpoint.php, etc.",
+            "rule_category": "validation",
+            "enforced_in_layer": "View",
+            "rule_id": "BR-VIE-001",
+            "source_module": "View"
+          },
+          {
+            "rule_name": "Search View Naming Convention",
+            "description": "Search-related views must follow *Search naming pattern",
+            "source_evidence": "ViewBooking_forcastSearch.php, ViewContactSearch.php, ViewCustomertargetSearch.php follow consistent naming",
+            "rule_category": "transformation",
+            "enforced_in_layer": "View",
+            "rule_id": "BR-VIE-002",
+            "source_module": "View"
+          },
+          {
+            "rule_name": "Report View Categorization",
+            "description": "Report views must be prefixed with ViewReport for identification",
+            "source_evidence": "ViewReportAnnualPerformance.php, ViewReportApprovalExceptionAudit.php, ViewReportAutomatedExceptionProcess.php follow naming convention",
+            "rule_category": "transformation",
+            "enforced_in_layer": "View",
+            "rule_id": "BR-VIE-003",
+            "source_module": "View"
+          }
+        ],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "code_bug",
+            "scenario": "ViewBooking_forcastSearch.php contains typo in filename - 'forcast' instead of 'forecast'",
+            "source_file": "View/ViewBooking_forcastSearch.php",
+            "line": 1,
+            "is_defect": true,
+            "risk_level": "LOW",
+            "remediation": "Rename file to ViewBooking_forecastSearch.php for consistency",
+            "ec_id": "EC-VIE-001",
+            "source_module": "View",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Multiple search view classes may have overlapping functionality without clear separation of concerns",
+            "source_file": "View/ViewContactSearch.php",
+            "line": 1,
+            "is_defect": false,
+            "risk_level": "MEDIUM",
+            "remediation": "Review search view hierarchy and consolidate common functionality",
+            "ec_id": "EC-VIE-002",
+            "source_module": "View",
+            "risk": "MEDIUM"
+          }
+        ]
+      }
+    },
+    "bin": {
+      "symbol_hash": "23c3e974a0f339cc",
+      "payload": {
+        "fr24_capabilities": [],
+        "fr25_business_rules": [],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": []
+      }
+    },
+    "dashboard": {
+      "symbol_hash": "d3e755d46d5db8ef",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Display Key Target Statistics",
+            "description": "Shows key performance metrics and target statistics for recruiters",
+            "preconditions": [
+              "User has access to dashboard",
+              "Target data is available"
+            ],
+            "postconditions": [
+              "Statistics are displayed to user"
+            ],
+            "actors": [
+              "Recruiter",
+              "System"
+            ],
+            "data_flow": "Dashboard -> keyTargetStats() -> Display",
+            "source_method": "keyTargetStats",
+            "business_logic_steps": [
+              "1. Retrieve target statistics from data source",
+              "2. Format statistics for display",
+              "3. Calculate performance metrics",
+              "4. Apply any filtering or aggregation",
+              "5. Return formatted statistics to dashboard",
+              "6. Display statistics to user"
+            ],
+            "fr_id": "FR-DAS-001",
+            "source_module": "dashboard",
+            "traceability": []
+          },
+          {
+            "feature_name": "Manage Iframe Content",
+            "description": "Handles loading, resizing, and formatting of iframe content within dashboard",
+            "preconditions": [
+              "Dashboard is loaded",
+              "Iframe content is available"
+            ],
+            "postconditions": [
+              "Iframe is properly sized and loaded"
+            ],
+            "actors": [
+              "System",
+              "User"
+            ],
+            "data_flow": "Dashboard -> iframeResize/format_iframe -> DOM",
+            "source_method": "iframeResize",
+            "business_logic_steps": [
+              "1. Check if iframes are loaded",
+              "2. Apply formatting to iframe elements",
+              "3. Calculate appropriate iframe dimensions",
+              "4. Resize iframe to fit content",
+              "5. Mark iframe as done loading",
+              "6. Update UI to reflect loaded state"
+            ],
+            "fr_id": "FR-DAS-002",
+            "source_module": "dashboard",
+            "traceability": []
+          },
+          {
+            "feature_name": "Load Employee Meeting Notes",
+            "description": "Retrieves and displays employee meeting notes with navigation links",
+            "preconditions": [
+              "Employee ID is valid",
+              "User has permission to view notes"
+            ],
+            "postconditions": [
+              "Meeting notes are displayed with navigation"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "Dashboard -> load_employee_meeting_notes -> load_employee_meeting_notes_callback -> update_employee_meeting_note_links",
+            "source_method": "load_employee_meeting_notes",
+            "business_logic_steps": [
+              "1. Validate employee ID parameter",
+              "2. Make async call to retrieve meeting notes",
+              "3. Process callback response data",
+              "4. Format notes for display",
+              "5. Update navigation links for notes",
+              "6. Display formatted notes to user"
+            ],
+            "fr_id": "FR-DAS-003",
+            "source_module": "dashboard",
+            "traceability": []
+          },
+          {
+            "feature_name": "Filter Commission Data",
+            "description": "Applies filtering and display controls to commission data views",
+            "preconditions": [
+              "Commission data is available",
+              "Filter parameters are valid"
+            ],
+            "postconditions": [
+              "Filtered commission data is displayed"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "Dashboard -> show_hide_months/rate_filter -> Display",
+            "source_method": "show_hide_months",
+            "business_logic_steps": [
+              "1. Parse filter criteria from user input",
+              "2. Apply date range filtering for months",
+              "3. Apply rate-based filtering if specified",
+              "4. Toggle visibility of filtered data",
+              "5. Update display to show/hide relevant sections",
+              "6. Return filtered results to user"
+            ],
+            "fr_id": "FR-DAS-004",
+            "source_module": "dashboard",
+            "traceability": []
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Iframe Loading State Management",
+            "description": "Ensures iframes are properly loaded before allowing user interaction",
+            "source_evidence": "Recruiter_new.php:iframesNotLoaded() and iframeDoneLoading() manage loading states",
+            "rule_category": "validation",
+            "enforced_in_layer": "UI",
+            "rule_id": "BR-DAS-001",
+            "source_module": "dashboard"
+          },
+          {
+            "rule_name": "Office-Based Data Filtering",
+            "description": "Data must be filtered based on office selection across multiple dashboard views",
+            "source_evidence": "detail_customer_activity.php and detail_ontarget.php:update_office_option() enforces office-based filtering",
+            "rule_category": "filtering",
+            "enforced_in_layer": "Data",
+            "rule_id": "BR-DAS-002",
+            "source_module": "dashboard"
+          },
+          {
+            "rule_name": "Table Visibility Toggle",
+            "description": "Tables can be shown or hidden based on user preferences and data availability",
+            "source_evidence": "detail_customer_activity.php and detail_scattered.php:show_hide_tables() and toggle_table() control visibility",
+            "rule_category": "display",
+            "enforced_in_layer": "UI",
+            "rule_id": "BR-DAS-003",
+            "source_module": "dashboard"
+          },
+          {
+            "rule_name": "Aggregation Level Control",
+            "description": "Data aggregation level must be switchable between different granularities",
+            "source_evidence": "detail_customer_activity.php:update_aggregation() and detail_dotd.php:switch_aggregation() manage aggregation levels",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Data",
+            "rule_id": "BR-DAS-004",
+            "source_module": "dashboard"
+          }
+        ],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "Iframe loading state may not be properly tracked if iframes fail to load",
+            "source_file": "dashboard/Recruiter_new.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Add timeout handling and error states for iframe loading",
+            "ec_id": "EC-DAS-001",
+            "source_module": "dashboard",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Office selection updates may not handle empty or invalid office lists",
+            "source_file": "dashboard/detail_customer_activity.php",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "MEDIUM",
+            "remediation": "Validate office data before updating UI components",
+            "ec_id": "EC-DAS-002",
+            "source_module": "dashboard",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "Table visibility toggles may not have default states defined",
+            "source_file": "dashboard/detail_scattered.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Define explicit default visibility states for all tables",
+            "ec_id": "EC-DAS-003",
+            "source_module": "dashboard",
+            "risk": "LOW"
+          }
+        ]
+      }
+    },
+    "fpdi": {
+      "symbol_hash": "547189ff1da68076",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Import PDF Pages",
+            "description": "Import pages from existing PDF files for use in new PDF documents",
+            "preconditions": [
+              "Valid PDF source file exists",
+              "PDF parser is available"
+            ],
+            "postconditions": [
+              "Page is imported and available for use",
+              "Page ID is returned"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "FpdiTrait.setSourceFile() -> FpdiTrait.importPage() -> getPdfReader()",
+            "source_method": "FpdiTrait.importPage",
+            "business_logic_steps": [
+              "1. Set source PDF file using setSourceFile()",
+              "2. Get PDF reader instance for the source file",
+              "3. Import specified page number from source PDF",
+              "4. Generate unique page ID for imported page",
+              "5. Store page data for later use",
+              "6. Return page ID to caller"
+            ],
+            "fr_id": "FR-FPD-001",
+            "source_module": "fpdi",
+            "traceability": []
+          },
+          {
+            "feature_name": "Use Imported Pages",
+            "description": "Place imported PDF pages into new PDF document at specified positions",
+            "preconditions": [
+              "Page has been imported",
+              "Valid page ID exists"
+            ],
+            "postconditions": [
+              "Page is rendered in target document",
+              "Position and size are applied"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "FpdiTrait.useImportedPage() -> getImportedPageSize() -> PDF output",
+            "source_method": "FpdiTrait.useImportedPage",
+            "business_logic_steps": [
+              "1. Validate imported page ID exists",
+              "2. Get page dimensions from imported page data",
+              "3. Calculate positioning and scaling parameters",
+              "4. Apply page content to current PDF document",
+              "5. Update PDF object references",
+              "6. Render page at specified coordinates"
+            ],
+            "fr_id": "FR-FPD-002",
+            "source_module": "fpdi",
+            "traceability": []
+          },
+          {
+            "feature_name": "Create PDF Templates",
+            "description": "Create reusable PDF templates that can be applied to multiple pages",
+            "preconditions": [
+              "PDF document is initialized"
+            ],
+            "postconditions": [
+              "Template is created and available",
+              "Template ID is returned"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "FpdfTplTrait.beginTemplate() -> content creation -> FpdfTplTrait.endTemplate()",
+            "source_method": "FpdfTplTrait.beginTemplate",
+            "business_logic_steps": [
+              "1. Generate next available template ID",
+              "2. Begin template recording mode",
+              "3. Capture all PDF operations during template creation",
+              "4. End template recording with endTemplate()",
+              "5. Store template data for reuse",
+              "6. Return template ID for future reference"
+            ],
+            "fr_id": "FR-FPD-003",
+            "source_module": "fpdi",
+            "traceability": []
+          },
+          {
+            "feature_name": "Apply PDF Templates",
+            "description": "Apply previously created templates to PDF pages with positioning",
+            "preconditions": [
+              "Template exists",
+              "Valid template ID provided"
+            ],
+            "postconditions": [
+              "Template is rendered on current page"
+            ],
+            "actors": [
+              "System"
+            ],
+            "data_flow": "FpdfTplTrait.useTemplate() -> getTemplateSize() -> PDF rendering",
+            "source_method": "FpdfTplTrait.useTemplate",
+            "business_logic_steps": [
+              "1. Validate template ID exists",
+              "2. Get template dimensions and content",
+              "3. Calculate positioning parameters",
+              "4. Apply template content to current page",
+              "5. Update page formatting if needed",
+              "6. Render template at specified location"
+            ],
+            "fr_id": "FR-FPD-004",
+            "source_module": "fpdi",
+            "traceability": []
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "PDF Version Compatibility",
+            "description": "Ensures minimum PDF version is maintained when importing pages",
+            "source_evidence": "FpdiTrait.php:setMinPdfVersion() \u2014 sets minimum PDF version for compatibility",
+            "rule_category": "validation",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-FPD-001",
+            "source_module": "fpdi"
+          },
+          {
+            "rule_name": "Template ID Generation",
+            "description": "Templates must have unique sequential IDs starting from 1",
+            "source_evidence": "FpdfTplTrait.php:getNextTemplateId() \u2014 generates sequential template IDs",
+            "rule_category": "validation",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-FPD-002",
+            "source_module": "fpdi"
+          },
+          {
+            "rule_name": "PDF Parser Instance Management",
+            "description": "Each PDF source file gets its own parser instance for isolation",
+            "source_evidence": "FpdiTrait.php:getPdfParserInstance() \u2014 creates isolated parser per file",
+            "rule_category": "caching",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-FPD-003",
+            "source_module": "fpdi"
+          },
+          {
+            "rule_name": "Resource Cleanup",
+            "description": "PDF resources must be cleaned up to prevent memory leaks",
+            "source_evidence": "FpdiTrait.php:cleanUp() \u2014 cleans up PDF parser resources",
+            "rule_category": "fallback",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-FPD-004",
+            "source_module": "fpdi"
+          }
+        ],
+        "fr29_error_handling": [
+          {
+            "location": "FPDF.Error",
+            "source_file": "fpdi/fpdf.php",
+            "error_type": "Fatal PDF Error",
+            "handling_strategy": "die() with error message",
+            "log_tag": "",
+            "user_visible": true,
+            "recovery_possible": false,
+            "eh_id": "EH-FPD-001",
+            "source_module": "fpdi"
+          },
+          {
+            "location": "FpdiTrait.setSourceFile",
+            "source_file": "fpdi/FpdiTrait.php",
+            "error_type": "Invalid PDF file",
+            "handling_strategy": "Exception thrown for invalid source",
+            "log_tag": "",
+            "user_visible": true,
+            "recovery_possible": false,
+            "eh_id": "EH-FPD-002",
+            "source_module": "fpdi"
+          },
+          {
+            "location": "FpdiTrait.importPage",
+            "source_file": "fpdi/FpdiTrait.php",
+            "error_type": "Page not found",
+            "handling_strategy": "Exception for invalid page number",
+            "log_tag": "",
+            "user_visible": true,
+            "recovery_possible": false,
+            "eh_id": "EH-FPD-003",
+            "source_module": "fpdi"
+          }
+        ],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Template ID generation starts at 1 and increments sequentially",
+            "source_file": "fpdi/FpdfTplTrait.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Current implementation is correct",
+            "ec_id": "EC-FPD-001",
+            "source_module": "fpdi",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "null_handling",
+            "scenario": "PDF parser instance creation may fail with invalid files",
+            "source_file": "fpdi/FpdiTrait.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "MEDIUM",
+            "remediation": "Exception handling is appropriate",
+            "ec_id": "EC-FPD-002",
+            "source_module": "fpdi",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Page numbers must be valid positive integers within PDF bounds",
+            "source_file": "fpdi/FpdiTrait.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "MEDIUM",
+            "remediation": "Validation should check page bounds",
+            "ec_id": "EC-FPD-003",
+            "source_module": "fpdi",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "Template and page positioning defaults to origin (0,0) if not specified",
+            "source_file": "fpdi/FpdfTplTrait.php",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Default positioning is reasonable",
+            "ec_id": "EC-FPD-004",
+            "source_module": "fpdi",
+            "risk": "LOW"
+          }
+        ]
+      }
+    },
+    "script": {
+      "symbol_hash": "dba2625e487806ac",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Manage Address",
+            "description": "Handle address input, editing, and selection with Google autocomplete integration",
+            "preconditions": [
+              "User has access to address form",
+              "Google Maps API is available"
+            ],
+            "postconditions": [
+              "Address is saved or updated",
+              "Form fields are populated"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "UI -> onClickAddress() -> fetchAddress() -> fillInAddress() -> Save",
+            "source_method": "address.js:onClickAddress",
+            "business_logic_steps": [
+              "1. User clicks address field to initiate editing",
+              "2. System fetches existing address data if available",
+              "3. Google autocomplete is enabled for address suggestions",
+              "4. User selects from autocomplete or enters manually",
+              "5. System validates and fills address components",
+              "6. Address is saved on completion"
+            ],
+            "fr_id": "FR-SCR-001",
+            "source_module": "script",
+            "traceability": []
+          },
+          {
+            "feature_name": "Process Employee Changes",
+            "description": "Handle various employee change requests including rates, dates, and locations",
+            "preconditions": [
+              "Employee exists in system",
+              "User has change request permissions"
+            ],
+            "postconditions": [
+              "Change request is created",
+              "HTML form is rendered"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "UI -> openChangeRequest() -> renderChangeHTML() -> Submit",
+            "source_method": "ccp.js:openBillRateChangeRequest",
+            "business_logic_steps": [
+              "1. User initiates specific change request type",
+              "2. System creates employee list if needed",
+              "3. Appropriate HTML form is rendered for change type",
+              "4. User fills in change details",
+              "5. System validates change parameters",
+              "6. Change request is submitted for processing"
+            ],
+            "fr_id": "FR-SCR-002",
+            "source_module": "script",
+            "traceability": []
+          },
+          {
+            "feature_name": "Generate Reports",
+            "description": "Load and display reports with export capabilities and data formatting",
+            "preconditions": [
+              "User has report access",
+              "Data is available"
+            ],
+            "postconditions": [
+              "Report is displayed",
+              "Export options are available"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "UI -> load_ajax_report() -> create_datatable() -> export_prep()",
+            "source_method": "common.js:load_ajax_report",
+            "business_logic_steps": [
+              "1. User requests report generation",
+              "2. System loads data via AJAX call",
+              "3. Data is formatted using display functions",
+              "4. DataTable is created with pagination and sorting",
+              "5. Export options are prepared for various formats",
+              "6. Report is rendered to user interface"
+            ],
+            "fr_id": "FR-SCR-003",
+            "source_module": "script",
+            "traceability": []
+          },
+          {
+            "feature_name": "Handle Autocomplete",
+            "description": "Provide autocomplete functionality for input fields with keyboard navigation",
+            "preconditions": [
+              "Input field exists",
+              "Data source is available"
+            ],
+            "postconditions": [
+              "Suggestions are displayed",
+              "Selection updates field"
+            ],
+            "actors": [
+              "User",
+              "System"
+            ],
+            "data_flow": "Input -> autocomplete() -> addActive() -> closeAllLists()",
+            "source_method": "autocomplete.js:autocomplete",
+            "business_logic_steps": [
+              "1. User types in autocomplete-enabled field",
+              "2. System filters available options based on input",
+              "3. Suggestion list is displayed below field",
+              "4. User navigates with keyboard or mouse",
+              "5. Active selection is highlighted",
+              "6. Selection updates field and closes list"
+            ],
+            "fr_id": "FR-SCR-004",
+            "source_module": "script",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "script/autocomplete.js",
+                "class_name": "autocomplete",
+                "method_name": "js:autocomplete"
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Address Validation",
+            "description": "Addresses must be validated through Google autocomplete or manual entry",
+            "source_evidence": "address.js:initAutocomplete() \u2014 integrates Google Places API for address validation",
+            "rule_category": "validation",
+            "enforced_in_layer": "API",
+            "rule_id": "BR-SCR-001",
+            "source_module": "script"
+          },
+          {
+            "rule_name": "Change Request Authorization",
+            "description": "Employee changes require specific request types and proper form rendering",
+            "source_evidence": "ccp.js:openBillRateChangeRequest() \u2014 validates change type before rendering form",
+            "rule_category": "validation",
+            "enforced_in_layer": "Validator",
+            "rule_id": "BR-SCR-002",
+            "source_module": "script"
+          },
+          {
+            "rule_name": "Data Formatting Standards",
+            "description": "All monetary and date values must follow specific display formats",
+            "source_evidence": "common.js:DisplayAmountSeparator() \u2014 enforces currency formatting rules",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Mapper",
+            "rule_id": "BR-SCR-003",
+            "source_module": "script"
+          },
+          {
+            "rule_name": "Report Export Preparation",
+            "description": "Reports must be properly formatted before export operations",
+            "source_evidence": "common.js:export_prep() \u2014 prepares data formatting for export",
+            "rule_category": "transformation",
+            "enforced_in_layer": "Repository",
+            "rule_id": "BR-SCR-004",
+            "source_module": "script"
+          },
+          {
+            "rule_name": "Autocomplete List Management",
+            "description": "Only one autocomplete list can be active at a time",
+            "source_evidence": "autocomplete.js:closeAllLists() \u2014 ensures single active autocomplete",
+            "rule_category": "caching",
+            "enforced_in_layer": "ViewModel",
+            "rule_id": "BR-SCR-005",
+            "source_module": "script"
+          }
+        ],
+        "fr29_error_handling": [],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "Google autocomplete may not be available or fail to load",
+            "source_file": "script/address.js",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "MEDIUM",
+            "remediation": "Implement fallback for manual address entry when Google API fails",
+            "ec_id": "EC-SCR-001",
+            "source_module": "script",
+            "risk": "MEDIUM"
+          },
+          {
+            "ec_type": "boundary_condition",
+            "scenario": "Multiple autocomplete lists could potentially be open simultaneously",
+            "source_file": "script/autocomplete.js",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "LOW",
+            "remediation": "Ensure closeAllLists() is called before opening new autocomplete",
+            "ec_id": "EC-SCR-002",
+            "source_module": "script",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "fallback_value",
+            "scenario": "Currency formatting functions may receive null or undefined values",
+            "source_file": "script/common.js",
+            "line": 0,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Add null checks in display formatting functions",
+            "ec_id": "EC-SCR-003",
+            "source_module": "script",
+            "risk": "LOW"
+          },
+          {
+            "ec_type": "code_bug",
+            "scenario": "Duplicate function names exist across address.js and addrmaster.js files",
+            "source_file": "script/address.js",
+            "line": 0,
+            "is_defect": true,
+            "risk_level": "HIGH",
+            "remediation": "Namespace functions or consolidate duplicate implementations",
+            "ec_id": "EC-SCR-004",
+            "source_module": "script",
+            "risk": "HIGH"
+          }
+        ]
+      }
+    }
+  }
+}
