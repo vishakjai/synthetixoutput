@@ -1,0 +1,693 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260427_180146_1EDF5E09",
+  "generated_at": "2026-04-27T22:02:28.009417+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "Kotlin-Spring-Vue to Go Modernization",
+    "work_item_id": "20260427_180146_1edf5e09",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Modernize the kotlin-spring-vue Spring Boot + Vue codebase to a Go (chi) target stack with REST contracts and parity-preserving migration.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "The existing database schema will remain unchanged.",
+      "The frontend will continue to interact with the backend via REST APIs."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "Data",
+        "capability_id": "data_management",
+        "confidence": 0.533,
+        "rationale": "Mapped from objective overlap for Data."
+      },
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "API Platform",
+        "capability_id": "api_platform",
+        "confidence": 0.7,
+        "rationale": "Mapped from objective overlap for API Platform."
+      },
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "Identity",
+        "capability_id": "identity_access",
+        "confidence": 0.8,
+        "rationale": "Mapped from objective overlap for Identity."
+      },
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "Observability",
+        "capability_id": "observability",
+        "confidence": 0.6,
+        "rationale": "Mapped from objective overlap for Observability."
+      }
+    ],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-003",
+        "title": "Preserve Authentication and Authorization Logic",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "FT-001",
+          "scenarios": [
+            "FT-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Migrate Email Service Functionality",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FT-002",
+          "scenarios": [
+            "FT-002-SC-001"
+          ]
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Response time under 200ms for 95% of requests",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "Pass all security audits and penetration tests",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "reliability",
+        "metric": "99.9% uptime over a rolling 30-day period",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "portability",
+        "metric": "Deployment scripts work across all target environments",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "usability",
+        "metric": "User satisfaction score of 8/10 or higher",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "FT-001",
+        "title": "User Authentication",
+        "scenarios": [
+          {
+            "id": "FT-001-SC-001",
+            "name": "Successful login",
+            "gherkin": [
+              "Given a registered user",
+              "When the user submits valid credentials",
+              "Then the user is authenticated and receives an auth token"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FT-002",
+        "title": "Email Sending",
+        "scenarios": [
+          {
+            "id": "FT-002-SC-001",
+            "name": "Send email successfully",
+            "gherkin": [
+              "Given a valid email request",
+              "When the email service processes the request",
+              "Then the email is sent to the recipient"
+            ],
+            "maps_to": [
+              "FR-005"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FT-003",
+        "title": "Data Migration",
+        "scenarios": [
+          {
+            "id": "FT-003-SC-001",
+            "name": "Successful data migration",
+            "gherkin": [
+              "Given existing data in the legacy system",
+              "When the migration script is executed",
+              "Then the data is available in the new system"
+            ],
+            "maps_to": [
+              "FR-008"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FT-004",
+        "title": "Endpoint Parity",
+        "scenarios": [
+          {
+            "id": "FT-004-SC-001",
+            "name": "Endpoint functionality",
+            "gherkin": [
+              "Given an existing endpoint in the legacy system",
+              "When the endpoint is accessed in the new system",
+              "Then the response matches the legacy output"
+            ],
+            "maps_to": [
+              "FR-001",
+              "FR-002"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential loss of functionality during migration.",
+      "impact": "high",
+      "mitigation": "Implement comprehensive testing to ensure parity."
+    },
+    {
+      "description": "Security vulnerabilities introduced during migration.",
+      "impact": "medium",
+      "mitigation": "Conduct security audits and penetration testing."
+    },
+    {
+      "description": "Performance degradation in the Go application.",
+      "impact": "medium",
+      "mitigation": "Optimize Go code and conduct performance benchmarking."
+    }
+  ],
+  "out_of_scope": [
+    "Frontend modernization or migration.",
+    "Changes to existing database schema."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-003",
+        "to": "FT-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-005",
+        "to": "FT-002",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260427_180146_1edf5e09",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260427T220149Z_20260427_180146_1edf5e09",
+    "repo": "Synthetix",
+    "branch": "codex-synthetix-ui-v2-claude",
+    "commit_sha": "98f57e32079f9fb912a7acb1b1e67b01f0d2fddc",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-693f39aa1367f03c",
+    "run_context_bundle_id": "runctx-9854918569ac4e55",
+    "source_version_ids": [],
+    "run_id": "20260427_180146_1edf5e09",
+    "repo_url": "https://github.com/vishakjai/kotlin-spring-vue"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=1, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=3, alternatives=1"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Modernize the kotlin-spring-vue Spring Boot + Vue codebase to a Go (chi) target stack with REST contracts and parity-preserving migration.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [
+      {
+        "id": "data_management",
+        "service_domain": "Data",
+        "business_capability": "Data Storage & Migration",
+        "confidence": 0.533,
+        "dependencies": [
+          "observability"
+        ]
+      },
+      {
+        "id": "api_platform",
+        "service_domain": "API Platform",
+        "business_capability": "Service Delivery",
+        "confidence": 0.7,
+        "dependencies": [
+          "identity_access",
+          "observability"
+        ]
+      },
+      {
+        "id": "identity_access",
+        "service_domain": "Identity",
+        "business_capability": "Authentication & Authorization",
+        "confidence": 0.8,
+        "dependencies": [
+          "observability"
+        ]
+      }
+    ],
+    "alternative_capabilities": [
+      {
+        "id": "observability",
+        "service_domain": "Observability",
+        "business_capability": "Logging & Monitoring",
+        "confidence": 0.6,
+        "dependencies": []
+      }
+    ],
+    "confidence": 0.678
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "FT-001",
+        "title": "User Authentication",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: User Authentication\nScenario: Successful login\nGiven a registered user\nWhen the user submits valid credentials\nThen the user is authenticated and receives an auth token"
+      },
+      {
+        "id": "FT-002",
+        "title": "Email Sending",
+        "source_requirement_ids": [
+          "FR-005"
+        ],
+        "gherkin": "Feature: Email Sending\nScenario: Send email successfully\nGiven a valid email request\nWhen the email service processes the request\nThen the email is sent to the recipient"
+      },
+      {
+        "id": "FT-003",
+        "title": "Data Migration",
+        "source_requirement_ids": [
+          "FR-008"
+        ],
+        "gherkin": "Feature: Data Migration\nScenario: Successful data migration\nGiven existing data in the legacy system\nWhen the migration script is executed\nThen the data is available in the new system"
+      },
+      {
+        "id": "FT-004",
+        "title": "Endpoint Parity",
+        "source_requirement_ids": [
+          "FR-001",
+          "FR-002"
+        ],
+        "gherkin": "Feature: Endpoint Parity\nScenario: Endpoint functionality\nGiven an existing endpoint in the legacy system\nWhen the endpoint is accessed in the new system\nThen the response matches the legacy output"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security Compliance",
+        "description": "Ensure the Go application adheres to security standards and practices.",
+        "category": "security",
+        "metric": "Pass all security audits and penetration tests",
+        "acceptance_criteria": [
+          "Security audits reveal no critical vulnerabilities.",
+          "Penetration tests confirm robust security posture.",
+          "Compliance checks validate adherence to security standards."
+        ],
+        "verification": "SAST + pre-prod pen test",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-003",
+        "title": "Reliability and Uptime",
+        "description": "Ensure the Go application maintains high reliability and uptime.",
+        "category": "reliability",
+        "metric": "99.9% uptime over a rolling 30-day period",
+        "acceptance_criteria": [
+          "Monitoring tools confirm uptime metrics are met.",
+          "Incident reports show no significant downtime.",
+          "Reliability tests validate system stability."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window",
+        "verification_source": "llm"
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance Benchmarking",
+        "description": "Ensure the Go application meets or exceeds the performance benchmarks of the legacy system.",
+        "category": "performance",
+        "metric": "Response time under 200ms for 95% of requests",
+        "acceptance_criteria": [
+          "Load tests confirm response times meet benchmarks.",
+          "Performance tests show no degradation compared to legacy.",
+          "Scalability tests validate application under peak load."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-004",
+        "title": "Portability and Deployment",
+        "description": "Ensure the Go application can be deployed across different environments with minimal changes.",
+        "category": "portability",
+        "metric": "Deployment scripts work across all target environments",
+        "acceptance_criteria": [
+          "Deployment tests confirm application runs in all environments.",
+          "Portability tests validate minimal configuration changes.",
+          "Documentation provides clear deployment instructions."
+        ],
+        "verification": "Cross-environment deployment tests",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-005",
+        "title": "Usability and Documentation",
+        "description": "Ensure the Go application is user-friendly and well-documented.",
+        "category": "usability",
+        "metric": "User satisfaction score of 8/10 or higher",
+        "acceptance_criteria": [
+          "User feedback confirms application usability.",
+          "Documentation is complete and easy to understand.",
+          "Usability tests validate user experience."
+        ],
+        "verification": "User surveys and documentation reviews",
+        "verification_source": "llm"
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FT-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FT-002"
+      ]
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 2,
+        "non_functional_count": 5,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 3
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-693f39aa1367f03c",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "This project aims to modernize a Kotlin-Spring-Vue application to a Go (chi) stack, ensuring parity in functionality and REST contracts."
+}
