@@ -1,0 +1,625 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260427_180637_4B7F38E0",
+  "generated_at": "2026-04-27T22:08:03.676121+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "KotlinSpringVue to GoChi Modernization",
+    "work_item_id": "20260427_180637_4b7f38e0",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Modernize the kotlin-spring-vue Spring Boot + Vue codebase to a Go (chi) target stack with REST contracts and parity-preserving migration.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "The frontend Vue application will remain unchanged.",
+      "Existing data storage solutions will be compatible with the Go stack."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "Data",
+        "capability_id": "data_management",
+        "confidence": 0.533,
+        "rationale": "Mapped from objective overlap for Data."
+      },
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "API Platform",
+        "capability_id": "api_platform",
+        "confidence": 0.8,
+        "rationale": "Mapped from objective overlap for API Platform."
+      },
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "Identity",
+        "capability_id": "identity_access",
+        "confidence": 0.9,
+        "rationale": "Mapped from objective overlap for Identity."
+      },
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "Observability",
+        "capability_id": "observability",
+        "confidence": 0.6,
+        "rationale": "Mapped from objective overlap for Observability."
+      }
+    ],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-002",
+        "title": "Implement Authentication in Go",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Email Service Migration",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-002",
+          "scenarios": [
+            "BDD-002-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Preserve Security Configurations",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "Pass all security audits and penetration tests.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "User Authentication",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Successful login",
+            "gherkin": [
+              "Given a registered user",
+              "When the user provides valid credentials",
+              "Then the user is authenticated and receives a session token"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Email Sending",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Send an email",
+            "gherkin": [
+              "Given a valid email address",
+              "When the email service is invoked",
+              "Then the email is sent successfully"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Data Access",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Retrieve user details",
+            "gherkin": [
+              "Given a valid user ID",
+              "When the user details are requested",
+              "Then the correct user details are returned"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Endpoint Migration",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "Access migrated endpoint",
+            "gherkin": [
+              "Given an existing endpoint",
+              "When accessed via the Go application",
+              "Then the response matches the original contract"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Lack of expertise in Go could delay the migration process.",
+      "impact": "high",
+      "mitigation": "Provide training and resources for the development team."
+    },
+    {
+      "description": "Potential security vulnerabilities during migration.",
+      "impact": "high",
+      "mitigation": "Conduct thorough security testing and audits."
+    },
+    {
+      "description": "Data integrity issues during migration.",
+      "impact": "medium",
+      "mitigation": "Implement rigorous data validation and testing procedures."
+    },
+    {
+      "description": "Performance degradation in the new Go application.",
+      "impact": "medium",
+      "mitigation": "Conduct performance benchmarking and optimization."
+    }
+  ],
+  "out_of_scope": [
+    "Frontend Vue application changes.",
+    "Major changes to existing data storage solutions."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-002",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-002",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260427_180637_4b7f38e0",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260427T220640Z_20260427_180637_4b7f38e0",
+    "repo": "Synthetix",
+    "branch": "codex-synthetix-ui-v2-claude",
+    "commit_sha": "98f57e32079f9fb912a7acb1b1e67b01f0d2fddc",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-693f39aa1367f03c",
+    "run_context_bundle_id": "runctx-50ef95164ce91ffd",
+    "source_version_ids": [],
+    "run_id": "20260427_180637_4b7f38e0",
+    "repo_url": "https://github.com/vishakjai/kotlin-spring-vue"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=1, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=3, alternatives=1"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Modernize the kotlin-spring-vue Spring Boot + Vue codebase to a Go (chi) target stack with REST contracts and parity-preserving migration.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [
+      {
+        "id": "data_management",
+        "service_domain": "Data",
+        "business_capability": "Data Storage & Migration",
+        "confidence": 0.533,
+        "dependencies": [
+          "observability"
+        ]
+      },
+      {
+        "id": "api_platform",
+        "service_domain": "API Platform",
+        "business_capability": "Service Delivery",
+        "confidence": 0.8,
+        "dependencies": [
+          "identity_access",
+          "observability"
+        ]
+      },
+      {
+        "id": "identity_access",
+        "service_domain": "Identity",
+        "business_capability": "Authentication & Authorization",
+        "confidence": 0.9,
+        "dependencies": [
+          "observability"
+        ]
+      }
+    ],
+    "alternative_capabilities": [
+      {
+        "id": "observability",
+        "service_domain": "Observability",
+        "business_capability": "Logging & Monitoring",
+        "confidence": 0.6,
+        "dependencies": []
+      }
+    ],
+    "confidence": 0.744
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "User Authentication",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: User Authentication\nScenario: Successful login\nGiven a registered user\nWhen the user provides valid credentials\nThen the user is authenticated and receives a session token"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Email Sending",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Email Sending\nScenario: Send an email\nGiven a valid email address\nWhen the email service is invoked\nThen the email is sent successfully"
+      },
+      {
+        "id": "BDD-003",
+        "title": "Data Access",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Data Access\nScenario: Retrieve user details\nGiven a valid user ID\nWhen the user details are requested\nThen the correct user details are returned"
+      },
+      {
+        "id": "BDD-004",
+        "title": "Endpoint Migration",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Endpoint Migration\nScenario: Access migrated endpoint\nGiven an existing endpoint\nWhen accessed via the Go application\nThen the response matches the original contract"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security Compliance",
+        "description": "Ensure the Go application complies with existing security standards and practices.",
+        "category": "security",
+        "metric": "Pass all security audits and penetration tests.",
+        "acceptance_criteria": [
+          "Security audits show no critical vulnerabilities.",
+          "Penetration tests confirm application resilience.",
+          "All sensitive data is encrypted and protected."
+        ],
+        "verification": "SAST + pre-prod pen test",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      }
+    ],
+    "should": []
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 3,
+        "non_functional_count": 1,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 3
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-693f39aa1367f03c",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "This project aims to modernize the existing Kotlin Spring Boot and Vue application to a Go (chi) stack, ensuring parity in functionality and REST contracts."
+}
