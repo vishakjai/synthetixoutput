@@ -1,0 +1,1403 @@
+{
+  "artifact_type": "capability_brd_v1",
+  "artifact_version": "1.0",
+  "artifact_id": "art_capbrd_afa0b2f8c8e5",
+  "run_id": "20260427_180146_1edf5e09",
+  "generated_at": "2026-04-27T22:04:24Z",
+  "repo": "https://github.com/vishakjai/kotlin-spring-vue",
+  "engagement_id": "20260427_180146_1edf5e09",
+  "completeness": {
+    "modules_total": 2,
+    "modules_with_full_coverage": 1,
+    "modules_with_partial_coverage": 0,
+    "modules_with_no_coverage": 1,
+    "symbol_index_coverage": {
+      "backend": "full",
+      "Support Artifacts": "none"
+    },
+    "blocking_gaps": []
+  },
+  "modules": [
+    {
+      "module_id": "backend",
+      "component_id": "kotlin::backend",
+      "dimensions": {
+        "FR24": {
+          "status": "complete",
+          "items": [
+            {
+              "feature_name": "Authenticate User",
+              "description": "Validates user credentials and returns JWT token for authenticated access",
+              "preconditions": [
+                "Valid username and password provided",
+                "ReCaptcha token is valid"
+              ],
+              "postconditions": [
+                "JWT token generated and returned",
+                "User authentication context established"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "AuthController.authenticateUser() -> ReCaptchaService.validateCaptcha() -> UserRepository.findByUsername() -> JwtProvider.generateJwtToken()",
+              "source_method": "AuthController.authenticateUser",
+              "business_logic_steps": [
+                "1. Validate ReCaptcha token to prevent bot attacks",
+                "2. Look up user by username in database",
+                "3. If user exists, authenticate credentials using Spring Security",
+                "4. Generate JWT token with user's username and roles",
+                "5. Return JWT response with token and user authorities",
+                "6. Handle validation failures with appropriate error messages"
+              ],
+              "fr_id": "FR-BAC-001",
+              "source_module": "backend",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+                  "class_name": "AuthController",
+                  "method_name": "authenticateUser"
+                }
+              ]
+            },
+            {
+              "feature_name": "Register User",
+              "description": "Creates new user account with validation and role assignment",
+              "preconditions": [
+                "Valid user registration data",
+                "Username and email not already taken",
+                "ReCaptcha validation passes"
+              ],
+              "postconditions": [
+                "New user created in database",
+                "Default ROLE_USER assigned",
+                "Password encrypted"
+              ],
+              "actors": [
+                "User",
+                "System"
+              ],
+              "data_flow": "AuthController.registerUser() -> ReCaptchaService.validateCaptcha() -> UserRepository.findByUsername() -> PasswordEncoder.encode() -> UserRepository.save()",
+              "source_method": "AuthController.registerUser",
+              "business_logic_steps": [
+                "1. Validate ReCaptcha token for bot protection",
+                "2. Check if username already exists in database",
+                "3. Check if email is already registered",
+                "4. Encrypt password using BCrypt encoder",
+                "5. Create User entity with default ROLE_USER role",
+                "6. Save new user to database and return success message"
+              ],
+              "fr_id": "FR-BAC-002",
+              "source_module": "backend",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+                  "class_name": "AuthController",
+                  "method_name": "registerUser"
+                }
+              ]
+            },
+            {
+              "feature_name": "Validate JWT Token",
+              "description": "Processes and validates JWT tokens for request authentication",
+              "preconditions": [
+                "Authorization header with Bearer token present"
+              ],
+              "postconditions": [
+                "Security context established for valid tokens",
+                "Authentication details set in Spring Security context"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "JwtAuthTokenFilter.doFilterInternal() -> JwtProvider.validateJwtToken() -> UserDetailsServiceImpl.loadUserByUsername() -> SecurityContextHolder.setAuthentication()",
+              "source_method": "JwtAuthTokenFilter.doFilterInternal",
+              "business_logic_steps": [
+                "1. Extract JWT token from Authorization header",
+                "2. Validate token signature and expiration using JwtProvider",
+                "3. Extract username from validated token claims",
+                "4. Load user details from database via UserDetailsService",
+                "5. Create authentication token and set in security context",
+                "6. Continue filter chain for authenticated requests"
+              ],
+              "fr_id": "FR-BAC-003",
+              "source_module": "backend",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthTokenFilter.kt",
+                  "class_name": "JwtAuthTokenFilter",
+                  "method_name": "doFilterInternal"
+                }
+              ]
+            },
+            {
+              "feature_name": "Generate JWT Token",
+              "description": "Creates signed JWT tokens with user claims and expiration",
+              "preconditions": [
+                "Valid username provided",
+                "JWT secret and expiration configured"
+              ],
+              "postconditions": [
+                "Signed JWT token created",
+                "Token contains username and expiration claims"
+              ],
+              "actors": [
+                "System"
+              ],
+              "data_flow": "JwtProvider.generateJwtToken() -> Jwts.builder().setSubject().setExpiration().signWith()",
+              "source_method": "JwtProvider.generateJwtToken",
+              "business_logic_steps": [
+                "1. Create JWT builder with username as subject",
+                "2. Set issued date to current timestamp",
+                "3. Calculate expiration time using configured duration",
+                "4. Sign token with HS512 algorithm and secret key",
+                "5. Compact and return the final JWT string"
+              ],
+              "fr_id": "FR-BAC-004",
+              "source_module": "backend",
+              "traceability": [
+                {
+                  "layer": "Other",
+                  "file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtProvider.kt",
+                  "class_name": "JwtProvider",
+                  "method_name": "generateJwtToken"
+                }
+              ]
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR25": {
+          "status": "complete",
+          "items": [
+            {
+              "rule_name": "Null-Bang (!!) Operator",
+              "description": "Code uses the force-unwrap (!!) operator, which throws NullPointerException when the left-hand side is null \u2014 a latent defect surface worth auditing.",
+              "source_evidence": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthTokenFilter.kt:33; backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthEntryPoint.kt:23; backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt:73",
+              "rule_category": "validation",
+              "enforced_in_layer": "Security",
+              "source_module": "backend",
+              "rule_id": "BR-BAC-001"
+            },
+            {
+              "rule_name": "ReCaptcha Validation Required",
+              "description": "All authentication and registration requests must pass ReCaptcha validation",
+              "source_evidence": "AuthController.kt:authenticateUser() and registerUser() \u2014 validates recaptchaToken before processing",
+              "rule_category": "validation",
+              "enforced_in_layer": "Controller",
+              "rule_id": "BR-BAC-002",
+              "source_module": "backend"
+            },
+            {
+              "rule_name": "Unique Username Constraint",
+              "description": "Username must be unique across all users in the system",
+              "source_evidence": "AuthController.kt:registerUser() \u2014 checks usernameExists() before creating user",
+              "rule_category": "validation",
+              "enforced_in_layer": "Controller",
+              "rule_id": "BR-BAC-003",
+              "source_module": "backend"
+            },
+            {
+              "rule_name": "Password Encryption Mandatory",
+              "description": "All user passwords must be encrypted using BCrypt before storage",
+              "source_evidence": "AuthController.kt:registerUser() \u2014 encoder.encode(newUser.password) before saving",
+              "rule_category": "transformation",
+              "enforced_in_layer": "Controller",
+              "rule_id": "BR-BAC-004",
+              "source_module": "backend"
+            },
+            {
+              "rule_name": "Default Role Assignment",
+              "description": "New users are automatically assigned ROLE_USER role upon registration",
+              "source_evidence": "AuthController.kt:registerUser() \u2014 user.roles = Arrays.asList(roleRepository.findByName(\"ROLE_USER\"))",
+              "rule_category": "transformation",
+              "enforced_in_layer": "Controller",
+              "rule_id": "BR-BAC-005",
+              "source_module": "backend"
+            },
+            {
+              "rule_name": "JWT Token Expiration",
+              "description": "JWT tokens must have expiration time based on configured duration",
+              "source_evidence": "JwtProvider.kt:generateJwtToken() \u2014 setExpiration(Date((Date()).getTime() + jwtExpiration!! * 1000))",
+              "rule_category": "validation",
+              "enforced_in_layer": "JWT Provider",
+              "rule_id": "BR-BAC-006",
+              "source_module": "backend"
+            },
+            {
+              "rule_name": "Bearer Token Format",
+              "description": "Authorization header must use Bearer token format for JWT authentication",
+              "source_evidence": "JwtAuthTokenFilter.kt:getJwt() \u2014 checks authHeader.startsWith(\"Bearer \")",
+              "rule_category": "validation",
+              "enforced_in_layer": "Filter",
+              "rule_id": "BR-BAC-007",
+              "source_module": "backend"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR26": {
+          "status": "complete",
+          "domain_entities": [
+            {
+              "entity_name": "User",
+              "entity_kind": "class",
+              "source_file": "backend/com/kotlinspringvue/backend/jpa/User.kt",
+              "source_module": "backend",
+              "fields": [
+                {
+                  "field_name": "id",
+                  "field_type": "Long",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": "@Id \u00b7 generation=AUTO"
+                }
+              ],
+              "orm_annotations": [
+                "@Table(name=\"users\")",
+                "@Entity"
+              ],
+              "note": ""
+            },
+            {
+              "entity_name": "Person",
+              "entity_kind": "class",
+              "source_file": "backend/com/kotlinspringvue/backend/jpa/Person.kt",
+              "source_module": "backend",
+              "fields": [
+                {
+                  "field_name": "id",
+                  "field_type": "Long",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": "@Id \u00b7 generation=AUTO"
+                }
+              ],
+              "orm_annotations": [
+                "@Table(name=\"persons\")",
+                "@Entity"
+              ],
+              "note": ""
+            },
+            {
+              "entity_name": "Role",
+              "entity_kind": "class",
+              "source_file": "backend/com/kotlinspringvue/backend/jpa/Role.kt",
+              "source_module": "backend",
+              "fields": [
+                {
+                  "field_name": "id",
+                  "field_type": "Long",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": "@Id \u00b7 generation=AUTO"
+                }
+              ],
+              "orm_annotations": [
+                "@Table(name=\"roles\")",
+                "@Entity"
+              ],
+              "note": ""
+            }
+          ],
+          "ui_models": [],
+          "_source": "skill:kotlin-spring"
+        },
+        "FR27": {
+          "status": "complete",
+          "endpoints": [
+            {
+              "method": "POST",
+              "path": "/signin",
+              "interface_name": "AuthController",
+              "method_name": "authenticateUser",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "POST",
+              "path": "/signup",
+              "interface_name": "AuthController",
+              "method_name": "registerUser",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "/greeting",
+              "interface_name": "BackendController",
+              "method_name": "greeting",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/BackendController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "/persons",
+              "interface_name": "BackendController",
+              "method_name": "getPersons",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/BackendController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "/usercontent",
+              "interface_name": "BackendController",
+              "method_name": "getUserContent",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/BackendController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "/admincontent",
+              "interface_name": "BackendController",
+              "method_name": "getAdminContent",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/BackendController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "/sendSimpleEmail",
+              "interface_name": "BackendController",
+              "method_name": "sendSimpleEmail",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/BackendController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "/sendTemplateEmail",
+              "interface_name": "BackendController",
+              "method_name": "sendTemplateEmail",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/BackendController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "GET",
+              "path": "/sendHtmlEmail",
+              "interface_name": "BackendController",
+              "method_name": "sendHtmlEmail",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/BackendController.kt",
+              "source_module": "backend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            }
+          ],
+          "_source": "symbol_index:path_prefix"
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "custom_filter",
+          "auth_implementation": "PasswordEncoder=BCryptPasswordEncoder \u00b7 1 SecurityFilterChain bean(s) \u00b7 config_style=legacy_adapter",
+          "headers": [],
+          "gaps": [
+            {
+              "gap_id": "sec-001",
+              "description": "Legacy security adapter on boot2",
+              "risk_level": "HIGH",
+              "evidence": "WebSecurityConfig.kt",
+              "recommendation": "Address per kotlin-spring skill-brief risk register."
+            },
+            {
+              "gap_id": "sec-002",
+              "description": "Custom jwt implementation",
+              "risk_level": "MEDIUM",
+              "evidence": "JwtProvider.kt",
+              "recommendation": "Address per kotlin-spring skill-brief risk register."
+            }
+          ],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "custom_filter",
+            "auth_implementation": "PasswordEncoder=BCryptPasswordEncoder \u00b7 1 SecurityFilterChain bean(s) \u00b7 config_style=legacy_adapter",
+            "headers": [],
+            "gaps": [
+              {
+                "gap_id": "sec-001",
+                "description": "Legacy security adapter on boot2",
+                "risk_level": "HIGH",
+                "evidence": "WebSecurityConfig.kt",
+                "recommendation": "Address per kotlin-spring skill-brief risk register."
+              },
+              {
+                "gap_id": "sec-002",
+                "description": "Custom jwt implementation",
+                "risk_level": "MEDIUM",
+                "evidence": "JwtProvider.kt",
+                "recommendation": "Address per kotlin-spring skill-brief risk register."
+              }
+            ],
+            "missing_files": []
+          },
+          "_source": "skill:kotlin-spring"
+        },
+        "FR29": {
+          "status": "complete",
+          "entries": [
+            {
+              "location": "JwtAuthTokenFilter.doFilterInternal",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthTokenFilter.kt",
+              "error_type": "Exception",
+              "handling_strategy": "log error and continue filter chain",
+              "log_tag": "authentication_error",
+              "user_visible": false,
+              "recovery_possible": true,
+              "eh_id": "EH-BAC-001",
+              "source_module": "backend"
+            },
+            {
+              "location": "JwtAuthEntryPoint.commence",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthEntryPoint.kt",
+              "error_type": "AuthenticationException",
+              "handling_strategy": "log error and send 401 Unauthorized response",
+              "log_tag": "unauthorized_error",
+              "user_visible": true,
+              "recovery_possible": true,
+              "eh_id": "EH-BAC-002",
+              "source_module": "backend"
+            },
+            {
+              "location": "JwtProvider.validateJwtToken",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtProvider.kt",
+              "error_type": "JWT validation exceptions",
+              "handling_strategy": "log specific JWT error types and return false",
+              "log_tag": "jwt_validation_error",
+              "user_visible": false,
+              "recovery_possible": true,
+              "eh_id": "EH-BAC-003",
+              "source_module": "backend"
+            },
+            {
+              "location": "AuthController.authenticateUser",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+              "error_type": "ReCaptcha validation failure",
+              "handling_strategy": "return BAD_REQUEST with validation failed message",
+              "log_tag": "",
+              "user_visible": true,
+              "recovery_possible": true,
+              "eh_id": "EH-BAC-004",
+              "source_module": "backend"
+            },
+            {
+              "location": "AuthController.registerUser",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+              "error_type": "Username/Email already exists",
+              "handling_strategy": "return BAD_REQUEST with specific error message",
+              "log_tag": "",
+              "user_visible": true,
+              "recovery_possible": true,
+              "eh_id": "EH-BAC-005",
+              "source_module": "backend"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR30": {
+          "status": "complete",
+          "items": [
+            {
+              "ec_type": "null_handling",
+              "scenario": "JwtAuthTokenFilter.getJwt() returns null when Authorization header is missing or malformed",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtAuthTokenFilter.kt",
+              "line": 45,
+              "is_defect": false,
+              "risk_level": "LOW",
+              "remediation": "Proper null check in doFilterInternal handles this case",
+              "ec_id": "EC-BAC-001",
+              "source_module": "backend",
+              "risk": "LOW"
+            },
+            {
+              "ec_type": "code_bug",
+              "scenario": "AuthController.emailExists() incorrectly calls findByUsername instead of findByEmail",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/controller/AuthController.kt",
+              "line": 95,
+              "is_defect": true,
+              "risk_level": "HIGH",
+              "remediation": "Change to userRepository.findByEmail(email).isPresent",
+              "ec_id": "EC-BAC-002",
+              "source_module": "backend",
+              "risk": "HIGH"
+            },
+            {
+              "ec_type": "null_handling",
+              "scenario": "JwtProvider uses non-null assertion on jwtExpiration without null check",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jwt/JwtProvider.kt",
+              "line": 30,
+              "is_defect": true,
+              "risk_level": "MEDIUM",
+              "remediation": "Add null check or provide default value for jwtExpiration",
+              "ec_id": "EC-BAC-003",
+              "source_module": "backend",
+              "risk": "MEDIUM"
+            },
+            {
+              "ec_type": "boundary_condition",
+              "scenario": "WebSecurityConfig permits all requests with antMatchers(\"/**\") making authentication optional",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/config/WebSecurityConfig.kt",
+              "line": 58,
+              "is_defect": true,
+              "risk_level": "HIGH",
+              "remediation": "Configure proper endpoint-specific security rules instead of permitAll",
+              "ec_id": "EC-BAC-004",
+              "source_module": "backend",
+              "risk": "HIGH"
+            },
+            {
+              "ec_type": "null_handling",
+              "scenario": "User entity fields are nullable but may cause issues in JWT token generation",
+              "source_file": "backend/src/main/kotlin/com/kotlinspringvue/backend/jpa/User.kt",
+              "line": 15,
+              "is_defect": false,
+              "risk_level": "MEDIUM",
+              "remediation": "Add validation to ensure username is not null before JWT operations",
+              "ec_id": "EC-BAC-005",
+              "source_module": "backend",
+              "risk": "MEDIUM"
+            }
+          ],
+          "fallback_banner": ""
+        },
+        "FR31": {
+          "status": "empty",
+          "workflows": []
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "kotlin_server_project",
+      "file_count": 24
+    },
+    {
+      "module_id": "frontend",
+      "component_id": "vue::frontend",
+      "dimensions": {
+        "FR24": {
+          "status": "complete",
+          "items": [
+            {
+              "fr_id": "FR-FE-001",
+              "feature_name": "View Home",
+              "description": "Route / renders component Home",
+              "actors": [
+                "end_user"
+              ],
+              "source_method": "@/components/Home",
+              "business_logic_steps": [],
+              "traceability": []
+            },
+            {
+              "fr_id": "FR-FE-002",
+              "feature_name": "View Home",
+              "description": "Route /home renders component Home",
+              "actors": [
+                "end_user"
+              ],
+              "source_method": "@/components/Home",
+              "business_logic_steps": [],
+              "traceability": []
+            },
+            {
+              "fr_id": "FR-FE-003",
+              "feature_name": "Authenticate user",
+              "description": "Route /login renders component SignIn",
+              "actors": [
+                "end_user"
+              ],
+              "source_method": "@/components/SignIn",
+              "business_logic_steps": [],
+              "traceability": []
+            },
+            {
+              "fr_id": "FR-FE-004",
+              "feature_name": "Register user",
+              "description": "Route /register renders component SignUp",
+              "actors": [
+                "end_user"
+              ],
+              "source_method": "@/components/SignUp",
+              "business_logic_steps": [],
+              "traceability": []
+            },
+            {
+              "fr_id": "FR-FE-005",
+              "feature_name": "View UserPage",
+              "description": "Route /user renders component UserPage",
+              "actors": [
+                "end_user"
+              ],
+              "source_method": "@/components/UserPage",
+              "business_logic_steps": [],
+              "traceability": []
+            },
+            {
+              "fr_id": "FR-FE-006",
+              "feature_name": "View AdminPage",
+              "description": "Route /admin renders component AdminPage",
+              "actors": [
+                "end_user"
+              ],
+              "source_method": "@/components/AdminPage",
+              "business_logic_steps": [],
+              "traceability": []
+            },
+            {
+              "fr_id": "FR-FE-007",
+              "feature_name": "View EmailPage",
+              "description": "Route /email renders component EmailPage",
+              "actors": [
+                "end_user"
+              ],
+              "source_method": "@/components/EmailPage",
+              "business_logic_steps": [],
+              "traceability": []
+            }
+          ],
+          "_source": "skill:vue-comprehension"
+        },
+        "FR25": {
+          "status": "complete",
+          "items": [
+            {
+              "rule_id": "BR-FE-001",
+              "rule_name": "Centralized state mutation",
+              "rule_category": "state",
+              "enforced_in_layer": "vuex_store",
+              "description": "1 Vuex module(s) expose 2 mutation(s) and 0 action(s); component state changes must flow through these to preserve the single-source-of-truth invariant."
+            }
+          ],
+          "_source": "skill:vue-comprehension"
+        },
+        "FR26": {
+          "status": "complete",
+          "domain_entities": [],
+          "ui_models": [],
+          "api_response_shapes": [
+            {
+              "entity_name": "root",
+              "entity_kind": "vuex_module",
+              "source_file": "",
+              "source_module": "frontend",
+              "fields": [
+                {
+                  "field_name": "token",
+                  "field_type": "any",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "role",
+                  "field_type": "any",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "username",
+                  "field_type": "any",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                },
+                {
+                  "field_name": "authorities",
+                  "field_type": "any",
+                  "nullable": false,
+                  "default_value": "",
+                  "json_annotation": ""
+                }
+              ],
+              "orm_annotations": [],
+              "note": "API response shape \u2014 state keys match auth/JWT payload."
+            }
+          ],
+          "_source": "skill:vue-comprehension"
+        },
+        "FR27": {
+          "status": "complete",
+          "endpoints": [
+            {
+              "method": "ROUTE",
+              "path": "/",
+              "interface_name": "VueRouter",
+              "method_name": "Home",
+              "source_file": "@/components/Home",
+              "source_module": "frontend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "ROUTE",
+              "path": "/home",
+              "interface_name": "VueRouter",
+              "method_name": "Home",
+              "source_file": "@/components/Home",
+              "source_module": "frontend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "ROUTE",
+              "path": "/login",
+              "interface_name": "VueRouter",
+              "method_name": "SignIn",
+              "source_file": "@/components/SignIn",
+              "source_module": "frontend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "ROUTE",
+              "path": "/register",
+              "interface_name": "VueRouter",
+              "method_name": "SignUp",
+              "source_file": "@/components/SignUp",
+              "source_module": "frontend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "ROUTE",
+              "path": "/user",
+              "interface_name": "VueRouter",
+              "method_name": "UserPage",
+              "source_file": "@/components/UserPage",
+              "source_module": "frontend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "ROUTE",
+              "path": "/admin",
+              "interface_name": "VueRouter",
+              "method_name": "AdminPage",
+              "source_file": "@/components/AdminPage",
+              "source_module": "frontend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            },
+            {
+              "method": "ROUTE",
+              "path": "/email",
+              "interface_name": "VueRouter",
+              "method_name": "EmailPage",
+              "source_file": "@/components/EmailPage",
+              "source_module": "frontend",
+              "headers": [],
+              "path_params": [],
+              "query_params": [],
+              "request_body": "",
+              "response_type": "",
+              "content_type": ""
+            }
+          ],
+          "_source": "skill:vue-comprehension"
+        },
+        "FR28": {
+          "status": "complete",
+          "auth_mechanism_type": "Client-side HTTP (axios)",
+          "auth_implementation": "HTTP client: axios \u00b7 Base URL: /api",
+          "headers": [],
+          "gaps": [],
+          "missing_files": [],
+          "auth": {
+            "auth_mechanism_type": "Client-side HTTP (axios)",
+            "auth_implementation": "HTTP client: axios \u00b7 Base URL: /api",
+            "headers": [],
+            "gaps": [],
+            "missing_files": []
+          },
+          "_source": "skill:vue-comprehension"
+        },
+        "FR29": {
+          "status": "complete",
+          "entries": [
+            {
+              "location": "frontend (global)",
+              "error_type": "Global HTTP interceptor",
+              "handling_strategy": "NOT present \u2014 surface as a gap",
+              "user_visible": false
+            },
+            {
+              "location": "frontend (global)",
+              "error_type": "Error-boundary component",
+              "handling_strategy": "NOT present \u2014 surface as a gap",
+              "user_visible": false
+            },
+            {
+              "location": "frontend (global)",
+              "error_type": "Centralized error service",
+              "handling_strategy": "NOT present \u2014 surface as a gap",
+              "user_visible": false
+            },
+            {
+              "location": "frontend (global)",
+              "error_type": "Sentry / APM integration",
+              "handling_strategy": "NOT present \u2014 surface as a gap",
+              "user_visible": false
+            }
+          ],
+          "_source": "skill:vue-comprehension"
+        },
+        "FR30": {
+          "status": "complete",
+          "items": [
+            {
+              "ec_id": "EC-FE-001",
+              "ec_type": "framework_migration",
+              "risk_level": "medium",
+              "is_defect": false,
+              "scenario": "6 of 7 component(s) use Options API only \u2014 Vue 3 migration surfaces every component as a rewrite candidate.",
+              "source_evidence": "migration_signals.api_style_distribution"
+            },
+            {
+              "ec_id": "EC-FE-002",
+              "ec_type": "state_migration",
+              "risk_level": "medium",
+              "is_defect": false,
+              "scenario": "Vuex-only codebase \u2014 Pinia migration is required for Vue 3 long-term support; plan module-by-module cutover.",
+              "source_evidence": "migration_signals.state_library_migration"
+            },
+            {
+              "ec_id": "EC-FE-003",
+              "ec_type": "performance",
+              "risk_level": "low",
+              "is_defect": false,
+              "scenario": "All 7 route(s) load eagerly \u2014 no code-splitting, initial bundle carries every view.",
+              "source_evidence": "framework_surface.routing.routes"
+            },
+            {
+              "ec_id": "EC-FE-004",
+              "ec_type": "vue2_eol",
+              "risk_level": "high",
+              "is_defect": true,
+              "scenario": "Vue 2 reached end-of-life on December 31, 2023",
+              "source_evidence": "entire frontend"
+            },
+            {
+              "ec_id": "EC-FE-005",
+              "ec_type": "no_tests",
+              "risk_level": "high",
+              "is_defect": true,
+              "scenario": "No test files detected in the frontend codebase",
+              "source_evidence": "entire frontend"
+            },
+            {
+              "ec_id": "EC-FE-006",
+              "ec_type": "bearer_in_localstorage_sensitive",
+              "risk_level": "medium",
+              "is_defect": false,
+              "scenario": "Authentication tokens stored in localStorage are vulnerable to XSS attacks",
+              "source_evidence": "frontend/src/store/index.js"
+            },
+            {
+              "ec_id": "EC-FE-007",
+              "ec_type": "no_error_handling_convention",
+              "risk_level": "medium",
+              "is_defect": false,
+              "scenario": "No centralized error handling for API calls",
+              "source_evidence": "API client usage"
+            },
+            {
+              "ec_id": "EC-FE-008",
+              "ec_type": "non_namespaced_vuex_module",
+              "risk_level": "low",
+              "is_defect": false,
+              "scenario": "Root Vuex store is not namespaced",
+              "source_evidence": "frontend/src/store/index.js"
+            }
+          ],
+          "_source": "skill:vue-comprehension"
+        },
+        "FR31": {
+          "status": "complete",
+          "workflows": [
+            {
+              "workflow_id": "WF-FE-003",
+              "entry_class": "SignIn",
+              "entry_method": "SignIn",
+              "steps": [
+                {
+                  "layer": "router",
+                  "class_name": "VueRouter",
+                  "method_name": "resolve",
+                  "source_file": "@/components/SignIn"
+                },
+                {
+                  "layer": "component",
+                  "class_name": "SignIn",
+                  "method_name": "mounted",
+                  "source_file": "frontend/src/components/SignIn.vue"
+                },
+                {
+                  "layer": "store",
+                  "class_name": "root",
+                  "method_name": "auth_login, isAuthenticated",
+                  "source_file": "store/index.js"
+                },
+                {
+                  "layer": "api",
+                  "class_name": "axios",
+                  "method_name": "/api",
+                  "source_file": "frontend/src/components/http-common.js"
+                }
+              ]
+            },
+            {
+              "workflow_id": "WF-FE-004",
+              "entry_class": "SignUp",
+              "entry_method": "SignUp",
+              "steps": [
+                {
+                  "layer": "router",
+                  "class_name": "VueRouter",
+                  "method_name": "resolve",
+                  "source_file": "@/components/SignUp"
+                },
+                {
+                  "layer": "component",
+                  "class_name": "SignUp",
+                  "method_name": "mounted",
+                  "source_file": "frontend/src/components/SignUp.vue"
+                },
+                {
+                  "layer": "store",
+                  "class_name": "root",
+                  "method_name": "auth_login",
+                  "source_file": "store/index.js"
+                },
+                {
+                  "layer": "api",
+                  "class_name": "axios",
+                  "method_name": "/api",
+                  "source_file": "frontend/src/components/http-common.js"
+                }
+              ]
+            },
+            {
+              "workflow_id": "WF-FE-005",
+              "entry_class": "UserPage",
+              "entry_method": "UserPage",
+              "steps": [
+                {
+                  "layer": "router",
+                  "class_name": "VueRouter",
+                  "method_name": "resolve",
+                  "source_file": "@/components/UserPage"
+                },
+                {
+                  "layer": "component",
+                  "class_name": "UserPage",
+                  "method_name": "mounted",
+                  "source_file": "frontend/src/components/UserPage.vue"
+                },
+                {
+                  "layer": "store",
+                  "class_name": "root",
+                  "method_name": "isAuthenticated, getUsername",
+                  "source_file": "store/index.js"
+                },
+                {
+                  "layer": "api",
+                  "class_name": "axios",
+                  "method_name": "/api",
+                  "source_file": "frontend/src/components/http-common.js"
+                }
+              ]
+            },
+            {
+              "workflow_id": "WF-FE-006",
+              "entry_class": "AdminPage",
+              "entry_method": "AdminPage",
+              "steps": [
+                {
+                  "layer": "router",
+                  "class_name": "VueRouter",
+                  "method_name": "resolve",
+                  "source_file": "@/components/AdminPage"
+                },
+                {
+                  "layer": "component",
+                  "class_name": "AdminPage",
+                  "method_name": "mounted",
+                  "source_file": "frontend/src/components/AdminPage.vue"
+                },
+                {
+                  "layer": "store",
+                  "class_name": "root",
+                  "method_name": "isAdmin, getUsername",
+                  "source_file": "store/index.js"
+                },
+                {
+                  "layer": "api",
+                  "class_name": "axios",
+                  "method_name": "/api",
+                  "source_file": "frontend/src/components/http-common.js"
+                }
+              ]
+            }
+          ],
+          "_source": "skill:vue-comprehension"
+        }
+      },
+      "gap_register": [],
+      "scope_status": "in_scope",
+      "excluded_reason": "",
+      "component_type": "vue_spa",
+      "file_count": 7
+    }
+  ],
+  "architecture": {
+    "pattern": "layered_spring_mvc",
+    "module_count": 2,
+    "layers": [
+      "repository",
+      "config",
+      "security",
+      "web",
+      "actuator"
+    ],
+    "di_framework": "spring"
+  },
+  "technology_stack": [
+    {
+      "display_name": "vue_cli_webpack",
+      "group_id": "",
+      "artifact_id": "vue_cli_webpack",
+      "version": "4.5.0",
+      "scope": "frontend",
+      "bucket": "build_tool",
+      "source": "skill:vue-comprehension"
+    },
+    {
+      "display_name": "com.fasterxml.jackson.module:jackson-module-kotlin",
+      "group_id": "com.fasterxml.jackson.module",
+      "artifact_id": "jackson-module-kotlin",
+      "version": "",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "com.mashape.unirest:unirest-java",
+      "group_id": "com.mashape.unirest",
+      "artifact_id": "unirest-java",
+      "version": "1.4.9",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "commons-io:commons-io",
+      "group_id": "commons-io",
+      "artifact_id": "commons-io",
+      "version": "2.4",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "io.jsonwebtoken:jjwt",
+      "group_id": "io.jsonwebtoken",
+      "artifact_id": "jjwt",
+      "version": "0.9.0",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "io.jsonwebtoken:jjwt-api",
+      "group_id": "io.jsonwebtoken",
+      "artifact_id": "jjwt-api",
+      "version": "0.10.6",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.jetbrains.kotlin:kotlin-maven-allopen",
+      "group_id": "org.jetbrains.kotlin",
+      "artifact_id": "kotlin-maven-allopen",
+      "version": "",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.jetbrains.kotlin:kotlin-maven-noarg",
+      "group_id": "org.jetbrains.kotlin",
+      "artifact_id": "kotlin-maven-noarg",
+      "version": "",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.jetbrains.kotlin:kotlin-reflect",
+      "group_id": "org.jetbrains.kotlin",
+      "artifact_id": "kotlin-reflect",
+      "version": "",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+      "group_id": "org.jetbrains.kotlin",
+      "artifact_id": "kotlin-stdlib-jdk8",
+      "version": "",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.postgresql:postgresql",
+      "group_id": "org.postgresql",
+      "artifact_id": "postgresql",
+      "version": "",
+      "scope": "",
+      "bucket": "other"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-devtools:2.1.3.RELEASE",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-devtools",
+      "version": "2.1.3.RELEASE",
+      "scope": "runtime",
+      "bucket": "other",
+      "version_source": "spring_boot_bom_propagated"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-starter-test:2.1.3.RELEASE",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-starter-test",
+      "version": "2.1.3.RELEASE",
+      "scope": "test",
+      "bucket": "other",
+      "version_source": "spring_boot_bom_propagated"
+    },
+    {
+      "display_name": "JVM target",
+      "group_id": "",
+      "artifact_id": "jdk-target",
+      "version": "1.8",
+      "scope": "platform",
+      "bucket": "runtime",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "org.jetbrains.kotlin:kotlin",
+      "group_id": "org.jetbrains.kotlin",
+      "artifact_id": "kotlin",
+      "version": "1.2.71",
+      "scope": "platform",
+      "bucket": "runtime",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-platform",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-platform",
+      "version": "2.1.3.RELEASE",
+      "scope": "platform",
+      "bucket": "spring",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-starter-actuator:2.1.3.RELEASE",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-starter-actuator",
+      "version": "2.1.3.RELEASE",
+      "scope": "capability",
+      "bucket": "spring",
+      "version_source": "spring_boot_bom_propagated",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-starter-data-jpa:2.1.3.RELEASE",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-starter-data-jpa",
+      "version": "2.1.3.RELEASE",
+      "scope": "capability",
+      "bucket": "spring",
+      "version_source": "spring_boot_bom_propagated",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-starter-mail:2.1.3.RELEASE",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-starter-mail",
+      "version": "2.1.3.RELEASE",
+      "scope": "capability",
+      "bucket": "spring",
+      "version_source": "spring_boot_bom_propagated",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-starter-security:2.1.3.RELEASE",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-starter-security",
+      "version": "2.1.3.RELEASE",
+      "scope": "capability",
+      "bucket": "spring",
+      "version_source": "spring_boot_bom_propagated",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-starter-thymeleaf:2.1.3.RELEASE",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-starter-thymeleaf",
+      "version": "2.1.3.RELEASE",
+      "scope": "capability",
+      "bucket": "spring",
+      "version_source": "spring_boot_bom_propagated",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "org.springframework.boot:spring-boot-starter-web:2.1.3.RELEASE",
+      "group_id": "org.springframework.boot",
+      "artifact_id": "spring-boot-starter-web",
+      "version": "2.1.3.RELEASE",
+      "scope": "capability",
+      "bucket": "spring",
+      "version_source": "spring_boot_bom_propagated",
+      "source": "skill:kotlin-spring"
+    },
+    {
+      "display_name": "vuex",
+      "group_id": "",
+      "artifact_id": "vuex",
+      "version": "3.6.2",
+      "scope": "frontend",
+      "bucket": "state_mgmt",
+      "source": "skill:vue-comprehension"
+    },
+    {
+      "display_name": "vue",
+      "group_id": "",
+      "artifact_id": "vue",
+      "version": "2.6.14",
+      "scope": "frontend",
+      "bucket": "vue",
+      "source": "skill:vue-comprehension"
+    },
+    {
+      "display_name": "vue-router",
+      "group_id": "",
+      "artifact_id": "vue-router",
+      "version": "3.6.5",
+      "scope": "frontend",
+      "bucket": "vue",
+      "source": "skill:vue-comprehension"
+    }
+  ],
+  "global_gap_register": [],
+  "dimension_summary": {
+    "by_module": {
+      "backend": {
+        "FR24": "complete",
+        "FR25": "complete",
+        "FR26": "complete",
+        "FR27": "complete",
+        "FR28": "complete",
+        "FR29": "complete",
+        "FR30": "complete",
+        "FR31": "empty"
+      },
+      "frontend": {
+        "FR24": "complete",
+        "FR25": "complete",
+        "FR26": "complete",
+        "FR27": "complete",
+        "FR28": "complete",
+        "FR29": "complete",
+        "FR30": "complete",
+        "FR31": "complete"
+      }
+    },
+    "dimensions": [
+      "FR24",
+      "FR25",
+      "FR26",
+      "FR27",
+      "FR28",
+      "FR29",
+      "FR30",
+      "FR31"
+    ]
+  },
+  "generator_warnings": [
+    "QG-CAP-001 FAIL: FR26 Data Model empty for modules ['frontend']"
+  ],
+  "controller_inventory": []
+}
