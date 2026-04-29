@@ -1,0 +1,172 @@
+{
+  "artifact": "executive_brief_v1",
+  "document_title": "Modernization Brief - PHP Application Modernization Executive Brief",
+  "client_name": "Client",
+  "project_name": "Modernization Brief - PHP Application Modernization",
+  "generated_at": "2026-04-29",
+  "scope_summary": "The current BRD is grounded in 565,185 LOC across 3,827 files from the selected PHP scope. Unless the scope lock explicitly states full-repository coverage, this document should not be interpreted as claiming that every legacy workflow was analyzed.",
+  "current_state_summary": "Legacy PHP custom_php_mvc application with 785 routes, 249 controllers, 372 analyzed model files, 1684 templates/views, 3836 extracted SQL statements, and 4 detected background job workflows.",
+  "target_state_summary": "Deliver a modern target architecture (TBD — ratify SYN-HLD-004 before Architect stage) with explicit services, route handling, and hardened security/data access behavior.",
+  "readiness": {
+    "qa_status": "WARN",
+    "quality_gate_summary": "11/18 quality gates passing, 4 failing.",
+    "module_count": 249
+  },
+  "counts": {
+    "routes": 785,
+    "modules": 249,
+    "files": 3827,
+    "loc": 565185
+  },
+  "scope_filter_applied": false,
+  "later_phase_summary": {
+    "deferred_module_count": 0,
+    "excluded_module_count": 0,
+    "current_phase_scope_summary": {}
+  },
+  "blocking_decisions": [
+    "DEC-SESSION-001: Session behavior must be mapped to the target authentication/session model.",
+    "DEC-SESSION-COUNTRY-001: COUNTRY_ALLOWED session behavior must be preserved or intentionally redesigned because it affects regional access control.",
+    "DEC-BDD-001 resolution plan: capture golden flows for the onboarding, contractor placement, and portal upload workflows before sprint planning is approved.",
+    "DEC-FILEIO-001: Upload and export workflows require target-state storage and validation design.",
+    "DEC-INTEGRATION-GP-001: Preserve or redesign GP import flows (GP/import.php, GP/import_emp_vendor.php).",
+    "DEC-INTEGRATION-SP-001: Confirm SharePoint Online dependency observed through phpSPO paths and define target-state integration ownership.",
+    "DEC-DATA-FUNC-001: Reimplement custom MySQL functions recentProfile(), alignRate(), hourGMByProfile() before target-state data access is approved.",
+    "DEC-INTEGRATION-FEDERATED_STAFFING-001: Federated Staffing is listed by the owner architecture document and needs explicit modernization ownership and dependency review."
+  ],
+  "top_risks": [
+    {
+      "risk_id": "RISK-DOM-001",
+      "domain_name": "Shared Services",
+      "severity": "HIGH",
+      "statement_count": 696,
+      "risky_statement_count": 623,
+      "title": "Shared Services: 623 SQL statements carry injection-style or unsafe-query signals",
+      "mitigation": "Portal-facing attack surface requires early security remediation. Upload/export surface requires validation and storage hardening. Parameterize queries and preserve domain data contracts before workflow migration.",
+      "tables": [
+        "academy_batch",
+        "account_foreign_map",
+        "contact",
+        "custmaster_customer_map",
+        "country",
+        "adhoc_adp_compare",
+        "delivery_center",
+        "archcontractor"
+      ]
+    },
+    {
+      "risk_id": "RISK-DOM-003",
+      "domain_name": "Onboarding",
+      "severity": "HIGH",
+      "statement_count": 47,
+      "risky_statement_count": 47,
+      "title": "Onboarding: 47 SQL statements carry injection-style or unsafe-query signals",
+      "mitigation": "Portal-facing attack surface requires early security remediation. Upload/export surface requires validation and storage hardening. Parameterize queries and preserve domain data contracts before workflow migration. Controller mixes routing, workflow logic, and data access. Large monolithic file with high orchestration blast radius.",
+      "tables": [
+        "candidate_onboarding",
+        "jobreq_foreign_map",
+        "jobreq",
+        "contractor_placement",
+        "states",
+        "office_oms_map",
+        "profile",
+        "eop_processed"
+      ]
+    },
+    {
+      "risk_id": "RISK-DOM-004",
+      "domain_name": "Contractor Placement",
+      "severity": "HIGH",
+      "statement_count": 34,
+      "risky_statement_count": 34,
+      "title": "Contractor Placement: 34 SQL statements carry injection-style or unsafe-query signals",
+      "mitigation": "Portal-facing attack surface requires early security remediation. Upload/export surface requires validation and storage hardening. Parameterize queries and preserve domain data contracts before workflow migration. Large monolithic file with high orchestration blast radius. Controller mixes routing, workflow logic, and data access. SQL risk flags detected: string_concatenation, possible_unparameterized_query. SQL risk flags detected: string_concatenation.",
+      "tables": [
+        "employee_usertype_map",
+        "onb_assignment_type_map",
+        "address",
+        "onb_project_details",
+        "onb_finance_details",
+        "over_time_eligibility_type",
+        "hrs_worked_type",
+        "employee"
+      ]
+    },
+    {
+      "risk_id": "RISK-DOM-005",
+      "domain_name": "Reporting",
+      "severity": "MEDIUM",
+      "statement_count": 11,
+      "risky_statement_count": 11,
+      "title": "Reporting: 11 SQL statements carry injection-style or unsafe-query signals",
+      "mitigation": "Upload/export surface requires validation and storage hardening. Parameterize queries and preserve domain data contracts before workflow migration.",
+      "tables": [
+        "employee",
+        "office",
+        "contact",
+        "sales_document_map",
+        "contact_note",
+        "ondemand_ts_export"
+      ]
+    },
+    {
+      "risk_id": "RISK-DOM-008",
+      "domain_name": "Portal and External Access",
+      "severity": "HIGH",
+      "statement_count": 6,
+      "risky_statement_count": 6,
+      "title": "Portal and External Access: 6 SQL statements carry injection-style or unsafe-query signals",
+      "mitigation": "Portal-facing attack surface requires early security remediation. Parameterize queries and preserve domain data contracts before workflow migration.",
+      "tables": [
+        "ondemand_ts_export",
+        "profile",
+        "contractor_placement"
+      ]
+    },
+    {
+      "risk_id": "RISK-DOM-007",
+      "domain_name": "Identity and Access",
+      "severity": "HIGH",
+      "statement_count": 4,
+      "risky_statement_count": 4,
+      "title": "Identity and Access: 4 SQL statements carry injection-style or unsafe-query signals",
+      "mitigation": "Portal-facing attack surface requires early security remediation. Upload/export surface requires validation and storage hardening. Parameterize queries and preserve domain data contracts before workflow migration.",
+      "tables": [
+        "office",
+        "operation",
+        "employee"
+      ]
+    },
+    {
+      "risk_id": "RISK-DOM-002",
+      "domain_name": "Finance and AP",
+      "severity": "MEDIUM",
+      "statement_count": 1,
+      "risky_statement_count": 1,
+      "title": "Finance and AP: 1 SQL statements carry injection-style or unsafe-query signals",
+      "mitigation": "Parameterize queries and preserve domain data contracts before workflow migration.",
+      "tables": [
+        "ap_approval_team_map",
+        "ap_approval_team"
+      ]
+    },
+    {
+      "risk_id": "RISK-DOM-006",
+      "domain_name": "Credentialing and Compliance",
+      "severity": "MEDIUM",
+      "statement_count": 1,
+      "risky_statement_count": 1,
+      "title": "Credentialing and Compliance: 1 SQL statements carry injection-style or unsafe-query signals",
+      "mitigation": "Parameterize queries and preserve domain data contracts before workflow migration.",
+      "tables": [
+        "office_teamlead_cca_map",
+        "employee"
+      ]
+    }
+  ],
+  "recommended_phasing": [
+    "Deliver a modern target architecture (TBD — ratify SYN-HLD-004 before Architect stage) with explicit services, route handling, and hardened security/data access behavior.",
+    "Close blocking decisions and scope-lock assumptions before Build.",
+    "Use domain dossiers for sprint planning and module cards for implementation handoff."
+  ]
+}
