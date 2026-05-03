@@ -1,0 +1,1156 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260503_214751_12B91D77",
+  "generated_at": "2026-05-03T21:48:40.198778+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "Legacy Modernization Scope",
+    "work_item_id": "20260503_214751_12b91d77",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Modernize Kotlin Spring Chirp API to a clean idiomatic Go service. Multi-package layout (cmd/, internal/auth, internal/chat, internal/user, internal/middleware), repository/service split, %w error wrapping, structured logging with slog, .sql migration files, table-driven tests for auth + chat domains.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Mobile",
+      "API",
+      "Internal Ops Console"
+    ],
+    "data_elements": [
+      {
+        "name": "apiId",
+        "classification": "INTERNAL"
+      },
+      {
+        "name": "serviceId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "Deterministic repository evidence is treated as authoritative for inventory, dependency, and traceability baseline details.",
+      "Narrative refinement may still be needed for business-language polish where the model response was not machine-readable."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "API Platform",
+        "capability_id": "api_platform",
+        "confidence": 0.65,
+        "rationale": "Mapped from objective overlap for API Platform."
+      },
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "Data",
+        "capability_id": "data_management",
+        "confidence": 0.617,
+        "rationale": "Mapped from objective overlap for Data."
+      },
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "Identity",
+        "capability_id": "identity_access",
+        "confidence": 0.533,
+        "rationale": "Mapped from objective overlap for Identity."
+      }
+    ],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-AUTO-001",
+        "title": "Implement API Platform workflow contract",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FR-AUTO-001-BDD-01",
+          "scenarios": [
+            "FR-AUTO-001-BDD-01-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-AUTO-002",
+        "title": "Implement Data workflow contract",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FR-AUTO-002-BDD-02",
+          "scenarios": [
+            "FR-AUTO-002-BDD-02-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-AUTO-003",
+        "title": "Implement Identity workflow contract",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FR-AUTO-003-BDD-03",
+          "scenarios": [
+            "FR-AUTO-003-BDD-03-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-AUTO-004",
+        "title": "Extend API Platform workflow \u2014 phase 2",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FR-AUTO-004-BDD-04",
+          "scenarios": [
+            "FR-AUTO-004-BDD-04-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-AUTO-005",
+        "title": "Extend Data workflow \u2014 phase 2",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-AUTO-006",
+        "title": "Extend Identity workflow \u2014 phase 2",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-AUTO-001",
+        "category": "security",
+        "metric": "100% critical state changes are logged with actor, action, and outcome.",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      },
+      {
+        "id": "NFR-AUTO-002",
+        "category": "reliability",
+        "metric": "Critical flows emit trace/correlation identifiers for diagnosis.",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      },
+      {
+        "id": "NFR-AUTO-003",
+        "category": "performance",
+        "metric": "Critical legacy flows do not regress by more than 20% versus baseline.",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      },
+      {
+        "id": "NFR-AUTO-004",
+        "category": "reliability",
+        "metric": "Recovery and fallback procedures are documented and validated for critical failures.",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "FR-AUTO-001-BDD-01",
+        "title": "Implement API Platform workflow contract",
+        "scenarios": [
+          {
+            "id": "FR-AUTO-001-BDD-01-SC-001",
+            "name": "FR-AUTO-001-BDD-01 happy path",
+            "gherkin": [
+              "Given legacy behavior mapped to requirement FR-AUTO-001 is identified",
+              "When a valid modernization request is submitted for implement api platform workflow contract",
+              "Then the system returns the expected result and preserves legacy side-effect contracts"
+            ],
+            "maps_to": [
+              "FR-AUTO-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FR-AUTO-002-BDD-02",
+        "title": "Implement Data workflow contract",
+        "scenarios": [
+          {
+            "id": "FR-AUTO-002-BDD-02-SC-001",
+            "name": "FR-AUTO-002-BDD-02 happy path",
+            "gherkin": [
+              "Given legacy behavior mapped to requirement FR-AUTO-002 is identified",
+              "When a valid modernization request is submitted for implement data workflow contract",
+              "Then the system returns the expected result and preserves legacy side-effect contracts"
+            ],
+            "maps_to": [
+              "FR-AUTO-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FR-AUTO-003-BDD-03",
+        "title": "Implement Identity workflow contract",
+        "scenarios": [
+          {
+            "id": "FR-AUTO-003-BDD-03-SC-001",
+            "name": "FR-AUTO-003-BDD-03 happy path",
+            "gherkin": [
+              "Given legacy behavior mapped to requirement FR-AUTO-003 is identified",
+              "When a valid modernization request is submitted for implement identity workflow contract",
+              "Then the system returns the expected result and preserves legacy side-effect contracts"
+            ],
+            "maps_to": [
+              "FR-AUTO-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FR-AUTO-004-BDD-04",
+        "title": "Extend API Platform workflow \u2014 phase 2",
+        "scenarios": [
+          {
+            "id": "FR-AUTO-004-BDD-04-SC-001",
+            "name": "FR-AUTO-004-BDD-04 happy path",
+            "gherkin": [
+              "Given legacy behavior mapped to requirement FR-AUTO-004 is identified",
+              "When a valid modernization request is submitted for extend api platform workflow \u2014 phase 2",
+              "Then the system returns the expected result and preserves legacy side-effect contracts"
+            ],
+            "maps_to": [
+              "FR-AUTO-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "id": "RISK-PARSE-001",
+      "title": "Analyst output required deterministic fallback",
+      "severity": "medium",
+      "description": "The primary Analyst LLM response could not be parsed into valid JSON, so Synthetix compiled the requirements pack from deterministic evidence instead.",
+      "mitigation": "Review the generated artifacts and rerun with a stricter output contract if additional narrative depth is required.",
+      "evidence": "Analyst LLM request exceeded 45s wall-clock timeout"
+    }
+  ],
+  "out_of_scope": [],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-AUTO-001",
+        "to": "FR-AUTO-001-BDD-01",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-AUTO-002",
+        "to": "FR-AUTO-002-BDD-02",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-AUTO-003",
+        "to": "FR-AUTO-003-BDD-03",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-AUTO-004",
+        "to": "FR-AUTO-004-BDD-04",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260503_214751_12b91d77",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260503T214752Z_20260503_214751_12b91d77",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "repo_url": "https://github.com/vishakjai/chirp-api",
+    "knowledge_snapshot_id": "kctx-693f39aa1367f03c",
+    "run_context_bundle_id": "runctx-816716d4d73a33bb",
+    "source_version_ids": [],
+    "run_id": "20260503_214751_12b91d77"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=1, objects=2"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=3, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=0"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Modernize Kotlin Spring Chirp API to a clean idiomatic Go service. Multi-package layout (cmd/, internal/auth, internal/chat, internal/user, internal/middleware), repository/service split, %w error wrapping, structured logging with slog, .sql migration files, table-driven tests for auth + chat domains.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [
+      {
+        "id": "api_platform",
+        "service_domain": "API Platform",
+        "business_capability": "Service Delivery",
+        "confidence": 0.65,
+        "dependencies": [
+          "identity_access",
+          "observability"
+        ]
+      },
+      {
+        "id": "data_management",
+        "service_domain": "Data",
+        "business_capability": "Data Storage & Migration",
+        "confidence": 0.617,
+        "dependencies": [
+          "observability"
+        ]
+      },
+      {
+        "id": "identity_access",
+        "service_domain": "Identity",
+        "business_capability": "Authentication & Authorization",
+        "confidence": 0.533,
+        "dependencies": [
+          "observability"
+        ]
+      }
+    ],
+    "alternative_capabilities": [],
+    "confidence": 0.6
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "FR-AUTO-001-BDD-01",
+        "title": "Implement API Platform workflow contract",
+        "source_requirement_ids": [
+          "FR-AUTO-001"
+        ],
+        "gherkin": "Feature: Implement API Platform workflow contract\n  Scenario: FR-AUTO-001-BDD-01 happy path\n    Given legacy behavior mapped to requirement FR-AUTO-001 is identified\n    When a valid modernization request is submitted for implement api platform workflow contract\n    Then the system returns the expected result and preserves legacy side-effect contracts"
+      },
+      {
+        "id": "FR-AUTO-002-BDD-02",
+        "title": "Implement Data workflow contract",
+        "source_requirement_ids": [
+          "FR-AUTO-002"
+        ],
+        "gherkin": "Feature: Implement Data workflow contract\n  Scenario: FR-AUTO-002-BDD-02 happy path\n    Given legacy behavior mapped to requirement FR-AUTO-002 is identified\n    When a valid modernization request is submitted for implement data workflow contract\n    Then the system returns the expected result and preserves legacy side-effect contracts"
+      },
+      {
+        "id": "FR-AUTO-003-BDD-03",
+        "title": "Implement Identity workflow contract",
+        "source_requirement_ids": [
+          "FR-AUTO-003"
+        ],
+        "gherkin": "Feature: Implement Identity workflow contract\n  Scenario: FR-AUTO-003-BDD-03 happy path\n    Given legacy behavior mapped to requirement FR-AUTO-003 is identified\n    When a valid modernization request is submitted for implement identity workflow contract\n    Then the system returns the expected result and preserves legacy side-effect contracts"
+      },
+      {
+        "id": "FR-AUTO-004-BDD-04",
+        "title": "Extend API Platform workflow \u2014 phase 2",
+        "source_requirement_ids": [
+          "FR-AUTO-004"
+        ],
+        "gherkin": "Feature: Extend API Platform workflow \u2014 phase 2\n  Scenario: FR-AUTO-004-BDD-04 happy path\n    Given legacy behavior mapped to requirement FR-AUTO-004 is identified\n    When a valid modernization request is submitted for extend api platform workflow \u2014 phase 2\n    Then the system returns the expected result and preserves legacy side-effect contracts"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-AUTO-001",
+        "title": "Auditability",
+        "description": "Auditability requirements must be explicitly validated before release.",
+        "category": "security",
+        "metric": "100% critical state changes are logged with actor, action, and outcome.",
+        "acceptance_criteria": [
+          "NFR-AUTO-001: Metric is continuously measured in CI/CD or runtime dashboards.",
+          "NFR-AUTO-001: Threshold breach triggers alerting and remediation workflow.",
+          "NFR-AUTO-001: Compliance evidence is retained for release review."
+        ],
+        "generation_source": "auto"
+      },
+      {
+        "id": "NFR-AUTO-002",
+        "title": "Observability",
+        "description": "Observability requirements must be explicitly validated before release.",
+        "category": "reliability",
+        "metric": "Critical flows emit trace/correlation identifiers for diagnosis.",
+        "acceptance_criteria": [
+          "NFR-AUTO-002: Metric is continuously measured in CI/CD or runtime dashboards.",
+          "NFR-AUTO-002: Threshold breach triggers alerting and remediation workflow.",
+          "NFR-AUTO-002: Compliance evidence is retained for release review."
+        ],
+        "generation_source": "auto"
+      },
+      {
+        "id": "NFR-AUTO-003",
+        "title": "Performance parity",
+        "description": "Performance parity requirements must be explicitly validated before release.",
+        "category": "performance",
+        "metric": "Critical legacy flows do not regress by more than 20% versus baseline.",
+        "acceptance_criteria": [
+          "NFR-AUTO-003: Metric is continuously measured in CI/CD or runtime dashboards.",
+          "NFR-AUTO-003: Threshold breach triggers alerting and remediation workflow.",
+          "NFR-AUTO-003: Compliance evidence is retained for release review."
+        ],
+        "generation_source": "auto"
+      },
+      {
+        "id": "NFR-AUTO-004",
+        "title": "Operational reliability",
+        "description": "Operational reliability requirements must be explicitly validated before release.",
+        "category": "reliability",
+        "metric": "Recovery and fallback procedures are documented and validated for critical failures.",
+        "acceptance_criteria": [
+          "NFR-AUTO-004: Metric is continuously measured in CI/CD or runtime dashboards.",
+          "NFR-AUTO-004: Threshold breach triggers alerting and remediation workflow.",
+          "NFR-AUTO-004: Compliance evidence is retained for release review."
+        ],
+        "generation_source": "auto"
+      }
+    ],
+    "should": []
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-AUTO-001",
+      "test_types": [
+        "contract",
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FR-AUTO-001-BDD-01"
+      ]
+    },
+    {
+      "requirement_id": "FR-AUTO-002",
+      "test_types": [
+        "contract",
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FR-AUTO-002-BDD-02"
+      ]
+    },
+    {
+      "requirement_id": "FR-AUTO-003",
+      "test_types": [
+        "contract",
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FR-AUTO-003-BDD-03"
+      ]
+    },
+    {
+      "requirement_id": "FR-AUTO-004",
+      "test_types": [
+        "contract",
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FR-AUTO-004-BDD-04"
+      ]
+    },
+    {
+      "requirement_id": "FR-AUTO-005",
+      "test_types": [
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-AUTO-006",
+      "test_types": [
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "PASS",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 6,
+        "non_functional_count": 4,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 3
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-693f39aa1367f03c",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "Deterministic analyst fallback compiled from repository evidence because the primary model response was not machine-readable. Objective: Modernize Kotlin Spring Chirp API to a clean idiomatic Go service. Multi-package layout (cmd/, internal/auth, internal/chat, internal/user, internal/middleware), repository/service split, %w error wrapping, structured logging with slog, .sql migration files, table-driven tests for auth + chat domains.",
+  "legacy_code_inventory": {
+    "summary": "Discover cache indicates PHP legacy application with 0 controllers, 0 routes, 0 templates, and 0 composer dependencies.",
+    "applications": 1,
+    "php_controller_count": 0,
+    "php_route_count": 0,
+    "php_template_count": 0,
+    "php_session_key_count": 0,
+    "php_auth_touchpoint_count": 24,
+    "source_loc_total": 4332,
+    "source_files_scanned": 178,
+    "php_dependency_count": 0,
+    "source_target_modernization_profile": {},
+    "php_analysis": {
+      "framework": "custom_php",
+      "route_inventory": {
+        "artifact_type": "php_route_inventory_v1",
+        "route_file_count": 0,
+        "route_files": [],
+        "route_count": 0,
+        "routes": [],
+        "entrypoint_count": 0,
+        "entrypoints": [],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "controller_inventory": {
+        "artifact_type": "php_controller_inventory_v1",
+        "controller_count": 0,
+        "action_count": 0,
+        "controllers": [],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "template_inventory": {
+        "artifact_type": "php_template_inventory_v1",
+        "template_count": 0,
+        "templates": [],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "session_state_inventory": {
+        "artifact_type": "php_session_state_inventory_v1",
+        "uses_session_state": false,
+        "session_start_files": [],
+        "session_key_count": 0,
+        "session_keys": [],
+        "superglobal_usage": {
+          "$_GET": 0,
+          "$_POST": 0,
+          "$_REQUEST": 0,
+          "$_COOKIE": 0,
+          "$_FILES": 0,
+          "$_SESSION": 0
+        },
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "authz_authn_inventory": {
+        "artifact_type": "php_authz_authn_inventory_v1",
+        "auth_file_count": 20,
+        "evidence": [
+          {
+            "path": "README.md",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "app/src/main/kotlin/com/plcoding/chirp/api/security/SecurityConfig.kt",
+            "signals": [
+              "auth",
+              "authenticate"
+            ]
+          },
+          {
+            "path": "chat/src/main/kotlin/com/plcoding/chirp/api/websocket/ChatWebSocketHandler.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "chat/src/main/kotlin/com/plcoding/chirp/infra/storage/SupabaseRestClientConfig.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "common/src/main/kotlin/com/plcoding/chirp/api/exception_handling/CommonExceptionHandler.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "common/src/main/kotlin/com/plcoding/chirp/api/util/requestUserId.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "common/src/main/kotlin/com/plcoding/chirp/domain/exception/UnauthorizedException.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "notification/src/main/kotlin/com/plcoding/chirp/infra/push_notification/FirebasePushNotificationService.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "notification/src/main/kotlin/com/plcoding/chirp/service/EmailService.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/api/config/ApiKeyAuthFilter.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/api/config/JwtAuthFilter.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/api/controllers/ApiKeyController.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/api/controllers/AuthController.kt",
+            "signals": [
+              "auth",
+              "authenticate",
+              "login",
+              "logout"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/api/dto/AuthenticatedUserDto.kt",
+            "signals": [
+              "auth",
+              "authenticate"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/api/dto/LoginRequest.kt",
+            "signals": [
+              "login"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/api/exception_handling/AuthExceptionHandler.kt",
+            "signals": [
+              "auth"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/api/mappers/UserMappers.kt",
+            "signals": [
+              "auth",
+              "authenticate"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/domain/model/AuthenticatedUser.kt",
+            "signals": [
+              "auth",
+              "authenticate"
+            ]
+          },
+          {
+            "path": "user/src/main/kotlin/com/plcoding/chirp/service/AuthService.kt",
+            "signals": [
+              "auth",
+              "authenticate",
+              "login",
+              "logout"
+            ]
+          },
+          {
+            "path": "app/src/main/resources/application.yml",
+            "signals": [
+              "auth"
+            ]
+          }
+        ],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0",
+        "auth_touchpoint_count": 24
+      },
+      "sql_catalog": {
+        "artifact_type": "php_sql_catalog_v1",
+        "statement_count": 7,
+        "connection_hint_files": [],
+        "statements": [
+          {
+            "sql_id": "php_sql:1",
+            "kind": "SELECT",
+            "raw": "SELECT m FROM ChatMessageEntity m WHERE m.chatId = :chatId AND m.createdAt < :before ORDER BY m.createdAt DESC",
+            "tables": [
+              "ChatMessageEntity"
+            ],
+            "source_file": "chat/src/main/kotlin/com/plcoding/chirp/infra/database/repositories/ChatMessageRepository.kt",
+            "risk_flags": []
+          },
+          {
+            "sql_id": "php_sql:2",
+            "kind": "SELECT",
+            "raw": "SELECT m FROM ChatMessageEntity m LEFT JOIN FETCH m.sender WHERE m.chatId IN :chatIds AND (m.createdAt, m.id) = ( SELECT m2.createdAt, m2.id FROM ChatMessageEntity m2 WHERE m2.chatId = m.chatId ORDER BY m2.createdAt DESC LIMIT 1 )",
+            "tables": [
+              "ChatMessageEntity",
+              "FETCH"
+            ],
+            "source_file": "chat/src/main/kotlin/com/plcoding/chirp/infra/database/repositories/ChatMessageRepository.kt",
+            "risk_flags": []
+          },
+          {
+            "sql_id": "php_sql:3",
+            "kind": "SELECT",
+            "raw": "SELECT p FROM ChatParticipantEntity p WHERE LOWER(p.username) = :query OR LOWER(p.email) = :query",
+            "tables": [
+              "ChatParticipantEntity"
+            ],
+            "source_file": "chat/src/main/kotlin/com/plcoding/chirp/infra/database/repositories/ChatParticipantRepository.kt",
+            "risk_flags": []
+          },
+          {
+            "sql_id": "php_sql:4",
+            "kind": "SELECT",
+            "raw": "SELECT c FROM ChatEntity c LEFT JOIN FETCH c.participants LEFT JOIN FETCH c.creator WHERE c.id = :id AND EXISTS ( SELECT 1 FROM c.participants p WHERE p.userId = :userId )",
+            "tables": [
+              "ChatEntity",
+              "FETCH",
+              "c.participants"
+            ],
+            "source_file": "chat/src/main/kotlin/com/plcoding/chirp/infra/database/repositories/ChatRepository.kt",
+            "risk_flags": []
+          },
+          {
+            "sql_id": "php_sql:5",
+            "kind": "SELECT",
+            "raw": "SELECT c FROM ChatEntity c LEFT JOIN FETCH c.participants LEFT JOIN FETCH c.creator WHERE EXISTS ( SELECT 1 FROM c.participants p WHERE p.userId = :userId )",
+            "tables": [
+              "ChatEntity",
+              "FETCH",
+              "c.participants"
+            ],
+            "source_file": "chat/src/main/kotlin/com/plcoding/chirp/infra/database/repositories/ChatRepository.kt",
+            "risk_flags": []
+          },
+          {
+            "sql_id": "php_sql:6",
+            "kind": "UPDATE",
+            "raw": "UPDATE EmailVerificationTokenEntity e SET e.usedAt = CURRENT_TIMESTAMP WHERE e.user = :user",
+            "tables": [
+              "EmailVerificationTokenEntity"
+            ],
+            "source_file": "user/src/main/kotlin/com/plcoding/chirp/infra/database/repositories/EmailVerificationTokenRepository.kt",
+            "risk_flags": []
+          },
+          {
+            "sql_id": "php_sql:7",
+            "kind": "UPDATE",
+            "raw": "UPDATE PasswordResetTokenEntity p SET p.usedAt = CURRENT_TIMESTAMP WHERE p.user = :user",
+            "tables": [
+              "PasswordResetTokenEntity"
+            ],
+            "source_file": "user/src/main/kotlin/com/plcoding/chirp/infra/database/repositories/PasswordResetTokenRepository.kt",
+            "risk_flags": []
+          }
+        ],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "include_graph": {
+        "artifact_type": "php_include_graph_v1",
+        "edge_count": 5,
+        "edges": [
+          {
+            "source": "settings.gradle.kts",
+            "target": "app",
+            "type": "include"
+          },
+          {
+            "source": "settings.gradle.kts",
+            "target": "user",
+            "type": "include"
+          },
+          {
+            "source": "settings.gradle.kts",
+            "target": "chat",
+            "type": "include"
+          },
+          {
+            "source": "settings.gradle.kts",
+            "target": "notification",
+            "type": "include"
+          },
+          {
+            "source": "settings.gradle.kts",
+            "target": "common",
+            "type": "include"
+          }
+        ],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "background_job_inventory": {
+        "artifact_type": "php_background_job_inventory_v1",
+        "job_count": 0,
+        "jobs": [],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "file_io_inventory": {
+        "artifact_type": "php_file_io_inventory_v1",
+        "upload_file_count": 0,
+        "export_file_count": 0,
+        "upload_files": [],
+        "export_files": [],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "validation_rules": {
+        "artifact_type": "php_validation_rules_v1",
+        "file_count": 0,
+        "entries": [],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0"
+      },
+      "hotspot_analysis": {
+        "artifact_type": "php_hotspot_analysis_v1",
+        "artifact_version": "1.0",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0",
+        "analysis_mode": "heuristic",
+        "llm_enrichment": {
+          "used": false,
+          "status": "skipped",
+          "reason": "No LLM enrichment requested."
+        },
+        "hotspots": [],
+        "bounded_context_candidates": [],
+        "cross_cutting_risks": [],
+        "blocking_questions": [
+          {
+            "decision_id": "DEC-PHP-DATA-001",
+            "question": "Which bounded contexts own MySQL versus SQL Server, and are both required in the target architecture?",
+            "why_it_matters": ""
+          }
+        ],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00"
+      },
+      "semantic_analysis": {
+        "artifact_type": "php_semantic_analysis_v1",
+        "artifact_version": "1.0",
+        "repo": "https://github.com/vishakjai/chirp-api",
+        "branch": "master",
+        "commit_sha": "b59bf27793c218e8e940ec176233ce8dbd3973f0",
+        "analysis_mode": "heuristic",
+        "llm_enrichment": false,
+        "semantic_file_count": 0,
+        "workflow_count": 0,
+        "semantic_role_counts": {},
+        "controller_inventory_count": 0,
+        "template_inventory_count": 0,
+        "analyzed_controller_count": 0,
+        "analyzed_model_count": 0,
+        "analyzed_view_count": 0,
+        "analyzed_report_count": 0,
+        "analyzed_include_count": 0,
+        "semantic_files": [],
+        "workflow_slices": [],
+        "bounded_context_candidates": [],
+        "blocking_questions": [
+          "Which bounded contexts own MySQL versus SQL Server, and are both required in the target architecture?"
+        ],
+        "notes": [
+          "Semantic analysis is derived from PHP routes, controllers, SQL, includes, templates, and hotspot/domain artifacts.",
+          "Use workflow slices as modernization seams and Architect inputs before deeper extraction work begins."
+        ],
+        "generated_at": "2026-05-01T19:32:20.026940+00:00"
+      },
+      "hotspot_workflow_specs": {}
+    }
+  }
+}
