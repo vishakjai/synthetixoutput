@@ -24,7 +24,7 @@ func main() {
 		w.Write([]byte(`{"status": "ready"}`))
 	})
 
-	r.Get("/notificationmodule/execute", controllers.ExecuteNotification)
+	r.Post("/notificationmodule/execute", controllers.ExecuteNotification)
 
 	port := os.Getenv("PORT")
 	if port == "" {
