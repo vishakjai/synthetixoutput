@@ -14,7 +14,8 @@ def readiness_check():
 @app.post("/profile/execute")
 def execute_profile_action():
     # Placeholder for executing profile actions
-    return {"message": "Profile action executed successfully."}
+    # This should preserve behavior from ConfirmProfilePictureRequest
+    return {"message": "Profile action executed"}
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8080))
