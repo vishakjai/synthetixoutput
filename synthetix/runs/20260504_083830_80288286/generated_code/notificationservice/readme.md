@@ -1,23 +1,20 @@
 # NotificationService
 
-This service handles sending notifications for chat events and other activities.
+This service is responsible for sending notifications, handling device tokens, and managing notification events.
 
 ## Running the Service
 
+To run the service locally:
+
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8080
+go run main.go
 ```
 
-## Building the Docker Image
+To build and run the Docker container:
 
 ```bash
-docker build -t notification-service .
-```
-
-## Running the Docker Container
-
-```bash
-docker run -p 8080:8080 notification-service
+docker build -t notificationservice .
+docker run -p 8080:8080 notificationservice
 ```
 
 ## Endpoints
