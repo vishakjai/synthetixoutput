@@ -1,9 +1,5 @@
 # NotificationModule
 
-## Description
-
-NotificationModule owns the behavior currently implemented by DeviceTokenController, NotificationExceptionHandler, PushNotification, and related workflows.
-
 ## Build
 
 ```bash
