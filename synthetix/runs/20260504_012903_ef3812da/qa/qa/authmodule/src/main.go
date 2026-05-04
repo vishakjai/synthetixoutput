@@ -21,7 +21,10 @@ func main() {
 		w.Write([]byte(`{"status": "ready"}`))
 	})
 
-	r.Get("/authmodule/execute", ConfirmProfilePictureRequestHandler)
+	r.Post("/authmodule/execute", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"status": "Executed"}`))
+	})
 
 	port := os.Getenv("PORT")
 	if port == "" {
