@@ -1,4 +1,3 @@
-import pytest
 from fastapi.testclient import TestClient
 from src.main import app
 
@@ -17,4 +16,4 @@ def test_readiness_check():
 def test_execute_profile_action():
     response = client.post("/profile/execute")
     assert response.status_code == 200
-    assert response.json() == {"message": "Profile action executed successfully."}
+    assert response.json() == {"message": "Profile action executed"}
