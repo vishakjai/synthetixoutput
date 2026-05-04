@@ -4,6 +4,7 @@ package domain
 type NotificationService struct{}
 
 // Execute handles the execution of a notification.
-func (s *NotificationService) Execute() string {
-	return "Notification executed successfully"
+func (s *NotificationService) Execute(message string) string {
+	// Simulate sending a notification
+	return "Notification executed successfully: " + message
 }
