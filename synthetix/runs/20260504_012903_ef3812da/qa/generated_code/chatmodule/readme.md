@@ -1,18 +1,18 @@
 # ChatModule
 
-## Building
+## Build
 
 ```bash
 docker build -t chatmodule .
 ```
 
-## Running
+## Run
 
 ```bash
 docker run -p 8080:8080 chatmodule
 ```
 
-## Testing
+## Test
 
 ```bash
 go test ./...
