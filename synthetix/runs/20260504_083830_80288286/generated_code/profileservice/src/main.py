@@ -13,8 +13,7 @@ def readiness_check():
 
 @app.post("/profile/execute")
 def execute_profile_action():
-    # Placeholder for executing profile actions
-    # This should preserve behavior from ConfirmProfilePictureRequest
+    # Placeholder for the logic to preserve legacy behavior
     return {"message": "Profile action executed"}
 
 if __name__ == "__main__":
