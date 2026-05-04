@@ -4,16 +4,18 @@ class ChatService:
         return ["Hello", "World"] if chat_id == "1" else None
 
     def get_chat(self, chat_id):
-        # Simulate fetching a chat
-        return {"id": chat_id, "created_at": "2023-10-01", "updated_at": "2023-10-02"} if chat_id == "1" else None
+        # Simulate fetching a chat from a database
+        if chat_id == "1":
+            return {"id": "1", "created_at": "2023-01-01T00:00:00Z", "updated_at": "2023-01-02T00:00:00Z"}
+        return None
 
-    def list_chats(self, page, page_size):
+    def list_chats(self):
         # Simulate listing chats
-        return ([{"id": "1", "created_at": "2023-10-01", "updated_at": "2023-10-02"}], 1)
+        return {"items": [{"id": "1", "created_at": "2023-01-01T00:00:00Z", "updated_at": "2023-01-02T00:00:00Z"}], "total": 1, "page": 1, "page_size": 10}
 
     def create_chat(self, payload):
         # Simulate chat creation
-        return "2", "2023-10-03"
+        return {"id": "2", "created_at": "2023-01-03T00:00:00Z"}
 
     def add_participant(self, chat_id):
         # Simulate adding a participant
