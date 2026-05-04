@@ -1,10 +1,12 @@
-FROM python:3.9-slim
+FROM golang:1.18-alpine
 
 WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY go.mod .
+COPY main.go .
+COPY handlers.go .
 
-COPY . .
+RUN go mod download
+RUN go build -o notificationservice
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["./notificationservice"]
