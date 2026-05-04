@@ -9,14 +9,14 @@ class AuthService:
         return SignupResponse(user_id=user_id, username=request.username, created_at=created_at)
 
     def login_user(self, request: LoginRequest) -> JwtAuthResponse:
-        token = "dummy-token"
+        token = "dummy-token"  # Replace with real token generation logic
         expires_at = datetime.now() + timedelta(hours=1)
-        return JwtAuthResponse(token=token, token_type="Bearer", username=request.username, authorities=["user"], expires_at=expires_at)
+        return JwtAuthResponse(token=token, token_type="Bearer", username=request.username, authorities=[], expires_at=expires_at)
 
     def refresh_token(self, request: RefreshTokenRequest) -> JwtAuthResponse:
-        token = "dummy-token"
+        token = "dummy-token"  # Replace with real token generation logic
         expires_at = datetime.now() + timedelta(hours=1)
-        return JwtAuthResponse(token=token, token_type="Bearer", username="user", authorities=["user"], expires_at=expires_at)
+        return JwtAuthResponse(token=token, token_type="Bearer", username="", authorities=[], expires_at=expires_at)
 
     def logout_user(self) -> LogoutResponse:
         return LogoutResponse(logged_out=True)
