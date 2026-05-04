@@ -39,6 +39,7 @@ func readyHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func userProfileExecuteHandler(w http.ResponseWriter, r *http.Request) {
+	// Simulate execution logic for user profile
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"message": "UserProfile executed successfully"}`))
