@@ -19,14 +19,14 @@ async def get_chat(chatId: str):
     return chat
 
 @router.get("/api/chat")
-async def list_chats(page: int = 1, page_size: int = 10):
-    items, total = chat_service.list_chats(page, page_size)
-    return {"items": items, "total": total, "page": page, "page_size": page_size}
+async def list_chats():
+    chats = chat_service.list_chats()
+    return chats
 
 @router.post("/api/chat")
 async def create_chat(payload: dict):
-    chat_id, created_at = chat_service.create_chat(payload)
-    return {"id": chat_id, "created_at": created_at}
+    chat = chat_service.create_chat(payload)
+    return chat
 
 @router.post("/api/chat/{chatId}/add")
 async def add_participant(chatId: str):
