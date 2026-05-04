@@ -7,14 +7,7 @@ This service manages user profile functionalities including profile picture upda
 To run the service locally:
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8080
-```
-
-To build and run the Docker container:
-
-```bash
-docker build -t profileservice .
-docker run -p 8080:8080 profileservice
+uvicorn src.main:app --host 0.0.0.0 --port 8080
 ```
 
 ## Endpoints
