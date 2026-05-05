@@ -18,23 +18,18 @@ type RegisterResponse struct {
 	CreatedAt string `json:"created_at"`
 }
 
-type DeleteNotificationResponse struct {
-	UserID    string `json:"user_id"`
-	Username  string `json:"username"`
-	CreatedAt string `json:"created_at"`
-}
-
-func registerHandler(w http.ResponseWriter, r *http.Request) {
+func registerNotificationHandler(w http.ResponseWriter, r *http.Request) {
 	var req RegisterRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeError(w, http.StatusBadRequest, "INVALID_PAYLOAD", err.Error())
 		return
 	}
+
 	if req.Username == "" || req.Email == "" || req.Password == "" || req.RecaptchaToken == "" {
 		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "All fields are required")
 		return
 	}
-	// Simulate registration logic
+
 	resp := RegisterResponse{
 		UserID:    "12345",
 		Username:  req.Username,
@@ -44,13 +39,18 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteNotificationHandler(w http.ResponseWriter, r *http.Request) {
-	// Simulate notification deletion logic
-	resp := DeleteNotificationResponse{
-		UserID:    "12345",
-		Username:  "testuser",
-		CreatedAt: "2023-10-01T12:00:00Z",
-	}
-	writeJSON(w, http.StatusOK, resp)
+	// Simulate deletion logic
+	writeJSON(w, http.StatusOK, map[string]string{"status": "deleted"})
+}
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status": "healthy"}`))
+}
+
+func readyHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status": "ready"}`))
 }
 
 func writeError(w http.ResponseWriter, status int, code, message string) {
