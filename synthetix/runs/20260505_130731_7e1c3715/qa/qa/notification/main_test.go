@@ -1,38 +1,42 @@
 package main
 
 import (
+	"bytes"
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
 )
 
-func TestRegisterHandler(t *testing.T) {
-	body := `{"username":"testuser","email":"test@example.com","password":"password","recaptcha_token":"token"}`
-	req, err := http.NewRequest("POST", "/api/notification/register", strings.NewReader(body))
+func TestRegisterNotificationHandler(t *testing.T) {
+	body := `{"username": "testuser", "email": "test@example.com", "password": "password", "recaptcha_token": "token"}`
+	req, err := http.NewRequest("POST", "/api/notification/register", bytes.NewBuffer([]byte(body)))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	rec := httptest.NewRecorder()
-	http.HandlerFunc(registerHandler).ServeHTTP(rec, req)
+	recorder := httptest.NewRecorder()
+	handler := http.HandlerFunc(registerNotificationHandler)
 
-	if status := rec.Code; status != http.StatusOK {
+	handler.ServeHTTP(recorder, req)
+
+	if status := recorder.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
 	}
 }
 
-func TestRegisterHandlerValidationError(t *testing.T) {
-	body := `{"username":"","email":"","password":"","recaptcha_token":""}`
-	req, err := http.NewRequest("POST", "/api/notification/register", strings.NewReader(body))
+func TestRegisterNotificationHandlerValidation(t *testing.T) {
+	body := `{"username": "", "email": "", "password": "", "recaptcha_token": ""}`
+	req, err := http.NewRequest("POST", "/api/notification/register", bytes.NewBuffer([]byte(body)))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	rec := httptest.NewRecorder()
-	http.HandlerFunc(registerHandler).ServeHTTP(rec, req)
+	recorder := httptest.NewRecorder()
+	handler := http.HandlerFunc(registerNotificationHandler)
 
-	if status := rec.Code; status != http.StatusBadRequest {
+	handler.ServeHTTP(recorder, req)
+
+	if status := recorder.Code; status != http.StatusBadRequest {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusBadRequest)
 	}
 }
