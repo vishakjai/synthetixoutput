@@ -2,7 +2,7 @@
 
 This service handles the dispatching of notifications for user and chat events.
 
-## Running the Service
+## Building and Running
 
 ```bash
 # Build the Docker image
@@ -14,14 +14,7 @@ $ docker run -p 8080:8080 notification-service
 
 ## Endpoints
 
+- `POST /api/notification/register`: Register a new notification.
+- `DELETE /api/notification/{token}`: Delete a notification.
 - `GET /health`: Health check endpoint.
 - `GET /ready`: Readiness check endpoint.
-- `POST /api/notification/register`: Register a notification.
-- `DELETE /api/notification/{token}`: Delete a notification.
-
-## Testing
-
-```bash
-# Run tests
-$ go test ./...
-```
