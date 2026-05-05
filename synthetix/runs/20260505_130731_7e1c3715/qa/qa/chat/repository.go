@@ -14,13 +14,13 @@ func NewChatRepository(db *sqlx.DB) *ChatRepository {
 	return &ChatRepository{db: db}
 }
 
-func (r *ChatRepository) FindChatByID(ctx context.Context, chatID string) (Chat, error) {
-	// Implementation for finding a chat by ID
-	return Chat{}, nil
+func (r *ChatRepository) FindChatByID(ctx context.Context, chatID string) (interface{}, error) {
+	// Logic to find a chat by ID
+	return nil, nil
 }
 
-func (r *ChatRepository) CreateChat(ctx context.Context, chat Chat) error {
-	// Implementation for creating a chat
+func (r *ChatRepository) CreateChat(ctx context.Context, chat interface{}) error {
+	// Logic to create a chat
 	return nil
 }
 
