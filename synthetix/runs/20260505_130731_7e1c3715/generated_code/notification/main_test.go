@@ -3,47 +3,36 @@ package main
 import (
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
-func TestHealthHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/health", nil)
+func TestRegisterHandler(t *testing.T) {
+	body := `{"username":"testuser","email":"test@example.com","password":"password","recaptcha_token":"token"}`
+	req, err := http.NewRequest("POST", "/api/notification/register", strings.NewReader(body))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(healthHandler)
+	rec := httptest.NewRecorder()
+	http.HandlerFunc(registerHandler).ServeHTTP(rec, req)
 
-	handler.ServeHTTP(rr, req)
-
-	if status := rr.Code; status != http.StatusOK {
+	if status := rec.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
-	}
-
-	expected := `{"status": "healthy"}`
-	if rr.Body.String() != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
 	}
 }
 
-func TestReadyHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/ready", nil)
+func TestRegisterHandlerValidationError(t *testing.T) {
+	body := `{"username":"","email":"","password":"","recaptcha_token":""}`
+	req, err := http.NewRequest("POST", "/api/notification/register", strings.NewReader(body))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(readyHandler)
+	rec := httptest.NewRecorder()
+	http.HandlerFunc(registerHandler).ServeHTTP(rec, req)
 
-	handler.ServeHTTP(rr, req)
-
-	if status := rr.Code; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
-	}
-
-	expected := `{"status": "ready"}`
-	if rr.Body.String() != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
+	if status := rec.Code; status != http.StatusBadRequest {
+		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusBadRequest)
 	}
 }
