@@ -13,7 +13,7 @@ func main() {
 
 	r.Get("/health", healthHandler)
 	r.Get("/ready", readyHandler)
-	r.Post("/api/notification/register", registerHandler)
+	r.Post("/api/notification/register", registerNotificationHandler)
 	r.Delete("/api/notification/{token}", deleteNotificationHandler)
 
 	port := ":8080"
@@ -23,16 +23,6 @@ func main() {
 
 	log.Printf("Starting server on %s", port)
 	if err := http.ListenAndServe(port, r); err != nil {
-		log.Fatalf("Server failed to start: %v", err)
+		log.Fatalf("Could not start server: %s", err)
 	}
-}
-
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "healthy"}`))
-}
-
-func readyHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "ready"}`))
 }
