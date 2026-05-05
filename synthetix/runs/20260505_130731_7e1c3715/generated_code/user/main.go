@@ -16,24 +16,23 @@ func main() {
 		port = ":" + p
 	}
 
-	db, err := sqlx.Connect("postgres", os.Getenv("DATABASE_URL"))
+	db, err := sqlx.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
-		log.Fatalf("Database connection failed: %v", err)
+		log.Fatalf("Failed to connect to database: %v", err)
 	}
 	defer db.Close()
 
 	r := chi.NewRouter()
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"status": "healthy"}`))
+		w.Write([]byte(`{"status":"healthy"}`))
 	})
 
 	r.Get("/ready", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"status": "ready"}`))
+		w.Write([]byte(`{"status":"ready"}`))
 	})
 
+	// Register handlers
 	r.Post("/api/auth/apiKey", apiKeyHandler)
 	r.Post("/api/auth/register", registerHandler)
 	r.Post("/api/auth/login", loginHandler)
