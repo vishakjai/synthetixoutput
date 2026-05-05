@@ -1,22 +1,20 @@
 # Chat Service
 
-This service manages chat functionalities and interactions between users.
+This is the Chat service, responsible for managing chat functionalities and interactions between users.
 
-## Building
+## Build
 
 ```bash
 docker build -t chat-service .
 ```
 
-## Running
+## Run
 
 ```bash
 docker run -p 8080:8080 chat-service
 ```
 
-## Testing
-
-Run tests with:
+## Test
 
 ```bash
 go test ./...
