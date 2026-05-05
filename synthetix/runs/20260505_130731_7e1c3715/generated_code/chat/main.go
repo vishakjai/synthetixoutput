@@ -18,29 +18,32 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
-	defer db.Close()
-
-	applyMigrations(db)
 	r := chi.NewRouter()
 
+	// Health endpoints
 	r.Get("/health", healthHandler)
 	r.Get("/ready", readyHandler)
 
+	// Chat endpoints
 	r.Get("/api/chat/{chatId}/messages", getChatMessagesHandler(db))
 	r.Get("/api/chat/{chatId}", getChatHandler(db))
 	r.Get("/api/chat", listChatsHandler(db))
 	r.Post("/api/chat", createChatHandler(db))
 	r.Post("/api/chat/{chatId}/add", addParticipantHandler(db))
 	r.Delete("/api/chat/{chatId}/leave", leaveChatHandler(db))
+
+	// Messages endpoints
 	r.Delete("/api/messages/{messageId}", deleteMessageHandler(db))
+
+	// Participants endpoints
 	r.Get("/api/participants", listParticipantsHandler(db))
 	r.Post("/api/participants/profile-picture-upload", uploadProfilePictureHandler(db))
 	r.Post("/api/participants/confirm-profile-picture", confirmProfilePictureHandler(db))
 	r.Delete("/api/participants/profile-picture", deleteProfilePictureHandler(db))
 
 	log.Printf("Starting server on port %s", port)
-	if err := http.ListenAndServe(port, r); err != nil {
-		log.Fatalf("Server failed: %v", err)
+	if err := http.ListenAndServe(":"+port, r); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
 	}
 }
 
@@ -49,7 +52,7 @@ func getPort() string {
 	if port == "" {
 		port = "8080"
 	}
-	return ":" + port
+	return port
 }
 
 // applyMigrations runs the bundled SQL files at startup. Doctor-injected;
