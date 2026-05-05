@@ -1,31 +1,27 @@
 # Notification Service
 
-This service dispatches notifications for user and chat events.
+This service handles the dispatching of notifications for user and chat events.
 
-## Requirements
-- Go 1.20+
-- Docker
-
-## Running Locally
-
-```bash
-# Run the service
-PORT=8080 go run main.go
-```
-
-## Building Docker Image
+## Running the Service
 
 ```bash
 # Build the Docker image
-docker build -t notification-service .
+$ docker build -t notification-service .
 
 # Run the Docker container
-docker run -p 8080:8080 notification-service
+$ docker run -p 8080:8080 notification-service
 ```
+
+## Endpoints
+
+- `GET /health`: Health check endpoint.
+- `GET /ready`: Readiness check endpoint.
+- `POST /api/notification/register`: Register a notification.
+- `DELETE /api/notification/{token}`: Delete a notification.
 
 ## Testing
 
 ```bash
 # Run tests
-PORT=8080 go test ./...
+$ go test ./...
 ```
