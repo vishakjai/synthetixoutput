@@ -13,7 +13,7 @@ func main() {
 
 	r.Get("/health", healthHandler)
 	r.Get("/ready", readyHandler)
-	r.Post("/api/notification/register", registerNotificationHandler)
+	r.Post("/api/notification/register", registerHandler)
 	r.Delete("/api/notification/{token}", deleteNotificationHandler)
 
 	port := ":8080"
@@ -21,9 +21,9 @@ func main() {
 		port = ":" + p
 	}
 
-	log.Printf("Starting server on port %s", port)
+	log.Printf("Starting server on %s", port)
 	if err := http.ListenAndServe(port, r); err != nil {
-		log.Fatalf("could not start server: %s", err)
+		log.Fatalf("Server failed to start: %v", err)
 	}
 }
 
