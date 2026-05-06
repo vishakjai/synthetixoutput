@@ -1,29 +1,21 @@
 # UserProfileService
 
-UserProfileService is a Go-based microservice for managing user profiles, including authentication and profile picture management.
+This service handles user profile operations including authentication, registration, and profile updates.
 
-## Requirements
-- Go 1.18+
-- Docker
+## Building and Running
 
-## Running Locally
+To build and run the service:
 
 ```bash
 # Build the Docker image
-$ docker build -t userprofileservice .
+docker build -t userprofileservice .
 
 # Run the Docker container
-$ docker run -p 8080:8080 userprofileservice
-```
-
-## Testing
-
-```bash
-# Run tests
-$ go test ./...
+docker run -p 8080:8080 userprofileservice
 ```
 
 ## Endpoints
+
 - `POST /api/auth/apiKey`
 - `POST /api/auth/register`
 - `POST /api/auth/login`
@@ -35,6 +27,7 @@ $ go test ./...
 - `POST /api/auth/reset-password`
 - `POST /api/auth/change-password`
 
-## Health Checks
+## Health Check
+
 - `GET /health`
 - `GET /ready`
