@@ -17,9 +17,9 @@ type SignupRequest struct {
 }
 
 type SignupResponse struct {
-	UserID    string `json:"user_id"`
-	Username  string `json:"username"`
-	CreatedAt string `json:"created_at"`
+	UserID    string    `json:"user_id"`
+	Username  string    `json:"username"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 type LoginRequest struct {
@@ -29,11 +29,11 @@ type LoginRequest struct {
 }
 
 type JwtAuthResponse struct {
-	Token       string   `json:"token"`
-	TokenType   string   `json:"token_type"`
-	Username    string   `json:"username"`
+	Token      string   `json:"token"`
+	TokenType  string   `json:"token_type"`
+	Username   string   `json:"username"`
 	Authorities []string `json:"authorities"`
-	ExpiresAt   string   `json:"expires_at"`
+	ExpiresAt  time.Time `json:"expires_at"`
 }
 
 type RefreshTokenRequest struct {
@@ -53,7 +53,8 @@ type PasswordResetResponse struct {
 }
 
 func apiKeyHandler(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status": "ok"}`))
 }
 
 func registerHandler(w http.ResponseWriter, r *http.Request) {
@@ -63,11 +64,16 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if req.Username == "" || req.Email == "" || req.Password == "" || req.RecaptchaToken == "" {
-		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "All fields are required")
+		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "all fields are required")
 		return
 	}
-	// Simulate registration logic
-	writeJSON(w, http.StatusOK, SignupResponse{UserID: "123e4567-e89b-12d3-a456-426614174000", Username: req.Username, CreatedAt: time.Now().Format(time.RFC3339)})
+	// Simulate user creation logic
+	resp := SignupResponse{
+		UserID:    "123e4567-e89b-12d3-a456-426614174000",
+		Username:  req.Username,
+		CreatedAt: time.Now(),
+	}
+	writeJSON(w, http.StatusOK, resp)
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
@@ -77,11 +83,19 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if req.Username == "" || req.Password == "" || req.RecaptchaToken == "" {
-		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "All fields are required")
+		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "all fields are required")
 		return
 	}
 	// Simulate login logic
-	writeJSON(w, http.StatusOK, JwtAuthResponse{Token: "dummy-token", TokenType: "Bearer", Username: req.Username, Authorities: []string{"user"}, ExpiresAt: time.Now().Add(24 * time.Hour).Format(time.RFC3339)})
+	token := "dummy-token"
+	resp := JwtAuthResponse{
+		Token:      token,
+		TokenType:  "Bearer",
+		Username:   req.Username,
+		Authorities: []string{"user"},
+		ExpiresAt:  time.Now().Add(24 * time.Hour),
+	}
+	writeJSON(w, http.StatusOK, resp)
 }
 
 func refreshHandler(w http.ResponseWriter, r *http.Request) {
@@ -91,23 +105,31 @@ func refreshHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if req.RefreshToken == "" {
-		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "Refresh token is required")
+		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "refresh token is required")
 		return
 	}
-	// Simulate refresh logic
-	writeJSON(w, http.StatusOK, map[string]string{"token": "new-dummy-token", "expires_at": time.Now().Add(24 * time.Hour).Format(time.RFC3339)})
+	// Simulate token refresh logic
+	token := "new-dummy-token"
+	writeJSON(w, http.StatusOK, map[string]interface{}{
+		"token":     token,
+		"expires_at": time.Now().Add(24 * time.Hour),
+	})
 }
 
 func logoutHandler(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, http.StatusOK, LogoutResponse{LoggedOut: true})
+	// Simulate logout logic
+	resp := LogoutResponse{LoggedOut: true}
+	writeJSON(w, http.StatusOK, resp)
 }
 
 func resendVerificationHandler(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, http.StatusOK, map[string]string{"status": "verification resent"})
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status": "ok"}`))
 }
 
 func verifyHandler(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, http.StatusOK, map[string]string{"status": "verified"})
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status": "ok"}`))
 }
 
 func forgotPasswordHandler(w http.ResponseWriter, r *http.Request) {
@@ -117,11 +139,12 @@ func forgotPasswordHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if req.Email == "" {
-		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "Email is required")
+		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "email is required")
 		return
 	}
-	// Simulate forgot password logic
-	writeJSON(w, http.StatusOK, PasswordResetResponse{ResetInitiated: true})
+	// Simulate password reset initiation logic
+	resp := PasswordResetResponse{ResetInitiated: true}
+	writeJSON(w, http.StatusOK, resp)
 }
 
 func resetPasswordHandler(w http.ResponseWriter, r *http.Request) {
@@ -131,15 +154,17 @@ func resetPasswordHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if req.Email == "" {
-		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "Email is required")
+		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "email is required")
 		return
 	}
-	// Simulate reset password logic
-	writeJSON(w, http.StatusOK, PasswordResetResponse{ResetInitiated: true})
+	// Simulate password reset logic
+	resp := PasswordResetResponse{ResetInitiated: true}
+	writeJSON(w, http.StatusOK, resp)
 }
 
 func changePasswordHandler(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, http.StatusOK, map[string]string{"status": "password changed"})
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status": "ok"}`))
 }
 
 func writeError(w http.ResponseWriter, status int, code, message string) {
@@ -148,7 +173,7 @@ func writeError(w http.ResponseWriter, status int, code, message string) {
 	json.NewEncoder(w).Encode(map[string]string{"code": code, "message": message})
 }
 
-func writeJSON(w http.ResponseWriter, status int, payload any) {
+func writeJSON(w http.ResponseWriter, status int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	json.NewEncoder(w).Encode(payload)
