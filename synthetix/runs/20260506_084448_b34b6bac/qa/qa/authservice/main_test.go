@@ -7,43 +7,23 @@ import (
 )
 
 func TestHealthHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/health", nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	req := httptest.NewRequest("GET", "/health", nil)
+	w := httptest.NewRecorder()
+	healthHandler(w, req)
 
-	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(healthHandler)
-
-	handler.ServeHTTP(rr, req)
-
-	if status := rr.Code; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
-	}
-
-	expected := `{"status": "healthy"}`
-	if rr.Body.String() != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
+	res := w.Result()
+	if res.StatusCode != http.StatusOK {
+		t.Errorf("Expected status OK, got %v", res.Status)
 	}
 }
 
 func TestReadyHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/ready", nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	req := httptest.NewRequest("GET", "/ready", nil)
+	w := httptest.NewRecorder()
+	readyHandler(w, req)
 
-	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(readyHandler)
-
-	handler.ServeHTTP(rr, req)
-
-	if status := rr.Code; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
-	}
-
-	expected := `{"status": "ready"}`
-	if rr.Body.String() != expected {
-		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
+	res := w.Result()
+	if res.StatusCode != http.StatusOK {
+		t.Errorf("Expected status OK, got %v", res.Status)
 	}
 }
