@@ -26,35 +26,37 @@ func registerNotificationHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if req.Username == "" || req.Email == "" || req.Password == "" || req.RecaptchaToken == "" {
-		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "all fields are required")
+		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "All fields are required")
 		return
 	}
 
-	// Simulate user registration logic
-	resp := RegisterResponse{
-		UserID:    "12345",
+	response := RegisterResponse{
+		UserID:    "123e4567-e89b-12d3-a456-426614174000",
 		Username:  req.Username,
 		CreatedAt: "2023-10-01T12:00:00Z",
 	}
 
-	writeJSON(w, http.StatusOK, resp)
+	writeJSON(w, http.StatusOK, response)
 }
 
 func deleteNotificationHandler(w http.ResponseWriter, r *http.Request) {
 	token := chi.URLParam(r, "token")
 	if token == "" {
-		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "token is required")
+		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "Token is required")
 		return
 	}
 
-	// Simulate token deletion logic
-	resp := RegisterResponse{
-		UserID:    "12345",
-		Username:  "example_user",
-		CreatedAt: "2023-10-01T12:00:00Z",
-	}
+	writeJSON(w, http.StatusOK, map[string]string{
+		"message": "Notification deleted successfully",
+	})
+}
 
-	writeJSON(w, http.StatusOK, resp)
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, http.StatusOK, map[string]string{"status": "healthy"})
+}
+
+func readyHandler(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ready"})
 }
 
 func writeError(w http.ResponseWriter, status int, code, message string) {
