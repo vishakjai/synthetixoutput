@@ -12,7 +12,7 @@ import (
 var jwtSecret = []byte("your-256-bit-secret")
 
 func hashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	return string(bytes), err
 }
 
@@ -28,14 +28,14 @@ func signJWT(userID string, roles []string, secret []byte, ttl time.Duration) (s
 		"exp":  time.Now().Add(ttl).Unix(),
 		"iat":  time.Now().Unix(),
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString(secret)
+	return jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(secret)
 }
 
-func authenticateUser(ctx context.Context, username, password string) (string, error) {
-	// Simulate user authentication
-	if username == "user" && password == "pass" {
-		return "123e4567-e89b-12d3-a456-426614174000", nil
-	}
-	return "", errors.New("invalid credentials")
+func verifyJWT(tokenStr string, secret []byte) (*jwt.Token, error) {
+	return jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, errors.New("unexpected signing method")
+		}
+		return secret, nil
+	})
 }
