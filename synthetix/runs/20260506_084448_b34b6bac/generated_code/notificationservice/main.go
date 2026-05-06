@@ -16,23 +16,13 @@ func main() {
 	r.Post("/api/notification/register", registerNotificationHandler)
 	r.Delete("/api/notification/{token}", deleteNotificationHandler)
 
-	port := ":8080"
-	if p := os.Getenv("PORT"); p != "" {
-		port = ":" + p
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
 	}
 
-	log.Printf("Starting server on %s", port)
-	if err := http.ListenAndServe(port, r); err != nil {
+	log.Printf("Starting server on port %s", port)
+	if err := http.ListenAndServe(":"+port, r); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
-}
-
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "healthy"}`))
-}
-
-func readyHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "ready"}`))
 }
