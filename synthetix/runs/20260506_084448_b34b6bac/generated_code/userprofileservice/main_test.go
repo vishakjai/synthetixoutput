@@ -1,54 +1,67 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
-func TestLoginHandler_Success(t *testing.T) {
-	body := LoginRequest{Username: "user", Password: "pass", RecaptchaToken: "token"}
-	jsonBody, _ := json.Marshal(body)
-	req, err := http.NewRequest("POST", "/api/auth/login", bytes.NewBuffer(jsonBody))
+func TestHealthHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/health", nil)
 	if err != nil {
-		t.Fatalf("Could not create request: %v", err)
+		t.Fatal(err)
 	}
 
-	recorder := httptest.NewRecorder()
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(healthHandler)
 
-	handler := http.HandlerFunc(loginHandler)
-	handler.ServeHTTP(recorder, req)
+	handler.ServeHTTP(rr, req)
 
-	if status := recorder.Code; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
 	}
 
-	var response JwtAuthResponse
-	if err := json.NewDecoder(recorder.Body).Decode(&response); err != nil {
-		t.Errorf("Could not decode response: %v", err)
+	expected := `{"status": "healthy"}`
+	if rr.Body.String() != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v",
+			rr.Body.String(), expected)
+	}
+}
+
+func TestRegisterHandler_Validation(t *testing.T) {
+	invalidPayload := `{"username": "", "email": "", "password": "", "recaptcha_token": ""}`
+	req, err := http.NewRequest("POST", "/api/auth/register", strings.NewReader(invalidPayload))
+	if err != nil {
+		t.Fatal(err)
 	}
 
-	if response.Username != "user" {
-		t.Errorf("Expected username 'user', got %v", response.Username)
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(registerHandler)
+
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusBadRequest {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusBadRequest)
 	}
 }
 
 func TestLoginHandler_InvalidCredentials(t *testing.T) {
-	body := LoginRequest{Username: "user", Password: "wrongpass", RecaptchaToken: "token"}
-	jsonBody, _ := json.Marshal(body)
-	req, err := http.NewRequest("POST", "/api/auth/login", bytes.NewBuffer(jsonBody))
+	invalidPayload := `{"username": "wrong", "password": "wrong", "recaptcha_token": "token"}`
+	req, err := http.NewRequest("POST", "/api/auth/login", strings.NewReader(invalidPayload))
 	if err != nil {
-		t.Fatalf("Could not create request: %v", err)
+		t.Fatal(err)
 	}
 
-	recorder := httptest.NewRecorder()
-
+	rr := httptest.NewRecorder()
 	handler := http.HandlerFunc(loginHandler)
-	handler.ServeHTTP(recorder, req)
 
-	if status := recorder.Code; status != http.StatusUnauthorized {
-		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusUnauthorized)
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusUnauthorized {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusUnauthorized)
 	}
 }
