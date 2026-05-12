@@ -1,0 +1,45 @@
+# Translator refusals (php → csharp)
+
+The per-method translator emitted a structured refusal for each row below. HITL should review and either re-dispatch with helper context or accept a manual translation.
+
+- **__construct** (5-12) — `unmappable`: PHP ::__construct body is constructor logic setting class properties; no direct mapping to .NET endpoint.
+- **getFormLabel** (14-17) — `unmappable`: PHP ::getFormLabel method calls parent::getFormLabel with dynamic text based on $this->op; parent method context not visible.
+- **read** (19-46) — `unmappable`: PHP ::read method uses helpers and fields not visible in input (e.g., Contractor_placement_hr_checklist_details_map::activeHRChecklistEntry, $this->model, $this->onExists, $this->display)
+- **create** (48-60) — `unmappable`: PHP ::create body calls parent::create with $this->request; parent method not visible in input
+- **update** (62-93) — `unmappable`: PHP ::update method uses helpers and session redirection not visible in input
+- **links** (95-99) — `empty_method`: PHP ::links body is empty, returning an empty array with no logic
+- **__construct** (5-12) — `unmappable`: PHP ::__construct body is constructor logic setting properties; not mappable to .NET endpoint
+- **links** (14-17) — `empty_method`: PHP ::links body is empty, returning an empty array
+- **run** (19-22) — `unmappable`: PHP ::run body is a one-liner returning parent::run($request, true); parent method not visible in input
+- **search** (24-44) — `unmappable`: PHP ::search method uses db_get_rows and global $db_connection; db_get_rows implementation not visible in input
+- **label** (46-55) — `unmappable`: PHP ::label method sets model labels; model context not visible in input
+- **__construct** (7-40) — `unmappable`: PHP ::__construct body initializes class properties and arrays; no direct .NET endpoint equivalent
+- **getFormLabel** (42-51) — `unmappable`: PHP ::getFormLabel calls parent method and uses properties not visible in input
+- **getHeadline** (53-59) — `unmappable`: PHP ::getHeadline calls parent::getHeadline; parent method not visible in input
+- **create** (61-73) — `unmappable`: PHP ::create body switches on $op but calls parent::create; parent method not visible in input
+- **read** (75-206) — `unmappable`: PHP ::read body contains complex logic with multiple branches and external dependencies not visible in input.
+- **update** (208-2269) — `unmappable`: PHP ::update method contains complex logic with multiple cases and external dependencies not visible in input.
+- **del** (2381-2383) — `unmappable`: PHP ::del method calls parent::del($request); but parent method is not visible in input
+- **links** (2385-2397) — `unmappable`: PHP ::links method calls _isAllowed and dov helpers which are not visible in input
+- **onNew** (2399-2440) — `unmappable`: PHP ::onNew calls onNewRefOnly, onNewManual, onNewManualPerm; helpers not visible in input
+- **onNewRefOnly** (2442-2482) — `unmappable`: PHP ::onNewRefOnly uses global $db_connection and complex model logic not visible in input
+- **onNewManual** (2484-2524) — `unmappable`: PHP ::onNewManual method references multiple external models and methods (e.g., Custmaster::mappedList(), Vendor::checkName()) without visible definitions.
+- **onNewManualPerm** (2526-2567) — `unmappable`: PHP ::onNewManualPerm relies on global state and complex model setup not visible in input
+- **onExists** (2569-2572) — `unmappable`: PHP ::onExists body calls $this->getModels(); helper getModels not visible in input
+- **prepNewPerm** (2574-2677) — `unmappable`: PHP ::prepNewPerm method involves complex object interactions and global state not visible in input.
+- **getModels** (2680-2704) — `unmappable`: PHP ::getModels body calls isEmployeeAreaMember, Contractor_placement::isPerm, getModelsPerm, getModelsContract, and dfv; helpers not visible in input
+- **getModelsPerm** (2706-2770) — `unmappable`: PHP ::getModelsPerm method relies on external classes and methods not visible in input.
+- **getModelsContract** (2772-2914) — `unmappable`: PHP ::getModelsContract method has complex dependencies and logic that cannot be mapped without additional context.
+- **getCcpRateColums** (2916-2935) — `unmappable`: PHP ::getCcpRateColums body uses dfv() helper not visible in input
+- **preSave** (2937-2943) — `unmappable`: PHP ::preSave method references $this->op and $this->model->notes; context not provided.
+- **postSave** (2945-3082) — `unmappable`: PHP ::postSave method contains complex logic with global dependencies, file operations, and external function calls not visible in input.
+- **validatePerm** (3084-3086) — `empty_method`: PHP ::validatePerm body is empty
+- **handleUpdateEopDelayReviewDetails** (3088-3147) — `unmappable`: PHP ::handleUpdateEopDelayReviewDetails uses helper methods and global variables not visible in input
+- **handleEopRequest** (3149-3196) — `unmappable`: PHP ::handleEopRequest uses dfv, employeeByUsername, modelname, searchObjects, saveData, and Equipment_tracking methods not visible in input
+- **handleHoEopRequest** (3198-3241) — `unmappable`: PHP ::handleHoEopRequest uses dfv(), new $this->modelname(), employeeByPlacementId() which are not visible in input
+- **handleCancelEop** (3243-3282) — `unmappable`: PHP ::handleCancelEop calls dfv, employeeByUsername, and model methods not visible in input
+- **handleOnbenchExtensionRequest** (3284-3307) — `unmappable`: PHP ::handleOnbenchExtensionRequest uses dfv and modelname not visible in input
+- **validateRefOnly** (3309-3637) — `unmappable`: PHP ::validateRefOnly method is complex with external dependencies and side effects, including file uploads, email sending, and database operations, which are not fully visible or mappable to a single .NET endpoint without guessing.
+- **validateManualPERM** (3639-3958) — `unmappable`: PHP ::validateManualPERM method involves complex logic with multiple dependencies and global variables not visible in input.
+- **validateManual** (3960-4357) — `unmappable`: PHP ::validateManual method is complex with multiple dependencies and side effects (e.g., global variables, file uploads, database operations) not visible in input.
+- **validate** (4359-4988) — `unmappable`: PHP ::validate method calls multiple helpers and uses global state not visible in input
