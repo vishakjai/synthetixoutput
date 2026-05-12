@@ -1,0 +1,577 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260512_220511_1B1D3DD4",
+  "generated_at": "2026-05-12T22:05:56.102020+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Strategic Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Code Modernization",
+    "work_item_id": "20260512_220511_1b1d3dd4",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Kick increment Contractor \u2014 verify MethodTranslatorSubAgent emits translated code with provenance.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "The target environment is .NET 8 with ASP.NET Core.",
+      "Provenance tracking will be implemented using existing logging frameworks."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Implement Code Translation",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Error Handling in Translation",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Observability of Translation Process",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-004",
+          "scenarios": [
+            "BDD-004-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "User Interface for Translation Management",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Translation of 1,000 lines of code must complete within 5 minutes.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Translate PHP Code to .NET",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Translate legacy PHP code to .NET",
+            "gherkin": [
+              "Given a legacy PHP codebase",
+              "When the translation process is initiated",
+              "Then the code is translated to .NET without errors"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Track Provenance of Translated Code",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Track provenance of translated code",
+            "gherkin": [
+              "Given a code translation is performed",
+              "When the translation completes",
+              "Then provenance data is recorded and accessible"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Error Handling in Translation",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Handle errors during translation",
+            "gherkin": [
+              "Given a translation error occurs",
+              "When the error is detected",
+              "Then detailed error information is logged and displayed"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Monitor Translation Process",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "Monitor translation process",
+            "gherkin": [
+              "Given the translation process is running",
+              "When an anomaly is detected",
+              "Then an alert is triggered"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential loss of functionality during translation.",
+      "impact": "high",
+      "mitigation": "Implement comprehensive automated testing."
+    },
+    {
+      "description": "Security vulnerabilities in translated code.",
+      "impact": "medium",
+      "mitigation": "Conduct regular security audits and apply patches."
+    },
+    {
+      "description": "Performance degradation in the translation process.",
+      "impact": "medium",
+      "mitigation": "Optimize translation algorithms and monitor performance."
+    }
+  ],
+  "out_of_scope": [
+    "Customer-facing portal functionalities.",
+    "Non-staffing related modules."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-003",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "BDD-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260512_220511_1b1d3dd4",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260512T220526Z_20260512_220511_1b1d3dd4",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-0f4b7e7e4cb3a338",
+    "run_context_bundle_id": "runctx-171418d745597703",
+    "source_version_ids": [],
+    "run_id": "20260512_220511_1b1d3dd4"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Kick increment Contractor \u2014 verify MethodTranslatorSubAgent emits translated code with provenance.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Translate PHP Code to .NET",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Code Translation\nScenario: Translate legacy PHP code to .NET\nGiven a legacy PHP codebase\nWhen the translation process is initiated\nThen the code is translated to .NET without errors"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Track Provenance of Translated Code",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Provenance Tracking\nScenario: Track provenance of translated code\nGiven a code translation is performed\nWhen the translation completes\nThen provenance data is recorded and accessible"
+      },
+      {
+        "id": "BDD-003",
+        "title": "Error Handling in Translation",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Error Handling\nScenario: Handle errors during translation\nGiven a translation error occurs\nWhen the error is detected\nThen detailed error information is logged and displayed"
+      },
+      {
+        "id": "BDD-004",
+        "title": "Monitor Translation Process",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Observability\nScenario: Monitor translation process\nGiven the translation process is running\nWhen an anomaly is detected\nThen an alert is triggered"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance of Translation Process",
+        "description": "The translation process must complete within acceptable time limits.",
+        "category": "performance",
+        "metric": "Translation of 1,000 lines of code must complete within 5 minutes.",
+        "acceptance_criteria": [
+          "Performance tests must show translation times within specified limits.",
+          "The system must scale to handle large codebases efficiently.",
+          "Performance metrics must be reviewed after each translation."
+        ],
+        "verification": "Load test with varying codebase sizes; measure completion time.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 4,
+        "non_functional_count": 1,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-0f4b7e7e4cb3a338",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "This project aims to modernize the MagicBox codebase by enabling the MethodTranslatorSubAgent to emit translated code with provenance, ensuring traceability and maintaining functionality."
+}
