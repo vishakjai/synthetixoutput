@@ -1,0 +1,683 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260512_164514_18382554",
+  "generated_at": "2026-05-12T16:46:09.328355+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Strategic Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Modernization",
+    "work_item_id": "20260512_164514_18382554",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Verify SYN-RECON-01 + BRIEF_PORT seed: LLM should emit grounded magicbox macro services and SYN-WIRE-01 should report 0 blocking ports.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "API"
+    ],
+    "data_elements": [
+      {
+        "name": "serviceId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [
+      "Verify SYN-RECON-01 + BRIEF_PORT seed: LLM should emit grounded magicbox macro services and SYN-WIRE-01 should report 0 blocking ports"
+    ],
+    "assumptions": [
+      "Existing PHP codebase is stable and functional.",
+      "Modernization will not disrupt current operations."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "API Platform",
+        "capability_id": "api_platform",
+        "confidence": 0.55,
+        "rationale": "Mapped from objective overlap for API Platform."
+      }
+    ],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-002",
+        "title": "Report Zero Blocking Ports",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "FEAT-002",
+          "scenarios": [
+            "FEAT-002-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Define Error Handling",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FEAT-003",
+          "scenarios": [
+            "FEAT-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Implement Observability",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FEAT-004",
+          "scenarios": [
+            "FEAT-004-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Service Delivery via API Platform",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "p95 response time < 200ms under peak load",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "Zero critical vulnerabilities in security scans",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "scalability",
+        "metric": "Horizontal scaling supports 100% increase in load",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "reliability",
+        "metric": "99.9% uptime over a rolling 30-day period",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "usability",
+        "metric": "User satisfaction score > 80%",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "FEAT-001",
+        "title": "Emit Grounded Macro Services",
+        "scenarios": [
+          {
+            "id": "FEAT-001-SC-001",
+            "name": "Service Emission",
+            "gherkin": [
+              "Given the MagicBox platform is operational",
+              "When a macro service is emitted",
+              "Then the service should be grounded and accessible"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FEAT-002",
+        "title": "Report Zero Blocking Ports",
+        "scenarios": [
+          {
+            "id": "FEAT-002-SC-001",
+            "name": "Port Check",
+            "gherkin": [
+              "Given SYN-WIRE-01 is configured",
+              "When a port scan is conducted",
+              "Then zero blocking ports should be reported"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FEAT-003",
+        "title": "Define Error Handling",
+        "scenarios": [
+          {
+            "id": "FEAT-003-SC-001",
+            "name": "Error Occurrence",
+            "gherkin": [
+              "Given a service encounters an error",
+              "When error handling is triggered",
+              "Then the error should be logged and handled appropriately"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FEAT-004",
+        "title": "Implement Observability",
+        "scenarios": [
+          {
+            "id": "FEAT-004-SC-001",
+            "name": "Service Monitoring",
+            "gherkin": [
+              "Given observability tools are in place",
+              "When a service is monitored",
+              "Then real-time metrics should be available"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential downtime during migration.",
+      "impact": "high",
+      "mitigation": "Implement phased migration with rollback plans."
+    },
+    {
+      "description": "Data integrity issues during transition.",
+      "impact": "medium",
+      "mitigation": "Conduct thorough data validation and testing."
+    }
+  ],
+  "out_of_scope": [
+    "Customer-facing portal enhancements.",
+    "Non-core business module migrations."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-002",
+        "to": "FEAT-002",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "FEAT-003",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "FEAT-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260512_164514_18382554",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260512T164525Z_20260512_164514_18382554",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-6c852fcceab50a55",
+    "run_context_bundle_id": "runctx-ea4a8ec31e639f1d",
+    "source_version_ids": [],
+    "run_id": "20260512_164514_18382554"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=1, objects=1"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=1, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Verify SYN-RECON-01 + BRIEF_PORT seed: LLM should emit grounded magicbox macro services and SYN-WIRE-01 should report 0 blocking ports.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [
+      {
+        "id": "api_platform",
+        "service_domain": "API Platform",
+        "business_capability": "Service Delivery",
+        "confidence": 0.55,
+        "dependencies": [
+          "identity_access",
+          "observability"
+        ]
+      }
+    ],
+    "alternative_capabilities": [],
+    "confidence": 0.55
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "FEAT-001",
+        "title": "Emit Grounded Macro Services",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Emit Grounded Macro Services\nScenario: Service Emission\nGiven the MagicBox platform is operational\nWhen a macro service is emitted\nThen the service should be grounded and accessible"
+      },
+      {
+        "id": "FEAT-002",
+        "title": "Report Zero Blocking Ports",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Report Zero Blocking Ports\nScenario: Port Check\nGiven SYN-WIRE-01 is configured\nWhen a port scan is conducted\nThen zero blocking ports should be reported"
+      },
+      {
+        "id": "FEAT-003",
+        "title": "Define Error Handling",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Define Error Handling\nScenario: Error Occurrence\nGiven a service encounters an error\nWhen error handling is triggered\nThen the error should be logged and handled appropriately"
+      },
+      {
+        "id": "FEAT-004",
+        "title": "Implement Observability",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Implement Observability\nScenario: Service Monitoring\nGiven observability tools are in place\nWhen a service is monitored\nThen real-time metrics should be available"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security Compliance",
+        "description": "Ensure the platform complies with security standards and best practices.",
+        "category": "security",
+        "metric": "Zero critical vulnerabilities in security scans",
+        "acceptance_criteria": [
+          "Security scans show zero critical vulnerabilities.",
+          "Security policies are documented and enforced.",
+          "Regular security audits are conducted."
+        ],
+        "verification": "SAST + pre-prod pen test",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-004",
+        "title": "Reliability",
+        "description": "Ensure the platform is reliable with minimal downtime.",
+        "category": "reliability",
+        "metric": "99.9% uptime over a rolling 30-day period",
+        "acceptance_criteria": [
+          "Uptime is monitored and meets targets.",
+          "Incident response procedures are documented.",
+          "Redundancy measures are in place."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window",
+        "verification_source": "llm"
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance Optimization",
+        "description": "Ensure the platform performs optimally under expected load conditions.",
+        "category": "performance",
+        "metric": "p95 response time < 200ms under peak load",
+        "acceptance_criteria": [
+          "Load tests confirm performance metrics.",
+          "Performance metrics are documented and monitored.",
+          "Optimization strategies are implemented as needed."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-003",
+        "title": "Scalability",
+        "description": "Ensure the platform can scale to meet increasing demand.",
+        "category": "scalability",
+        "metric": "Horizontal scaling supports 100% increase in load",
+        "acceptance_criteria": [
+          "Scalability tests confirm load handling capabilities.",
+          "Infrastructure supports horizontal scaling.",
+          "Monitoring shows stable performance under increased load."
+        ],
+        "verification": "Scalability test with 2\u00d7 load increase",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-005",
+        "title": "Usability",
+        "description": "Ensure the platform is user-friendly and accessible.",
+        "category": "usability",
+        "metric": "User satisfaction score > 80%",
+        "acceptance_criteria": [
+          "User feedback is collected and analyzed.",
+          "Usability tests confirm user-friendliness.",
+          "Accessibility standards are met."
+        ],
+        "verification": "User satisfaction survey and accessibility audit",
+        "verification_source": "llm"
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FEAT-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FEAT-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FEAT-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 4,
+        "non_functional_count": 5,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 1
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-6c852fcceab50a55",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The project aims to modernize the MagicBox platform by ensuring grounded macro services and no blocking ports, aligning with the code_modernization use case."
+}
