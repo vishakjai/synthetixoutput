@@ -1,0 +1,680 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260512_192640_8FE153C7",
+  "generated_at": "2026-05-12T19:27:22.159987+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "Magicbox Modernization",
+    "work_item_id": "20260512_192640_8fe153c7",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Magicbox adopt-mode increment \u2014 verify Developer auto-approves and skips sealed modules.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Mobile"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "Sealed modules are clearly defined and identifiable.",
+      "Developer actions are well-documented and standardized."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Identify Sealed Modules",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-002",
+          "scenarios": [
+            "BDD-002-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Automate Developer Action Approval",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Error Handling for Approval Process",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Logging and Monitoring",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-004",
+          "scenarios": [
+            "BDD-004-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "User Interface for Approval Status",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Approval process completes within 5 seconds for 95% of actions.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "No unauthorized access incidents in the approval process.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "scalability",
+        "metric": "System handles 2\u00d7 current load without performance loss.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "usability",
+        "metric": "User satisfaction score of 4.5/5 or higher.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Auto-Approval of Developer Actions",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Developer action auto-approval",
+            "gherkin": [
+              "Given a developer action is submitted",
+              "When the action is processed",
+              "Then it should be auto-approved if no exceptions apply"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Identification of Sealed Modules",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Identifying sealed modules",
+            "gherkin": [
+              "Given a list of modules",
+              "When the system processes the list",
+              "Then it should correctly identify and flag sealed modules"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Error Handling in Approval Process",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Handling errors during approval",
+            "gherkin": [
+              "Given an error occurs during approval",
+              "When the error is detected",
+              "Then it should be logged and notified appropriately"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Logging and Monitoring",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "Monitoring approval process",
+            "gherkin": [
+              "Given the approval process is running",
+              "When an action is approved",
+              "Then it should be logged with a timestamp"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Incorrect identification of sealed modules could lead to processing errors.",
+      "impact": "high",
+      "mitigation": "Implement thorough testing and validation of module identification logic."
+    },
+    {
+      "description": "Automated approval process might bypass necessary manual checks.",
+      "impact": "medium",
+      "mitigation": "Define clear criteria for actions that require manual approval."
+    }
+  ],
+  "out_of_scope": [
+    "Changes to the underlying database schema.",
+    "Modifications to non-approval related workflows."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-002",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-002",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-003",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "BDD-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260512_192640_8fe153c7",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260512T192652Z_20260512_192640_8fe153c7",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-9902e42d32f8c0bb",
+    "run_context_bundle_id": "runctx-fca5fe3ee6190f8b",
+    "source_version_ids": [],
+    "run_id": "20260512_192640_8fe153c7"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=1, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Magicbox adopt-mode increment \u2014 verify Developer auto-approves and skips sealed modules.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Auto-Approval of Developer Actions",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Auto-Approval\nScenario: Developer action auto-approval\nGiven a developer action is submitted\nWhen the action is processed\nThen it should be auto-approved if no exceptions apply"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Identification of Sealed Modules",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Sealed Module Identification\nScenario: Identifying sealed modules\nGiven a list of modules\nWhen the system processes the list\nThen it should correctly identify and flag sealed modules"
+      },
+      {
+        "id": "BDD-003",
+        "title": "Error Handling in Approval Process",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Error Handling\nScenario: Handling errors during approval\nGiven an error occurs during approval\nWhen the error is detected\nThen it should be logged and notified appropriately"
+      },
+      {
+        "id": "BDD-004",
+        "title": "Logging and Monitoring",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Logging and Monitoring\nScenario: Monitoring approval process\nGiven the approval process is running\nWhen an action is approved\nThen it should be logged with a timestamp"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security of Approval Process",
+        "description": "Ensure the approval process is secure and resistant to unauthorized access.",
+        "category": "security",
+        "metric": "No unauthorized access incidents in the approval process.",
+        "acceptance_criteria": [
+          "Access controls are enforced for all approval actions.",
+          "Security audits are conducted quarterly.",
+          "All security incidents are logged and reviewed."
+        ],
+        "verification": "SAST + pre-prod pen test.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 3 legacy terms"
+        }
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance of Approval Process",
+        "description": "Ensure the approval process is completed within a defined time frame.",
+        "category": "performance",
+        "metric": "Approval process completes within 5 seconds for 95% of actions.",
+        "acceptance_criteria": [
+          "95% of approval actions complete within 5 seconds.",
+          "System performance does not degrade under peak load.",
+          "Performance metrics are logged and reviewed monthly."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 3 legacy terms"
+        }
+      },
+      {
+        "id": "NFR-003",
+        "title": "Scalability of Approval System",
+        "description": "The system should scale to handle increased load without performance degradation.",
+        "category": "scalability",
+        "metric": "System handles 2\u00d7 current load without performance loss.",
+        "acceptance_criteria": [
+          "System scales to handle double the current load.",
+          "No performance degradation at increased load.",
+          "Scalability tests are conducted bi-annually."
+        ],
+        "verification": "Scalability test with 2\u00d7 current load.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      },
+      {
+        "id": "NFR-005",
+        "title": "Usability of Approval Interface",
+        "description": "The user interface for approval status should be intuitive and easy to use.",
+        "category": "usability",
+        "metric": "User satisfaction score of 4.5/5 or higher.",
+        "acceptance_criteria": [
+          "User satisfaction surveys score 4.5/5 or higher.",
+          "UI feedback is incorporated within 2 release cycles.",
+          "Usability tests are conducted quarterly."
+        ],
+        "verification": "User satisfaction surveys and usability tests.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 5,
+        "non_functional_count": 4,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-9902e42d32f8c0bb",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The project aims to automate the approval of developer actions while ensuring sealed modules are skipped, enhancing efficiency and reliability."
+}
