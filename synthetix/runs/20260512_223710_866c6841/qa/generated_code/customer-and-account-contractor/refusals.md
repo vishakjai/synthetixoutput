@@ -1,0 +1,44 @@
+# Translator refusals (php → csharp)
+
+The per-method translator emitted a structured refusal for each row below. HITL should review and either re-dispatch with helper context or accept a manual translation.
+
+- **links** (95-99) — `empty_method`: PHP ::links body is empty, returning an empty list.
+- **__construct** (5-12) — `unmappable`: PHP ::__construct body initializes properties and calls parent constructor; no equivalent .NET endpoint logic.
+- **getFormLabel** (14-17) — `unmappable`: PHP ::getFormLabel calls parent::getFormLabel with dynamic label based on $this->op; parent method not visible
+- **links** (14-17) — `empty_method`: PHP ::links body is empty, returning an empty array.
+- **__construct** (5-12) — `unmappable`: PHP ::__construct body sets properties and calls parent constructor; no endpoint logic to map
+- **__construct** (7-40) — `unmappable`: PHP ::__construct body initializes properties and arrays without visible side effects or logic mappable to an endpoint.
+- **getFormLabel** (42-51) — `unmappable`: PHP ::getFormLabel calls parent::getFormLabel and relies on $this->model->ccp_mode and $this->op, which are not visible in input
+- **getHeadline** (53-59) — `unmappable`: PHP ::getHeadline calls parent::getHeadline; parent method not visible in input
+- **read** (75-206) — `unmappable`: PHP ::read method has complex logic with multiple branches and external dependencies not visible in input.
+- **update** (208-940) — `unmappable`: PHP ::update method is complex with multiple branches and external dependencies not visible in input.
+- **__construct** (99-110) — `unmappable`: PHP ::__construct body initializes properties but does not map to an endpoint.
+- **organize** (112-116) — `unmappable`: PHP ::organize body calls parent::organize(); parent method not visible in input
+- **downloadFile** (118-138) — `unmappable`: PHP ::downloadFile calls parent::downloadFile and uses dfv() helper not visible in input
+- **links** (140-155) — `unmappable`: PHP ::links method uses _isAllowed helper and model->data not visible in input
+- **preSearch** (157-302) — `unmappable`: PHP ::preSearch method relies on multiple helpers and state not visible in input
+- **search** (304-827) — `unmappable`: PHP ::search method is complex with multiple branches, database operations, and external dependencies not visible in input.
+- **getSaveLabel** (18-20) — `would_emit_stub`: PHP ::getSaveLabel body is one-liner returning a static string 'Save'.
+- **getHeadline** (22-26) — `would_emit_stub`: PHP ::getHeadline body is one-liner returning a default string; no complex logic to translate
+- **onNew** (28-31) — `would_emit_stub`: PHP ::onNew body is one-liner returning true; no meaningful logic to translate
+- **preSave** (33-36) — `would_emit_stub`: PHP ::preSave body is a one-liner returning true; no logic to translate
+- **__construct** (6-12) — `unmappable`: PHP ::__construct body sets fields and calls parent::__construct(); no equivalent .NET endpoint logic
+- **getFormLabel** (14-16) — `unmappable`: PHP ::getFormLabel body depends on $this->op which is not visible in input
+- **update** (57-192) — `unmappable`: PHP ::update method has complex logic with external dependencies and side effects not visible in input.
+- **links** (18-21) — `empty_method`: PHP ::links body is empty, returning an empty array.
+- **__construct** (8-16) — `unmappable`: PHP ::__construct body sets instance variables; no endpoint logic to map
+- **search** (28-106) — `unmappable`: PHP ::search method involves complex SQL query construction and helper calls (e.g., dbms_escape_string, dfv, db_get_rows) not visible in input.
+- **searchMap** (108-165) — `unmappable`: PHP ::searchMap uses global $db_connection and dbms_escape_string; these require context not visible in input
+- **label** (168-219) — `unmappable`: PHP ::label method involves complex model manipulations and helper calls not visible in input.
+- **__construct** (8-23) — `unmappable`: PHP ::__construct body initializes properties with database queries and global state; not directly translatable to .NET endpoint without guessing.
+- **prePopulateTs** (47-55) — `unmappable`: PHP ::prePopulateTs calls Contractor_placement::placementByContractorID and Ts_weekly::prePopulateTs; helper methods not visible in input
+- **getSum** (100-112) — `unmappable`: PHP ::getSum uses preg_split and array iteration not directly mappable to .NET endpoint without context
+- **handleTsSave** (114-338) — `unmappable`: PHP ::handleTsSave contains complex logic with multiple dependencies and side effects that cannot be mapped without additional context.
+- **handleLeaveSave** (340-552) — `unmappable`: PHP ::handleLeaveSave method calls multiple helpers and uses global variables not visible in input.
+- **handleTsEdit** (554-634) — `unmappable`: PHP ::handleTsEdit calls multiple helpers and uses session-like state not visible in input
+- **handleLeaveEdit** (636-695) — `unmappable`: PHP ::handleLeaveEdit method includes multiple helper calls and side effects not visible in input, such as Contractor::isAllowedForLeave, Leaves::createdBy, and others.
+- **handleHomePage** (697-725) — `unmappable`: PHP ::handleHomePage calls multiple helpers and uses class fields not visible in input
+- **handleTsReport** (727-741) — `unmappable`: PHP ::handleTsReport uses helpers and properties not visible in input (userObj, menuDefinition, getTsList, renderPage)
+- **handleLeaveReport** (743-770) — `unmappable`: PHP ::handleLeaveReport calls helpers and uses session state not visible in input
+- **handleTsLeave** (772-782) — `unmappable`: PHP ::handleTsLeave uses methods and properties (userObj, menuDefinition, renderPage) not visible in input
+- **handle** (784-834) — `unmappable`: PHP ::handle method calls multiple helpers (handleTsEdit, handleTsSave, etc.) not visible in input
