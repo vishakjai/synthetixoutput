@@ -1,0 +1,581 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260512_201030_857CFF1E",
+  "generated_at": "2026-05-12T20:11:03.487325+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Contractor Increment Modernization",
+    "work_item_id": "20260512_201030_857cff1e",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Kick increment Contractor \u2014 verify filter propagates past anchor and overlay is audit_only.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "The anchor point is a specific data state or record within the contractor increment process.",
+      "Audit logs are already part of the system and need integration with the overlay."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Implement Filter Propagation",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Anchor Definition and Management",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Integration with Existing Contractor Management",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-004",
+          "scenarios": [
+            "BDD-004-SC-001"
+          ]
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Process completion time under 2 seconds for 95% of transactions.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "reliability",
+        "metric": "99.9% uptime for the contractor increment process.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Filter Propagation Verification",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Verify filter propagates past anchor",
+            "gherkin": [
+              "Given a contractor increment record",
+              "When the filter is applied",
+              "Then it should propagate past the anchor point"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Audit-Only Overlay Verification",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Verify overlay is audit-only",
+            "gherkin": [
+              "Given an overlay interaction",
+              "When an action is performed",
+              "Then it should be logged without modifying data"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Anchor Management",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Define and manage anchor",
+            "gherkin": [
+              "Given a contractor increment process",
+              "When defining the anchor",
+              "Then it should be documented and verified"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Integration Testing",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "Verify integration with existing workflows",
+            "gherkin": [
+              "Given the new functionalities",
+              "When integrated with existing workflows",
+              "Then they should not disrupt current operations"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential disruption to existing workflows during integration.",
+      "impact": "medium",
+      "mitigation": "Conduct thorough integration testing and stakeholder reviews."
+    },
+    {
+      "description": "Security vulnerabilities in the overlay functionality.",
+      "impact": "high",
+      "mitigation": "Perform security audits and implement necessary fixes."
+    }
+  ],
+  "out_of_scope": [
+    "Changes to the underlying database schema.",
+    "Modifications to non-contractor related modules."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-003",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "BDD-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260512_201030_857cff1e",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260512T201041Z_20260512_201030_857cff1e",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-9902e42d32f8c0bb",
+    "run_context_bundle_id": "runctx-871f6394b025ca2d",
+    "source_version_ids": [],
+    "run_id": "20260512_201030_857cff1e"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Kick increment Contractor \u2014 verify filter propagates past anchor and overlay is audit_only.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Filter Propagation Verification",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Filter Propagation\nScenario: Verify filter propagates past anchor\nGiven a contractor increment record\nWhen the filter is applied\nThen it should propagate past the anchor point"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Audit-Only Overlay Verification",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Audit-Only Overlay\nScenario: Verify overlay is audit-only\nGiven an overlay interaction\nWhen an action is performed\nThen it should be logged without modifying data"
+      },
+      {
+        "id": "BDD-003",
+        "title": "Anchor Management",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Anchor Management\nScenario: Define and manage anchor\nGiven a contractor increment process\nWhen defining the anchor\nThen it should be documented and verified"
+      },
+      {
+        "id": "BDD-004",
+        "title": "Integration Testing",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Integration Testing\nScenario: Verify integration with existing workflows\nGiven the new functionalities\nWhen integrated with existing workflows\nThen they should not disrupt current operations"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-005",
+        "title": "Reliability",
+        "description": "Ensure the contractor increment process is reliable and fault-tolerant.",
+        "category": "reliability",
+        "metric": "99.9% uptime for the contractor increment process.",
+        "acceptance_criteria": [
+          "Reliability tests show compliance with the metric.",
+          "System logs show no significant downtime.",
+          "Reliability metrics are documented and monitored."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "System Performance",
+        "description": "Ensure the contractor increment process does not degrade system performance.",
+        "category": "performance",
+        "metric": "Process completion time under 2 seconds for 95% of transactions.",
+        "acceptance_criteria": [
+          "Performance tests show compliance with the metric.",
+          "No significant performance degradation is observed.",
+          "Performance metrics are documented and monitored."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "contract",
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 3,
+        "non_functional_count": 2,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-9902e42d32f8c0bb",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "This project aims to modernize the contractor increment process by ensuring a filter propagates correctly and the overlay remains audit-only, enhancing data integrity and compliance."
+}
