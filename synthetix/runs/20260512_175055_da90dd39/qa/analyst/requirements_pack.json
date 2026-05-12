@@ -1,0 +1,599 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260512_175055_DA90DD39",
+  "generated_at": "2026-05-12T17:51:37.856381+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Modernization",
+    "work_item_id": "20260512_175055_da90dd39",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Verify modernization_language seed + frontend_target fallback. ui_scaffold_contracts cascade should fire and ARCH-V06 should clear.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [
+      "ui_scaffold_contracts cascade should fire and ARCH-V06 should clear"
+    ],
+    "assumptions": [
+      "The modernization process will not alter existing business logic.",
+      "All stakeholders are aligned on modernization objectives."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-004",
+        "title": "Clear ARCH-V06 Validation",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-004",
+          "scenarios": [
+            "BDD-004-SC-001"
+          ]
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "System response time must be under 2 seconds at peak load.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "Pass all security audits with no critical vulnerabilities.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "scalability",
+        "metric": "Support 100% increase in user load without performance degradation.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "reliability",
+        "metric": "System uptime must be 99.9% over a rolling 30-day window.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "usability",
+        "metric": "User satisfaction score must be above 80%.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Language Seed Initialization",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Initialize language seed",
+            "gherkin": [
+              "Given the system is starting",
+              "When the language seed is set",
+              "Then the system must initialize with the correct language"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Frontend Target Fallback",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Fallback to secondary target",
+            "gherkin": [
+              "Given the primary frontend target fails",
+              "When the system detects the failure",
+              "Then the system must fallback to the secondary target"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "UI Scaffold Contracts Execution",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Trigger scaffold contracts",
+            "gherkin": [
+              "Given a build process is initiated",
+              "When the build process runs",
+              "Then UI scaffold contracts must trigger"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Clear ARCH-V06 Validation",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "Validate architecture",
+            "gherkin": [
+              "Given the architecture is reviewed",
+              "When ARCH-V06 criteria are applied",
+              "Then the architecture must pass validation"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential data loss during migration.",
+      "impact": "high",
+      "mitigation": "Implement comprehensive data backup and recovery plans."
+    },
+    {
+      "description": "Integration failures with existing systems.",
+      "impact": "medium",
+      "mitigation": "Conduct thorough integration testing and establish fallback procedures."
+    },
+    {
+      "description": "User resistance to new UI changes.",
+      "impact": "medium",
+      "mitigation": "Engage users early in the design process and provide training."
+    }
+  ],
+  "out_of_scope": [
+    "Development of new features not related to modernization.",
+    "Changes to backend business logic."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-004",
+        "to": "BDD-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260512_175055_da90dd39",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260512T175106Z_20260512_175055_da90dd39",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-15b3c2bc8c946c76",
+    "run_context_bundle_id": "runctx-8d8330cd49e9b6bb",
+    "source_version_ids": [],
+    "run_id": "20260512_175055_da90dd39"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Verify modernization_language seed + frontend_target fallback. ui_scaffold_contracts cascade should fire and ARCH-V06 should clear.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Language Seed Initialization",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Language Seed Initialization\nScenario: Initialize language seed\nGiven the system is starting\nWhen the language seed is set\nThen the system must initialize with the correct language"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Frontend Target Fallback",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Frontend Target Fallback\nScenario: Fallback to secondary target\nGiven the primary frontend target fails\nWhen the system detects the failure\nThen the system must fallback to the secondary target"
+      },
+      {
+        "id": "BDD-003",
+        "title": "UI Scaffold Contracts Execution",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: UI Scaffold Contracts Execution\nScenario: Trigger scaffold contracts\nGiven a build process is initiated\nWhen the build process runs\nThen UI scaffold contracts must trigger"
+      },
+      {
+        "id": "BDD-004",
+        "title": "Clear ARCH-V06 Validation",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Clear ARCH-V06 Validation\nScenario: Validate architecture\nGiven the architecture is reviewed\nWhen ARCH-V06 criteria are applied\nThen the architecture must pass validation"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security Compliance",
+        "description": "Ensure the system complies with security standards.",
+        "category": "security",
+        "metric": "Pass all security audits with no critical vulnerabilities.",
+        "acceptance_criteria": [
+          "Security audits must be conducted quarterly.",
+          "All critical vulnerabilities must be resolved within 30 days.",
+          "Security patches must be applied within 7 days of release."
+        ],
+        "verification": "SAST + pre-prod pen test",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-004",
+        "title": "Reliability",
+        "description": "Ensure system reliability with minimal downtime.",
+        "category": "reliability",
+        "metric": "System uptime must be 99.9% over a rolling 30-day window.",
+        "acceptance_criteria": [
+          "Downtime must not exceed 0.1% monthly.",
+          "System must recover automatically from failures.",
+          "Reliability metrics must be monitored and reported."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window",
+        "verification_source": "llm"
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance Under Load",
+        "description": "The system must maintain performance under expected load conditions.",
+        "category": "performance",
+        "metric": "System response time must be under 2 seconds at peak load.",
+        "acceptance_criteria": [
+          "Load tests must simulate peak conditions.",
+          "System must not exceed 2 seconds response time.",
+          "Performance metrics must be logged and reviewed."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-003",
+        "title": "Scalability",
+        "description": "The system must scale to support increased user load.",
+        "category": "scalability",
+        "metric": "Support 100% increase in user load without performance degradation.",
+        "acceptance_criteria": [
+          "Scalability tests must simulate double the current user load.",
+          "System must maintain performance metrics under increased load.",
+          "Scalability improvements must be documented."
+        ],
+        "verification": "Scalability test with 2\u00d7 current user load",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-005",
+        "title": "Usability",
+        "description": "Ensure the system is user-friendly and accessible.",
+        "category": "usability",
+        "metric": "User satisfaction score must be above 80%.",
+        "acceptance_criteria": [
+          "Conduct usability tests with target users.",
+          "Collect and analyze user feedback.",
+          "Implement improvements based on feedback."
+        ],
+        "verification": "User satisfaction survey post-deployment",
+        "verification_source": "llm"
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 1,
+        "non_functional_count": 5,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-15b3c2bc8c946c76",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The modernization project aims to ensure language and frontend compatibility, trigger UI scaffold contracts, and clear architectural validation ARCH-V06."
+}
