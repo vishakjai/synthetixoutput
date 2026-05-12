@@ -1,0 +1,64 @@
+# Translator refusals (php → csharp)
+
+The per-method translator emitted a structured refusal for each row below. HITL should review and either re-dispatch with helper context or accept a manual translation.
+
+- **links** (95-99) — `empty_method`: PHP ::links body is empty, returning an empty array
+- **__construct** (5-12) — `unmappable`: PHP ::__construct body is constructor logic setting class properties; no direct .NET endpoint equivalent.
+- **getFormLabel** (14-17) — `unmappable`: PHP ::getFormLabel calls parent method with dynamic text based on $this->op and $this->defaultFormlabel; parent method not visible
+- **links** (14-17) — `empty_method`: PHP ::links body is empty, returning an empty array.
+- **__construct** (5-12) — `unmappable`: PHP ::__construct body sets instance variables; no equivalent .NET endpoint logic
+- **__construct** (7-40) — `unmappable`: PHP ::__construct contains initialization logic and field assignments without direct mapping to a .NET endpoint.
+- **getFormLabel** (42-51) — `unmappable`: PHP ::getFormLabel calls parent::getFormLabel and relies on $this->model->ccp_mode; parent and model context not visible
+- **getHeadline** (53-59) — `unmappable`: PHP ::getHeadline calls parent::getHeadline; parent method not visible in input
+- **read** (75-206) — `unmappable`: PHP ::read method has complex logic with multiple branches and external dependencies not visible in input.
+- **update** (208-940) — `unmappable`: PHP ::update method is too complex with multiple operations and dependencies on external functions and classes not visible in input
+- **__construct** (99-110) — `unmappable`: PHP ::__construct body initializes properties and calls parent constructor; no equivalent .NET endpoint logic.
+- **organize** (112-116) — `unmappable`: PHP ::organize method calls parent::organize() with no visible logic or context.
+- **downloadFile** (118-138) — `unmappable`: PHP ::downloadFile calls parent::downloadFile and uses dfv() and glob() functions without visible definitions or equivalents.
+- **links** (140-155) — `unmappable`: PHP ::links method relies on _isAllowed helper and model->data not visible in input
+- **preSearch** (157-302) — `unmappable`: PHP ::preSearch body is complex with multiple external dependencies and state manipulations; cannot map to a single .NET endpoint without guessing.
+- **search** (304-827) — `unmappable`: PHP ::search method is complex with multiple dependencies and SQL queries; cannot map without guessing.
+- **getSaveLabel** (18-20) — `would_emit_stub`: PHP ::getSaveLabel body is one-liner returning 'Save'; no logic to translate
+- **getHeadline** (22-26) — `would_emit_stub`: PHP ::getHeadline body is a simple conditional return with no complex logic.
+- **onNew** (28-31) — `would_emit_stub`: PHP ::onNew body is one-liner returning true; no logic to translate
+- **preSave** (33-36) — `would_emit_stub`: PHP ::preSave body is one-liner returning true; no logic to translate
+- **__construct** (6-12) — `unmappable`: PHP constructor logic involves parent constructor and static property manipulation, which cannot be directly mapped to a .NET endpoint.
+- **getFormLabel** (14-16) — `unmappable`: PHP ::getFormLabel relies on $this->op, which is not visible in input
+- **update** (57-192) — `unmappable`: PHP ::update method has complex logic with multiple branches and dependencies on global variables and helper functions not visible in input.
+- **validate** (210-281) — `unmappable`: PHP ::validate uses dfv() and modelname() helpers not visible in input
+- **links** (18-21) — `empty_method`: PHP ::links body is empty, returning an empty array.
+- **__construct** (8-16) — `unmappable`: PHP ::__construct body sets instance variables and calls parent constructor; no equivalent .NET endpoint behavior.
+- **search** (28-106) — `unmappable`: PHP ::search method calls searchMap() and uses db_get_rows() with complex SQL, both of which are not visible in input
+- **searchMap** (108-165) — `unmappable`: PHP ::searchMap method uses global db_connection and db_get_rows with complex SQL query construction, which cannot be mapped to .NET without guessing the database context and structure.
+- **label** (168-219) — `unmappable`: PHP ::label method manipulates model properties with complex conditional logic and helper calls not visible in input.
+- **__construct** (8-23) — `unmappable`: PHP ::__construct body initializes fields and runs queries; no direct .NET endpoint equivalent
+- **populateHrTypes** (24-46) — `unmappable`: PHP ::populateHrTypes calls getConfig, dov, db_get_rows_value; helpers not visible in input
+- **prePopulateTs** (47-55) — `unmappable`: PHP ::prePopulateTs calls Contractor_placement::placementByContractorID and Ts_weekly::prePopulateTs; helpers not visible in input
+- **getLeaveList** (87-98) — `unmappable`: PHP ::getLeaveList calls Leaves::leaveListQuery; Leaves class not visible in input
+- **getSum** (100-112) — `unmappable`: PHP ::getSum method processes arrays with regex keys and cannot be directly mapped to a .NET endpoint without guessing context.
+- **handleTsSave** (114-338) — `unmappable`: PHP ::handleTsSave contains complex logic with multiple dependencies and side effects not visible in input
+- **handleLeaveSave** (340-552) — `unmappable`: PHP ::handleLeaveSave method calls multiple helpers and uses globals not visible in input
+- **handle** (784-834) — `unmappable`: PHP ::handle method calls multiple helpers (handleTsEdit, handleTsSave, etc.) not visible in input
+- **isPerm** (84-98) — `unmappable`: PHP ::isPerm uses db_get_value with $db_connection; db_get_value not visible in input
+- **isTsDirect** (99-113) — `unmappable`: PHP ::isTsDirect uses db_get_value with unknown implementation; db_connection context not visible
+- **inFurlough** (115-131) — `unmappable`: PHP ::inFurlough uses db_get_value and dbms_escape_string; helper functions not visible in input
+- **contractorByPlacementID** (133-145) — `unmappable`: PHP ::contractorByPlacementID uses db_get_value with unknown implementation; global $db_connection not visible
+- **placementByCenteneContractorEmail** (147-166) — `unmappable`: PHP ::placementByCenteneContractorEmail uses global $db_connection and helper trimAll/dbms_escape_string/db_get_value not visible in input
+- **placementByContractorID** (168-193) — `unmappable`: PHP ::placementByContractorID uses global variables and db_get_value; cannot map without guessing
+- **placementsByApprover** (237-253) — `unmappable`: PHP ::placementsByApprover uses db_get_rows_idx helper not visible in input
+- **canApproveTs** (254-280) — `unmappable`: PHP ::canApproveTs uses global $db_connection and helper dov() not visible in input
+- **alertUnassignedVendors** (287-336) — `unmappable`: PHP ::alertUnassignedVendors uses globals and functions not visible in input (e.g., db_get_rows, msgoutQueue)
+- **uniquePlacementsByCandidateIDs** (392-429) — `unmappable`: PHP ::uniquePlacementsByCandidateIDs uses global db_connection and db_get_rows_value helper not visible in input
+- **getPlacementIDsByCustomer** (577-588) — `unmappable`: PHP ::getPlacementIDsByCustomer calls db_get_rows_idx; helper not visible in input
+- **getJobClassificationName** (590-602) — `unmappable`: PHP ::getJobClassificationName uses db_get_value with global $db_connection, which is not visible in input
+- **getJobPriorityType** (604-617) — `unmappable`: PHP ::getJobPriorityType uses db_get_value helper not visible in input
+- **getJobPositionType** (619-631) — `unmappable`: PHP ::getJobPositionType uses db_get_value with no visible implementation or equivalent C# pattern
+- **getPlacementIDsByCustomerWithNoDiscountFreeze** (633-646) — `unmappable`: PHP ::getPlacementIDsByCustomerWithNoDiscountFreeze uses db_get_rows_idx; helper not visible in input
+- **getVMSCustomerIDs** (648-658) — `unmappable`: PHP ::getVMSCustomerIDs body uses db_get_rows_idx helper not visible in input
+- **getMissingCenteneVMSList** (660-673) — `unmappable`: PHP ::getMissingCenteneVMSList relies on db_get_rows and global $db_connection, which are not visible in input
+- **getPlacementIDsByJobreq** (675-686) — `unmappable`: PHP ::getPlacementIDsByJobreq uses db_get_rows_idx; helper not visible in input
+- **jobreqID** (688-695) — `unmappable`: PHP ::jobreqID uses db_get_value with global $db_connection; db_get_value implementation not visible in input
+- **changeJobId** (697-715) — `unmappable`: PHP ::changeJobId method uses dynamic class instantiation and search method not visible in input
+- **getDemographicsID** (717-731) — `unmappable`: PHP ::getDemographicsID uses db_get_value, which is not visible in input
+- **percentageLookupList** (733-744) — `unmappable`: PHP ::percentageLookupList is a static method generating a list; no direct HTTP endpoint equivalent.
+- **updateInsertWorksiteAddress** (746-756) — `unmappable`: PHP ::updateInsertWorksiteAddress calls dov() and Address::doExists() without visible definitions
