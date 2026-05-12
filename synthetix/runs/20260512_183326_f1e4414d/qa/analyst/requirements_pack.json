@@ -1,0 +1,717 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260512_183326_F1E4414D",
+  "generated_at": "2026-05-12T18:34:11.653617+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Strategic Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Service Name Modernization",
+    "work_item_id": "20260512_183326_f1e4414d",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Verify ARCH-V21 + ARCH-V18 fixes: canonical-only architect_service_names.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "API"
+    ],
+    "data_elements": [
+      {
+        "name": "serviceId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "Canonical naming standards are well-defined and documented.",
+      "Existing monitoring tools can be extended to include compliance checks."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "API Platform",
+        "capability_id": "api_platform",
+        "confidence": 0.55,
+        "rationale": "Mapped from objective overlap for API Platform."
+      }
+    ],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Implement Canonical Service Name Verification",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Service Name Compliance Reporting",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-002",
+          "scenarios": [
+            "BDD-002-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Error Handling for Non-compliant Services",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Integration with Existing Monitoring Tools",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Automated Compliance Verification on Deployment",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-004",
+          "scenarios": [
+            "BDD-004-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "User Interface for Managing Canonical Names",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Compliance checks complete within 200ms per service.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "All compliance data access is logged and encrypted.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "scalability",
+        "metric": "Support up to 10,000 services without performance degradation.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "usability",
+        "metric": "User satisfaction score of 4.5/5 in usability tests.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Verify Service Name Compliance",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Service name matches canonical format",
+            "gherkin": [
+              "Given a service name",
+              "When the name is verified",
+              "Then it should match the canonical format"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Report Service Name Compliance",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Generate compliance report",
+            "gherkin": [
+              "Given a set of service names",
+              "When a report is generated",
+              "Then it should list compliant and non-compliant names"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Handle Non-compliant Service Names",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Service name is non-compliant",
+            "gherkin": [
+              "Given a non-compliant service name",
+              "When it is processed",
+              "Then an error message should be returned"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Automate Compliance Verification",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "Deployment with non-compliant service name",
+            "gherkin": [
+              "Given a deployment pipeline",
+              "When a non-compliant name is detected",
+              "Then the deployment should be blocked"
+            ],
+            "maps_to": [
+              "FR-005"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Non-compliance with service naming standards could lead to integration issues.",
+      "impact": "high",
+      "mitigation": "Implement automated compliance checks and alerts."
+    },
+    {
+      "description": "Performance degradation due to compliance checks.",
+      "impact": "medium",
+      "mitigation": "Optimize compliance check algorithms and conduct performance testing."
+    }
+  ],
+  "out_of_scope": [
+    "Redefining existing service architectures beyond naming compliance.",
+    "Changes to business logic unrelated to service naming."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-002",
+        "to": "BDD-002",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-003",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-005",
+        "to": "BDD-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260512_183326_f1e4414d",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260512T183337Z_20260512_183326_f1e4414d",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-6c852fcceab50a55",
+    "run_context_bundle_id": "runctx-2068352b4ab889ea",
+    "source_version_ids": [],
+    "run_id": "20260512_183326_f1e4414d"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=1"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=1, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=0"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Verify ARCH-V21 + ARCH-V18 fixes: canonical-only architect_service_names.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [
+      {
+        "id": "api_platform",
+        "service_domain": "API Platform",
+        "business_capability": "Service Delivery",
+        "confidence": 0.55,
+        "dependencies": [
+          "identity_access",
+          "observability"
+        ]
+      }
+    ],
+    "alternative_capabilities": [],
+    "confidence": 0.55
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Verify Service Name Compliance",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Verify service name compliance\nScenario: Service name matches canonical format\nGiven a service name\nWhen the name is verified\nThen it should match the canonical format"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Report Service Name Compliance",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Report service name compliance\nScenario: Generate compliance report\nGiven a set of service names\nWhen a report is generated\nThen it should list compliant and non-compliant names"
+      },
+      {
+        "id": "BDD-003",
+        "title": "Handle Non-compliant Service Names",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Handle non-compliant service names\nScenario: Service name is non-compliant\nGiven a non-compliant service name\nWhen it is processed\nThen an error message should be returned"
+      },
+      {
+        "id": "BDD-004",
+        "title": "Automate Compliance Verification",
+        "source_requirement_ids": [
+          "FR-005"
+        ],
+        "gherkin": "Feature: Automate compliance verification\nScenario: Deployment with non-compliant service name\nGiven a deployment pipeline\nWhen a non-compliant name is detected\nThen the deployment should be blocked"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security of Compliance Data",
+        "description": "Ensure that compliance data is securely stored and accessed.",
+        "category": "security",
+        "metric": "All compliance data access is logged and encrypted.",
+        "acceptance_criteria": [
+          "Data is encrypted at rest and in transit.",
+          "Access logs are reviewed monthly.",
+          "Unauthorized access attempts trigger alerts."
+        ],
+        "verification": "SAST + pre-prod pen test",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance of Compliance Checks",
+        "description": "Ensure compliance checks do not degrade system performance.",
+        "category": "performance",
+        "metric": "Compliance checks complete within 200ms per service.",
+        "acceptance_criteria": [
+          "Performance tests show compliance checks meet the target.",
+          "Checks do not impact overall system response time.",
+          "Performance is consistent under peak load conditions."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      },
+      {
+        "id": "NFR-003",
+        "title": "Scalability of Compliance Mechanisms",
+        "description": "Compliance mechanisms must scale with the number of services.",
+        "category": "scalability",
+        "metric": "Support up to 10,000 services without performance degradation.",
+        "acceptance_criteria": [
+          "Scalability tests confirm support for target service volume.",
+          "Mechanisms maintain performance under increased load.",
+          "No additional infrastructure is required for scaling."
+        ],
+        "verification": "Scalability tests with incremental load increase",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      },
+      {
+        "id": "NFR-004",
+        "title": "Usability of Compliance Management UI",
+        "description": "Ensure the UI for managing canonical names is user-friendly.",
+        "category": "usability",
+        "metric": "User satisfaction score of 4.5/5 in usability tests.",
+        "acceptance_criteria": [
+          "Usability tests confirm ease of use.",
+          "UI feedback is positive from end users.",
+          "Training materials are provided for new users."
+        ],
+        "verification": "Usability testing with representative user group",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 3 legacy terms"
+        }
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "PASS",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 6,
+        "non_functional_count": 4,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 1
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-6c852fcceab50a55",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "This project aims to verify and ensure compliance with architectural fixes related to service naming conventions, focusing on canonical-only architect_service_names."
+}
