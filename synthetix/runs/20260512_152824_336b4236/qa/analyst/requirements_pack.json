@@ -1,0 +1,709 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260512_152824_336B4236",
+  "generated_at": "2026-05-12T15:29:09.474845+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Strategic Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Modernization",
+    "work_item_id": "20260512_152824_336b4236",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "DP grounded in real magicbox controllers.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "All PHP controllers have equivalent .NET counterparts.",
+      "Data contracts can be preserved without modification."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Map PHP Controllers to .NET Core",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001",
+            "FR-001-BDD-01-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Preserve Data Contracts",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-002",
+          "scenarios": [
+            "BDD-002-SC-001",
+            "FR-002-BDD-02-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Implement Structured Error Handling",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Enhance Observability",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Maintain User Authentication",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "Support Legacy Workflows",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Response time < 200ms for 95% of requests",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "Zero critical vulnerabilities in SAST",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "scalability",
+        "metric": "System supports 2\u00d7 current user load without degradation",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "usability",
+        "metric": "User satisfaction score > 80%",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "availability",
+        "metric": "99.9% uptime",
+        "verification_method": [
+          "unit",
+          "integration",
+          "e2e"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Placement Approval Process",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Submit placement for approval",
+            "gherkin": [
+              "Given a draft placement",
+              "When the recruiter submits it for approval",
+              "Then the placement status should be 'Pending Co-Approval'"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Co-Approval Process",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Approve a pending placement",
+            "gherkin": [
+              "Given a placement with 'Pending Co-Approval' status",
+              "When the co-approver approves the placement",
+              "Then the placement status should be 'Co-Approved'"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FR-001-BDD-01",
+        "title": "Map PHP Controllers to .NET Core",
+        "scenarios": [
+          {
+            "id": "FR-001-BDD-01-SC-001",
+            "name": "FR-001-BDD-01 happy path",
+            "gherkin": [
+              "Given legacy behavior mapped to requirement FR-001 is identified",
+              "When a valid modernization request is submitted for map php controllers to .net core",
+              "Then the system returns the expected result and preserves legacy side-effect contracts"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FR-002-BDD-02",
+        "title": "Preserve Data Contracts",
+        "scenarios": [
+          {
+            "id": "FR-002-BDD-02-SC-001",
+            "name": "FR-002-BDD-02 happy path",
+            "gherkin": [
+              "Given legacy behavior mapped to requirement FR-002 is identified",
+              "When a valid modernization request is submitted for preserve data contracts",
+              "Then the system returns the expected result and preserves legacy side-effect contracts"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential data loss during migration.",
+      "impact": "high",
+      "mitigation": "Conduct thorough data validation pre- and post-migration."
+    },
+    {
+      "description": "Performance degradation in the new environment.",
+      "impact": "medium",
+      "mitigation": "Optimize .NET code and conduct performance testing."
+    }
+  ],
+  "out_of_scope": [
+    "Frontend UI redesign",
+    "Integration with new third-party services"
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-001",
+        "to": "FR-001-BDD-01",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-002",
+        "to": "BDD-002",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-002",
+        "to": "FR-002-BDD-02",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260512_152824_336b4236",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260512T152835Z_20260512_152824_336b4236",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-6c852fcceab50a55",
+    "run_context_bundle_id": "runctx-0636937d20f9bc2f",
+    "source_version_ids": [],
+    "run_id": "20260512_152824_336b4236"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "DP grounded in real magicbox controllers.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Placement Approval Process",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Placement Approval\nScenario: Submit placement for approval\nGiven a draft placement\nWhen the recruiter submits it for approval\nThen the placement status should be 'Pending Co-Approval'"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Co-Approval Process",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Placement Co-Approval\nScenario: Approve a pending placement\nGiven a placement with 'Pending Co-Approval' status\nWhen the co-approver approves the placement\nThen the placement status should be 'Co-Approved'"
+      },
+      {
+        "id": "FR-001-BDD-01",
+        "title": "Map PHP Controllers to .NET Core",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Map PHP Controllers to .NET Core\n  Scenario: FR-001-BDD-01 happy path\n    Given legacy behavior mapped to requirement FR-001 is identified\n    When a valid modernization request is submitted for map php controllers to .net core\n    Then the system returns the expected result and preserves legacy side-effect contracts"
+      },
+      {
+        "id": "FR-002-BDD-02",
+        "title": "Preserve Data Contracts",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Preserve Data Contracts\n  Scenario: FR-002-BDD-02 happy path\n    Given legacy behavior mapped to requirement FR-002 is identified\n    When a valid modernization request is submitted for preserve data contracts\n    Then the system returns the expected result and preserves legacy side-effect contracts"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security Compliance",
+        "description": "Ensure the system complies with internal security standards.",
+        "category": "security",
+        "metric": "Zero critical vulnerabilities in SAST",
+        "acceptance_criteria": [
+          "Security audits are conducted pre- and post-migration.",
+          "All identified vulnerabilities are remediated.",
+          "Security documentation is updated and reviewed."
+        ],
+        "verification": "SAST + pre-prod pen test",
+        "verification_source": "llm"
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance Optimization",
+        "description": "Optimize system performance to meet or exceed current benchmarks.",
+        "category": "performance",
+        "metric": "Response time < 200ms for 95% of requests",
+        "acceptance_criteria": [
+          "System performance is benchmarked pre- and post-migration.",
+          "Performance optimization techniques are documented.",
+          "Load testing results meet defined metrics."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-003",
+        "title": "Scalability",
+        "description": "Design the system to scale efficiently with increased load.",
+        "category": "scalability",
+        "metric": "System supports 2\u00d7 current user load without degradation",
+        "acceptance_criteria": [
+          "Scalability tests are conducted under simulated load.",
+          "System architecture supports horizontal scaling.",
+          "Resource utilization metrics are within acceptable limits."
+        ],
+        "verification": "Scalability test with 2\u00d7 current load",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-004",
+        "title": "Usability",
+        "description": "Ensure the system is user-friendly and intuitive.",
+        "category": "usability",
+        "metric": "User satisfaction score > 80%",
+        "acceptance_criteria": [
+          "User feedback is collected and analyzed.",
+          "Usability tests are conducted with target users.",
+          "UI/UX improvements are implemented based on feedback."
+        ],
+        "verification": "User satisfaction survey post-deployment",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-005",
+        "title": "Availability",
+        "description": "Ensure high availability of the system.",
+        "category": "availability",
+        "metric": "99.9% uptime",
+        "acceptance_criteria": [
+          "Redundant systems are in place to prevent downtime.",
+          "Downtime incidents are logged and analyzed.",
+          "Disaster recovery plans are tested and validated."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window",
+        "verification_source": "llm"
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001",
+        "FR-001-BDD-01"
+      ]
+    },
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002",
+        "FR-002-BDD-02"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 6,
+        "non_functional_count": 5,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-6c852fcceab50a55",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The project aims to modernize the MagicBox platform by transitioning from PHP to .NET while preserving existing functionality and improving system observability."
+}
