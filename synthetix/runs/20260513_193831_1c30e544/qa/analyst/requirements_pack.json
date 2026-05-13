@@ -1,0 +1,691 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260513_193831_1C30E544",
+  "generated_at": "2026-05-13T19:39:14.431616+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox DTO Modernization",
+    "work_item_id": "20260513_193831_1c30e544",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "E2E with broader DTO regex \u2014 should fill real fields.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [
+      "E2E with broader DTO regex \u2014 should fill real fields"
+    ],
+    "assumptions": [
+      "Current regex patterns are insufficient for complete field population.",
+      "Regex performance will not degrade system operations significantly."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Implement Broader DTO Regex Pattern",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Validate DTO Field Population",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Integrate Error Handling for Regex Application",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-002",
+          "scenarios": [
+            "BDD-002-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Enhance Logging for DTO Operations",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Ensure Compatibility with Existing Data Structures",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "Develop Test Suite for DTO Regex Validation",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Regex application time \u2264 50ms per DTO",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "reliability",
+        "metric": "System uptime \u2265 99.9% post-deployment",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "security",
+        "metric": "Zero regex-induced security incidents",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "usability",
+        "metric": "Regex configuration time \u2264 10 minutes",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "DTO Regex Application",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Apply regex to DTO",
+            "gherkin": [
+              "Given a DTO with incomplete fields",
+              "When the regex pattern is applied",
+              "Then all fields should be correctly populated."
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Error Handling in Regex Application",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Regex application error",
+            "gherkin": [
+              "Given a faulty regex pattern",
+              "When the pattern is applied",
+              "Then an error should be logged and handled gracefully."
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Logging of DTO Operations",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "Log regex application",
+            "gherkin": [
+              "Given a DTO operation",
+              "When regex is applied",
+              "Then the operation should be logged with details."
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Performance of Regex Application",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "Measure regex performance",
+            "gherkin": [
+              "Given a set of DTOs",
+              "When regex is applied",
+              "Then the application time should be within acceptable limits."
+            ],
+            "maps_to": [
+              "NFR-001"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Regex pattern may not capture all edge cases.",
+      "impact": "medium",
+      "mitigation": "Develop comprehensive test cases to cover edge scenarios."
+    },
+    {
+      "description": "Performance degradation due to complex regex operations.",
+      "impact": "high",
+      "mitigation": "Optimize regex patterns and conduct performance testing."
+    }
+  ],
+  "out_of_scope": [
+    "Non-DTO related data operations",
+    "UI enhancements unrelated to regex application"
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-002",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "BDD-003",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260513_193831_1c30e544",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260513T193844Z_20260513_193831_1c30e544",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-9902e42d32f8c0bb",
+    "run_context_bundle_id": "runctx-b735f3b84b6cb737",
+    "source_version_ids": [],
+    "run_id": "20260513_193831_1c30e544"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "E2E with broader DTO regex \u2014 should fill real fields.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "DTO Regex Application",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: DTO Regex Application\nScenario: Apply regex to DTO\nGiven a DTO with incomplete fields\nWhen the regex pattern is applied\nThen all fields should be correctly populated."
+      },
+      {
+        "id": "BDD-002",
+        "title": "Error Handling in Regex Application",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Error Handling\nScenario: Regex application error\nGiven a faulty regex pattern\nWhen the pattern is applied\nThen an error should be logged and handled gracefully."
+      },
+      {
+        "id": "BDD-003",
+        "title": "Logging of DTO Operations",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Logging\nScenario: Log regex application\nGiven a DTO operation\nWhen regex is applied\nThen the operation should be logged with details."
+      },
+      {
+        "id": "BDD-004",
+        "title": "Performance of Regex Application",
+        "source_requirement_ids": [
+          "NFR-001"
+        ],
+        "gherkin": "Feature: Performance\nScenario: Measure regex performance\nGiven a set of DTOs\nWhen regex is applied\nThen the application time should be within acceptable limits."
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "System Reliability with New Regex",
+        "description": "Maintain system reliability and stability after implementing the new regex pattern.",
+        "category": "reliability",
+        "metric": "System uptime \u2265 99.9% post-deployment",
+        "acceptance_criteria": [
+          "No increase in system downtime post-deployment.",
+          "Reliability metrics are consistent with pre-deployment levels.",
+          "Incident reports show no regex-related failures."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 2 legacy terms"
+        }
+      },
+      {
+        "id": "NFR-003",
+        "title": "Security of Data Transfers",
+        "description": "Ensure that the regex pattern does not introduce security vulnerabilities in data transfers.",
+        "category": "security",
+        "metric": "Zero regex-induced security incidents",
+        "acceptance_criteria": [
+          "Security tests confirm no vulnerabilities in regex application.",
+          "Regex pattern is reviewed by security experts.",
+          "Security incidents are monitored and reported."
+        ],
+        "verification": "SAST + pre-prod pen test.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 2 legacy terms"
+        }
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance of Regex Application",
+        "description": "Ensure that the regex pattern application does not degrade system performance.",
+        "category": "performance",
+        "metric": "Regex application time \u2264 50ms per DTO",
+        "acceptance_criteria": [
+          "Performance tests confirm regex application time is within limits.",
+          "System load tests show no significant impact from regex updates.",
+          "Performance metrics are monitored continuously post-deployment."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure regex application time.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 2 legacy terms"
+        }
+      },
+      {
+        "id": "NFR-004",
+        "title": "Usability of Regex Configuration",
+        "description": "Ensure that regex patterns are easy to configure and maintain.",
+        "category": "usability",
+        "metric": "Regex configuration time \u2264 10 minutes",
+        "acceptance_criteria": [
+          "Documentation provides clear guidelines for regex configuration.",
+          "User feedback confirms ease of regex maintenance.",
+          "Configuration changes are tested for simplicity and effectiveness."
+        ],
+        "verification": "User testing and feedback sessions.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-002"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "e2e",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 6,
+        "non_functional_count": 4,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-9902e42d32f8c0bb",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "This project aims to enhance the MagicBox platform by implementing a broader regex pattern for DTOs to ensure accurate field population during data transfers."
+}
