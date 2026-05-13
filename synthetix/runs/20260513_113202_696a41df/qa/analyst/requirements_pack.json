@@ -1,0 +1,566 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260513_113202_696A41DF",
+  "generated_at": "2026-05-13T11:32:54.166521+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Contractor Modernization",
+    "work_item_id": "20260513_113202_696a41df",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Phase 4+5+cost-cuts on Contractor (cheap models locked, no code edits in flight).",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [
+      "Phase 4+5+cost-cuts on Contractor (cheap models locked, no code edits in flight)"
+    ],
+    "assumptions": [
+      "No ongoing code edits during migration phases.",
+      "Stakeholders are available for regular updates and approvals."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Implement Phased Migration Strategy",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "FT-001",
+          "scenarios": [
+            "FT-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Cost-Effective Model Implementation",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FT-004",
+          "scenarios": [
+            "FT-004-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Stakeholder Communication Plan",
+        "priority": "P2",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "Testing and Validation",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-005",
+        "category": "scalability",
+        "metric": "System can handle 2\u00d7 current load without degradation.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "FT-001",
+        "title": "Submit Placement for Approval",
+        "scenarios": [
+          {
+            "id": "FT-001-SC-001",
+            "name": "Recruiter submits a placement for approval",
+            "gherkin": [
+              "Given a draft placement",
+              "When the recruiter submits the placement",
+              "Then the placement status should be 'pending approval'"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FT-002",
+        "title": "Approve Placement",
+        "scenarios": [
+          {
+            "id": "FT-002-SC-001",
+            "name": "Co-approver approves a placement",
+            "gherkin": [
+              "Given a placement pending approval",
+              "When the co-approver approves the placement",
+              "Then the placement status should be 'coapproved'"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FT-003",
+        "title": "Backward Compatibility Verification",
+        "scenarios": [
+          {
+            "id": "FT-003-SC-001",
+            "name": "System operates with new models",
+            "gherkin": [
+              "Given the system is running on new models",
+              "When existing functionalities are tested",
+              "Then they should operate without issues"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FT-004",
+        "title": "Cost-Effective Model Implementation",
+        "scenarios": [
+          {
+            "id": "FT-004-SC-001",
+            "name": "Transition to cost-effective models",
+            "gherkin": [
+              "Given the current operational costs",
+              "When new models are implemented",
+              "Then the operational costs should reduce by 20%"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential disruption to ongoing operations during migration.",
+      "impact": "high",
+      "mitigation": "Implement a phased migration strategy with thorough testing."
+    },
+    {
+      "description": "Compatibility issues with existing systems.",
+      "impact": "medium",
+      "mitigation": "Ensure backward compatibility and conduct comprehensive testing."
+    }
+  ],
+  "out_of_scope": [
+    "Changes to non-contractor related modules.",
+    "Introduction of new features not related to cost reduction."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "FT-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "FT-004",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260513_113202_696a41df",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260513T113215Z_20260513_113202_696a41df",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-9902e42d32f8c0bb",
+    "run_context_bundle_id": "runctx-f871d218b1f2e96f",
+    "source_version_ids": [],
+    "run_id": "20260513_113202_696a41df"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Phase 4+5+cost-cuts on Contractor (cheap models locked, no code edits in flight).",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "FT-001",
+        "title": "Submit Placement for Approval",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Submit Placement\nScenario: Recruiter submits a placement for approval\nGiven a draft placement\nWhen the recruiter submits the placement\nThen the placement status should be 'pending approval'"
+      },
+      {
+        "id": "FT-002",
+        "title": "Approve Placement",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Approve Placement\nScenario: Co-approver approves a placement\nGiven a placement pending approval\nWhen the co-approver approves the placement\nThen the placement status should be 'coapproved'"
+      },
+      {
+        "id": "FT-003",
+        "title": "Backward Compatibility Verification",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Verify Backward Compatibility\nScenario: System operates with new models\nGiven the system is running on new models\nWhen existing functionalities are tested\nThen they should operate without issues"
+      },
+      {
+        "id": "FT-004",
+        "title": "Cost-Effective Model Implementation",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Implement Cost-Effective Models\nScenario: Transition to cost-effective models\nGiven the current operational costs\nWhen new models are implemented\nThen the operational costs should reduce by 20%"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [],
+    "should": [
+      {
+        "id": "NFR-005",
+        "title": "Scalability",
+        "description": "Ensure the system can scale to meet future demands.",
+        "category": "scalability",
+        "metric": "System can handle 2\u00d7 current load without degradation.",
+        "acceptance_criteria": [
+          "Scalability tests are conducted and documented.",
+          "System architecture supports future scaling needs.",
+          "No performance degradation under increased load."
+        ],
+        "verification": "Scalability testing with load simulation.",
+        "verification_source": "llm",
+        "grounding": {
+          "classification": "derived_from_legacy",
+          "reason": "matched 1 legacy term"
+        }
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FT-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FT-004"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 4,
+        "non_functional_count": 1,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-9902e42d32f8c0bb",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The project aims to modernize the contractor management system by transitioning to cost-effective models while ensuring no code edits are in progress during the transition."
+}
