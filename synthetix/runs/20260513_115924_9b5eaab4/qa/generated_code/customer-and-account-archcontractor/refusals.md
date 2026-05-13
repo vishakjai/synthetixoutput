@@ -1,0 +1,43 @@
+# Translator refusals (php → csharp)
+
+The per-method translator emitted a structured refusal for each row below. HITL should review and either re-dispatch with helper context or accept a manual translation.
+
+- **links** (95-99) — `empty_method`: PHP ::links body is a one-liner returning an empty array.
+- **__construct** (5-12) — `unmappable`: PHP ::__construct body sets instance variables; no equivalent .NET endpoint logic.
+- **getFormLabel** (14-17) — `unmappable`: PHP ::getFormLabel calls parent::getFormLabel with dynamic label logic; parent method not visible
+- **links** (14-17) — `would_emit_stub`: PHP ::links body is a single return statement with an empty array.
+- **__construct** (5-12) — `unmappable`: PHP ::__construct body sets properties and calls parent::__construct(); no equivalent C# endpoint logic.
+- **label** (46-55) — `unmappable`: PHP ::label method sets UI-specific labels and styles; no equivalent .NET endpoint.
+- **__construct** (7-40) — `unmappable`: PHP ::__construct body sets up instance variables and mappings; no direct C# endpoint equivalent
+- **read** (75-206) — `unmappable`: PHP ::read method has complex logic with multiple branches and helper calls not visible in the input.
+- **getFormLabel** (42-51) — `unmappable`: PHP ::getFormLabel calls parent::getFormLabel; parent method not visible in input
+- **getHeadline** (53-59) — `unmappable`: PHP ::getHeadline calls parent::getHeadline; parent method not visible in input
+- **update** (208-940) — `unmappable`: PHP ::update method is complex with multiple cases and external dependencies not visible in input.
+- **organize** (112-116) — `unmappable`: PHP ::organize method calls parent::organize() with no visible implementation for parent method.
+- **preSearch** (157-302) — `unmappable`: PHP ::preSearch body contains procedural logic and helper calls not directly translatable to a .NET endpoint without guessing.
+- **search** (304-827) — `unmappable`: PHP ::search method contains complex SQL with dynamic conditions and procedural logic not directly translatable to .NET Minimal API without guessing.
+- **links** (140-155) — `unmappable`: PHP ::links method relies on _isAllowed and model->data not visible in input
+- **getSaveLabel** (18-20) — `would_emit_stub`: PHP ::getSaveLabel body is one-liner returning 'Save'; no logic to translate
+- **onNew** (28-31) — `would_emit_stub`: PHP ::onNew body is a one-liner returning true; no logic to translate
+- **preSave** (33-36) — `would_emit_stub`: PHP ::preSave body is a one-liner returning true; no logic to translate.
+- **read** (52-54) — `unmappable`: PHP ::read body is one-liner returning parent::read($request); parent method not visible in input
+- **__construct** (6-12) — `unmappable`: PHP ::__construct body sets class properties and calls parent constructor; no equivalent .NET endpoint
+- **update** (57-192) — `unmappable`: PHP ::update method involves complex email and password logic with external dependencies not visible in input.
+- **links** (18-21) — `empty_method`: PHP ::links body is a one-liner returning an empty array
+- **run** (23-26) — `unmappable`: PHP ::run body is one-liner returning parent::run($request, true); parent method not visible in input
+- **__construct** (8-16) — `unmappable`: PHP ::__construct body sets instance variables and calls parent::__construct(); these are not directly translatable to a .NET endpoint.
+- **search** (28-106) — `unmappable`: PHP ::search method contains complex SQL with dynamic conditions and helper calls not fully visible in input.
+- **label** (168-219) — `unmappable`: PHP ::label method uses procedural PHP globals and complex array manipulations that cannot be directly mapped to a .NET endpoint without guessing.
+- **__construct** (8-23) — `unmappable`: PHP ::__construct body initializes class fields and executes SQL query; constructor logic not directly mappable to .NET endpoint.
+- **getSum** (100-112) — `unmappable`: PHP ::getSum uses preg_split with pattern logic not directly translatable to a .NET endpoint without guessing.
+- **handleTsSave** (114-338) — `unmappable`: PHP ::handleTsSave method involves complex logic with multiple external dependencies and side effects, including file uploads, database operations, and email notifications, which cannot be mapped without additional context.
+- **handleLeaveSave** (340-552) — `unmappable`: PHP ::handleLeaveSave body contains complex logic with multiple external dependencies and procedural calls not fully visible in input.
+- **handleTsLeave** (772-782) — `unmappable`: PHP ::handleTsLeave calls Contractor::isAllowedForLeave, which is not visible.
+- **handle** (784-834) — `unmappable`: PHP ::handle method dispatches to multiple handlers (handleTsEdit, handleTsSave, etc.) not visible in input
+- **placementsByApprover** (237-253) — `lint_gate_failed`: missing_imports: ['using Dapper']; add these ``using`` lines or use the architecture's existing types
+- **canApproveTs** (254-280) — `lint_gate_failed`: missing_imports: ['using Dapper']; add these ``using`` lines or use the architecture's existing types
+- **alertUnassignedVendors** (287-336) — `lint_gate_failed`: sql_injection_smell: raw SQL string-concat with interpolated user input ('$"<tr><td><a href=\'{site}/entity/contractor_placement/{placementId}\'>{placementId}</a></td><td>{name}</td><td>{vendorName}'); use EF Core LINQ + parameterized queries instead
+- **getPlacementIDsByCustomerWithNoDiscountFreeze** (633-646) — `lint_gate_failed`: missing_imports: ['using Dapper']; add these ``using`` lines or use the architecture's existing types
+- **getVMSCustomerIDs** (648-658) — `lint_gate_failed`: missing_imports: ['using Dapper']; add these ``using`` lines or use the architecture's existing types
+- **getMissingCenteneVMSList** (660-673) — `lint_gate_failed`: missing_imports: ['using System.Data']; add these ``using`` lines or use the architecture's existing types
+- **getPlacementIDsByJobreq** (675-686) — `lint_gate_failed`: missing_imports: ['using Dapper']; add these ``using`` lines or use the architecture's existing types
