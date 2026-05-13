@@ -1,0 +1,642 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260513_162526_44E97972",
+  "generated_at": "2026-05-13T16:26:03.133591+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Legacy Modernization Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Contractor Management Modernization",
+    "work_item_id": "20260513_162526_44e97972",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Production tier \u2014 full Contractor translation w/ all Phase 9 + 9.2 fixes (doctor + DTO auto-populate + Onboarding rollup).",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Web"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "All existing features must be preserved in the new system.",
+      "The modernization will not introduce new business logic changes."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Contractor Management Translation",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-001",
+          "scenarios": [
+            "BDD-001-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Onboarding Rollup Enhancement",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "BDD-003",
+          "scenarios": [
+            "BDD-003-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "User Access Management",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "System response time under load should not exceed 2 seconds.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "All sensitive data is encrypted at rest and in transit.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "availability",
+        "metric": "System uptime should be 99.9% or higher.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "usability",
+        "metric": "User satisfaction scores should be 85% or higher.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-005",
+        "category": "scalability",
+        "metric": "System can handle a 50% increase in users without performance loss.",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Submit Contractor Placement for Approval",
+        "scenarios": [
+          {
+            "id": "BDD-001-SC-001",
+            "name": "Recruiter submits a placement for approval",
+            "gherkin": [
+              "Given a contractor placement is in draft",
+              "When the recruiter submits the placement",
+              "Then the placement status should change to 'Pending Approval'"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-002",
+        "title": "Approve Contractor Placement",
+        "scenarios": [
+          {
+            "id": "BDD-002-SC-001",
+            "name": "Co-approver approves a placement",
+            "gherkin": [
+              "Given a placement is 'Pending Approval'",
+              "When the co-approver approves the placement",
+              "Then the placement status should change to 'Approved'"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-003",
+        "title": "Auto-Populate DTO",
+        "scenarios": [
+          {
+            "id": "BDD-003-SC-001",
+            "name": "DTO is auto-populated during data transfer",
+            "gherkin": [
+              "Given a data transfer is initiated",
+              "When the system processes the transfer",
+              "Then the DTO should be populated with relevant data fields"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "BDD-004",
+        "title": "Enhance Onboarding Process",
+        "scenarios": [
+          {
+            "id": "BDD-004-SC-001",
+            "name": "User completes onboarding with fewer steps",
+            "gherkin": [
+              "Given the onboarding process is initiated",
+              "When the user completes the process",
+              "Then the number of steps should be reduced by 30%"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    },
+    {
+      "id": "Q-002",
+      "question": "What are target latency, throughput, and availability SLOs?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential data loss during migration.",
+      "impact": "high",
+      "mitigation": "Implement comprehensive data validation and backup procedures."
+    },
+    {
+      "description": "Performance degradation in the new system.",
+      "impact": "medium",
+      "mitigation": "Conduct thorough performance testing and optimization."
+    },
+    {
+      "description": "User resistance to new system interfaces.",
+      "impact": "medium",
+      "mitigation": "Provide user training and support during transition."
+    }
+  ],
+  "out_of_scope": [
+    "Development of new features not present in the legacy system.",
+    "Changes to existing business processes outside of contractor management."
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "BDD-001",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "BDD-003",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260513_162526_44e97972",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260513T162539Z_20260513_162526_44e97972",
+    "repo": "app",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-9902e42d32f8c0bb",
+    "run_context_bundle_id": "runctx-5b3ef250f15b99a1",
+    "source_version_ids": [],
+    "run_id": "20260513_162526_44e97972"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=0, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=0, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=1"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Production tier \u2014 full Contractor translation w/ all Phase 9 + 9.2 fixes (doctor + DTO auto-populate + Onboarding rollup).",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [],
+    "alternative_capabilities": [],
+    "confidence": 0.0
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "BDD-001",
+        "title": "Submit Contractor Placement for Approval",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Submit Contractor Placement\nScenario: Recruiter submits a placement for approval\nGiven a contractor placement is in draft\nWhen the recruiter submits the placement\nThen the placement status should change to 'Pending Approval'"
+      },
+      {
+        "id": "BDD-002",
+        "title": "Approve Contractor Placement",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Approve Contractor Placement\nScenario: Co-approver approves a placement\nGiven a placement is 'Pending Approval'\nWhen the co-approver approves the placement\nThen the placement status should change to 'Approved'"
+      },
+      {
+        "id": "BDD-003",
+        "title": "Auto-Populate DTO",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Auto-Populate DTO\nScenario: DTO is auto-populated during data transfer\nGiven a data transfer is initiated\nWhen the system processes the transfer\nThen the DTO should be populated with relevant data fields"
+      },
+      {
+        "id": "BDD-004",
+        "title": "Enhance Onboarding Process",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Enhance Onboarding Process\nScenario: User completes onboarding with fewer steps\nGiven the onboarding process is initiated\nWhen the user completes the process\nThen the number of steps should be reduced by 30%"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Data Security",
+        "description": "Ensure all data is securely handled and stored.",
+        "category": "security",
+        "metric": "All sensitive data is encrypted at rest and in transit.",
+        "acceptance_criteria": [
+          "Data encryption standards are applied to all sensitive information.",
+          "Security audits show no vulnerabilities in data handling.",
+          "Access to sensitive data is logged and monitored."
+        ],
+        "verification": "SAST + pre-prod pen test.",
+        "verification_source": "llm"
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "System Performance",
+        "description": "Ensure the system performs efficiently under expected load.",
+        "category": "performance",
+        "metric": "System response time under load should not exceed 2 seconds.",
+        "acceptance_criteria": [
+          "System response time is consistently under 2 seconds during peak load.",
+          "Load tests simulate 10x expected peak load without performance degradation.",
+          "Performance metrics are monitored and reported in real-time."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99.",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-003",
+        "title": "System Availability",
+        "description": "Ensure high availability of the system.",
+        "category": "availability",
+        "metric": "System uptime should be 99.9% or higher.",
+        "acceptance_criteria": [
+          "System uptime is consistently 99.9% or higher.",
+          "Redundancy and failover mechanisms are in place and tested.",
+          "Downtime incidents are logged and analyzed for root cause."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window.",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-004",
+        "title": "User Experience",
+        "description": "Ensure a positive user experience with intuitive interfaces.",
+        "category": "usability",
+        "metric": "User satisfaction scores should be 85% or higher.",
+        "acceptance_criteria": [
+          "User satisfaction surveys show scores of 85% or higher.",
+          "User feedback is regularly collected and analyzed for improvements.",
+          "UI/UX design follows best practices for accessibility and usability."
+        ],
+        "verification": "User testing and feedback analysis.",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-005",
+        "title": "Scalability",
+        "description": "Ensure the system can scale to accommodate future growth.",
+        "category": "scalability",
+        "metric": "System can handle a 50% increase in users without performance loss.",
+        "acceptance_criteria": [
+          "Scalability tests show the system can handle a 50% increase in users.",
+          "Infrastructure supports horizontal scaling as needed.",
+          "Performance metrics remain stable under increased load."
+        ],
+        "verification": "Scalability testing with simulated user growth.",
+        "verification_source": "llm"
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-001"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "BDD-003"
+      ]
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "FAIL",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 3,
+        "non_functional_count": 5,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 0
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-9902e42d32f8c0bb",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The project aims to modernize the contractor management system by translating existing features to .NET and implementing enhancements from Phase 9 and 9.2, focusing on DTO auto-population and onboarding improvements."
+}
