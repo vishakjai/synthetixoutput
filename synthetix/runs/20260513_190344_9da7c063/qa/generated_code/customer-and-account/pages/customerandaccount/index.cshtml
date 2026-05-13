@@ -1,0 +1,234 @@
+@page "/ui/customer-and-account"
+@model Customer and Account.Pages.CustomerAndAccount.IndexModel
+@{
+    var descriptor = Model.Descriptor;
+    var navigationFields = descriptor.Fields.Values.Where(field => field.RenderKind == "nav").OrderBy(field => field.TabOrder).ToList();
+    var displayFields = descriptor.Fields.Values.Where(field => field.RenderKind == "display").ToList();
+    var editableFields = descriptor.Fields.Values.Where(field => field.RenderKind != "nav" && field.RenderKind != "display" && field.RenderKind != "fieldset").ToList();
+    var fieldsetCount = descriptor.Fields.Values.Count(field => field.RenderKind == "fieldset");
+    var primaryAction = descriptor.Actions.FirstOrDefault();
+    var screenArchetype =
+        descriptor.Actions.Any(action => action.EventId.Contains("save", StringComparison.OrdinalIgnoreCase) || action.EventId.Contains("deposit", StringComparison.OrdinalIgnoreCase) || action.EventId.Contains("withdraw", StringComparison.OrdinalIgnoreCase) || action.EventId.Contains("post", StringComparison.OrdinalIgnoreCase))
+        || editableFields.Any(field => field.FieldId.Contains("amount", StringComparison.OrdinalIgnoreCase) || field.InputType == "number" || field.InputType == "date")
+            ? "transaction"
+            : displayFields.Count >= editableFields.Count
+                ? "inquiry"
+                : descriptor.Sections.Count > 1
+                    ? "workflow"
+                    : "form";
+}
+<!-- UI_SCAFFOLD -->
+<head>
+    <link rel="stylesheet" href="/css/render-profile.enterprise-neutral.preload.css" />
+</head>
+<main class="screen-shell screen-shell-@screenArchetype" aria-label="@descriptor.ScreenName">
+    <section class="hero-band">
+        <div class="hero-copy">
+            <p class="hero-eyebrow">Contract-driven modernized screen</p>
+            <div class="hero-title-row">
+                <p class="meta-chip">Contract: @descriptor.ScreenId</p>
+                <span class="hero-archetype">@screenArchetype</span>
+            </div>
+            <h1>@descriptor.ScreenName</h1>
+            <p class="hero-kicker">@descriptor.Description</p>
+            <div class="screen-meta">
+                <span class="meta-chip">Route @descriptor.DefaultRoute</span>
+                <span class="meta-chip">Fidelity @descriptor.FidelityLevel (@descriptor.FidelityScore.ToString("0.00"))</span>
+                <span class="meta-chip">@descriptor.Actions.Count action(s)</span>
+                <span class="meta-chip">@descriptor.Sections.Count section(s)</span>
+            </div>
+        </div>
+        <aside class="hero-aside" aria-label="Screen summary">
+            <div class="metric-card">
+                <span class="metric-label">Editable fields</span>
+                <strong>@editableFields.Count</strong>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Read-only fields</span>
+                <strong>@displayFields.Count</strong>
+            </div>
+            <div class="metric-card">
+                <span class="metric-label">Workflow regions</span>
+                <strong>@fieldsetCount</strong>
+            </div>
+        </aside>
+    </section>
+    <div class="screen-layout">
+        <div class="screen-main">
+            @if (Model.Errors.Count > 0)
+            {
+                <section class="validation-summary" aria-live="polite">
+                    <strong>Validation summary</strong>
+                    <ul>
+                    @foreach (var error in Model.Errors)
+                    {
+                        <li><strong>@error.Key</strong>: @error.Value</li>
+                    }
+                    </ul>
+                </section>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.FormMessage))
+            {
+                <section class="status-panel @(Model.FormStatus == "success" ? "status-panel-success" : "status-panel-error")" aria-live="polite">
+                    <strong>@Model.FormMessage</strong>
+                    @if (Model.ExecutedTargets.Count > 0)
+                    {
+                        <ul class="executed-targets">
+                        @foreach (var target in Model.ExecutedTargets)
+                        {
+                            <li>@target</li>
+                        }
+                        </ul>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.NavigationTarget))
+                    {
+                        <p>Navigation target: <code>@Model.NavigationTarget</code></p>
+                    }
+                </section>
+            }
+            @if (navigationFields.Count > 0)
+            {
+                <nav class="ui-scaffold-navigation" aria-label="Legacy navigation menu">
+                @foreach (var navField in navigationFields)
+                {
+                    <a class="ui-scaffold-nav-link" href="@navField.NavigationTarget">@navField.Label</a>
+                }
+                </nav>
+            }
+            @if (descriptor.Sections.Any(section => section.FieldIds.Any(fieldId => descriptor.Fields[fieldId].RenderKind != "nav")) || descriptor.Actions.Count > 0)
+            {
+            <form method="post">
+                @foreach (var sectionItem in descriptor.Sections)
+                {
+                    var renderedRadioGroups = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    <section class="screen-section" aria-labelledby="@(sectionItem.Id + "_heading")">
+                        <div class="section-heading">
+                            <div>
+                                <h2 id="@(sectionItem.Id + "_heading")">@sectionItem.Label</h2>
+                                <p>@sectionItem.FieldIds.Count field(s) in this workflow step.</p>
+                            </div>
+                            <span class="section-step">@sectionItem.Order</span>
+                        </div>
+                        <div class="field-grid">
+                        @foreach (var fieldId in sectionItem.FieldIds)
+                        {
+                            var field = descriptor.Fields[fieldId];
+                            if (field.RenderKind == "nav")
+                            {
+                                continue;
+                            }
+                            if (field.RenderKind == "radio" && !renderedRadioGroups.Add(field.RadioGroupName))
+                            {
+                                continue;
+                            }
+                            <div class="field-card @(field.RenderKind == "display" ? "field-card-display" : field.RenderKind == "fieldset" ? "field-card-annotation" : string.Empty)" data-field-id="@field.FieldId">
+                                @if (field.RenderKind == "fieldset")
+                                {
+                                    <fieldset class="ui-scaffold-group">
+                                        <legend>@field.Label</legend>
+                                    </fieldset>
+                                }
+                                else if (field.RenderKind == "display")
+                                {
+                                    <label for="@field.FieldId">@field.Label</label>
+                                    <output id="@field.FieldId" aria-live="polite">@Model.GetDisplayValue(field.FieldId)</output>
+                                }
+                                else if (field.RenderKind == "textarea")
+                                {
+                                    <label for="@field.FieldId">@field.Label @if (field.Required) { <span aria-hidden="true">*</span> }</label>
+                                    <textarea id="@field.FieldId" name="@field.BindingName" rows="4" placeholder="@field.Placeholder" aria-describedby="@(field.FieldId + "_help")">@Model.GetValue(field.BindingName)</textarea>
+                                }
+                                else if (field.RenderKind == "select")
+                                {
+                                    <label for="@field.FieldId">@field.Label @if (field.Required) { <span aria-hidden="true">*</span> }</label>
+                                    <select id="@field.FieldId" name="@field.BindingName" aria-describedby="@(field.FieldId + "_help")">
+                                        @foreach (var option in field.Options)
+                                        {
+                                            <option value="@option" selected="@(string.Equals(Model.GetValue(field.BindingName), option, StringComparison.OrdinalIgnoreCase) ? "selected" : null)">@option</option>
+                                        }
+                                    </select>
+                                }
+                                else if (field.RenderKind == "radio")
+                                {
+                                    var groupedFields = sectionItem.FieldIds
+                                        .Select(candidateId => descriptor.Fields[candidateId])
+                                        .Where(candidate => candidate.RenderKind == "radio" && string.Equals(candidate.RadioGroupName, field.RadioGroupName, StringComparison.OrdinalIgnoreCase))
+                                        .OrderBy(candidate => candidate.TabOrder)
+                                        .ToList();
+                                    <fieldset class="ui-scaffold-choice">
+                                        <legend>@field.RadioGroupLabel</legend>
+                                        @foreach (var optionField in groupedFields)
+                                        {
+                                            <label class="ui-scaffold-choice-option">
+                                                <input type="radio" id="@(optionField.FieldId + "_" + optionField.OptionValue)" name="@field.BindingName" value="@optionField.OptionValue" checked="@(string.Equals(Model.GetValue(field.BindingName), optionField.OptionValue, StringComparison.OrdinalIgnoreCase) ? "checked" : null)" />
+                                                <span>@optionField.OptionValue</span>
+                                            </label>
+                                        }
+                                    </fieldset>
+                                }
+                                else if (field.RenderKind == "checkbox")
+                                {
+                                    <label>
+                                        <input type="checkbox" id="@field.FieldId" name="@field.FieldId" value="true" checked="@(string.Equals(Model.GetValue(field.FieldId), "true", StringComparison.OrdinalIgnoreCase) ? "checked" : null)" />
+                                        <span>@field.Label</span>
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label for="@field.FieldId">@field.Label @if (field.Required) { <span aria-hidden="true">*</span> }</label>
+                                    <input type="@field.InputType" inputmode="@field.InputMode" maxlength="@(field.MaxLength?.ToString() ?? string.Empty)" id="@field.FieldId" name="@field.BindingName" value="@Model.GetValue(field.BindingName)" placeholder="@field.Placeholder" aria-describedby="@(field.FieldId + "_help")" />
+                                }
+                                @if (!string.IsNullOrWhiteSpace(field.HelpText) && field.RenderKind != "display" && field.RenderKind != "fieldset" && field.RenderKind != "nav")
+                                {
+                                    <p class="field-help" id="@(field.FieldId + "_help")">@field.HelpText</p>
+                                }
+                                @if (Model.Errors.ContainsKey(field.FieldId))
+                                {
+                                    <p class="field-error" data-error-for="@field.FieldId">@Model.Errors[field.FieldId]</p>
+                                }
+                            </div>
+                        }
+                        </div>
+                    </section>
+                }
+                <nav class="action-bar sticky-action-bar" aria-label="Screen actions">
+                @foreach (var action in descriptor.Actions)
+                {
+                    <button class="action-button action-button-@action.Kind" type="submit" formaction="?handler=@Model.HandlerName(action.EventId)">
+                        <span>@action.Label</span>
+                        <small>@action.TargetHint</small>
+                    </button>
+                }
+                </nav>
+            </form>
+            }
+        </div>
+        <aside class="screen-aside">
+            <section class="surface-card insight-card">
+                <p class="panel-eyebrow">Primary action</p>
+                <h3>@(primaryAction?.Label ?? "Review screen")</h3>
+                <p>@(primaryAction?.TargetHint ?? "Use the generated workflow to inspect parity, validation, and navigation behavior.")</p>
+            </section>
+            <section class="surface-card insight-card">
+                <p class="panel-eyebrow">Parity guardrails</p>
+                <ul class="insight-list">
+                    <li>Contract-driven labels, validation, and event handlers remain preserved.</li>
+                    <li>Navigation and downstream targets are visible without inventing business logic.</li>
+                    <li>UI layout adapts to the screen archetype inferred from the contract.</li>
+                </ul>
+            </section>
+            @if (displayFields.Count > 0)
+            {
+                <section class="surface-card insight-card">
+                    <p class="panel-eyebrow">Read-only context</p>
+                    <ul class="insight-list">
+                    @foreach (var field in displayFields.Take(5))
+                    {
+                        <li>@field.Label</li>
+                    }
+                    </ul>
+                </section>
+            }
+        </aside>
+    </div>
+</main>
