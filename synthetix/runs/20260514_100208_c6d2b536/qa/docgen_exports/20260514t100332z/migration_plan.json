@@ -1,0 +1,87 @@
+{
+  "artifact_type": "migration_plan",
+  "artifact_version": "1.0",
+  "metadata": {
+    "generated_at": "2026-05-14T10:03:31.280134+00:00",
+    "run_id": "run_2f10e924cb57",
+    "producer": {
+      "agent": "Analyst Agent",
+      "skill_pack": "generic_legacy",
+      "skill_version": "1.0.0"
+    },
+    "skill_pack": {
+      "id": "generic_legacy",
+      "version": "1.0.0",
+      "confidence": 0.35
+    },
+    "context_reference": {
+      "repo": "https://github.com/philipplackner/chirp-api",
+      "branch": "detached",
+      "commit_sha": "unknown",
+      "version_id": "20260514T100222Z_20260514_100208_c6d2b536",
+      "target_stack": {
+        "language": "Go",
+        "ui": "Unknown",
+        "db": "Unknown"
+      }
+    }
+  },
+  "strategy": {
+    "cutover": "phased",
+    "backfill": "table_by_table_with_reconciliation",
+    "rollback": "retain_source_snapshot_per_batch"
+  },
+  "sequence": [
+    {
+      "step": 1,
+      "title": "Create target schema and constraints in staging environment."
+    },
+    {
+      "step": 2,
+      "title": "Backfill reference/master tables, then transaction/history tables."
+    },
+    {
+      "step": 3,
+      "title": "Run reconciliation checks (row counts, financial aggregates, spot checks)."
+    },
+    {
+      "step": 4,
+      "title": "Perform controlled cutover and monitor verification dashboard."
+    }
+  ],
+  "target_tables": [
+    "firebase",
+    "git_hub_actions_workflow",
+    "jwt",
+    "nginx",
+    "postgre_sql",
+    "rabbit_mq",
+    "redis",
+    "security_configuration",
+    "spring_boot_application",
+    "supabase",
+    "user_entity"
+  ],
+  "unresolved_mappings": 0,
+  "blocking_items": [],
+  "artifact_id": "art_migration_plan_3154aeffaa584c5e",
+  "run_id": "run_2f10e924cb57",
+  "generated_at": "2026-05-14T10:03:31.280134+00:00",
+  "producer": {
+    "agent": "Analyst Agent",
+    "skill_pack": "generic_legacy",
+    "skill_version": "1.0.0"
+  },
+  "context": {
+    "repo": "https://github.com/philipplackner/chirp-api",
+    "branch": "detached",
+    "commit_sha": "unknown",
+    "scope_lock_ref": "artifact://scope_lock/1.0/art_scope_lock_a487abc25cc14c5c",
+    "canonical_project": "Project 1",
+    "target_stack": {
+      "language": "Go",
+      "ui": "Unknown",
+      "db": "Unknown"
+    }
+  }
+}
