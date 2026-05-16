@@ -1,0 +1,701 @@
+{
+  "artifact_type": "requirements_pack",
+  "artifact_version": "2.0",
+  "artifact_id": "REQPACK-20260516_063558_74977D04",
+  "generated_at": "2026-05-16T10:36:22.065863+00:00",
+  "generated_by": {
+    "agent_name": "Analyst Agent",
+    "persona": "Strategic Analyst",
+    "persona_version": "1.0",
+    "requirements_pack_profile": "requirements-pack-v2-general",
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "project": {
+    "name": "MagicBox Code Modernization",
+    "work_item_id": "20260516_063558_74977d04",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "regulatory_profile": [],
+    "domain_pack": {
+      "id": "software-general-v1",
+      "version": "1.0.0",
+      "ontologies": [
+        "Capability Taxonomy"
+      ],
+      "standards": [],
+      "internal_playbooks": []
+    }
+  },
+  "intake": {
+    "business_request_raw": "Smoke v8 \u2014 scoped team (Architect / DP / Developer / Tester only). Drops UI Scaffold (backend-only), DB Engineer, Security Engineer, Validator, Deployer.",
+    "actors": [
+      "Business User"
+    ],
+    "channels": [
+      "Internal Ops Console"
+    ],
+    "data_elements": [
+      {
+        "name": "domainEntityId",
+        "classification": "INTERNAL"
+      }
+    ],
+    "constraints_from_user": [],
+    "assumptions": [
+      "Existing integration contracts remain valid unless explicitly revised.",
+      "Operational environments support observability instrumentation for release verification."
+    ]
+  },
+  "domain_mapping": {
+    "capabilities": [
+      {
+        "framework": "Capability Taxonomy",
+        "service_domain": "API Platform",
+        "capability_id": "api_platform",
+        "confidence": 0.55,
+        "rationale": "Mapped from objective overlap for API Platform."
+      }
+    ],
+    "domain_invariants": [
+      {
+        "id": "INV-001",
+        "statement": "Define explicit error handling and observability requirements."
+      },
+      {
+        "id": "INV-002",
+        "statement": "Include measurable non-functional requirements."
+      },
+      {
+        "id": "INV-003",
+        "statement": "Map acceptance criteria to executable test types."
+      }
+    ],
+    "glossary": [
+      {
+        "term": "AuditEvent",
+        "definition": "AuditEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "DomainEvent",
+        "definition": "DomainEvent entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "ServiceRequest",
+        "definition": "ServiceRequest entity in current domain scope.",
+        "synonyms": []
+      },
+      {
+        "term": "User",
+        "definition": "User entity in current domain scope.",
+        "synonyms": []
+      }
+    ]
+  },
+  "compliance": {
+    "controls_triggered": [],
+    "privacy": {
+      "pii_masking_rules": [],
+      "retention_days": 365,
+      "access_model": "least_privilege"
+    }
+  },
+  "requirements": {
+    "functional": [
+      {
+        "id": "FR-001",
+        "title": "Backend API Development",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "FR-001-BDD-01",
+          "scenarios": [
+            "FR-001-BDD-01-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-002",
+        "title": "Error Handling Implementation",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "FR-002-BDD-02",
+          "scenarios": [
+            "FR-002-BDD-02-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-003",
+        "title": "Observability and Monitoring",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "FR-003-BDD-03",
+          "scenarios": [
+            "FR-003-BDD-03-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-004",
+        "title": "Data Contract Preservation",
+        "priority": "P0",
+        "acceptance": {
+          "gherkin_feature_id": "FR-004-BDD-04",
+          "scenarios": [
+            "FR-004-BDD-04-SC-001"
+          ]
+        }
+      },
+      {
+        "id": "FR-005",
+        "title": "Security Compliance Review",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      },
+      {
+        "id": "FR-006",
+        "title": "Performance Optimization",
+        "priority": "P1",
+        "acceptance": {
+          "gherkin_feature_id": "",
+          "scenarios": []
+        }
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "NFR-001",
+        "category": "performance",
+        "metric": "Response time under 200ms for 95% of requests",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-002",
+        "category": "security",
+        "metric": "Zero critical vulnerabilities in SAST scan",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-003",
+        "category": "scalability",
+        "metric": "Support for 10,000 concurrent users",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      },
+      {
+        "id": "NFR-004",
+        "category": "reliability",
+        "metric": "99.9% uptime",
+        "verification_method": [
+          "unit",
+          "integration"
+        ]
+      }
+    ]
+  },
+  "bdd": {
+    "features": [
+      {
+        "id": "FR-001-BDD-01",
+        "title": "Backend API Development",
+        "scenarios": [
+          {
+            "id": "FR-001-BDD-01-SC-001",
+            "name": "API responds correctly",
+            "gherkin": [
+              "Given a valid API request",
+              "When the request is processed",
+              "Then the API returns the expected response"
+            ],
+            "maps_to": [
+              "FR-001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FR-002-BDD-02",
+        "title": "Error Handling Implementation",
+        "scenarios": [
+          {
+            "id": "FR-002-BDD-02-SC-001",
+            "name": "Error is logged",
+            "gherkin": [
+              "Given an error occurs",
+              "When the error is handled",
+              "Then it is logged with sufficient detail"
+            ],
+            "maps_to": [
+              "FR-002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FR-003-BDD-03",
+        "title": "Observability and Monitoring",
+        "scenarios": [
+          {
+            "id": "FR-003-BDD-03-SC-001",
+            "name": "Monitor API performance",
+            "gherkin": [
+              "Given an API is deployed",
+              "When it is monitored",
+              "Then performance metrics are available"
+            ],
+            "maps_to": [
+              "FR-003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "FR-004-BDD-04",
+        "title": "Data Contract Preservation",
+        "scenarios": [
+          {
+            "id": "FR-004-BDD-04-SC-001",
+            "name": "Data integrity is maintained",
+            "gherkin": [
+              "Given existing data contracts",
+              "When APIs are migrated",
+              "Then data integrity is preserved"
+            ],
+            "maps_to": [
+              "FR-004"
+            ]
+          }
+        ]
+      }
+    ],
+    "lint": {
+      "gherkin_valid": true,
+      "missing_steps": []
+    }
+  },
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "Are there existing operational constraints or integration dependencies not listed?",
+      "owner": "Client",
+      "severity": "high"
+    }
+  ],
+  "risks": [
+    {
+      "description": "Potential data contract mismatches during migration.",
+      "impact": "high",
+      "mitigation": "Conduct thorough data contract testing and validation."
+    },
+    {
+      "description": "Security vulnerabilities may be introduced during modernization.",
+      "impact": "medium",
+      "mitigation": "Implement continuous security testing and monitoring."
+    }
+  ],
+  "out_of_scope": [
+    "UI modernization",
+    "Database schema redesign",
+    "Security engineering",
+    "Deployment automation"
+  ],
+  "traceability": {
+    "links": [
+      {
+        "from": "FR-001",
+        "to": "FR-001-BDD-01",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-002",
+        "to": "FR-002-BDD-02",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-003",
+        "to": "FR-003-BDD-03",
+        "type": "verified_by"
+      },
+      {
+        "from": "FR-004",
+        "to": "FR-004-BDD-04",
+        "type": "verified_by"
+      }
+    ]
+  },
+  "conversation_audit": {
+    "thread_id": "THREAD-20260516_063558_74977d04",
+    "changes": []
+  },
+  "context_reference": {
+    "version_id": "20260516T103602Z_20260516_063558_74977d04",
+    "repo": "Synthetix",
+    "branch": "codex-synthetix-ui-v2-claude",
+    "commit_sha": "f4e53a33cee95a71cd037b4c1fa2ca2bda791869",
+    "scm_version": "scm-v1",
+    "cp_version": "cp-v1",
+    "ha_version": "ha-v1",
+    "source_language": "vb6",
+    "knowledge_snapshot_id": "kctx-a48cbc6197550448",
+    "run_context_bundle_id": "runctx-04b2422a26050732",
+    "source_version_ids": [],
+    "run_id": "20260516_063558_74977d04"
+  },
+  "schema_version": "2.0.0",
+  "domain_pack_ref": {
+    "id": "software-general-v1",
+    "name": "General Software Domain Pack",
+    "version": "1.0.0"
+  },
+  "analyst_dag_trace": [
+    {
+      "step": "normalize_requirement",
+      "status": "completed",
+      "details": "actors=0, actions=1, objects=0"
+    },
+    {
+      "step": "map_to_capabilities",
+      "status": "completed",
+      "details": "primary=1, alternatives=0"
+    },
+    {
+      "step": "retrieve_internal_patterns",
+      "status": "completed",
+      "details": "patterns=0, standards=0"
+    },
+    {
+      "step": "retrieve_compliance_constraints",
+      "status": "completed",
+      "details": "jurisdiction=GLOBAL, data_classification=INTERNAL, constraints=0"
+    },
+    {
+      "step": "synthesize_requirements_pack",
+      "status": "completed",
+      "details": "requirements_pack_ready=true, bdd_features=4"
+    },
+    {
+      "step": "run_quality_gates",
+      "status": "completed",
+      "details": "quality_gates=3, failed=0"
+    }
+  ],
+  "input_contract": {
+    "business_objective": "Smoke v8 \u2014 scoped team (Architect / DP / Developer / Tester only). Drops UI Scaffold (backend-only), DB Engineer, Security Engineer, Validator, Deployer.",
+    "use_case": "code_modernization",
+    "jurisdiction": "GLOBAL",
+    "data_classification": [
+      "INTERNAL"
+    ]
+  },
+  "capability_mapping": {
+    "framework": "Capability Taxonomy",
+    "primary_capabilities": [
+      {
+        "id": "api_platform",
+        "service_domain": "API Platform",
+        "business_capability": "Service Delivery",
+        "confidence": 0.55,
+        "dependencies": [
+          "identity_access",
+          "observability"
+        ]
+      }
+    ],
+    "alternative_capabilities": [],
+    "confidence": 0.55
+  },
+  "domain_model_excerpt": {
+    "entities": [
+      "AuditEvent",
+      "DomainEvent",
+      "ServiceRequest",
+      "User"
+    ],
+    "lifecycle_states": [
+      "completed",
+      "failed",
+      "processed",
+      "requested",
+      "validated"
+    ],
+    "relationships": [
+      "LegacyInput contract must map deterministically to ModernizedOutput contract",
+      "ServiceRequest emits DomainEvent and AuditEvent"
+    ]
+  },
+  "regulatory_constraints_applied": [],
+  "standards_guidance": [],
+  "gold_patterns": [],
+  "non_negotiables": [
+    "Define explicit error handling and observability requirements.",
+    "Include measurable non-functional requirements.",
+    "Map acceptance criteria to executable test types."
+  ],
+  "bdd_contract": {
+    "features": [
+      {
+        "id": "FR-001-BDD-01",
+        "title": "Backend API Development",
+        "source_requirement_ids": [
+          "FR-001"
+        ],
+        "gherkin": "Feature: Backend API Development\nScenario: API responds correctly\nGiven a valid API request\nWhen the request is processed\nThen the API returns the expected response"
+      },
+      {
+        "id": "FR-002-BDD-02",
+        "title": "Error Handling Implementation",
+        "source_requirement_ids": [
+          "FR-002"
+        ],
+        "gherkin": "Feature: Error Handling\nScenario: Error is logged\nGiven an error occurs\nWhen the error is handled\nThen it is logged with sufficient detail"
+      },
+      {
+        "id": "FR-003-BDD-03",
+        "title": "Observability and Monitoring",
+        "source_requirement_ids": [
+          "FR-003"
+        ],
+        "gherkin": "Feature: Observability\nScenario: Monitor API performance\nGiven an API is deployed\nWhen it is monitored\nThen performance metrics are available"
+      },
+      {
+        "id": "FR-004-BDD-04",
+        "title": "Data Contract Preservation",
+        "source_requirement_ids": [
+          "FR-004"
+        ],
+        "gherkin": "Feature: Data Contract Preservation\nScenario: Data integrity is maintained\nGiven existing data contracts\nWhen APIs are migrated\nThen data integrity is preserved"
+      }
+    ],
+    "lint": {
+      "pass": true,
+      "issues": [],
+      "scenario_count": 4
+    }
+  },
+  "non_functional_contract": {
+    "must": [
+      {
+        "id": "NFR-002",
+        "title": "Security",
+        "description": "Ensure backend services are secure and compliant.",
+        "category": "security",
+        "metric": "Zero critical vulnerabilities in SAST scan",
+        "acceptance_criteria": [
+          "Conduct static application security testing (SAST).",
+          "Remediate all identified vulnerabilities.",
+          "Implement secure coding practices."
+        ],
+        "verification": "SAST + pre-prod pen test",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-004",
+        "title": "Reliability",
+        "description": "Ensure backend services are reliable and available.",
+        "category": "reliability",
+        "metric": "99.9% uptime",
+        "acceptance_criteria": [
+          "Implement redundancy and failover mechanisms.",
+          "Monitor uptime and service availability.",
+          "Conduct regular reliability testing."
+        ],
+        "verification": "SLO monitoring over rolling 30-day window",
+        "verification_source": "llm"
+      }
+    ],
+    "should": [
+      {
+        "id": "NFR-001",
+        "title": "Performance",
+        "description": "Ensure high performance of backend services.",
+        "category": "performance",
+        "metric": "Response time under 200ms for 95% of requests",
+        "acceptance_criteria": [
+          "Conduct load testing to validate performance.",
+          "Optimize code for efficient resource usage.",
+          "Monitor performance metrics continuously."
+        ],
+        "verification": "Load test at 10\u00d7 expected peak; measure p95/p99",
+        "verification_source": "llm"
+      },
+      {
+        "id": "NFR-003",
+        "title": "Scalability",
+        "description": "Ensure backend services can scale to meet demand.",
+        "category": "scalability",
+        "metric": "Support for 10,000 concurrent users",
+        "acceptance_criteria": [
+          "Conduct scalability testing under peak load.",
+          "Ensure horizontal scaling is supported.",
+          "Monitor system performance under load."
+        ],
+        "verification": "Load test with 10,000 concurrent users",
+        "verification_source": "llm"
+      }
+    ]
+  },
+  "acceptance_test_mapping": [
+    {
+      "requirement_id": "FR-001",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FR-001-BDD-01"
+      ]
+    },
+    {
+      "requirement_id": "FR-002",
+      "test_types": [
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FR-002-BDD-02"
+      ]
+    },
+    {
+      "requirement_id": "FR-003",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FR-003-BDD-03"
+      ]
+    },
+    {
+      "requirement_id": "FR-004",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": [
+        "FR-004-BDD-04"
+      ]
+    },
+    {
+      "requirement_id": "FR-005",
+      "test_types": [
+        "integration",
+        "security",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    },
+    {
+      "requirement_id": "FR-006",
+      "test_types": [
+        "contract",
+        "integration",
+        "unit"
+      ],
+      "bdd_scenarios": []
+    }
+  ],
+  "quality_gates": [
+    {
+      "name": "gherkin_syntax",
+      "status": "PASS",
+      "message": "BDD syntax validation for Feature/Scenario/Given/When/Then.",
+      "details": {
+        "scenario_count": 4,
+        "issues": []
+      }
+    },
+    {
+      "name": "requirements_completeness",
+      "status": "PASS",
+      "message": "Checks minimum requirement volume, scenario coverage, and capability mapping presence.",
+      "details": {
+        "functional_count": 6,
+        "non_functional_count": 4,
+        "min_functional": 6,
+        "min_non_functional": 4,
+        "scenario_count": 4,
+        "min_scenarios": 4,
+        "capability_count": 1
+      }
+    },
+    {
+      "name": "compliance_constraints_applied",
+      "status": "WARN",
+      "message": "Verifies that regulatory/software controls are linked to requirements when applicable.",
+      "details": {
+        "jurisdiction": "GLOBAL",
+        "data_classification": [
+          "INTERNAL"
+        ],
+        "constraints_count": 0
+      }
+    },
+    {
+      "id": "intake_classifier_alignment",
+      "name": "intake_classifier_alignment",
+      "status": "PASS",
+      "result": "pass",
+      "description": "Modernization intent aligns with the detected source/target archetype.",
+      "remediation": ""
+    },
+    {
+      "name": "knowledge_snapshot_pinned",
+      "status": "PASS",
+      "message": "Run is pinned to immutable knowledge source snapshots.",
+      "details": {
+        "snapshot_id": "kctx-a48cbc6197550448",
+        "source_count": 0
+      }
+    },
+    {
+      "name": "compliance_citation_grounding",
+      "status": "PASS",
+      "message": "Compliance controls have required citations.",
+      "details": {
+        "blocked": false,
+        "citation_required": true,
+        "enforce": false,
+        "source_count": 0,
+        "set_count": 0,
+        "controls_count": 0,
+        "missing_citations": [],
+        "assumptions_added": []
+      }
+    },
+    {
+      "name": "source_influenced_qa_mandatory",
+      "status": "PASS",
+      "message": "No active knowledge sources in run context snapshot.",
+      "details": {
+        "blocked": false,
+        "source_influenced": false,
+        "reason": "No active knowledge sources in run context snapshot."
+      }
+    }
+  ],
+  "executive_summary": "The project focuses on backend modernization using .NET 8, excluding UI and other non-backend tasks, with a scoped team of Architect, Developer, and Tester."
+}
