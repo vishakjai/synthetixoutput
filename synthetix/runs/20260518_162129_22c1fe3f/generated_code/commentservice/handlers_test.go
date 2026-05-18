@@ -24,7 +24,7 @@ func TestContractRoutes(t *testing.T) {
 	{"TestPostApiCommentserviceCommentview", "POST", "/api/commentservice/commentview", `null`},
 	{"TestPostApiCommentserviceCreatecommentrequest", "POST", "/api/commentservice/createcommentrequest", `null`},
 	{"TestPostApiCommentserviceTagrepository", "POST", "/api/commentservice/tagrepository", `null`},
-	{"TestPostApiCommentserviceOffsetbasedpageable", "POST", "/api/commentservice/offsetbasedpageable", `null`},
+	{"TestPostApiCommentserviceGlobalcontrolleradvice", "POST", "/api/commentservice/globalcontrolleradvice", `null`},
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
