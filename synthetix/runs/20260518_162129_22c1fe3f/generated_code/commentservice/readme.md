@@ -2,31 +2,31 @@
 
 This service manages comments on articles, including pagination and tag management.
 
-## Building and Running
+## Running the Service
 
-To build and run the service, use the following commands:
+To build and run the service locally:
 
 ```bash
-# Build the Docker image
-$ docker build -t commentservice .
-
-# Run the Docker container
-$ docker run -p 8080:8080 commentservice
+docker build -t commentservice .
+docker run -p 8080:8080 commentservice
 ```
 
-## API Endpoints
+## Endpoints
 
-- `GET /health`: Health check endpoint
-- `GET /ready`: Readiness check endpoint
-- `POST /api/commentservice/commentview`: Handles comment view operations
-- `POST /api/commentservice/createcommentrequest`: Handles comment creation requests
-- `POST /api/commentservice/tagrepository`: Handles tag repository operations
-- `POST /api/commentservice/offsetbasedpageable`: Handles offset-based pagination operations
+- `POST /api/commentservice/commentview`
+- `POST /api/commentservice/createcommentrequest`
+- `POST /api/commentservice/tagrepository`
+- `POST /api/commentservice/globalcontrolleradvice`
+
+## Health Check
+
+- `GET /health`
+- `GET /ready`
 
 ## Testing
 
-To run tests, use the following command:
+To run the tests:
 
 ```bash
-$ go test ./...
+go test ./...
 ```
