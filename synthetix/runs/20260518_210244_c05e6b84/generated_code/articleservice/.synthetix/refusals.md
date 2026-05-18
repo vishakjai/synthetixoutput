@@ -1,0 +1,10 @@
+# Translator refusals (kotlin → go)
+
+The per-method translator emitted a structured refusal for each row below. HITL should review and either re-dispatch with helper context or accept a manual translation.
+
+- **createArticle** (15-18) — `service_layer_leak`: (helper_code) Output inlines service / repository code ('func (s *service'). Translate ONLY the handler func — decode + validate the request, call `h.svc.<Method>(...)`, map the result through httpx. The service + repository layers are translated by their own pass.
+- **feed** (33-39) — `service_layer_leak`: (helper_code) Output inlines service / repository code ('func (s *service'). Translate ONLY the handler func — decode + validate the request, call `h.svc.<Method>(...)`, map the result through httpx. The service + repository layers are translated by their own pass.
+- **getArticle** (42-45) — `service_layer_leak`: (helper_code) Output inlines service / repository code ('func (s *service'). Translate ONLY the handler func — decode + validate the request, call `h.svc.<Method>(...)`, map the result through httpx. The service + repository layers are translated by their own pass.
+- **deleteArticle** (57-60) — `service_layer_leak`: (helper_code) Output inlines service / repository code ('func (s *service'). Translate ONLY the handler func — decode + validate the request, call `h.svc.<Method>(...)`, map the result through httpx. The service + repository layers are translated by their own pass.
+- **favoriteArticle** (64-67) — `service_layer_leak`: (helper_code) Output inlines service / repository code ('func (s *service'). Translate ONLY the handler func — decode + validate the request, call `h.svc.<Method>(...)`, map the result through httpx. The service + repository layers are translated by their own pass.
+- **deleteComment** (92-95) — `error_leak_to_client`: Output passes a raw error (err.Error() / a wrapped error string) into the client-facing message of httpx.WriteError. Internal errors must go through httpx.WriteInternal(w, r, err) — it logs server-side with the request id and returns a generic 500. Use a fixed, non-sensitive message in WriteError.
