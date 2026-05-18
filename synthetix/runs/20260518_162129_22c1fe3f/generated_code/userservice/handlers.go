@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -9,26 +10,35 @@ import (
 func userRouter() http.Handler {
 	r := chi.NewRouter()
 
-	r.Post("/", signupHandler)
-	r.Post("/login", loginHandler)
-	r.Get("/", getCurrentUserHandler)
-	r.Put("/", updateUserHandler)
-
-	r.Route("/profiles/{username}", func(r chi.Router) {
-		r.Get("/", getProfileHandler)
-		r.Post("/follow", followHandler)
-		r.Delete("/follow", unfollowHandler)
-	})
+	r.Post("/users", signupHandler)
+	r.Post("/users/login", loginHandler)
+	r.Get("/user", getCurrentUserHandler)
+	r.Put("/user", updateUserHandler)
+	r.Get("/profiles/{username}", getProfileHandler)
+	r.Post("/profiles/{username}/follow", followHandler)
+	r.Delete("/profiles/{username}/follow", unfollowHandler)
 
 	return r
 }
 
 func signupHandler(w http.ResponseWriter, r *http.Request) {
-	// Implement signup logic
+	var req SignupRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, http.StatusBadRequest, "INVALID_PAYLOAD", err.Error())
+		return
+	}
+	// Validate and process signup
+	// Respond with SignupResponse
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
-	// Implement login logic
+	var req LoginRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, http.StatusBadRequest, "INVALID_PAYLOAD", err.Error())
+		return
+	}
+	// Validate and process login
+	// Respond with JwtAuthResponse
 }
 
 func getCurrentUserHandler(w http.ResponseWriter, r *http.Request) {
@@ -49,4 +59,10 @@ func followHandler(w http.ResponseWriter, r *http.Request) {
 
 func unfollowHandler(w http.ResponseWriter, r *http.Request) {
 	// Implement unfollow logic
+}
+
+func writeError(w http.ResponseWriter, status int, code, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	json.NewEncoder(w).Encode(map[string]string{"code": code, "message": message})
 }
