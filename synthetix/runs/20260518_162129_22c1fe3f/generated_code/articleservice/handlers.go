@@ -1,77 +1,93 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http"
 )
 
 func createArticleHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement create article logic
-	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte(`{"id": "123", "created_at": "2023-01-01T00:00:00Z"}`))
+	// Decode request body
+	var req CreateArticleRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, http.StatusBadRequest, "INVALID_PAYLOAD", err.Error())
+		return
+	}
+
+	// Validate required fields
+	if req.Payload == "" {
+		writeError(w, http.StatusBadRequest, "VALIDATION_ERROR", "payload required")
+		return
+	}
+
+	// Call service method
+	article, err := createArticle(req)
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, "INTERNAL_ERROR", err.Error())
+		return
+	}
+
+	// Respond with created article
+	writeJSON(w, http.StatusCreated, article)
 }
 
 func getArticlesHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement get articles logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"items": [], "total": 0, "page": 1, "page_size": 10}`))
+	articles, err := getArticles()
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, "INTERNAL_ERROR", err.Error())
+		return
+	}
+
+	writeJSON(w, http.StatusOK, articles)
 }
 
 func feedHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement feed logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "ok"}`))
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }
 
 func getArticleHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement get article logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"id": "123", "created_at": "2023-01-01T00:00:00Z", "updated_at": "2023-01-01T00:00:00Z"}`))
+	// Implementation here
 }
 
 func updateArticleHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement update article logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"id": "123", "updated_at": "2023-01-01T00:00:00Z"}`))
+	// Implementation here
 }
 
 func deleteArticleHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement delete article logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"deleted": true}`))
+	// Implementation here
 }
 
 func favoriteArticleHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement favorite article logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "ok"}`))
+	// Implementation here
 }
 
 func unfavoriteArticleHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement unfavorite article logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "ok"}`))
+	// Implementation here
 }
 
 func getCommentsHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement get comments logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "ok"}`))
+	// Implementation here
 }
 
 func addCommentHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement add comment logic
-	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte(`{"status": "ok"}`))
+	// Implementation here
 }
 
 func deleteCommentHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement delete comment logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "ok"}`))
+	// Implementation here
 }
 
 func getTagsHandler(w http.ResponseWriter, r *http.Request) {
-	// TODO: Implement get tags logic
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"items": [], "total": 0, "page": 1, "page_size": 10}`))
+	// Implementation here
+}
+
+func writeError(w http.ResponseWriter, status int, code, message string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	json.NewEncoder(w).Encode(map[string]string{"code": code, "message": message})
+}
+
+func writeJSON(w http.ResponseWriter, status int, payload any) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	json.NewEncoder(w).Encode(payload)
 }
