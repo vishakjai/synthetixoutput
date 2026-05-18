@@ -4,11 +4,65 @@
 // stubbed. Replace stubs with SME-validated logic in the next wiring step.
 package user
 
+type ArticleWrapper[T any] struct {
+	Content T `json:"content"`
+}
+func (a ArticleWrapper[T]) Validate() error { return nil }
+
+type CommentWrapper[T any] struct {
+	Content T `json:"content"`
+}
+func (c CommentWrapper[T]) Validate() error { return nil }
+
+type ProfileView struct {
+	Username string `json:"username"`
+	Bio string `json:"bio"`
+	Image string `json:"image"`
+	Following bool `json:"following"`
+}
+func (p ProfileView) Validate() error { return nil }
+
+type UpdateUserRequest struct {
+	Email string `json:"email"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Image string `json:"image"`
+	Bio string `json:"bio"`
+}
+func (u UpdateUserRequest) Validate() error { return nil }
+
+type UserAuthenticationRequest struct {
+	Email string `json:"email"`
+	Password string `json:"password"`
+}
+func (u UserAuthenticationRequest) Validate() error { return nil }
+
+type UserRegistrationRequest struct {
+	Username string `json:"username"`
+	Email string `json:"email"`
+	Password string `json:"password"`
+}
+func (u UserRegistrationRequest) Validate() error { return nil }
+
 type UserSession struct {
 	User User `json:"user"`
 	Token string `json:"token"`
 }
 func (u UserSession) Validate() error { return nil }
+
+type UserView struct {
+	Email string `json:"email"`
+	Token string `json:"token"`
+	Username string `json:"username"`
+	Bio string `json:"bio"`
+	Image string `json:"image"`
+}
+func (u UserView) Validate() error { return nil }
+
+type UserWrapper[T any] struct {
+	Content T `json:"content"`
+}
+func (u UserWrapper[T]) Validate() error { return nil }
 
 // Fallback aliases for Kotlin types we don't have a richer translation for yet.
 // A future enum / sealed-class translator pack will replace these with named types.
