@@ -16,23 +16,18 @@ func main() {
 	r.Get("/health", healthHandler)
 	r.Get("/ready", readyHandler)
 
-	// Article routes
-	r.Route("/api/articles", func(r chi.Router) {
-		r.Post("/", createArticleHandler)
-		r.Get("/", getArticlesHandler)
-		r.Get("/feed", feedHandler)
-		r.Route("/{slug}", func(r chi.Router) {
-			r.Get("/", getArticleHandler)
-			r.Put("/", updateArticleHandler)
-			r.Delete("/", deleteArticleHandler)
-			r.Get("/comments", getCommentsHandler)
-			r.Post("/comments", addCommentHandler)
-			r.Delete("/comments/{commentId}", deleteCommentHandler)
-			r.Post("/favorite", favoriteArticleHandler)
-			r.Delete("/favorite", unfavoriteArticleHandler)
-		})
-	})
-
+	// Article endpoints
+	r.Post("/api/articles", createArticleHandler)
+	r.Get("/api/articles", getArticlesHandler)
+	r.Get("/api/articles/feed", feedHandler)
+	r.Get("/api/articles/{slug}", getArticleHandler)
+	r.Put("/api/articles/{slug}", updateArticleHandler)
+	r.Delete("/api/articles/{slug}", deleteArticleHandler)
+	r.Post("/api/articles/{slug}/favorite", favoriteArticleHandler)
+	r.Delete("/api/articles/{slug}/favorite", unfavoriteArticleHandler)
+	r.Get("/api/articles/{slug}/comments", getCommentsHandler)
+	r.Post("/api/articles/{slug}/comments", addCommentHandler)
+	r.Delete("/api/articles/{slug}/comments/{commentId}", deleteCommentHandler)
 	r.Get("/api/tags", getTagsHandler)
 
 	port := os.Getenv("PORT")
@@ -40,10 +35,7 @@ func main() {
 		port = "8080"
 	}
 
-	log.Printf("Starting server on port %s", port)
-	if err := http.ListenAndServe(":"+port, r); err != nil {
-		log.Fatalf("Error starting server: %v", err)
-	}
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
