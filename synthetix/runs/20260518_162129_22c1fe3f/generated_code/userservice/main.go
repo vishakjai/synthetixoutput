@@ -16,9 +16,7 @@ func main() {
 	r.Get("/health", healthHandler)
 	r.Get("/ready", readyHandler)
 
-	r.Route("/api", func(r chi.Router) {
-		r.Mount("/users", userRouter())
-	})
+	r.Mount("/api", userRouter())
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -26,9 +24,7 @@ func main() {
 	}
 
 	log.Printf("Starting server on port %s", port)
-	if err := http.ListenAndServe(":"+port, r); err != nil {
-		log.Fatalf("Failed to start server: %v", err)
-	}
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
