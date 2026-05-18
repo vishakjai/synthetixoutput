@@ -1,0 +1,18 @@
+package com.example.articleservice.dto
+
+data class CreateArticleRequest(val payload: String)
+data class CreateArticleResponse(val id: Long, val createdAt: String)
+data class GetArticlesResponse(val items: List<ArticleSummary>, val total: Int, val page: Int, val pageSize: Int)
+data class ArticleSummary(val id: Long, val title: String, val description: String)
+data class FeedResponse(val status: String)
+data class GetArticleResponse(val id: Long, val createdAt: String, val updatedAt: String)
+data class UpdateArticleRequest(val payload: String)
+data class UpdateArticleResponse(val id: Long, val updatedAt: String)
+data class DeleteArticleResponse(val deleted: Boolean)
+data class GetCommentsResponse(val status: String)
+data class AddCommentRequest(val payload: String)
+data class AddCommentResponse(val status: String)
+data class DeleteCommentResponse(val status: String)
+data class FavoriteArticleResponse(val status: String)
+data class UnfavoriteArticleResponse(val status: String)
+data class GetTagsResponse(val items: List<String>, val total: Int, val page: Int, val pageSize: Int)
