@@ -19,7 +19,7 @@ func main() {
 	r.Post("/api/commentservice/commentview", commentViewHandler)
 	r.Post("/api/commentservice/createcommentrequest", createCommentRequestHandler)
 	r.Post("/api/commentservice/tagrepository", tagRepositoryHandler)
-	r.Post("/api/commentservice/offsetbasedpageable", offsetBasedPageableHandler)
+	r.Post("/api/commentservice/globalcontrolleradvice", globalControllerAdviceHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -27,9 +27,7 @@ func main() {
 	}
 
 	log.Printf("Starting server on port %s", port)
-	if err := http.ListenAndServe(":"+port, r); err != nil {
-		log.Fatalf("Error starting server: %v", err)
-	}
+	http.ListenAndServe(":"+port, r)
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
