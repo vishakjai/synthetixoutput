@@ -1,0 +1,152 @@
+{
+  "_schema": "capability-llm-extract-v1",
+  "modules": {
+    "src": {
+      "symbol_hash": "07453b2238441825",
+      "payload": {
+        "fr24_capabilities": [
+          {
+            "feature_name": "Create Article",
+            "description": "Allows a user to create a new article.",
+            "preconditions": [
+              "User must be authenticated."
+            ],
+            "postconditions": [
+              "Article is saved in the database.",
+              "Article is associated with the author."
+            ],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "ArticleApiSupport.createArticle() -> ArticleFacade.createArticle() -> ArticleRepository.save()",
+            "source_method": "ArticleApiSupport.createArticle",
+            "business_logic_steps": [
+              "1. Validate user authentication.",
+              "2. Map request to Article entity.",
+              "3. Save article to database.",
+              "4. Return the created article to the caller."
+            ],
+            "fr_id": "FR-SRC-001",
+            "source_module": "src",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "src/test/kotlin/helpers/ArticleApiSupport.kt",
+                "class_name": "ArticleApiSupport",
+                "method_name": "createArticle"
+              }
+            ]
+          },
+          {
+            "feature_name": "Get Article",
+            "description": "Retrieves an article by its slug.",
+            "preconditions": [
+              "Article with the given slug must exist."
+            ],
+            "postconditions": [
+              "Article details are returned to the user."
+            ],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "ArticleApiSupport.getArticle() -> ArticleFacade.getArticle() -> ArticleRepository.findBySlug()",
+            "source_method": "ArticleApiSupport.getArticle",
+            "business_logic_steps": [
+              "1. Validate user authentication.",
+              "2. Retrieve article by slug from database.",
+              "3. Map Article entity to ArticleView.",
+              "4. Return the article view to the caller."
+            ],
+            "fr_id": "FR-SRC-002",
+            "source_module": "src",
+            "traceability": [
+              {
+                "layer": "Other",
+                "file": "src/test/kotlin/helpers/ArticleApiSupport.kt",
+                "class_name": "ArticleApiSupport",
+                "method_name": "getArticle"
+              }
+            ]
+          },
+          {
+            "feature_name": "Find Newest Article Filtered By",
+            "description": "Retrieves the newest article filtered by via the repository layer. Returns Flux<Article>.",
+            "preconditions": [],
+            "postconditions": [
+              "Returns Flux<Article>"
+            ],
+            "actors": [
+              "User"
+            ],
+            "data_flow": "ArticleManualRepositoryImpl.findNewestArticleFilteredBy",
+            "source_method": "ArticleManualRepositoryImpl.findNewestArticleFilteredBy",
+            "business_logic_steps": [
+              "1. Caller invokes ArticleManualRepositoryImpl.findNewestArticleFilteredBy().",
+              "2. Repository dispatches work on Dispatchers.IO.",
+              "3. Network / cache interaction runs to completion.",
+              "4. Result (Flux<Article>) is returned to the caller."
+            ],
+            "source_module": "src",
+            "augmented_deterministic": true,
+            "fr_id": "FR-SRC-003",
+            "traceability": [
+              {
+                "layer": "Repository",
+                "file": "src/main/kotlin/com/realworld/springmongo/article/repository/ArticleManualRepository.kt",
+                "class_name": "ArticleManualRepositoryImpl",
+                "method_name": "findNewestArticleFilteredBy"
+              }
+            ]
+          }
+        ],
+        "fr25_business_rules": [
+          {
+            "rule_name": "Empty Collection Fallback",
+            "description": "Null / missing collections are defaulted to an empty list so downstream UI code never has to null-check.",
+            "source_evidence": "src/test/kotlin/com/realworld/springmongo/api/ArticleApiTest.kt:51",
+            "rule_category": "fallback",
+            "enforced_in_layer": "Repository",
+            "source_module": "src",
+            "rule_id": "BR-SRC-001"
+          },
+          {
+            "rule_name": "Unique Article Slug",
+            "description": "Ensures that each article has a unique slug.",
+            "source_evidence": "ArticleFacade.kt:createArticle() \u2014 generates unique slug for each article",
+            "rule_category": "validation",
+            "enforced_in_layer": "Facade",
+            "rule_id": "BR-SRC-002",
+            "source_module": "src"
+          }
+        ],
+        "fr29_error_handling": [
+          {
+            "location": "ArticleApiSupport.createArticle",
+            "source_file": "src/test/kotlin/helpers/ArticleApiSupport.kt",
+            "error_type": "API Error",
+            "handling_strategy": "log + return error response",
+            "log_tag": "article_creation_error",
+            "user_visible": true,
+            "recovery_possible": false,
+            "eh_id": "EH-SRC-001",
+            "source_module": "src"
+          }
+        ],
+        "fr30_edge_cases": [
+          {
+            "ec_type": "null_handling",
+            "scenario": "ArticleApiSupport.kt \u2014 handle null response when fetching article",
+            "source_file": "src/test/kotlin/helpers/ArticleApiSupport.kt",
+            "line": 45,
+            "is_defect": false,
+            "risk_level": "LOW",
+            "remediation": "Ensure null checks are in place",
+            "ec_id": "EC-SRC-001",
+            "source_module": "src",
+            "risk": "LOW"
+          }
+        ]
+      }
+    }
+  }
+}
